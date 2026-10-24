@@ -1,0 +1,705 @@
+/* date and time picker   */
+
+
+/* =====================================
+       DATE PICKER
+    ===================================== */
+
+.date-picker {
+    position: relative;
+}
+
+.date-input {
+    /* width: 100%;
+        height: 48px;
+        padding: 0 46px 0 16px;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg-app);
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 500;
+        outline: none;
+        transition: 0.2s ease;
+        box-shadow: 0 1px 2px rgba(1,52,119,0.04); */
+}
+
+/* .date-input:hover { border-color: #b7c3d6; } */
+
+.date-input:focus {
+    /* border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(10,95,176,0.14); */
+}
+
+/* .date-input::placeholder { color: #a7b1c2; } */
+
+.calendar-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background: var(--primary);
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s ease;
+}
+
+.calendar-icon:hover {
+    filter: brightness(1.08);
+}
+
+/* =====================================
+       CALENDAR DROPDOWN
+    ===================================== */
+
+.calendar-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 300px;
+    background: var(--bg-app);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 20px 45px rgba(1, 52, 119, 0.18);
+    overflow: hidden;
+    z-index: 3000;
+    outline: 5px solid #e5eaf1;
+}
+
+.date-picker.date-range-picker .calendar-dropdown{
+    width: 600px;
+}
+.date-picker.date-range-picker .calendar-dropdown .range-panels{
+    display: flex;
+}
+.date-picker.date-range-picker .calendar-dropdown .range-panels .calendar-panel{
+    width: 100%;
+}
+.date-picker.date-range-picker .calendar-dropdown .range-panels .calendar-panel:first-child{
+    border-right: 1px solid var(--border-soft);
+}
+.date-picker.date-range-picker .calendar-dropdown .range-panels .calendar-panel:last-child{
+    border-left: 1px solid var(--border-soft);
+}
+
+.date-picker.right-0 .calendar-dropdown {
+    right: 0;
+    left: unset;
+}
+
+.date-picker.bottom-0 .calendar-dropdown {
+    bottom: calc(100% + 5px);
+    top:unset;
+}
+
+.calendar-dropdown.show {
+    display: block;
+}
+
+/* =====================================
+       CALENDAR HEADER (gradient band)
+    ===================================== */
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    background: var(--primary);
+}
+
+.month-year-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* =====================================
+       CUSTOM SELECT
+    ===================================== */
+
+.custom-select {
+    position: relative;
+}
+
+.month-input,
+.year-input {
+    height: 25px;
+    padding: 0 26px 0 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    outline: none;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.month-input::placeholder,
+.year-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.month-input {
+    width: 112px;
+}
+
+.year-input {
+    width: 70px;
+}
+
+.month-input:focus,
+.year-input:focus {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+}
+
+/* =====================================
+       MONTH / YEAR OPTIONS DROPDOWN
+    ===================================== */
+
+.options-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(1, 52, 119, 0.2);
+    z-index: 3001;
+}
+
+.options-dropdown.show {
+    display: block;
+}
+
+.option {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.option:hover {
+    background: #eef3fb;
+}
+
+.option.active {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* =====================================
+       PREVIOUS / NEXT BUTTON
+    ===================================== */
+
+.navigation {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+/* =====================================
+       WEEK DAYS
+    ===================================== */
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    padding: 5px;
+    background-color: #e5eaf1;
+}
+
+.weekday {
+    padding: 6px 0;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+/* =====================================
+       DAYS
+    ===================================== */
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 5px;
+}
+
+.day {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.day:hover {
+    background: var(--primary-light);
+}
+
+.day.other-month {
+    color: #c3cad6;
+}
+
+.day.other-month:hover {
+    background: #f2f4f8;
+    color: #97a1b2;
+}
+
+.day.in-range{
+    background-color: var(--primary-light);
+}
+
+.day.in-range.today{
+    background-color: var(--primary-light);
+    border: 0;
+    color: unset;
+}
+
+.day.range-start,
+.day.range-end {
+    border: 1.5px solid var(--primary);
+    color: var(--white) !important;
+    font-weight: 700;
+    background-color: var(--primary);
+}
+.day.today {
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+    /* background-color: var(--primary); */
+}
+
+.day.selected {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(1, 52, 119, 0.35);
+}
+
+.day.selected:hover {
+    filter: brightness(1.06);
+}
+
+/* =====================================
+       FOOTER
+    ===================================== */
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-top: 1px solid var(--line);
+    background: #f7f9fc;
+}
+
+.footer-btn {
+    border: 0;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: 0.15s ease;
+}
+
+.today-btn {
+    color: var(--primary);
+}
+
+.today-btn:hover {
+    background: rgba(10, 95, 176, 0.1);
+}
+
+.clear-btn {
+    color: var(--muted);
+}
+
+.clear-btn:hover {
+    background: #eceff4;
+    color: #55617a;
+}
+
+/* =====================================
+       SCROLLBAR
+    ===================================== */
+
+.options-dropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.options-dropdown::-webkit-scrollbar-thumb {
+    background: #c3cddc;
+    border-radius: 10px;
+}
+
+/* =====================================
+       RESPONSIVE
+    ===================================== */
+
+@media (max-width: 480px) {
+    .calendar-dropdown {
+        width: 100%;
+    }
+}
+
+
+
+/* =====================================
+           FORM
+        ===================================== */
+
+
+
+/* =====================================
+           TIME PICKER
+        ===================================== */
+
+.time-picker {
+    position: relative;
+}
+
+/* =====================================
+           INPUT
+        ===================================== */
+
+.time-input {
+    /* width: 100%;
+
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d9dee3;
+
+  border-radius: 6px;
+
+  background: #fff;
+
+  color: #333;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s; */
+}
+
+.time-input:hover {
+    /* border-color: #bfc4ca; */
+}
+
+.time-input:focus {
+    /* border-color: var(--primary); */
+
+    /* box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08); */
+}
+
+.time-input::placeholder {
+    /* color: #999; */
+}
+
+/* =====================================
+           TIME DROPDOWN
+           
+           JS controls display.
+        ===================================== */
+
+.time-dropdown {
+    position: absolute;
+
+    top: calc(100% + 6px);
+
+    left: 0;
+
+    width: 320px;
+
+    padding: 10px;
+
+    background: #fff;
+
+    border: 1px solid #e1e4e8;
+
+    border-radius: 9px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+    z-index: 3000;
+    outline: 5px solid #e5eaf1;
+}
+
+/* =====================================
+           HEADER
+        ===================================== */
+
+.time-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #333;
+}
+
+/* =====================================
+           TIME SELECT AREA
+        ===================================== */
+
+.time-select-wrapper {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.time-select {
+    position: relative;
+}
+
+.time-select .select-arrow {
+    color: #777;
+}
+
+/* =====================================
+           SELECT INPUT
+        ===================================== */
+
+.hour-input,
+.minute-input,
+.ampm-input {
+    height: 38px;
+
+    padding: 0 28px 0 10px;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.hour-input {
+    width: 75px;
+}
+
+.minute-input {
+    width: 75px;
+}
+
+.ampm-input {
+    width: 85px;
+}
+
+.hour-input:focus,
+.minute-input:focus,
+.ampm-input:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.08);
+}
+
+/* =====================================
+           ARROW
+        ===================================== */
+
+.select-arrow {
+    position: absolute;
+
+    right: 9px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 9px;
+
+    color: #fff;
+
+    pointer-events: none;
+}
+
+/* =====================================
+           OPTIONS
+        ===================================== */
+
+.option {
+    padding: 9px 10px;
+
+    font-size: 13px;
+
+    color: #333;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.option:hover {
+    background: #e5eaf1;
+}
+
+.option.active {
+    background: var(--primary);
+
+    color: #fff;
+}
+
+/* =====================================
+           COLON
+        ===================================== */
+
+.time-colon {
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #555;
+
+    margin-top: -2px;
+}
+
+/* =====================================
+           FOOTER
+        ===================================== */
+
+.time-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    padding-top: 10px;
+
+    border-top: 1px solid #eee;
+}
+
+.footer-btn {
+    border: 0;
+
+    background: transparent;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.now-btn {
+    color: var(--primary);
+
+    font-weight: 500;
+}
+
+.clear-btn {
+    color: #777;
+}
+
+/* =====================================
+           SCROLLBAR
+        ===================================== */
+
+.options-dropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.options-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+
+    border-radius: 10px;
+}
+
+/* =====================================
+           MOBILE
+        ===================================== */
+
+@media (max-width: 480px) {
+    .time-dropdown {
+        width: 100%;
+    }
+
+    .time-select-wrapper {
+        gap: 5px;
+    }
+}
+
+.calendar-panel.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+/* date and time picker   */

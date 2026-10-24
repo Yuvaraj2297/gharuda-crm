@@ -1,0 +1,258 @@
+/* ===== Brand Target page — scoped to .bt5-page ===== */
+
+/* Title icon tile */
+.bt5-page .bt5-title-ico {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    box-shadow: 0 8px 18px rgba(22, 163, 74, .28);
+    flex-shrink: 0;
+}
+
+/* ===== Filter strip ===== */
+.bt5-page .bt5-filter-bar {
+    display: inline-flex;
+    width: 100%;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #eef0f3;
+    border-radius: 14px;
+    padding: 15px 14px;
+    box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+}
+
+.bt5-page .bt5-filter-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-bottom: 4px;
+}
+
+.bt5-page .bt5-field {
+    min-width: 170px;
+    font-size: 13px;
+}
+
+/* ===== Grouped table structure ===== */
+.bt5-page .table-modern thead th,
+.bt5-page .table-modern tbody td {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.bt5-page .table-modern thead tr:first-child th {
+    /* background: #f8f9fb; */
+}
+
+.bt5-page .table-modern tbody tr[data-id]:hover td {
+}
+
+.bt5-page .thead-group {
+    text-align: center !important;
+    font-weight: 800;
+    font-size: 11.5px;
+    letter-spacing: .03em;
+    color: var(--ink-700);
+}
+
+.bt5-page .thead-sub {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--ink-500);
+    text-align: center !important;
+}
+
+/* Group color accent */
+.bt5-page .gb-cvv {
+    box-shadow: inset 0 -2.5px 0 #fda4af;
+}
+
+/* ===== Brand avatar chip ===== */
+.bt5-page .brand-chip {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    flex-shrink: 0;
+}
+
+/* ===== Achieved pill badges ===== */
+.bt5-page .ach-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.bt5-page .ach-pill .bi {
+    font-size: 11px;
+}
+.bt5-page .pill-up {
+    background: #ecfdf5;
+    color: #15803d;
+}
+.bt5-page .pill-down {
+    background: #fef2f2;
+    color: #dc2626;
+}
+.bt5-page .pill-flat {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* ===== Per-month Target Vs Achieved colored subtotal rows ===== */
+.bt5-page .bt5-subtotal td {
+    padding: 10px 10px;
+    font-weight: 800;
+    color: var(--ink-900);
+    border-top: 2px solid #eef0f3;
+    text-wrap: nowrap;
+}
+
+.bt5-page .bt-label {
+    background: linear-gradient(135deg, #fee2e2, #fecdd3);
+    color: #9f1239;
+    text-align: center !important;
+    font-size: 12px;
+    letter-spacing: .02em;
+}
+
+.bt5-page .bt-actual {
+    background: linear-gradient(135deg, #fef9c3, #fde047);
+    text-align: center;
+}
+.bt5-page .bt-ach {
+    background: linear-gradient(135deg, #ffe4e6, #fda4af);
+    text-align: center;
+}
+
+/* ===== Option buttons ===== */
+.bt5-page .bt5-act {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: .15s;
+    text-decoration: none;
+}
+
+.bt5-page .bt5-act.edit {
+    color: #3564e0;
+    background: rgba(53, 100, 224, .1);
+}
+.bt5-page .bt5-act.edit:hover {
+    background: #3564e0;
+    color: #fff;
+}
+.bt5-page .bt5-act.del {
+    color: #e5484d;
+    background: rgba(229, 72, 77, .1);
+}
+.bt5-page .bt5-act.del:hover {
+    background: #e5484d;
+    color: #fff;
+}
+
+/* ===== Modal ===== */
+#bt5Modal .modal-dialog {
+    max-width: 520px;
+}
+
+#bt5Modal .modal-content {
+    border: none;
+    border-radius: 14px;
+}
+
+.bt5-modal-ico {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+/* ===== Select2 Customization ===== */
+.bt5-filter-bar .select2-container {
+    min-width: 190px !important;
+    width: 190px !important;
+}
+.bt5-filter-bar .select2-container .select2-selection--single {
+    height: 38px !important;
+    border-radius: 8px !important;
+    /* border: 1px solid var(--border-color) !important; */
+    /* background: #fff !important; */
+    display: flex !important;
+    align-items: center !important;
+}
+.bt5-filter-bar .select2-container .select2-selection--single .select2-selection__rendered {
+    line-height: 36px !important;
+    font-size: 13.5px !important;
+    padding-left: 12px !important;
+    padding-right: 24px !important;
+    color: var(--ink-900) !important;
+}
+.bt5-filter-bar .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 36px !important;
+    right: 8px !important;
+}
+.bt5-filter-bar .select2-container--default.select2-container--open .select2-selection--single,
+.bt5-filter-bar .select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+#bt5Modal .select2-container {
+    width: 100% !important;
+    display: block !important;
+}
+#bt5Modal .select2-container .select2-selection--single {
+    height: 38px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color) !important;
+    /* background: #fff !important; */
+    display: flex !important;
+    align-items: center !important;
+}
+#bt5Modal .select2-container .select2-selection--single .select2-selection__rendered {
+    line-height: 36px !important;
+    font-size: 13.5px !important;
+    padding-left: 12px !important;
+    padding-right: 24px !important;
+    color: var(--ink-900) !important;
+}
+#bt5Modal .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 36px !important;
+    right: 8px !important;
+}
+#bt5Modal .select2-container--default.select2-container--open .select2-selection--single,
+#bt5Modal .select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}

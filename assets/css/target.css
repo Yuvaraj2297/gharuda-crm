@@ -1,0 +1,262 @@
+/* ===== Gharuda CRM - Target Page Styles ===== */
+
+/* ===== Target page v5 — scoped to .tgt5-page ===== */
+    .tgt5-page .tgt5-date-range {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink-700);
+        white-space: nowrap;
+    }
+
+    .tgt5-page .tgt5-date-range i {
+        color: var(--primary);
+    }
+
+    /* ===== Year pills ===== */
+    .tgt5-page .tgt5-year-pills {
+        display: inline-flex;
+        gap: 6px;
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 14px;
+        padding: 6px;
+        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+    }
+
+    .tgt5-page .tgt5-year-pill {
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        padding: 8px 16px;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: var(--ink-500);
+        cursor: pointer;
+        transition: .15s;
+    }
+
+    .tgt5-page .tgt5-year-pill:hover {
+        background: var(--primary-soft);
+        color: var(--primary-dark);
+    }
+
+    .tgt5-page .tgt5-year-pill.active {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        color: #fff;
+        box-shadow: 0 6px 14px rgba(22, 163, 74, .28);
+    }
+
+    /* ===== KPI strip ===== */
+    .tgt5-page .tgt5-kpi {
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 14px;
+        padding: 13px 15px;
+        height: 100%;
+        transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .tgt5-page .tgt5-kpi:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(20, 30, 20, .1);
+    }
+
+    .tgt5-page .tgt5-kpi .lbl {
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: var(--ink-500);
+    }
+
+    .tgt5-page .tgt5-kpi .val {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--ink-900);
+        line-height: 1.15;
+        margin-top: 3px;
+    }
+
+    .tgt5-page .tgt5-kpi .bar {
+        height: 5px;
+        border-radius: 999px;
+        background: #eef0f3;
+        margin-top: 8px;
+        overflow: hidden;
+    }
+
+    .tgt5-page .tgt5-kpi .bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: var(--primary);
+        transition: width .35s ease;
+    }
+
+    .tgt5-page .tgt5-kpi .sub {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--ink-500);
+        margin-top: 5px;
+    }
+
+    /* ===== Grouped table structure ===== */
+    .tgt5-page .table-modern thead th,
+    .tgt5-page .table-modern tbody td {
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    /* group band header (row 1) */
+    .tgt5-page .table-modern thead tr:first-child th {
+        /* background: #f8f9fb; */
+    }
+
+    .tgt5-page .thead-group {
+        text-align: center !important;
+        font-weight: 800;
+        font-size: 11.5px;
+        letter-spacing: .03em;
+        color: var(--ink-700);
+    }
+
+    .tgt5-page .thead-sub {
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--ink-500);
+        text-align: center !important;
+    }
+
+    /* group color accents (subtle, namba style) */
+    .tgt5-page .gb-bvn { box-shadow: inset 0 -2.5px 0 #93c5fd; }
+    .tgt5-page .gb-bvv { box-shadow: inset 0 -2.5px 0 #a78bfa; }
+    .tgt5-page .gb-cvv { box-shadow: inset 0 -2.5px 0 #fda4af; }
+
+    /* achieved cell colors */
+    .tgt5-page .up { color: #16a34a; font-weight: 800; }
+    .tgt5-page .down { color: #e5484d; font-weight: 800; }
+
+    /* money cells */
+    .tgt5-page .tgt5-money {
+        font-weight: 700;
+        color: var(--ink-900);
+    }
+
+    /* ===== Target Vs Achieved colored totals row ===== */
+    .tgt5-page .tgt5-total-row td {
+        padding: 10px 10px;
+        font-weight: 800;
+        color: var(--ink-900);
+        border-top: 2px solid #eef0f3;
+        text-wrap: nowrap;
+    }
+
+    .tgt5-page .tt-label {
+        background: #fdeeee;
+        color: #b91c1c;
+        text-align: center !important;
+        font-size: 12px;
+        letter-spacing: .02em;
+    }
+
+    .tgt5-page .tc-src { background: #ede9fe; }
+    .tgt5-page .tc-bvn-actual { background: #dbeafe; }
+    .tgt5-page .tc-bvn-ach { background: #d1fae5; }
+    .tgt5-page .tc-bvv-actual { background: #ddd6fe; }
+    .tgt5-page .tc-bvv-ach { background: #fef08a; }
+    .tgt5-page .tc-cvv-actual { background: #fed7aa; }
+    .tgt5-page .tc-cvv-ach { background: #fecaca; }
+
+    /* ===== Option buttons ===== */
+    .tgt5-page .tgt5-act {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12.5px;
+        cursor: pointer;
+        transition: .15s;
+        text-decoration: none;
+    }
+
+    .tgt5-page .tgt5-act.edit { color: #3564e0; background: rgba(53, 100, 224, .1); }
+    .tgt5-page .tgt5-act.edit:hover { background: #3564e0; color: #fff; }
+    .tgt5-page .tgt5-act.del { color: #e5484d; background: rgba(229, 72, 77, .1); }
+    .tgt5-page .tgt5-act.del:hover { background: #e5484d; color: #fff; }
+    .tgt5-page .tgt5-act.wa { color: #16a34a; background: rgba(22, 163, 74, .1); }
+    .tgt5-page .tgt5-act.wa:hover { background: #16a34a; color: #fff; }
+
+    /* ===== Chart card ===== */
+    .tgt5-page .tgt5-chart-card {
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+        padding: 18px;
+    }
+
+    .tgt5-page .tgt5-chart-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .tgt5-page .tgt5-chart-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--ink-900);
+    }
+
+    .tgt5-page .tgt5-chart-sub {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--ink-500);
+    }
+
+    .tgt5-page .tgt5-chart-wrap {
+        position: relative;
+        height: 300px;
+    }
+
+    /* ===== Modal ===== */
+    #tgt5Modal .modal-dialog {
+        max-width: 520px;
+    }
+
+    #tgt5Modal .modal-content {
+        border: none;
+        border-radius: 14px;
+    }
+
+    #tgt5Modal .select2-container--default .select2-selection--single {
+        height: 38px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    #tgt5Modal .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 36px;
+        padding-left: 12px;
+        color: var(--ink-700);
+        font-size: 13px;
+    }
+
+    #tgt5Modal .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 36px;
+        right: 8px;
+    }
+
+    #tgt5Modal .select2-dropdown {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        z-index: 1065;
+    }

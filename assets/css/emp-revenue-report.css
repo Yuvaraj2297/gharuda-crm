@@ -1,0 +1,199 @@
+.revenue-report-page .rev-date-range {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-700);
+    white-space: nowrap;
+}
+
+.revenue-report-page .rev-date-range i {
+    color: var(--primary);
+}
+
+/* ===== Employee card ===== */
+.revenue-report-page .rev-card {
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #eef0f3;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.revenue-report-page .rev-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(20, 30, 20, .1);
+}
+
+.revenue-report-page .rev-banner {
+    position: relative;
+    height: 78px;
+    background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 55%, #4ade80 100%);
+    overflow: hidden;
+}
+
+.revenue-report-page .rev-banner svg {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 44px;
+    display: block;
+}
+
+.revenue-report-page .rev-avatar {
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    z-index: 1;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #fff;
+    color: var(--ink-900);
+    font-size: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+}
+
+.revenue-report-page .rev-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.revenue-report-page .rev-name {
+    padding: 8px 16px 10px;
+    text-align: right;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--ink-900);
+    border-bottom: 1px solid #eef0f3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.revenue-report-page .rev-body {
+    padding: 10px 16px 16px;
+    background: #f8fbf9;
+}
+
+.revenue-report-page .rev-colhead {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-500);
+    margin-bottom: 4px;
+}
+
+.revenue-report-page .rev-metric {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+}
+
+.revenue-report-page .rev-metric+.rev-metric {
+    border-top: 1px dashed #e3e6ea;
+}
+
+.revenue-report-page .rev-icon {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.revenue-report-page .rev-theme-blue .rev-icon {
+    background: #e8f0fe;
+    color: #3b82f6;
+}
+
+.revenue-report-page .rev-theme-amber .rev-icon {
+    background: var(--accent-amber-soft);
+    color: #d98a17;
+}
+
+.revenue-report-page .rev-theme-green .rev-icon {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.revenue-report-page .rev-theme-violet .rev-icon {
+    background: #f0eafb;
+    color: var(--accent-violet, #8b5cf6);
+}
+
+.revenue-report-page .rev-theme-red .rev-icon {
+    background: var(--accent-red-soft);
+    color: var(--accent-red, #e5484d);
+}
+
+.revenue-report-page .rev-metric-main {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.revenue-report-page .rev-metric-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.revenue-report-page .rev-label {
+    color: var(--ink-500);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.revenue-report-page .rev-value {
+    font-weight: 800;
+    color: var(--ink-900);
+    white-space: nowrap;
+}
+
+.revenue-report-page .rev-value.neg {
+    color: var(--accent-red, #e5484d);
+}
+
+.revenue-report-page .rev-track {
+    height: 6px;
+    margin-top: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #eef0f3;
+}
+
+.revenue-report-page .rev-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #16a34a, #4ade80);
+    transition: width .5s ease;
+}
+
+.revenue-report-page .rev-fill.neg {
+    background: linear-gradient(90deg, #dc2626, #f87171);
+}
+
+.revenue-report-page .rev-empty {
+    padding: 48px 16px;
+    text-align: center;
+    color: var(--ink-500);
+}
+
+.revenue-report-page .rev-empty i {
+    font-size: 34px;
+    display: block;
+    margin-bottom: 8px;
+}

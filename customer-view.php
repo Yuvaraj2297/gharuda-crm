@@ -1,0 +1,9901 @@
+<?php include 'header.php'; ?>
+
+<link rel="stylesheet" href="./assets/css/customer-view.css">
+
+
+<main class="cv-page">
+  <div class="cv-head">
+    <div>
+      <h1 class="font-display fw-bold mb-1 page-title">#46 GG COMPANY</h1>
+      <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap overflow-auto breadcrumb-text">
+        <i class="bi bi-people fs-6"></i><a href="customers.php" class="text-neutral text-decoration-none">Customers</a><i class="bi bi-chevron-right"></i><span class="fw-bold text-dark" id="cvCrumbTab">Contacts</span>
+        <!-- <span class="ms-2">Customer from Lead</span> -->
+      </nav>
+    </div>
+    <a href="customers.php" class="btn btn-outline-primary"><i class="bi bi-arrow-left me-1"></i>Back to customers</a>
+  </div>
+
+  <div class="cv-layout">
+    <!-- Left sidebar (Bootstrap pills — toggles the panes on the right, URL hash follows) -->
+    <aside class="card-custom cv-side" id="cvSide" role="tablist" aria-orientation="vertical" aria-label="Customer sections">
+      <div class="cv-side-group">
+        <div class="cv-side-label">Overview</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-profile" data-tab="profile" data-bs-target="#cvTab-profile" role="tab" aria-controls="cvTab-profile" aria-selected="false">
+          <i class="bi bi-person-circle"></i>Profile </a>
+        <a href="javascript:void(0)" class="cv-side-link active" id="cvSideLink-contacts" data-tab="contacts" data-bs-target="#cvTab-contacts" role="tab" aria-controls="cvTab-contacts" aria-selected="true">
+          <i class="bi bi-person-fill"></i>Contacts <span class="cv-badge">4</span> </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-notes" data-tab="notes" data-bs-target="#cvTab-notes" role="tab" aria-controls="cvTab-notes" aria-selected="false">
+          <i class="bi bi-journal-text"></i>Notes </a>
+      </div>
+      <div class="cv-side-group">
+        <div class="cv-side-label">Sales</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-proposals" data-tab="proposals" data-bs-target="#cvTab-proposals" role="tab" aria-controls="cvTab-proposals" aria-selected="false">
+          <i class="bi bi-file-earmark"></i>Proposals </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-estimates" data-tab="estimates" data-bs-target="#cvTab-estimates" role="tab" aria-controls="cvTab-estimates" aria-selected="false">
+          <i class="bi bi-file-earmark"></i>Estimates </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-appointments" data-tab="appointments" data-bs-target="#cvTab-appointments" role="tab" aria-controls="cvTab-appointments" aria-selected="false">
+          <i class="bi bi-calendar3"></i>Appointments </a>
+      </div>
+      <div class="cv-side-group">
+        <div class="cv-side-label">Finance</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-invoices" data-tab="invoices" data-bs-target="#cvTab-invoices" role="tab" aria-controls="cvTab-invoices" aria-selected="false">
+          <i class="bi bi-file-earmark-text"></i>Invoices </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-payments" data-tab="payments" data-bs-target="#cvTab-payments" role="tab" aria-controls="cvTab-payments" aria-selected="false">
+          <i class="bi bi-graph-up"></i>Payments </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-statement" data-tab="statement" data-bs-target="#cvTab-statement" role="tab" aria-controls="cvTab-statement" aria-selected="false">
+          <i class="bi bi-bar-chart-line"></i>Statement </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-credit_notes" data-tab="credit_notes" data-bs-target="#cvTab-credit_notes" role="tab" aria-controls="cvTab-credit_notes" aria-selected="false">
+          <i class="bi bi-file-earmark-minus"></i>Credit Notes </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-purchase_orders" data-tab="purchase_orders" data-bs-target="#cvTab-purchase_orders" role="tab" aria-controls="cvTab-purchase_orders" aria-selected="false">
+          <i class="bi bi-file-earmark-check"></i>Purchase Orders </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-subscriptions" data-tab="subscriptions" data-bs-target="#cvTab-subscriptions" role="tab" aria-controls="cvTab-subscriptions" aria-selected="false">
+          <i class="bi bi-arrow-repeat"></i>Subscriptions </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-expenses" data-tab="expenses" data-bs-target="#cvTab-expenses" role="tab" aria-controls="cvTab-expenses" aria-selected="false">
+          <i class="bi bi-receipt"></i>Expenses </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-contracts" data-tab="contracts" data-bs-target="#cvTab-contracts" role="tab" aria-controls="cvTab-contracts" aria-selected="false">
+          <i class="bi bi-file-earmark-ruled"></i>Contracts </a>
+      </div>
+      <div class="cv-side-group">
+        <div class="cv-side-label">Work</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-projects" data-tab="projects" data-bs-target="#cvTab-projects" role="tab" aria-controls="cvTab-projects" aria-selected="false">
+          <i class="bi bi-diagram-3"></i>Projects </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-tasks" data-tab="tasks" data-bs-target="#cvTab-tasks" role="tab" aria-controls="cvTab-tasks" aria-selected="false">
+          <i class="bi bi-list-check"></i>Tasks </a>
+      </div>
+      <div class="cv-side-group">
+        <div class="cv-side-label">Support</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-tickets" data-tab="tickets" data-bs-target="#cvTab-tickets" role="tab" aria-controls="cvTab-tickets" aria-selected="false">
+          <i class="bi bi-life-preserver"></i>Support Tickets <span class="cv-badge">1</span> </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-email_log" data-tab="email_log" data-bs-target="#cvTab-email_log" role="tab" aria-controls="cvTab-email_log" aria-selected="false">
+          <i class="bi bi-envelope-fill"></i>Email Log <span class="cv-badge">1</span> </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-call_logs" data-tab="call_logs" data-bs-target="#cvTab-call_logs" role="tab" aria-controls="cvTab-call_logs" aria-selected="false">
+          <i class="bi bi-telephone-fill"></i>Call Logs </a>
+      </div>
+      <div class="cv-side-group">
+        <div class="cv-side-label">Other</div>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-shipping" data-tab="shipping" data-bs-target="#cvTab-shipping" role="tab" aria-controls="cvTab-shipping" aria-selected="false">
+          <i class="bi bi-truck"></i>View Shipping Address </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-map" data-tab="map" data-bs-target="#cvTab-map" role="tab" aria-controls="cvTab-map" aria-selected="false">
+          <i class="bi bi-geo-alt-fill"></i>Map </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-files" data-tab="files" data-bs-target="#cvTab-files" role="tab" aria-controls="cvTab-files" aria-selected="false">
+          <i class="bi bi-paperclip"></i>Files </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-vault" data-tab="vault" data-bs-target="#cvTab-vault" role="tab" aria-controls="cvTab-vault" aria-selected="false">
+          <i class="bi bi-lock-fill"></i>Vault </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-reminders" data-tab="reminders" data-bs-target="#cvTab-reminders" role="tab" aria-controls="cvTab-reminders" aria-selected="false">
+          <i class="bi bi-clock"></i>Reminders </a>
+        <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-activity_log" data-tab="activity_log" data-bs-target="#cvTab-activity_log" role="tab" aria-controls="cvTab-activity_log" aria-selected="false">
+          <i class="bi bi-card-list"></i>Activity Log </a>
+      </div>
+    </aside>
+
+    <!-- Right content -->
+    <section class="pt-2">
+      <div class="tab-content" id="cvTabContent">
+        <div class="tab-pane fade" id="cvTab-profile" role="tabpanel" aria-labelledby="cvSideLink-profile" tabindex="0">
+          <div class="cv-title">Profile</div>
+          <div class="card-custom p-0 cv-profile" id="cvProfile">
+            <div class="cv-subtabs" role="tablist" aria-label="Profile sections">
+              <button type="button" class="cv-subtab active" id="cvSubBtn-details" data-sub="details" data-bs-target="#cvSub-details" role="tab" aria-controls="cvSub-details" aria-selected="true">Customer Details</button>
+              <button type="button" class="cv-subtab" id="cvSubBtn-billing" data-sub="billing" data-bs-target="#cvSub-billing" role="tab" aria-controls="cvSub-billing" aria-selected="false">Billing &amp; Shipping</button>
+              <button type="button" class="cv-subtab" id="cvSubBtn-admins" data-sub="admins" data-bs-target="#cvSub-admins" role="tab" aria-controls="cvSub-admins" aria-selected="false">Customer Admins</button>
+              <button type="button" class="cv-subtab" id="cvSubBtn-po" data-sub="po" data-bs-target="#cvSub-po" role="tab" aria-controls="cvSub-po" aria-selected="false">Purchase Order</button>
+            </div>
+
+            <div class="tab-content">
+              <!-- Customer Details -->
+              <div class="tab-pane cv-pane fade show active" id="cvSub-details" data-pane="details" role="tabpanel" aria-labelledby="cvSubBtn-details">
+
+                <div class="cv-form">
+                  <label class="cv-check mb-3"><input type="checkbox" class="form-check-input" id="dShowContact"> <span>Show primary contact full name on Invoices, Estimates, Payments, Credit Notes</span></label>
+
+                  <div class="cv-field"><label class="form-label" for="dClientCode">Client code</label><input class="form-control" id="dClientCode"></div>
+                  <div class="cv-field"><label class="form-label cv-required" for="dCompany">Company</label><input class="form-control" id="dCompany" value="GG COMPANY">
+                    <div class="cv-err" hidden>Company is required.</div>
+                  </div>
+
+                  <div class="cv-grid-2">
+                    <div class="cv-field"><label class="form-label" for="dBalance">Balance</label><input class="form-control" id="dBalance" inputmode="decimal"></div>
+                    <div class="cv-field"><label class="form-label" for="dBalanceDate">as of</label>
+                      <div class="date-picker"><input type="text" class="date-input form-control" id="dBalanceDate" placeholder="dd-mm-yyyy" autocomplete="off"></div>
+                    </div>
+                  </div>
+
+                  <div class="cv-field"><label class="form-label" for="dPhone">Phone</label><input class="form-control" id="dPhone" value="9677063368"></div>
+                  <div class="cv-field"><label class="form-label" for="dWebsite">Website</label><input class="form-control" id="dWebsite"></div>
+
+                  <div class="cv-field">
+                    <label class="form-label" for="dGroups">Groups</label>
+                    <div class="cv-with-btn">
+                      <select class="form-select cv-select" id="dGroups">
+                        <option value="">Non selected</option>
+                        <option selected>Anand Mehta</option>
+                        <option>VIP</option>
+                        <option>Retail</option>
+                      </select>
+                      <button type="button" class="btn cv-plus js-demo" title="Add group" aria-label="Add group"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="cv-field"><label class="form-label" for="dCredit">Credit Days</label>
+                    <select class="form-select cv-select" id="dCredit">
+                      <option>0</option>
+                      <option selected>1</option>
+                      <option>7</option>
+                      <option>15</option>
+                      <option>30</option>
+                      <option>45</option>
+                      <option>60</option>
+                    </select>
+                  </div>
+                  <div class="cv-field"><label class="form-label" for="dCurrency"><i class="bi bi-question-circle me-1"></i>Currency</label>
+                    <select class="form-select cv-select" id="dCurrency">
+                      <option>System Default</option>
+                      <option>INR (₹)</option>
+                      <option>USD ($)</option>
+                      <option>EUR (€)</option>
+                    </select>
+                  </div>
+
+                  <hr class="cv-divider">
+
+                  <div class="cv-field"><label class="form-label" for="dAddress">Address</label><textarea class="form-control" id="dAddress" rows="3">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea></div>
+                  <div class="cv-field"><label class="form-label" for="dCountry">Country</label>
+                    <select class="form-select cv-select" id="dCountry">
+                      <option selected>India</option>
+                      <option>United States</option>
+                      <option>United Kingdom</option>
+                      <option>United Arab Emirates</option>
+                    </select>
+                  </div>
+                  <div class="cv-field"><label class="form-label" for="dState">State</label>
+                    <select class="form-select cv-select" id="dState">
+                      <option value="">Nothing selected</option>
+                      <option>Tamil Nadu</option>
+                      <option>Karnataka</option>
+                      <option>Kerala</option>
+                      <option>Maharashtra</option>
+                      <option>Andhra Pradesh</option>
+                    </select>
+                  </div>
+                  <div class="cv-field"><label class="form-label" for="dStateCode">State Code</label><input class="form-control" id="dStateCode"></div>
+                  <div class="cv-field"><label class="form-label" for="dCity">City</label>
+                    <select class="form-select cv-select" id="dCity">
+                      <option value="">Nothing selected</option>
+                      <option selected>Chennai</option>
+                      <option>Coimbatore</option>
+                      <option>Madurai</option>
+                      <option>Bengaluru</option>
+                      <option>Kochi</option>
+                    </select>
+                  </div>
+                  <div class="cv-field"><label class="form-label" for="dZip">Zip Code</label><input class="form-control" id="dZip" value="600006"></div>
+                  <div class="cv-field"><label class="form-label" for="dPan">PAN No</label><input class="form-control" id="dPan" maxlength="10"></div>
+                  <div class="cv-field"><label class="form-label" for="dGst">GST Number</label><input class="form-control" id="dGst" maxlength="15"></div>
+                  <div class="cv-field"><label class="form-label" for="dIndustry">Industry Type</label><textarea class="form-control" id="dIndustry" rows="3"></textarea></div>
+
+                  <div class="cv-grid-2">
+                    <div class="cv-field mb-0"><label class="form-label" for="dOpening">Opening Balance</label><input class="form-control" id="dOpening" placeholder="0.000" inputmode="decimal"></div>
+                    <div class="cv-field mb-0"><label class="form-label" for="dOpeningDate">As Of</label>
+                      <div class="date-picker"><input type="text" class="date-input form-control" id="dOpeningDate" placeholder="dd-mm-yyyy" autocomplete="off"></div>
+                    </div>
+                  </div>
+
+                  <div class="cv-field mb-0">
+                    <label class="form-label cv-required" for="cProfession">Profession</label>
+                    <select class="form-select cv-select" id="cProfession">
+                      <option value="">Select profession</option>
+                      <option selected>Builders</option>
+                      <option>Contractors</option>
+                      <option>Event Management</option>
+                      <option>Manufacturing</option>
+                      <option>Retail</option>
+                    </select>
+                    <div class="cv-err" hidden>Profession is required.</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Billing & Shipping -->
+              <div class="tab-pane cv-pane fade" id="cvSub-billing" data-pane="billing" role="tabpanel" aria-labelledby="cvSubBtn-billing">
+
+                <div class="cv-grid-2 cv-bill-grid">
+                  <div>
+                    <div class="cv-addr-head"><span>Billing Address</span><button type="button" class="cv-textlink" id="cvSameAsInfo">Same as Customer Info</button></div>
+                    <div class="cv-field"><label class="form-label cv-required" for="bStreet">Street</label><textarea class="form-control" id="bStreet" rows="4">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea></div>
+                    <div class="cv-field"><label class="form-label" for="bCountry">Country</label>
+                      <select class="form-select cv-select" id="bCountry">
+                        <option value="">Non selected</option>
+                        <option selected>India</option>
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>United Arab Emirates</option>
+                      </select>
+                    </div>
+                    <div class="cv-field"><label class="form-label" for="bState">State</label>
+                      <select class="form-select cv-select" id="bState">
+                        <option value="">Nothing selected</option>
+                        <option>Tamil Nadu</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Maharashtra</option>
+                        <option>Andhra Pradesh</option>
+                      </select>
+                    </div>
+                    <div class="cv-field"><label class="form-label" for="bCity">City</label>
+                      <select class="form-select cv-select" id="bCity">
+                        <option value="">Nothing selected</option>
+                        <option selected>Chennai</option>
+                        <option>Coimbatore</option>
+                        <option>Madurai</option>
+                        <option>Bengaluru</option>
+                        <option>Kochi</option>
+                      </select>
+                    </div>
+                    <div class="cv-field mb-0"><label class="form-label" for="bZip">Zip Code</label><input class="form-control" id="bZip" value="600006"></div>
+                  </div>
+                  <div>
+                    <div class="cv-addr-head"><span><i class="bi bi-question-circle me-1"></i>Shipping Address</span><button type="button" class="cv-textlink" id="cvCopyBilling">Copy Billing Address</button></div>
+                    <div class="cv-field"><label class="form-label cv-required" for="sStreet">Street</label><textarea class="form-control" id="sStreet" rows="4"></textarea></div>
+                    <div class="cv-field"><label class="form-label" for="sCountry">Country</label>
+                      <select class="form-select cv-select" id="sCountry">
+                        <option value="">Non selected</option>
+                        <option>India</option>
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>United Arab Emirates</option>
+                      </select>
+                    </div>
+                    <div class="cv-field"><label class="form-label" for="sState">State</label>
+                      <select class="form-select cv-select" id="sState">
+                        <option value="">Nothing selected</option>
+                        <option>Tamil Nadu</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Maharashtra</option>
+                        <option>Andhra Pradesh</option>
+                      </select>
+                    </div>
+                    <div class="cv-field"><label class="form-label" for="sCity">City</label>
+                      <select class="form-select cv-select" id="sCity">
+                        <option value="">Nothing selected</option>
+                        <option>Chennai</option>
+                        <option>Coimbatore</option>
+                        <option>Madurai</option>
+                        <option>Bengaluru</option>
+                        <option>Kochi</option>
+                      </select>
+                    </div>
+                    <div class="cv-field mb-0"><label class="form-label" for="sZip">Zip Code</label><input class="form-control" id="sZip"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Customer Admins -->
+              <div class="tab-pane cv-pane fade" id="cvSub-admins" data-pane="admins" role="tabpanel" aria-labelledby="cvSubBtn-admins">
+                <div class="card-custom p-0" id="cvCard-admins">
+                  <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="icon-chip"><i class="bi bi-person-badge"></i></div>
+                      <div>
+                        <h3 class="card-title mb-0">Customer Admins</h3>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="cvAssignAdminBtn"><i class="bi bi-plus-lg me-1"></i>Assign Admin</button>
+                  </div>
+                  <div class="table-responsive table-modern-wrap overflow-auto column-border">
+                    <table class="table-modern w-100 datatable" id="cvTbl-admins">
+                      <thead>
+                        <tr>
+                          <th>Staff Member</th>
+                          <th>Date Assigned</th>
+                          <th>Options</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cvBody-admins">
+                        <tr>
+                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Karthik R</span></span></td>
+                          <td>16-09-2026 11:53</td>
+                          <td><button type="button" class="btn btn-sm danger cv-icon-btn" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
+                        </tr>
+                        <tr>
+                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Divya M</span></span></td>
+                          <td>16-09-2026 11:53</td>
+                          <td><button type="button" class="btn btn-sm danger cv-icon-btn" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Purchase Order -->
+              <div class="tab-pane cv-pane fade" id="cvSub-po" data-pane="po" role="tabpanel" aria-labelledby="cvSubBtn-po">
+                <div class="card-custom p-0" id="cvCard-profile-po">
+                  <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="icon-chip"><i class="bi bi-file-earmark-check"></i></div>
+                      <div>
+                        <h3 class="card-title mb-0">Purchase Order</h3>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="table-responsive table-modern-wrap overflow-auto column-border">
+                    <table class="table-modern w-100 datatable" id="cvTbl-profile-po">
+                      <thead>
+                        <tr>
+                          <th>Purchase order</th>
+                          <th>PO Value</th>
+                          <th>Tax Value</th>
+                          <th>PO Value Including Tax</th>
+                          <th>Order date</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cvBody-profile-po">
+                        <tr>
+                          <td><a href="#" class="cv-link">PO-2026-001</a></td>
+                          <td>₹ 45,000</td>
+                          <td>₹ 8,100</td>
+                          <td>₹ 53,100</td>
+                          <td>16-09-2026</td>
+                        </tr>
+                        <tr>
+                          <td><a href="#" class="cv-link">PO-2026-002</a></td>
+                          <td>₹ 32,000</td>
+                          <td>₹ 5,760</td>
+                          <td>₹ 37,760</td>
+                          <td>05-09-2026</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cv-form-foot" id="cvFormFoot"><button type="button" class="btn btn-primary" id="cvSubmit">Submit</button></div>
+          </div>
+        </div>
+        <div class="tab-pane fade show active" id="cvTab-contacts" role="tabpanel" aria-labelledby="cvSideLink-contacts" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-contacts">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-person-fill"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Contacts</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewContactBtn"><i class="bi bi-plus-lg me-1"></i>New Contact</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-contacts">
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role Position</th>
+                    <th>Phone</th>
+                    <th>Active</th>
+                    <th>Last Login</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-contacts">
+                  <tr class="cv-row">
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">MOHAN S</a></span>
+                    </td>
+                    <td>
+                      <a href="mailto:kaviyarasu@ghratechnology.com" class="cv-link">kaviyarasu@ghratechnology.com</a>
+                    </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      <a href="tel:9677063368" class="cv-link">9677063368</a>
+                    </td>
+                    <td>
+                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                    </td>
+                    <td>
+                      16-09-2026 11:53 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Kaviyarasu M</a></span>
+                    </td>
+                    <td>
+                      <a href="mailto:kaviyarasu@gmail.com" class="cv-link">kaviyarasu@gmail.com</a>
+                    </td>
+                    <td>
+                      Project Manager </td>
+                    <td>
+                      <a href="tel:9840123456" class="cv-link">9840123456</a>
+                    </td>
+                    <td>
+                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                    </td>
+                    <td>
+                      14-09-2026 10:20 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Suresh Babu</a></span>
+                    </td>
+                    <td>
+                      <a href="mailto:suresh@ggcompany.com" class="cv-link">suresh@ggcompany.com</a>
+                    </td>
+                    <td>
+                      Operations Head </td>
+                    <td>
+                      <a href="tel:9444123890" class="cv-link">9444123890</a>
+                    </td>
+                    <td>
+                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                    </td>
+                    <td>
+                      12-09-2026 15:45 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Priya S</a></span>
+                    </td>
+                    <td>
+                      <a href="mailto:priya@ggcompany.com" class="cv-link">priya@ggcompany.com</a>
+                    </td>
+                    <td>
+                      Finance &amp; Accounts </td>
+                    <td>
+                      <a href="tel:9841198765" class="cv-link">9841198765</a>
+                    </td>
+                    <td>
+                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                    </td>
+                    <td>
+                      09-09-2026 09:12 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-notes" role="tabpanel" aria-labelledby="cvSideLink-notes" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-notes">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-journal-text"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Notes</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewNoteBtn"><i class="bi bi-plus-lg me-1"></i>New Note</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-notes">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Added By</th>
+                    <th>Date Added</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-notes">
+                  <tr class="cv-row">
+                    <td>
+                      Requested revised quotation for event setup. </td>
+                    <td>
+                      Admin </td>
+                    <td>
+                      14-09-2026 10:12 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      Follow-up call scheduled for next week. </td>
+                    <td>
+                      Sales Team </td>
+                    <td>
+                      10-09-2026 16:40 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-proposals" role="tabpanel" aria-labelledby="cvSideLink-proposals" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-proposals">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Proposals</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewProposalBtn"><i class="bi bi-plus-lg me-1"></i>New Proposal</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-proposals">
+                <thead>
+                  <tr>
+                    <th>Proposal #</th>
+                    <th>Subject</th>
+                    <th>Total</th>
+                    <th>Open Till</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-proposals">
+                  <tr class="cv-row">
+                    <td>
+                      PRO-0007 </td>
+                    <td>
+                      Corporate event management </td>
+                    <td>
+                      ₹ 1,20,000 </td>
+                    <td>
+                      30-09-2026 </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Sent</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      PRO-0004 </td>
+                    <td>
+                      Annual maintenance </td>
+                    <td>
+                      ₹ 60,000 </td>
+                    <td>
+                      01-09-2026 </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Accepted</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-estimates" role="tabpanel" aria-labelledby="cvSideLink-estimates" tabindex="0">
+          <!-- Estimates — title + buttons + year select + KPI cards + table flow -->
+
+
+          <div class="cv-est-head mt-3 ms-3">
+            <div class="cv-est-actions w-100">
+              <select class="form-select form-select-sm cv-est-year bg-white mb-0" aria-label="Year">
+                <option selected>2026</option>
+                <option>2025</option>
+                <option>2024</option>
+              </select>
+              <button type="button" class="btn btn-primary" id="cvEstNewBtn"><i class="bi bi-plus-lg me-1"></i>Create New Estimate</button>
+              <button type="button" class="btn btn-primary" id="cvEstZipBtn"><i class="bi bi-file-zip me-1"></i>Zip Estimates</button>
+            </div>
+          </div>
+
+          <!-- Status summary KPI cards (blue → primary) -->
+          <div class="cv-est-kpis ms-3">
+            <div class="cv-est-kpi c-green">
+              <div class="k">Draft</div>
+              <div class="v">₹ 22,000</div>
+            </div>
+            <div class="cv-est-kpi c-green">
+              <div class="k">Sent</div>
+              <div class="v">₹ 38,000</div>
+            </div>
+            <div class="cv-est-kpi c-amber">
+              <div class="k">Expired</div>
+              <div class="v">₹ 0.00</div>
+            </div>
+            <div class="cv-est-kpi c-red">
+              <div class="k">Declined</div>
+              <div class="v">₹ 15,000</div>
+            </div>
+            <div class="cv-est-kpi c-green">
+              <div class="k">Accepted</div>
+              <div class="v">₹ 0.00</div>
+            </div>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-estimates">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Estimates</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-estimates">
+                <thead>
+                  <tr>
+                    <th>Estimate #</th>
+                    <th>Amount</th>
+                    <th>Total Tax</th>
+                    <th>Project</th>
+                    <th>Tags</th>
+                    <th>Date</th>
+                    <th>Expiry Date</th>
+                    <th>Reference #</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-estimates">
+                  <tr class="cv-row">
+                    <td>
+                      <a href="#" class="cv-link">EST-000021</a>
+                    </td>
+                    <td>
+                      <strong>₹ 38,000</strong>
+                    </td>
+                    <td>
+                      ₹ 0 </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <span class="cv-tag-chip">Hot</span>
+                    </td>
+                    <td>
+                      03-09-2026 </td>
+                    <td>
+                      17-09-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-021</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Sent</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <a href="#" class="cv-link">EST-000018</a>
+                    </td>
+                    <td>
+                      <strong>₹ 15,000</strong>
+                    </td>
+                    <td>
+                      ₹ 0 </td>
+                    <td>
+                      AMC Renewal </td>
+                    <td>
+                      <span class="cv-tag-chip">Warm</span>
+                    </td>
+                    <td>
+                      20-08-2026 </td>
+                    <td>
+                      03-09-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-018</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Declined</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <a href="#" class="cv-link">EST-000014</a>
+                    </td>
+                    <td>
+                      <strong>₹ 22,000</strong>
+                    </td>
+                    <td>
+                      ₹ 0 </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      <span class="cv-tag-chip">Hot</span>
+                    </td>
+                    <td>
+                      10-08-2026 </td>
+                    <td>
+                      24-08-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-014</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Draft</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Create New Estimate modal — fullscreen (image 2 fields) -->
+            <div class="modal fade" id="cvNewEstimateModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content cv-inv-modal">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-file-earmark"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">Create New Estimate</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New estimate</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body cv-inv-body">
+                    <div class="cv-est-grid">
+                      <!-- Left column -->
+                      <div>
+                        <div class="cv-est-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                        <div class="cv-est-addr-row">
+                          <div>
+                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <div class="cv-inv-addr-text">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>Chennai, Tamil Nadu<br>IN, 600100</div>
+                          </div>
+                          <div>
+                            <label class="cv-inv-mini-label">Ship to</label>
+                            <div class="cv-inv-addr-text" style="color:#9ca3af;">---, ---<br>---, ---</div>
+                          </div>
+                        </div>
+                        <div class="cv-est-field">
+                          <label><span class="req">*</span>Estimate Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                          <div class="cv-est-num-wrap"><span class="cv-est-prefix">EST-</span><input type="text" class="form-control" value="059"></div>
+                        </div>
+                        <div class="cv-est-addr-row">
+                          <div class="cv-est-field"><label><span class="req">*</span>Estimate Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                          <div class="cv-est-field"><label>Expiry Date</label><input type="date" class="form-control" value="2026-09-30"></div>
+                        </div>
+                        <div class="cv-est-addr-row">
+                          <div class="cv-est-field"><label>Advance Payment</label><select class="form-select">
+                              <option selected>Select Advance Payment</option>
+                              <option>25% Advance</option>
+                              <option>50% Advance</option>
+                              <option>Full Advance</option>
+                            </select></div>
+                          <div class="cv-est-field"><label>Bank Accounts</label><select class="form-select">
+                              <option selected>Select Banking</option>
+                              <option>HDFC Bank - 50100234567890</option>
+                              <option>ICICI Bank - 602305123456</option>
+                            </select></div>
+                        </div>
+                      </div>
+                      <!-- Right column -->
+                      <div>
+                        <div class="cv-est-field">
+                          <label><i class="bi bi-tag me-1"></i>Tags</label>
+                          <div class="nl-tags-wrap" style="max-width:100%;">
+                            <div class="nl-tags-chips"></div>
+                            <input type="text" class="nl-tags-input" placeholder="Tag">
+                          </div>
+                        </div>
+                        <div class="cv-est-addr-row">
+                          <div class="cv-est-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                              <option selected>INR ₹</option>
+                              <option>USD $</option>
+                            </select></div>
+                          <div class="cv-est-field"><label>Status</label><select class="form-select">
+                              <option selected>Draft</option>
+                              <option>Sent</option>
+                              <option>Expired</option>
+                              <option>Declined</option>
+                              <option>Accepted</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-est-field"><label>Reference #</label><input type="text" class="form-control"></div>
+                        <div class="cv-est-field"><label>Purchase order</label><select class="form-select">
+                            <option selected>Non selected</option>
+                            <option>PO-0011 — Event setup</option>
+                            <option>PO-0014 — AMC renewal</option>
+                          </select></div>
+                        <div class="cv-est-addr-row">
+                          <div class="cv-est-field"><label>Sale Agent</label><select class="form-select">
+                              <option selected>gharuda SOFTWARE</option>
+                              <option>Karthik R</option>
+                              <option>Divya M</option>
+                            </select></div>
+                          <div class="cv-est-field"><label>Discount type</label><select class="form-select">
+                              <option selected>No discount</option>
+                              <option>Before Tax</option>
+                              <option>After Tax</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-est-field"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
+                      </div>
+                    </div>
+
+                    <!-- Items section -->
+                    <div class="cv-inv-items" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
+                      <div class="cv-inv-items-toolbar">
+                        <div class="d-flex align-items-center gap-2">
+                          <select class="form-select cv-inv-add-item">
+                            <option value="">Add Item</option>
+                            <option>HRMS Subscription</option>
+                            <option>Solar Panel — 450W</option>
+                            <option>Installation Service</option>
+                            <option>AMC Charges</option>
+                          </select>
+                          <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvEstAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                        <div class="cv-inv-qty-radio">
+                          <span>Show quantity as:</span>
+                          <label><input type="radio" name="cvEstQty" checked> Qty</label>
+                          <label><input type="radio" name="cvEstQty"> Hours</label>
+                          <label><input type="radio" name="cvEstQty"> Qty/Hours</label>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="cv-inv-item-table">
+                          <thead>
+                            <tr>
+                              <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
+                              <th>Item</th>
+                              <th style="width:190px;">Description</th>
+                              <th style="width:80px;">Qty</th>
+                              <th style="width:110px;">Rate</th>
+                              <th style="width:100px;">Discount %</th>
+                              <th style="width:110px;">Tax</th>
+                              <th style="width:110px;">Amount</th>
+                              <th style="width:40px;"><i class="bi bi-gear"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody id="cvEstItemBody">
+                            <tr>
+                              <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                              <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
+                              <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
+                              <td><input type="number" class="form-control" value="1" min="0">
+                                <div class="cv-inv-unit">Unit</div>
+                              </td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><select class="form-select">
+                                  <option selected>No Tax</option>
+                                  <option>GST 5%</option>
+                                  <option>GST 12%</option>
+                                  <option>GST 18%</option>
+                                </select></td>
+                              <td><span class="cv-inv-amt">₹ 0.00</span></td>
+                              <td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- Totals -->
+                      <div class="cv-inv-totals">
+                        <div class="cv-inv-totals-box">
+                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Transport Amount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl cv-est-adv">Advance Received</span><span class="val cv-est-adv">0</span></div>
+                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="cv-inv-notes" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
+                      <div class="mb-0"><label>Client Note</label><textarea class="form-control"></textarea></div>
+                    </div>
+                  </div>
+                  <div class="cv-inv-footer">
+                    <span class="cv-inv-hint" style="font-size:11.5px;color:#9ca3af;">Include estimate items with merge field anywhere in estimate content as {estimate_items}</span>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Save &amp; Send</button>
+                      <button type="button" class="btn btn-primary" id="cvEstSubmit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add New Item modal (image fields — invoice cvAddItemModal madhiri) -->
+            <div class="modal fade" id="cvEstAddItemModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvEstAddItemTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvEstAddItemTitle" style="font-size:15.5px;font-weight:800;">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="estItDesc"></div>
+                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="estItLongDesc" rows="3"></textarea></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="estItRateInr" step="0.01"></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="estItHsn"></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="estItRateUsd" step="0.01"></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="estItTax1">
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="estItTax2" disabled>
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="estItUnit" placeholder="Unit"></div>
+                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="estItGroup">
+                        <option value="">Non selected</option>
+                        <option>Services</option>
+                        <option>Products</option>
+                        <option>Subscription</option>
+                      </select></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvEstItemSave">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ZIP Estimates modal (image 3 — existing zip modal design) -->
+            <div class="modal fade" id="cvEstZipModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvEstZipTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <h5 class="modal-title" id="cvEstZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Estimates</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field">
+                      <label>Status</label>
+                      <div class="cv-zip-status">
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Draft"><span class="cv-zip-pill"><i class="bi bi-pencil"></i>Draft</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Sent"><span class="cv-zip-pill"><i class="bi bi-send"></i>Sent</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Expired"><span class="cv-zip-pill"><i class="bi bi-clock-history"></i>Expired</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Declined"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Declined</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Accepted"><span class="cv-zip-pill"><i class="bi bi-check-circle"></i>Accepted</span></label>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvEstZipFrom"></div>
+                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvEstZipTo"></div>
+                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Estimates matching the selected status and date range will be bundled into a single ZIP file.</div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvEstZipSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* Create New Estimate -> fullscreen modal */
+                var estNewBtn = document.getElementById('cvEstNewBtn'),
+                  estModal = document.getElementById('cvNewEstimateModal');
+                if (estNewBtn && estModal) {
+                  estNewBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(estModal).show();
+                  });
+                }
+
+                /* Items: add row + amount calc + confirm (lock) / delete — invoice modal madhiri */
+                var estAdd = document.getElementById('cvEstAddItem'),
+                  estBody = document.getElementById('cvEstItemBody');
+
+                function estBlankRow() {
+                  var tr = document.createElement('tr');
+                  tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                    '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                    '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                    '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">Unit</div></td>' +
+                    '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                    '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                    '<td><select class="form-select"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option><option>GST 18%</option></select></td>' +
+                    '<td><span class="cv-inv-amt">₹ 0.00</span></td>' +
+                    '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                  return tr;
+                }
+
+                /* Toolbar ➕ -> open Add New Item modal (invoice flow madhiri) */
+                var estItemModal = document.getElementById('cvEstAddItemModal');
+                if (estAdd && estItemModal && window.bootstrap) {
+                  estAdd.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(estItemModal).show();
+                  });
+                }
+
+                /* Stacked modal backdrop z-index fix (estimate + item modal) */
+                ['#cvNewEstimateModal', '#cvEstAddItemModal'].forEach(function(id) {
+                  var el = document.querySelector(id);
+                  if (!el) return;
+                  el.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(el).zIndex, 10) || 1055;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                });
+
+                /* Add New Item submit -> validate + fill blank row in estimate items */
+                var estItemSave = document.getElementById('cvEstItemSave');
+                if (estItemSave && estItemModal && estBody) {
+                  estItemSave.addEventListener('click', function() {
+                    var desc = document.getElementById('estItDesc').value.trim(),
+                      rate = document.getElementById('estItRateInr').value.trim();
+                    if (!desc || !rate) {
+                      toast('Description and Rate - INR are required');
+                      return;
+                    }
+                    var tr = estBody.querySelector('tr:not(.cv-inv-row-locked)'),
+                      madeNew = false;
+                    if (!tr) {
+                      tr = estBlankRow();
+                      madeNew = true;
+                    }
+                    var tax = document.getElementById('estItTax1').value,
+                      longDesc = document.getElementById('estItLongDesc').value.trim(),
+                      unit = document.getElementById('estItUnit').value.trim();
+                    tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                      '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                      '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                      '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">' + (unit || 'Unit') + '</div></td>' +
+                      '<td><input type="number" class="form-control" value="' + parseFloat(rate).toFixed(2) + '" step="0.01"></td>' +
+                      '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                      '<td><select class="form-select"><option ' + (tax === 'No Tax' ? 'selected' : '') + '>No Tax</option><option ' + (tax === 'GST 5%' ? 'selected' : '') + '>GST 5%</option><option ' + (tax === 'GST 12%' ? 'selected' : '') + '>GST 12%</option><option ' + (tax === 'GST 18%' ? 'selected' : '') + '>GST 18%</option></select></td>' +
+                      '<td><span class="cv-inv-amt">₹ ' + parseFloat(rate).toFixed(2) + '</span></td>' +
+                      '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                    tr.querySelector('textarea').value = desc;
+                    tr.cells[2].querySelector('textarea').value = longDesc;
+                    if (madeNew) estBody.appendChild(tr);
+
+                    // reset form + close
+                    ['estItDesc', 'estItLongDesc', 'estItRateInr', 'estItHsn', 'estItRateUsd', 'estItUnit'].forEach(function(id) {
+                      document.getElementById(id).value = '';
+                    });
+                    document.getElementById('estItTax1').value = 'No Tax';
+                    document.getElementById('estItTax2').value = 'No Tax';
+                    document.getElementById('estItGroup').value = '';
+                    bootstrap.Modal.getOrCreateInstance(estItemModal).hide();
+                    toast('Item "' + desc + '" added to estimate');
+                  });
+                }
+
+                document.addEventListener('input', function(e) {
+                  var t = e.target;
+                  if (!t.closest || !t.closest('#cvEstItemBody')) return;
+                  var row = t.closest('tr');
+                  if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                  var qty = parseFloat(row.cells[3].querySelector('input').value) || 0,
+                    rate = parseFloat(row.cells[4].querySelector('input').value) || 0;
+                  row.querySelector('.cv-inv-amt').textContent = '₹ ' + (qty * rate).toFixed(2);
+                });
+
+                if (estBody) {
+                  estBody.addEventListener('click', function(e) {
+                    var check = e.target.closest('.cv-inv-check'),
+                      del = e.target.closest('.cv-inv-row-del'),
+                      row;
+                    if (del) {
+                      row = del.closest('tr');
+                      if (row) row.remove();
+                      if (estBody && !estBody.querySelector('tr')) estBody.appendChild(estBlankRow());
+                      return;
+                    }
+                    if (!check) return;
+                    row = check.closest('tr');
+                    if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                    row.classList.add('cv-inv-row-locked');
+                    row.querySelectorAll('input, select, textarea').forEach(function(el) {
+                      el.setAttribute('readonly', 'readonly');
+                      el.setAttribute('disabled', 'disabled');
+                    });
+                    check.className = 'cv-inv-row-del';
+                    check.title = 'Delete item';
+                    check.innerHTML = '<i class="bi bi-trash"></i>';
+                    if (estAdd) estBody.appendChild(estBlankRow());
+                  });
+                }
+
+                /* Submit -> success toast */
+                var estSubmit = document.getElementById('cvEstSubmit');
+                if (estSubmit && estModal) {
+                  estSubmit.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(estModal).hide();
+                    toast('Estimate EST-059 created successfully');
+                  });
+                }
+
+                /* Zip Estimates -> modal */
+                var estZipBtn = document.getElementById('cvEstZipBtn'),
+                  estZipModal = document.getElementById('cvEstZipModal');
+                if (estZipBtn && estZipModal) {
+                  estZipBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(estZipModal).show();
+                  });
+                }
+
+                /* Zip submit -> validate date range + toast */
+                var estZipSubmit = document.getElementById('cvEstZipSubmit');
+                if (estZipSubmit && estZipModal) {
+                  estZipSubmit.addEventListener('click', function() {
+                    var from = document.getElementById('cvEstZipFrom').value,
+                      to = document.getElementById('cvEstZipTo').value;
+                    if (from && to && from > to) {
+                      toast('From Date cannot be after To Date');
+                      return;
+                    }
+                    var statusEl = document.querySelector('input[name="cvEstZipStatus"]:checked'),
+                      status = statusEl ? statusEl.value : 'All';
+                    bootstrap.Modal.getOrCreateInstance(estZipModal).hide();
+                    var msg = 'Preparing ZIP of ' + status.toLowerCase() + ' estimates';
+                    if (from && to) msg += ' from ' + from + ' to ' + to;
+                    toast(msg + '...');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-appointments" role="tabpanel" aria-labelledby="cvSideLink-appointments" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-appointments">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-calendar3"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Appointments</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewApptBtn" data-bs-toggle="modal" data-bs-target="#apmContactModal"><i class="bi bi-plus-lg me-1"></i>New Appointment</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-appointments">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-appointments">
+                  <tr class="cv-row">
+                    <td>
+                      Site visit </td>
+                    <td>
+                      22-09-2026 </td>
+                    <td>
+                      11:00 AM </td>
+                    <td>
+                      Karthik R </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Pending</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      Requirement discussion </td>
+                    <td>
+                      05-09-2026 </td>
+                    <td>
+                      03:30 PM </td>
+                    <td>
+                      Divya M </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Completed</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-invoices" role="tabpanel" aria-labelledby="cvSideLink-invoices" tabindex="0">
+          <!-- Invoices — KPI cards + table flow -->
+          <div class="cv-inv-actions mt-3 ms-3">
+            <button type="button" class="btn btn-primary" id="cvNewInvoiceBtn"><i class="bi bi-plus-lg me-1"></i>Create New Invoice</button>
+            <button type="button" class="btn btn-outline-primary" id="cvZipInvoicesBtn"><i class="bi bi-file-zip me-1"></i>Zip Invoices</button>
+          </div>
+
+          <div class="card-custom p-3 mb-0 py-0">
+            <select class="form-select form-select-sm cv-inv-year" aria-label="Year">
+              <option selected>2026</option>
+              <option>2025</option>
+              <option>2024</option>
+            </select>
+            <div class="cv-inv-kpis">
+              <div class="cv-inv-kpi k-blue">
+                <div class="k">Opening Balance</div>
+                <div class="v">₹ 0.00</div>
+              </div>
+              <div class="cv-inv-kpi k-amber">
+                <div class="k">Invoices Outstanding</div>
+                <div class="v">₹ 45,000</div>
+              </div>
+              <div class="cv-inv-kpi k-red">
+                <div class="k">Total Outstanding</div>
+                <div class="v">₹ 53,000</div>
+              </div>
+              <div class="cv-inv-kpi k-red">
+                <div class="k">Past Due Invoices</div>
+                <div class="v">₹ 8,000</div>
+              </div>
+              <div class="cv-inv-kpi k-green">
+                <div class="k">Paid Invoices</div>
+                <div class="v">₹ 12,500</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-invoices">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark-text"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Invoices</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-invoices">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Amount</th>
+                    <th>Total Tax</th>
+                    <th>Date</th>
+                    <th>Sales Agent</th>
+                    <th>Project</th>
+                    <th>Tags</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-invoices">
+                  <tr class="cv-row">
+                    <td><a href="#" class="cv-link">INV-000112</a></td>
+                    <td>₹ 45,000</td>
+                    <td>₹ 0</td>
+                    <td>01-09-2026</td>
+                    <td>Karthik R</td>
+                    <td>Solar Installation</td>
+                    <td><span class="cv-tag-chip">Hot</span></td>
+                    <td>15-09-2026</td>
+                    <td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Partially Paid</span></td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td><a href="#" class="cv-link">INV-000098</a></td>
+                    <td>₹ 12,500</td>
+                    <td>₹ 0</td>
+                    <td>10-08-2026</td>
+                    <td>Divya M</td>
+                    <td>AMC Renewal</td>
+                    <td><span class="cv-tag-chip">Warm</span></td>
+                    <td>24-08-2026</td>
+                    <td><span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Paid</span></td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td><a href="#" class="cv-link">INV-000087</a></td>
+                    <td>₹ 8,000</td>
+                    <td>₹ 0</td>
+                    <td>02-08-2026</td>
+                    <td>Karthik R</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>16-08-2026</td>
+                    <td><span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Overdue</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Create New Invoice modal -->
+            <div class="modal fade" id="cvNewInvoiceModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content cv-inv-modal">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-receipt-cutoff"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">Create New Invoice</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New invoice</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body cv-inv-body">
+                    <div class="cv-inv-grid">
+                      <!-- Left column -->
+                      <div>
+                        <div class="cv-inv-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                        <div class="cv-inv-field"><label>Sales Order</label><select class="form-select">
+                            <option value="">Non selected</option>
+                            <option>SO-0003 — Solar Installation</option>
+                            <option>SO-0007 — AMC Renewal</option>
+                          </select></div>
+                        <div class="cv-inv-addr-row">
+                          <div>
+                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill to</label>
+                            <div class="cv-inv-addr-text">1/2 VOC STREET MENABADU AMBATTUR CHENNAI<br>Chennai, ---<br>IN, 006</div>
+                          </div>
+                          <div>
+                            <label class="cv-inv-mini-label">Ship to</label>
+                            <select class="form-select">
+                              <option selected>Select Shipping Address</option>
+                              <option>GG COMPANY - Anna Nagar</option>
+                              <option>GG COMPANY - T. Nagar</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="cv-inv-field"><label>Credit Days</label><select class="form-select">
+                            <option>0</option>
+                            <option selected>1</option>
+                            <option>7</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                            <option>60</option>
+                          </select></div>
+                        <div class="cv-inv-field">
+                          <label><span class="req">*</span>Invoice Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                          <div class="cv-inv-num-wrap"><span class="cv-inv-prefix">INV-</span><input type="text" class="form-control" value="258"></div>
+                        </div>
+                        <div class="cv-inv-addr-row">
+                          <div class="cv-inv-field"><label><span class="req">*</span>Invoice Date</label><input type="date" class="form-control" value="2026-09-22"></div>
+                          <div class="cv-inv-field"><label>Due Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                        </div>
+                        <div class="cv-inv-addr-row">
+                          <div class="cv-inv-field"><label>Customer PO No.</label><input type="text" class="form-control"></div>
+                          <div class="cv-inv-field"><label>Vehicle Number</label><input type="text" class="form-control"></div>
+                        </div>
+                        <label class="cv-check" style="font-size:12.5px;"><input type="checkbox" class="form-check-input"> <span>Prevent sending overdue reminders for this invoice</span></label>
+                      </div>
+                      <!-- Right column -->
+                      <div>
+                        <div class="cv-inv-field">
+                          <label><i class="bi bi-tag me-1"></i>Tags</label>
+                          <div class="nl-tags-wrap" style="max-width:100%;">
+                            <div class="nl-tags-chips"></div>
+                            <input type="text" class="nl-tags-input" placeholder="Tag">
+                          </div>
+                        </div>
+                        <div class="cv-inv-field"><label>Allowed payment modes for this invoice</label><select class="form-select">
+                            <option>Bank, Rave, Instamojo, Paypal Smart Checkout, PayPal, PayU Money, Stripe Checkout</option>
+                          </select></div>
+                        <div class="cv-inv-addr-row">
+                          <div class="cv-inv-field"><label><span class="req">*</span>Currency</label><input type="text" class="form-control" value="INR ₹" readonly></div>
+                          <div class="cv-inv-field"><label>Sale Agent</label><select class="form-select">
+                              <option selected>GHARUDA SOFTWARE</option>
+                              <option>Karthik R</option>
+                              <option>Divya M</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-inv-field"><label>Recurring Invoice?</label><select class="form-select">
+                            <option selected>No</option>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                            <option>Yearly</option>
+                          </select></div>
+                        <div class="cv-inv-field"><label>Discount type</label><select class="form-select">
+                            <option selected>No discount</option>
+                            <option>Before Tax</option>
+                            <option>After Tax</option>
+                          </select></div>
+                        <div class="cv-inv-field"><label>Admin Note</label><textarea class="form-control" rows="3"></textarea></div>
+                        <div class="cv-inv-field"><label>Bank Accounts</label><select class="form-select">
+                            <option selected>Select Banking</option>
+                            <option>HDFC Bank - 50100234567890</option>
+                            <option>ICICI Bank - 602305123456</option>
+                          </select></div>
+                      </div>
+                    </div>
+
+                    <!-- Items section -->
+                    <div class="cv-inv-items">
+                      <div class="cv-inv-items-toolbar">
+                        <div class="d-flex align-items-center gap-2">
+                          <select class="form-select cv-inv-add-item">
+                            <option value="">Add Item</option>
+                            <option>HRMS Subscription</option>
+                            <option>Solar Panel — 450W</option>
+                            <option>Installation Service</option>
+                            <option>AMC Charges</option>
+                          </select>
+                          <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvInvAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                          <select class="form-select cv-inv-add-item">
+                            <option value="">Bill Tasks</option>
+                            <option>Task #12 — Site inspection</option>
+                            <option>Task #14 — Panel mounting</option>
+                          </select>
+                          <i class="bi bi-question-circle" style="color:#9ca3af;"></i>
+                        </div>
+                        <div class="cv-inv-qty-radio">
+                          <span>Show quantity as:</span>
+                          <label><input type="radio" name="cvInvQty" checked> Qty</label>
+                          <label><input type="radio" name="cvInvQty"> Hours</label>
+                          <label><input type="radio" name="cvInvQty"> Qty/Hours</label>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="cv-inv-item-table">
+                          <thead>
+                            <tr>
+                              <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
+                              <th>Item</th>
+                              <th style="width:190px;">Description</th>
+                              <th style="width:80px;">Qty</th>
+                              <th style="width:110px;">Rate</th>
+                              <th style="width:100px;">Discount %</th>
+                              <th style="width:110px;">Tax</th>
+                              <th style="width:110px;">Amount</th>
+                              <th style="width:40px;"><i class="bi bi-gear"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody id="cvInvItemBody">
+                            <tr>
+                              <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                              <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
+                              <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
+                              <td><input type="number" class="form-control" value="1" min="0">
+                                <div class="cv-inv-unit">Unit</div>
+                              </td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><select class="form-select">
+                                  <option selected>No Tax</option>
+                                  <option>GST 5%</option>
+                                  <option>GST 12%</option>
+                                  <option>GST 18%</option>
+                                </select></td>
+                              <td><span class="cv-inv-amt">₹ 0.00</span></td>
+                              <td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- Totals -->
+                      <div class="cv-inv-totals">
+                        <div class="cv-inv-totals-box">
+                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Transport Amount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="cv-inv-notes">
+                      <div class="mb-3"><label>Client Note</label><textarea class="form-control" placeholder="Enter client note..."></textarea></div>
+                      <div class="mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3" placeholder="Enter terms and conditions..."></textarea></div>
+                    </div>
+                  </div>
+                  <div class="cv-inv-footer">
+                    <span class="cv-inv-hint">Include invoice items with merge field anywhere in invoice content as {invoice_items}</span>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Save as Draft</button>
+                      <button type="button" class="btn btn-primary" id="cvInvSubmit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add New Item modal -->
+            <div class="modal fade" id="cvAddItemModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvAddItemTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvAddItemTitle" style="font-size:15.5px;font-weight:800;">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cvItDesc"></div>
+                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="cvItLongDesc" rows="3"></textarea></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cvItRateInr" step="0.01"></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cvItHsn"></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="cvItRateUsd" step="0.01"></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="cvItTax1">
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="cvItTax2" disabled>
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="cvItUnit" placeholder="Unit"></div>
+                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="cvItGroup">
+                        <option value="">Non selected</option>
+                        <option>Services</option>
+                        <option>Products</option>
+                        <option>Subscription</option>
+                      </select></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvItemSave">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ZIP Invoices modal -->
+            <div class="modal fade" id="cvZipModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvZipTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <h5 class="modal-title" id="cvZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Invoices</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field">
+                      <label>Status</label>
+                      <div class="cv-zip-status">
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Unpaid"><span class="cv-zip-pill"><i class="bi bi-hourglass-split"></i>Unpaid</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Paid"><span class="cv-zip-pill"><i class="bi bi-check2-circle"></i>Paid</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Partially Paid"><span class="cv-zip-pill"><i class="bi bi-pie-chart"></i>Partially Paid</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Overdue"><span class="cv-zip-pill"><i class="bi bi-exclamation-circle"></i>Overdue</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Cancelled"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Cancelled</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Draft"><span class="cv-zip-pill"><i class="bi bi-pencil"></i>Draft</span></label>
+                      </div>
+                    </div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>From Date:</label><input type="date" class="form-control" id="cvZipFrom"></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvZipTo"></div>
+                      </div>
+                    </div>
+                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Invoices matching the selected status and date range will be bundled into a single ZIP file.</div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvZipSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-payments" role="tabpanel" aria-labelledby="cvSideLink-payments" tabindex="0">
+          <!-- Payments — status filter (first image) + Zip Payments + table flow -->
+
+
+          <div class="cv-pay-actions mt-3 ms-3 mb-0">
+            <button type="button" class="btn btn-primary" id="cvZipPaymentsBtn"><i class="bi bi-file-zip me-1"></i>Zip Payments</button>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-payments">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-graph-up"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Payments</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-payments">
+                <thead>
+                  <tr>
+                    <th>Payment #</th>
+                    <th>Invoice #</th>
+                    <th>Payment Mode</th>
+                    <th>Transaction ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-payments">
+                  <tr class="cv-row">
+                    <td>
+                      PAY-000041 </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000118</a>
+                    </td>
+                    <td>
+                      Bank Transfer (NEFT) </td>
+                    <td>
+                      <code style="font-size:11.5px;color:var(--ink-700);background:#f1f4f3;border-radius:6px;padding:2px 7px;">NEFT9821304571</code>
+                    </td>
+                    <td>
+                      <strong>₹ 12,500</strong>
+                    </td>
+                    <td>
+                      15-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      PAY-000034 </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000112</a>
+                    </td>
+                    <td>
+                      Bank Transfer (NEFT) </td>
+                    <td>
+                      <code style="font-size:11.5px;color:var(--ink-700);background:#f1f4f3;border-radius:6px;padding:2px 7px;">NEFT8100477219</code>
+                    </td>
+                    <td>
+                      <strong>₹ 20,000</strong>
+                    </td>
+                    <td>
+                      08-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      PAY-000029 </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000098</a>
+                    </td>
+                    <td>
+                      UPI </td>
+                    <td>
+                      <code style="font-size:11.5px;color:var(--ink-700);background:#f1f4f3;border-radius:6px;padding:2px 7px;">UPI7741209938</code>
+                    </td>
+                    <td>
+                      <strong>₹ 12,500</strong>
+                    </td>
+                    <td>
+                      12-08-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      PAY-000018 </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000087</a>
+                    </td>
+                    <td>
+                      Cheque </td>
+                    <td>
+                      <code style="font-size:11.5px;color:var(--ink-700);background:#f1f4f3;border-radius:6px;padding:2px 7px;">CHQ0045120087</code>
+                    </td>
+                    <td>
+                      <strong>₹ 8,000</strong>
+                    </td>
+                    <td>
+                      05-08-2026 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ZIP Payments modal (second image) -->
+            <div class="modal fade" id="cvZipPaymentModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvZipPayTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <h5 class="modal-title" id="cvZipPayTitle" style="font-size:15.5px;font-weight:800;">ZIP Payments</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-zip-field">
+                      <label>Payment made by</label>
+                      <select class="form-select select2" id="cvZipPayBy" data-placeholder="Non selected">
+                        <option></option>
+                        <option>Admin</option>
+                        <option>Karthik R.</option>
+                        <option>Divya M.</option>
+                        <option>Priya S.</option>
+                        <option>Harish D.</option>
+                      </select>
+                    </div>
+                    <div class="cv-zip-field">
+                      <label>From Date:</label>
+                      <input type="date" class="form-control" id="cvZipPayFrom">
+                    </div>
+                    <div class="cv-zip-field mb-0">
+                      <label>To Date:</label>
+                      <input type="date" class="form-control" id="cvZipPayTo">
+                    </div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvZipPaySubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap + jQuery + select2) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                var payBtn = document.getElementById('cvZipPaymentsBtn'),
+                  payModal = document.getElementById('cvZipPaymentModal');
+
+                /* Zip Payments button -> modal (select2 dropdownParent fix inside modal) */
+                if (payBtn && payModal && window.bootstrap) {
+                  payBtn.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(payModal).show();
+                    if (typeof $ !== 'undefined' && $.fn.select2) {
+                      var sel = jQuery('#cvZipPayBy');
+                      if (sel.data('select2')) sel.select2('destroy');
+                      sel.select2({
+                        width: '100%',
+                        dropdownParent: jQuery(payModal)
+                      });
+                    }
+                  });
+                }
+
+                /* Submit -> validate date range + ZIP toast */
+                var paySubmit = document.getElementById('cvZipPaySubmit');
+                if (paySubmit && payModal) {
+                  paySubmit.addEventListener('click', function() {
+                    var by = document.getElementById('cvZipPayBy'),
+                      from = document.getElementById('cvZipPayFrom').value,
+                      to = document.getElementById('cvZipPayTo').value;
+                    if (from && to && from > to) {
+                      toast('From Date cannot be after To Date', false);
+                      return;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(payModal).hide();
+                    var who = by && by.value ? by.value : 'all staff',
+                      msg = 'Preparing ZIP of payments made by ' + who;
+                    if (from && to) msg += ' from ' + from + ' to ' + to;
+                    toast(msg + '...');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-statement" role="tabpanel" aria-labelledby="cvSideLink-statement" tabindex="0">
+          <div class="cv-title">Statement</div>
+
+          <!-- Customer Statement — document style view -->
+          <div class="card-custom p-0 cv-stmt-wrap">
+            <div class="cv-stmt-toolbar">
+              <input type="text" class="form-control cv-stmt-period" value="01-09-2026 to 30-09-2026" readonly aria-label="Statement period">
+              <div class="cv-stmt-acts">
+                <button type="button" class="cv-stmt-btn js-stmt-print" title="Print"><i class="bi bi-printer"></i></button>
+                <button type="button" class="cv-stmt-btn js-stmt-pdf" title="Download PDF"><i class="bi bi-file-earmark-pdf"></i></button>
+                <button type="button" class="cv-stmt-btn js-stmt-email" title="Send by email"><i class="bi bi-envelope"></i></button>
+                <button type="button" class="cv-stmt-btn js-stmt-wa" title="Send via WhatsApp"><i class="bi bi-whatsapp"></i></button>
+              </div>
+            </div>
+
+            <div class="cv-stmt-doc" id="cvStmtDoc">
+              <!-- Letterhead -->
+              <div class="cv-stmt-head">
+                <div class="cv-stmt-brand">
+                  <div class="cv-stmt-logo">KS</div>
+                  <div style="min-width:0;">
+                    <div class="cv-stmt-co-name">ghrA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
+                    <div class="cv-stmt-co-addr">
+                      PC 20 /3, 3rd Block, Mogappair West, Chennai- 560038, Tamil Nadu, India<br>
+                      9865321670 · GST Number: 28AABCR7796N0O0
+                    </div>
+                  </div>
+                </div>
+                <div class="cv-stmt-meta">
+                  <div class="cv-stmt-doc-type"><i class="bi bi-receipt"></i> Customer Statement</div>
+                  <div class="cv-stmt-meta-row"><span>Statement #</span><b>STMT-2026-0092</b></div>
+                  <div class="cv-stmt-meta-row"><span>Issue date</span><b>16-09-2026</b></div>
+                  <div class="cv-stmt-meta-row"><span>Period</span><b>01-09-2026 – 30-09-2026</b></div>
+                </div>
+              </div>
+
+              <div class="cv-stmt-title">Customer Statement For GG COMPANY</div>
+
+              <!-- Parties -->
+              <div class="cv-stmt-parties">
+                <div class="cv-stmt-to">
+                  <div class="cv-stmt-to-label">Billed to</div>
+                  <div class="cv-stmt-to-box">
+                    <div class="cv-stmt-to-ava">GG</div>
+                    <div style="min-width:0;">
+                      <div class="cv-stmt-to-name">GG COMPANY</div>
+                      <div class="cv-stmt-to-line"><i class="bi bi-person"></i>MOHAN S</div>
+                      <div class="cv-stmt-to-line"><i class="bi bi-envelope"></i>kaviyarasu@ghratechnology.com</div>
+                      <div class="cv-stmt-to-line"><i class="bi bi-geo-alt"></i>1/2 VOC Street, Menabadu, Ambattur, Chennai - 600053</div>
+                      <div class="cv-stmt-to-line"><i class="bi bi-telephone"></i>9677063368</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cv-stmt-due">
+                  <div class="k">Total amount due</div>
+                  <div class="v">₹ 37,500</div>
+                  <div class="d">3 transactions this period</div>
+                </div>
+              </div>
+
+              <div class="cv-stmt-kpis">
+                <div class="cv-stmt-kpi">
+                  <span class="ic i-grey"><i class="bi bi-play-circle"></i></span>
+                  <div>
+                    <div class="k">Opening Balance</div>
+                    <div class="v">₹ 0.00</div>
+                  </div>
+                </div>
+                <div class="cv-stmt-kpi">
+                  <span class="ic i-red"><i class="bi bi-file-earmark-arrow-up"></i></span>
+                  <div>
+                    <div class="k">Invoiced this period</div>
+                    <div class="v">₹ 57,500</div>
+                  </div>
+                </div>
+                <div class="cv-stmt-kpi">
+                  <span class="ic i-blue"><i class="bi bi-cash-coin"></i></span>
+                  <div>
+                    <div class="k">Payments received</div>
+                    <div class="v">₹ 20,000</div>
+                  </div>
+                </div>
+                <div class="cv-stmt-kpi">
+                  <span class="ic i-green"><i class="bi bi-wallet2"></i></span>
+                  <div>
+                    <div class="k">Closing Balance</div>
+                    <div class="v">₹ 37,500</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive table-modern-wrap column-border">
+                <table class="table-modern w-100">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Description</th>
+                      <th>Debit</th>
+                      <th>Credit</th>
+                      <th>Balance</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="cv-row" data-date="01-09-2026" data-ref="INV-000112" data-type="Invoice" data-mode="Credit" data-debit="₹ 45,000" data-credit="—" data-balance="₹ 45,000" data-desc="Invoice INV-000112" data-notes="Solar installation — Phase 1 billing raised against purchase order PO-2291.">
+                      <td>01-09-2026</td>
+                      <td>Invoice INV-000112</td>
+                      <td>₹ 45,000</td>
+                      <td>—</td>
+                      <td>₹ 45,000</td>
+                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                    </tr>
+                    <tr class="cv-row" data-date="08-09-2026" data-ref="PAY-000034" data-type="Payment" data-mode="Bank Transfer (NEFT)" data-debit="—" data-credit="₹ 20,000" data-balance="₹ 25,000" data-desc="Payment PAY-000034" data-notes="Payment received against invoice INV-000112.">
+                      <td>08-09-2026</td>
+                      <td>Payment PAY-000034</td>
+                      <td>—</td>
+                      <td>₹ 20,000</td>
+                      <td>₹ 25,000</td>
+                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                    </tr>
+                    <tr class="cv-row" data-date="15-09-2026" data-ref="INV-000118" data-type="Invoice" data-mode="Credit" data-debit="₹ 12,500" data-credit="—" data-balance="₹ 37,500" data-desc="Invoice INV-000118" data-notes="AMC service charges for Q3 2026 as per service agreement.">
+                      <td>15-09-2026</td>
+                      <td>Invoice INV-000118</td>
+                      <td>₹ 12,500</td>
+                      <td>—</td>
+                      <td>₹ 37,500</td>
+                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                    </tr>
+                    <tr class="cv-stmt-total">
+                      <td colspan="2">Total</td>
+                      <td>₹ 57,500</td>
+                      <td>₹ 20,000</td>
+                      <td>₹ 37,500</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction details modal -->
+          <div class="leave-reject-modal" id="cvStmtModal" role="dialog" aria-modal="true" aria-labelledby="cvStmtTitle">
+            <div class="leave-reject-dialog cv-note-dialog">
+              <div class="cv-contact-head">
+                <div class="cv-contact-head-l">
+                  <div class="cv-contact-ava"><i class="bi bi-receipt"></i></div>
+                  <div style="min-width:0;">
+                    <h3 id="cvStmtTitle" class="mb-0">Transaction details</h3>
+                    <div class="cv-contact-sub">Statement entry for GG COMPANY</div>
+                  </div>
+                </div>
+                <button type="button" class="modal-close" id="cvStmtClose" aria-label="Close">&times;</button>
+              </div>
+
+              <div class="leave-reject-body cv-note-body">
+                <div class="cv-stmt-detail-grid">
+                  <div class="cv-stmt-df">
+                    <div class="k">Date</div>
+                    <div class="v" id="sdDate">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Reference #</div>
+                    <div class="v" id="sdRef">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Type</div>
+                    <div class="v" id="sdType">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Payment Mode</div>
+                    <div class="v" id="sdMode">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Debit</div>
+                    <div class="v" id="sdDebit">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Credit</div>
+                    <div class="v" id="sdCredit">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Balance</div>
+                    <div class="v" id="sdBal">—</div>
+                  </div>
+                  <div class="cv-stmt-df">
+                    <div class="k">Description</div>
+                    <div class="v" id="sdDesc">—</div>
+                  </div>
+                  <div class="cv-stmt-df cv-stmt-df-full">
+                    <div class="k">Notes</div>
+                    <div class="v" id="sdNotes">—</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="leave-reject-foot pt-3">
+                <button type="button" class="btn btn-reject" id="cvStmtCancel">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-credit_notes" role="tabpanel" aria-labelledby="cvSideLink-credit_notes" tabindex="0">
+          <!-- Credit Notes — credits banner + buttons + table flow -->
+
+
+          <div class="mt-3 ms-3 cv-cn-banner"><i class="bi bi-cash-coin"></i>₹ 0.00 credits available.</div>
+
+          <div class="cv-cn-actions ms-3 mb-0">
+            <button type="button" class="btn btn-primary" id="cvCnNewBtn"><i class="bi bi-plus-lg me-1"></i>New Credit Note</button>
+            <button type="button" class="btn btn-primary" id="cvCnZipBtn"><i class="bi bi-file-zip me-1"></i>Zip Credit Notes</button>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-credit_notes">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark-minus"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Credit Notes</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-credit_notes">
+                <thead>
+                  <tr>
+                    <th>Credit Note #</th>
+                    <th>Credit Note Date</th>
+                    <th>Status</th>
+                    <th>Project</th>
+                    <th>Reference #</th>
+                    <th>Amount</th>
+                    <th>Remaining Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-credit_notes">
+                  <tr class="cv-row">
+                    <td>
+                      <a href="#" class="cv-link">CN-0002</a>
+                    </td>
+                    <td>
+                      20-08-2026 </td>
+                    <td>
+                      <span class="cv-cn-status open"><i class="bi bi-door-open"></i>Open</span>
+                    </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000087</a>
+                    </td>
+                    <td>
+                      <strong>₹ 2,500</strong>
+                    </td>
+                    <td>
+                      <strong>₹ 0</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- New Credit Note modal — fullscreen (image 2 fields) -->
+            <div class="modal fade" id="cvNewCreditNoteModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content cv-inv-modal">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-file-earmark-minus"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">New Credit Note</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New credit note</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body cv-inv-body">
+                    <div class="cv-cn-grid">
+                      <!-- Left column -->
+                      <div>
+                        <div class="cv-cn-field"><label><span class="req">*</span>Customer</label><select class="form-select">
+                            <option selected>GG COMPANY</option>
+                          </select></div>
+                        <div class="cv-cn-addr-row">
+                          <div>
+                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <div class="cv-cn-addr-text">214, Vadasery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>IN, 600100</div>
+                          </div>
+                          <div>
+                            <label class="cv-inv-mini-label">Ship to</label>
+                            <div class="cv-cn-addr-text" style="color:#9ca3af;">---<br>---<br>---, ---</div>
+                          </div>
+                        </div>
+                        <div class="cv-cn-addr-row">
+                          <div class="cv-cn-field"><label><span class="req">*</span>Credit Note Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                          <div class="cv-cn-field">
+                            <label><span class="req">*</span>Credit Note # <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                            <div class="cv-cn-num-wrap"><span class="cv-cn-prefix">CN-</span><input type="text" class="form-control" value="23"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Right column -->
+                      <div>
+                        <div class="cv-cn-addr-row">
+                          <div class="cv-cn-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                              <option selected>INR ₹</option>
+                              <option>USD $</option>
+                            </select></div>
+                          <div class="cv-cn-field"><label>Discount type</label><select class="form-select">
+                              <option selected>No discount</option>
+                              <option>Before Tax</option>
+                              <option>After Tax</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-cn-field"><label>Reference #</label><input type="text" class="form-control"></div>
+                        <div class="cv-cn-field"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
+                      </div>
+                    </div>
+
+                    <!-- Items section -->
+                    <div class="cv-cn-items">
+                      <div class="cv-inv-items-toolbar">
+                        <div class="d-flex align-items-center gap-2">
+                          <select class="form-select cv-inv-add-item">
+                            <option value="">Add Item</option>
+                            <option>HRMS Subscription</option>
+                            <option>Solar Panel — 450W</option>
+                            <option>Installation Service</option>
+                            <option>AMC Charges</option>
+                          </select>
+                          <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvCnAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                        <div class="cv-inv-qty-radio">
+                          <span>Show quantity as:</span>
+                          <label><input type="radio" name="cvCnQty" checked> Qty</label>
+                          <label><input type="radio" name="cvCnQty"> Only</label>
+                          <label><input type="radio" name="cvCnQty"> Hours</label>
+                          <label><input type="radio" name="cvCnQty"> Qty/Hours</label>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="cv-inv-item-table">
+                          <thead>
+                            <tr>
+                              <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
+                              <th>Item</th>
+                              <th style="width:190px;">Description</th>
+                              <th style="width:80px;">Qty</th>
+                              <th style="width:110px;">Rate</th>
+                              <th style="width:100px;">Discount %</th>
+                              <th style="width:110px;">Tax</th>
+                              <th style="width:110px;">Amount</th>
+                              <th style="width:40px;"><i class="bi bi-gear"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody id="cvCnItemBody">
+                            <tr>
+                              <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                              <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
+                              <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
+                              <td><input type="number" class="form-control" value="1" min="0"></td>
+                              <td><input type="number" class="form-control" placeholder="Rate" step="0.01"></td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><select class="form-select">
+                                  <option selected>No Tax</option>
+                                  <option>GST 5%</option>
+                                  <option>GST 12%</option>
+                                  <option>GST 18%</option>
+                                </select></td>
+                              <td><span class="cv-inv-amt">₹ 0.00</span></td>
+                              <td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- Totals -->
+                      <div class="cv-inv-totals">
+                        <div class="cv-inv-totals-box">
+                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Discount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="cv-cn-notes">
+                      <div class="mb-3"><label>Client Note</label><textarea class="form-control"></textarea></div>
+                      <div class="mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3"></textarea></div>
+                    </div>
+                  </div>
+                  <div class="cv-cn-footer">
+                    <span class="hint">Include credit note items with merge field anywhere in credit note content as {credit_note_items}</span>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Save &amp; Send</button>
+                      <button type="button" class="btn btn-primary" id="cvCnSubmit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ZIP Credit Notes modal — cvZipModal design (image 3) -->
+            <div class="modal fade" id="cvCnZipModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvCnZipTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <h5 class="modal-title" id="cvCnZipTitle" style="font-size:15.5px;font-weight:800;">Zip Credit Notes</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field">
+                      <label>Status</label>
+                      <div class="cv-zip-status">
+                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Open"><span class="cv-zip-pill"><i class="bi bi-door-open"></i>Open</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Closed"><span class="cv-zip-pill"><i class="bi bi-lock"></i>Closed</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Void"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Void</span></label>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvCnZipFrom"></div>
+                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvCnZipTo"></div>
+                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Credit notes matching the selected status and date range will be bundled into a single ZIP file.</div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvCnZipSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add New Item modal (same #cvCnAddItemModal as Estimates — branches rendum render aagaathu) -->
+            <div class="modal fade" id="cvCnAddItemModal" tabindex="-1" aria-hidden="true" aria-labelledby="cnEstAddItemTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cnEstAddItemTitle" style="font-size:15.5px;font-weight:800;">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cnItDesc"></div>
+                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="cnItLongDesc" rows="3"></textarea></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cnItRateInr" step="0.01"></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cnItHsn"></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="cnItRateUsd" step="0.01"></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="cnItTax1">
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="cnItTax2" disabled>
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="cnItUnit" placeholder="Unit"></div>
+                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="cnItGroup">
+                        <option value="">Non selected</option>
+                        <option>Services</option>
+                        <option>Products</option>
+                        <option>Subscription</option>
+                      </select></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvCnItemSave">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* New Credit Note -> fullscreen modal */
+                var cnNewBtn = document.getElementById('cvCnNewBtn'),
+                  cnModal = document.getElementById('cvNewCreditNoteModal');
+                if (cnNewBtn && cnModal) {
+                  cnNewBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(cnModal).show();
+                  });
+                }
+
+                /* Items: add row + amount calc + confirm (lock) / delete — invoice modal madhiri */
+                var cnAdd = document.getElementById('cvCnAddItem'),
+                  cnBody = document.getElementById('cvCnItemBody');
+
+                function cnBlankRow() {
+                  var tr = document.createElement('tr');
+                  tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                    '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                    '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                    '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">Unit</div></td>' +
+                    '<td><input type="number" class="form-control" placeholder="Rate" step="0.01"></td>' +
+                    '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                    '<td><select class="form-select"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option><option>GST 18%</option></select></td>' +
+                    '<td><span class="cv-inv-amt">₹ 0.00</span></td>' +
+                    '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                  return tr;
+                }
+
+                /* Toolbar ➕ -> open Add New Item modal (#cvCnAddItemModal — estimates branch madhiri) */
+                var cnItemModal = document.getElementById('cvCnAddItemModal');
+                if (cnAdd && cnItemModal && window.bootstrap) {
+                  cnAdd.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(cnItemModal).show();
+                  });
+                }
+
+                /* Stacked modal backdrop z-index fix (credit note + item modal) */
+                ['#cvNewCreditNoteModal', '#cvCnAddItemModal'].forEach(function(id) {
+                  var el = document.querySelector(id);
+                  if (!el) return;
+                  el.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(el).zIndex, 10) || 1055;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                });
+
+                /* Add New Item submit -> validate + fill blank row in credit note items */
+                var cnItemSave = document.getElementById('cvCnItemSave');
+                if (cnItemSave && cnItemModal && cnBody) {
+                  cnItemSave.addEventListener('click', function() {
+                    var desc = document.getElementById('cnItDesc').value.trim(),
+                      rate = document.getElementById('cnItRateInr').value.trim();
+                    if (!desc || !rate) {
+                      toast('Description and Rate - INR are required');
+                      return;
+                    }
+                    var tr = cnBody.querySelector('tr:not(.cv-inv-row-locked)'),
+                      madeNew = false;
+                    if (!tr) {
+                      tr = cnBlankRow();
+                      madeNew = true;
+                    }
+                    var tax = document.getElementById('cnItTax1').value,
+                      longDesc = document.getElementById('cnItLongDesc').value.trim(),
+                      unit = document.getElementById('cnItUnit').value.trim();
+                    tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                      '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                      '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                      '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">' + (unit || 'Unit') + '</div></td>' +
+                      '<td><input type="number" class="form-control" value="' + parseFloat(rate).toFixed(2) + '" step="0.01"></td>' +
+                      '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                      '<td><select class="form-select"><option ' + (tax === 'No Tax' ? 'selected' : '') + '>No Tax</option><option ' + (tax === 'GST 5%' ? 'selected' : '') + '>GST 5%</option><option ' + (tax === 'GST 12%' ? 'selected' : '') + '>GST 12%</option><option ' + (tax === 'GST 18%' ? 'selected' : '') + '>GST 18%</option></select></td>' +
+                      '<td><span class="cv-inv-amt">₹ ' + parseFloat(rate).toFixed(2) + '</span></td>' +
+                      '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                    tr.querySelector('textarea').value = desc;
+                    tr.cells[2].querySelector('textarea').value = longDesc;
+                    if (madeNew) cnBody.appendChild(tr);
+
+                    // reset form + close
+                    ['cnItDesc', 'cnItLongDesc', 'cnItRateInr', 'cnItHsn', 'cnItRateUsd', 'cnItUnit'].forEach(function(id) {
+                      document.getElementById(id).value = '';
+                    });
+                    document.getElementById('cnItTax1').value = 'No Tax';
+                    document.getElementById('cnItTax2').value = 'No Tax';
+                    document.getElementById('cnItGroup').value = '';
+                    bootstrap.Modal.getOrCreateInstance(cnItemModal).hide();
+                    toast('Item "' + desc + '" added to credit note');
+                  });
+                }
+
+                document.addEventListener('input', function(e) {
+                  var t = e.target;
+                  if (!t.closest || !t.closest('#cvCnItemBody')) return;
+                  var row = t.closest('tr');
+                  if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                  var qty = parseFloat(row.cells[3].querySelector('input').value) || 0,
+                    rate = parseFloat(row.cells[4].querySelector('input').value) || 0;
+                  row.querySelector('.cv-inv-amt').textContent = '₹ ' + (qty * rate).toFixed(2);
+                });
+
+                if (cnBody) {
+                  cnBody.addEventListener('click', function(e) {
+                    var check = e.target.closest('.cv-inv-check'),
+                      del = e.target.closest('.cv-inv-row-del'),
+                      row;
+                    if (del) {
+                      row = del.closest('tr');
+                      if (row) row.remove();
+                      if (cnBody && !cnBody.querySelector('tr')) cnBody.appendChild(cnBlankRow());
+                      return;
+                    }
+                    if (!check) return;
+                    row = check.closest('tr');
+                    if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                    row.classList.add('cv-inv-row-locked');
+                    row.querySelectorAll('input, select, textarea').forEach(function(el) {
+                      el.setAttribute('readonly', 'readonly');
+                      el.setAttribute('disabled', 'disabled');
+                    });
+                    check.className = 'cv-inv-row-del';
+                    check.title = 'Delete item';
+                    check.innerHTML = '<i class="bi bi-trash"></i>';
+                    if (cnAdd) cnBody.appendChild(cnBlankRow());
+                  });
+                }
+
+                /* Submit -> success toast + table row add (demo) */
+                var cnSubmit = document.getElementById('cvCnSubmit');
+                if (cnSubmit && cnModal) {
+                  cnSubmit.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(cnModal).hide();
+                    toast('Credit note CN-24 created successfully');
+                  });
+                }
+
+                /* Zip Credit Notes -> modal */
+                var cnZipBtn = document.getElementById('cvCnZipBtn'),
+                  cnZipModal = document.getElementById('cvCnZipModal');
+                if (cnZipBtn && cnZipModal) {
+                  cnZipBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(cnZipModal).show();
+                  });
+                }
+
+                /* Zip submit -> validate date range + toast */
+                var cnZipSubmit = document.getElementById('cvCnZipSubmit');
+                if (cnZipSubmit && cnZipModal) {
+                  cnZipSubmit.addEventListener('click', function() {
+                    var from = document.getElementById('cvCnZipFrom').value,
+                      to = document.getElementById('cvCnZipTo').value;
+                    if (from && to && from > to) {
+                      toast('From Date cannot be after To Date');
+                      return;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(cnZipModal).hide();
+                    var msg = 'Preparing ZIP of credit notes';
+                    if (from && to) msg += ' from ' + from + ' to ' + to;
+                    toast(msg + '...');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-purchase_orders" role="tabpanel" aria-labelledby="cvSideLink-purchase_orders" tabindex="0">
+          <!-- Purchase Orders — estimates design flow (title + buttons + year + KPI cards + table) -->
+
+
+          <div class="cv-po-head ms-3 mt-3">
+            <div class="cv-po-actions w-100">
+              <select class="form-select mb-0 form-select-sm cv-po-year bg-white" aria-label="Year">
+                <option selected>2026</option>
+                <option>2025</option>
+                <option>2024</option>
+              </select>
+              <button type="button" class="btn btn-primary" id="cvPoNewBtn"><i class="bi bi-plus-lg me-1"></i>Create New Purchase Order</button>
+              <button type="button" class="btn btn-primary" id="cvPoZipBtn"><i class="bi bi-file-zip me-1"></i>Zip Purchase Orders</button>
+            </div>
+          </div>
+
+          <!-- Status summary KPI cards -->
+          <div class="cv-po-kpis ms-3 mb-0">
+            <div class="cv-po-kpi c-green">
+              <div class="k">New</div>
+              <div class="v">₹ 27,000</div>
+            </div>
+            <div class="cv-po-kpi c-red">
+              <div class="k">Cancelled</div>
+              <div class="v">₹ 12,000</div>
+            </div>
+            <div class="cv-po-kpi c-green">
+              <div class="k">Confirmed</div>
+              <div class="v">₹ 45,500</div>
+            </div>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-purchase_orders">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark-check"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Purchase Orders</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-purchase_orders">
+                <thead>
+                  <tr>
+                    <th>Progress</th>
+                    <th>Purchase Order #</th>
+                    <th>Amount</th>
+                    <th>Total Tax</th>
+                    <th>Project</th>
+                    <th>Tags</th>
+                    <th>Date</th>
+                    <th>Reference #</th>
+                    <th>Status</th>
+                    <th>Profoma Status</th>
+                    <th>Profoma No</th>
+                    <th>Profoma Date</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-purchase_orders">
+                  <tr class="cv-row">
+                    <td>
+                      <div class="cv-po-prog"><span class="track"><span class="bar" style="width:40%"></span></span><span>40%</span></div>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">PO-0011</a>
+                    </td>
+                    <td>
+                      <strong>₹ 27,000</strong>
+                    </td>
+                    <td>
+                      ₹ 1,350 </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <span class="cv-tag-chip">Material</span>
+                    </td>
+                    <td>
+                      06-09-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-011</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>New</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Generated</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">PRO-0031</a>
+                    </td>
+                    <td>
+                      10-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <div class="cv-po-prog"><span class="track"><span class="bar" style="width:100%"></span></span><span>100%</span></div>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">PO-0009</a>
+                    </td>
+                    <td>
+                      <strong>₹ 45,500</strong>
+                    </td>
+                    <td>
+                      ₹ 2,275 </td>
+                    <td>
+                      AMC Renewal </td>
+                    <td>
+                      <span class="cv-tag-chip">Service</span>
+                    </td>
+                    <td>
+                      28-08-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-009</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Confirmed</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Generated</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">PRO-0029</a>
+                    </td>
+                    <td>
+                      30-08-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <div class="cv-po-prog"><span class="track"><span class="bar" style="width:65%"></span></span><span>65%</span></div>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">PO-0007</a>
+                    </td>
+                    <td>
+                      <strong>₹ 12,000</strong>
+                    </td>
+                    <td>
+                      ₹ 600 </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      — </td>
+                    <td>
+                      20-08-2026 </td>
+                    <td>
+                      <a href="#" class="cv-link">REF-007</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Cancelled</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Not Generated</span>
+                    </td>
+                    <td>
+                      — </td>
+                    <td>
+                      — </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Create New Purchase Order modal — fullscreen (image 2 fields) -->
+            <div class="modal fade" id="cvNewPOModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content cv-inv-modal">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-file-earmark-check"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">Create New Purchase Order</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New purchase order</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body cv-inv-body">
+                    <div class="cv-po-grid">
+                      <!-- Left column -->
+                      <div>
+                        <div class="cv-po-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                        <div class="cv-po-addr-row">
+                          <div>
+                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <div class="cv-inv-addr-text">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>Chennai, Tamil Nadu<br>IN, 600100</div>
+                          </div>
+                          <div>
+                            <label class="cv-inv-mini-label">Ship to</label>
+                            <select class="form-select">
+                              <option selected>Select Shipping Address</option>
+                              <option>GG COMPANY - Anna Nagar</option>
+                              <option>GG COMPANY - T. Nagar</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="cv-po-field">
+                          <label><span class="req">*</span>Purchase Order Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                          <div class="cv-po-num-wrap"><span class="cv-po-prefix">PO-</span><input type="text" class="form-control" value="163"></div>
+                        </div>
+                        <div class="cv-po-field"><label><span class="req">*</span>Purchase Order Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                      </div>
+                      <!-- Right column -->
+                      <div>
+                        <div class="cv-po-field">
+                          <label><i class="bi bi-tag me-1"></i>Tags</label>
+                          <div class="nl-tags-wrap" style="max-width:100%;">
+                            <div class="nl-tags-chips"></div>
+                            <input type="text" class="nl-tags-input" placeholder="Tag">
+                          </div>
+                        </div>
+                        <div class="cv-po-addr-row">
+                          <div class="cv-po-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                              <option selected>INR ₹</option>
+                              <option>USD $</option>
+                            </select></div>
+                          <div class="cv-po-field"><label>Status</label><select class="form-select">
+                              <option selected>New</option>
+                              <option>Cancelled</option>
+                              <option>Confirmed</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-po-field"><label>Customer PO No.</label><input type="text" class="form-control"></div>
+                        <div class="cv-po-addr-row">
+                          <div class="cv-po-field"><label>Sale Agent</label><select class="form-select">
+                              <option selected>gharuda SOFTWARE</option>
+                              <option>Karthik R</option>
+                              <option>Divya M</option>
+                            </select></div>
+                          <div class="cv-po-field"><label>Discount type</label><select class="form-select">
+                              <option selected>No discount</option>
+                              <option>Before Tax</option>
+                              <option>After Tax</option>
+                            </select></div>
+                        </div>
+                        <div class="cv-po-field"><label>Admin Note</label><textarea class="form-control" rows="5"></textarea></div>
+                      </div>
+                    </div>
+
+                    <!-- Items section -->
+                    <div class="cv-inv-items" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
+                      <div class="cv-inv-items-toolbar">
+                        <div class="d-flex align-items-center gap-2">
+                          <select class="form-select cv-inv-add-item">
+                            <option value="">Add Item</option>
+                            <option>HRMS Subscription</option>
+                            <option>Solar Panel — 450W</option>
+                            <option>Installation Service</option>
+                            <option>AMC Charges</option>
+                          </select>
+                          <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvPoAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                        <div class="cv-inv-qty-radio">
+                          <span>Show quantity as:</span>
+                          <label><input type="radio" name="cvPoQty" checked> Qty</label>
+                          <label><input type="radio" name="cvPoQty"> Hours</label>
+                          <label><input type="radio" name="cvPoQty"> Qty/Hours</label>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="cv-inv-item-table">
+                          <thead>
+                            <tr>
+                              <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
+                              <th>Item</th>
+                              <th style="width:190px;">Description</th>
+                              <th style="width:80px;">Qty</th>
+                              <th style="width:110px;">Rate</th>
+                              <th style="width:100px;">Discount %</th>
+                              <th style="width:110px;">Tax</th>
+                              <th style="width:110px;">Amount</th>
+                              <th style="width:40px;"><i class="bi bi-gear"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody id="cvPoItemBody">
+                            <tr>
+                              <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                              <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
+                              <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
+                              <td><input type="number" class="form-control" value="1" min="0"></td>
+                              <td><input type="number" class="form-control" placeholder="Rate" step="0.01"></td>
+                              <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                              <td><select class="form-select">
+                                  <option selected>No Tax</option>
+                                  <option>GST 5%</option>
+                                  <option>GST 12%</option>
+                                  <option>GST 18%</option>
+                                </select></td>
+                              <td><span class="cv-inv-amt">₹ 0.00</span></td>
+                              <td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- Totals (image 2) -->
+                      <div class="cv-inv-totals">
+                        <div class="cv-inv-totals-box">
+                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Discount</span><input type="number" class="form-control" value="0" style="max-width:110px;"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="cv-inv-notes" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
+                      <div class="mb-3"><label>Client Note</label><textarea class="form-control"></textarea></div>
+                      <div class="mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3"></textarea></div>
+                    </div>
+                  </div>
+                  <div class="cv-inv-footer" style="justify-content:flex-end;">
+                    <button type="button" class="btn btn-primary" id="cvPoSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add New Item modal (same #cvPoAddItemModal — branches rendum render aagaathu) -->
+            <div class="modal fade" id="cvPoAddItemModal" tabindex="-1" aria-hidden="true" aria-labelledby="poAddItemTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="poAddItemTitle" style="font-size:15.5px;font-weight:800;">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="poItDesc"></div>
+                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="poItLongDesc" rows="3"></textarea></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="poItRateInr" step="0.01"></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="poItHsn"></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="poItRateUsd" step="0.01"></div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="poItTax1">
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="poItTax2" disabled>
+                            <option selected>No Tax</option>
+                            <option>GST 5%</option>
+                            <option>GST 12%</option>
+                            <option>GST 18%</option>
+                          </select></div>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="poItUnit" placeholder="Unit"></div>
+                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="poItGroup">
+                        <option value="">Non selected</option>
+                        <option>Services</option>
+                        <option>Products</option>
+                        <option>Subscription</option>
+                      </select></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvPoItemSave">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ZIP Purchase Orders modal (image 3 — existing zip modal design) -->
+            <div class="modal fade" id="cvPoZipModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvPoZipTitle">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content" style="border:none;border-radius:0;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <h5 class="modal-title" id="cvPoZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Purchase Orders</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-it-field">
+                      <label>Status</label>
+                      <div class="cv-zip-status">
+                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="New"><span class="cv-zip-pill"><i class="bi bi-plus-circle"></i>New</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="Cancelled"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Cancelled</span></label>
+                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="Confirmed"><span class="cv-zip-pill"><i class="bi bi-check-circle"></i>Confirmed</span></label>
+                      </div>
+                    </div>
+                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvPoZipFrom"></div>
+                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvPoZipTo"></div>
+                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Purchase orders matching the selected status and date range will be bundled into a single ZIP file.</div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvPoZipSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* Create New Purchase Order -> fullscreen modal */
+                var poNewBtn = document.getElementById('cvPoNewBtn'),
+                  poModal = document.getElementById('cvNewPOModal');
+                if (poNewBtn && poModal) {
+                  poNewBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(poModal).show();
+                  });
+                }
+
+                /* Items: add row + amount calc + confirm (lock) / delete — invoice modal madhiri */
+                var poAdd = document.getElementById('cvPoAddItem'),
+                  poBody = document.getElementById('cvPoItemBody');
+
+                function poBlankRow() {
+                  var tr = document.createElement('tr');
+                  tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                    '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                    '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                    '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">Unit</div></td>' +
+                    '<td><input type="number" class="form-control" placeholder="Rate" step="0.01"></td>' +
+                    '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                    '<td><select class="form-select"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option><option>GST 18%</option></select></td>' +
+                    '<td><span class="cv-inv-amt">₹ 0.00</span></td>' +
+                    '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                  return tr;
+                }
+
+                /* Toolbar ➕ -> open Add New Item modal (#cvPoAddItemModal — estimates design) */
+                var poItemModal = document.getElementById('cvPoAddItemModal');
+                if (poAdd && poItemModal && window.bootstrap) {
+                  poAdd.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(poItemModal).show();
+                  });
+                }
+
+                /* Stacked modal backdrop z-index fix (PO + item modal) */
+                ['#cvNewPOModal', '#cvPoAddItemModal'].forEach(function(id) {
+                  var el = document.querySelector(id);
+                  if (!el) return;
+                  el.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(el).zIndex, 10) || 1055;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                });
+
+                /* Add New Item submit -> validate + fill blank row in PO items */
+                var poItemSave = document.getElementById('cvPoItemSave');
+                if (poItemSave && poItemModal && poBody) {
+                  poItemSave.addEventListener('click', function() {
+                    var desc = document.getElementById('poItDesc').value.trim(),
+                      rate = document.getElementById('poItRateInr').value.trim();
+                    if (!desc || !rate) {
+                      toast('Description and Rate - INR are required');
+                      return;
+                    }
+                    var tr = poBody.querySelector('tr:not(.cv-inv-row-locked)'),
+                      madeNew = false;
+                    if (!tr) {
+                      tr = poBlankRow();
+                      madeNew = true;
+                    }
+                    var tax = document.getElementById('poItTax1').value,
+                      longDesc = document.getElementById('poItLongDesc').value.trim(),
+                      unit = document.getElementById('poItUnit').value.trim();
+                    tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+                      '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+                      '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+                      '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">' + (unit || 'Unit') + '</div></td>' +
+                      '<td><input type="number" class="form-control" value="' + parseFloat(rate).toFixed(2) + '" step="0.01"></td>' +
+                      '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+                      '<td><select class="form-select"><option ' + (tax === 'No Tax' ? 'selected' : '') + '>No Tax</option><option ' + (tax === 'GST 5%' ? 'selected' : '') + '>GST 5%</option><option ' + (tax === 'GST 12%' ? 'selected' : '') + '>GST 12%</option><option ' + (tax === 'GST 18%' ? 'selected' : '') + '>GST 18%</option></select></td>' +
+                      '<td><span class="cv-inv-amt">₹ ' + parseFloat(rate).toFixed(2) + '</span></td>' +
+                      '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+                    tr.querySelector('textarea').value = desc;
+                    tr.cells[2].querySelector('textarea').value = longDesc;
+                    if (madeNew) poBody.appendChild(tr);
+
+                    // reset form + close
+                    ['poItDesc', 'poItLongDesc', 'poItRateInr', 'poItHsn', 'poItRateUsd', 'poItUnit'].forEach(function(id) {
+                      document.getElementById(id).value = '';
+                    });
+                    document.getElementById('poItTax1').value = 'No Tax';
+                    document.getElementById('poItTax2').value = 'No Tax';
+                    document.getElementById('poItGroup').value = '';
+                    bootstrap.Modal.getOrCreateInstance(poItemModal).hide();
+                    toast('Item "' + desc + '" added to purchase order');
+                  });
+                }
+
+                /* Items amount calc + confirm/delete — PO table */
+                document.addEventListener('input', function(e) {
+                  var t = e.target;
+                  if (!t.closest || !t.closest('#cvPoItemBody')) return;
+                  var row = t.closest('tr');
+                  if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                  var qty = parseFloat(row.cells[3].querySelector('input').value) || 0,
+                    rate = parseFloat(row.cells[4].querySelector('input').value) || 0;
+                  row.querySelector('.cv-inv-amt').textContent = '₹ ' + (qty * rate).toFixed(2);
+                });
+
+                if (poBody) {
+                  poBody.addEventListener('click', function(e) {
+                    var check = e.target.closest('.cv-inv-check'),
+                      del = e.target.closest('.cv-inv-row-del'),
+                      row;
+                    if (del) {
+                      row = del.closest('tr');
+                      if (row) row.remove();
+                      if (poBody && !poBody.querySelector('tr')) poBody.appendChild(poBlankRow());
+                      return;
+                    }
+                    if (!check) return;
+                    row = check.closest('tr');
+                    if (!row || row.classList.contains('cv-inv-row-locked')) return;
+                    row.classList.add('cv-inv-row-locked');
+                    row.querySelectorAll('input, select, textarea').forEach(function(el) {
+                      el.setAttribute('readonly', 'readonly');
+                      el.setAttribute('disabled', 'disabled');
+                    });
+                    check.className = 'cv-inv-row-del';
+                    check.title = 'Delete item';
+                    check.innerHTML = '<i class="bi bi-trash"></i>';
+                    if (poAdd) poBody.appendChild(poBlankRow());
+                  });
+                }
+
+                /* Submit -> success toast */
+                var poSubmit = document.getElementById('cvPoSubmit');
+                if (poSubmit && poModal) {
+                  poSubmit.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(poModal).hide();
+                    toast('Purchase order PO-163 created successfully');
+                  });
+                }
+
+                /* Zip Purchase Orders -> modal */
+                var poZipBtn = document.getElementById('cvPoZipBtn'),
+                  poZipModal = document.getElementById('cvPoZipModal');
+                if (poZipBtn && poZipModal) {
+                  poZipBtn.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(poZipModal).show();
+                  });
+                }
+
+                /* Zip submit -> validate date range + toast */
+                var poZipSubmit = document.getElementById('cvPoZipSubmit');
+                if (poZipSubmit && poZipModal) {
+                  poZipSubmit.addEventListener('click', function() {
+                    var from = document.getElementById('cvPoZipFrom').value,
+                      to = document.getElementById('cvPoZipTo').value;
+                    if (from && to && from > to) {
+                      toast('From Date cannot be after To Date');
+                      return;
+                    }
+                    var statusEl = document.querySelector('input[name="cvPoZipStatus"]:checked'),
+                      status = statusEl ? statusEl.value : 'All';
+                    bootstrap.Modal.getOrCreateInstance(poZipModal).hide();
+                    var msg = 'Preparing ZIP of ' + status.toLowerCase() + ' purchase orders';
+                    if (from && to) msg += ' from ' + from + ' to ' + to;
+                    toast(msg + '...');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-subscriptions" role="tabpanel" aria-labelledby="cvSideLink-subscriptions" tabindex="0">
+          <!-- Subscriptions — title + New Subscription + table flow -->
+
+
+          <div class="cv-sub-head ms-3 mb-0 mt-3">
+            <button type="button" class="btn btn-primary" id="cvSubNewBtn"><i class="bi bi-plus-lg me-1"></i>New Subscription</button>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-subscriptions">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-arrow-repeat"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Subscriptions</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-subscriptions">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Subscription Name</th>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th>Next Billing Cycle</th>
+                    <th>Date Subscribed</th>
+                    <th>Last Sent</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-subscriptions">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">1</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">HRMS Subscription</a>
+                    </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Active</span>
+                    </td>
+                    <td>
+                      01-10-2026 </td>
+                    <td>
+                      01-04-2026 </td>
+                    <td>
+                      01-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">2</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Hosting — Business Yearly</a>
+                    </td>
+                    <td>
+                      AMC Renewal </td>
+                    <td>
+                      <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Cancelled</span>
+                    </td>
+                    <td>
+                      01-01-2027 </td>
+                    <td>
+                      15-01-2026 </td>
+                    <td>
+                      15-08-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">3</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Cloud Backup Plus</a>
+                    </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Paused</span>
+                    </td>
+                    <td>
+                      10-10-2026 </td>
+                    <td>
+                      10-05-2026 </td>
+                    <td>
+                      10-09-2026 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- New Subscription modal (centered — second image design flow) -->
+            <div class="modal fade" id="cvNewSubModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvNewSubTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-arrow-repeat"></i></div>
+                      <h5 class="modal-title" id="cvNewSubTitle" style="font-size:15.5px;font-weight:800;">New Subscription</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-sub-field"><label><span class="req">*</span>Subscription Name</label><input type="text" class="form-control" id="subName" autocomplete="off"></div>
+                    <div class="cv-sub-field"><label>Description</label><textarea class="form-control" id="subDesc" rows="3" placeholder="Short description of this subscription..."></textarea></div>
+                    <div class="cv-sub-field">
+                      <label><span class="req">*</span>Billing Plan</label>
+                      <select class="form-select" id="subPlan">
+                        <option value="">Select plan</option>
+                        <option>Basic Monthly — ₹ 1,999</option>
+                        <option>Business Yearly — ₹ 19,999</option>
+                        <option>Enterprise Yearly — ₹ 49,999</option>
+                      </select>
+                    </div>
+                    <div class="cv-sub-row">
+                      <div class="cv-sub-field"><label><span class="req">*</span>Quantity</label><input type="number" class="form-control" id="subQty" value="1" min="1"></div>
+                      <div class="cv-sub-field"><label><span class="req">*</span>First Billing Date</label><input type="date" class="form-control" id="subFirstDate" value="2026-10-01"></div>
+                    </div>
+                    <div class="cv-sub-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                    <div class="cv-sub-row">
+                      <div class="cv-sub-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                          <option selected>INR ₹</option>
+                          <option>USD $</option>
+                        </select></div>
+                      <div class="cv-sub-field"><label>Status</label><select class="form-select" id="subStatus">
+                          <option selected>Active</option>
+                          <option>Paused</option>
+                          <option>Cancelled</option>
+                        </select></div>
+                    </div>
+                    <div class="cv-sub-row">
+                      <div class="cv-sub-field"><label>Tax 1</label><select class="form-select">
+                          <option selected>No Tax</option>
+                          <option>GST 5%</option>
+                          <option>GST 12%</option>
+                          <option>GST 18%</option>
+                        </select></div>
+                      <div class="cv-sub-field"><label>Tax 2</label><select class="form-select">
+                          <option selected>No Tax</option>
+                          <option>GST 5%</option>
+                          <option>GST 12%</option>
+                          <option>GST 18%</option>
+                        </select></div>
+                    </div>
+                    <div class="cv-sub-field mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3" placeholder="Enter customer terms &amp; conditions to be displayed before subscribe to the subscription."></textarea></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvSubSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* New Subscription -> centered modal */
+                var subNewBtn = document.getElementById('cvSubNewBtn'),
+                  subModal = document.getElementById('cvNewSubModal');
+                if (subNewBtn && subModal && window.bootstrap) {
+                  subNewBtn.addEventListener('click', function() {
+                    var nm = document.getElementById('subName');
+                    if (nm) nm.value = '';
+                    var ds = document.getElementById('subDesc');
+                    if (ds) ds.value = '';
+                    var pl = document.getElementById('subPlan');
+                    if (pl) pl.value = '';
+                    var qt = document.getElementById('subQty');
+                    if (qt) qt.value = '1';
+                    bootstrap.Modal.getOrCreateInstance(subModal).show();
+                  });
+                }
+
+                /* Backdrop z-index fix for stacked modal */
+                if (subModal) {
+                  subModal.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(subModal).zIndex, 10) || 1075;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                }
+
+                /* Submit -> validate required + success toast */
+                var subSubmit = document.getElementById('cvSubSubmit');
+                if (subSubmit && subModal) {
+                  subSubmit.addEventListener('click', function() {
+                    var name = document.getElementById('subName'),
+                      plan = document.getElementById('subPlan');
+                    var invalid = null;
+                    [name, plan].forEach(function(el) {
+                      if (!el) return;
+                      var bad = !el.value.trim();
+                      el.style.borderColor = bad ? '#dc2626' : '';
+                      if (bad && !invalid) invalid = el;
+                    });
+                    if (invalid) {
+                      toast('Subscription Name and Billing Plan are required');
+                      invalid.focus();
+                      return;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(subModal).hide();
+                    toast('Subscription "' + name.value.trim() + '" created successfully');
+                  });
+                  ['subName', 'subPlan'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.addEventListener('input', function() {
+                      this.style.borderColor = '';
+                    });
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-expenses" role="tabpanel" aria-labelledby="cvSideLink-expenses" tabindex="0">
+          <!-- Expenses — title + Record Expense + year + KPI cards + table flow -->
+
+          <div class="cv-exp-head justify-content-start mt-3 ms-3">
+            <select class="form-select mb-0 bg-white form-select-sm cv-exp-year" aria-label="Year">
+              <option selected>2026</option>
+              <option>2025</option>
+              <option>2024</option>
+            </select>
+            <button type="button" class="btn btn-primary" id="cvExpNewBtn"><i class="bi bi-plus-lg me-1"></i>Record Expense</button>
+          </div>
+
+          <!-- Summary KPI cards (image colors) -->
+          <div class="cv-exp-kpis ms-3 mb-0 me-3">
+            <div class="cv-exp-kpi c-amber">
+              <div class="k">Total</div>
+              <div class="v">₹ 12,600</div>
+            </div>
+            <div class="cv-exp-kpi c-green">
+              <div class="k">Billable</div>
+              <div class="v">₹ 4,600</div>
+            </div>
+            <div class="cv-exp-kpi c-amber">
+              <div class="k">Non Billable</div>
+              <div class="v">₹ 8,000</div>
+            </div>
+            <div class="cv-exp-kpi c-red">
+              <div class="k">Not Invoiced</div>
+              <div class="v">₹ 4,600</div>
+            </div>
+            <div class="cv-exp-kpi c-green">
+              <div class="k">Billed</div>
+              <div class="v">₹ 8,000</div>
+            </div>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-expenses">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-receipt"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Expenses</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-expenses">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Amount</th>
+                    <th>Name</th>
+                    <th>Receipt</th>
+                    <th>Date</th>
+                    <th>Project</th>
+                    <th>Attachment</th>
+                    <th>Invoice</th>
+                    <th>Reference #</th>
+                    <th>Payment Mode</th>
+                    <th>Vendor</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-expenses">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">1</span>
+                    </td>
+                    <td>
+                      Travel </td>
+                    <td>
+                      Site visit cab </td>
+                    <td>
+                      <strong>₹ 1,200</strong>
+                    </td>
+                    <td>
+                      Karthik R </td>
+                    <td>
+                      <a href="#" class="cv-link">View</a>
+                    </td>
+                    <td>
+                      05-09-2026 </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <a href="#" class="cv-link">cab-receipt.pdf</a>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000112</a>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">EXP-001</a>
+                    </td>
+                    <td>
+                      Cash </td>
+                    <td>
+                      Fast Cabs </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">2</span>
+                    </td>
+                    <td>
+                      Printing </td>
+                    <td>
+                      Brochures </td>
+                    <td>
+                      <strong>₹ 3,400</strong>
+                    </td>
+                    <td>
+                      Divya M </td>
+                    <td>
+                      <a href="#" class="cv-link">View</a>
+                    </td>
+                    <td>
+                      28-08-2026 </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      <a href="#" class="cv-link">brochure.pdf</a>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000098</a>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">EXP-002</a>
+                    </td>
+                    <td>
+                      Bank Transfer </td>
+                    <td>
+                      Print World </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">3</span>
+                    </td>
+                    <td>
+                      Software </td>
+                    <td>
+                      Cloud subscription </td>
+                    <td>
+                      <strong>₹ 8,000</strong>
+                    </td>
+                    <td>
+                      Admin </td>
+                    <td>
+                      <span style="color:var(--ink-500);">—</span>
+                    </td>
+                    <td>
+                      15-09-2026 </td>
+                    <td>
+                      AMC Renewal </td>
+                    <td>
+                      <span style="color:var(--ink-500);">—</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">INV-000087</a>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">EXP-003</a>
+                    </td>
+                    <td>
+                      UPI </td>
+                    <td>
+                      Zen Cloud </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Record Expense modal — fullscreen (image 2 fields, two cards) -->
+            <div class="modal fade" id="cvNewExpenseModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content cv-inv-modal">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-receipt"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">Record Expense</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New expense</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="cv-exp-grid">
+                      <!-- Left card -->
+                      <div class="cv-exp-card">
+                        <div class="cv-exp-card-head">Add new Expense of GG COMPANY</div>
+                        <div class="cv-exp-card-body">
+                          <div class="cv-exp-field"><label>Vendors</label><select class="form-select" id="expVendor">
+                              <option value="" selected>None</option>
+                              <option>Fast Cabs</option>
+                              <option>Print World</option>
+                              <option>Zen Cloud</option>
+                              <option>Office Supplies Co</option>
+                            </select></div>
+                          <div class="cv-exp-field"><label><i class="bi bi-info-circle me-1"></i>Name</label><input type="text" class="form-control" id="expName" autocomplete="off"></div>
+                          <div class="cv-exp-field"><label><i class="bi bi-info-circle me-1"></i>Note</label><textarea class="form-control" id="expNote" rows="4"></textarea></div>
+                          <div class="cv-exp-field">
+                            <label><span class="req">*</span>Expense Category</label>
+                            <div class="cv-exp-cat-wrap">
+                              <select class="form-select" id="expCat">
+                                <option value="" selected>Non selected</option>
+                                <option>Travel</option>
+                                <option>Printing</option>
+                                <option>Software</option>
+                                <option>Office Supplies</option>
+                                <option>Marketing</option>
+                              </select>
+                              <button type="button" class="btn btn-primary cv-exp-cat-add" id="expCatAdd" title="Add category"><i class="bi bi-plus-lg"></i></button>
+                            </div>
+                          </div>
+                          <div class="cv-exp-field"><label>Expense Sub Category</label><select class="form-select" id="expSubCat">
+                              <option value="" selected>Non selected</option>
+                              <option>Cab</option>
+                              <option>Fuel</option>
+                              <option>Brochures</option>
+                              <option>Subscription</option>
+                            </select></div>
+                          <div class="cv-exp-field"><label><span class="req">*</span>Expense Date</label><input type="date" class="form-control" id="expDate" value="2026-09-23"></div>
+                          <div class="cv-exp-field"><label><span class="req">*</span>Amount</label><input type="number" class="form-control" id="expAmount" step="0.01"></div>
+                          <label class="cv-exp-check"><input type="checkbox" class="form-check-input" id="expBillable"> Billable</label>
+                          <div class="cv-exp-field"><label>Customer</label><input type="text" class="form-control" value="GG COMPANY"></div>
+                          <div class="cv-exp-field mb-0"><label>Project</label><select class="form-select">
+                              <option selected>Select and begin typing</option>
+                              <option>Solar Installation</option>
+                              <option>Event Management</option>
+                              <option>AMC Renewal</option>
+                            </select></div>
+                        </div>
+                      </div>
+                      <!-- Right card -->
+                      <div class="cv-exp-card">
+                        <div class="cv-exp-card-head">Advanced Options</div>
+                        <div class="cv-exp-card-body">
+                          <div class="cv-exp-field"><label><span class="req">*</span>Currency</label><select class="form-select" id="expCurrency">
+                              <option selected>INR ₹</option>
+                              <option>USD $</option>
+                            </select></div>
+                          <div class="cv-exp-row">
+                            <div class="cv-exp-field"><label>Tax 1</label><select class="form-select">
+                                <option selected>No Tax</option>
+                                <option>GST 5%</option>
+                                <option>GST 12%</option>
+                                <option>GST 18%</option>
+                              </select></div>
+                            <div class="cv-exp-field"><label>Tax 2</label><select class="form-select">
+                                <option selected>No Tax</option>
+                                <option>GST 5%</option>
+                                <option>GST 12%</option>
+                                <option>GST 18%</option>
+                              </select></div>
+                          </div>
+                          <div class="cv-exp-field"><label>Attatment</label><input type="file" class="form-control" id="expFile"></div>
+                          <div class="cv-exp-row">
+                            <div class="cv-exp-field"><label>Payment Mode</label><select class="form-select" id="expPayMode">
+                                <option value="" selected>Non selected</option>
+                                <option>Cash</option>
+                                <option>Bank Transfer</option>
+                                <option>UPI</option>
+                                <option>Card</option>
+                                <option>Cheque</option>
+                              </select></div>
+                            <div class="cv-exp-field"><label>Reference #</label><input type="text" class="form-control" id="expRef" autocomplete="off"></div>
+                          </div>
+                          <div class="cv-exp-field"><label>Repeat everyss</label><select class="form-select">
+                              <option value="" selected>Non selected</option>
+                              <option>Daily</option>
+                              <option>Weekly</option>
+                              <option>Monthly</option>
+                              <option>Yearly</option>
+                            </select></div>
+                          <div class="cv-exp-field"><label>Staff</label><select class="form-select">
+                              <option value="" selected>Nothing selected</option>
+                              <option>Admin</option>
+                              <option>Karthik R</option>
+                              <option>Divya M</option>
+                            </select></div>
+                          <div class="cv-exp-row">
+                            <div class="cv-exp-field"><label>Payment Account</label><select class="form-select">
+                                <option value="" selected>Non selected</option>
+                                <option>HDFC</option>
+                                <option>ICICI</option>
+                                <option>Cash in Hand</option>
+                              </select></div>
+                            <div class="cv-exp-field"><label>Deposit To</label><select class="form-select">
+                                <option value="" selected>Non selected</option>
+                                <option>Cash Account</option>
+                                <option>HDFC</option>
+                                <option>ICICI</option>
+                              </select></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cv-inv-footer">
+                    <span class="cv-inv-hint" style="font-size:11.5px;color:#9ca3af;">* marked fields are required</span>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" id="cvExpSubmit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New Category modal (image fields — centered) -->
+            <div class="modal fade" id="cvNewCatModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvNewCatTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvNewCatTitle" style="font-size:15.5px;font-weight:800;">New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-exp-field"><label><span class="req">*</span>Category Name</label><input type="text" class="form-control" id="newCatName" autocomplete="off"></div>
+                    <div class="cv-exp-field mb-0"><label>Category Description</label><textarea class="form-control" id="newCatDesc" rows="4"></textarea></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="newCatSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* Record Expense -> fullscreen modal */
+                var expNewBtn = document.getElementById('cvExpNewBtn'),
+                  expModal = document.getElementById('cvNewExpenseModal');
+                if (expNewBtn && expModal && window.bootstrap) {
+                  expNewBtn.addEventListener('click', function() {
+                    ['expName', 'expNote', 'expAmount', 'expRef'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) {
+                        el.value = '';
+                        el.style.borderColor = '';
+                      }
+                    });
+                    ['expVendor', 'expCat', 'expSubCat', 'expPayMode'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) {
+                        el.value = '';
+                        el.style.borderColor = '';
+                      }
+                    });
+                    var dt = document.getElementById('expDate');
+                    if (dt) {
+                      dt.value = '2026-09-23';
+                      dt.style.borderColor = '';
+                    }
+                    var bb = document.getElementById('expBillable');
+                    if (bb) bb.checked = false;
+                    var fl = document.getElementById('expFile');
+                    if (fl) fl.value = '';
+                    bootstrap.Modal.getOrCreateInstance(expModal).show();
+                  });
+                }
+
+                /* Category ➕ -> New Category modal */
+                var catAdd = document.getElementById('expCatAdd'),
+                  newCatModal = document.getElementById('cvNewCatModal');
+                if (catAdd && newCatModal && window.bootstrap) {
+                  catAdd.addEventListener('click', function() {
+                    var nm = document.getElementById('newCatName'),
+                      ds = document.getElementById('newCatDesc');
+                    if (nm) {
+                      nm.value = '';
+                      nm.style.borderColor = '';
+                    }
+                    if (ds) ds.value = '';
+                    bootstrap.Modal.getOrCreateInstance(newCatModal).show();
+                  });
+                }
+
+                /* Stacked modal backdrop fix (expense fullscreen + category modal) */
+                ['#cvNewExpenseModal', '#cvNewCatModal'].forEach(function(id) {
+                  var el = document.querySelector(id);
+                  if (!el) return;
+                  el.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(el).zIndex, 10) || 1055;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                });
+
+                /* Category name clear while typing */
+                var newCatNameEl = document.getElementById('newCatName');
+                if (newCatNameEl) newCatNameEl.addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* New Category submit -> validate + add option to select + toast */
+                var newCatSubmit = document.getElementById('newCatSubmit');
+                if (newCatSubmit && newCatModal) {
+                  newCatSubmit.addEventListener('click', function() {
+                    var nm = document.getElementById('newCatName');
+                    var name = nm.value.trim();
+                    if (!name) {
+                      nm.style.borderColor = '#dc2626';
+                      toast('Category Name is required');
+                      nm.focus();
+                      return;
+                    }
+                    var sel = document.getElementById('expCat'),
+                      exists = false;
+                    if (sel) {
+                      Array.prototype.forEach.call(sel.options, function(op) {
+                        if (op.text === name) exists = true;
+                      });
+                      if (!exists) {
+                        var op = document.createElement('option');
+                        op.value = name;
+                        op.text = name;
+                        sel.appendChild(op);
+                      }
+                      sel.value = name;
+                      sel.style.borderColor = '';
+                    }
+                    bootstrap.Modal.getOrCreateInstance(newCatModal).hide();
+                    toast('Category "' + name + '" added');
+                  });
+                }
+
+                /* Clear red border while typing */
+                ['expCat', 'expDate', 'expAmount'].forEach(function(id) {
+                  var el = document.getElementById(id);
+                  if (el) el.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                  });
+                });
+
+                /* Submit -> validate required + success toast */
+                var expSubmit = document.getElementById('cvExpSubmit');
+                if (expSubmit && expModal) {
+                  expSubmit.addEventListener('click', function() {
+                    var req = ['expCat', 'expDate', 'expAmount'],
+                      invalid = null;
+                    req.forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (!el) return;
+                      var bad = !String(el.value).trim();
+                      el.style.borderColor = bad ? '#dc2626' : '';
+                      if (bad && !invalid) invalid = el;
+                    });
+                    if (invalid) {
+                      toast('Expense Category, Date and Amount are required');
+                      invalid.focus();
+                      return;
+                    }
+                    var amt = document.getElementById('expAmount').value,
+                      cat = document.getElementById('expCat').value;
+                    bootstrap.Modal.getOrCreateInstance(expModal).hide();
+                    toast('Expense of ₹ ' + amt + ' (' + cat + ') recorded successfully');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-contracts" role="tabpanel" aria-labelledby="cvSideLink-contracts" tabindex="0">
+          <!-- Contracts — title + New Contract + table flow -->
+
+
+          <div class="cv-con-head mt-3 mb-0 ms-3">
+            <button type="button" class="btn btn-primary" id="cvConNewBtn"><i class="bi bi-plus-lg me-1"></i>New contract</button>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-contracts">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-file-earmark-ruled"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Contracts</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-contracts">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>Contract Type</th>
+                    <th>Contract Value</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Project</th>
+                    <th>Signature</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-contracts">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">1</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Event services agreement</a>
+                    </td>
+                    <td>
+                      Service </td>
+                    <td>
+                      <strong>₹ 3,60,000</strong>
+                    </td>
+                    <td>
+                      01-09-2026 </td>
+                    <td>
+                      31-08-2027 </td>
+                    <td>
+                      Event Management </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Signed</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">2</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Annual maintenance contract</a>
+                    </td>
+                    <td>
+                      Maintenance </td>
+                    <td>
+                      <strong>₹ 72,000</strong>
+                    </td>
+                    <td>
+                      01-08-2026 </td>
+                    <td>
+                      31-07-2027 </td>
+                    <td>
+                      AMC Renewal </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Signed</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">3</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Solar installation contract</a>
+                    </td>
+                    <td>
+                      Project </td>
+                    <td>
+                      <strong>₹ 4,50,000</strong>
+                    </td>
+                    <td>
+                      15-09-2026 </td>
+                    <td>
+                      15-12-2026 </td>
+                    <td>
+                      Solar Installation </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Pending</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Contract Information modal (second image fields — centered) -->
+            <div class="modal fade" id="cvNewContractModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvConTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-earmark-ruled"></i></div>
+                      <h5 class="modal-title" id="cvConTitle" style="font-size:15.5px;font-weight:800;">Contract Information</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-con-checks">
+                      <label class="cv-con-check"><input type="checkbox" class="form-check-input" id="conTrash"> <i class="bi bi-trash"></i> Trash</label>
+                      <label class="cv-con-check"><input type="checkbox" class="form-check-input" id="conHide"> Hide from customer</label>
+                    </div>
+                    <div class="cv-con-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" id="conCustomer" value="GG COMPANY" readonly></div>
+                    <div class="cv-con-field"><label><i class="bi bi-info-circle me-1"></i><span class="req">*</span>Subject</label><input type="text" class="form-control" id="conSubject" autocomplete="off"></div>
+                    <div class="cv-con-field">
+                      <label>Contract Value</label>
+                      <div class="cv-con-val-wrap"><input type="number" class="form-control" id="conValue" step="0.01"><span class="cv-con-suffix">₹</span></div>
+                    </div>
+                    <div class="cv-con-field">
+                      <label>Contract type</label>
+                      <div class="cv-con-type-wrap">
+                        <select class="form-select" id="conType">
+                          <option value="" selected>Non selected</option>
+                          <option>Service</option>
+                          <option>Maintenance</option>
+                          <option>Project</option>
+                          <option>Retainer</option>
+                        </select>
+                        <button type="button" class="btn btn-primary cv-con-type-add" id="conTypeAdd" title="Add contract type"><i class="bi bi-plus-lg"></i></button>
+                      </div>
+                    </div>
+                    <div class="cv-con-row">
+                      <div class="cv-con-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="conStart" value="2026-09-23"></div>
+                      <div class="cv-con-field"><label>End Date</label><input type="date" class="form-control" id="conEnd"></div>
+                    </div>
+                    <div class="cv-con-field mb-0"><label>Contract description</label><textarea class="form-control" id="conDesc" rows="5"></textarea></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvConSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New contract type modal (image fields — centered) -->
+            <div class="modal fade" id="cvConTypeModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvConTypeTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvConTypeTitle" style="font-size:15.5px;font-weight:800;">New contract type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-con-field mb-0"><label><span class="req">*</span>Name</label><input type="text" class="form-control" id="conTypeName" autocomplete="off"></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="conTypeSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                /* New contract -> modal */
+                var conNewBtn = document.getElementById('cvConNewBtn'),
+                  conModal = document.getElementById('cvNewContractModal');
+                if (conNewBtn && conModal && window.bootstrap) {
+                  conNewBtn.addEventListener('click', function() {
+                    ['conSubject', 'conValue', 'conDesc'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) {
+                        el.value = '';
+                        el.style.borderColor = '';
+                      }
+                    });
+                    var ty = document.getElementById('conType');
+                    if (ty) ty.value = '';
+                    var en = document.getElementById('conEnd');
+                    if (en) en.value = '';
+                    ['conTrash', 'conHide'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) el.checked = false;
+                    });
+                    bootstrap.Modal.getOrCreateInstance(conModal).show();
+                  });
+                }
+
+                /* Backdrop z-index fix (stacked modal) */
+                if (conModal) {
+                  conModal.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(conModal).zIndex, 10) || 1075;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                }
+                if (conTypeModal) {
+                  conTypeModal.addEventListener('shown.bs.modal', function() {
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = 1084; /* below type modal 1085, above contract modal 1075 */
+                  });
+                }
+
+                /* Contract type ➕ -> New contract type modal */
+                var conTypeAdd = document.getElementById('conTypeAdd'),
+                  conTypeModal = document.getElementById('cvConTypeModal');
+                if (conTypeAdd && conTypeModal && window.bootstrap) {
+                  conTypeAdd.addEventListener('click', function() {
+                    var nm = document.getElementById('conTypeName');
+                    if (nm) {
+                      nm.value = '';
+                      nm.style.borderColor = '';
+                    }
+                    bootstrap.Modal.getOrCreateInstance(conTypeModal).show();
+                  });
+                }
+
+                /* Contract type name clear while typing */
+                var conTypeNameEl = document.getElementById('conTypeName');
+                if (conTypeNameEl) conTypeNameEl.addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* New contract type submit -> validate + add option to select + toast */
+                var conTypeSubmit = document.getElementById('conTypeSubmit');
+                if (conTypeSubmit && conTypeModal) {
+                  conTypeSubmit.addEventListener('click', function() {
+                    var nm = document.getElementById('conTypeName'),
+                      name = nm.value.trim();
+                    if (!name) {
+                      nm.style.borderColor = '#dc2626';
+                      toast('Name is required');
+                      nm.focus();
+                      return;
+                    }
+                    var sel = document.getElementById('conType'),
+                      exists = false;
+                    if (sel) {
+                      Array.prototype.forEach.call(sel.options, function(op) {
+                        if (op.text === name) exists = true;
+                      });
+                      if (!exists) {
+                        var op = document.createElement('option');
+                        op.value = name;
+                        op.text = name;
+                        sel.appendChild(op);
+                      }
+                      sel.value = name;
+                      sel.style.borderColor = '';
+                    }
+                    bootstrap.Modal.getOrCreateInstance(conTypeModal).hide();
+                    toast('Contract type "' + name + '" added');
+                  });
+                }
+
+                /* Clear red border while typing */
+                ['conSubject'].forEach(function(id) {
+                  var el = document.getElementById(id);
+                  if (el) el.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                  });
+                });
+
+                /* Submit -> validate required + success toast */
+                var conSubmit = document.getElementById('cvConSubmit');
+                if (conSubmit && conModal) {
+                  conSubmit.addEventListener('click', function() {
+                    var subj = document.getElementById('conSubject'),
+                      start = document.getElementById('conStart'),
+                      invalid = null;
+                    [subj, start].forEach(function(el) {
+                      if (!el) return;
+                      var bad = !String(el.value).trim();
+                      el.style.borderColor = bad ? '#dc2626' : '';
+                      if (bad && !invalid) invalid = el;
+                    });
+                    if (invalid) {
+                      toast('Subject and Start Date are required');
+                      invalid.focus();
+                      return;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(conModal).hide();
+                    toast('Contract "' + subj.value.trim() + '" created successfully');
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-projects" role="tabpanel" aria-labelledby="cvSideLink-projects" tabindex="0">
+          <!-- Projects — New Project + status KPI cards + table flow + Add new project fullscreen modal -->
+          <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
+
+          <div class="cv-prj-head ms-3 mt-3">
+            <button type="button" class="btn btn-primary" id="cvPrjNewBtn"><i class="bi bi-plus-lg me-1"></i>New Project</button>
+          </div>
+
+          <!-- Status KPI cards (image 1 — Not Started, In Progress, On Hold, Cancelled, test, Finished) -->
+          <div class="cv-prj-kpis ms-3 me-3 mb-0">
+            <div class="cv-prj-kpi c-dim">
+              <div class="k">Not Started</div>
+              <div class="v">0</div>
+            </div>
+            <div class="cv-prj-kpi c-green">
+              <div class="k">In Progress</div>
+              <div class="v">1</div>
+            </div>
+            <div class="cv-prj-kpi c-amber">
+              <div class="k">On Hold</div>
+              <div class="v">1</div>
+            </div>
+            <div class="cv-prj-kpi c-dim">
+              <div class="k">Cancelled</div>
+              <div class="v">0</div>
+            </div>
+            <div class="cv-prj-kpi c-red">
+              <div class="k">test</div>
+              <div class="v">0</div>
+            </div>
+            <div class="cv-prj-kpi c-green">
+              <div class="k">Finished</div>
+              <div class="v">1</div>
+            </div>
+          </div>
+
+          <div class="card-custom p-0" id="cvCard-projects">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-diagram-3"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Projects</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-projects">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Project Name</th>
+                    <th>Tags</th>
+                    <th>Project Progress</th>
+                    <th>Start Date</th>
+                    <th>Deadline</th>
+                    <th>Remaining Days</th>
+                    <th>Members</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-projects">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">1</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">ERP Rollout 2026</a>
+                    </td>
+                    <td>
+                      <span class="cv-tag-chip">hot</span>
+                    </td>
+                    <td>
+                      <div class="cv-prj-prog">
+                        <div class="cv-prj-bar"><span style="width:65%;"></span></div><span class="cv-prj-pct">65%</span>
+                      </div>
+                    </td>
+                    <td>
+                      01-09-2026 </td>
+                    <td>
+                      15-11-2026 </td>
+                    <td>
+                      <span class="cv-prj-remain">54</span>
+                    </td>
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>gharuda SOFTWARE</span></span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>In Progress</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">2</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Website Revamp</a>
+                    </td>
+                    <td>
+                      <span class="cv-tag-chip">low</span>
+                    </td>
+                    <td>
+                      <div class="cv-prj-prog">
+                        <div class="cv-prj-bar"><span style="width:30%;"></span></div><span class="cv-prj-pct">30%</span>
+                      </div>
+                    </td>
+                    <td>
+                      10-09-2026 </td>
+                    <td>
+                      30-11-2026 </td>
+                    <td>
+                      <span class="cv-prj-remain">69</span>
+                    </td>
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Karthik R</span></span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>On Hold</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">3</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Mobile App Phase 1</a>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                      <div class="cv-prj-prog">
+                        <div class="cv-prj-bar"><span style="width:100%;"></span></div><span class="cv-prj-pct">100%</span>
+                      </div>
+                    </td>
+                    <td>
+                      05-08-2026 </td>
+                    <td>
+                      20-09-2026 </td>
+                    <td>
+                      <span class="cv-prj-remain over">0</span>
+                    </td>
+                    <td>
+                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Divya M</span></span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Finished</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Add new project modal — fullscreen (image 2 fields) -->
+            <div class="modal fade" id="cvNewProjectModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                  <div class="cv-contact-head">
+                    <div class="cv-contact-head-l">
+                      <div class="cv-contact-ava"><i class="bi bi-kanban"></i></div>
+                      <div style="min-width:0;">
+                        <h3 class="mb-0">Add new project</h3>
+                        <div class="cv-contact-sub">GG COMPANY · New project</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="cv-prj-tabs">
+                      <button type="button" class="cv-prj-tab active" data-prjtab="project">Project</button>
+                      <button type="button" class="cv-prj-tab" data-prjtab="settings">Project Settings</button>
+                    </div>
+
+                    <!-- Project pane -->
+                    <div class="cv-prj-pane active" data-prjpane="project">
+                      <div class="cv-prj-field"><label><span class="req">*</span>Project Name</label><input type="text" class="form-control" id="prjName" autocomplete="off"></div>
+                      <div class="cv-prj-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                      <div class="cv-prj-grid">
+                        <div class="cv-prj-field"><label>Device</label><select class="form-select">
+                            <option value="" selected>Non selected</option>
+                            <option>Desktop</option>
+                            <option>Mobile</option>
+                            <option>Tablet</option>
+                          </select></div>
+                      </div>
+                      <label class="cv-prj-check"><input type="checkbox" id="prjCalcTasks" checked> Calculate progress through tasks</label>
+                      <div class="cv-prj-prog-wrap">
+                        <div class="cv-prj-prog-lbl">Progress <span id="prjProgVal">0%</span></div>
+                        <input type="range" class="cv-prj-range" id="prjProg" min="0" max="100" value="0">
+                      </div>
+                      <div class="cv-prj-grid">
+                        <div class="cv-prj-field"><label><span class="req">*</span>Billing Type</label><select class="form-select" id="prjBilling">
+                            <option selected>Fixed Rate</option>
+                            <option>Hourly Rate</option>
+                            <option>Project Hours</option>
+                          </select></div>
+                        <div class="cv-prj-field"><label>Status</label><select class="form-select" id="prjStatus">
+                            <option selected>In Progress</option>
+                            <option>Not Started</option>
+                            <option>On Hold</option>
+                            <option>Cancelled</option>
+                            <option>Finished</option>
+                          </select></div>
+                        <div class="cv-prj-field full"><label>Project Deadline Date Extend Limit</label><input type="text" class="form-control" id="prjDeadlineLimit"></div>
+                        <div class="cv-prj-field"><label>Total Rate</label><input type="text" class="form-control" id="prjTotalRate"></div>
+                        <div class="cv-prj-field"><label>Estimated Hours</label><input type="text" class="form-control" id="prjHours"></div>
+                        <div class="cv-prj-field"><label>Members</label><select class="form-select" id="prjMembers">
+                            <option selected>gharuda SOFTWARE</option>
+                            <option>Karthik R</option>
+                            <option>Divya M</option>
+                            <option>Arun Kumar</option>
+                          </select></div>
+                        <div class="cv-prj-field"><label>Follower</label><select class="form-select" id="prjFollower">
+                            <option value="" selected>Non selected</option>
+                            <option>Karthik R</option>
+                            <option>Divya M</option>
+                          </select></div>
+                        <div class="cv-prj-field"><label>Super Follower</label><select class="form-select" id="prjSuperFollower">
+                            <option value="" selected>Non selected</option>
+                            <option>Admin</option>
+                          </select></div>
+                        <div class="cv-prj-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="prjStart" value="2026-09-23"></div>
+                        <div class="cv-prj-field"><label>Deadline</label><input type="date" class="form-control" id="prjDeadline"></div>
+                        <div class="cv-prj-field full">
+                          <label><i class="bi bi-tag me-1"></i>Tags</label>
+                          <div class="nl-tags-wrap" style="max-width:100%;">
+                            <div class="nl-tags-chips"></div>
+                            <input type="text" class="nl-tags-input" placeholder="Tag">
+                          </div>
+                        </div>
+                        <div class="cv-prj-field full">
+                          <label>Description</label>
+                          <div class="cv-prj-quill-wrap">
+                            <div id="cvPrjQuill"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <label class="cv-prj-check mt-3 mb-0"><input type="checkbox" id="prjSendEmail"> Send project created email</label>
+                    </div>
+
+                    <!-- Project Settings pane — grouped toggle design -->
+                    <div class="cv-prj-pane" data-prjpane="settings">
+                      <div class="cv-prj-field"><label><span class="req">*</span>Send contacts notifications</label>
+                        <select class="form-select" id="prjNotify">
+                          <option selected>To all contacts with notifications for projects enabled</option>
+                          <option>To primary contact only</option>
+                          <option>Do not send notifications</option>
+                        </select>
+                      </div>
+                      <div class="cv-prj-field"><label>Visible Tabs</label>
+                        <div class="cv-prj-tabsbox" id="prjVisibleTabs">
+                          <span class="cv-tag-chip" data-tab="Profit &amp; Loss">Profit &amp; Loss<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Tasks">Tasks<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Timesheets">Timesheets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Milestones">Milestones<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Files">Files<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Discussions">Discussions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Gantt">Gantt<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Tickets">Tickets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Video Library">Video Library<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Contracts">Contracts<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Proposals">Proposals<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Estimates">Estimates<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Purchase Orders">Purchase Orders<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Invoices">Invoices<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Subscriptions">Subscriptions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Expenses">Expenses<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Credit Notes">Credit Notes<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span>
+                          <div class="dropdown cv-prj-tabs-dd">
+                            <button type="button" class="cv-prj-tabs-add" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"><i class="bi bi-plus-lg"></i>Add tabs <i class="bi bi-chevron-down" style="font-size:9px;"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end cv-prj-tabs-menu" id="prjTabsMenu"></ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="cv-prj-set-grid">
+                        <!-- Tasks & Comments -->
+                        <div class="cv-prj-set-card">
+                          <div class="cv-prj-set-head"><i class="bi bi-list-check"></i><span class="t">Tasks &amp; Comments</span><span class="c">9 on</span></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to create tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to edit tasks (only tasks created from contact)</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to comment on project tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task comments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task attachments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task checklist items</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to upload attachments on tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task total logged time</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div>
+
+                        <!-- Files & Discussions -->
+                        <div class="cv-prj-set-card">
+                          <div class="cv-prj-set-head"><i class="bi bi-folder2-open"></i><span class="t">Files &amp; Discussions</span><span class="c">3 on</span></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to upload files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to open discussions</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div>
+
+                        <!-- Milestones & Planning -->
+                        <div class="cv-prj-set-card">
+                          <div class="cv-prj-set-head"><i class="bi bi-diagram-3"></i><span class="t">Milestones &amp; Planning</span><span class="c">3 on</span></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view milestones</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view Gantt</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view timesheets</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div>
+
+                        <!-- Finance, Log & Team -->
+                        <div class="cv-prj-set-card">
+                          <div class="cv-prj-set-head"><i class="bi bi-graph-up"></i><span class="t">Finance, Log &amp; Team</span><span class="c">3 on</span></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view finance overview</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view activity log</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view team members</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div>
+                      </div>
+
+                      <div class="cv-prj-set-foot">
+                        <i class="bi bi-eye-slash-fill"></i>
+                        <span class="lbl">Hide project tasks on main tasks table (admin area)</span>
+                        <label class="cust-switch"><input type="checkbox"><span class="slider"></span></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cv-prj-footer">
+                    <span class="cv-inv-hint"><span style="color:#dc2626;">*</span> marked fields are required</span>
+                    <div class="d-flex gap-2">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" id="cvPrjSubmit">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg, ok) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                var prjBtn = document.getElementById('cvPrjNewBtn'),
+                  prjModal = document.getElementById('cvNewProjectModal'),
+                  pgBody = document.getElementById('cvBody-projects');
+                if (!prjBtn || !prjModal || !pgBody) return;
+
+                /* Tabs: Project / Project Settings */
+                var prjTabs = prjModal.querySelectorAll('.cv-prj-tab'),
+                  prjPanes = prjModal.querySelectorAll('.cv-prj-pane');
+                prjTabs.forEach(function(tb) {
+                  tb.addEventListener('click', function() {
+                    prjTabs.forEach(function(x) {
+                      x.classList.toggle('active', x === tb);
+                    });
+                    prjPanes.forEach(function(p) {
+                      p.classList.toggle('active', p.dataset.prjpane === tb.dataset.prjtab);
+                    });
+                  });
+                });
+
+                /* Progress slider */
+                var prjProg = document.getElementById('prjProg'),
+                  prjProgVal = document.getElementById('prjProgVal');
+                if (prjProg && prjProgVal) prjProg.addEventListener('input', function() {
+                  prjProgVal.textContent = this.value + '%';
+                });
+
+                /* ---- Visible Tabs: chips + profile-dropdown select (lead.php status pattern) ---- */
+                var tabsBox = document.getElementById('prjVisibleTabs'),
+                  tabsMenu = document.getElementById('prjTabsMenu');
+                if (tabsBox && tabsMenu) {
+                  var ALL_TABS = ['Profit & Loss', 'Tasks', 'Timesheets', 'Milestones', 'Files', 'Discussions', 'Gantt', 'Tickets', 'Video Library', 'Contracts', 'Proposals', 'Estimates', 'Purchase Orders', 'Invoices', 'Subscriptions', 'Expenses', 'Credit Notes'];
+
+                  function selectedTabs() {
+                    return Array.prototype.map.call(tabsBox.querySelectorAll('.cv-tag-chip[data-tab]'), function(c) {
+                      return c.getAttribute('data-tab').replace(/&amp;/g, '&');
+                    });
+                  }
+
+                  function renderTabsMenu() {
+                    var sel = selectedTabs(),
+                      remaining = ALL_TABS.filter(function(t) {
+                        return sel.indexOf(t) === -1;
+                      }),
+                      html = '';
+                    remaining.forEach(function(t) {
+                      html += '<li><a class="dropdown-item" href="#" data-tab="' + t.replace(/&/g, '&amp;') + '"><i class="bi bi-check-lg"></i>' + t.replace(/&/g, '&amp;') + '</a></li>';
+                    });
+                    if (!remaining.length) html = '<li><a class="dropdown-item empty" href="#">All tabs added</a></li>';
+                    tabsMenu.innerHTML = html;
+                  }
+
+                  function makeChip(name) {
+                    var chip = document.createElement('span');
+                    chip.className = 'cv-tag-chip';
+                    chip.setAttribute('data-tab', name);
+                    chip.innerHTML = name.replace(/&/g, '&amp;') + '<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button>';
+                    var dd = tabsBox.querySelector('.cv-prj-tabs-dd'),
+                      menuWrap = dd.parentNode;
+                    menuWrap.insertBefore(chip, dd);
+                  }
+
+                  renderTabsMenu();
+
+                  /* chip ✕ -> remove */
+                  tabsBox.addEventListener('click', function(e) {
+                    var x = e.target.closest('.chip-x');
+                    if (!x) return;
+                    x.closest('.cv-tag-chip[data-tab]').remove();
+                    renderTabsMenu();
+                  });
+
+                  /* dropdown item -> add chip back */
+                  tabsMenu.addEventListener('click', function(e) {
+                    var item = e.target.closest('.dropdown-item[data-tab]');
+                    if (!item) return;
+                    e.preventDefault();
+                    makeChip(item.getAttribute('data-tab').replace(/&amp;/g, '&'));
+                    /* close dropdown (same flow as lead status) */
+                    var dd = item.closest('.dropdown');
+                    if (dd && typeof bootstrap !== 'undefined') {
+                      var ddBtn = dd.querySelector('[data-bs-toggle="dropdown"]');
+                      if (ddBtn) bootstrap.Dropdown.getOrCreateInstance(ddBtn).hide();
+                    }
+                    renderTabsMenu();
+                  });
+                }
+
+                var quill = null;
+
+                function initQuill() {
+                  if (quill || typeof Quill === 'undefined') return;
+                  quill = new Quill('#cvPrjQuill', {
+                    theme: 'snow',
+                    placeholder: 'Write project description here...',
+                    modules: {
+                      toolbar: [
+                        [{
+                          font: ['verdana', 'sans-serif', 'serif', 'monospace']
+                        }, {
+                          size: ['small', false, 'large', 'huge']
+                        }],
+                        [{
+                          color: []
+                        }, {
+                          background: []
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        [{
+                          align: []
+                        }],
+                        ['image', 'link'],
+                        [{
+                          list: 'bullet'
+                        }, {
+                          list: 'ordered'
+                        }],
+                        ['clean']
+                      ]
+                    }
+                  });
+                }
+
+                /* New Project -> open modal (fresh) */
+                prjBtn.addEventListener('click', function() {
+                  ['prjName', 'prjDeadlineLimit', 'prjTotalRate', 'prjHours', 'prjDeadline'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) {
+                      el.value = '';
+                      el.style.borderColor = '';
+                    }
+                  });
+                  document.getElementById('prjStatus').value = 'In Progress';
+                  document.getElementById('prjBilling').value = 'Fixed Rate';
+                  if (prjProg) {
+                    prjProg.value = 0;
+                    prjProgVal.textContent = '0%';
+                  }
+                  prjTabs[0].click();
+                  bootstrap.Modal.getOrCreateInstance(prjModal).show();
+                  setTimeout(initQuill, 150);
+                  setTimeout(function() {
+                    if (quill) quill.root.innerHTML = '';
+                  }, 200);
+                });
+
+                /* name clear red border while typing */
+                document.getElementById('prjName').addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* Submit -> validate + append row */
+                document.getElementById('cvPrjSubmit').addEventListener('click', function() {
+                  var name = document.getElementById('prjName'),
+                    start = document.getElementById('prjStart'),
+                    billing = document.getElementById('prjBilling'),
+                    invalid = null;
+                  [name, start, billing].forEach(function(el) {
+                    if (!el) return;
+                    var bad = !String(el.value).trim();
+                    el.style.borderColor = bad ? '#dc2626' : '';
+                    if (bad && !invalid) invalid = el;
+                  });
+                  if (invalid) {
+                    toast('Project Name, Billing Type and Start Date are required', false);
+                    invalid.focus();
+                    return;
+                  }
+                  var esc = function(s) {
+                      var dv = document.createElement('div');
+                      dv.textContent = s;
+                      return dv.innerHTML;
+                    },
+                    status = document.getElementById('prjStatus').value || 'In Progress',
+                    members = document.getElementById('prjMembers').value || '—',
+                    sd = start.value,
+                    dl = document.getElementById('prjDeadline').value,
+                    remaining = '—',
+                    pct = prjProg ? prjProg.value : 0;
+                  if (sd && dl) {
+                    var diff = Math.ceil((new Date(dl) - new Date(sd)) / 86400000);
+                    remaining = diff > 0 ? diff : 0;
+                  }
+                  var count = pgBody.querySelectorAll('tr').length,
+                    next = count + 1;
+                  var tr = pgBody.insertRow();
+                  tr.className = 'cv-row';
+                  tr.innerHTML = '<td>' + next + '</td>' +
+                    '<td><a href="#" class="cv-link">' + esc(name.value.trim()) + '</a></td>' +
+                    '<td>—</td>' +
+                    '<td><div class="cv-prj-prog"><div class="cv-prj-bar"><span style="width:' + pct + '%;"></span></div><span class="cv-prj-pct">' + pct + '%</span></div></td>' +
+                    '<td>' + (sd || '—') + '</td>' +
+                    '<td>' + (dl || '—') + '</td>' +
+                    '<td><span class="cv-prj-remain">' + remaining + '</span></td>' +
+                    '<td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>' + esc(members) + '</span></span></td>' +
+                    '<td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>' + esc(status) + '</span></td>';
+                  bootstrap.Modal.getOrCreateInstance(prjModal).hide();
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                  toast('Project "' + name.value.trim() + '" created successfully');
+                });
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-tasks" role="tabpanel" aria-labelledby="cvSideLink-tasks" tabindex="0">
+          <!-- Tasks — New Task + Related To + filter + namba table flow + Add new task modal -->
+
+
+          <div class="card-custom p-0" id="cvCard-tasks">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-list-check"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Tasks</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="cv-tsk-toolbar-row">
+              <button type="button" class="btn btn-primary" id="cvTskNewBtn"><i class="bi bi-plus-lg me-1"></i>New Task</button>
+              <!-- <div class="dropdown">
+                            <button type="button" class="cv-tsk-filter-btn" id="cvTskFilterBtn" data-bs-toggle="dropdown" title="Filter tasks" aria-expanded="false" aria-label="Filter tasks"><i class="bi bi-funnel"></i><span class="cv-tsk-active-dot"></span></button>
+                            <div class="dropdown-menu dropdown-menu-end cv-tsk-filter-menu">
+                                <label for="cvTskFStatus">Status</label>
+                                <select class="form-select form-select-sm" id="cvTskFStatus">
+                                    <option value="">All statuses</option>
+                                    <option>Not Started</option>
+                                    <option>In Progress</option>
+                                    <option>Completed</option>
+                                </select>
+                                <label for="cvTskFPriority">Priority</label>
+                                <select class="form-select form-select-sm" id="cvTskFPriority">
+                                    <option value="">All priorities</option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                    <option>Urgent</option>
+                                </select>
+                                <button type="button" class="btn btn-sm btn-outline-secondary w-100" id="cvTskFClear"><i class="bi bi-arrow-counterclockwise me-1"></i>Clear filters</button>
+                            </div>
+                        </div> -->
+            </div>
+
+            <div class="cv-tsk-related">
+              <span class="lbl">Related To:</span>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input" checked> Customer</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Projects</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Invoices</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Estimates</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Contracts</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Support Tickets</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Expenses</label>
+              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Proposals</label>
+            </div>
+
+            <hr class="cv-tsk-div">
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-tasks">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>Due Date</th>
+                    <th>Assigned to</th>
+                    <th>Tags</th>
+                    <th>Priority</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-tasks">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">1</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Send revised quotation</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>In Progress</span>
+                    </td>
+                    <td>
+                      14-09-2026 </td>
+                    <td>
+                      16-09-2026 </td>
+                    <td>
+                      Divya M </td>
+                    <td>
+                      <span class="cv-tag-chip">urgent</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>High</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">2</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Collect requirement doc</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Completed</span>
+                    </td>
+                    <td>
+                      05-09-2026 </td>
+                    <td>
+                      08-09-2026 </td>
+                    <td>
+                      Karthik R </td>
+                    <td>
+                      —
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Low</span>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">3</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Deploy staging build</a>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Not Started</span>
+                    </td>
+                    <td>
+                      20-09-2026 </td>
+                    <td>
+                      25-09-2026 </td>
+                    <td>
+                      gharuda SOFTWARE </td>
+                    <td>
+                      <span class="cv-tag-chip">release</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Medium</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Add new task modal (image 2 fields — centered) -->
+            <div class="modal fade" id="cvNewTaskModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvTskTitle">
+              <div class="modal-dialog modal-dialog-centered" style="max-width:560px;">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvTskTitle" style="font-size:15.5px;font-weight:800;">Add new task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;max-height:70vh;overflow-y:auto;">
+                    <div class="cv-tsk-top">
+                      <div class="cv-tsk-top-checks">
+                        <label class="cv-tsk-top-check"><input type="checkbox" class="form-check-input" id="tskPublic"> Public</label>
+                        <label class="cv-tsk-top-check"><input type="checkbox" class="form-check-input" id="tskBillable" checked> Billable</label>
+                      </div>
+                    </div>
+                    <!-- Attach Files: drag & drop zone + selected file list -->
+                    <div class="cv-tsk-drop" id="cvTskDropZone">
+                      <i class="bi bi-cloud-arrow-up"></i>
+                      <div class="t1">Drag &amp; drop files here, or <span>Browse</span></div>
+                      <div class="t2">Images, documents, spreadsheets — you can attach multiple files</div>
+                      <input type="file" id="cvTskFileInput" multiple style="display:none;">
+                    </div>
+                    <div id="cvTskFileList"></div>
+                    <div class="cv-tsk-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" id="tskSubject" autocomplete="off"></div>
+                    <div class="cv-tsk-field"><label>Hourly Rate</label><input type="number" class="form-control" id="tskRate" value="0" min="0" step="0.5"></div>
+                    <div class="cv-tsk-row">
+                      <div class="cv-tsk-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="tskStart" value="2026-09-23"></div>
+                      <div class="cv-tsk-field"><label>Due Date</label><input type="date" class="form-control" id="tskDue"></div>
+                    </div>
+                    <div class="cv-tsk-row">
+                      <div class="cv-tsk-field"><label>Repeat every</label><select class="form-select" id="tskRepeat">
+                          <option value="" selected>Non selected</option>
+                          <option>Daily</option>
+                          <option>Weekdays</option>
+                          <option>Weekly</option>
+                          <option>Monthly</option>
+                          <option>Yearly</option>
+                        </select></div>
+                      <div class="cv-tsk-field"><label>Priority</label><select class="form-select" id="tskPriority">
+                          <option>Low</option>
+                          <option selected>Medium</option>
+                          <option>High</option>
+                          <option>Urgent</option>
+                        </select></div>
+                    </div>
+                    <div class="cv-tsk-row">
+                      <div class="cv-tsk-field"><label>Related To</label><select class="form-select" id="tskRelated">
+                          <option selected>Customer</option>
+                          <option>Projects</option>
+                          <option>Invoices</option>
+                          <option>Estimates</option>
+                          <option>Contracts</option>
+                          <option>Support Tickets</option>
+                          <option>Expenses</option>
+                          <option>Proposals</option>
+                        </select></div>
+                      <div class="cv-tsk-field"><label>Customer</label><select class="form-select" id="tskCustomer">
+                          <option selected>GG COMPANY</option>
+                        </select></div>
+                    </div>
+                    <label class="cv-tsk-top-check mb-3"><input type="checkbox" class="form-check-input" id="tskDep"> Dependency</label>
+                    <div class="cv-tsk-row">
+                      <div class="cv-tsk-field"><label>Assignees</label><select class="form-select" id="tskAssignees">
+                          <option selected>gharuda SOFTWARE</option>
+                          <option>Admin</option>
+                          <option>Karthik R</option>
+                          <option>Divya M</option>
+                        </select></div>
+                      <div class="cv-tsk-field"><label>Followers</label><select class="form-select" id="tskFollowers">
+                          <option value="" selected>Non selected</option>
+                          <option>Admin</option>
+                          <option>Karthik R</option>
+                          <option>Divya M</option>
+                        </select></div>
+                    </div>
+                    <div class="cv-tsk-field"><label>Insert Checklist Templates</label><select class="form-select" id="tskChecklist">
+                        <option value="" selected>Non selected</option>
+                        <option>Dev handoff checklist</option>
+                        <option>QA checklist</option>
+                        <option>Bug triage checklist</option>
+                      </select></div>
+                    <div class="cv-tsk-field">
+                      <div class="cv-tsk-tags-lbl"><i class="bi bi-tags"></i>Tags</div>
+                      <input type="text" class="form-control" id="tskTags" placeholder="Tag" autocomplete="off">
+                    </div>
+                    <div class="cv-tsk-field mb-0"><label>Task Description</label><textarea class="form-control" id="tskDesc" rows="4" placeholder="Add Description"></textarea></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvTskSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg, ok) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                var pgBody = document.getElementById('cvBody-tasks'),
+                  tskBtn = document.getElementById('cvTskNewBtn'),
+                  tskModal = document.getElementById('cvNewTaskModal');
+
+                /* New Task -> open modal (fresh) */
+                if (tskBtn && tskModal && window.bootstrap) {
+                  tskBtn.addEventListener('click', function() {
+                    ['tskSubject', 'tskDue', 'tskTags', 'tskDesc'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) {
+                        el.value = '';
+                        el.style.borderColor = '';
+                      }
+                    });
+                    document.getElementById('tskRate').value = '0';
+                    document.getElementById('tskStart').value = '2026-09-23';
+                    document.getElementById('tskPriority').value = 'Medium';
+                    document.getElementById('tskRepeat').value = '';
+                    document.getElementById('tskRelated').value = 'Customer';
+                    document.getElementById('tskAssignees').value = 'gharuda SOFTWARE';
+                    document.getElementById('tskFollowers').value = '';
+                    document.getElementById('tskChecklist').value = '';
+                    document.getElementById('tskPublic').checked = false;
+                    document.getElementById('tskBillable').checked = true;
+                    document.getElementById('tskDep').checked = false;
+                    var fi = document.getElementById('cvTskFileInput');
+                    if (fi) fi.value = '';
+                    pickedFiles = [];
+                    if (fileList) fileList.innerHTML = '';
+                    bootstrap.Modal.getOrCreateInstance(tskModal).show();
+                  });
+                }
+
+                /* Backdrop z-index fix (stacked modal) */
+                if (tskModal) {
+                  tskModal.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(tskModal).zIndex, 10) || 1075;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                }
+
+                /* required fields clear red border while typing */
+                ['tskSubject', 'tskStart'].forEach(function(id) {
+                  var el = document.getElementById(id);
+                  if (el) el.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                  });
+                });
+
+                /* Attach Files: drag & drop zone + file list */
+                var dropZone = document.getElementById('cvTskDropZone'),
+                  fileInput = document.getElementById('cvTskFileInput'),
+                  fileList = document.getElementById('cvTskFileList');
+
+                function fileIcon(f) {
+                  var n = (f.name || '').toLowerCase();
+                  if (f.type.indexOf('image/') === 0 || /\.(png|jpe?g|gif|webp|svg)$/.test(n)) return 'bi-file-earmark-image';
+                  if (f.type === 'application/pdf' || n.indexOf('.pdf') !== -1) return 'bi-file-earmark-pdf';
+                  if (/\.docx?$/.test(n)) return 'bi-file-earmark-word';
+                  if (/\.xlsx?$/.test(n)) return 'bi-file-earmark-excel';
+                  return 'bi-file-earmark';
+                }
+
+                function fmtSize(bytes) {
+                  if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
+                  if (bytes >= 1024) return (bytes / 1024).toFixed(1) + ' KB';
+                  return bytes + ' B';
+                }
+
+                var pickedFiles = []; /* accumulated across multiple Browse/drop sessions */
+
+                function redrawFileList() {
+                  fileList.innerHTML = '';
+                  pickedFiles.forEach(function(f, idx) {
+                    var item = document.createElement('div');
+                    item.className = 'cv-tsk-file-item';
+                    item.innerHTML = '<i class="bi ' + fileIcon(f) + '"></i>' +
+                      '<span class="nm"></span><span class="sz"></span>' +
+                      '<button type="button" class="rm" title="Remove"><i class="bi bi-x-lg"></i></button>';
+                    item.querySelector('.nm').textContent = f.name;
+                    item.querySelector('.sz').textContent = fmtSize(f.size || 0);
+                    item.querySelector('.rm').addEventListener('click', function() {
+                      pickedFiles.splice(idx, 1);
+                      redrawFileList();
+                    });
+                    fileList.appendChild(item);
+                  });
+                }
+
+                function addFiles(list) {
+                  var added = 0;
+                  Array.prototype.forEach.call(list, function(f) {
+                    /* skip duplicates (same name + size already picked) */
+                    var dup = pickedFiles.some(function(p) {
+                      return p.name === f.name && p.size === f.size;
+                    });
+                    if (dup) return;
+                    pickedFiles.push(f);
+                    added++;
+                  });
+                  redrawFileList();
+                  if (added) toast(added + ' file(s) attached');
+                }
+
+                if (dropZone && fileInput) {
+                  dropZone.addEventListener('click', function() {
+                    fileInput.click();
+                  });
+                  dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                  });
+                  dropZone.addEventListener('dragleave', function() {
+                    dropZone.classList.remove('dragover');
+                  });
+                  dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer && e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+                  });
+                  fileInput.addEventListener('change', function() {
+                    if (fileInput.files.length) addFiles(fileInput.files);
+                    fileInput.value = '';
+                  });
+                }
+
+                /* ---- Filter dropdown -> datatable external hook (wraps global search hook) ---- */
+                var fStatus = document.getElementById('cvTskFStatus'),
+                  fPriority = document.getElementById('cvTskFPriority'),
+                  filterBtn = document.getElementById('cvTskFilterBtn');
+
+                function refresh() {
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                }
+
+                function syncFilterDot() {
+                  if (!filterBtn) return;
+                  var on = (fStatus && fStatus.value) || (fPriority && fPriority.value);
+                  filterBtn.classList.toggle('filtered', !!on);
+                }
+
+                function installFilter() {
+                  if (window.__tskFilterInstalled) return;
+                  window.__tskFilterInstalled = true;
+                  var base = window.attendanceRowMatches;
+                  window.attendanceRowMatches = function(row) {
+                    if (base && !base(row)) return false;
+                    var st = fStatus && fStatus.value ? fStatus.value.toLowerCase() : '',
+                      pr = fPriority && fPriority.value ? fPriority.value.toLowerCase() : '';
+                    if (st && (!row.cells[2] || row.cells[2].textContent.trim().toLowerCase() !== st)) return false;
+                    if (pr && (!row.cells[7] || row.cells[7].textContent.trim().toLowerCase() !== pr)) return false;
+                    return true;
+                  };
+                }
+                /* global search hook is set in a later DOMContentLoaded listener — wrap it after load */
+                if (document.readyState === 'complete') installFilter();
+                else window.addEventListener('load', installFilter);
+
+                [fStatus, fPriority].forEach(function(sel) {
+                  if (!sel) return;
+                  sel.addEventListener('change', function() {
+                    installFilter();
+                    syncFilterDot();
+                    refresh();
+                  });
+                });
+
+                var fClear = document.getElementById('cvTskFClear');
+                if (fClear) fClear.addEventListener('click', function() {
+                  if (fStatus) fStatus.value = '';
+                  if (fPriority) fPriority.value = '';
+                  var searchEl = document.getElementById('cvSearch');
+                  if (searchEl) {
+                    searchEl.value = '';
+                    searchEl.dispatchEvent(new Event('input'));
+                  }
+                  installFilter();
+                  syncFilterDot();
+                  refresh();
+                  toast('Filters cleared');
+                });
+
+                /* Submit -> validate + append row */
+                document.getElementById('cvTskSubmit').addEventListener('click', function() {
+                  var subj = document.getElementById('tskSubject'),
+                    start = document.getElementById('tskStart'),
+                    invalid = null;
+                  [subj, start].forEach(function(el) {
+                    if (!el) return;
+                    var bad = !String(el.value).trim();
+                    el.style.borderColor = bad ? '#dc2626' : '';
+                    if (bad && !invalid) invalid = el;
+                  });
+                  if (invalid) {
+                    toast('Subject and Start Date are required', false);
+                    invalid.focus();
+                    return;
+                  }
+                  var esc = function(s) {
+                      var dv = document.createElement('div');
+                      dv.textContent = s;
+                      return dv.innerHTML;
+                    },
+                    fmt = function(v) {
+                      if (!v) return '—';
+                      var p = v.split('-');
+                      return p.length === 3 ? p[2] + '-' + p[1] + '-' + p[0] : v;
+                    },
+                    priority = document.getElementById('tskPriority').value || 'Medium',
+                    pcls = /high|urgent/i.test(priority) ? 'bad' : (/medium/i.test(priority) ? 'wait' : 'ok'),
+                    assignee = document.getElementById('tskAssignees').value || '—',
+                    tags = document.getElementById('tskTags').value.trim(),
+                    count = pgBody.querySelectorAll('tr').length,
+                    next = count + 1;
+                  var tr = pgBody.insertRow();
+                  tr.className = 'cv-row';
+                  tr.innerHTML = '<td><span style="color:var(--ink-500);font-weight:600;">' + next + '</span></td>' +
+                    '<td><a href="#" class="cv-link">' + esc(subj.value.trim()) + '</a></td>' +
+                    '<td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Not Started</span></td>' +
+                    '<td>' + fmt(start.value) + '</td>' +
+                    '<td>' + fmt(document.getElementById('tskDue').value) + '</td>' +
+                    '<td>' + esc(assignee) + '</td>' +
+                    '<td>' + (tags ? '<span class="cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
+                    '<td><span class="cv-pill ' + pcls + '"><i class="bi bi-circle-fill" style="font-size:6px;"></i>' + esc(priority) + '</span></td>';
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                  bootstrap.Modal.getOrCreateInstance(tskModal).hide();
+                  toast('Task "' + subj.value.trim() + '" created successfully');
+                });
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-tickets" role="tabpanel" aria-labelledby="cvSideLink-tickets" tabindex="0">
+          <!-- Tickets — New Ticket + namba table flow + Ticket Information modal (Quill body) -->
+
+
+
+          <div class="card-custom p-0" id="cvCard-tickets">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-life-preserver"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Support Tickets</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvTktNewBtn"><i class="bi bi-plus-lg me-1"></i>New Ticket</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-tickets">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>Tags</th>
+                    <th>Department</th>
+                    <th>Service</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Last Reply</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-tickets">
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">#1042</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Unable to download invoice</a>
+                    </td>
+                    <td>
+                      <span class="cv-tag-chip">billing</span>
+                    </td>
+                    <td>
+                      Billing </td>
+                    <td>
+                      — </td>
+                    <td>
+                      Suresh s </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Open</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Medium</span>
+                    </td>
+                    <td>
+                      23-09-2026 10:42 </td>
+                    <td>
+                      18-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">#1041</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Login page not loading</a>
+                    </td>
+                    <td>
+                      <span class="cv-tag-chip">bug</span>
+                    </td>
+                    <td>
+                      Technical </td>
+                    <td>
+                      Website Support </td>
+                    <td>
+                      Divya M </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>In Progress</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>High</span>
+                    </td>
+                    <td>
+                      22-09-2026 16:20 </td>
+                    <td>
+                      20-09-2026 </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      <span style="color:var(--ink-500);font-weight:600;">#1040</span>
+                    </td>
+                    <td>
+                      <a href="#" class="cv-link">Request GST invoice copy</a>
+                    </td>
+                    <td>
+                      —
+                    </td>
+                    <td>
+                      Billing </td>
+                    <td>
+                      — </td>
+                    <td>
+                      Suresh s </td>
+                    <td>
+                      <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Answered</span>
+                    </td>
+                    <td>
+                      <span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Low</span>
+                    </td>
+                    <td>
+                      19-09-2026 09:15 </td>
+                    <td>
+                      17-09-2026 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Ticket Information modal (image 2 — fullscreen) -->
+            <div class="modal fade" id="cvNewTicketModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvTktTitle">
+              <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:14px 24px;">
+                    <h5 class="modal-title" id="cvTktTitle" style="font-size:15.5px;font-weight:800;">Ticket Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Top card: ticket fields -->
+                    <div class="cv-tkt-card">
+                      <div class="cv-tkt-grid">
+                        <div class="cv-tkt-field full">
+                          <label>Subject</label>
+                          <input type="text" class="form-control" id="tktSubject" autocomplete="off">
+                        </div>
+                        <div class="cv-tkt-field">
+                          <div class="cv-tsk-tags-lbl"><i class="bi bi-tags"></i>Tags</div>
+                          <input type="text" class="form-control" id="tktTags" placeholder="Tag" autocomplete="off">
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Contact</label>
+                          <select class="form-select" id="tktContact">
+                            <option selected>Suresh s</option>
+                            <option>Divya M</option>
+                            <option>Karthik R</option>
+                          </select>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Assign ticket (default is current user)</label>
+                          <select class="form-select" id="tktAssign">
+                            <option selected>gharuda SOFTWARE</option>
+                            <option>Admin</option>
+                            <option>Karthik R</option>
+                          </select>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Name</label>
+                          <input type="text" class="form-control" id="tktName" value="Suresh s" readonly>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Email address</label>
+                          <input type="text" class="form-control" id="tktEmail" value="pm@GHARUDAtechnology.com" readonly>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Priority</label>
+                          <select class="form-select" id="tktPriority">
+                            <option>Low</option>
+                            <option selected>Medium</option>
+                            <option>High</option>
+                            <option>Urgent</option>
+                          </select>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Follower ticket (default is current user)</label>
+                          <select class="form-select" id="tktFollower">
+                            <option selected>gharuda SOFTWARE</option>
+                            <option>Admin</option>
+                            <option>Karthik R</option>
+                          </select>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Department</label>
+                          <select class="form-select" id="tktDept">
+                            <option value="" selected>Non selected</option>
+                            <option>Billing</option>
+                            <option>Technical</option>
+                            <option>Sales</option>
+                            <option>Support</option>
+                          </select>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>Service</label>
+                          <div class="cv-tkt-type-wrap">
+                            <select class="form-select" id="tktService">
+                              <option value="" selected>Non selected</option>
+                              <option>Website Support</option>
+                              <option>Hosting</option>
+                              <option>Maintenance</option>
+                            </select>
+                            <button type="button" class="btn btn-primary cv-tkt-type-add" id="tktServiceAdd" title="Add service"><i class="bi bi-plus-lg"></i></button>
+                          </div>
+                        </div>
+                        <div class="cv-tkt-field">
+                          <label>CC</label>
+                          <input type="text" class="form-control" id="tktCc" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Ticket Body card -->
+                    <div class="cv-tkt-card mb-0">
+                      <div class="cv-tkt-field"><label>Ticket Body</label></div>
+                      <div class="cv-tkt-body-grid">
+                        <select class="form-select" id="tktPredefined" style="border-radius:10px;font-size:13px;">
+                          <option value="" selected>Insert predefined reply</option>
+                          <option>Thank you — we are looking into it</option>
+                          <option>Issue resolved — closing ticket</option>
+                        </select>
+                        <select class="form-select" id="tktKbLink" style="border-radius:10px;font-size:13px;">
+                          <option value="" selected>Insert knowledge base link</option>
+                          <option>How to reset your password</option>
+                          <option>Invoice & payment FAQ</option>
+                        </select>
+                      </div>
+                      <div class="cv-tkt-quill-wrap mt-2">
+                        <div id="cvTktQuill"></div>
+                      </div>
+                      <div class="row justify-content-start mt-3">
+                        <div class="col-auto" style="min-width:380px;max-width:100%;">
+                          <div class="cv-tkt-att-lbl">Attachments</div>
+                          <div class="cv-tkt-att-wrap">
+                            <input type="file" class="form-control" id="tktFile" multiple>
+                            <button type="button" class="btn btn-primary cv-tkt-att-add" id="tktFileAdd" title="Add more"><i class="bi bi-plus-lg"></i></button>
+                          </div>
+                          <div id="tktFileList"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cv-tkt-foot">
+                    <button type="button" class="btn btn-primary" id="cvTktSubmit">Open Ticket</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New Service modal (stacked above ticket modal) -->
+            <div class="modal fade" id="cvNewServiceModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvSvcTitle">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvSvcTitle" style="font-size:15.5px;font-weight:800;">New Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-tkt-field mb-0"><label><span style="color:#dc2626;margin-right:2px;">*</span>Service Name</label><input type="text" class="form-control" id="svcName" autocomplete="off"></div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="svcSubmit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg, ok) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                var pgBody = document.getElementById('cvBody-tickets'),
+                  tktBtn = document.getElementById('cvTktNewBtn'),
+                  tktModal = document.getElementById('cvNewTicketModal'),
+                  quill = null;
+
+                function initQuill() {
+                  if (quill || typeof Quill === 'undefined') return;
+                  quill = new Quill('#cvTktQuill', {
+                    theme: 'snow',
+                    placeholder: 'Describe the issue...',
+                    modules: {
+                      toolbar: [
+                        [{
+                          font: ['verdana', 'sans-serif', 'serif', 'monospace']
+                        }, {
+                          size: ['small', false, 'large', 'huge']
+                        }],
+                        [{
+                          color: []
+                        }, {
+                          background: []
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        [{
+                          align: []
+                        }],
+                        ['image', 'link'],
+                        [{
+                          list: 'bullet'
+                        }, {
+                          list: 'ordered'
+                        }],
+                        ['clean']
+                      ]
+                    }
+                  });
+                }
+
+                /* New Ticket -> open modal (fresh) */
+                if (tktBtn && tktModal && window.bootstrap) {
+                  tktBtn.addEventListener('click', function() {
+                    ['tktSubject', 'tktTags', 'tktCc'].forEach(function(id) {
+                      var el = document.getElementById(id);
+                      if (el) {
+                        el.value = '';
+                        el.style.borderColor = '';
+                      }
+                    });
+                    document.getElementById('tktContact').value = 'Suresh s';
+                    document.getElementById('tktAssign').value = 'gharuda SOFTWARE';
+                    document.getElementById('tktFollower').value = 'gharuda SOFTWARE';
+                    document.getElementById('tktPriority').value = 'Medium';
+                    document.getElementById('tktDept').value = '';
+                    document.getElementById('tktService').value = '';
+                    document.getElementById('tktPredefined').value = '';
+                    document.getElementById('tktKbLink').value = '';
+                    var fl = document.getElementById('tktFileList');
+                    if (fl) fl.innerHTML = '';
+                    var fi = document.getElementById('tktFile');
+                    if (fi) fi.value = '';
+                    bootstrap.Modal.getOrCreateInstance(tktModal).show();
+                    setTimeout(initQuill, 150);
+                    setTimeout(function() {
+                      if (quill) quill.root.innerHTML = '';
+                    }, 200);
+                  });
+                }
+
+                /* Backdrop z-index fix (stacked modal) */
+                if (tktModal) {
+                  tktModal.addEventListener('shown.bs.modal', function() {
+                    var z = parseInt(getComputedStyle(tktModal).zIndex, 10) || 1055;
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = (z - 1);
+                  });
+                }
+
+                /* Subject clear red border while typing */
+                var tktSubjEl = document.getElementById('tktSubject');
+                if (tktSubjEl) tktSubjEl.addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* Contact select -> autofill name/email (readonly fields) */
+                var contactData = {
+                  'Suresh s': ['Suresh s', 'pm@GHARUDAtechnology.com'],
+                  'Divya M': ['Divya M', 'divya@GHARUDAtechnology.com'],
+                  'Karthik R': ['Karthik R', 'karthik@GHARUDAtechnology.com']
+                };
+                var tktContact = document.getElementById('tktContact');
+                if (tktContact) tktContact.addEventListener('change', function() {
+                  var d = contactData[this.value] || ['', ''];
+                  document.getElementById('tktName').value = d[0];
+                  document.getElementById('tktEmail').value = d[1];
+                });
+
+                /* Predefined reply -> insert into Quill */
+                var preDefReplies = {
+                  'Thank you — we are looking into it': '<p>Thank you for reaching out. We are looking into your issue and will get back to you shortly.</p>',
+                  'Issue resolved — closing ticket': '<p>Your issue has been resolved. This ticket is now being closed. Feel free to reopen if you need anything else.</p>'
+                };
+                var tktPre = document.getElementById('tktPredefined');
+                if (tktPre) tktPre.addEventListener('change', function() {
+                  if (this.value && preDefReplies[this.value] && quill) {
+                    quill.root.innerHTML = preDefReplies[this.value];
+                  }
+                });
+
+                /* Knowledge base link -> insert link into Quill */
+                var tktKb = document.getElementById('tktKbLink');
+                if (tktKb) tktKb.addEventListener('change', function() {
+                  if (this.value && quill) {
+                    var url = 'https://kb.GHARUDAtechnology.com/' + this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                    quill.focus();
+                    quill.updateContents(quill.getSelection(true) || {
+                      index: quill.getLength(),
+                      length: 0
+                    }, [{
+                      insert: this.value,
+                      attributes: {
+                        link: url
+                      }
+                    }, {
+                      insert: '\n'
+                    }]);
+                  }
+                  this.value = '';
+                });
+
+                /* ➕ -> add another attachment file input row */
+                var tktFileAdd = document.getElementById('tktFileAdd'),
+                  tktFileList = document.getElementById('tktFileList');
+                if (tktFileAdd && tktFileList) {
+                  tktFileAdd.addEventListener('click', function() {
+                    var fi = document.getElementById('tktFile');
+                    if (fi && fi.files && fi.files.length) {
+                      Array.prototype.forEach.call(fi.files, function(f) {
+                        var row = document.createElement('div');
+                        row.className = 'cv-tkt-file-row';
+                        row.innerHTML = '<i class="bi bi-paperclip"></i><span class="nm"></span>' +
+                          '<button type="button" class="rm" title="Remove"><i class="bi bi-x-lg"></i></button>';
+                        row.querySelector('.nm').textContent = f.name;
+                        row.querySelector('.rm').addEventListener('click', function() {
+                          row.remove();
+                        });
+                        tktFileList.appendChild(row);
+                      });
+                      fi.value = '';
+                    } else {
+                      fi.click();
+                    }
+                  });
+                  /* picking files directly also lists them */
+                  document.getElementById('tktFile').addEventListener('change', function() {
+                    if (this.files.length) tktFileAdd.click();
+                  });
+                }
+
+                /* Service ➕ -> New Service modal */
+                var svcAdd = document.getElementById('tktServiceAdd'),
+                  svcModal = document.getElementById('cvNewServiceModal');
+                if (svcAdd && svcModal && window.bootstrap) {
+                  svcAdd.addEventListener('click', function() {
+                    var nm = document.getElementById('svcName');
+                    if (nm) {
+                      nm.value = '';
+                      nm.style.borderColor = '';
+                    }
+                    bootstrap.Modal.getOrCreateInstance(svcModal).show();
+                  });
+                }
+
+                /* Backdrop z-index fix (stacked: service modal above ticket modal) */
+                if (svcModal) {
+                  svcModal.addEventListener('shown.bs.modal', function() {
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = 1064; /* below service modal 1065, above ticket modal 1055 */
+                  });
+                }
+
+                /* Service name clear red border while typing */
+                var svcNameEl = document.getElementById('svcName');
+                if (svcNameEl) svcNameEl.addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* New Service submit -> validate + add option to Service select + toast */
+                var svcSubmit = document.getElementById('svcSubmit');
+                if (svcSubmit && svcModal) {
+                  svcSubmit.addEventListener('click', function() {
+                    var nm = document.getElementById('svcName'),
+                      name = nm.value.trim();
+                    if (!name) {
+                      nm.style.borderColor = '#dc2626';
+                      toast('Service Name is required', false);
+                      nm.focus();
+                      return;
+                    }
+                    var sel = document.getElementById('tktService'),
+                      exists = false;
+                    if (sel) {
+                      Array.prototype.forEach.call(sel.options, function(op) {
+                        if (op.text === name) exists = true;
+                      });
+                      if (!exists) {
+                        var op = document.createElement('option');
+                        op.value = name;
+                        op.text = name;
+                        sel.appendChild(op);
+                      }
+                      sel.value = name;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(svcModal).hide();
+                    toast('Service "' + name + '" added');
+                  });
+                }
+
+                /* Open Ticket -> validate + append row */
+                document.getElementById('cvTktSubmit').addEventListener('click', function() {
+                  var subj = document.getElementById('tktSubject'),
+                    invalid = null;
+                  var bad = !String(subj.value).trim();
+                  subj.style.borderColor = bad ? '#dc2626' : '';
+                  if (bad) {
+                    toast('Subject is required', false);
+                    subj.focus();
+                    return;
+                  }
+                  var esc = function(s) {
+                      var dv = document.createElement('div');
+                      dv.textContent = s;
+                      return dv.innerHTML;
+                    },
+                    now = new Date(),
+                    pad = function(n) {
+                      return String(n).padStart(2, '0');
+                    },
+                    created = pad(now.getDate()) + '-' + pad(now.getMonth() + 1) + '-' + now.getFullYear(),
+                    lastReply = created + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()),
+                    priority = document.getElementById('tktPriority').value || 'Medium',
+                    pcls = /high|urgent/i.test(priority) ? 'bad' : (/medium/i.test(priority) ? 'wait' : 'ok'),
+                    dept = document.getElementById('tktDept').value || '—',
+                    service = document.getElementById('tktService').value || '—',
+                    contact = document.getElementById('tktContact').value || '—',
+                    tags = document.getElementById('tktTags').value.trim(),
+                    count = pgBody.querySelectorAll('tr').length,
+                    next = count + 1043;
+                  var tr = pgBody.insertRow();
+                  tr.className = 'cv-row';
+                  tr.innerHTML = '<td><span style="color:var(--ink-500);font-weight:600;">#' + next + '</span></td>' +
+                    '<td><a href="#" class="cv-link">' + esc(subj.value.trim()) + '</a></td>' +
+                    '<td>' + (tags ? '<span class="cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
+                    '<td>' + esc(dept) + '</td>' +
+                    '<td>' + esc(service) + '</td>' +
+                    '<td>' + esc(contact) + '</td>' +
+                    '<td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Open</span></td>' +
+                    '<td><span class="cv-pill ' + pcls + '"><i class="bi bi-circle-fill" style="font-size:6px;"></i>' + esc(priority) + '</span></td>' +
+                    '<td>' + lastReply + '</td>' +
+                    '<td>' + created + '</td>';
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                  bootstrap.Modal.getOrCreateInstance(tktModal).hide();
+                  toast('Ticket #' + next + ' opened successfully');
+                });
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-email_log" role="tabpanel" aria-labelledby="cvSideLink-email_log" tabindex="0">
+          <!-- Email Log — Send Email + table flow + Compose Email modal (Quill) -->
+
+
+
+          <div class="card-custom p-0" id="cvCard-email_log">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-envelope-fill"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Email Log</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvSendEmailBtn"><i class="bi bi-envelope-fill me-1"></i>Send Email</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-email_log">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Staff</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Opened</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-email_log">
+                  <tr class="cv-row">
+                    <td>228</td>
+                    <td></td>
+                    <td>Welcome aboard</td>
+                    <td>23-09-2026 12:17:10</td>
+                    <td><span class="el-status">Success</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Compose Email modal (Quill editor) -->
+            <div class="modal fade" id="cvComposeEmailModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvComposeEmailTitle">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="border:none;border-radius:14px;">
+                  <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                    <h5 class="modal-title" id="cvComposeEmailTitle" style="font-size:15.5px;font-weight:800;">Compose Email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="padding:20px 22px;">
+                    <div class="cv-em-field">
+                      <label class="cv-em-upper">Send Email Using (SMTP)</label>
+                      <select class="form-select" id="cvEmSmtp">
+                        <option>USE SYSTEM SMTP ( info@GHARUDAtechnology.com )</option>
+                        <option>USE CUSTOM SMTP</option>
+                      </select>
+                    </div>
+                    <div class="cv-em-field">
+                      <label>Templates</label>
+                      <select class="form-select" id="cvEmTemplate">
+                        <option value="">Non selected</option>
+                        <option value="welcome">Welcome Aboard</option>
+                        <option value="quote">Quotation Follow-up</option>
+                        <option value="invoice">Invoice Reminder</option>
+                      </select>
+                    </div>
+                    <div class="cv-em-field">
+                      <label>Email To</label>
+                      <select class="form-select" id="cvEmTo">
+                        <option>Suresh s ( pm@GHARUDAtechnology.com )</option>
+                        <option>Mohan R ( mohan@GHARUDAtechnology.com )</option>
+                        <option>Priya K ( priya@GHARUDAtechnology.com )</option>
+                      </select>
+                    </div>
+                    <div class="cv-em-field"><label>Email CC</label><input type="text" class="form-control" id="cvEmCc" autocomplete="off"></div>
+                    <div class="cv-em-field"><label>Email Subject</label><input type="text" class="form-control" id="cvEmSubject" autocomplete="off"></div>
+                    <div class="cv-em-field">
+                      <div class="cv-em-quill-wrap">
+                        <div id="cvEmQuill"></div>
+                      </div>
+                    </div>
+                    <div class="cv-em-field mb-0">
+                      <label>Attachment</label>
+                      <div id="cvEmAttachList">
+                        <div class="cv-em-attach-row">
+                          <input type="file" class="form-control cv-em-file">
+                          <button type="button" class="cv-em-add-file" title="Add another attachment" aria-label="Add attachment"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cvEmSend">send</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg, ok) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                var sendBtn = document.getElementById('cvSendEmailBtn'),
+                  emModal = document.getElementById('cvComposeEmailModal'),
+                  pgBody = document.getElementById('cvBody-email_log');
+                if (!sendBtn || !emModal || !pgBody) return;
+
+                var quill = null;
+
+                function initQuill() {
+                  if (quill || typeof Quill === 'undefined') return;
+                  quill = new Quill('#cvEmQuill', {
+                    theme: 'snow',
+                    placeholder: 'Write your email here...',
+                    modules: {
+                      toolbar: [
+                        [{
+                          font: ['verdana', 'sans-serif', 'serif', 'monospace']
+                        }, {
+                          size: ['small', false, 'large', 'huge']
+                        }],
+                        [{
+                          color: []
+                        }, {
+                          background: []
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        [{
+                          align: []
+                        }],
+                        ['image', 'link'],
+                        [{
+                          list: 'bullet'
+                        }, {
+                          list: 'ordered'
+                        }],
+                        ['clean']
+                      ]
+                    }
+                  });
+                }
+
+                /* Templates -> prefill subject + body */
+                var TEMPLATES = {
+                  welcome: {
+                    subject: 'Welcome aboard',
+                    body: '<p>Dear Customer,</p><p>Welcome aboard! We are excited to have you with us. Please feel free to reach out for any assistance.</p><p>Regards,<br>GHARUDA SOFTWARE TECHNOLOGY</p>'
+                  },
+                  quote: {
+                    subject: 'Quotation follow-up',
+                    body: '<p>Dear Customer,</p><p>Following up on the quotation shared with you. Kindly review and let us know your feedback.</p><p>Regards,<br>GHARUDA SOFTWARE TECHNOLOGY</p>'
+                  },
+                  invoice: {
+                    subject: 'Invoice reminder',
+                    body: '<p>Dear Customer,</p><p>This is a gentle reminder regarding your pending invoice. Please arrange the payment at the earliest.</p><p>Regards,<br>GHARUDA SOFTWARE TECHNOLOGY</p>'
+                  }
+                };
+                document.getElementById('cvEmTemplate').addEventListener('change', function() {
+                  var tpl = TEMPLATES[this.value];
+                  if (!tpl) return;
+                  document.getElementById('cvEmSubject').value = tpl.subject;
+                  document.getElementById('cvEmSubject').style.borderColor = '';
+                  initQuill();
+                  if (quill) quill.root.innerHTML = tpl.body;
+                });
+
+                /* Attachment ➕ -> add row (✕ removes) */
+                var attachList = document.getElementById('cvEmAttachList');
+                attachList.addEventListener('click', function(e) {
+                  var add = e.target.closest('.cv-em-add-file'),
+                    rem = e.target.closest('.cv-em-remove-file');
+                  if (rem) {
+                    rem.closest('.cv-em-attach-row').remove();
+                    return;
+                  }
+                  if (!add) return;
+                  var row = document.createElement('div');
+                  row.className = 'cv-em-attach-row';
+                  row.innerHTML = '<input type="file" class="form-control cv-em-file"><button type="button" class="cv-em-remove-file" title="Remove" aria-label="Remove attachment"><i class="bi bi-x-lg"></i></button>';
+                  attachList.insertBefore(row, add.closest('.cv-em-attach-row').nextSibling);
+                });
+
+                /* reset attachments to single row */
+                function resetAttach() {
+                  var rows = attachList.querySelectorAll('.cv-em-attach-row');
+                  rows.forEach(function(r, i) {
+                    if (i > 0) r.remove();
+                  });
+                  var first = attachList.querySelector('.cv-em-file');
+                  if (first) first.value = '';
+                }
+
+                /* Send Email -> open modal (fresh) */
+                sendBtn.addEventListener('click', function() {
+                  document.getElementById('cvEmSubject').value = '';
+                  document.getElementById('cvEmSubject').style.borderColor = '';
+                  document.getElementById('cvEmCc').value = '';
+                  document.getElementById('cvEmTemplate').value = '';
+                  resetAttach();
+                  bootstrap.Modal.getOrCreateInstance(emModal).show();
+                  setTimeout(initQuill, 150);
+                  setTimeout(function() {
+                    if (quill) quill.root.innerHTML = '';
+                  }, 200);
+                });
+
+                /* subject clear red border while typing */
+                document.getElementById('cvEmSubject').addEventListener('input', function() {
+                  this.style.borderColor = '';
+                });
+
+                /* send -> validate + append log row */
+                document.getElementById('cvEmSend').addEventListener('click', function() {
+                  var subj = document.getElementById('cvEmSubject'),
+                    to = document.getElementById('cvEmTo');
+                  if (!subj.value.trim()) {
+                    subj.style.borderColor = '#dc2626';
+                    toast('Email Subject is required', false);
+                    subj.focus();
+                    return;
+                  }
+                  var d = new Date(),
+                    p = function(n) {
+                      return String(n).padStart(2, '0');
+                    },
+                    when = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds()),
+                    esc = function(s) {
+                      var dv = document.createElement('div');
+                      dv.textContent = s;
+                      return dv.innerHTML;
+                    },
+                    count = pgBody.querySelectorAll('tr').length,
+                    nextId = 228 + count + 1;
+                  var tr = pgBody.insertRow();
+                  tr.className = 'cv-row';
+                  tr.innerHTML = '<td>' + nextId + '</td><td>Admin</td><td>' + esc(subj.value.trim()) + '</td><td>' + when + '</td><td><span class="el-status">Success</span></td><td>—</td>';
+                  bootstrap.Modal.getOrCreateInstance(emModal).hide();
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                  toast('Email sent to ' + to.value);
+                });
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-call_logs" role="tabpanel" aria-labelledby="cvSideLink-call_logs" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-call_logs">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-telephone-fill"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Call Logs</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewCallLogBtn" data-bs-toggle="modal" data-bs-target="#cvNewCallLogModal"><i class="bi bi-plus-lg me-1"></i>New Call Log</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-call_logs">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Purpose of call</th>
+                    <th>Caller</th>
+                    <th>Contact</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Duration</th>
+                    <th>Follow-up</th>
+                    <th>Important</th>
+                    <th>Completed</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-call_logs">
+                  <tr class="cv-row">
+                    <td>
+                      Outgoing </td>
+                    <td>
+                      Discuss proposal </td>
+                    <td>
+                      Karthik R </td>
+                    <td>
+                      96770 63368 </td>
+                    <td>
+                      10-09-2026 11:05 </td>
+                    <td>
+                      10-09-2026 11:09 </td>
+                    <td>
+                      04:12 </td>
+                    <td>
+                      No </td>
+                    <td>
+                      Yes </td>
+                    <td>
+                      Yes </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>
+                      Incoming </td>
+                    <td>
+                      Payment reminder </td>
+                    <td>
+                      Divya M </td>
+                    <td>
+                      96770 63368 </td>
+                    <td>
+                      07-09-2026 15:22 </td>
+                    <td>
+                      07-09-2026 15:24 </td>
+                    <td>
+                      01:48 </td>
+                    <td>
+                      Yes </td>
+                    <td>
+                      No </td>
+                    <td>
+                      Yes </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-shipping" role="tabpanel" aria-labelledby="cvSideLink-shipping" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-shipping">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-truck"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">View Shipping Address</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvAddAddrBtn"><i class="bi bi-plus-lg me-1"></i>Add Address</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-shipping">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Outlet Name</th>
+                    <th>Area</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Zip</th>
+                    <th>State</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-shipping">
+                  <tr class="cv-row">
+                    <td>1</td>
+                    <td>GG COMPANY - Anna Nagar</td>
+                    <td>Anna Nagar</td>
+                    <td>12, Anna Salai</td>
+                    <td>Chennai</td>
+                    <td>600002</td>
+                    <td>Tamil Nadu</td>
+                    <td>13.0878</td>
+                    <td>80.2106</td>
+                    <td><a href="mailto:kaviyarasu@ghratechnology.com" class="cv-link">kaviyarasu@ghratechnology.com</a></td>
+                    <td><a href="tel:9677063368" class="cv-link">9677063368</a></td>
+                    <td>14-09-2026 10:12</td>
+                    <td>
+                      <div class="d-flex gap-1">
+                        <button type="button" class="cv-addr-edit" title="Edit address" aria-label="Edit address"><i class="bi bi-pencil-fill"></i></button>
+                        <button type="button" class="cv-addr-del" title="Delete address" aria-label="Delete address"><i class="bi bi-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="cv-row">
+                    <td>2</td>
+                    <td>GG COMPANY - T. Nagar</td>
+                    <td>T. Nagar</td>
+                    <td>45, Usman Road</td>
+                    <td>Chennai</td>
+                    <td>600017</td>
+                    <td>Tamil Nadu</td>
+                    <td>13.0418</td>
+                    <td>80.2341</td>
+                    <td><a href="mailto:outlet2@ghratechnology.com" class="cv-link">outlet2@ghratechnology.com</a></td>
+                    <td><a href="tel:9440011223" class="cv-link">94400 11223</a></td>
+                    <td>02-09-2026 15:40</td>
+                    <td>
+                      <div class="d-flex gap-1">
+                        <button type="button" class="cv-addr-edit" title="Edit address" aria-label="Edit address"><i class="bi bi-pencil-fill"></i></button>
+                        <button type="button" class="cv-addr-del" title="Delete address" aria-label="Delete address"><i class="bi bi-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Add address modal -->
+            <div class="leave-reject-modal" id="cvAddrModal" role="dialog" aria-modal="true" aria-labelledby="cvAddrTitle">
+              <div class="leave-reject-dialog cv-note-dialog">
+                <div class="cv-contact-head">
+                  <div class="cv-contact-head-l">
+                    <div class="cv-contact-ava"><i class="bi bi-geo-alt-fill"></i></div>
+                    <div style="min-width:0;">
+                      <h3 id="cvAddrTitle" class="mb-0">Add address</h3>
+                      <div class="cv-contact-sub">GG COMPANY · New shipping outlet</div>
+                    </div>
+                  </div>
+                  <button type="button" class="modal-close" id="cvAddrClose" aria-label="Close">&times;</button>
+                </div>
+
+                <div class="leave-reject-body cv-note-body">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adOutlet">Outlet Name</label>
+                        <input type="text" class="form-control" id="adOutlet" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adStreet">Street</label>
+                        <textarea class="form-control" id="adStreet" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adCountry">Country</label>
+                        <select class="form-select" id="adCountry">
+                          <option>India</option>
+                          <option>United States</option>
+                          <option>United Kingdom</option>
+                          <option>United Arab Emirates</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adState">State</label>
+                        <select class="form-select" id="adState">
+                          <option value="">Nothing selected</option>
+                          <option>Tamil Nadu</option>
+                          <option>Karnataka</option>
+                          <option>Kerala</option>
+                          <option>Maharashtra</option>
+                          <option>Andhra Pradesh</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adCity">City</label>
+                        <select class="form-select" id="adCity">
+                          <option value="">Nothing selected</option>
+                          <option>Chennai</option>
+                          <option>Coimbatore</option>
+                          <option>Madurai</option>
+                          <option>Bengaluru</option>
+                          <option>Kochi</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adArea">Area</label>
+                        <select class="form-select" id="adArea">
+                          <option value="">Nothing selected</option>
+                          <option>Anna Nagar</option>
+                          <option>T. Nagar</option>
+                          <option>Adyar</option>
+                          <option>Velachery</option>
+                          <option>Porur</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adZip">Zipcode</label>
+                        <input type="text" class="form-control" id="adZip" maxlength="6" inputmode="numeric" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adLat">Latitude</label>
+                        <input type="text" class="form-control" id="adLat" placeholder="13.0878" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adLng">Longitude</label>
+                        <input type="text" class="form-control" id="adLng" placeholder="80.2106" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adEmail">Email</label>
+                        <input type="email" class="form-control" id="adEmail" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="cv-field mb-0">
+                        <label class="form-label" for="adPhone">Phone Number</label>
+                        <input type="tel" class="form-control" id="adPhone" value="+91 " autocomplete="off">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="leave-reject-foot pt-3">
+                  <button type="button" class="btn btn-reject" id="cvAddrCancel">Close</button>
+                  <button type="button" class="btn btn-primary" id="cvAddrSubmit">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-map" role="tabpanel" aria-labelledby="cvSideLink-map" tabindex="0">
+          <div class="cv-title">Map</div>
+
+
+
+          <div class="card-custom">
+            <!-- Coordinates form -->
+            <div class="cv-map-toolbar">
+              <div class="cv-map-field">
+                <label for="cvMapLat"><span class="req">*</span>Latitude (Google Maps)</label>
+                <div class="cv-map-inp-wrap">
+                  <input type="text" class="form-control" id="cvMapLat" placeholder="e.g. 13.0827" autocomplete="off">
+                  <i class="bi bi-geo-alt cv-map-inp-ic"></i>
+                </div>
+              </div>
+              <div class="cv-map-field">
+                <label for="cvMapLng"><span class="req">*</span>Longitude (Google Maps)</label>
+                <div class="cv-map-inp-wrap">
+                  <input type="text" class="form-control" id="cvMapLng" placeholder="e.g. 80.2707" autocomplete="off">
+                  <i class="bi bi-geo-alt cv-map-inp-ic"></i>
+                </div>
+              </div>
+              <div class="cv-map-acts">
+                <button type="button" class="btn btn-primary" id="cvMapSubmit"><i class="bi bi-geo me-1"></i>Show on map</button>
+                <button type="button" class="btn btn-outline-primary" id="cvMapOpen"><i class="bi bi-box-arrow-up-right me-1"></i>Open in Google Map</button>
+              </div>
+            </div>
+
+            <!-- API key note -->
+            <div class="cv-map-note"><i class="bi bi-key-fill"></i>Setup Google API key in settings to unlock advanced map options for this customer map.</div>
+
+            <!-- Live map preview (Google Maps embed — API key not required) -->
+            <div class="cv-map-frame-wrap">
+              <div class="cv-map-err" id="cvMapPreview">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>Enter coordinates and click "Show on map"</span>
+                <span class="cv-err" id="cvMapErr" hidden>Please enter both Latitude and Longitude.</span>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var latEl = document.getElementById('cvMapLat'),
+                lngEl = document.getElementById('cvMapLng'),
+                preview = document.getElementById('cvMapPreview'),
+                errEl = document.getElementById('cvMapErr'),
+                wrap = preview.parentNode;
+
+              function coords() {
+                return {
+                  lat: latEl.value.trim(),
+                  lng: lngEl.value.trim()
+                };
+              }
+
+              function valid(c) {
+                return c.lat !== '' && c.lng !== '';
+              }
+
+              [latEl, lngEl].forEach(function(el) {
+                el.addEventListener('input', function() {
+                  if (valid(coords())) errEl.hidden = true;
+                  if (el.value.trim()) el.style.borderColor = '';
+                });
+              });
+
+              function markInvalid() {
+                [latEl, lngEl].forEach(function(el) {
+                  if (!el.value.trim()) el.style.borderColor = '#e5484d';
+                });
+                errEl.hidden = false;
+                (!latEl.value.trim() ? latEl : lngEl).focus();
+              }
+
+              document.getElementById('cvMapSubmit').addEventListener('click', function() {
+                var c = coords();
+                if (!valid(c)) return markInvalid();
+
+                var iframe = document.createElement('iframe');
+                iframe.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(c.lat + ',' + c.lng) + '&z=15&output=embed';
+                iframe.loading = 'lazy';
+                iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                iframe.setAttribute('title', 'Customer map preview');
+                wrap.replaceChild(iframe, preview);
+                preview = iframe;
+              });
+
+              document.getElementById('cvMapOpen').addEventListener('click', function() {
+                var c = coords();
+                if (!valid(c)) return markInvalid();
+                window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.lat + ',' + c.lng), '_blank');
+              });
+            });
+          </script>
+        </div>
+        <div class="tab-pane fade" id="cvTab-files" role="tabpanel" aria-labelledby="cvSideLink-files" tabindex="0">
+          <!-- Files — info note + drop-to-upload zone + namba table flow -->
+
+
+          <div class="cv-fl-note ms-3">Files from projects and tasks linked to the customer are not shown on this table.</div>
+
+          <!-- Share File With modal -->
+          <div class="modal fade" id="cvShareFileModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvShfTitle">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content" style="border:none;border-radius:14px;">
+                <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                  <h5 class="modal-title" id="cvShfTitle" style="font-size:15.5px;font-weight:800;">Share File With</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding:20px 22px;">
+                  <div class="cv-sf-field mb-0"><label>Contacts</label><select class="form-control form-select" id="shfContact">
+                      <option selected>Suresh s</option>
+                      <option>Divya M</option>
+                      <option>Karthik R</option>
+                    </select></div>
+                </div>
+                <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="shfConfirm">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Send File modal -->
+          <div class="modal fade" id="cvSendFileModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvSfTitle">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content" style="border:none;border-radius:14px;">
+                <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
+                  <h5 class="modal-title" id="cvSfTitle" style="font-size:15.5px;font-weight:800;">Send File</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding:20px 22px;">
+                  <div class="cv-sf-field"><label>Email Subject</label><input type="text" class="form-control" id="sfSubject" autocomplete="off"></div>
+                  <div class="cv-sf-field"><label>Email Address</label><input type="email" class="form-control" id="sfEmail" autocomplete="off"></div>
+                  <div class="cv-sf-field mb-0"><label>Message</label><textarea class="form-control" id="sfMessage" rows="5"></textarea></div>
+                </div>
+                <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="sfSubmit">Send File</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drop files to upload zone -->
+          <div class="cv-fl-drop mx-3" id="cvFlDropZone">
+            <div class="t1">Drop files here to upload</div>
+            <input type="file" id="cvFlFileInput" multiple style="display:none;">
+          </div>
+          <div class="mx-3" id="cvFlFileList"></div>
+
+          <div class="card-custom p-0 mx-3" id="cvCard-files">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-paperclip"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Files</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-files">
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Show to customers area</th>
+                    <th>Date Uploaded</th>
+                    <th>Options</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-files">
+                  <tr class="cv-row">
+                    <td>
+                      <a href="#" class="cv-fl-file-link"><i class="bi bi-file-earmark-pdf"></i>PRO-140-GHARUDA-SOFTWARE-TECHNOLOGY-PRIVATE-LIMITED.pdf</a>
+                    </td>
+                    <td>
+                      <div class="form-check form-switch m-0 cv-fl-switch" style="width:fit-content" data-tip="Only files uploaded from customer profile have ability to show/hide in Customers area">
+                        <input class="form-check-input" type="checkbox" role="switch" disabled>
+                      </div>
+                    </td>
+                    <td>
+                      21-08-2026 14:15:57 </td>
+                    <td>
+                      <button type="button" class="cv-fl-mail-btn" title="Send via email"><i class="bi bi-envelope"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <script>
+              /* footer.php (bootstrap) loads AFTER this block — bind on DOMContentLoaded */
+              document.addEventListener('DOMContentLoaded', function() {
+                function toast(msg, ok) {
+                  var t = document.createElement('div');
+                  t.className = 'cv-toast';
+                  t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+                  document.body.appendChild(t);
+                  setTimeout(function() {
+                    t.classList.add('show');
+                  }, 10);
+                  setTimeout(function() {
+                    t.classList.remove('show');
+                    setTimeout(function() {
+                      t.remove();
+                    }, 350);
+                  }, 2400);
+                }
+
+                var pgBody = document.getElementById('cvBody-files'),
+                  dropZone = document.getElementById('cvFlDropZone'),
+                  fileInput = document.getElementById('cvFlFileInput');
+
+                function fileIconCls(name) {
+                  var n = (name || '').toLowerCase();
+                  if (/\.(png|jpe?g|gif|webp|svg)$/.test(n)) return 'bi-file-earmark-image';
+                  if (n.indexOf('.pdf') !== -1) return 'bi-file-earmark-pdf';
+                  if (/\.docx?$/.test(n)) return 'bi-file-earmark-word';
+                  if (/\.xlsx?$/.test(n)) return 'bi-file-earmark-excel';
+                  return 'bi-file-earmark';
+                }
+
+                function nowStamp() {
+                  var d = new Date(),
+                    p = function(n) {
+                      return String(n).padStart(2, '0');
+                    };
+                  return p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+                }
+
+                /* Uploaded file -> direct table row append (files branch only) */
+                function addFilesToTable(list) {
+                  Array.prototype.forEach.call(list, function(f) {
+                    var tr = pgBody.insertRow();
+                    tr.className = 'cv-row';
+                    tr.innerHTML = '<td><a href="#" class="cv-fl-file-link"><i class="bi ' + fileIconCls(f.name) + '"></i><span class="fnm"></span></a></td>' +
+                      '<td><div class="form-check form-switch m-0 cv-fl-switch cv-fl-switch-live" style="width:fit-content;" data-tip="Show/hide this file in Customers area"><input class="form-check-input" type="checkbox" role="switch"></div><div class="cv-fl-share-row" style="display:none;"><span class="txt"></span><button type="button" class="cv-fl-share-edit" title="Edit sharing"><i class="bi bi-pencil-square"></i></button></div></td>' +
+                      '<td>' + nowStamp() + '</td>' +
+                      '<td><button type="button" class="cv-fl-mail-btn cv-fl-send" title="Send via email"><i class="bi bi-envelope"></i></button>' +
+                      '<button type="button" class="cv-fl-mail-btn cv-fl-del" title="Delete" style="color:#dc2626;"><i class="bi bi-trash"></i></button></td>';
+                    tr.querySelector('.fnm').textContent = f.name;
+                  });
+                  if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                  toast(list.length + ' file(s) uploaded successfully');
+                }
+
+                if (dropZone && fileInput) {
+                  dropZone.addEventListener('click', function() {
+                    fileInput.click();
+                  });
+                  dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                  });
+                  dropZone.addEventListener('dragleave', function() {
+                    dropZone.classList.remove('dragover');
+                  });
+                  dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    if (e.dataTransfer && e.dataTransfer.files.length) addFilesToTable(e.dataTransfer.files);
+                  });
+                  fileInput.addEventListener('change', function() {
+                    if (fileInput.files.length) addFilesToTable(fileInput.files);
+                    fileInput.value = '';
+                  });
+                }
+
+                /* Options column: mail -> Send File modal, trash -> remove row */
+                var sfModal = document.getElementById('cvSendFileModal');
+
+                function openSendFile() {
+                  ['sfSubject', 'sfEmail', 'sfMessage'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) {
+                      el.value = '';
+                      el.style.borderColor = '';
+                    }
+                  });
+                  bootstrap.Modal.getOrCreateInstance(sfModal).show();
+                }
+
+                if (sfModal) {
+                  sfModal.addEventListener('shown.bs.modal', function() {
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = 1074; /* below send file modal 1075 */
+                  });
+                }
+
+                ['sfSubject', 'sfEmail'].forEach(function(id) {
+                  var el = document.getElementById(id);
+                  if (el) el.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                  });
+                });
+
+                var sfSubmit = document.getElementById('sfSubmit');
+                if (sfSubmit && sfModal) {
+                  sfSubmit.addEventListener('click', function() {
+                    var subj = document.getElementById('sfSubject'),
+                      email = document.getElementById('sfEmail'),
+                      invalid = null;
+                    [subj, email].forEach(function(el) {
+                      var bad = !String(el.value).trim();
+                      el.style.borderColor = bad ? '#dc2626' : '';
+                      if (bad && !invalid) invalid = el;
+                    });
+                    if (invalid) {
+                      toast('Email Subject and Email Address are required', false);
+                      invalid.focus();
+                      return;
+                    }
+                    bootstrap.Modal.getOrCreateInstance(sfModal).hide();
+                    toast('File sent to ' + email.value.trim());
+                  });
+                }
+
+                pgBody.addEventListener('click', function(e) {
+                  var del = e.target.closest('.cv-fl-del');
+                  if (del) {
+                    del.closest('tr').remove();
+                    if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+                    toast('File deleted');
+                    return;
+                  }
+                  var mb = e.target.closest('.cv-fl-mail-btn');
+                  if (mb && sfModal && window.bootstrap) openSendFile();
+                });
+
+                /* Switch: whole pill clickable; custom fixed-position tooltip on hover */
+                var flTip = document.createElement('div');
+                flTip.className = 'cv-fl-tip';
+                document.body.appendChild(flTip);
+
+                pgBody.addEventListener('mouseover', function(e) {
+                  var wrap = e.target.closest('.cv-fl-switch');
+                  if (!wrap) return;
+                  flTip.textContent = wrap.getAttribute('data-tip');
+                  flTip.classList.add('show');
+                  var r = wrap.getBoundingClientRect(),
+                    tw = flTip.offsetWidth,
+                    th = flTip.offsetHeight,
+                    left = Math.max(8, Math.min(r.left + r.width / 2 - tw / 2, window.innerWidth - tw - 8)),
+                    top = r.top - th - 8;
+                  if (top < 8) top = r.bottom + 8; /* flip below if not enough room above */
+                  flTip.style.left = left + 'px';
+                  flTip.style.top = top + 'px';
+                });
+                pgBody.addEventListener('mouseout', function(e) {
+                  if (e.target.closest('.cv-fl-switch')) flTip.classList.remove('show');
+                });
+
+                /* Switch: disabled row -> tooltip hide mattum; live (uploaded) row -> toggle */
+                pgBody.addEventListener('click', function(e) {
+                  var wrap = e.target.closest('.cv-fl-switch');
+                  if (wrap) {
+                    flTip.classList.remove('show');
+                    if (!wrap.classList.contains('cv-fl-switch-live')) return; /* dummy row: disabled */
+                    if (e.target.classList.contains('form-check-input')) return; /* native toggle -> change event handles the rest */
+                    var cb = wrap.querySelector('input[type="checkbox"]');
+                    if (cb) {
+                      cb.checked = !cb.checked;
+                      cb.dispatchEvent(new Event('change', {
+                        bubbles: true
+                      }));
+                    }
+                    return;
+                  }
+                  /* share edit icon -> Share File With modal */
+                  var ed = e.target.closest('.cv-fl-share-edit');
+                  if (ed && window.bootstrap) {
+                    var shfModal = document.getElementById('cvShareFileModal');
+                    var cur = ed.closest('td').querySelector('.cv-fl-share-row .txt').textContent.replace('This file is shared with: ', '');
+                    var sel = document.getElementById('shfContact');
+                    if (sel) {
+                      var has = Array.prototype.some.call(sel.options, function(op) {
+                        return op.text === cur;
+                      });
+                      if (has) sel.value = cur;
+                    }
+                    shfModal._shareEditBtn = ed;
+                    bootstrap.Modal.getOrCreateInstance(shfModal).show();
+                  }
+                });
+
+                /* Switch change -> update share row (works for both native + custom toggle) */
+                pgBody.addEventListener('change', function(e) {
+                  var cb = e.target;
+                  if (!cb.matches('.cv-fl-switch-live input[type="checkbox"]')) return;
+                  var wrap = cb.closest('.cv-fl-switch');
+                  setShareState(wrap, cb.checked ? 'Suresh s' : '');
+                  toast(cb.checked ? 'File visible in customers area' : 'File hidden from customers area');
+                });
+
+                /* Share row text helper */
+                function setShareState(switchWrap, contact) {
+                  var row = switchWrap.parentNode.querySelector('.cv-fl-share-row'),
+                    txt = row ? row.querySelector('.txt') : null;
+                  if (!row || !txt) return;
+                  if (contact) {
+                    txt.textContent = 'This file is shared with: ' + contact;
+                    row.style.display = 'flex';
+                  } else {
+                    txt.textContent = '';
+                    row.style.display = 'none';
+                  }
+                }
+
+                /* Share File With Confirm -> update share text */
+                var shfModalEl = document.getElementById('cvShareFileModal');
+                if (shfModalEl) {
+                  shfModalEl.addEventListener('shown.bs.modal', function() {
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    var last = backdrops[backdrops.length - 1];
+                    if (last) last.style.zIndex = 1074;
+                  });
+                  var shfConfirm = document.getElementById('shfConfirm');
+                  if (shfConfirm) shfConfirm.addEventListener('click', function() {
+                    var sel = document.getElementById('shfContact'),
+                      btn = shfModalEl._shareEditBtn;
+                    if (btn) {
+                      var wrap = btn.closest('td').querySelector('.cv-fl-switch');
+                      setShareState(wrap, sel ? sel.value : '');
+                    }
+                    bootstrap.Modal.getOrCreateInstance(shfModalEl).hide();
+                    toast('File shared with ' + (sel ? sel.value : ''));
+                  });
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-vault" role="tabpanel" aria-labelledby="cvSideLink-vault" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-vault">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-lock-fill"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Vault</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewVaultBtn"><i class="bi bi-plus-lg me-1"></i>New Entry</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-vault">
+                <thead>
+                  <tr>
+                    <th>Server Address</th>
+                    <th>Port</th>
+                    <th>Username</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-vault">
+                  <tr class="cv-row">
+                    <td>
+                      ftp.example.com </td>
+                    <td>
+                      21 </td>
+                    <td>
+                      ggcompany </td>
+                    <td>
+                      FTP access </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-reminders" role="tabpanel" aria-labelledby="cvSideLink-reminders" tabindex="0">
+          <div class="card-custom p-0" id="cvCard-reminders">
+            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-chip"><i class="bi bi-clock"></i></div>
+                <div>
+                  <h3 class="card-title mb-0">Reminders</h3>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" id="cvNewReminderBtn"><i class="bi bi-plus-lg me-1"></i>Set Reminder</button>
+            </div>
+
+            <div class="table-responsive table-modern-wrap overflow-auto column-border">
+              <table class="table-modern w-100 datatable" id="cvTbl-reminders">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Remind</th>
+                    <th>Notified</th>
+                  </tr>
+                </thead>
+                <tbody id="cvBody-reminders">
+                  <tr class="cv-row">
+                    <td>
+                      Follow up on proposal </td>
+                    <td>
+                      25-09-2026 10:00 </td>
+                    <td>
+                      Karthik R </td>
+                    <td>
+                      No </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="cvTab-activity_log" role="tabpanel" aria-labelledby="cvSideLink-activity_log" tabindex="0">
+          <div class="cv-title">Activity Log</div>
+
+          <!-- Activity Log tab: table-a timeline format-a render pannirukom -->
+
+
+          <div class="card-custom p-4">
+            <div class="cv-tl-head">
+              <div>
+                <div class="cv-tl-title"><i class="bi bi-card-list"></i> Activity Trail</div>
+                <div class="cv-tl-sub">All activities for GG COMPANY — latest first</div>
+              </div>
+              <span class="cv-tl-count">2 activities</span>
+            </div>
+
+            <div class="cv-tl">
+              <div class="cv-tl-item">
+                <div class="cv-tl-marker">
+                  <span class="cv-tl-dot"><i class="bi bi-person-up"></i></span>
+                  <span class="cv-tl-line"></span>
+                </div>
+                <div class="cv-tl-card">
+                  <div class="cv-tl-text">Customer converted from lead</div>
+                  <div class="cv-tl-meta">
+                    <span><i class="bi bi-person-fill"></i>Admin</span>
+                    <span><i class="bi bi-clock"></i>16-09-2026 11:53:29</span>
+                  </div>
+                </div>
+              </div>
+              <div class="cv-tl-item">
+                <div class="cv-tl-marker">
+                  <span class="cv-tl-dot"><i class="bi bi-person-plus-fill"></i></span>
+                </div>
+                <div class="cv-tl-card">
+                  <div class="cv-tl-text">Contact added: MOHAN S</div>
+                  <div class="cv-tl-meta">
+                    <span><i class="bi bi-person-fill"></i>Admin</span>
+                    <span><i class="bi bi-clock"></i>16-09-2026 11:53:29</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Assign Admin modal (same modal pattern as Leave Report) -->
+  <div class="leave-reject-modal" id="cvAssignModal" role="dialog" aria-modal="true" aria-labelledby="cvAssignTitle">
+    <div class="leave-reject-dialog">
+      <div class="leave-reject-head">
+        <h3 id="cvAssignTitle">Assign Admin</h3><button type="button" class="modal-close" id="cvAssignClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="leave-reject-body">
+        <select class="form-select" id="cvAssignSelect" aria-label="Staff member">
+          <option value="">Non selected</option>
+          <option>Karthik R</option>
+          <option>Divya M</option>
+          <option>Arun Kumar</option>
+          <option>Bala Kumar</option>
+          <option>Chandran</option>
+        </select>
+        <div class="text-danger small mt-2" id="cvAssignError" hidden>Select a staff member.</div>
+      </div>
+      <div class="leave-reject-foot pt-3"><button type="button" class="btn btn-reject" id="cvAssignCancel">Close</button><button type="button" class="btn btn-primary" id="cvAssignSubmit">Submit</button></div>
+    </div>
+  </div>
+  <!-- Add new contact modal (same modal pattern as Leave Report) -->
+  <div class="leave-reject-modal" id="cvContactModal" role="dialog" aria-modal="true" aria-labelledby="cvContactTitle">
+    <div class="leave-reject-dialog cv-contact-dialog">
+      <div class="cv-contact-head">
+        <div class="cv-contact-head-l">
+          <div class="cv-contact-ava"><i class="bi bi-person-plus-fill"></i></div>
+          <div style="min-width:0;">
+            <h3 id="cvContactTitle" class="mb-0">Add new contact</h3>
+            <div class="cv-contact-sub">GG COMPANY · Contact information & permissions</div>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="cvContactClose" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="leave-reject-body cv-contact-body">
+        <!-- Avatar + identity -->
+        <div class="cv-avatar-upload">
+          <div class="cv-avatar-preview" id="ctAvatarPreview"><i class="bi bi-person-fill"></i></div>
+          <div style="min-width:0;">
+            <div class="cv-avatar-title">Profile image</div>
+            <p class="cv-avatar-hint">PNG or JPG, up to 2MB. Square images look best.</p>
+            <input type="file" class="form-control form-control-sm" id="ctImage" accept="image/*">
+          </div>
+        </div>
+
+        <!-- Contact details -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-person-vcard"></i> Contact details</div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="ctFirst">First Name</label>
+                <input type="text" class="form-control" id="ctFirst" autocomplete="off">
+                <div class="cv-err" hidden>First name is required.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="ctLast">Last Name</label>
+                <input type="text" class="form-control" id="ctLast" autocomplete="off">
+                <div class="cv-err" hidden>Last name is required.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="ctEmail">Email</label>
+                <input type="email" class="form-control" id="ctEmail" autocomplete="off">
+                <div class="cv-err" hidden>Email is required.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label" for="ctPhone">Phone</label>
+                <input type="tel" class="form-control" id="ctPhone" value="+91 " autocomplete="off">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label" for="ctRole">Role Position</label>
+                <input type="text" class="form-control" id="ctRole" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label" for="ctDirection">Direction</label>
+                <select class="form-select" id="ctDirection">
+                  <option value="">System Default</option>
+                  <option value="ltr">LTR</option>
+                  <option value="rtl">RTL</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-shield-lock"></i> Security</div>
+          <div class="cv-field mb-0">
+            <label class="form-label cv-required" for="ctPassword" id="ctPasswordLabel">Password</label>
+            <div class="cv-pass-wrap">
+              <input type="password" class="form-control" id="ctPassword" autocomplete="new-password">
+              <button type="button" class="cv-pass-btn" id="ctTogglePass" title="Show / hide password" aria-label="Show password"><i class="bi bi-eye-fill"></i></button>
+              <button type="button" class="cv-pass-btn" id="ctGenPass" title="Generate password" aria-label="Generate password"><i class="bi bi-arrow-repeat"></i></button>
+            </div>
+            <div class="cv-err" hidden>Password is required.</div>
+            <div class="cv-pass-meter"><i id="ctPassMeter"></i></div>
+            <div class="cv-pass-hint" id="ctPassHint">Password strength — type to see strength</div>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-envelope-gear"></i> Email options</div>
+          <div class="cv-check-grid">
+            <label class="cv-check-card">
+              <input type="checkbox" class="form-check-input" id="ctPrimary">
+              <span><span class="t">Primary Contact</span><span class="d">Main point of contact for this customer</span></span>
+            </label>
+            <label class="cv-check-card">
+              <input type="checkbox" class="form-check-input" id="ctNoWelcome">
+              <span><span class="t">Do not send welcome email</span><span class="d">Skip the welcome email on save</span></span>
+            </label>
+            <label class="cv-check-card">
+              <input type="checkbox" class="form-check-input" id="ctSetPwd">
+              <span><span class="t">Send SET password email</span><span class="d">Contact chooses their own password</span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Permissions -->
+        <div class="cv-section">
+          <div class="cv-sec-head">
+            <i class="bi bi-key"></i> Permissions
+            <label class="cv-sec-all" title="Toggle all permissions"><input type="checkbox" class="form-check-input" id="ctAllPerms" checked> Toggle all</label>
+          </div>
+          <p class="cv-warn">Make sure to set appropriate permissions for this contact.</p>
+          <div class="cv-perm-grid">
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Invoices</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Invoices" checked aria-label="Invoices permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Estimates</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Estimates" checked aria-label="Estimates permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Contracts</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Contracts" checked aria-label="Contracts permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Proposals</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Proposals" checked aria-label="Proposals permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Support</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Support" checked aria-label="Support permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Projects</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Projects" checked aria-label="Projects permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Purchase Orders</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Purchase Orders" checked aria-label="Purchase Orders permission"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Assets</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Assets" checked aria-label="Assets permission"><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email notifications -->
+        <div class="cv-section mb-0">
+          <div class="cv-sec-head">
+            <i class="bi bi-bell"></i> Email notifications
+            <label class="cv-sec-all" title="Toggle all notifications"><input type="checkbox" class="form-check-input" id="ctAllNotifs" checked> Toggle all</label>
+          </div>
+          <div class="cv-perm-grid">
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Invoice</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Invoice" checked aria-label="Invoice email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Estimate</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Estimate" checked aria-label="Estimate email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Credit Note</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Credit Note" checked aria-label="Credit Note email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Project</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Project" checked aria-label="Project email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Support Tickets</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Support Tickets" checked aria-label="Support Tickets email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label">Contract</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Contract" checked aria-label="Contract email notification"><span class="slider"></span></label>
+            </div>
+            <div class="cv-perm-card">
+              <span class="cv-perm-label"><i class="bi bi-question-circle"></i>Task</span>
+              <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Task" checked aria-label="Task email notification"><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="leave-reject-foot pt-3">
+        <button type="button" class="btn btn-reject" id="cvContactCancel">Close</button>
+        <button type="button" class="btn btn-outline-primary me-2" id="cvContactReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+        <button type="button" class="btn btn-primary" id="cvContactSubmit"><i class="bi bi-check2 me-1"></i>Save contact</button>
+      </div>
+    </div>
+  </div>
+  <!-- Add note modal -->
+  <div class="leave-reject-modal" id="cvNoteModal" role="dialog" aria-modal="true" aria-labelledby="cvNoteTitle">
+    <div class="leave-reject-dialog cv-note-dialog">
+      <div class="cv-contact-head">
+        <div class="cv-contact-head-l">
+          <div class="cv-contact-ava"><i class="bi bi-journal-text"></i></div>
+          <div style="min-width:0;">
+            <h3 id="cvNoteTitle" class="mb-0">Add new note</h3>
+            <div class="cv-contact-sub">GG COMPANY · Internal note for this customer</div>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="cvNoteClose" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="leave-reject-body cv-note-body">
+        <div class="cv-field mb-0">
+          <label class="form-label" for="cvNoteDesc">Note description</label>
+          <textarea class="form-control cv-note-textarea" id="cvNoteDesc" rows="6" placeholder="Write a note about this customer..."></textarea>
+          <div class="cv-err" id="cvNoteErr" hidden>Note description is required.</div>
+          <div class="cv-note-hint">Tip: press Ctrl + Enter to submit quickly.</div>
+        </div>
+      </div>
+
+      <div class="leave-reject-foot pt-3">
+        <button type="button" class="btn btn-reject" id="cvNoteCancel">Close</button>
+        <button type="button" class="btn btn-primary" id="cvNoteSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- New Appointment modal (appointments.php la irundhu copy — customer details prefill aagum) -->
+  <div class="modal fade apm-modal" id="apmContactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-calendar-plus"></i>New appointment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label">* Subject</label>
+              <input type="text" class="form-control" id="apmCtSubject" autocomplete="off">
+            </div>
+            <div class="col-12">
+              <label class="form-label">* Description</label>
+              <textarea class="form-control" id="apmCtDesc" rows="3"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">* Related</label>
+              <select class="form-select" id="apmCtRelated">
+                <option value="">Non selected</option>
+                <option value="Contact">Internal (Contact)</option>
+                <option value="Lead">Lead</option>
+                <option value="External">External</option>
+              </select>
+            </div>
+            <!-- Related = Lead -> Leads searchable select -->
+            <div class="col-12" id="apmRelLeadBlock" style="display:none;">
+              <label class="form-label">Leads</label>
+              <select class="form-select select2" id="apmRelLead" data-placeholder="Select and begin typing">
+                <option value=""></option>
+                <option>Gharuda Software</option>
+                <option>Acme Corporation</option>
+                <option>Sunrise Enterprises</option>
+                <option>Bluewave Solutions</option>
+              </select>
+            </div>
+            <!-- Related = External -> Name, Email, Phone, Project -->
+            <div class="col-12" id="apmRelExternalBlock" style="display:none;">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" id="apmRelExtName" autocomplete="off">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" id="apmRelExtEmail" autocomplete="off">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Phone (Ex: +1 69 1234 5678)</label>
+                  <input type="text" class="form-control" id="apmRelExtPhone" autocomplete="off">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Project</label>
+                  <select class="form-select" id="apmRelExtProject">
+                    <option value="">Non selected</option>
+                    <option>HRMS Implementation</option>
+                    <option>Website Revamp</option>
+                    <option>Mobile App Development</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Related = Internal (Contact) -> Contact select -->
+            <div class="col-12" id="apmRelInternalBlock" style="display:none;">
+              <label class="form-label">Contact</label>
+              <select class="form-select" id="apmRelContact">
+                <option value="">Non selected</option>
+                <option>Suresh Babu</option>
+                <option>Priya R</option>
+                <option>Karthik R</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">* Date / Time</label>
+              <input type="datetime-local" class="form-control" id="apmCtDateTime">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Appointment Location (optional)</label>
+              <input type="text" class="form-control" id="apmCtLocation" autocomplete="off">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">* Attendees</label>
+              <select class="form-select" id="apmCtAttendees">
+                <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
+                <option value="Harish D.">Harish D.</option>
+                <option value="Divya A.">Divya A.</option>
+                <option value="Priya S.">Priya S.</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Appointment Type</label>
+              <select class="form-select select2" id="apmCtType">
+                <option value="">Non selected</option>
+                <option value="SD - Online Demo" data-color="#16a34a">SD - Online Demo</option>
+                <option value="SD - Direct Visit - lead" data-color="#0d9488">SD - Direct Visit - lead</option>
+                <option value="DEV - Direct Visit - customer" data-color="#9f1239">DEV - Direct Visit - customer</option>
+                <option value="DEV - Customer visit - GHARUDA" data-color="#2563eb">DEV - Customer visit - GHARUDA</option>
+                <option value="DEV - Online Demo - Customer" data-color="#dc2626">DEV - Online Demo - Customer</option>
+                <option value="SD - GHARUDA Visit" data-color="#06b6d4">SD - GHARUDA Visit</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Repeat every</label>
+              <select class="form-select" id="apmCtRepeat">
+                <option value="">Non selected</option>
+                <option value="1 week">1 week</option>
+                <option value="2 weeks">2 weeks</option>
+                <option value="1 month">1 month</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <div class="apm-cron-note">Please mark the checkboxes as checked if you want selected attendee and contact to receive reminders eg. if set 30 minutes before the appointment start. Note that this feature requires cron job to be configured.</div>
+              <div class="apm-notif-check mt-2">
+                <input class="form-check-input" type="checkbox" id="apmCtSms">
+                <label class="form-check-label" for="apmCtSms">SMS Notification</label>
+              </div>
+              <div class="apm-notif-check">
+                <input class="form-check-input" type="checkbox" id="apmCtEmail">
+                <label class="form-check-label" for="apmCtEmail">Email Notification</label>
+              </div>
+
+              <!-- SMS reminder value block (shown when SMS ticked) -->
+              <div id="apmSmsReminderBlock" style="display:none;" class="mt-2">
+                <label class="form-label" style="margin-bottom:6px;">Add value to receive an SMS notification prior to your appointment (default 30 min before)</label>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <div class="position-relative" style="flex:1;max-width:120px;">
+                    <input type="number" min="0" class="form-control" id="apmSmsReminderValue" placeholder="" style="padding-right:38px;">
+                    <button type="button" class="btn btn-sm btn-primary position-absolute" id="apmSmsReminderInfo"
+                      style="right:6px;top:50%;transform:translateY(-50%);width:24px;height:24px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                      data-bs-title="Minutes before the appointment start">
+                      <i class="bi bi-info-circle" style="font-size:12px;"></i>
+                    </button>
+                  </div>
+                  <select class="form-select" id="apmSmsReminderUnit" style="max-width:140px;">
+                    <option value="minutes" selected>Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Email reminder value block (shown when Email ticked) -->
+              <div id="apmEmailReminderBlock" style="display:none;" class="mt-2">
+                <label class="form-label" style="margin-bottom:6px;">Add value to receive an email notification prior to your appointment (default 30 min before)</label>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <div class="position-relative" style="flex:1;max-width:120px;">
+                    <input type="number" min="0" class="form-control" id="apmEmailReminderValue" placeholder="" style="padding-right:38px;">
+                    <button type="button" class="btn btn-sm btn-primary position-absolute" id="apmEmailReminderInfo"
+                      style="right:6px;top:50%;transform:translateY(-50%);width:24px;height:24px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;"
+                      data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                      data-bs-title="Minutes before the appointment start">
+                      <i class="bi bi-info-circle" style="font-size:12px;"></i>
+                    </button>
+                  </div>
+                  <select class="form-select" id="apmEmailReminderUnit" style="max-width:140px;">
+                    <option value="minutes" selected>Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Appointment notes</label>
+              <div class="apm-quill-wrap">
+                <div id="apmCtQuill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="apmCtSubmit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- New Call Log modal — fullscreen -->
+  <div class="modal fade" id="cvNewCallLogModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="cv-cl-header">
+          <div class="cv-contact-head-l">
+            <div class="cv-contact-ava"><i class="bi bi-telephone-fill"></i></div>
+            <div style="min-width:0;">
+              <h3 id="cvCallLogTitle" class="mb-0">Add new call log</h3>
+              <div class="cv-contact-sub">GG COMPANY · Record call details & follow-ups</div>
+            </div>
+          </div>
+          <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="modal-body cv-cl-body">
+          <div class="cv-cl-grid">
+            <!-- Left: main details -->
+            <div class="cv-cl-card">
+              <div class="cv-cl-card-head"><i class="bi bi-telephone-outbound"></i> Call details</div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Related</label>
+                <select class="form-select" id="clRelated">
+                  <option value="Customer" selected>Customer</option>
+                  <option value="Lead">Lead</option>
+                  <option value="Project">Project</option>
+                </select>
+              </div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Customer</label>
+                <select class="form-select" id="clCustomer">
+                  <option selected>GG COMPANY</option>
+                </select>
+              </div>
+
+              <div class="cv-cl-grid-2">
+                <div class="cv-cl-field mb-0">
+                  <label class="cv-required">Type</label>
+                  <select class="form-select" id="clType">
+                    <option value="">Non selected</option>
+                    <option value="Outgoing">Outgoing</option>
+                    <option value="Incoming">Incoming</option>
+                    <option value="Missed">Missed</option>
+                  </select>
+                  <div class="cv-err" id="clTypeErr" hidden>Please select a call type.</div>
+                </div>
+                <div class="cv-cl-field mb-0">
+                  <label>Call Type</label>
+                  <select class="form-select" id="clCallType">
+                    <option value="">Non selected</option>
+                    <option value="Support">Support</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Follow-up">Follow-up</option>
+                    <option value="General">General</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Caller</label>
+                <input type="text" class="form-control" id="clCaller" placeholder="Caller name" autocomplete="off">
+                <div class="cv-err" id="clCallerErr" hidden>Caller is required.</div>
+              </div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Contact</label>
+                <input type="tel" class="form-control" id="clContact" placeholder="Contact number" autocomplete="off">
+                <div class="cv-err" id="clContactErr" hidden>Contact number is required.</div>
+              </div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Call Purpose</label>
+                <input type="text" class="form-control" id="clPurpose" placeholder="e.g. Discuss proposal" autocomplete="off">
+                <div class="cv-err" id="clPurposeErr" hidden>Call purpose is required.</div>
+              </div>
+
+              <div class="cv-cl-field">
+                <label class="cv-required">Call Summary</label>
+                <textarea class="form-control cv-cl-textarea" id="clSummary" rows="4" placeholder="What was discussed in the call?"></textarea>
+                <div class="cv-err" id="clSummaryErr" hidden>Call summary is required.</div>
+              </div>
+
+              <div class="cv-cl-inline">
+                <span class="cv-cl-inline-lbl">Follow-up Required</span>
+                <div class="cv-cl-yn" role="radiogroup">
+                  <label><input type="radio" name="clFollowup" value="Yes"><span>Yes</span></label>
+                  <label><input type="radio" name="clFollowup" value="No" checked><span>No</span></label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: advanced options -->
+            <div class="cv-cl-card">
+              <div class="cv-cl-card-head"><i class="bi bi-sliders"></i> Advanced options</div>
+
+              <div class="cv-cl-field">
+                <label>Call Start Time</label>
+                <input type="datetime-local" class="form-control" id="clStart">
+              </div>
+
+              <div class="cv-cl-field">
+                <label>Call End Time</label>
+                <input type="datetime-local" class="form-control" id="clEnd">
+              </div>
+
+              <div class="cv-cl-field">
+                <label>Call Duration</label>
+                <input type="text" class="form-control" id="clDuration" readonly placeholder="Auto-calculated from start & end time">
+              </div>
+
+              <div class="cv-cl-field">
+                <label>Call Owner</label>
+                <input type="text" class="form-control" id="clOwner" value="info@GHARUDAtechnology.com" readonly style="background:#f8f9fa;">
+              </div>
+
+              <div class="cv-cl-field">
+                <label>Call with Staff Member</label>
+                <select class="form-select" id="clStaff">
+                  <option value="">Non selected</option>
+                  <option>gharuda SOFTWARE</option>
+                  <option>Karthik R</option>
+                  <option>Divya M</option>
+                  <option>Madhupriya S</option>
+                </select>
+              </div>
+
+              <div class="cv-cl-inline">
+                <span class="cv-cl-inline-lbl">Completed</span>
+                <div class="cv-cl-yn" role="radiogroup">
+                  <label><input type="radio" name="clCompleted" value="Yes"><span>Yes</span></label>
+                  <label><input type="radio" name="clCompleted" value="No" checked><span>No</span></label>
+                </div>
+              </div>
+
+              <div class="cv-cl-inline">
+                <span class="cv-cl-inline-lbl">Important</span>
+                <div class="cv-cl-yn" role="radiogroup">
+                  <label><input type="radio" name="clImportant" value="Yes"><span>Yes</span></label>
+                  <label><input type="radio" name="clImportant" value="No" checked><span>No</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-cl-footer">
+          <button type="button" class="btn btn-reject" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="clSubmit"><i class="bi bi-telephone-fill me-1"></i>Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add vault entry modal -->
+  <div class="leave-reject-modal" id="cvVaultModal" role="dialog" aria-modal="true" aria-labelledby="cvVaultTitle">
+    <div class="leave-reject-dialog cv-vault-dialog">
+      <div class="cv-contact-head">
+        <div class="cv-contact-head-l">
+          <div class="cv-contact-ava cv-vault-ava"><i class="bi bi-lock-fill"></i></div>
+          <div style="min-width:0;">
+            <h3 id="cvVaultTitle" class="mb-0">Add vault entry</h3>
+            <div class="cv-contact-sub">GG COMPANY · Securely store server & login credentials</div>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="cvVaultClose" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="leave-reject-body cv-contact-body">
+        <!-- Server details -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-hdd-network"></i> Server details</div>
+          <div class="row g-3">
+            <div class="col-md-8">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="cvServer">Server Address</label>
+                <input type="text" class="form-control" id="cvServer" placeholder="e.g. ftp.example.com" autocomplete="off">
+                <div class="cv-err" id="cvServerErr" hidden>Server address is required.</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cv-field mb-0">
+                <label class="form-label" for="cvPort">Port</label>
+                <input type="text" class="form-control" id="cvPort" placeholder="e.g. 21" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login credentials -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-person-fill-lock"></i> Login credentials</div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="cvUser">Username</label>
+                <input type="text" class="form-control" id="cvUser" placeholder="Login username" autocomplete="off">
+                <div class="cv-err" id="cvUserErr" hidden>Username is required.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="cvPass">Password</label>
+                <div class="cv-pass-wrap">
+                  <input type="password" class="form-control" id="cvPass" placeholder="••••••••" autocomplete="new-password">
+                  <button type="button" class="cv-pass-eye" id="cvPassToggle" aria-label="Show password" tabindex="-1"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="cv-pass-gen" id="cvPassGen" title="Generate strong password" aria-label="Generate password" tabindex="-1"><i class="bi bi-magic"></i></button>
+                </div>
+                <div class="cv-err" id="cvPassErr" hidden>Password is required.</div>
+                <div class="cv-pass-meter"><i id="cvPassBar"></i></div>
+                <div class="cv-pass-hint" id="cvPassHint">Use 8+ characters with letters, numbers & symbols.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-card-text"></i> Description</div>
+          <div class="cv-field mb-0">
+            <label class="form-label" for="cvDesc">Short Description</label>
+            <textarea class="form-control cv-vault-textarea" id="cvDesc" rows="4" placeholder="What is this credential for? e.g. cPanel login, FTP access..."></textarea>
+          </div>
+        </div>
+
+        <!-- Visibility -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-shield-lock"></i> Who can see this entry?</div>
+          <div class="cv-vault-vis-grid">
+            <label class="cv-vault-vis">
+              <input type="radio" name="cvVisibility" value="staff" checked>
+              <span class="cv-vault-vis-body">
+                <span class="cv-vault-vis-title"><i class="bi bi-people-fill"></i> All staff</span>
+                <span class="cv-vault-vis-desc">Visible to all staff members who have access to this customer</span>
+              </span>
+            </label>
+            <label class="cv-vault-vis">
+              <input type="radio" name="cvVisibility" value="admins">
+              <span class="cv-vault-vis-body">
+                <span class="cv-vault-vis-title"><i class="bi bi-person-badge-fill"></i> Administrators only</span>
+                <span class="cv-vault-vis-desc">Visible only to administrators of this customer</span>
+              </span>
+            </label>
+            <label class="cv-vault-vis">
+              <input type="radio" name="cvVisibility" value="me">
+              <span class="cv-vault-vis-body">
+                <span class="cv-vault-vis-title"><i class="bi bi-person-lock"></i> Only me</span>
+                <span class="cv-vault-vis-desc">Visible only to me (administrators are not excluded)</span>
+              </span>
+            </label>
+          </div>
+
+          <label class="cv-vault-share">
+            <input type="checkbox" id="cvShareProjects">
+            <span class="cv-vault-share-box"><i class="bi bi-check2"></i></span>
+            <span class="cv-vault-share-text">
+              <span class="t">Share in projects</span>
+              <span class="d">Share this vault entry in projects with project members</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="leave-reject-foot pt-3">
+        <button type="button" class="btn btn-reject" id="cvVaultCancel">Close</button>
+        <button type="button" class="btn btn-primary" id="cvVaultSubmit"><i class="bi bi-lock-fill me-1"></i>Save entry</button>
+      </div>
+    </div>
+  </div>
+  <!-- Set reminder modal -->
+  <div class="leave-reject-modal" id="cvReminderModal" role="dialog" aria-modal="true" aria-labelledby="cvReminderTitle">
+    <div class="leave-reject-dialog cv-vault-dialog" id="cvReminderDialog">
+      <div class="cv-contact-head">
+        <div class="cv-contact-head-l">
+          <div class="cv-contact-ava"><i class="bi bi-bell-fill"></i></div>
+          <div style="min-width:0;">
+            <h3 id="cvReminderTitle" class="mb-0">Set reminder</h3>
+            <div class="cv-contact-sub">GG COMPANY · Get notified about important follow-ups</div>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="cvReminderClose" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="leave-reject-body cv-contact-body cv-reminder-body">
+        <!-- Date to be notified -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-calendar-event"></i> Reminder date & time</div>
+          <div class="row g-3">
+            <div class="col-md-7">
+              <div class="cv-field mb-0">
+                <label class="form-label cv-required" for="cvRemDate">Date to be notified</label>
+                <input type="date" class="form-control" id="cvRemDate">
+                <div class="cv-err" id="cvRemDateErr" hidden>Date to be notified is required.</div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="cv-field mb-0">
+                <label class="form-label" for="cvRemTime">Time</label>
+                <input type="time" class="form-control" id="cvRemTime">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assign to -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-person-check"></i> Notify whom?</div>
+          <div class="cv-field mb-0">
+            <label class="form-label cv-required" for="cvRemStaff">Set reminder to</label>
+            <select class="form-select" id="cvRemStaff">
+              <option value="">Select staff member</option>
+              <option>gharuda SOFTWARE</option>
+              <option>Karthik R</option>
+              <option>Divya M</option>
+              <option>Madhupriya S</option>
+            </select>
+            <div class="cv-err" id="cvRemStaffErr" hidden>Please select a staff member.</div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="cv-section">
+          <div class="cv-sec-head"><i class="bi bi-card-text"></i> Description</div>
+          <div class="cv-field mb-0">
+            <label class="form-label cv-required" for="cvRemDesc">Description</label>
+            <textarea class="form-control cv-reminder-textarea" id="cvRemDesc" rows="4" placeholder="What should they be reminded about? e.g. Follow up on proposal..."></textarea>
+            <div class="cv-err" id="cvRemDescErr" hidden>Description is required.</div>
+            <div class="cv-reminder-hint">Tip: press Ctrl + Enter to submit quickly.</div>
+          </div>
+        </div>
+
+        <!-- Email option -->
+        <label class="cv-reminder-email">
+          <input type="checkbox" id="cvRemEmail">
+          <span class="cv-reminder-email-box"><i class="bi bi-check2"></i></span>
+          <span class="cv-reminder-email-text">
+            <span class="t">Send email notification</span>
+            <span class="d">Also send an email for this reminder to the selected staff</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="leave-reject-foot pt-3">
+        <button type="button" class="btn btn-reject" id="cvReminderCancel">Close</button>
+        <button type="button" class="btn btn-primary" id="cvReminderSubmit"><i class="bi bi-bell-fill me-1"></i>Set reminder</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<?php include 'footer.php'; ?>
+
+<script>
+  document.querySelectorAll(".js-new-dummy").forEach(function(b) {
+    b.addEventListener("click", function() {
+      alert("Demo only — form not connected yet");
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var root = document.getElementById('cvProfile');
+    if (!root) return;
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    var hasS2 = window.jQuery && jQuery.fn.select2;
+    if (hasS2) jQuery('#cvProfile .cv-select').select2({
+      width: '100%'
+    });
+
+    function setVal(id, v) {
+      var el = document.getElementById(id);
+      el.value = v;
+      if (hasS2 && el.tagName === 'SELECT') jQuery(el).trigger('change');
+    }
+
+    function getVal(id) {
+      return document.getElementById(id).value;
+    }
+
+    document.getElementById('cvSameAsInfo').addEventListener('click', function() {
+      setVal('bStreet', getVal('dAddress'));
+      setVal('bCountry', getVal('dCountry'));
+      setVal('bState', getVal('dState'));
+      setVal('bCity', getVal('dCity'));
+      setVal('bZip', getVal('dZip'));
+      toastMsg('Billing address copied from customer info');
+    });
+    document.getElementById('cvCopyBilling').addEventListener('click', function() {
+      setVal('sStreet', getVal('bStreet'));
+      setVal('sCountry', getVal('bCountry'));
+      setVal('sState', getVal('bState'));
+      setVal('sCity', getVal('bCity'));
+      setVal('sZip', getVal('bZip'));
+      toastMsg('Shipping address copied from billing');
+    });
+    root.querySelectorAll('.js-demo').forEach(function(b) {
+      b.addEventListener('click', function() {
+        toastMsg('Demo only — not connected yet');
+      });
+    });
+
+    function flag(id, bad) {
+      var el = document.getElementById(id),
+        err = el.closest('.cv-field').querySelector('.cv-err');
+      el.classList.toggle('cv-invalid', bad);
+      if (err) err.hidden = !bad;
+    }
+    document.getElementById('cvSubmit').addEventListener('click', function() {
+      var noCompany = !getVal('dCompany').trim(),
+        noProf = !getVal('cProfession');
+      flag('dCompany', noCompany);
+      flag('cProfession', noProf);
+      if (noCompany || noProf) {
+        bootstrap.Tab.getOrCreateInstance(root.querySelector('#cvSubBtn-details')).show();
+        toastMsg('Please fill the required fields', false);
+        return;
+      }
+      toastMsg('Customer details saved (demo)');
+    });
+  });
+</script>
+
+<script>
+  /* Customer Admins / Purchase Order: table itself is driven by the datatable class (auto-master-table.js).
+       This block only adds the Assign Admin modal, Submit toast and the empty-state fallback. */
+  document.addEventListener('DOMContentLoaded', function() {
+    var body = document.getElementById('cvBody-admins'),
+      fallback = document.getElementById('cvEmptyFallback');
+    if (!body) return;
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    function syncEmpty() {
+      var real = Array.from(body.rows).filter(function(r) {
+        return !r.classList.contains('no-record-row') && r.style.display !== 'none';
+      });
+      if (fallback) fallback.hidden = real.length > 0 || !!body.querySelector('.no-record-row');
+    }
+
+    function refresh() {
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      setTimeout(syncEmpty, 0);
+    }
+    ['cvSearch'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', function() {
+        setTimeout(syncEmpty, 0);
+      });
+    });
+    var size = document.getElementById('showEntries');
+    if (size) size.addEventListener('change', function() {
+      setTimeout(syncEmpty, 0);
+    });
+    var refreshBtn = document.getElementById('cvRefresh');
+    if (refreshBtn) refreshBtn.addEventListener('click', function() {
+      setTimeout(syncEmpty, 0);
+    });
+    setTimeout(syncEmpty, 50);
+
+    // ---- Assign Admin ----
+    var modal = document.getElementById('cvAssignModal');
+    if (!modal) return;
+    var sel = document.getElementById('cvAssignSelect'),
+      hasS2 = window.jQuery && jQuery.fn.select2;
+    if (hasS2) jQuery(sel).select2({
+      width: '100%',
+      dropdownParent: jQuery(modal)
+    });
+
+    function closeModal() {
+      modal.classList.remove('show');
+      sel.value = '';
+      if (hasS2) jQuery(sel).trigger('change');
+      document.getElementById('cvAssignError').hidden = true;
+    }
+    document.getElementById('cvAssignAdminBtn').addEventListener('click', function() {
+      modal.classList.add('show');
+    });
+    document.getElementById('cvAssignClose').addEventListener('click', closeModal);
+    document.getElementById('cvAssignCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.getElementById('cvAssignSubmit').addEventListener('click', function() {
+      var staff = sel.value;
+      if (!staff) {
+        document.getElementById('cvAssignError').hidden = false;
+        return;
+      }
+      var dupe = Array.from(body.rows).some(function(r) {
+        return r.cells[0] && r.cells[0].textContent.trim() === staff;
+      });
+      if (dupe) {
+        toastMsg(staff + ' is already assigned', false);
+        return;
+      }
+      var d = new Date(),
+        p = function(n) {
+          return String(n).padStart(2, '0');
+        };
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td></td><td>' + p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + '</td>' +
+        '<td><button type="button" class="cv-icon-btn" title="Remove"><i class="bi bi-trash"></i></button></td>';
+      tr.cells[0].textContent = staff;
+      closeModal();
+      refresh();
+      toastMsg('Admin assigned');
+    });
+    body.addEventListener('click', function(e) {
+      var btn = e.target.closest('.cv-icon-btn');
+      if (!btn) return;
+      btn.closest('tr').remove();
+      refresh();
+      toastMsg('Admin removed');
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('cvContactModal'),
+      openBtn = document.getElementById('cvNewContactBtn'),
+      body = document.getElementById('cvBody-contacts');
+    if (!modal || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    var fields = ['ctFirst', 'ctLast', 'ctEmail', 'ctPassword'];
+
+    function setError(id, msg) {
+      var el = $(id),
+        err = el.closest('.cv-field').querySelector('.cv-err');
+      el.classList.toggle('cv-invalid', !!msg);
+      el.closest('.cv-pass-wrap') && el.closest('.cv-pass-wrap').classList.toggle('cv-invalid-wrap', !!msg);
+      if (err) {
+        err.hidden = !msg;
+        if (msg) err.textContent = msg;
+      }
+      return !msg;
+    }
+
+    function existingEmails() {
+      return Array.from(body.rows).map(function(r) {
+        return r.cells[1] ? r.cells[1].textContent.trim().toLowerCase() : '';
+      }).filter(Boolean);
+    }
+
+    function checkEmail() {
+      var v = $('ctEmail').value.trim().toLowerCase();
+      if (!v) return setError('ctEmail', 'Email is required.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return setError('ctEmail', 'Enter a valid email address.');
+      if (existingEmails().indexOf(v) > -1) return setError('ctEmail', 'Email already exists');
+      return setError('ctEmail', '');
+    }
+
+    function checkPassword() {
+      // Not needed when a "set password" email is sent instead
+      if ($('ctSetPwd').checked) return setError('ctPassword', '');
+      return setError('ctPassword', $('ctPassword').value ? '' : 'Password is required.');
+    }
+
+    function resetForm() {
+      ['ctImage', 'ctFirst', 'ctLast', 'ctRole', 'ctPassword'].forEach(function(id) {
+        $(id).value = '';
+      });
+      $('ctEmail').value = '';
+      $('ctPhone').value = '+91 ';
+      $('ctDirection').value = '';
+      $('ctPassword').type = 'password';
+      $('ctTogglePass').querySelector('i').className = 'bi bi-eye-fill';
+      ['ctPrimary', 'ctNoWelcome', 'ctSetPwd'].forEach(function(id) {
+        $(id).checked = false;
+      });
+      modal.querySelectorAll('.ct-perm, .ct-notif').forEach(function(c) {
+        c.checked = true;
+      });
+      var ap = $('ctAllPerms'),
+        an = $('ctAllNotifs');
+      if (ap) ap.checked = true;
+      if (an) an.checked = true;
+      var pv = $('ctAvatarPreview');
+      if (pv) pv.innerHTML = '<i class="bi bi-person-fill"></i>';
+      updateStrength();
+      fields.forEach(function(id) {
+        setError(id, '');
+      });
+      modal.querySelector('.cv-contact-body').scrollTop = 0;
+    }
+
+    function openModal() {
+      resetForm();
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('ctFirst').focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    $('cvContactClose').addEventListener('click', closeModal);
+    $('cvContactCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    });
+
+    // Live validation
+    $('ctEmail').addEventListener('input', checkEmail);
+    $('ctEmail').addEventListener('blur', checkEmail);
+    $('ctFirst').addEventListener('input', function() {
+      setError('ctFirst', this.value.trim() ? '' : 'First name is required.');
+    });
+    $('ctLast').addEventListener('input', function() {
+      setError('ctLast', this.value.trim() ? '' : 'Last name is required.');
+    });
+    $('ctPassword').addEventListener('input', checkPassword);
+    $('ctSetPwd').addEventListener('change', checkPassword);
+
+    // Password strength meter
+    function updateStrength() {
+      var v = $('ctPassword').value || '';
+      var score = 0;
+      if (v.length >= 8) score++;
+      if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+      if (/\d/.test(v)) score++;
+      if (/[^A-Za-z0-9]/.test(v)) score++;
+      if (!v) score = -1;
+      var meter = $('ctPassMeter'),
+        hint = $('ctPassHint');
+      if (!meter || !hint) return;
+      var levels = [
+        ['18%', 's-weak', 'Weak password'],
+        ['45%', 's-med', 'Medium password — add numbers or symbols'],
+        ['70%', 's-strong', 'Strong password'],
+        ['100%', 's-strong', 'Very strong password']
+      ];
+      if (score < 0) {
+        meter.style.width = '0';
+        hint.className = 'cv-pass-hint';
+        hint.textContent = 'Password strength — type to see strength';
+      } else {
+        var lv = levels[Math.max(0, Math.min(score - 1, levels.length - 1))];
+        meter.style.width = lv[0];
+        meter.style.background = score <= 1 ? '#dc3545' : (score === 2 ? '#d97706' : 'var(--primary)');
+        hint.className = 'cv-pass-hint ' + lv[1];
+        hint.textContent = lv[2];
+      }
+    }
+    $('ctPassword').addEventListener('input', updateStrength);
+
+    // Avatar live preview
+    $('ctImage').addEventListener('change', function() {
+      var f = this.files && this.files[0],
+        pv = $('ctAvatarPreview');
+      if (!pv) return;
+      if (f) {
+        pv.innerHTML = '<img alt="Preview">';
+        pv.querySelector('img').src = URL.createObjectURL(f);
+      } else {
+        pv.innerHTML = '<i class="bi bi-person-fill"></i>';
+      }
+    });
+
+    // Toggle all permissions / notifications
+    function bindToggleAll(allId, rowSel) {
+      var all = $(allId);
+      if (!all) return;
+      all.addEventListener('change', function() {
+        modal.querySelectorAll(rowSel).forEach(function(c) {
+          c.checked = all.checked;
+        });
+      });
+    }
+    bindToggleAll('ctAllPerms', '.ct-perm');
+    bindToggleAll('ctAllNotifs', '.ct-notif');
+
+    // Keep "toggle all" checkbox in sync when a single switch changes
+    ['ct-perm', 'ct-notif'].forEach(function(sel) {
+      modal.addEventListener('change', function(e) {
+        if (!e.target.classList.contains(sel)) return;
+        var all = $(sel === 'ct-perm' ? 'ctAllPerms' : 'ctAllNotifs');
+        if (!all) return;
+        var rows = Array.from(modal.querySelectorAll('.' + sel));
+        all.checked = rows.every(function(c) {
+          return c.checked;
+        });
+      });
+    });
+
+    // Reset button
+    var resetBtn = $('cvContactReset');
+    if (resetBtn) resetBtn.addEventListener('click', function() {
+      resetForm();
+      toastMsg('Form reset');
+    });
+
+    // Password: show / hide + generate
+    $('ctTogglePass').addEventListener('click', function() {
+      var input = $('ctPassword'),
+        show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      this.querySelector('i').className = show ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill';
+      this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+    $('ctGenPass').addEventListener('click', function() {
+      var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%',
+        out = '',
+        buf = new Uint32Array(14);
+      (window.crypto || window.msCrypto).getRandomValues(buf);
+      for (var i = 0; i < buf.length; i++) out += chars[buf[i] % chars.length];
+      $('ctPassword').value = out;
+      $('ctPassword').type = 'text';
+      $('ctTogglePass').querySelector('i').className = 'bi bi-eye-slash-fill';
+      checkPassword();
+      updateStrength();
+    });
+
+    // Submit
+    $('cvContactSubmit').addEventListener('click', function() {
+      var okFirst = setError('ctFirst', $('ctFirst').value.trim() ? '' : 'First name is required.'),
+        okLast = setError('ctLast', $('ctLast').value.trim() ? '' : 'Last name is required.'),
+        okEmail = checkEmail(),
+        okPass = checkPassword();
+      if (!(okFirst && okLast && okEmail && okPass)) {
+        var firstBad = modal.querySelector('.cv-invalid');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      var name = ($('ctFirst').value.trim() + ' ' + $('ctLast').value.trim()),
+        email = $('ctEmail').value.trim(),
+        role = $('ctRole').value.trim() || '—',
+        phoneRaw = $('ctPhone').value.trim(),
+        phone = phoneRaw === '+91' ? '' : phoneRaw,
+        file = $('ctImage').files && $('ctImage').files[0],
+        img = file ? URL.createObjectURL(file) : './assets/img/profile-1.jpg';
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML =
+        '<td><span class="d-inline-flex align-items-center gap-2"><img class="cv-avatar" alt=""><a href="#" class="cv-link"></a></span></td>' +
+        '<td><a class="cv-link"></a></td>' +
+        '<td></td>' +
+        '<td>' + (phone ? '<a class="cv-link"></a>' : '') + '</td>' +
+        '<td><label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label></td>' +
+        '<td>—</td>';
+      tr.querySelector('img').src = img;
+      tr.cells[0].querySelector('a').textContent = name;
+      var mail = tr.cells[1].querySelector('a');
+      mail.textContent = email;
+      mail.setAttribute('href', 'mailto:' + email);
+      tr.cells[2].textContent = role;
+      if (phone) {
+        var tel = tr.cells[3].querySelector('a');
+        tel.textContent = phone;
+        tel.setAttribute('href', 'tel:' + phone.replace(/\s+/g, ''));
+      }
+
+      // Sidebar "Contacts" badge count
+      var link = document.querySelector('.cv-side a[data-tab="contacts"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      closeModal();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Contact "' + name + '" added successfully');
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('cvNoteModal'),
+      openBtn = document.getElementById('cvNewNoteBtn'),
+      body = document.getElementById('cvBody-notes');
+    if (!modal || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    function openModal() {
+      $('cvNoteDesc').value = '';
+      $('cvNoteDesc').classList.remove('cv-invalid');
+      $('cvNoteErr').hidden = true;
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('cvNoteDesc').focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    $('cvNoteClose').addEventListener('click', closeModal);
+    $('cvNoteCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    });
+
+    // Clear error while typing
+    $('cvNoteDesc').addEventListener('input', function() {
+      if (this.value.trim()) {
+        this.classList.remove('cv-invalid');
+        $('cvNoteErr').hidden = true;
+      }
+    });
+
+    // Ctrl + Enter shortcut
+    $('cvNoteDesc').addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') $('cvNoteSubmit').click();
+    });
+
+    // Submit
+    $('cvNoteSubmit').addEventListener('click', function() {
+      var desc = $('cvNoteDesc').value.trim();
+      if (!desc) {
+        $('cvNoteDesc').classList.add('cv-invalid');
+        $('cvNoteErr').hidden = false;
+        $('cvNoteDesc').focus();
+        return;
+      }
+      var d = new Date(),
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        },
+        when = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td></td><td>Admin</td><td>' + when + '</td>';
+      tr.cells[0].textContent = desc;
+
+      // Sidebar "Notes" badge count
+      var link = document.querySelector('.cv-side a[data-tab="notes"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      closeModal();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Note added successfully');
+    });
+  });
+</script>
+<!-- New Proposal modal — copied from lead.php #newProposalModal -->
+<div class="modal fade" id="newProposalModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content" style="border:none;">
+
+      <div class="np-header">
+        <h5>New Proposal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0;overflow-y:auto;padding:0;">
+        <div class="np-body">
+          <div class="np-grid">
+            <!-- Left Column -->
+            <div>
+              <div class="np-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
+              <div class="np-field"><label><span class="req">*</span>Related</label><select class="form-select">
+                  <option selected>Lead</option>
+                  <option>Customer</option>
+                </select></div>
+              <div class="np-field"><label><span class="req">*</span>Lead</label><select class="form-select" id="npLeadSelect">
+                  <option>Suresh - gh@gharuda.com</option>
+                  <option>Arun Kumar - info@vetri.co</option>
+                  <option>Meena Ramesh - meena@srlakshmi.in</option>
+                </select></div>
+              <div class="np-row">
+                <div class="np-field"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
+                <div class="np-field"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
+              </div>
+              <div class="np-row">
+                <div class="np-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                    <option selected>INR ₹</option>
+                    <option>USD $</option>
+                    <option>EUR €</option>
+                    <option>GBP £</option>
+                  </select></div>
+                <div class="np-field"><label>Discount type</label><select class="form-select">
+                    <option selected>No discount</option>
+                    <option>Before Tax</option>
+                    <option>After Tax</option>
+                  </select></div>
+              </div>
+              <div class="np-field">
+                <label><i class="bi bi-tag me-1"></i>Tags</label>
+                <div class="nl-tags-wrap" id="npTagsWrap" style="max-width:100%;">
+                  <div class="nl-tags-chips" id="npTagsChips"></div>
+                  <input type="text" class="nl-tags-input" id="npTagsInput" placeholder="Type and press Enter...">
+                </div>
+                <input type="hidden" id="np_tags" value="">
+              </div>
+              <div class="np-field">
+                <div class="np-toggle"><input type="checkbox" checked id="npAllowComments"><label for="npAllowComments">Allow Comments</label></div>
+              </div>
+            </div>
+            <!-- Right Column -->
+            <div>
+              <div class="np-row">
+                <div class="np-field"><label>Status</label><select class="form-select">
+                    <option selected>Draft</option>
+                    <option>Sent</option>
+                    <option>Accepted</option>
+                    <option>Rejected</option>
+                  </select></div>
+                <div class="np-field"><label>Assigned</label><select class="form-select">
+                    <option selected>GHRAUDA SOFTWARE</option>
+                    <option>Harish D.</option>
+                    <option>Divya A.</option>
+                  </select></div>
+              </div>
+              <div class="np-field"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+              <div class="np-field"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
+              <div class="np-row">
+                <div class="np-field"><label>Country</label><select class="form-select">
+                    <option selected>India</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                  </select></div>
+                <div class="np-field"><label>State</label><select class="form-select">
+                    <option value="">Nothing selected</option>
+                    <option>Tamil Nadu</option>
+                    <option>Karnataka</option>
+                    <option>Maharashtra</option>
+                  </select></div>
+              </div>
+              <div class="np-row">
+                <div class="np-field"><label>City</label><select class="form-select">
+                    <option value="">Nothing selected</option>
+                    <option>Chennai</option>
+                    <option>Bangalore</option>
+                    <option>Mumbai</option>
+                  </select></div>
+                <div class="np-field"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
+              </div>
+              <div class="np-row">
+                <div class="np-field"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+                <div class="np-field"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Items Section -->
+          <div class="np-items-section">
+            <div class="np-items-toolbar">
+              <div class="np-add-item-wrap">
+                <select class="form-select" id="npAddItemSelect">
+                  <option value="">Add Item</option>
+                  <option>HRMS Subscription</option>
+                  <option>Payroll Module</option>
+                  <option>Custom Development</option>
+                  <option>Consulting Hours</option>
+                </select>
+                <button type="button" class="btn btn-primary" id="npAddItemBtn" title="Add item"><i class="bi bi-plus-lg"></i></button>
+              </div>
+              <div class="np-qty-radio">
+                <span>Show quantity as:</span>
+                <label><input type="radio" name="npQtyType" checked> Qty</label>
+                <label><input type="radio" name="npQtyType"> Hours</label>
+                <label><input type="radio" name="npQtyType"> Qty/Hours</label>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="np-item-table">
+                <thead>
+                  <tr>
+                    <th style="width:30px;"><i class="bi bi-info-circle" style="color:#9ca3af;"></i></th>
+                    <th>Item</th>
+                    <th style="width:200px;">Description</th>
+                    <th style="width:80px;">Qty</th>
+                    <th style="width:110px;">Rate</th>
+                    <th style="width:100px;">Discount %</th>
+                    <th style="width:110px;">Tax</th>
+                    <th style="width:110px;">Amount</th>
+                    <th style="width:36px;"><i class="bi bi-gear" style="color:#9ca3af;"></i></th>
+                  </tr>
+                </thead>
+                <tbody id="npItemBody">
+                  <tr>
+                    <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                    <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
+                    <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
+                    <td><input type="number" class="form-control" value="1" min="0"></td>
+                    <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                    <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
+                    <td><select class="form-select">
+                        <option selected>No Tax</option>
+                        <option>GST 5%</option>
+                        <option>GST 12%</option>
+                        <option>GST 18%</option>
+                      </select></td>
+                    <td><span style="font-weight:700;color:#111827;">₹ 0.00</span></td>
+                    <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Totals -->
+            <div class="np-totals">
+              <div class="np-totals-table">
+                <div class="np-totals-row"><span class="total-label">Sub Total :</span><span class="total-val" style="margin-right: -10px;">₹ 0.00</span></div>
+                <div class="np-totals-row"><span class="total-label">Adjustment</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
+                <div class="np-totals-row"><span class="total-label">Transport Amount</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
+                <div class="np-totals-row"><span class="total-label">Total :</span><span class="total-val total-grand" style="margin-right: -10px;">₹ 0.00</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes Section -->
+          <div class="np-notes-section">
+            <div class="mb-3"><label>Client Note</label><textarea class="form-control" placeholder="Enter client note..."></textarea></div>
+            <div><label>Terms & Conditions</label><textarea class="form-control np-tc" placeholder="Enter terms and conditions..."></textarea></div>
+          </div>
+        </div>
+      </div><!-- /modal-body -->
+      <!-- Footer -->
+      <div class="np-footer">
+        <span class="np-hint">Include proposal items with merge field anywhere in proposal content as {proposal_items}</span>
+        <div class="np-actions">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">View PDF</button>
+          <button type="button" class="btn btn-primary">Download</button>
+          <button type="button" class="btn btn-primary">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* footer.php loads bootstrap after this block — bind on DOMContentLoaded */
+  document.addEventListener('DOMContentLoaded', function() {
+    /* New Proposal button -> open modal */
+    var npBtn = document.getElementById('cvNewProposalBtn');
+    if (npBtn) {
+      npBtn.addEventListener('click', function() {
+        var npModal = document.getElementById('newProposalModal');
+        if (npModal && typeof bootstrap !== 'undefined') {
+          bootstrap.Modal.getOrCreateInstance(npModal).show();
+        }
+      });
+    }
+
+    /* Proposal tags chip input */
+    var chipsWrap = document.getElementById('npTagsChips');
+    var input = document.getElementById('npTagsInput');
+    var hidden = document.getElementById('np_tags');
+    var wrap = document.getElementById('npTagsWrap');
+    if (chipsWrap && input && hidden) {
+      var tags = [];
+
+      function syncHidden() {
+        hidden.value = tags.join(',');
+      }
+
+      function addTag(text) {
+        var val = text.trim().replace(/,/g, '');
+        if (!val || tags.indexOf(val) !== -1) return;
+        tags.push(val);
+        var chip = document.createElement('span');
+        chip.className = 'nl-tag-chip';
+        chip.innerHTML = val + '<button type="button" class="nl-tag-x" title="Remove">&times;</button>';
+        chipsWrap.appendChild(chip);
+        chip.querySelector('.nl-tag-x').addEventListener('click', function() {
+          var idx = tags.indexOf(val);
+          if (idx !== -1) tags.splice(idx, 1);
+          chip.remove();
+          syncHidden();
+        });
+        syncHidden();
+      }
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          addTag(input.value);
+          input.value = '';
+        }
+        if (e.key === 'Backspace' && !input.value && tags.length) {
+          var last = chipsWrap.lastElementChild;
+          if (last) last.querySelector('.nl-tag-x').click();
+        }
+      });
+      input.addEventListener('blur', function() {
+        if (input.value.trim()) {
+          addTag(input.value);
+          input.value = '';
+        }
+      });
+      if (wrap) wrap.addEventListener('click', function() {
+        input.focus();
+      });
+    }
+
+    /* Add / remove item row */
+    var addBtn = document.getElementById('npAddItemBtn');
+    var itemBody = document.getElementById('npItemBody');
+    var addSelect = document.getElementById('npAddItemSelect');
+    if (addBtn && itemBody) {
+      addBtn.addEventListener('click', function() {
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+          '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+          '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+          '<td><input type="number" class="form-control" value="1" min="0"><div style="font-size:10px;color:#9ca3af;margin-top:2px;">Unit</div></td>' +
+          '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+          '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+          '<td><select class="form-select"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option><option>GST 18%</option></select></td>' +
+          '<td><span style="font-weight:700;color:#111827;">₹ 0.00</span></td>' +
+          '<td><button type="button" class="np-check-btn np-remove-item" title="Remove"><i class="bi bi-trash"></i></button></td>';
+        itemBody.appendChild(tr);
+        if (addSelect) addSelect.value = '';
+      });
+      itemBody.addEventListener('click', function(e) {
+        var btn = e.target.closest('.np-remove-item');
+        if (btn) btn.closest('tr').remove();
+      });
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modalEl = document.getElementById('apmContactModal'),
+      body = document.getElementById('cvBody-appointments');
+    if (!modalEl || !body) return;
+
+    function $id(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-calendar-check-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    /* Customer context (PHP la irundhu) */
+    var custName = "GG COMPANY",
+      custEmail = "kaviyarasu@ghratechnology.com",
+      custPhone = "9677063368";
+
+    /* Related select -> conditional blocks (Lead / External / Internal Contact) */
+    var relSel = $id('apmCtRelated'),
+      relBlocks = {
+        Lead: $id('apmRelLeadBlock'),
+        External: $id('apmRelExternalBlock'),
+        Contact: $id('apmRelInternalBlock')
+      };
+
+    function toggleRelBlocks() {
+      Object.keys(relBlocks).forEach(function(k) {
+        if (relBlocks[k]) relBlocks[k].style.display = (relSel.value === k) ? '' : 'none';
+      });
+    }
+    relSel.addEventListener('change', toggleRelBlocks);
+
+    /* Quill notes editor — lazy init on first open */
+    var ctQuill = null;
+
+    function initCtQuill() {
+      if (ctQuill || typeof Quill === 'undefined') return;
+      ctQuill = new Quill('#apmCtQuill', {
+        theme: 'snow',
+        placeholder: 'Write appointment notes here...',
+        modules: {
+          toolbar: [
+            [{
+              font: ['verdana', 'sans-serif', 'serif', 'monospace']
+            }, {
+              size: ['small', false, 'large', 'huge']
+            }],
+            ['bold', 'italic', 'underline'],
+            [{
+              align: []
+            }],
+            [{
+              list: 'bullet'
+            }, {
+              list: 'ordered'
+            }],
+            ['link'],
+            ['clean']
+          ]
+        }
+      });
+    }
+
+    function nowLocal() {
+      var d = new Date(),
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        };
+      return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + 'T' + p(d.getHours()) + ':' + p(d.getMinutes());
+    }
+
+    /* "2026-09-29T15:30" -> "29-09-2026" / "03:30 PM" (table format) */
+    function fmtDate(v) {
+      var d = v.split('T')[0].split('-');
+      return d[2] + '-' + d[1] + '-' + d[0];
+    }
+
+    function fmtTime(v) {
+      var parts = (v.split('T')[1] || '00:00').split(':'),
+        hh = parseInt(parts[0], 10),
+        ap = hh >= 12 ? 'PM' : 'AM',
+        h12 = hh % 12;
+      if (h12 === 0) h12 = 12;
+      return (h12 < 10 ? '0' : '') + h12 + ':' + parts[1] + ' ' + ap;
+    }
+
+    /* Open -> customer details prefill + defaults */
+    modalEl.addEventListener('shown.bs.modal', function() {
+      initCtQuill();
+      relSel.value = 'External';
+      toggleRelBlocks();
+      if (!$id('apmCtSubject').value) $id('apmCtSubject').value = 'Appointment with ' + custName;
+      $id('apmRelExtName').value = custName;
+      $id('apmRelExtEmail').value = custEmail;
+      $id('apmRelExtPhone').value = custPhone;
+      if (!$id('apmCtDateTime').value) $id('apmCtDateTime').value = nowLocal();
+
+      /* Leads select2 inside modal: destroy + re-init with dropdownParent */
+      if (typeof $ !== 'undefined' && $.fn.select2) {
+        $('#apmRelLead').each(function() {
+          if ($(this).data('select2')) $(this).select2('destroy');
+          $(this).select2({
+            width: '100%',
+            dropdownParent: $(modalEl)
+          });
+        });
+      }
+    });
+
+    /* SMS / Email tick -> reminder value blocks (appointments.php flow) */
+    var smsChk = $id('apmCtSms'),
+      smsBlock = $id('apmSmsReminderBlock');
+    smsChk.addEventListener('change', function() {
+      smsBlock.style.display = smsChk.checked ? '' : 'none';
+      if (smsChk.checked) $id('apmSmsReminderValue').focus();
+    });
+    var emailChk = $id('apmCtEmail'),
+      emailBlock = $id('apmEmailReminderBlock');
+    emailChk.addEventListener('change', function() {
+      emailBlock.style.display = emailChk.checked ? '' : 'none';
+      if (emailChk.checked) $id('apmEmailReminderValue').focus();
+    });
+
+    /* Close -> reset form for next open */
+    modalEl.addEventListener('hidden.bs.modal', function() {
+      modalEl.querySelectorAll('input, textarea, select').forEach(function(el) {
+        if (el.type !== 'checkbox') el.value = '';
+      });
+      relSel.value = 'External';
+      toggleRelBlocks();
+      if (typeof $ !== 'undefined' && $.fn.select2) $('#apmRelLead').val(null).trigger('change');
+      smsChk.checked = false;
+      smsBlock.style.display = 'none';
+      emailChk.checked = false;
+      emailBlock.style.display = 'none';
+      if (ctQuill) ctQuill.root.innerHTML = '';
+      [$id('apmCtSubject'), $id('apmCtDateTime')].forEach(function(el) {
+        el.classList.remove('cv-invalid');
+      });
+    });
+
+    /* Clear red border while typing */
+    $id('apmCtSubject').addEventListener('input', function() {
+      this.classList.remove('cv-invalid');
+    });
+    $id('apmCtDateTime').addEventListener('change', function() {
+      this.classList.remove('cv-invalid');
+    });
+
+    /* Submit -> validate + append row to Appointments table (important fields only) */
+    $id('apmCtSubmit').addEventListener('click', function() {
+      var subj = $id('apmCtSubject'),
+        dt = $id('apmCtDateTime'),
+        ok = true;
+      if (!subj.value.trim()) {
+        subj.classList.add('cv-invalid');
+        ok = false;
+      }
+      if (!dt.value) {
+        dt.classList.add('cv-invalid');
+        ok = false;
+      }
+      if (!ok) {
+        toastMsg('Subject and Date / Time are required', false);
+        (!subj.value.trim() ? subj : dt).focus();
+        return;
+      }
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td></td><td></td><td></td><td></td><td>' +
+        '<span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Pending</span></td>';
+      tr.cells[0].textContent = subj.value.trim();
+      tr.cells[1].textContent = fmtDate(dt.value);
+      tr.cells[2].textContent = fmtTime(dt.value);
+      tr.cells[3].textContent = $id('apmCtAttendees').value || '—';
+
+      /* Sidebar "Appointments" badge count */
+      var link = document.querySelector('.cv-side a[data-tab="appointments"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Appointment saved for ' + custName);
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var body = document.getElementById('cvBody-invoices');
+    if (!body) return;
+
+    function toast(msg) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2400);
+    }
+
+    // Create New Invoice modal (Bootstrap)
+    var invModalEl = document.getElementById('cvNewInvoiceModal');
+    var newBtn = document.getElementById('cvNewInvoiceBtn');
+    if (newBtn && invModalEl && window.bootstrap) {
+      newBtn.addEventListener('click', function() {
+        bootstrap.Modal.getOrCreateInstance(invModalEl).show();
+      });
+    }
+
+    // Zip Invoices modal
+    var zipBtn = document.getElementById('cvZipInvoicesBtn'),
+      zipModalEl = document.getElementById('cvZipModal');
+    if (zipBtn && zipModalEl && window.bootstrap) {
+      zipBtn.addEventListener('click', function() {
+        bootstrap.Modal.getOrCreateInstance(zipModalEl).show();
+      });
+    }
+    var zipSubmit = document.getElementById('cvZipSubmit');
+    if (zipSubmit && zipModalEl) {
+      zipSubmit.addEventListener('click', function() {
+        var status = document.querySelector('input[name="cvZipStatus"]:checked'),
+          st = status ? status.value : 'All',
+          from = document.getElementById('cvZipFrom').value,
+          to = document.getElementById('cvZipTo').value;
+        if (from && to && from > to) {
+          toast('From Date cannot be after To Date', false);
+          return;
+        }
+        bootstrap.Modal.getOrCreateInstance(zipModalEl).hide();
+        var msg = 'Preparing ZIP of ' + st + ' invoices';
+        if (from && to) msg += ' from ' + from + ' to ' + to;
+        toast(msg + '...');
+      });
+    }
+
+    // Tags chip input (invoice modal)
+    var tagsWrap = invModalEl ? invModalEl.querySelector('.nl-tags-wrap') : null;
+    if (tagsWrap) {
+      var tagsChips = tagsWrap.querySelector('.nl-tags-chips'),
+        tagsInput = tagsWrap.querySelector('.nl-tags-input');
+      tagsWrap.addEventListener('click', function() {
+        tagsInput.focus();
+      });
+      tagsInput.addEventListener('keydown', function(e) {
+        if (e.key !== 'Enter' && e.key !== ',') return;
+        e.preventDefault();
+        var v = tagsInput.value.trim().replace(/,$/, '');
+        if (!v) return;
+        var chip = document.createElement('span');
+        chip.className = 'nl-tag-chip';
+        chip.innerHTML = v + ' <button type="button" class="nl-tag-x" title="Remove">✕</button>';
+        tagsChips.appendChild(chip);
+        tagsInput.value = '';
+      });
+      tagsChips.addEventListener('click', function(e) {
+        var x = e.target.closest('.nl-tag-x');
+        if (x) x.closest('.nl-tag-chip').remove();
+      });
+    }
+
+    // Add item row (toolbar ➕ button -> opens Add New Item modal)
+    var addBtn = document.getElementById('cvInvAddItem'),
+      itemModalEl = document.getElementById('cvAddItemModal');
+    if (addBtn && itemModalEl && window.bootstrap) {
+      addBtn.addEventListener('click', function() {
+        bootstrap.Modal.getOrCreateInstance(itemModalEl).show();
+      });
+    }
+
+    // Stacked modal backdrop z-index fix (same as lead.php)
+    ['#cvAddItemModal'].forEach(function(id) {
+      var el = document.querySelector(id);
+      if (!el) return;
+      el.addEventListener('shown.bs.modal', function() {
+        var z = parseInt(getComputedStyle(el).zIndex, 10) || 1075;
+        var backdrops = document.querySelectorAll('.modal-backdrop');
+        var last = backdrops[backdrops.length - 1];
+        if (last) last.style.zIndex = (z - 1);
+      });
+    });
+
+    // Item amount calc (qty * rate, row level — only unconfirmed rows)
+    document.addEventListener('input', function(e) {
+      var t = e.target;
+      if (!t.closest || !t.closest('#cvInvItemBody')) return;
+      var row = t.closest('tr');
+      if (!row || row.classList.contains('cv-inv-row-locked')) return;
+      var qty = parseFloat(row.cells[3].querySelector('input').value) || 0,
+        rate = parseFloat(row.cells[4].querySelector('input').value) || 0;
+      row.querySelector('.cv-inv-amt').textContent = '₹ ' + (qty * rate).toFixed(2);
+    });
+
+    // Confirm row — freeze inputs, replace tick with delete icon, auto-add new blank row
+    var itemBody = document.getElementById('cvInvItemBody');
+    if (itemBody) itemBody.addEventListener('click', function(e) {
+      var check = e.target.closest('.cv-inv-check'),
+        del = e.target.closest('.cv-inv-row-del');
+      var row;
+      if (del) {
+        row = del.closest('tr');
+        if (row) {
+          row.remove();
+          // Keep at least one editable row
+          if (!itemBody.querySelector('tr')) addBlankItemRow();
+        }
+        return;
+      }
+      if (!check) return;
+      row = check.closest('tr');
+      if (!row || row.classList.contains('cv-inv-row-locked')) return;
+      row.classList.add('cv-inv-row-locked');
+      row.querySelectorAll('input, select, textarea').forEach(function(el) {
+        el.setAttribute('readonly', 'readonly');
+        el.setAttribute('disabled', 'disabled');
+      });
+      check.className = 'cv-inv-row-del';
+      check.title = 'Delete item';
+      check.setAttribute('aria-label', 'Delete item');
+      check.innerHTML = '<i class="bi bi-trash"></i>';
+      addBlankItemRow();
+    });
+
+    // Add New Item modal — save -> fill the blank row in items table
+    var itemSaveBtn = document.getElementById('cvItemSave');
+    if (itemSaveBtn && itemModalEl) {
+      itemSaveBtn.addEventListener('click', function() {
+        var desc = document.getElementById('cvItDesc').value.trim(),
+          rate = document.getElementById('cvItRateInr').value.trim();
+        if (!desc || !rate) {
+          toast('Description and Rate - INR are required');
+          return;
+        }
+        var tbody = document.getElementById('cvInvItemBody');
+        if (tbody) {
+          var tr = tbody.querySelector('tr:not(.cv-inv-row-locked)'),
+            madeNew = false;
+          if (!tr) {
+            tr = document.createElement('tr');
+            madeNew = true;
+          }
+          var tax = document.getElementById('cvItTax1').value,
+            longDesc = document.getElementById('cvItLongDesc').value.trim();
+          tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+            '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+            '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+            '<td><input type="number" class="form-control" value="1" min="0"><div class="cv-inv-unit">' + (document.getElementById('cvItUnit').value.trim() || 'Unit') + '</div></td>' +
+            '<td><input type="number" class="form-control" value="' + parseFloat(rate).toFixed(2) + '" step="0.01"></td>' +
+            '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+            '<td><select class="form-select"><option ' + (tax === 'No Tax' ? 'selected' : '') + '>No Tax</option><option ' + (tax === 'GST 5%' ? 'selected' : '') + '>GST 5%</option><option ' + (tax === 'GST 12%' ? 'selected' : '') + '>GST 12%</option><option ' + (tax === 'GST 18%' ? 'selected' : '') + '>GST 18%</option></select></td>' +
+            '<td><span class="cv-inv-amt">₹ ' + parseFloat(rate).toFixed(2) + '</span></td>' +
+            '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+          tr.querySelector('textarea').value = desc;
+          tr.cells[2].querySelector('textarea').value = longDesc;
+          if (madeNew) tbody.appendChild(tr);
+        }
+        // reset form + close
+        ['cvItDesc', 'cvItLongDesc', 'cvItRateInr', 'cvItHsn', 'cvItRateUsd', 'cvItUnit'].forEach(function(id) {
+          document.getElementById(id).value = '';
+        });
+        document.getElementById('cvItTax1').value = 'No Tax';
+        document.getElementById('cvItGroup').value = '';
+        bootstrap.Modal.getOrCreateInstance(itemModalEl).hide();
+        toast('Item "' + desc + '" added to invoice');
+      });
+    }
+
+    function addBlankItemRow() {
+      var tbody = document.getElementById('cvInvItemBody');
+      if (!tbody) return;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>' +
+        '<td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>' +
+        '<td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>' +
+        '<td><input type="number" class="form-control" value="1" min="0"></td>' +
+        '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+        '<td><input type="number" class="form-control" value="0.00" step="0.01"></td>' +
+        '<td><select class="form-select"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option><option>GST 18%</option></select></td>' +
+        '<td><span class="cv-inv-amt">₹ 0.00</span></td>' +
+        '<td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>';
+      tbody.appendChild(tr);
+    }
+
+    // Submit — add invoice row
+    var submitBtn = document.getElementById('cvInvSubmit');
+    if (submitBtn) submitBtn.addEventListener('click', function() {
+      var d = new Date(),
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        },
+        today = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear(),
+        due = new Date(d.getTime() + 86400000),
+        dueStr = p(due.getDate()) + '-' + p(due.getMonth() + 1) + '-' + due.getFullYear(),
+        num = 'INV-000' + (120 + body.rows.length),
+        tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td><a href="#" class="cv-link">' + num + '</a></td>' +
+        '<td>₹ 0.00</td><td>₹ 0</td><td>' + today + '</td>' +
+        '<td>GHARUDA SOFTWARE</td><td>—</td><td>—</td><td>' + dueStr + '</td>' +
+        '<td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Draft</span></td>';
+      if (invModalEl && window.bootstrap) bootstrap.Modal.getOrCreateInstance(invModalEl).hide();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toast('Invoice ' + num + ' created successfully');
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var doc = document.getElementById('cvStmtDoc');
+    if (!doc) return;
+
+    function toast(msg) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2400);
+    }
+
+    var PRINT_CSS = 'body{font-family:Arial,Helvetica,sans-serif;padding:26px;color:#111827}' +
+      '.cv-stmt-head{display:flex;justify-content:space-between;border-bottom:1px dashed #d1d5db;padding-bottom:14px;margin-bottom:18px}' +
+      '.cv-stmt-brand{display:flex;gap:12px;align-items:center}' +
+      '.cv-stmt-logo{width:48px;height:48px;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}' +
+      '.cv-stmt-co-name{font-weight:800;font-size:14px;margin-bottom:4px}' +
+      '.cv-stmt-co-addr{font-size:11.5px;line-height:1.6;color:#4b5563}' +
+      '.cv-stmt-meta{border:1px solid #e5e7eb;border-radius:10px;padding:10px 14px;font-size:12px}' +
+      '.cv-stmt-doc-type{font-weight:800;color:#0f7a38;font-size:11px;text-transform:uppercase;margin-bottom:8px}' +
+      '.cv-stmt-meta-row{display:flex;justify-content:space-between;gap:16px;padding:2px 0}' +
+      '.cv-stmt-meta-row span{color:#6b7280}' +
+      '.cv-stmt-title{font-size:18px;font-weight:800;margin:16px 0}' +
+      '.cv-stmt-parties{display:flex;gap:14px;margin-bottom:18px}' +
+      '.cv-stmt-to{flex:1.6}' +
+      '.cv-stmt-to-label{font-size:11px;font-weight:800;text-transform:uppercase;color:#6b7280;margin-bottom:6px}' +
+      '.cv-stmt-to-box{border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;font-size:12.5px;display:flex;gap:10px}' +
+      '.cv-stmt-to-ava{width:36px;height:36px;border-radius:9px;background:#eafaf1;color:#0f7a38;font-weight:800;display:flex;align-items:center;justify-content:center}' +
+      '.cv-stmt-to-name{font-weight:800;margin-bottom:3px}' +
+      '.cv-stmt-to-line{color:#4b5563;line-height:1.7}' +
+      '.cv-stmt-due{flex:1;border:1px solid #d9f2e4;border-radius:10px;padding:14px;background:#f4fdf8}' +
+      '.cv-stmt-due .k{font-size:10px;font-weight:800;text-transform:uppercase;color:#0f7a38;margin-bottom:4px}' +
+      '.cv-stmt-due .v{font-size:22px;font-weight:800}' +
+      '.cv-stmt-due .d{font-size:11px;color:#6b7280;margin-top:4px}' +
+      '.cv-stmt-kpis{display:flex;gap:10px;margin-bottom:18px}' +
+      '.cv-stmt-kpi{border:1px solid #e5e7eb;border-radius:10px;padding:8px 12px;font-size:12px;display:flex;gap:8px;align-items:center}' +
+      '.cv-stmt-kpi .k{font-size:10px;text-transform:uppercase;color:#6b7280;margin-bottom:2px}' +
+      '.cv-stmt-kpi .v{font-weight:800;font-size:14px}' +
+      'table{border-collapse:collapse;width:100%;font-size:12.5px}' +
+      'th,td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left}' +
+      'th{background:#f3f4f6}' +
+      '.cv-stmt-total td{font-weight:800;background:#f9fafb;border-top:2px solid #16a34a}';
+
+    function printDoc() {
+      var w = window.open('', '_blank', 'width=900,height=650');
+      if (!w) {
+        toast('Please allow pop-ups to print');
+        return;
+      }
+      var head = doc.querySelector('.cv-stmt-head').outerHTML,
+        parties = doc.querySelector('.cv-stmt-parties').outerHTML,
+        kpis = doc.querySelector('.cv-stmt-kpis').outerHTML,
+        tbl = doc.querySelector('.table-responsive').outerHTML;
+      w.document.write('<html><head><title>Customer Statement</title><style>' + PRINT_CSS +
+        '</style></head><body>' + head +
+        '<div class="cv-stmt-title">' + doc.querySelector('.cv-stmt-title').textContent + '</div>' +
+        parties + kpis + tbl + '</body></html>');
+      w.document.close();
+      w.focus();
+      w.print();
+    }
+
+    function exportPdf() {
+      var head = doc.querySelector('.cv-stmt-head').outerHTML,
+        parties = doc.querySelector('.cv-stmt-parties').outerHTML,
+        kpis = doc.querySelector('.cv-stmt-kpis').outerHTML,
+        tbl = doc.querySelector('.table-responsive').outerHTML,
+        w = window.open('', '_blank', 'width=900,height=650');
+      if (!w) {
+        toast('Please allow pop-ups to export');
+        return;
+      }
+      w.document.write('<html><head><title>Customer Statement</title></head><body>' + head +
+        '<div class="cv-stmt-title">' + doc.querySelector('.cv-stmt-title').textContent + '</div>' +
+        parties + kpis + tbl + '</body></html>');
+      w.document.close();
+      toast('Statement ready — use the browser Print → Save as PDF');
+    }
+
+    document.querySelector('.js-stmt-print').addEventListener('click', function() {
+      printDoc();
+      toast('Opening print view...');
+    });
+    document.querySelector('.js-stmt-pdf').addEventListener('click', exportPdf);
+    document.querySelector('.js-stmt-email').addEventListener('click', function() {
+      toast('Statement sent to kaviyarasu@ghratechnology.com by email');
+    });
+    document.querySelector('.js-stmt-wa').addEventListener('click', function() {
+      toast('Statement sent via WhatsApp to 9677063368');
+    });
+
+    // Table view button -> open details modal
+    var stmtModal = document.getElementById('cvStmtModal');
+
+    function openStmtModal(tr) {
+      if (!stmtModal) return;
+      var d = tr.dataset;
+      document.getElementById('sdDate').textContent = d.date || '—';
+      document.getElementById('sdRef').textContent = d.ref || '—';
+      document.getElementById('sdType').textContent = d.type || '—';
+      document.getElementById('sdMode').textContent = d.mode || '—';
+      document.getElementById('sdDebit').textContent = d.debit || '—';
+      document.getElementById('sdCredit').textContent = d.credit || '—';
+      document.getElementById('sdBal').textContent = d.balance || '—';
+      document.getElementById('sdDesc').textContent = d.desc || '—';
+      document.getElementById('sdNotes').textContent = d.notes || '—';
+      stmtModal.classList.add('show');
+    }
+
+    function bindStmtView() {
+      doc.querySelectorAll('.cv-stmt-view').forEach(function(btn) {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', function() {
+          var tr = btn.closest('tr');
+          if (tr && tr.dataset.date) openStmtModal(tr);
+        });
+      });
+    }
+    bindStmtView();
+
+    function closeStmtModal() {
+      if (stmtModal) stmtModal.classList.remove('show');
+    }
+    ['cvStmtClose', 'cvStmtCancel'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', closeStmtModal);
+    });
+    if (stmtModal) stmtModal.addEventListener('click', function(e) {
+      if (e.target === stmtModal) closeStmtModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && stmtModal && stmtModal.classList.contains('show')) closeStmtModal();
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modalEl = document.getElementById('cvNewCallLogModal'),
+      openBtn = document.getElementById('cvNewCallLogBtn'),
+      body = document.getElementById('cvBody-call_logs');
+    if (!modalEl || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-telephone-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    function esc(s) {
+      var dv = document.createElement('div');
+      dv.textContent = s;
+      return dv.innerHTML;
+    }
+
+    var modal = bootstrap.Modal.getOrCreateInstance(modalEl),
+      startEl = $('clStart'),
+      endEl = $('clEnd'),
+      durEl = $('clDuration');
+
+    /* ---- Default start/end to now when modal opens fresh ---- */
+    function nowLocal() {
+      var d = new Date(),
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        };
+      return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + 'T' + p(d.getHours()) + ':' + p(d.getMinutes());
+    }
+
+    function fmtDT(v) {
+      // "2026-09-24T14:48" -> "24-09-2026 14:48"
+      if (!v) return '—';
+      var parts = v.split('T'),
+        d = parts[0].split('-');
+      return d[2] + '-' + d[1] + '-' + d[0] + ' ' + (parts[1] || '00:00');
+    }
+
+    /* ---- Duration auto-calc ---- */
+    function calcDuration() {
+      if (!startEl.value || !endEl.value) {
+        durEl.value = '';
+        return;
+      }
+      var ms = new Date(endEl.value) - new Date(startEl.value);
+      if (isNaN(ms) || ms < 0) {
+        durEl.value = '';
+        durEl.placeholder = 'End time must be after start time';
+        return;
+      }
+      durEl.placeholder = 'Auto-calculated from start & end time';
+      var totalSec = Math.floor(ms / 1000),
+        h = Math.floor(totalSec / 3600),
+        m = Math.floor((totalSec % 3600) / 60),
+        s = totalSec % 60,
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        };
+      durEl.value = (h ? p(h) + ':' : '') + p(m) + ':' + p(s);
+    }
+
+    startEl.addEventListener('change', calcDuration);
+    endEl.addEventListener('change', calcDuration);
+
+    modalEl.addEventListener('shown.bs.modal', function() {
+      if (!startEl.value) startEl.value = nowLocal();
+      if (!endEl.value) endEl.value = nowLocal();
+      calcDuration();
+    });
+
+    /* ---- Clear errors while typing ---- */
+    [$('clType'), $('clCaller'), $('clContact'), $('clPurpose'), $('clSummary')].forEach(function(el) {
+      el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', function() {
+        if (String(this.value).trim()) {
+          this.classList.remove('cv-invalid');
+          var err = $(this.id + 'Err');
+          if (err) err.hidden = true;
+        }
+      });
+    });
+
+    /* ---- Submit ---- */
+    $('clSubmit').addEventListener('click', function() {
+      var ok = true,
+        first = null;
+
+      function check(input, errId) {
+        if (!String(input.value).trim()) {
+          input.classList.add('cv-invalid');
+          $(errId).hidden = false;
+          if (!first) first = input;
+          ok = false;
+        }
+      }
+      check($('clType'), 'clTypeErr');
+      check($('clCaller'), 'clCallerErr');
+      check($('clContact'), 'clContactErr');
+      check($('clPurpose'), 'clPurposeErr');
+      check($('clSummary'), 'clSummaryErr');
+      if (!ok) {
+        toastMsg('Please fill the required fields', false);
+        if (first) first.focus();
+        return;
+      }
+
+      function radio(name) {
+        var el = modalEl.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : 'No';
+      }
+
+      var type = $('clType').value,
+        icon = type === 'Incoming' ? 'bi-telephone-inbound-fill' : (type === 'Missed' ? 'bi-telephone-missed-fill' : 'bi-telephone-outbound-fill'),
+        cls = type.toLowerCase();
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML =
+        '<td><span class="cv-cl-type"><i class="bi ' + icon + ' ' + esc(cls) + '"></i>' + esc(type) + '</span></td>' +
+        '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
+      tr.cells[1].textContent = $('clPurpose').value.trim();
+      tr.cells[2].textContent = $('clCaller').value.trim();
+      tr.cells[3].textContent = $('clContact').value.trim();
+      tr.cells[4].textContent = startEl.value ? fmtDT(startEl.value) : '—';
+      tr.cells[5].textContent = endEl.value ? fmtDT(endEl.value) : '—';
+      tr.cells[6].textContent = durEl.value || '—';
+      tr.cells[7].innerHTML = '<span class="' + (radio('clFollowup') === 'Yes' ? 'cv-cl-yes' : 'cv-cl-no') + '">' + radio('clFollowup') + '</span>';
+      tr.cells[8].innerHTML = '<span class="' + (radio('clImportant') === 'Yes' ? 'cv-cl-yes' : 'cv-cl-no') + '">' + radio('clImportant') + '</span>';
+      tr.cells[9].innerHTML = '<span class="' + (radio('clCompleted') === 'Yes' ? 'cv-cl-yes' : 'cv-cl-no') + '">' + radio('clCompleted') + '</span>';
+
+      // Sidebar "Call Logs" badge count
+      var link = document.querySelector('.cv-side a[data-tab="call_logs"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      modal.hide();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Call log saved for ' + $('clContact').value.trim());
+
+      /* Reset form for next open */
+      $('clType').value = '';
+      $('clCallType').value = '';
+      $('clCaller').value = '';
+      $('clContact').value = '';
+      $('clPurpose').value = '';
+      $('clSummary').value = '';
+      startEl.value = nowLocal();
+      endEl.value = nowLocal();
+      calcDuration();
+      $('clStaff').value = '';
+      modalEl.querySelector('input[name="clFollowup"][value="No"]').checked = true;
+      modalEl.querySelector('input[name="clCompleted"][value="No"]').checked = true;
+      modalEl.querySelector('input[name="clImportant"][value="No"]').checked = true;
+      ['clType', 'clCaller', 'clContact', 'clPurpose', 'clSummary'].forEach(function(id) {
+        $(id).classList.remove('cv-invalid');
+      });
+      ['clTypeErr', 'clCallerErr', 'clContactErr', 'clPurposeErr', 'clSummaryErr'].forEach(function(id) {
+        $(id).hidden = true;
+      });
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('cvAddrModal'),
+      openBtn = document.getElementById('cvAddAddrBtn'),
+      body = document.getElementById('cvBody-shipping');
+    if (!modal || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-check-circle-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    var reqFields = ['adOutlet', 'adStreet'],
+      editingRow = null;
+
+    function resetAddrForm() {
+      ['adOutlet', 'adStreet', 'adZip', 'adLat', 'adLng', 'adEmail'].forEach(function(id) {
+        $(id).value = '';
+      });
+      $('adPhone').value = '+91 ';
+      $('adCountry').value = 'India';
+      ['adState', 'adCity', 'adArea'].forEach(function(id) {
+        $(id).value = '';
+      });
+      reqFields.forEach(function(id) {
+        $(id).classList.remove('cv-invalid');
+      });
+      modal.querySelector('.cv-note-body').scrollTop = 0;
+    }
+
+    function openModal() {
+      resetAddrForm();
+      editingRow = null;
+      $('cvAddrTitle').textContent = 'Add address';
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('adOutlet').focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    $('cvAddrClose').addEventListener('click', closeModal);
+    $('cvAddrCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    });
+
+    // Clear error while typing
+    reqFields.forEach(function(id) {
+      $(id).addEventListener('input', function() {
+        if (this.value.trim()) this.classList.remove('cv-invalid');
+      });
+    });
+
+    // Submit — add address row
+    $('cvAddrSubmit').addEventListener('click', function() {
+      var ok = true;
+      reqFields.forEach(function(id) {
+        var el = $(id);
+        if (!el.value.trim()) {
+          el.classList.add('cv-invalid');
+          ok = false;
+        }
+      });
+      if (!ok) {
+        toastMsg('Outlet Name and Street are required', false);
+        return;
+      }
+      var d = new Date(),
+        p = function(n) {
+          return (n < 10 ? '0' : '') + n;
+        },
+        when = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()),
+        esc = function(s) {
+          var div = document.createElement('div');
+          div.textContent = s;
+          return div.innerHTML;
+        },
+        email = $('adEmail').value.trim(),
+        phoneRaw = $('adPhone').value.trim(),
+        phone = phoneRaw === '+91' ? '' : esc(phoneRaw),
+        emailCell = email ? '<a class="cv-link" href="mailto:' + esc(email) + '">' + esc(email) + '</a>' : '—',
+        phoneCell = phone ? '<a class="cv-link" href="tel:' + esc(phone.replace(/\s+/g, '')) + '">' + esc(phone) + '</a>' : '—';
+
+      var tr = editingRow || body.insertRow();
+      tr.className = 'cv-row';
+      if (!editingRow) tr.innerHTML = '<td></td>';
+
+      var cells = [
+        esc($('adOutlet').value.trim()),
+        esc($('adArea').value || '—'),
+        esc($('adStreet').value.trim()),
+        esc($('adCity').value || '—'),
+        esc($('adZip').value.trim() || '—'),
+        esc($('adState').value || '—'),
+        esc($('adLat').value.trim() || '—'),
+        esc($('adLng').value.trim() || '—'),
+        emailCell,
+        phoneCell,
+        when
+      ];
+      cells.forEach(function(val, i) {
+        var cell = tr.cells[i + 1];
+        if (!cell) {
+          cell = tr.insertCell(i + 1);
+        }
+        cell.innerHTML = val;
+      });
+
+      var actCell = tr.cells[12];
+      if (!actCell) {
+        actCell = tr.insertCell(12);
+        actCell.innerHTML = '<div class="d-flex gap-1">' +
+          '<button type="button" class="cv-addr-edit" title="Edit address" aria-label="Edit address"><i class="bi bi-pencil-fill"></i></button>' +
+          '<button type="button" class="cv-addr-del" title="Delete address" aria-label="Delete address"><i class="bi bi-trash"></i></button>' +
+          '</div>';
+      }
+
+      renumber();
+      closeModal();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg(editingRow ? 'Address updated successfully' : 'Address added successfully');
+      editingRow = null;
+    });
+
+    // Serial number + delete
+    function renumber() {
+      Array.from(body.rows).forEach(function(r, i) {
+        if (r.cells[0]) r.cells[0].textContent = i + 1;
+      });
+    }
+
+    body.addEventListener('click', function(e) {
+      var del = e.target.closest('.cv-addr-del'),
+        edit = e.target.closest('.cv-addr-edit');
+      if (del) {
+        del.closest('tr').remove();
+        renumber();
+        if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+        toastMsg('Address removed');
+        return;
+      }
+      if (!edit) return;
+      var row = edit.closest('tr'),
+        c = row.cells;
+      $('adOutlet').value = c[1].textContent === '—' ? '' : c[1].textContent;
+      $('adArea').value = c[2].textContent === '—' ? '' : c[2].textContent;
+      $('adStreet').value = c[3].textContent === '—' ? '' : c[3].textContent;
+      $('adCity').value = c[4].textContent === '—' ? '' : c[4].textContent;
+      $('adZip').value = c[5].textContent === '—' ? '' : c[5].textContent;
+      $('adState').value = c[6].textContent === '—' ? '' : c[6].textContent;
+      $('adLat').value = c[7].textContent === '—' ? '' : c[7].textContent;
+      $('adLng').value = c[8].textContent === '—' ? '' : c[8].textContent;
+      var emailTxt = c[9].querySelector('a') ? c[9].querySelector('a').textContent : '';
+      $('adEmail').value = emailTxt;
+      var phoneTxt = c[10].querySelector('a') ? c[10].querySelector('a').textContent : '+91 ';
+      $('adPhone').value = phoneTxt.indexOf('+91') === 0 ? phoneTxt : '+91 ' + phoneTxt;
+      editingRow = row;
+      $('cvAddrTitle').textContent = 'Edit address';
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('adOutlet').focus();
+      }, 50);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('cvVaultModal'),
+      openBtn = document.getElementById('cvNewVaultBtn'),
+      body = document.getElementById('cvBody-vault');
+    if (!modal || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-shield-lock-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    var passInput = $('cvPass'),
+      passBar = $('cvPassBar'),
+      passHint = $('cvPassHint'),
+      passToggle = $('cvPassToggle'),
+      passGen = $('cvPassGen');
+
+    function esc(s) {
+      var dv = document.createElement('div');
+      dv.textContent = s;
+      return dv.innerHTML;
+    }
+
+    /* ---- Password show / hide ---- */
+    passToggle.addEventListener('click', function() {
+      var show = passInput.type === 'password';
+      passInput.type = show ? 'text' : 'password';
+      this.innerHTML = '<i class="bi ' + (show ? 'bi-eye-slash' : 'bi-eye') + '"></i>';
+      this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      passInput.focus();
+    });
+
+    /* ---- Password strength ---- */
+    function passScore(v) {
+      var s = 0;
+      if (v.length >= 8) s++;
+      if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++;
+      if (/\d/.test(v)) s++;
+      if (/[^A-Za-z0-9]/.test(v)) s++;
+      if (v.length >= 12 && s >= 3) s++;
+      return s; // 0..5
+    }
+
+    function renderStrength() {
+      var v = passInput.value,
+        s = passScore(v),
+        pct = [0, 20, 40, 60, 85, 100][s],
+        cls = s <= 1 ? '#dc3545' : (s <= 3 ? '#d97706' : 'var(--primary)'),
+        lbl = v ? (s <= 1 ? 'Weak password' : (s <= 3 ? 'Medium password' : 'Strong password')) : 'Use 8+ characters with letters, numbers & symbols.';
+      passBar.style.width = pct + '%';
+      passBar.style.background = cls;
+      passHint.textContent = lbl;
+      passHint.className = 'cv-pass-hint ' + (v ? (s <= 1 ? 's-weak' : (s <= 3 ? 's-med' : 's-strong')) : '');
+    }
+
+    passInput.addEventListener('input', function() {
+      renderStrength();
+      if (this.value.trim()) {
+        this.classList.remove('cv-invalid');
+        $('cvPassErr').hidden = true;
+      }
+    });
+
+    /* ---- Generate strong password ---- */
+    passGen.addEventListener('click', function() {
+      var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%&*?',
+        out = '';
+      var rnd = new Uint32Array(16);
+      (window.crypto || window.msCrypto).getRandomValues(rnd);
+      for (var i = 0; i < 16; i++) out += chars[rnd[i] % chars.length];
+      passInput.value = out;
+      passInput.type = 'text';
+      passToggle.innerHTML = '<i class="bi bi-eye-slash"></i>';
+      renderStrength();
+      toastMsg('Strong password generated');
+    });
+
+    /* ---- Clear errors while typing ---- */
+    [$('cvServer'), $('cvUser')].forEach(function(el) {
+      el.addEventListener('input', function() {
+        if (this.value.trim()) {
+          this.classList.remove('cv-invalid');
+          $(this.id + 'Err').hidden = true;
+        }
+      });
+    });
+
+    function openModal() {
+      $('cvServer').value = '';
+      $('cvPort').value = '';
+      $('cvUser').value = '';
+      passInput.value = '';
+      passInput.type = 'password';
+      passToggle.innerHTML = '<i class="bi bi-eye"></i>';
+      renderStrength();
+      $('cvDesc').value = '';
+      var def = modal.querySelector('input[name="cvVisibility"][value="staff"]');
+      if (def) def.checked = true;
+      $('cvShareProjects').checked = false;
+      [$('cvServer'), $('cvUser'), passInput].forEach(function(el) {
+        el.classList.remove('cv-invalid');
+      });
+      ['cvServerErr', 'cvUserErr', 'cvPassErr'].forEach(function(id) {
+        $(id).hidden = true;
+      });
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('cvServer').focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    $('cvVaultClose').addEventListener('click', closeModal);
+    $('cvVaultCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    });
+
+    /* ---- Submit ---- */
+    $('cvVaultSubmit').addEventListener('click', function() {
+      var ok = true,
+        first = null;
+
+      function check(input, errId) {
+        if (!input.value.trim()) {
+          input.classList.add('cv-invalid');
+          $(errId).hidden = false;
+          if (!first) first = input;
+          ok = false;
+        }
+      }
+      check($('cvServer'), 'cvServerErr');
+      check($('cvUser'), 'cvUserErr');
+      check(passInput, 'cvPassErr');
+      if (!ok) {
+        toastMsg('Please fill the required fields', false);
+        if (first) first.focus();
+        return;
+      }
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td></td><td></td><td></td><td></td>';
+      tr.cells[0].textContent = $('cvServer').value.trim();
+      tr.cells[1].textContent = $('cvPort').value.trim() || '—';
+      tr.cells[2].textContent = $('cvUser').value.trim();
+      tr.cells[3].textContent = $('cvDesc').value.trim() || '—';
+
+      // Sidebar "Vault" badge count
+      var link = document.querySelector('.cv-side a[data-tab="vault"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      closeModal();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Vault entry saved for ' + $('cvServer').value.trim());
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('cvReminderModal'),
+      openBtn = document.getElementById('cvNewReminderBtn'),
+      body = document.getElementById('cvBody-reminders');
+    if (!modal || !openBtn || !body) return;
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function toastMsg(msg, ok) {
+      var t = document.createElement('div');
+      t.className = 'cv-toast';
+      t.innerHTML = '<i class="bi ' + (ok === false ? 'bi-exclamation-circle-fill' : 'bi-bell-fill') + '"></i> ' + msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('show');
+      }, 10);
+      setTimeout(function() {
+        t.classList.remove('show');
+        setTimeout(function() {
+          t.remove();
+        }, 350);
+      }, 2600);
+    }
+
+    /* ---- Clear errors while typing ---- */
+    [$('cvRemDate'), $('cvRemDesc')].forEach(function(el) {
+      el.addEventListener('input', function() {
+        if (this.value.trim()) {
+          this.classList.remove('cv-invalid');
+          $(this.id + 'Err').hidden = true;
+        }
+      });
+    });
+    $('cvRemStaff').addEventListener('change', function() {
+      if (this.value) {
+        this.classList.remove('cv-invalid');
+        $('cvRemStaffErr').hidden = true;
+      }
+    });
+
+    function openModal() {
+      $('cvRemDate').value = '';
+      $('cvRemTime').value = '';
+      $('cvRemStaff').value = '';
+      $('cvRemDesc').value = '';
+      $('cvRemEmail').checked = false;
+      [$('cvRemDate'), $('cvRemStaff'), $('cvRemDesc')].forEach(function(el) {
+        el.classList.remove('cv-invalid');
+      });
+      ['cvRemDateErr', 'cvRemStaffErr', 'cvRemDescErr'].forEach(function(id) {
+        $(id).hidden = true;
+      });
+      modal.classList.add('show');
+      setTimeout(function() {
+        $('cvRemDate').focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    $('cvReminderClose').addEventListener('click', closeModal);
+    $('cvReminderCancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    });
+
+    /* ---- Ctrl + Enter shortcut ---- */
+    $('cvRemDesc').addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') $('cvReminderSubmit').click();
+    });
+
+    /* ---- Submit ---- */
+    $('cvReminderSubmit').addEventListener('click', function() {
+      var ok = true,
+        first = null;
+
+      function check(input, errId) {
+        if (!input.value.trim()) {
+          input.classList.add('cv-invalid');
+          $(errId).hidden = false;
+          if (!first) first = input;
+          ok = false;
+        }
+      }
+      check($('cvRemDate'), 'cvRemDateErr');
+      check($('cvRemStaff'), 'cvRemStaffErr');
+      check($('cvRemDesc'), 'cvRemDescErr');
+      if (!ok) {
+        toastMsg('Please fill the required fields', false);
+        if (first) first.focus();
+        return;
+      }
+
+      var d = $('cvRemDate').value,
+        time = $('cvRemTime').value,
+        when = d;
+      if (time) when += ' ' + time;
+      if ($('cvRemEmail').checked) when += ' + Email';
+
+      var tr = body.insertRow();
+      tr.className = 'cv-row';
+      tr.innerHTML = '<td></td><td></td><td></td><td>No</td>';
+      tr.cells[0].textContent = $('cvRemDesc').value.trim();
+      tr.cells[1].textContent = when;
+      tr.cells[2].textContent = $('cvRemStaff').value;
+
+      // Sidebar "Reminders" badge count
+      var link = document.querySelector('.cv-side a[data-tab="reminders"]');
+      if (link) {
+        var badge = link.querySelector('.cv-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cv-badge';
+          badge.textContent = '0';
+          link.appendChild(badge);
+        }
+        badge.textContent = (parseInt(badge.textContent, 10) || 0) + 1;
+      }
+
+      closeModal();
+      if (window.refreshAttendanceTable) window.refreshAttendanceTable();
+      toastMsg('Reminder set for ' + $('cvRemStaff').value);
+    });
+  });
+</script>
+
+<script>
+  /* ---------------------------------------------------------------
+       Pure JavaScript Client-Side Tab Switching (display: block / none)
+       NO URL changes, NO hash, NO query parameters, NO page reloads!
+       --------------------------------------------------------------- */
+  (function() {
+    var DEFAULT_TAB = 'contacts';
+    var LABELS = {
+      "profile": "Profile",
+      "contacts": "Contacts",
+      "notes": "Notes",
+      "proposals": "Proposals",
+      "estimates": "Estimates",
+      "appointments": "Appointments",
+      "invoices": "Invoices",
+      "payments": "Payments",
+      "statement": "Statement",
+      "credit_notes": "Credit Notes",
+      "purchase_orders": "Purchase Orders",
+      "subscriptions": "Subscriptions",
+      "expenses": "Expenses",
+      "contracts": "Contracts",
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "tickets": "Support Tickets",
+      "email_log": "Email Log",
+      "call_logs": "Call Logs",
+      "shipping": "View Shipping Address",
+      "map": "Map",
+      "files": "Files",
+      "vault": "Vault",
+      "reminders": "Reminders",
+      "activity_log": "Activity Log"
+    };
+
+    var side = document.getElementById('cvSide');
+    var crumb = document.getElementById('cvCrumbTab');
+    var profile = document.getElementById('cvProfile');
+    var foot = document.getElementById('cvFormFoot');
+
+    // Immediately clean any existing query string (?id=46...) or hash from the URL bar without reloading
+    if (window.location.search || window.location.hash) {
+      try {
+        window.history.replaceState(null, '', window.location.pathname);
+      } catch (e) {}
+    }
+
+    function activateTab(tabKey) {
+      if (!tabKey) tabKey = DEFAULT_TAB;
+
+      // 1. Update sidebar links
+      var sideLinks = side ? side.querySelectorAll('.cv-side-link') : [];
+      var activeLink = null;
+      sideLinks.forEach(function(link) {
+        if (link.getAttribute('data-tab') === tabKey) {
+          link.classList.add('active');
+          link.setAttribute('aria-selected', 'true');
+          activeLink = link;
+        } else {
+          link.classList.remove('active');
+          link.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      // 2. Update breadcrumb
+      if (crumb) {
+        crumb.textContent = LABELS[tabKey] || (activeLink ? activeLink.textContent.trim() : '');
+      }
+
+      // 3. Switch main tab panes using display: block and display: none
+      var panes = document.querySelectorAll('#cvTabContent > .tab-pane');
+      var targetId = 'cvTab-' + tabKey;
+      var activePane = null;
+
+      panes.forEach(function(pane) {
+        if (pane.id === targetId) {
+          pane.style.display = 'block';
+          pane.classList.add('show', 'active');
+          activePane = pane;
+        } else {
+          pane.style.display = 'none';
+          pane.classList.remove('show', 'active');
+        }
+      });
+
+      // 4. Refresh datatables in the newly visible pane
+      if (activePane) {
+        var tables = activePane.querySelectorAll('table.datatable');
+        tables.forEach(function(table) {
+          if (table.autoTable && typeof table.autoTable.refresh === 'function') {
+            table.autoTable.refresh();
+          }
+        });
+      }
+    }
+
+    // Sidebar click handler (pure client-side display toggle, no URL change)
+    if (side) {
+      side.addEventListener('click', function(e) {
+        var link = e.target.closest('.cv-side-link');
+        if (!link) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var key = link.getAttribute('data-tab');
+        if (key) {
+          activateTab(key);
+        }
+      });
+    }
+
+    // Profile sub-tabs switching (Customer Details, Billing & Shipping, Customer Admins, Purchase Order)
+    function activateSubTab(subKey) {
+      if (!profile) return;
+      var subBtns = profile.querySelectorAll('.cv-subtab');
+      var subPanes = profile.querySelectorAll('.tab-content > .tab-pane');
+
+      subBtns.forEach(function(btn) {
+        if (btn.getAttribute('data-sub') === subKey) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      var activeSubPane = null;
+      subPanes.forEach(function(pane) {
+        if (pane.getAttribute('data-pane') === subKey || pane.id === 'cvSub-' + subKey) {
+          pane.style.display = 'block';
+          pane.classList.add('show', 'active');
+          activeSubPane = pane;
+        } else {
+          pane.style.display = 'none';
+          pane.classList.remove('show', 'active');
+        }
+      });
+
+      // Toggle submit button footer (show only for details & billing)
+      if (foot) {
+        foot.style.display = (subKey === 'details' || subKey === 'billing') ? '' : 'none';
+      }
+
+      if (activeSubPane) {
+        var tables = activeSubPane.querySelectorAll('table.datatable');
+        tables.forEach(function(table) {
+          if (table.autoTable && typeof table.autoTable.refresh === 'function') {
+            table.autoTable.refresh();
+          }
+        });
+      }
+    }
+
+    if (profile) {
+      profile.addEventListener('click', function(e) {
+        var btn = e.target.closest('.cv-subtab');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var sub = btn.getAttribute('data-sub');
+        if (sub) {
+          activateSubTab(sub);
+        }
+      });
+    }
+
+    // Initial setup on page load: show default tab (Contacts)
+    activateTab(DEFAULT_TAB);
+    activateSubTab('details');
+  })();
+
+  /* every row added/removed from JS re-paginates through the datatable plugin */
+  window.refreshAttendanceTable = function() {
+    document.querySelectorAll('table.datatable').forEach(function(t) {
+      if (t.autoTable) t.autoTable.refresh();
+    });
+  };
+</script>

@@ -1,0 +1,332 @@
+/* ===== Summary Report — scoped to .sr5-page ===== */
+
+    /* Title icon tile */
+    .sr5-page .sr5-title-ico {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        box-shadow: 0 8px 18px rgba(22, 163, 74, .28);
+        flex-shrink: 0;
+    }
+
+    /* ===== Filter card ===== */
+    .sr5-page .sr5-filter-card {
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+        padding: 16px 18px 18px;
+        margin-bottom: 16px;
+    }
+
+    .sr5-page .sr5-filter-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .sr5-page .sr5-filter-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--ink-900);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sr5-page .sr5-filter-title i {
+        color: var(--primary);
+    }
+
+    .sr5-page .sr5-reset-btn {
+        font-size: 11.5px;
+        font-weight: 800;
+        border-radius: 9px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: var(--ink-700);
+        padding: 6px 12px;
+        transition: .15s;
+    }
+
+    .sr5-page .sr5-reset-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary-dark);
+        background: var(--primary-soft);
+    }
+
+    .sr5-page .sr5-filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 14px 16px;
+    }
+
+    .sr5-page .sr5-fld .lbl {
+        display: block;
+        font-size: 11.5px;
+        font-weight: 800;
+        color: var(--ink-500);
+        letter-spacing: .02em;
+        margin-bottom: 6px;
+    }
+
+    .sr5-page .sr5-select {
+        width: 100%;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-900);
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 9px 12px;
+        background-color: #fff;
+        transition: .15s;
+    }
+
+    .sr5-page .sr5-select:focus {
+        outline: none;
+        border-color: #86efac;
+        box-shadow: 0 0 0 3px rgba(12, 163, 8, .1);
+    }
+
+    .sr5-page .sr5-select:disabled {
+        background: #f8fafc;
+        color: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    /* ===== Select2 =====
+       Footer.php `.select2` class-a global-a init pannudhu, assets/css/select2.css
+       already box / focus ring / dropdown panel ellathukum project theme kudukkudhu
+       — adhanala inga override thevai illa. Disabled filter field mattum
+       handle pandrom. */
+
+    /* Disabled filter field — pointer-events off, so Select2 version eppadi
+       irundhaalum dropdown open aagaadhu */
+    .sr5-page .sr5-fld.is-disabled {
+        pointer-events: none;
+    }
+
+    .sr5-page .sr5-fld.is-disabled .lbl {
+        color: #b6bec9;
+    }
+
+    .sr5-page .sr5-fld.is-disabled .select2-container .select2-selection--single {
+        background: #f8fafc;
+        border-color: #e5e7eb;
+        box-shadow: none;
+    }
+
+    .sr5-page .sr5-fld.is-disabled .select2-container .select2-selection--single .select2-selection__rendered {
+        color: #9ca3af;
+    }
+
+    /* ===== KPI cards ===== */
+    .sr5-page .sr5-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    .sr5-page .sr5-kpi {
+        position: relative;
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+        padding: 15px 16px 14px;
+        overflow: hidden;
+    }
+
+    .sr5-page .sr5-kpi::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: #e5e7eb;
+    }
+
+    .sr5-page .sr5-kpi .top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .sr5-page .sr5-kpi .ico {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+        background: #eef1f6;
+        color: var(--ink-700);
+    }
+
+    .sr5-page .sr5-kpi .lbl {
+        font-size: 11.5px;
+        font-weight: 800;
+        color: var(--ink-500);
+        line-height: 1.35;
+    }
+
+    .sr5-page .sr5-kpi .val {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--ink-900);
+        line-height: 1.1;
+    }
+
+    .sr5-page .sr5-kpi .sub {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--ink-500);
+        margin-top: 5px;
+    }
+
+    .sr5-page .sr5-kpi .bar {
+        height: 6px;
+        border-radius: 999px;
+        background: #eef0f3;
+        margin-top: 9px;
+        overflow: hidden;
+    }
+
+    .sr5-page .sr5-kpi .bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: var(--primary);
+        transition: width .35s ease;
+    }
+
+    /* KPI accents */
+    .sr5-page .sr5-kpi.k-total::after { background: #2563eb; }
+    .sr5-page .sr5-kpi.k-total .ico { background: #dbeafe; color: #1d4ed8; }
+
+    .sr5-page .sr5-kpi.k-finished::after { background: #16a34a; }
+    .sr5-page .sr5-kpi.k-finished .ico { background: #dcfce7; color: #15803d; }
+    .sr5-page .sr5-kpi.k-finished .bar span { background: #16a34a; }
+
+    .sr5-page .sr5-kpi.k-pending::after { background: #f59e0b; }
+    .sr5-page .sr5-kpi.k-pending .ico { background: #fef3c7; color: #b45309; }
+    .sr5-page .sr5-kpi.k-pending .bar span { background: #f59e0b; }
+
+    .sr5-page .sr5-kpi.k-cancelled::after { background: #ef4444; }
+    .sr5-page .sr5-kpi.k-cancelled .ico { background: #fee2e2; color: #b91c1c; }
+    .sr5-page .sr5-kpi.k-cancelled .bar span { background: #ef4444; }
+
+    .sr5-page .sr5-kpi.k-missed::after { background: #64748b; }
+    .sr5-page .sr5-kpi.k-missed .ico { background: #e2e8f0; color: #475569; }
+    .sr5-page .sr5-kpi.k-missed .bar span { background: #64748b; }
+
+    /* ===== Chart card ===== */
+    .sr5-page .sr5-chart-card {
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
+        padding: 18px;
+    }
+
+    .sr5-page .sr5-chart-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .sr5-page .sr5-chart-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--ink-900);
+    }
+
+    .sr5-page .sr5-chart-sub {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--ink-500);
+        margin-top: 2px;
+    }
+
+    /* Legend chips (image la irukkura legend — chip style la) */
+    .sr5-page .sr5-legend {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0 6px;
+    }
+
+    .sr5-page .sr5-lg-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: #f8fafc;
+        border: 1px solid #eef0f3;
+        border-radius: 999px;
+        padding: 5px 12px 5px 8px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--ink-700);
+    }
+
+    .sr5-page .sr5-lg-item b {
+        font-weight: 800;
+        color: var(--ink-900);
+    }
+
+    .sr5-page .sr5-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+
+    .sr5-page .sr5-chart-wrap {
+        position: relative;
+        height: 330px;
+    }
+
+    .sr5-page .sr5-empty {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: var(--ink-500);
+        font-size: 12.5px;
+        font-weight: 700;
+        background: #fff;
+    }
+
+    .sr5-page .sr5-empty.show {
+        display: flex;
+    }
+
+    .sr5-page .sr5-empty i {
+        font-size: 26px;
+        color: #cbd5e1;
+    }
+
+    @media (max-width: 575px) {
+        .sr5-page .sr5-chart-wrap {
+            height: 260px;
+        }
+    }
