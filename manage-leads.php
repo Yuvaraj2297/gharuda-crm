@@ -65,9 +65,9 @@
     </div>
 
     <!-- Table Card Wrap -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 overflow-hidden" id="manageLeadsTableWrap">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 datatable" id="manageLeadsTable" data-table-name="Manage Leads">
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden" id="manageLeadsTableWrap">
+        <div class="table-responsive table-modern-wrap">
+            <table class="table table-modern table-hover align-middle mb-0 datatable" id="manageLeadsTable" data-table-name="Manage Leads">
                 <thead class="table-light">
                     <tr>
                         <th class="text-nowrap" style="width: 70px;">S.No</th>

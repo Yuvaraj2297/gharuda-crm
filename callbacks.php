@@ -3,17 +3,17 @@
 <div class="container-fluid px-0">
 
     <!-- Title row -->
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+    <div class="page-header-modern d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
         <div class="d-flex align-items-center gap-3">
-            <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
+            <div class="header-icon-box bg-primary text-white shadow-sm">
                 <i class="bi bi-telephone-forward"></i>
             </div>
             <div>
-                <h4 class="fw-bold text-dark mb-0">Callbacks</h4>
-                <span class="text-muted small">Manage client callback requests and scheduled contact follow-ups</span>
+                <h1 class="header-title mb-1">Callbacks</h1>
+                <p class="header-subtitle mb-0">Manage client callback requests and scheduled contact follow-ups</p>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
             <a href="appointments.php" class="btn btn-sm btn-outline-success"><i class="bi bi-calendar2-week me-1"></i>Appointments</a>
             <a href="past-meeting.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
             <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
@@ -64,14 +64,14 @@
                     </select>
                 </div>
                 <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5From">From Date</label>
                     <div class="date-picker">
-                        <label class="form-label fw-semibold small text-secondary" for="cb5From">From Date</label>
                         <input type="text" class="date-input form-control" id="cb5From" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5To">To Date</label>
                     <div class="date-picker">
-                        <label class="form-label fw-semibold small text-secondary" for="cb5To">To Date</label>
                         <input type="text" class="date-input form-control" id="cb5To" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
                     </div>
                 </div>
@@ -177,8 +177,8 @@
 
     <!-- Table (toolbar + export + column visibility + pagination auto-created by datatable class via auto-master-table.js) -->
     <div class="card border-0 shadow-sm rounded-3 overflow-hidden" id="cb5TableWrap">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 datatable" id="cb5Table" data-table-name="Callbacks">
+        <div class="table-responsive table-modern-wrap">
+            <table class="table table-modern table-hover align-middle mb-0 datatable" id="cb5Table" data-table-name="Callbacks">
                 <thead class="table-light">
                     <tr>
                         <th style="width:60px;">S.No</th>
@@ -1484,25 +1484,33 @@
 
 <!-- Modal: New / Edit Callback (pure Bootstrap 5) -->
 <div class="modal fade" id="cb5Modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 shadow">
-            <div class="modal-header border-bottom">
-                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-telephone-forward-fill text-primary me-2"></i><span id="cb5ModalTitle">New Callback</span></h5>
+            <div class="modal-header border-bottom py-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width:36px;height:36px;font-size:18px;">
+                        <i class="bi bi-telephone-forward-fill"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark mb-0"><span id="cb5ModalTitle">New Callback</span></h5>
+                        <span class="text-muted small">Schedule or update a customer callback request</span>
+                    </div>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
                 <input type="hidden" id="cb5EditId" value="">
                 <div class="row g-3">
-                    <div class="col-md-7">
-                        <label class="form-label fw-semibold text-secondary small">* Full Name</label>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmName"><span class="text-danger me-1">*</span>Full Name</label>
                         <input type="text" class="form-control" id="cb5NmName" placeholder="Ex: Ravi Shankar" autocomplete="off">
                     </div>
-                    <div class="col-md-5">
-                        <label class="form-label fw-semibold text-secondary small">* Phone</label>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPhone"><span class="text-danger me-1">*</span>Phone</label>
                         <input type="text" class="form-control" id="cb5NmPhone" placeholder="Ex: 9840123456" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Timezone</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmTz">Timezone</label>
                         <select class="form-select select2" id="cb5NmTz">
                             <option value="Asia/Kolkata (GMT+5:30)" selected>Asia/Kolkata (GMT+5:30)</option>
                             <option value="Asia/Colombo (GMT+5:30)">Asia/Colombo (GMT+5:30)</option>
@@ -1512,7 +1520,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Source</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmSource">Source</label>
                         <select class="form-select select2" id="cb5NmSource">
                             <option value="Contact" selected>Contact</option>
                             <option value="Lead">Lead</option>
@@ -1522,7 +1530,7 @@
                     </div>
                     <!-- Available From (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">* Available From</label>
+                        <label class="form-label fw-semibold text-secondary small"><span class="text-danger me-1">*</span>Available From</label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1538,7 +1546,7 @@
                     </div>
                     <!-- To (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">* To</label>
+                        <label class="form-label fw-semibold text-secondary small"><span class="text-danger me-1">*</span>To</label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1553,7 +1561,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Status</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmStatus">Status</label>
                         <select class="form-select select2" id="cb5NmStatus">
                             <option value="Upcoming" data-color="#2563eb" selected>Upcoming</option>
                             <option value="Postponed" data-color="#d97706">Postponed</option>
@@ -1562,7 +1570,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Priority</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPriority">Priority</label>
                         <select class="form-select select2" id="cb5NmPriority">
                             <option value="High" data-color="#dc2626">High</option>
                             <option value="Medium" data-color="#f59e0b" selected>Medium</option>
@@ -1570,7 +1578,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Assignees</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmAssignees">Assignees</label>
                         <select class="form-select select2" id="cb5NmAssignees">
                             <option value="Harish D." selected>Harish D.</option>
                             <option value="Divya A.">Divya A.</option>
@@ -1582,20 +1590,20 @@
                     </div>
                     <!-- Date requested (DatePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small">Date requested</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmRequested">Date requested</label>
                         <div class="date-picker">
                             <input type="text" class="date-input form-control" id="cb5NmRequested" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off" value="25-09-2026">
                         </div>
                     </div>
                     <div class="col-12">
-                        <label class="form-label fw-semibold text-secondary small">Note</label>
-                        <textarea class="form-control" id="cb5NmNote" rows="2" placeholder="Topic notes..."></textarea>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmNote">Note</label>
+                        <textarea class="form-control" id="cb5NmNote" rows="3" placeholder="Enter details or notes regarding this callback..."></textarea>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer border-top bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="cb5NmSubmit">Save Callback</button>
+            <div class="modal-footer border-top bg-light py-2 px-3">
+                <button type="button" class="btn btn-sm btn-outline-secondary px-3" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-primary px-4" id="cb5NmSubmit"><i class="bi bi-check-lg me-1"></i>Save Callback</button>
             </div>
         </div>
     </div>

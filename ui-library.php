@@ -360,6 +360,39 @@ include 'header.php';
                     </div>
                 </div>
 
+                <!-- Date Picker, Time Picker & Select2 -->
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-secondary">Date Picker (Calendar) <span class="text-danger">*</span></label>
+                    <div class="date-picker">
+                        <input type="text" class="form-control date-input" placeholder="DD-MM-YYYY" value="26-10-2026" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-secondary">Time Picker</label>
+                    <div class="time-picker">
+                        <input type="text" class="form-control time-input" placeholder="HH:MM" value="10:30" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-secondary">Select2 Single (Color Dot)</label>
+                    <select class="form-select select2">
+                        <option value="">Choose an option...</option>
+                        <option value="lead1" selected data-color="#16a34a">SD - Direct Visit - Lead</option>
+                        <option value="lead2" data-color="#2563eb">DEV - Customer Visit</option>
+                        <option value="lead3" data-color="#f59e0b">SD - Online Demo</option>
+                        <option value="lead4" data-color="#dc2626">Urgent High Priority</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-secondary">Select2 Multiple (Tags)</label>
+                    <select class="form-select select2" multiple>
+                        <option value="tag1" selected>Enterprise</option>
+                        <option value="tag2" selected>Software</option>
+                        <option value="tag3">Renewal</option>
+                        <option value="tag4">Consulting</option>
+                    </select>
+                </div>
+
                 <!-- Switches & Checks -->
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold text-secondary d-block">Switches</label>

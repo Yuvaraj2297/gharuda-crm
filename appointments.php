@@ -123,9 +123,9 @@
     </div>
 
     <!-- Table (toolbar auto-created by master-table.js) -->
-    <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 datatable" id="apmAppointmentsTable" data-table-name="Appointments">
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+        <div class="table-responsive table-modern-wrap">
+            <table class="table table-modern table-hover align-middle mb-0 datatable" id="apmAppointmentsTable" data-table-name="Appointments">
                 <thead class="table-light">
                             <tr>
                                 <th class="text-nowrap" style="width: 70px;">S.No</th>

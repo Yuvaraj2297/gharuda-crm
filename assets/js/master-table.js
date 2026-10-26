@@ -67,7 +67,7 @@ var MasterTable = (function () {
 
         // Resolve table ref early
         var table = document.getElementById(cfg.tableId);
-        var tableWrap = table ? table.closest('.card-custom') : null;
+        var tableWrap = table ? (table.closest('.card-custom') || table.closest('.card') || (table.parentElement && table.parentElement.classList.contains('table-responsive') ? table.parentElement.parentElement : table.parentElement)) : null;
 
         // Graceful no-op: table (or tbody) missing in the DOM (e.g. panel not
         // rendered on the server). Return a safe stub so the calling script

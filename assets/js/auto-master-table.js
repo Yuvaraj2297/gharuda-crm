@@ -84,7 +84,7 @@
             table.appendChild(tbody);
         }
 
-        var tableWrap = table.closest('.card-custom') || table.parentElement;
+        var tableWrap = table.closest('.card-custom') || table.closest('.card') || (table.parentElement && table.parentElement.classList.contains('table-responsive') ? table.parentElement.parentElement : table.parentElement);
         var tableResponsive = table.closest('.table-responsive') || table;
 
         // Determine table name automatically from card title or heading (no data attribute required)

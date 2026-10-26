@@ -49,7 +49,7 @@ if ($pos !== '') {
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
     <link rel="stylesheet" href="./assets/icon/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./assets/css/select2.css">
-     
+    <link rel="stylesheet" href="./assets/css/ui-kit.css">
 
     <style>
         /* ===== Candidate Apply — scoped to body.cap-body ===== */
