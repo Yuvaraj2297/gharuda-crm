@@ -538,32 +538,32 @@
                 </button>
                 
                 <!-- Project Management Link -->
-                <!-- <button data-rail-flag="isProjectMgmtActive" type="button" class="rail-btn"
+                <button data-rail-flag="isProjectMgmtActive" type="button" class="rail-btn"
                     data-panel-target="Project Management" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-title="Project Management" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-briefcase-fill"></i>
-                </button> -->
+                </button>
  
                 <!-- Support Link -->
-                <!-- <button data-rail-flag="isSupportActive" type="button" class="rail-btn"
+                <button data-rail-flag="isSupportActive" type="button" class="rail-btn"
                     data-panel-target="Support" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-title="Support" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-headset"></i>
-                </button> -->
+                </button>
  
-                <!-- Expenses Link -->
-                <!-- <button data-rail-flag="isExpenseActive" type="button" class="rail-btn"
+                <!-- Expenses & Billing Link -->
+                <button data-rail-flag="isExpenseActive" type="button" class="rail-btn"
                     data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right"
-                    data-bs-title="Expenses" data-bs-custom-class="custom-tooltip">
+                    data-bs-title="Billing & Expenses" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-receipt"></i>
-                </button> -->
+                </button>
  
                 <!-- Petty Cash Link -->
-                <!-- <button data-rail-flag="isPettyCashActive" type="button" class="rail-btn"
+                <button data-rail-flag="isPettyCashActive" type="button" class="rail-btn"
                     data-panel-target="PettyCash" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-title="Petty Cash" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-safe"></i>
-                </button> -->
+                </button>
                 <!-- Bootstrap UI Library Rail Button -->
                 <button type="button" class="rail-btn" data-panel-target="UI" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Bootstrap UI Library" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-bootstrap-fill text-primary"></i>
@@ -662,6 +662,9 @@
                         <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
                             <i class="bi bi-currency-exchange me-2"></i> <span>Currency</span>
                         </a>
+                        <a data-active-pages="branch.php,country.php,state.php,district.php" class="nav-link-custom" href="branch.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Branch &amp; Geography</span>
+                        </a>
                     </div>
 
                     <!-- CRM Panel Section -->
@@ -682,13 +685,16 @@
                         <div data-show-flag="isLeadCoreActive" class="collapse tree-submenu" id="leadsSubmenu">
                             <a data-active-pages="lead-map.php" class="tree-link" href="lead-map.php">Map</a>
                             <a data-active-pages="lead.php" class="tree-link" href="lead.php">Leads</a>
+                            <a data-active-pages="follow-up-list.php" class="tree-link" href="follow-up-list.php">Follow Up List</a>
+                            <a data-active-pages="lead-filter.php" class="tree-link" href="lead-filter.php">Lead Search Filter</a>
+                            <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
+                            <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
+                            <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
                             <a data-active-pages="employee-revenue-report.php" class="tree-link" href="employee-revenue-report.php">Employee Revenue Report</a>
                             <a data-active-pages="employee-lead-report.php" class="tree-link" href="employee-lead-report.php">Employee Lead Report</a>
                             <a data-active-pages="lead-source-report.php" class="tree-link" href="lead-source-report.php">Lead Source Report</a>
                             <a data-active-pages="staff-visting-report.php,staff-visiting-location-report.php" class="tree-link" href="staff-visting-report.php">Staff Visiting Reports</a>
                             <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Report</a>
-                            <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
-                            <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
                             <a data-active-pages="lead-stage.php" class="tree-link" href="lead-stage.php">Lead Stage</a>
                             <a data-active-pages="lead-dashboard.php" class="tree-link" href="lead-dashboard.php">Lead Dashboard</a>
                         </div>
@@ -713,16 +719,28 @@
  
                     <!-- Support Panel Section -->
                     <div class="panel-section" data-panel="Support">
-                        <div class="nav-label">Support</div>
+                        <div class="nav-label">Customer Support &amp; Helpdesk</div>
+                        <a data-active-pages="ticket-dashboard.php" class="nav-link-custom"
+                            href="ticket-dashboard.php"><i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span></a>
                         <a data-active-pages="support-tickets.php" class="nav-link-custom"
                             href="support-tickets.php"><i class="bi bi-headset me-2"></i> <span>Support Tickets</span></a>
+                        <a data-active-pages="support-create-ticket.php" class="nav-link-custom"
+                            href="support-create-ticket.php"><i class="bi bi-plus-circle me-2"></i> <span>New Ticket</span></a>
+                        <a data-active-pages="ticket-reports.php" class="nav-link-custom"
+                            href="ticket-reports.php"><i class="bi bi-file-earmark-bar-graph me-2"></i> <span>Ticket &amp; SLA Reports</span></a>
                     </div>
  
                     <!-- Expenses & Invoicing Panel Section -->
                     <div class="panel-section" data-panel="Expenses">
-                        <div class="nav-label">Billing &amp; Expenses</div>
+                        <div class="nav-label">Billing &amp; Finance</div>
                         <a data-active-pages="invoices.php" class="nav-link-custom"
-                            href="invoices.php"><i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices &amp; Billing</span></a>
+                            href="invoices.php"><i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices Ledger</span></a>
+                        <a data-active-pages="invoice-create.php" class="nav-link-custom"
+                            href="invoice-create.php"><i class="bi bi-file-earmark-plus me-2"></i> <span>Create Tax Invoice</span></a>
+                        <a data-active-pages="payments.php" class="nav-link-custom"
+                            href="payments.php"><i class="bi bi-credit-card-2-front me-2"></i> <span>Payments Received</span></a>
+                        <a data-active-pages="contracts.php" class="nav-link-custom"
+                            href="contracts.php"><i class="bi bi-pen me-2"></i> <span>Contracts &amp; SLAs</span></a>
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom"
                             href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Field Expenses</span></a>
                     </div>
@@ -750,8 +768,10 @@
 
                     <!-- Customers Panel Section -->
                     <div class="panel-section" data-panel="Customers">
-                        <div class="nav-label">Customers</div>
-                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php"><i class="bi bi-person-vcard me-2"></i> <span>Customers</span></a>
+                        <div class="nav-label">Customers &amp; Contacts</div>
+                        <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php"><i class="bi bi-pie-chart me-2"></i> <span>Customer 360 Dashboard</span></a>
+                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php"><i class="bi bi-person-vcard me-2"></i> <span>Customers Directory</span></a>
+                        <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php"><i class="bi bi-people me-2"></i> <span>Contacts Directory</span></a>
                     </div>
 
                     <!-- Appointments / MOM Panel Section -->
@@ -770,6 +790,7 @@
 
                         <div data-show-flag="isApptActive" class="collapse tree-submenu" id="appointmentsSubmenu">
                             <a data-active-pages="appointments.php" class="tree-link" href="appointments.php">Appointments</a>
+                            <a data-active-pages="appointment-schedule.php" class="tree-link" href="appointment-schedule.php">Appointment Schedule</a>
                             <a data-active-pages="past-meeting.php" class="tree-link" href="past-meeting.php">Past Meeting</a>
                             <a data-active-pages="callbacks.php" class="tree-link" href="callbacks.php">Callbacks</a>
                             <a data-active-pages="summary-report.php" class="tree-link" href="summary-report.php">Summary Report</a>
@@ -780,14 +801,16 @@
 
                     <!-- Target Panel Section -->
                     <div class="panel-section" data-panel="Target">
-                        <div class="nav-label">Target</div>
-                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php"><i class="bi bi-bullseye me-2"></i> <span>Target</span></a>
-                        <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php"><i class="bi bi-tags me-2"></i> <span>Brand Target</span></a>
+                        <div class="nav-label">Sales Targets</div>
+                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php"><i class="bi bi-bullseye me-2"></i> <span>Target Overview</span></a>
+                        <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php"><i class="bi bi-tags me-2"></i> <span>Brand Targets</span></a>
+                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php"><i class="bi bi-bar-chart-steps me-2"></i> <span>Target Slabs</span></a>
                     </div>
 
                     <!-- Project Management Panel Section -->
                     <div class="panel-section" data-panel="Project Management">
                         <div class="nav-label">Project Management</div>
+                        <a data-active-pages="project-dashboard.php" class="nav-link-custom" href="project-dashboard.php"><i class="bi bi-speedometer2 me-2"></i> <span>Project Dashboard</span></a>
  
                         <!-- ===== Projects ===== -->
                         <a data-toggle-flag="isProjectCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
@@ -799,14 +822,14 @@
                         </a>
  
                         <div data-show-flag="isProjectCoreActive" class="collapse tree-submenu" id="projectsSubmenu">
-                            <a data-active-pages="project-dashboard.php" class="tree-link"
-                                href="project-dashboard.php">Project Dashboard</a>
                             <a data-active-pages="projects-list.php" class="tree-link"
                                 href="projects-list.php">Projects List</a>
+                            <a data-active-pages="project-create.php" class="tree-link"
+                                href="project-create.php">New Project</a>
                             <a data-active-pages="projects-report.php" class="tree-link"
                                 href="projects-report.php">Projects Report</a>
                             <a data-active-pages="projectwise-daily-task-report.php" class="tree-link"
-                                href="projectwise-daily-task-report.php">Projectwise Daily Task Report</a>
+                                href="projectwise-daily-task-report.php">Daily Task Report</a>
                         </div>
  
                         <!-- ===== Tasks ===== -->
@@ -820,6 +843,8 @@
                         <div data-show-flag="isTaskCoreActive" class="collapse tree-submenu" id="tasksSubmenu">
                             <a data-active-pages="tasks-list.php" class="tree-link"
                                 href="tasks-list.php">Tasks List</a>
+                            <a data-active-pages="task-create.php" class="tree-link"
+                                href="task-create.php">New Task</a>
                             <a data-active-pages="score-card.php" class="tree-link"
                                 href="score-card.php">Score Card</a>
                         </div>

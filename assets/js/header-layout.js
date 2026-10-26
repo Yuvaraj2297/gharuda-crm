@@ -233,7 +233,7 @@
             var ticketAdminPages = ['ticket-dashboard.php', 'ticket-reports.php'];
             var custSelfPages = ['customer-dashboard.php', 'customer-create-ticket.php', 'customer-my-tickets.php'];
             var custAdminPages = ['cticket-admin.php'];
-            var leadCorePages = ['lead.php', 'lead-map.php', 'lead-dashboard.php', 'employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'brandwise-report.php', 'deals.php', 'quotations.php', 'quotation-create.php'];
+            var leadCorePages = ['lead.php', 'lead-map.php', 'lead-dashboard.php', 'employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'brandwise-report.php', 'deals.php', 'quotations.php', 'quotation-create.php', 'contracts.php', 'follow-up-list.php'];
             var leadMgrPages = ['manage-leads.php', 'sms-chat.php', 'mailbox.php', 'whatsapp-chat.php'];
             var leadReportPages = ['lead-filter.php'];
             var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
@@ -242,10 +242,10 @@
             var customerPages = ['customers.php', 'customer-view.php', 'customer-new.php', 'customer-import.php', 'customer-dashboard.php', 'contacts.php'];
             var inventoryPages = ['commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'package-list.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'return-order-management.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
-            var supportPages = ['support-tickets.php', 'support-create-ticket.php'];
-            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php'];
+            var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'ticket-reports.php', 'my-tickets.php'];
+            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'contracts.php'];
             var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-report.php'];
-            var apptPages = ['appointments.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
+            var apptPages = ['appointments.php', 'appointment-schedule.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
 
             var F = {};
             F.isMasterActive = has(masterPages);
