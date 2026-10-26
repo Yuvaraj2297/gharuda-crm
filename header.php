@@ -450,6 +450,11 @@
                     </div>
                 </div>
                 <div class="profile-menu-divider"></div>
+                <a href="settings.php" class="profile-menu-item d-flex align-items-center gap-2 px-3 py-2 text-decoration-none text-dark" role="menuitem" style="font-size:13px; font-weight:500;">
+                    <i class="bi bi-gear text-secondary"></i>
+                    <span>System Settings</span>
+                </a>
+                <div class="profile-menu-divider"></div>
                 <a href="login.php" class="profile-menu-logout" role="menuitem">
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Logout</span>
@@ -571,7 +576,7 @@
             </div>
 
             <div class="icon-rail-bottom">
-                <button type="button" class="rail-btn" data-panel-target="account" title="Settings">
+                <button data-rail-flag="isSettingsActive" type="button" class="rail-btn" data-panel-target="Settings" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Settings" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-gear"></i>
                 </button>
             </div>
@@ -604,10 +609,10 @@
 
                     <!-- Master Panel Section -->
                     <div class="panel-section" data-panel="Master">
-                        <div class="nav-label">Master</div>
-                        <a data-active-pages="ui-library.php" class="nav-link-custom" href="ui-library.php">
-                            <i class="bi bi-bootstrap me-2 text-primary"></i> <span>Bootstrap UI Library</span>
-                        </a>
+                        <div class="nav-label">Master Data</div>
+
+                        <!-- CRM & Pipeline Masters -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">CRM &amp; Sales Pipeline</div>
                         <a data-active-pages="lead-stage.php,lead-stages-master.php" class="nav-link-custom" href="lead-stage.php">
                             <i class="bi bi-layers me-2"></i> <span>Lead Stages</span>
                         </a>
@@ -617,33 +622,39 @@
                         <a data-active-pages="lead-status-master.php" class="nav-link-custom" href="lead-status-master.php">
                             <i class="bi bi-flag me-2"></i> <span>Lead Status</span>
                         </a>
-                        <a data-active-pages="brand-master.php" class="nav-link-custom" href="brand-master.php">
-                            <i class="bi bi-patch-check me-2"></i> <span>Brand</span>
+                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
+                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
                         </a>
-                        <a data-active-pages="product-catalog-master.php" class="nav-link-custom" href="product-catalog-master.php">
-                            <i class="bi bi-box-seam me-2"></i> <span>Product Catalog</span>
-                        </a>
-                        <a data-active-pages="visit-activity-types.php" class="nav-link-custom" href="visit-activity-types.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Visit Activity Types</span>
-                        </a>
+
+                        <!-- Customers & Categories -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Customers &amp; Categories</div>
                         <a data-active-pages="customer-categories.php" class="nav-link-custom" href="customer-categories.php">
                             <i class="bi bi-people me-2"></i> <span>Customer Categories</span>
                         </a>
                         <a data-active-pages="industry-verticals.php" class="nav-link-custom" href="industry-verticals.php">
                             <i class="bi bi-buildings me-2"></i> <span>Industry Verticals</span>
                         </a>
+                        <a data-active-pages="group-master.php" class="nav-link-custom" href="group-master.php">
+                            <i class="bi bi-collection me-2"></i> <span>Customer Groups</span>
+                        </a>
                         <a data-active-pages="payment-terms-master.php" class="nav-link-custom" href="payment-terms-master.php">
                             <i class="bi bi-credit-card-2-front me-2"></i> <span>Payment Terms</span>
                         </a>
+
+                        <!-- Meetings & Field Visits -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Meetings &amp; Visits</div>
                         <a data-active-pages="appointment-types.php,meeting-types-master.php" class="nav-link-custom" href="appointment-types.php">
                             <i class="bi bi-calendar2-event me-2"></i> <span>Meeting Types</span>
                         </a>
                         <a data-active-pages="meeting-outcomes-master.php" class="nav-link-custom" href="meeting-outcomes-master.php">
                             <i class="bi bi-clipboard2-check me-2"></i> <span>Meeting Outcomes</span>
                         </a>
-                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
+                        <a data-active-pages="visit-activity-types.php" class="nav-link-custom" href="visit-activity-types.php">
+                            <i class="bi bi-pin-map me-2"></i> <span>Visit Activity Types</span>
                         </a>
+
+                        <!-- Projects & Support -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Projects &amp; Support</div>
                         <a data-active-pages="project-types-master.php" class="nav-link-custom" href="project-types-master.php">
                             <i class="bi bi-folder-check me-2"></i> <span>Project Types</span>
                         </a>
@@ -653,67 +664,124 @@
                         <a data-active-pages="ticket-categories.php" class="nav-link-custom" href="ticket-categories.php">
                             <i class="bi bi-ticket-perforated me-2"></i> <span>Ticket Categories</span>
                         </a>
-                        <a data-active-pages="sla-policies.php,sla-policies-severity.php" class="nav-link-custom" href="sla-policies.php">
-                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies & Severity</span>
+
+                        <!-- Brand & Products -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Brand &amp; Catalog</div>
+                        <a data-active-pages="brand-master.php" class="nav-link-custom" href="brand-master.php">
+                            <i class="bi bi-patch-check me-2"></i> <span>Brand</span>
                         </a>
-                        <a data-active-pages="group-master.php" class="nav-link-custom" href="group-master.php">
-                            <i class="bi bi-collection me-2"></i> <span>Group </span>
+                        <a data-active-pages="product-catalog-master.php" class="nav-link-custom" href="product-catalog-master.php">
+                            <i class="bi bi-box-seam me-2"></i> <span>Product Catalog</span>
                         </a>
+                    </div>
+
+                    <!-- Settings Panel Section -->
+                    <div class="panel-section" data-panel="Settings">
+                        <div class="nav-label">Settings</div>
+
+                        <!-- Central Settings Overview Hub -->
+                        <a data-active-pages="settings.php" class="nav-link-custom fw-semibold mb-2" href="settings.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
+                        </a>
+
+                        <!-- Organization & System -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Organization &amp; System</div>
+                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
+                        </a>
+                        <a data-active-pages="country.php" class="nav-link-custom" href="country.php">
+                            <i class="bi bi-globe-americas me-2"></i> <span>Countries</span>
+                        </a>
+                        <a data-active-pages="state.php" class="nav-link-custom" href="state.php">
+                            <i class="bi bi-map me-2"></i> <span>States &amp; Provinces</span>
+                        </a>
+                        <a data-active-pages="district.php" class="nav-link-custom" href="district.php">
+                            <i class="bi bi-pin-map me-2"></i> <span>Districts &amp; Cities</span>
+                        </a>
+
+                        <!-- Security & Permissions -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Security &amp; Access</div>
+                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
+                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access Control</span>
+                        </a>
+
+                        <!-- Finance & Policies -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Finance &amp; SLA Policies</div>
                         <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
-                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency</span>
+                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
                         </a>
-                        <a data-active-pages="branch.php,country.php,state.php,district.php" class="nav-link-custom" href="branch.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Branch &amp; Geography</span>
+                        <a data-active-pages="sla-policies.php,sla-policies-severity.php" class="nav-link-custom" href="sla-policies.php">
+                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies &amp; Severity</span>
                         </a>
                     </div>
 
                     <!-- CRM Panel Section -->
                     <div class="panel-section" data-panel="CRM">
-                        <div class="nav-label">Lead Management</div>
+                        <div class="nav-label">Lead &amp; Sales Management</div>
 
-                        <!-- ===== Leads ===== -->
-                        <a data-toggle-flag="isLeadCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
-                            data-bs-toggle="collapse"
-                            href="#leadsSubmenu"
-                            role="button"
-                            aria-expanded="false"
-                            aria-controls="leadsSubmenu">
-                            <span><i class="bi bi-person-badge me-2"></i> Leads</span>
-                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
+                        <!-- 1. Executive Dashboard (Prominent Top Item) -->
+                        <a data-active-pages="lead-dashboard.php" class="nav-link-custom fw-semibold mb-2" href="lead-dashboard.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                            <i class="bi bi-speedometer2 me-2"></i> <span>Lead Dashboard</span>
                         </a>
 
-                        <div data-show-flag="isLeadCoreActive" class="collapse tree-submenu" id="leadsSubmenu">
-                            <a data-active-pages="lead-map.php" class="tree-link" href="lead-map.php">Map</a>
-                            <a data-active-pages="lead.php" class="tree-link" href="lead.php">Leads</a>
-                            <a data-active-pages="follow-up-list.php" class="tree-link" href="follow-up-list.php">Follow Up List</a>
-                            <a data-active-pages="lead-filter.php" class="tree-link" href="lead-filter.php">Lead Search Filter</a>
-                            <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
-                            <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
-                            <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
+                        <!-- 2. Leads & Operations -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Leads &amp; Operations</div>
+                        <a data-active-pages="lead.php" class="nav-link-custom" href="lead.php">
+                            <i class="bi bi-person-lines-fill me-2"></i> <span>All Leads</span>
+                        </a>
+                        <a data-active-pages="manage-leads.php" class="nav-link-custom" href="manage-leads.php">
+                            <i class="bi bi-kanban me-2"></i> <span>Manage Leads</span>
+                        </a>
+                        <a data-active-pages="follow-up-list.php" class="nav-link-custom" href="follow-up-list.php">
+                            <i class="bi bi-clock-history me-2"></i> <span>Follow-Up List</span>
+                        </a>
+                        <a data-active-pages="lead-map.php" class="nav-link-custom" href="lead-map.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Lead Map View</span>
+                        </a>
+                        <a data-active-pages="lead-filter.php" class="nav-link-custom" href="lead-filter.php">
+                            <i class="bi bi-funnel me-2"></i> <span>Search &amp; Filter</span>
+                        </a>
+
+                        <!-- 3. Deals & Pipeline -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Deals &amp; Pipeline</div>
+                        <a data-active-pages="deals.php" class="nav-link-custom" href="deals.php">
+                            <i class="bi bi-currency-rupee me-2"></i> <span>Deals Pipeline</span>
+                        </a>
+                        <a data-active-pages="quotations.php,quotation-create.php" class="nav-link-custom" href="quotations.php">
+                            <i class="bi bi-file-earmark-text me-2"></i> <span>Quotations</span>
+                        </a>
+                        <a data-active-pages="contracts.php" class="nav-link-custom" href="contracts.php">
+                            <i class="bi bi-pen me-2"></i> <span>Contracts &amp; SLAs</span>
+                        </a>
+
+                        <!-- 4. Omnichannel Communications -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Communications</div>
+                        <a data-active-pages="mailbox.php" class="nav-link-custom" href="mailbox.php">
+                            <i class="bi bi-envelope me-2"></i> <span>Mailbox</span>
+                        </a>
+                        <a data-active-pages="whatsapp-chat.php" class="nav-link-custom" href="whatsapp-chat.php">
+                            <i class="bi bi-whatsapp me-2 text-success"></i> <span>WhatsApp Chat</span>
+                        </a>
+                        <a data-active-pages="sms-chat.php" class="nav-link-custom" href="sms-chat.php">
+                            <i class="bi bi-chat-dots me-2"></i> <span>SMS Center</span>
+                        </a>
+
+                        <!-- 5. Lead & Sales Reports -->
+                        <a data-toggle-flag="isLeadReportActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed mt-2"
+                            data-bs-toggle="collapse"
+                            href="#leadReportsSubmenu"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="leadReportsSubmenu">
+                            <span><i class="bi bi-graph-up-arrow me-2 text-primary"></i> <span>Lead Reports</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
+                        </a>
+                        <div data-show-flag="isLeadReportActive" class="collapse tree-submenu" id="leadReportsSubmenu">
                             <a data-active-pages="employee-revenue-report.php" class="tree-link" href="employee-revenue-report.php">Employee Revenue Report</a>
                             <a data-active-pages="employee-lead-report.php" class="tree-link" href="employee-lead-report.php">Employee Lead Report</a>
                             <a data-active-pages="lead-source-report.php" class="tree-link" href="lead-source-report.php">Lead Source Report</a>
                             <a data-active-pages="staff-visting-report.php,staff-visiting-location-report.php" class="tree-link" href="staff-visting-report.php">Staff Visiting Reports</a>
-                            <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Report</a>
-                            <a data-active-pages="lead-stage.php" class="tree-link" href="lead-stage.php">Lead Stage</a>
-                            <a data-active-pages="lead-dashboard.php" class="tree-link" href="lead-dashboard.php">Lead Dashboard</a>
-                        </div>
-                        
-                        <!-- ===== Lead Manager ===== -->
-                        <a data-toggle-flag="isLeadMgrActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
-                            data-bs-toggle="collapse"
-                            href="#leadMgrSubmenu"
-                            role="button"
-                            aria-expanded="false"
-                            aria-controls="leadMgrSubmenu">
-                            <span><i class="bi bi-people-fill me-2"></i> Lead Manager</span>
-                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
-                        </a>
-                        <div data-show-flag="isLeadMgrActive" class="collapse tree-submenu" id="leadMgrSubmenu">
-                            <a data-active-pages="manage-leads.php" class="tree-link" href="manage-leads.php">Manage Lead</a>
-                            <a data-active-pages="sms-chat.php" class="tree-link" href="sms-chat.php">SMS</a>
-                            <a data-active-pages="mailbox.php" class="tree-link" href="mailbox.php">Mailbox</a>
-                            <a data-active-pages="whatsapp-chat.php" class="tree-link" href="whatsapp-chat.php">WhatsApp</a>
+                            <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Sales Report</a>
                         </div>
                     </div>
  

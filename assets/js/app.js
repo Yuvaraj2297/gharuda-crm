@@ -249,7 +249,10 @@
         if (!target) return;
         currentPanelTarget = target;
         panelSections.forEach(sec => {
-            if (sec.dataset.panel === target) {
+            const secPanel = sec.dataset.panel;
+            const isMatch = (secPanel === target) ||
+                (target === 'account' && secPanel === 'Settings');
+            if (isMatch) {
                 sec.style.display = '';
                 sec.classList.add('highlight');
             } else {

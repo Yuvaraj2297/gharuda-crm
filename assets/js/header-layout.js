@@ -181,7 +181,7 @@
                 var found = false;
                 $$('.rail-btn[data-panel-target]').forEach(function (btn) {
                     var target = (btn.getAttribute('data-panel-target') || '').trim().toLowerCase();
-                    if (target === clean) {
+                    if (target === clean || (clean === 'settings' && target === 'account')) {
                         btn.classList.add('active-rail');
                         found = true;
                     } else {
@@ -210,12 +210,12 @@
                 'brand-master.php', 'product-catalog-master.php', 'visit-activity-types.php', 'customer-categories.php',
                 'industry-verticals.php', 'payment-terms-master.php', 'meeting-types-master.php', 'meeting-outcomes-master.php',
                 'sales-target-slabs.php', 'project-types-master.php', 'milestone-templates.php', 'ticket-categories.php',
-                'sla-policies.php', 'sla-policies-severity.php', 'group-master.php', 'currency-master.php',
-                'countr.php', 'country.php', 'countryy.php', 'state.php', 'district.php', 'branch.php',
-                'department.php', 'jobtype.php', 'team.php', 'position.php', 'designation.php',
-                'employee-type.php', 'relieving-type.php', 'notice-period.php', 'shift.php',
-                'permission-modules.php', 'role.php', 'leave-type.php', 'holiday-type.php',
-                'bgv-vendar.php', 'bgv-vendor.php', 'documents-generate.php', 'document-upload.php', 'work-location.php'
+                'group-master.php', 'appointment-types.php'
+            ];
+            var settingsPages = [
+                'settings.php', 'branch.php', 'country.php', 'countr.php', 'countryy.php',
+                'state.php', 'district.php', 'role.php', 'permission-modules.php',
+                'currency-master.php', 'sla-policies.php', 'sla-policies-severity.php'
             ];
             var recruitmentPages = ['job-requisitions.php', 'job-openings.php', 'linkedin-applications.php', 'candidate-evaluations.php', 'candidates.php', 'interview-schedule.php', 'offer-management.php', 'recruitment-report.php'];
             var orgPages = ['organization.php', 'employee-tree.php', 'organization-policy.php', 'organization-calendar.php'];
@@ -233,9 +233,10 @@
             var ticketAdminPages = ['ticket-dashboard.php', 'ticket-reports.php'];
             var custSelfPages = ['customer-dashboard.php', 'customer-create-ticket.php', 'customer-my-tickets.php'];
             var custAdminPages = ['cticket-admin.php'];
-            var leadCorePages = ['lead.php', 'lead-map.php', 'lead-dashboard.php', 'employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'brandwise-report.php', 'deals.php', 'quotations.php', 'quotation-create.php', 'contracts.php', 'follow-up-list.php'];
-            var leadMgrPages = ['manage-leads.php', 'sms-chat.php', 'mailbox.php', 'whatsapp-chat.php'];
-            var leadReportPages = ['lead-filter.php'];
+            var leadCorePages = ['lead.php', 'lead-map.php', 'lead-dashboard.php', 'follow-up-list.php', 'manage-leads.php', 'lead-filter.php'];
+            var dealPages = ['deals.php', 'quotations.php', 'quotation-create.php', 'contracts.php'];
+            var commPages = ['mailbox.php', 'sms-chat.php', 'whatsapp-chat.php'];
+            var leadReportPages = ['employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'brandwise-report.php'];
             var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
             var projectCorePages = ['project-dashboard.php', 'projects-list.php', 'projects-report.php', 'projectwise-daily-task-report.php', 'project-create.php'];
             var taskCorePages = ['tasks-list.php', 'task-create.php', 'task-overview.php', 'score-card.php'];
@@ -249,6 +250,7 @@
 
             var F = {};
             F.isMasterActive = has(masterPages);
+            F.isSettingsActive = has(settingsPages) || cur === 'settings.php';
             F.isRecruitmentActive = has(recruitmentPages);
             F.isOrgActive = has(orgPages);
             F.isEmpCreateActive = has(empCreatePages);
@@ -270,9 +272,10 @@
             F.isCustAdminActive = has(custAdminPages);
             F.isTicketActive = F.isTicketEmpActive || F.isTicketAdminActive || F.isCustSelfActive || F.isCustAdminActive;
             F.isLeadCoreActive = has(leadCorePages);
-            F.isLeadMgrActive = has(leadMgrPages);
+            F.isDealActive = has(dealPages);
+            F.isCommActive = has(commPages);
             F.isLeadReportActive = has(leadReportPages);
-            F.isLeadActive = F.isLeadCoreActive || F.isLeadMgrActive || F.isLeadReportActive;
+            F.isLeadActive = F.isLeadCoreActive || F.isDealActive || F.isCommActive || F.isLeadReportActive;
             F.isApptMomActive = has(apptMomPages);
             F.isApptActive = has(apptPages);
             F.isTargetActive = cur === 'target.php' || cur === 'brand-target.php';
