@@ -687,6 +687,8 @@
                             <a data-active-pages="lead-source-report.php" class="tree-link" href="lead-source-report.php">Lead Source Report</a>
                             <a data-active-pages="staff-visting-report.php,staff-visiting-location-report.php" class="tree-link" href="staff-visting-report.php">Staff Visiting Reports</a>
                             <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Report</a>
+                            <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
+                            <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
                             <a data-active-pages="lead-stage.php" class="tree-link" href="lead-stage.php">Lead Stage</a>
                             <a data-active-pages="lead-dashboard.php" class="tree-link" href="lead-dashboard.php">Lead Dashboard</a>
                         </div>
@@ -716,11 +718,13 @@
                             href="support-tickets.php"><i class="bi bi-headset me-2"></i> <span>Support Tickets</span></a>
                     </div>
  
-                    <!-- Expenses Panel Section -->
+                    <!-- Expenses & Invoicing Panel Section -->
                     <div class="panel-section" data-panel="Expenses">
-                        <div class="nav-label">Expenses</div>
+                        <div class="nav-label">Billing &amp; Expenses</div>
+                        <a data-active-pages="invoices.php" class="nav-link-custom"
+                            href="invoices.php"><i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices &amp; Billing</span></a>
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom"
-                            href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Expenses</span></a>
+                            href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Field Expenses</span></a>
                     </div>
  
                     <!-- Petty Cash Panel Section (Outside Expenses) -->

@@ -1,36 +1,330 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+$clientId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '1';
+$clientName = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : '';
+
+if (empty($clientName)) {
+    if ($clientId == '1') $clientName = 'Power Spares Engineering';
+    elseif ($clientId == '2') $clientName = 'Zen Publications';
+    elseif ($clientId == '3') $clientName = 'Hindustan Hydraulics';
+    elseif ($clientId == '4') $clientName = 'Gharuda Software';
+    else $clientName = 'GG COMPANY';
+}
+?>
 
 <style>
-.cv-side-link {
-  display: flex; align-items: center; gap: 10px; padding: 8px 12px;
-  border-radius: 8px; color: var(--ink-700, #334155); font-size: 13px;
-  font-weight: 500; text-decoration: none; transition: all 0.15s ease;
+/* Gharuda CRM Brand Theme Variables */
+:root {
+  --primary: #16a34a;
+  --primary-dark: #0f7a38;
+  --primary-light: #e6f7ec;
+  --primary-soft: #eafaf1;
+  --primary2: #013376;
+  --primary2-dark: #002250;
+  --gh-green: #0B7A02;
 }
-.cv-side-link i { width: 18px; text-align: center; font-size: 15px; }
-.cv-side-link:hover { background: #f1f5f9; color: var(--primary, #0d6efd); }
-.cv-side-link.active { background: var(--primary-light, #e7f1ff); color: var(--primary, #0d6efd); font-weight: 600; }
-.cv-subtabs { display: flex; gap: 6px; border-bottom: 1px solid #e2e8f0; padding: 12px 16px; overflow-x: auto; }
-.cv-subtab { background: none; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 500; color: #64748b; cursor: pointer; transition: all 0.15s ease; }
-.cv-subtab:hover { background: #f8fafc; color: #0d6efd; }
-.cv-subtab.active { background: var(--primary-light, #e7f1ff); color: var(--primary, #0d6efd); font-weight: 600; }
+
+/* Modern Bootstrap 5 Side Nav Navigation with Gharuda Theme */
+.cv-side-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #475569;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 3px;
+}
+.cv-side-link i {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #64748b;
+  opacity: 0.85;
+  transition: transform 0.2s, color 0.2s;
+}
+.cv-side-link:hover {
+  background: #f0fdf4;
+  color: var(--primary, #16a34a);
+  transform: translateX(3px);
+}
+.cv-side-link:hover i {
+  color: var(--primary, #16a34a);
+  opacity: 1;
+}
+.cv-side-link.active {
+  background: linear-gradient(135deg, var(--primary, #16a34a) 0%, var(--primary-dark, #0f7a38) 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.32);
+}
+.cv-side-link.active i {
+  opacity: 1;
+  color: #ffffff !important;
+}
+.cv-side-link.active .badge {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* Subtabs with Gharuda Brand Accent */
+.cv-subtabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 14px 18px;
+  overflow-x: auto;
+  background-color: #f8fafc;
+}
+.cv-subtab {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.cv-subtab:hover {
+  background: #f0fdf4;
+  color: var(--primary, #16a34a);
+  border-color: #bbf7d0;
+}
+.cv-subtab.active {
+  background: var(--primary, #16a34a);
+  color: #ffffff;
+  border-color: var(--primary, #16a34a);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.28);
+}
 .cv-prj-pane:not(.active) { display: none !important; }
-.cv-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #1e293b; }
+.cv-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #0f172a;
+}
 .cv-cl-yn { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2px; }
 .cv-cl-yn label { padding: 4px 10px; font-size: 12px; font-weight: 500; border-radius: 6px; cursor: pointer; }
-.cv-cl-yn input:checked + label { background: var(--primary, #0d6efd); color: #fff; }
+.cv-cl-yn input:checked + label { background: var(--primary, #16a34a); color: #fff; }
+
+/* Hero Metric Chip */
+.cv-hero-stat {
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Primary Theme Button Overrides */
+.btn-primary {
+  background-color: var(--primary, #16a34a) !important;
+  border-color: var(--primary, #16a34a) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: var(--primary-dark, #0f7a38) !important;
+  border-color: var(--primary-dark, #0f7a38) !important;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35) !important;
+}
+.btn-outline-primary {
+  color: var(--primary, #16a34a) !important;
+  border-color: var(--primary, #16a34a) !important;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+  background-color: var(--primary, #16a34a) !important;
+  border-color: var(--primary, #16a34a) !important;
+  color: #ffffff !important;
+}
+
+/* Avatar Styling for Contacts & Users (fixes natural dimension blowout) */
+.cv-avatar {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+  border: 2px solid #e2e8f0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background-color: #f1f5f9;
+  display: inline-block !important;
+}
+
+/* Toggle Switch Styling */
+.cust-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 38px;
+  height: 22px;
+  margin: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.cust-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.cust-switch .slider {
+  position: absolute;
+  inset: 0;
+  background-color: #cbd5e1;
+  border-radius: 22px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cust-switch .slider::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.cust-switch input:checked + .slider {
+  background-color: var(--primary, #16a34a);
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
+}
+.cust-switch input:checked + .slider::before {
+  transform: translateX(16px);
+}
+
+/* Table Link Styling */
+.cv-link {
+  color: #1e293b;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.cv-link:hover {
+  color: var(--primary, #16a34a);
+  text-decoration: underline;
+}
+
+/* Contact Tab & Table Polish */
+#cvTbl-contacts th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  border-bottom: 2px solid #e2e8f0;
+  vertical-align: middle;
+}
+#cvTbl-contacts td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13.5px;
+}
+#cvTbl-contacts tr.cv-row:hover td {
+  background-color: #fbfdfb;
+}
+
+/* Icon Chip for Card Header */
+.icon-chip {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--primary-soft, #eafaf1);
+  color: var(--primary, #16a34a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Leave Reject / Custom Modal matching theme */
+.leave-reject-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1055;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.leave-reject-modal.show {
+  display: flex !important;
+}
 </style>
 
-
 <main class="container-fluid px-3 py-2">
-  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
-    <div>
-      <h1 class="font-display fw-bold mb-1 page-title">#46 GG COMPANY</h1>
-      <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap overflow-auto breadcrumb-text">
-        <i class="bi bi-people fs-6"></i><a href="customers.php" class="text-neutral text-decoration-none">Customers</a><i class="bi bi-chevron-right"></i><span class="fw-bold text-dark" id="cvCrumbTab">Contacts</span>
-        <!-- <span class="ms-2">Customer from Lead</span> -->
-      </nav>
+  <!-- Top Hero Header Card -->
+  <div class="card border-0 shadow-sm rounded-4 p-3 mb-3 bg-white">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <!-- Left: Identity -->
+      <div class="d-flex align-items-center gap-3">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold fs-3 shadow-sm" style="width: 54px; height: 54px;">
+          <?php echo strtoupper(substr($clientName, 0, 1)); ?>
+        </div>
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <h1 class="h4 fw-bold mb-0 text-dark"><?php echo $clientName; ?></h1>
+            <span class="badge bg-success-subtle text-success px-2.5 py-1 rounded-pill fw-semibold"><i class="bi bi-patch-check-fill me-1"></i>Active Client</span>
+            <span class="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-semibold">Enterprise Tier</span>
+          </div>
+          <nav class="d-flex align-items-center gap-2 text-muted small mt-1">
+            <i class="bi bi-people fs-6"></i>
+            <a href="customers.php" class="text-decoration-none text-muted hover-primary">Customers</a>
+            <i class="bi bi-chevron-right fs-10"></i>
+            <span class="text-dark fw-semibold" id="cvCrumbTab">Contacts</span>
+            <span class="text-muted ms-2">&middot; Client ID: #CUST-<?php echo str_pad($clientId, 4, '0', STR_PAD_LEFT); ?></span>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Right: Quick Metrics & Action Buttons -->
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <div class="d-none d-xl-flex align-items-center gap-2 me-2">
+          <div class="cv-hero-stat">
+            <span class="p-2 rounded-2 bg-success-subtle text-success"><i class="bi bi-cash-stack"></i></span>
+            <div>
+              <span class="text-muted small d-block" style="font-size:11px;">Total Billed</span>
+              <strong class="text-dark small">₹12.5 Lakh</strong>
+            </div>
+          </div>
+          <div class="cv-hero-stat">
+            <span class="p-2 rounded-2 bg-warning-subtle text-warning"><i class="bi bi-clock-history"></i></span>
+            <div>
+              <span class="text-muted small d-block" style="font-size:11px;">Open Balance</span>
+              <strong class="text-dark small">₹1.25 Lakh</strong>
+            </div>
+          </div>
+        </div>
+
+        <a href="customers.php" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-left me-1"></i>Customers
+        </a>
+        <a href="quotation-create.php?customer=<?php echo urlencode($clientName); ?>" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-file-earmark-plus me-1"></i>New Quote
+        </a>
+        <a href="project-create.php" class="btn btn-primary btn-sm">
+          <i class="bi bi-plus-lg me-1"></i>New Project
+        </a>
+      </div>
     </div>
-    <a href="customers.php" class="btn btn-outline-primary"><i class="bi bi-arrow-left me-1"></i>Back to customers</a>
   </div>
 
   <div class="row g-0 bg-white rounded-4 border overflow-hidden shadow-sm align-items-start">
@@ -462,100 +756,136 @@
         </div>
         <div class="tab-pane fade show active" id="cvTab-contacts" role="tabpanel" aria-labelledby="cvSideLink-contacts" tabindex="0">
           <div class="card-custom p-0" id="cvCard-contacts">
-            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
+            <div class="card-head d-flex align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3 flex-wrap gap-2">
               <div class="d-flex align-items-center gap-3">
-                <div class="icon-chip"><i class="bi bi-person-fill"></i></div>
+                <div class="icon-chip"><i class="bi bi-people-fill"></i></div>
                 <div>
-                  <h3 class="card-title mb-0">Contacts</h3>
+                  <h3 class="card-title mb-0 h5 fw-bold text-dark">Contacts</h3>
+                  <small class="text-muted">Direct client contacts, phone numbers and portal access permissions</small>
                 </div>
               </div>
-              <button type="button" class="btn btn-primary btn-sm" id="cvNewContactBtn"><i class="bi bi-plus-lg me-1"></i>New Contact</button>
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-success-subtle text-success px-2.5 py-1.5 rounded-pill fw-semibold"><i class="bi bi-check-circle-fill me-1"></i>4 Active Contacts</span>
+                <button type="button" class="btn btn-primary btn-sm rounded-3 shadow-sm" id="cvNewContactBtn"><i class="bi bi-person-plus me-1"></i>New Contact</button>
+              </div>
             </div>
 
             <div class="table-responsive table-modern-wrap overflow-auto column-border">
               <table class="table-modern w-100 datatable" id="cvTbl-contacts">
                 <thead>
                   <tr>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Role Position</th>
-                    <th>Phone</th>
-                    <th>Active</th>
-                    <th>Last Login</th>
+                    <th style="min-width: 220px;">Full Name</th>
+                    <th style="min-width: 200px;">Email</th>
+                    <th style="min-width: 150px;">Role Position</th>
+                    <th style="min-width: 140px;">Phone</th>
+                    <th style="min-width: 90px; text-align: center;">Active</th>
+                    <th style="min-width: 150px;">Last Login</th>
                   </tr>
                 </thead>
                 <tbody id="cvBody-contacts">
                   <tr class="cv-row">
                     <td>
-                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">MOHAN S</a></span>
+                      <span class="d-inline-flex align-items-center gap-2.5">
+                        <img src="./assets/img/profile-1.jpg" class="cv-avatar" alt="MOHAN S">
+                        <div>
+                          <a href="javascript:void(0)" class="cv-link fw-bold text-dark d-block">MOHAN S</a>
+                          <span class="badge bg-success-subtle text-success" style="font-size: 10.5px; padding: 2px 6px;">Primary Contact</span>
+                        </div>
+                      </span>
                     </td>
                     <td>
-                      <a href="mailto:kaviyarasu@ghratechnology.com" class="cv-link">kaviyarasu@ghratechnology.com</a>
+                      <a href="mailto:kaviyarasu@ghratechnology.com" class="cv-link text-muted small"><i class="bi bi-envelope me-1 text-primary"></i>kaviyarasu@ghratechnology.com</a>
                     </td>
                     <td>
-                      Event Management </td>
-                    <td>
-                      <a href="tel:9677063368" class="cv-link">9677063368</a>
+                      <span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-briefcase me-1 text-secondary"></i>Event Management</span>
                     </td>
                     <td>
-                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                      <a href="tel:9677063368" class="cv-link small"><i class="bi bi-telephone me-1 text-primary"></i>+91 9677063368</a>
+                    </td>
+                    <td class="text-center">
+                      <label class="cust-switch" title="Active contact"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
                     </td>
                     <td>
-                      16-09-2026 11:53 </td>
+                      <span class="text-muted small"><i class="bi bi-clock me-1"></i>16-09-2026 11:53</span>
+                    </td>
                   </tr>
                   <tr class="cv-row">
                     <td>
-                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Kaviyarasu M</a></span>
+                      <span class="d-inline-flex align-items-center gap-2.5">
+                        <img src="./assets/img/profile-2.jpg" class="cv-avatar" alt="Kaviyarasu M">
+                        <div>
+                          <a href="javascript:void(0)" class="cv-link fw-bold text-dark d-block">Kaviyarasu M</a>
+                          <span class="badge bg-primary-subtle text-primary" style="font-size: 10.5px; padding: 2px 6px;">Staff</span>
+                        </div>
+                      </span>
                     </td>
                     <td>
-                      <a href="mailto:kaviyarasu@gmail.com" class="cv-link">kaviyarasu@gmail.com</a>
+                      <a href="mailto:kaviyarasu@gmail.com" class="cv-link text-muted small"><i class="bi bi-envelope me-1 text-primary"></i>kaviyarasu@gmail.com</a>
                     </td>
                     <td>
-                      Project Manager </td>
-                    <td>
-                      <a href="tel:9840123456" class="cv-link">9840123456</a>
+                      <span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-briefcase me-1 text-secondary"></i>Project Manager</span>
                     </td>
                     <td>
-                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                      <a href="tel:9840123456" class="cv-link small"><i class="bi bi-telephone me-1 text-primary"></i>+91 9840123456</a>
+                    </td>
+                    <td class="text-center">
+                      <label class="cust-switch" title="Active contact"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
                     </td>
                     <td>
-                      14-09-2026 10:20 </td>
+                      <span class="text-muted small"><i class="bi bi-clock me-1"></i>14-09-2026 10:20</span>
+                    </td>
                   </tr>
                   <tr class="cv-row">
                     <td>
-                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Suresh Babu</a></span>
+                      <span class="d-inline-flex align-items-center gap-2.5">
+                        <img src="./assets/img/profile-3.jpg" class="cv-avatar" alt="Suresh Babu">
+                        <div>
+                          <a href="javascript:void(0)" class="cv-link fw-bold text-dark d-block">Suresh Babu</a>
+                          <span class="badge bg-primary-subtle text-primary" style="font-size: 10.5px; padding: 2px 6px;">Staff</span>
+                        </div>
+                      </span>
                     </td>
                     <td>
-                      <a href="mailto:suresh@ggcompany.com" class="cv-link">suresh@ggcompany.com</a>
+                      <a href="mailto:suresh@ggcompany.com" class="cv-link text-muted small"><i class="bi bi-envelope me-1 text-primary"></i>suresh@ggcompany.com</a>
                     </td>
                     <td>
-                      Operations Head </td>
-                    <td>
-                      <a href="tel:9444123890" class="cv-link">9444123890</a>
+                      <span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-briefcase me-1 text-secondary"></i>Operations Head</span>
                     </td>
                     <td>
-                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                      <a href="tel:9444123890" class="cv-link small"><i class="bi bi-telephone me-1 text-primary"></i>+91 9444123890</a>
+                    </td>
+                    <td class="text-center">
+                      <label class="cust-switch" title="Active contact"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
                     </td>
                     <td>
-                      12-09-2026 15:45 </td>
+                      <span class="text-muted small"><i class="bi bi-clock me-1"></i>12-09-2026 15:45</span>
+                    </td>
                   </tr>
                   <tr class="cv-row">
                     <td>
-                      <span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><a href="#" class="cv-link">Priya S</a></span>
+                      <span class="d-inline-flex align-items-center gap-2.5">
+                        <img src="./assets/img/profile-4.jpg" class="cv-avatar" alt="Priya S">
+                        <div>
+                          <a href="javascript:void(0)" class="cv-link fw-bold text-dark d-block">Priya S</a>
+                          <span class="badge bg-primary-subtle text-primary" style="font-size: 10.5px; padding: 2px 6px;">Staff</span>
+                        </div>
+                      </span>
                     </td>
                     <td>
-                      <a href="mailto:priya@ggcompany.com" class="cv-link">priya@ggcompany.com</a>
+                      <a href="mailto:priya@ggcompany.com" class="cv-link text-muted small"><i class="bi bi-envelope me-1 text-primary"></i>priya@ggcompany.com</a>
                     </td>
                     <td>
-                      Finance &amp; Accounts </td>
-                    <td>
-                      <a href="tel:9841198765" class="cv-link">9841198765</a>
+                      <span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-briefcase me-1 text-secondary"></i>Finance &amp; Accounts</span>
                     </td>
                     <td>
-                      <label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
+                      <a href="tel:9841198765" class="cv-link small"><i class="bi bi-telephone me-1 text-primary"></i>+91 9841198765</a>
+                    </td>
+                    <td class="text-center">
+                      <label class="cust-switch" title="Active contact"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label>
                     </td>
                     <td>
-                      09-09-2026 09:12 </td>
+                      <span class="text-muted small"><i class="bi bi-clock me-1"></i>09-09-2026 09:12</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -8076,21 +8406,21 @@
       var tr = body.insertRow();
       tr.className = 'cv-row';
       tr.innerHTML =
-        '<td><span class="d-inline-flex align-items-center gap-2"><img class="cv-avatar" alt=""><a href="#" class="cv-link"></a></span></td>' +
-        '<td><a class="cv-link"></a></td>' +
-        '<td></td>' +
-        '<td>' + (phone ? '<a class="cv-link"></a>' : '') + '</td>' +
-        '<td><label class="cust-switch"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label></td>' +
-        '<td>—</td>';
+        '<td><span class="d-inline-flex align-items-center gap-2.5"><img class="cv-avatar" alt=""><a href="javascript:void(0)" class="cv-link fw-bold text-dark"></a></span></td>' +
+        '<td><a class="cv-link text-muted small"><i class="bi bi-envelope me-1 text-primary"></i><span class="ct-email-txt"></span></a></td>' +
+        '<td><span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-briefcase me-1 text-secondary"></i><span class="ct-role-txt"></span></span></td>' +
+        '<td>' + (phone ? '<a class="cv-link small"><i class="bi bi-telephone me-1 text-primary"></i><span class="ct-phone-txt"></span></a>' : '—') + '</td>' +
+        '<td class="text-center"><label class="cust-switch" title="Active contact"><input type="checkbox" checked aria-label="Active"><span class="slider"></span></label></td>' +
+        '<td><span class="text-muted small"><i class="bi bi-clock me-1"></i>Just now</span></td>';
       tr.querySelector('img').src = img;
       tr.cells[0].querySelector('a').textContent = name;
       var mail = tr.cells[1].querySelector('a');
-      mail.textContent = email;
+      mail.querySelector('.ct-email-txt').textContent = email;
       mail.setAttribute('href', 'mailto:' + email);
-      tr.cells[2].textContent = role;
+      tr.cells[2].querySelector('.ct-role-txt').textContent = role;
       if (phone) {
         var tel = tr.cells[3].querySelector('a');
-        tel.textContent = phone;
+        tel.querySelector('.ct-phone-txt').textContent = phone;
         tel.setAttribute('href', 'tel:' + phone.replace(/\s+/g, ''));
       }
 
