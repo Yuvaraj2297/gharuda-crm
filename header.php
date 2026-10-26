@@ -504,40 +504,36 @@
         </div>
         <div class="offcanvas-body p-0">
             <div class="notif-oc-list" id="notifPendingList">
-                <a href="leave-report.php" class="bell-notif-item" id="notifLeaveItem">
+                <a href="callbacks.php?new=1" class="bell-notif-item" id="notifCallbackItem">
                     <img src="./assets/img/profile-1.jpg" class="bell-notif-avatar" alt="">
                     <div class="bell-notif-info">
                         <div class="bell-notif-name">Emma Miller</div>
-                        <div class="bell-notif-text">Applied for <b>Sick Leave</b></div>
-                        <div class="bell-notif-text" style="font-weight:700;color:#111827;">2 days &middot; 14 &ndash; 15 Sep 2026</div>
+                        <div class="bell-notif-text">Requested <b>Callback</b> for Quote</div>
+                        <div class="bell-notif-text" style="font-weight:700;color:#111827;">Scheduled &middot; Today, 04:30 PM</div>
                     </div>
-                    <span class="bell-notif-time notif-time-swap" style="white-space:nowrap;">30 mins ago</span>
-                    <span class="notif-hover-actions">
-                        <button type="button" class="notif-ico-btn approve" data-action="approve" title="Approve" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Approve"><i class="bi bi-check-lg"></i></button>
-                        <button type="button" class="notif-ico-btn reject" data-action="reject" title="Reject" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Reject"><i class="bi bi-x-lg"></i></button>
-                    </span>
+                    <span class="bell-notif-time notif-time-swap" style="white-space:nowrap;">10 mins ago</span>
                 </a>
-                <a href="employees-report.php?emp=EMP0002" class="bell-notif-item">
+                <a href="appointments.php" class="bell-notif-item">
                     <img src="./assets/img/profile-2.jpg" class="bell-notif-avatar" alt="">
                     <div class="bell-notif-info">
                         <div class="bell-notif-name">Daniel Martinez</div>
-                        <div class="bell-notif-text">Submitted resigning request</div>
+                        <div class="bell-notif-text">Booked Client Presentation</div>
                     </div>
-                    <span class="bell-notif-time" style="white-space:nowrap;">2 hours ago</span>
+                    <span class="bell-notif-time" style="white-space:nowrap;">1 hour ago</span>
                 </a>
-                <a href="employees-report.php?emp=EMP0007" class="bell-notif-item">
+                <a href="manage-leads.php" class="bell-notif-item">
                     <img src="./assets/img/profile-3.jpg" class="bell-notif-avatar" alt="">
                     <div class="bell-notif-info">
                         <div class="bell-notif-name">Olivia Brown</div>
-                        <div class="bell-notif-text">Submitted resigning request</div>
+                        <div class="bell-notif-text">New inbound Indiamart lead assigned</div>
                     </div>
-                    <span class="bell-notif-time" style="white-space:nowrap;">5 hours ago</span>
+                    <span class="bell-notif-time" style="white-space:nowrap;">3 hours ago</span>
                 </a>
             </div>
         </div>
         <div class="notif-oc-footer">
-            <a href="employees-report.php" class="btn btn-primary w-100" style="font-size:13px;font-weight:700;border-radius:10px;">
-                <i class="bi bi-box-arrow-in-right me-1"></i> View All Requests
+            <a href="manage-leads.php" class="btn btn-primary w-100" style="font-size:13px;font-weight:700;border-radius:10px;">
+                <i class="bi bi-box-arrow-in-right me-1"></i> View All Leads
             </a>
         </div>
     </div>
