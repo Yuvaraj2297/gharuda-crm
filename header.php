@@ -430,38 +430,7 @@
         </button>
         <div class="search-box ms-auto">
             <i class="bi bi-search"></i>
-            <input type="text" placeholder="Search for employees, logs, files...">
-        </div>
-        <div class="quick-attendance-actions gap-3" aria-label="Quick attendance">
-            <button type="button" class="btn-quick" id="quickCheckInBtn" title="Check in"
-                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Check in">
-                <i class="mdi mdi-clock-check-outline"></i>
-            </button>
-            <button type="button" class="btn-quick quick-checkout-btn" id="quickCheckOutBtn"
-                title="Check out" aria-label="Check out" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" data-bs-title="Check out" hidden>
-                <i class="bi bi-clock"></i>
-            </button>
-            <button type="button" class="btn-quick quick-breakout-btn" id="quickBreakOutBtn"
-                title="Break out" aria-label="Break out" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" data-bs-title="Break out" hidden>
-                <i class="bi bi-arrow-up-right"></i>
-            </button>
-            <button type="button" class="btn-quick quick-breakin-btn" id="quickBreakInBtn"
-                title="Break in" aria-label="Break in" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" data-bs-title="Break in" hidden>
-                <i class="bi bi-arrow-down-left"></i>
-            </button>
-            <button type="button" class="btn-quick quick-lunchout-btn" id="quickLunchOutBtn"
-                title="Lunch out" aria-label="Lunch out" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" data-bs-title="Lunch out" hidden>
-                <i class="bi bi-egg-fried"></i>
-            </button>
-            <button type="button" class="btn-quick quick-lunchin-btn" id="quickLunchInBtn"
-                title="Lunch in" aria-label="Lunch in" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" data-bs-title="Lunch in" hidden>
-                <i class="bi bi-arrow-return-left"></i>
-            </button>
+            <input type="text" placeholder="Search leads, clients, deals, tickets...">
         </div>
         <div class="icon-pill"><i class="bi bi-question-circle"></i></div>
         <div class="icon-pill" id="bellIcon" style="position:relative;cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Notifications">
@@ -481,7 +450,7 @@
                     </div>
                 </div>
                 <div class="profile-menu-divider"></div>
-                <a href="#" class="profile-menu-logout" role="menuitem">
+                <a href="login.php" class="profile-menu-logout" role="menuitem">
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Logout</span>
                 </a>
@@ -496,7 +465,7 @@
                 <div class="notif-oc-icon"><i class="bi bi-bell"></i></div>
                 <div class="min-w-0">
                     <div class="notif-oc-title" id="bellNotifOffcanvasLabel">Notifications</div>
-                    <div class="notif-oc-sub">Leave & Relieving Requests</div>
+                    <div class="notif-oc-sub">Lead & Client Alerts</div>
                 </div>
                 <span class="notif-count-pill ms-2">3 new</span>
             </div>
