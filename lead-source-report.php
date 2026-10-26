@@ -1,10 +1,6 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/lead-source-report.css">
-
-
-
-<main class="lsr-page">
+<main class="container-fluid px-0">
     <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
         <div class="overflow-auto">
             <h1 class="font-display fw-bold mb-1 page-title">Lead Source Report</h1>
@@ -12,7 +8,7 @@
     </div>
 
     <!-- Filters -->
-    <form method="get" class="card-custom mb-3 filters-card" autocomplete="off">
+    <form method="get" class="card border-0 shadow-sm rounded-3 p-3 mb-3 filters-card" autocomplete="off">
         <div class="row g-3 align-items-end">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <label class="form-label" for="lsrFrom">From Date</label>
@@ -26,7 +22,7 @@
             </div>
             <div class="col-lg-3 col-md-4">
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-reject flex-fill" id="lsrClear">Clear</button>
+                    <button type="button" class="btn btn-outline-secondary flex-fill" id="lsrClear">Clear</button>
                     <button type="submit" class="btn btn-primary flex-fill"><i
                             class="bi bi-search me-1"></i>Search</button>
                 </div>
@@ -45,12 +41,29 @@
     <!-- ============ PANEL: Overview ============ -->
     <div class="lsr-panel active" id="lsrPanel-overview">
 
-        <div class="lsr-hero">
-            <div>
-                <div class="lsr-hero-eyebrow">Total leads across all sources</div>
-                <div class="lsr-hero-num">143</div>
-                <div class="lsr-hero-sub"><i class="bi bi-calendar3 me-1"></i>17-10-2026 · combined result</div>
+        <div class="card border-0 bg-primary text-white rounded-3 p-4 mb-3 shadow-sm position-relative overflow-hidden">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 position-relative" style="z-index: 1;">
+                <div>
+                    <small class="text-white-50 text-uppercase fw-bold" style="letter-spacing: 0.8px;">Total leads across all sources</small>
+                    <div class="display-5 fw-bold text-white mt-1">143</div>
+                    <small class="text-white-50 mt-1 d-block lsr-hero-sub"><i class="bi bi-calendar3 me-1"></i>17-10-2026 · combined result</small>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2 px-3 text-center border border-white border-opacity-25">
+                        <div class="fs-5 fw-bold text-white">17</div>
+                        <small class="text-white-50">Sources</small>
+                    </div>
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2 px-3 text-center border border-white border-opacity-25">
+                        <div class="fs-5 fw-bold text-white text-truncate" style="max-width: 140px;" title="INDIAMART">INDIAMART</div>
+                        <small class="text-white-50">Top source</small>
+                    </div>
+                    <div class="bg-white bg-opacity-25 rounded-3 p-2 px-3 text-center border border-white border-opacity-25">
+                        <div class="fs-5 fw-bold text-white">8.4</div>
+                        <small class="text-white-50">Avg / source</small>
+                    </div>
+                </div>
             </div>
+        </div>
             <div class="lsr-hero-stats">
                 <div class="lsr-hero-chip"><b>17</b>Sources</div>
                 <div class="lsr-hero-chip"><b title="INDIAMART">INDIAMART</b>Top source</div>
@@ -60,94 +73,94 @@
 
         <div class="row g-3">
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-green"><i class="bi bi-person-check-fill"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">25</div>
-                        <div class="lsr-stat-lbl">Customer</div>
-                    </div>
-                    <span class="lsr-stat-share">17%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-success-subtle text-success p-3 rounded-3 fs-5"><i class="bi bi-person-check-fill"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">25</div>
+        <small class="text-muted fw-semibold">Customer</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">17%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-blue"><i class="bi bi-person-fill"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">101</div>
-                        <div class="lsr-stat-lbl">Lead</div>
-                    </div>
-                    <span class="lsr-stat-share">71%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-primary-subtle text-primary p-3 rounded-3 fs-5"><i class="bi bi-person-fill"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">101</div>
+        <small class="text-muted fw-semibold">Lead</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">71%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-violet"><i class="bi bi-file-earmark-text"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">8</div>
-                        <div class="lsr-stat-lbl">Quotation</div>
-                    </div>
-                    <span class="lsr-stat-share">6%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-info-subtle text-info p-3 rounded-3 fs-5"><i class="bi bi-file-earmark-text"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">8</div>
+        <small class="text-muted fw-semibold">Quotation</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">6%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-amber"><i class="bi bi-hourglass-split"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">1</div>
-                        <div class="lsr-stat-lbl">Waiting for Response</div>
-                    </div>
-                    <span class="lsr-stat-share">1%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-warning-subtle text-warning p-3 rounded-3 fs-5"><i class="bi bi-hourglass-split"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">1</div>
+        <small class="text-muted fw-semibold">Waiting for Response</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">1%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-green"><i class="bi bi-arrow-repeat"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">4</div>
-                        <div class="lsr-stat-lbl">Followup</div>
-                    </div>
-                    <span class="lsr-stat-share">3%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-success-subtle text-success p-3 rounded-3 fs-5"><i class="bi bi-arrow-repeat"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">4</div>
+        <small class="text-muted fw-semibold">Followup</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">3%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-blue"><i class="bi bi-patch-check-fill"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">0</div>
-                        <div class="lsr-stat-lbl">Qualified</div>
-                    </div>
-                    <span class="lsr-stat-share">0%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-primary-subtle text-primary p-3 rounded-3 fs-5"><i class="bi bi-patch-check-fill"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">0</div>
+        <small class="text-muted fw-semibold">Qualified</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">0%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-red"><i class="bi bi-signpost-2-fill"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">1</div>
-                        <div class="lsr-stat-lbl">DIRECT</div>
-                    </div>
-                    <span class="lsr-stat-share">1%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-danger-subtle text-danger p-3 rounded-3 fs-5"><i class="bi bi-signpost-2-fill"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">1</div>
+        <small class="text-muted fw-semibold">DIRECT</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">1%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-violet"><i class="bi bi-envelope-plus-fill"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">0</div>
-                        <div class="lsr-stat-lbl">New Enquiry</div>
-                    </div>
-                    <span class="lsr-stat-share">0%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-info-subtle text-info p-3 rounded-3 fs-5"><i class="bi bi-envelope-plus-fill"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">0</div>
+        <small class="text-muted fw-semibold">New Enquiry</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">0%</span>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-stat">
-                    <span class="lsr-stat-ico t-amber"><i class="bi bi-stars"></i></span>
-                    <div>
-                        <div class="lsr-stat-val">3</div>
-                        <div class="lsr-stat-lbl">New</div>
-                    </div>
-                    <span class="lsr-stat-share">2%</span>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 d-flex flex-row align-items-center gap-3">
+    <span class="badge bg-warning-subtle text-warning p-3 rounded-3 fs-5"><i class="bi bi-stars"></i></span>
+    <div>
+        <div class="fs-4 fw-bold text-dark">3</div>
+        <small class="text-muted fw-semibold">New</small>
+    </div>
+    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill ms-auto px-3 py-1">2%</span>
+</div>
             </div>
         </div>
     </div>
@@ -158,868 +171,868 @@
         <!-- Source cards -->
         <div class="row g-3">
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card is-total">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="TOTAL">TOTAL</span>
-                        <span class="lsr-badge total">143</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">25</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value hot">101</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value hot">8</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value hot">4</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value hot">3</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-warning-subtle text-dark border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="TOTAL">TOTAL</h6>
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3">143</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">25</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">101</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">8</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">4</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">3</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="AGENCY">AGENCY</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="AGENCY">AGENCY</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="DEMO">DEMO</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="DEMO">DEMO</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="DIGITAL ADS">DIGITAL ADS</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="DIGITAL ADS">DIGITAL ADS</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="DIRECT">DIRECT</span>
-                        <span class="lsr-badge ">8</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">3</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value hot">3</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="DIRECT">DIRECT</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">8</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">3</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">3</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="EXIHIBITION">EXIHIBITION</span>
-                        <span class="lsr-badge ">3</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value hot">2</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="EXIHIBITION">EXIHIBITION</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">3</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">2</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="FACEBOOK">FACEBOOK</span>
-                        <span class="lsr-badge ">1</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="FACEBOOK">FACEBOOK</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">1</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="FACEBOOK LEAD ADS">FACEBOOK LEAD ADS</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="FACEBOOK LEAD ADS">FACEBOOK LEAD ADS</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="GOKUL(REFERENCE)">GOKUL(REFERENCE)</span>
-                        <span class="lsr-badge ">1</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="GOKUL(REFERENCE)">GOKUL(REFERENCE)</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">1</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="GOOGLE">GOOGLE</span>
-                        <span class="lsr-badge ">1</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="GOOGLE">GOOGLE</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">1</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="INDIAMART">INDIAMART</span>
-                        <span class="lsr-badge ">122</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">17</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value hot">97</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value hot">4</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value hot">3</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="INDIAMART">INDIAMART</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">122</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">17</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">97</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">4</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">3</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="INSTA">INSTA</span>
-                        <span class="lsr-badge ">3</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">3</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="INSTA">INSTA</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">3</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">3</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="JUSTDIAL">JUSTDIAL</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="JUSTDIAL">JUSTDIAL</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="LINKEDIN">LINKEDIN</span>
-                        <span class="lsr-badge ">1</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="LINKEDIN">LINKEDIN</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">1</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="MAIL">MAIL</span>
-                        <span class="lsr-badge ">2</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="MAIL">MAIL</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">2</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="MARKET">MARKET</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="MARKET">MARKET</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="OFFICE VISIT">OFFICE VISIT</span>
-                        <span class="lsr-badge zero">0</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="OFFICE VISIT">OFFICE VISIT</h6>
+        <span class="badge bg-light text-secondary border rounded-pill px-3">0</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
             <div class="col-xl-4 col-md-6">
-                <div class="lsr-card">
-                    <div class="lsr-head">
-                        <span class="lsr-title" title="TELEGRAM">TELEGRAM</span>
-                        <span class="lsr-badge ">1</span>
-                    </div>
-                    <div class="lsr-body">
-                        <ul class="lsr-list">
-                            <li class="lsr-row">
-                                <span class="lsr-label">Customer</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Lead</span>
-                                <span class="lsr-value hot">1</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Quotation</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Waiting for Response</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Followup</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">Qualified</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">DIRECT</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New Enquiry</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                            <li class="lsr-row">
-                                <span class="lsr-label">New</span>
-                                <span class="lsr-value zero">0</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
+    <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark text-truncate" title="TELEGRAM">TELEGRAM</h6>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3">1</span>
+    </div>
+    <div class="card-body p-3">
+        <ul class="list-group list-group-flush border rounded-3 overflow-hidden">
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Customer</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Lead</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold">1</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Quotation</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Waiting for Response</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Followup</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">Qualified</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">DIRECT</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New Enquiry</span>
+                    <span class="text-muted">0</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between py-2 small">
+                    <span class="text-muted">New</span>
+                    <span class="text-muted">0</span>
+                </li>
+        </ul>
+    </div>
+</div>
             </div>
         </div>
     </div><!-- /lsrPanel-sources -->

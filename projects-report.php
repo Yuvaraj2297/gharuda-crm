@@ -1,24 +1,21 @@
 <?php include 'header.php'; ?>
 
 <!-- DataTables / DatePicker CSS if available, plus custom Gharuda styles -->
-<link rel="stylesheet" href="./assets/css/table.css">
 <link rel="stylesheet" href="./assets/css/date-picker.css">
 <link rel="stylesheet" href="./assets/css/select2.css">
 
-<link rel="stylesheet" href="./assets/css/projects-report.css">
-
-<main class="projects-report-wrapper py-3">
+<main class="projects-report-wrapper py-3 pb-5">
     <div class="container-fluid px-3 px-md-4">
         
         <!-- Title row (Gharuda CRM Standard Flow) -->
         <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
             <div class="d-flex align-items-center gap-3">
-                <div class="proj-title-ico">
+                <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:48px; height:48px; font-size:22px;">
                     <i class="bi bi-file-earmark-bar-graph-fill"></i>
                 </div>
                 <div>
-                    <h1 class="font-display fw-bold mb-1" style="font-size:1.65rem; color:var(--ink-900, #16202b);">Projects Report</h1>
-                    <nav class="d-flex align-items-center gap-2 text-neutral" style="font-size:13px;">
+                    <h1 class="font-display fw-bold mb-1 fs-3 text-dark">Projects Report</h1>
+                    <nav class="d-flex align-items-center gap-2 small text-secondary">
                         <span>CRM</span>
                         <i class="bi bi-chevron-right" style="font-size:10px;"></i>
                         <a href="projects-list.php" class="text-secondary text-decoration-none fw-medium">Projects</a>
@@ -29,24 +26,24 @@
             </div>
             
             <div class="d-flex align-items-center gap-2 flex-wrap">
-                <button type="button" class="btn btn-outline-secondary px-3 py-2 fw-semibold" onclick="window.print()" style="border-radius:10px; font-size:13.5px;">
+                <button type="button" class="btn btn-outline-secondary bg-white px-3 py-2 fw-semibold rounded-2 shadow-sm" onclick="window.print()">
                     <i class="bi bi-printer me-1"></i> Print Summary
                 </button>
-                <a href="project-create.php" class="btn btn-primary px-3 py-2 fw-semibold" style="border-radius:10px; font-size:13.5px;">
+                <a href="project-create.php" class="btn btn-primary px-3 py-2 fw-semibold rounded-2 shadow-sm">
                     <i class="bi bi-plus-circle me-1"></i> New Project
                 </a>
             </div>
         </div>
 
         <!-- Filter Card ("Filter by") -->
-        <div class="filter-card">
-            <div class="filter-card-header">
-                <i class="bi bi-funnel-fill me-1" style="color:var(--primary, #16a34a);"></i> Filter by
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white" id="filterCard">
+            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
+                <i class="bi bi-funnel-fill text-success me-2"></i> Filter by
             </div>
             <form id="projectReportFilterForm" onsubmit="handleReportSearch(event)">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-4">
-                        <label class="form-label fw-bold text-slate-700 fs-13 mb-1">Staff Members</label>
+                        <label class="form-label fw-bold text-dark small mb-1">Staff Members</label>
                         <select class="form-select select2" id="filterStaffMember">
                             <option value="Assigned" selected>Assigned</option>
                             <option value="All">All Staff Members</option>
@@ -58,21 +55,21 @@
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <label class="form-label fw-bold text-slate-700 fs-13 mb-1">From Date</label>
+                        <label class="form-label fw-bold text-dark small mb-1">From Date</label>
                         <div class="date-picker">
                             <input type="text" class="date-input form-control" id="filterFromDate" placeholder="Select date" autocomplete="off">
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <label class="form-label fw-bold text-slate-700 fs-13 mb-1">To Date</label>
+                        <label class="form-label fw-bold text-dark small mb-1">To Date</label>
                         <div class="date-picker">
                             <input type="text" class="date-input form-control" id="filterToDate" placeholder="Select date" autocomplete="off">
                         </div>
                     </div>
 
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-search-primary w-100 justify-content-center">
+                        <button type="submit" class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 rounded-2 shadow-sm fw-semibold">
                             <i class="bi bi-search"></i> Search
                         </button>
                     </div>
@@ -81,92 +78,87 @@
         </div>
 
         <!-- Quick Filter Action Buttons Bar -->
-        <div class="action-filter-bar">
-            <button type="button" class="btn-quick-filter btn-qf-deadline" onclick="filterByQuickTag('today_deadline')">
-                <i class="bi bi-alarm"></i> Today's Dead Line Project
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-3" id="actionFilterBar">
+            <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('today_deadline')">
+                <i class="bi bi-alarm me-1"></i> Today's Dead Line Project
             </button>
-            <button type="button" class="btn-quick-filter btn-qf-upcoming" onclick="filterByQuickTag('upcoming')">
-                <i class="bi bi-calendar-event"></i> Upcoming Project
+            <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('upcoming')">
+                <i class="bi bi-calendar-event me-1"></i> Upcoming Project
             </button>
-            <button type="button" class="btn-quick-filter btn-qf-today" onclick="filterByQuickTag('today')">
-                <i class="bi bi-calendar-check"></i> Today's Project
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('today')">
+                <i class="bi bi-calendar-check me-1"></i> Today's Project
             </button>
-            <button type="button" class="btn-quick-filter btn-qf-passed" onclick="filterByQuickTag('due_passed')">
-                <i class="bi bi-exclamation-triangle"></i> Due Date Passed Project
+            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('due_passed')">
+                <i class="bi bi-exclamation-triangle me-1"></i> Due Date Passed Project
             </button>
-            <button type="button" class="btn-quick-filter btn-qf-reset" onclick="resetReportFilters()">
-                <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 fw-semibold" onclick="resetReportFilters()">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
             </button>
-            <button type="button" class="btn-quick-filter btn-qf-overview" onclick="openDetailedOverviewModal()">
-                <i class="bi bi-bar-chart-steps"></i> Detailed project overview
+            <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3 py-1 fw-semibold" onclick="openDetailedOverviewModal()">
+                <i class="bi bi-bar-chart-steps me-1"></i> Detailed project overview
             </button>
         </div>
 
         <!-- Projects Summary Section -->
-        <div class="projects-summary-card">
-            <div class="projects-summary-title">
-                <i class="bi bi-file-earmark-text me-1" style="color:var(--primary, #16a34a);"></i> Projects Summary
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white">
+            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
+                <i class="bi bi-file-earmark-text text-success me-2"></i> Projects Summary
             </div>
-            <div class="summary-counter-bar">
-                <div class="counter-item" onclick="filterByStatus('Not Started')">
-                    <span class="counter-number not-started" id="cntNotStarted">2</span>
-                    <span>Not Started</span>
+            <div class="row g-2 text-center">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('Not Started')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-secondary" id="cntNotStarted">2</div>
+                        <div class="small text-muted fw-semibold">Not Started</div>
+                    </div>
                 </div>
 
-                <div class="counter-divider"></div>
-
-                <div class="counter-item" onclick="filterByStatus('In Progress')">
-                    <span class="counter-number in-progress" id="cntInProgress">8</span>
-                    <span>In Progress</span>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('In Progress')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-primary" id="cntInProgress">8</div>
+                        <div class="small text-muted fw-semibold">In Progress</div>
+                    </div>
                 </div>
 
-                <div class="counter-divider"></div>
-
-                <div class="counter-item" onclick="filterByStatus('On Hold')">
-                    <span class="counter-number on-hold" id="cntOnHold">1</span>
-                    <span>On Hold</span>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('On Hold')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-warning" id="cntOnHold">1</div>
+                        <div class="small text-muted fw-semibold">On Hold</div>
+                    </div>
                 </div>
 
-                <div class="counter-divider"></div>
-
-                <div class="counter-item" onclick="filterByStatus('Cancelled')">
-                    <span class="counter-number cancelled" id="cntCancelled">1</span>
-                    <span>Cancelled</span>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('Cancelled')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-danger" id="cntCancelled">1</div>
+                        <div class="small text-muted fw-semibold">Cancelled</div>
+                    </div>
                 </div>
 
-                <div class="counter-divider"></div>
-
-                <div class="counter-item" onclick="filterByStatus('test')">
-                    <span class="counter-number test" id="cntTest">1</span>
-                    <span>test</span>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('test')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-info" id="cntTest">1</div>
+                        <div class="small text-muted fw-semibold">test</div>
+                    </div>
                 </div>
 
-                <div class="counter-divider"></div>
-
-                <div class="counter-item" onclick="filterByStatus('Finished')">
-                    <span class="counter-number finished" id="cntFinished">2</span>
-                    <span>Finished</span>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-2 rounded-3 bg-light" onclick="filterByStatus('Finished')" role="button" style="cursor: pointer;">
+                        <div class="fs-4 fw-bold text-success" id="cntFinished">2</div>
+                        <div class="small text-muted fw-semibold">Finished</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== Grouped table card (jobtype.php table flow with datatable class) ===== -->
-        <div class="card-custom p-0 overflow-hidden mb-3" id="projectsReportTableWrap">
-            <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="icon-chip">
-                        <i class="bi bi-file-earmark-bar-graph"></i>
-                    </div>
-                    <div>
-                        <h3 class="card-title mb-0">Project Detailed Ledger</h3>
-                    </div>
-                </div>
+        <!-- ===== Grouped table card ===== -->
+        <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3 bg-white" id="projectsReportTableWrap">
+            <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
+                <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-file-earmark-bar-graph text-primary me-2"></i> Project Detailed Ledger</h5>
             </div>
 
             <!-- Table (toolbar + export + column visibility + search + show entries + pagination auto-created by datatable class via auto-master-table.js) -->
-            <div class="table-responsive table-modern-wrap overflow-auto column-border">
-                <table class="table-modern w-100 datatable" id="projectReportTable" data-table-name="Projects Report">
-                    <thead>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 datatable" id="projectReportTable" data-table-name="Projects Report">
+                    <thead class="table-light">
                         <tr>
                             <th rowspan="2" style="width:60px;">S.No</th>
                             <th rowspan="2" style="width:85px;">Project Id</th>
@@ -208,11 +200,11 @@
                             </td>
                             <td class="fw-semibold">14:30</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" data-bs-toggle="tooltip" title="KOHA Staff">KOHA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" data-bs-toggle="tooltip" title="KOHA Staff">KOHA</div>
                                 </div>
                             </td>
                             <td>
@@ -240,11 +232,11 @@
                             </td>
                             <td class="fw-semibold">32:00</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#eab308;" title="Staff 1">ST</div><div class="staff-avatar-circle" style="background:#3b82f6;" title="Staff 2">AD</div><div class="staff-avatar-circle" style="background:#ec4899;" title="Staff 3">MK</div><div class="staff-avatar-circle" style="background:#8b5cf6;" title="Staff 4">KOHA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="Staff 1">ST</div><div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="Staff 2">AD</div><div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="Staff 3">MK</div><div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="Staff 4">KOHA</div>
                                 </div>
                             </td>
                             <td>
@@ -272,11 +264,11 @@
                             </td>
                             <td class="fw-semibold">84:15</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#3b82f6;" title="AD">AD</div><div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="AD">AD</div><div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div>
                                 </div>
                             </td>
                             <td>
@@ -304,11 +296,11 @@
                             </td>
                             <td class="fw-semibold">120:00</td>
                             <td>
-                                <span class="status-pill finished">Finished</span>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1 rounded-2">Finished</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#8b5cf6;" title="KOHA">KOHA</div><div class="staff-avatar-circle" style="background:#eab308;" title="ST">ST</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="KOHA">KOHA</div><div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="ST">ST</div>
                                 </div>
                             </td>
                             <td>
@@ -336,11 +328,11 @@
                             </td>
                             <td class="fw-semibold">45:30</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#eab308;" title="ST">ST</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="ST">ST</div>
                                 </div>
                             </td>
                             <td>
@@ -368,11 +360,11 @@
                             </td>
                             <td class="fw-semibold">95:45</td>
                             <td>
-                                <span class="status-pill finished">Finished</span>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1 rounded-2">Finished</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#3b82f6;" title="AD">AD</div><div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div><div class="staff-avatar-circle" style="background:#8b5cf6;" title="KOHA">KOHA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="AD">AD</div><div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div><div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="KOHA">KOHA</div>
                                 </div>
                             </td>
                             <td>
@@ -400,11 +392,11 @@
                             </td>
                             <td class="fw-semibold">00:00</td>
                             <td>
-                                <span class="status-pill not-started">Not Started</span>
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-2.5 py-1 rounded-2">Not Started</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#eab308;" title="ST">ST</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="ST">ST</div>
                                 </div>
                             </td>
                             <td>
@@ -432,11 +424,11 @@
                             </td>
                             <td class="fw-semibold">38:00</td>
                             <td>
-                                <span class="status-pill on-hold">On Hold</span>
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2.5 py-1 rounded-2">On Hold</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div>
                                 </div>
                             </td>
                             <td>
@@ -464,11 +456,11 @@
                             </td>
                             <td class="fw-semibold">72:20</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#8b5cf6;" title="KOHA">KOHA</div><div class="staff-avatar-circle" style="background:#3b82f6;" title="AD">AD</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="KOHA">KOHA</div><div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="AD">AD</div>
                                 </div>
                             </td>
                             <td>
@@ -496,11 +488,11 @@
                             </td>
                             <td class="fw-semibold">18:00</td>
                             <td>
-                                <span class="status-pill not-started">Not Started</span>
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-2.5 py-1 rounded-2">Not Started</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#eab308;" title="ST">ST</div><div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="ST">ST</div><div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div>
                                 </div>
                             </td>
                             <td>
@@ -528,11 +520,11 @@
                             </td>
                             <td class="fw-semibold">28:00</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#3b82f6;" title="AD">AD</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="AD">AD</div>
                                 </div>
                             </td>
                             <td>
@@ -560,11 +552,11 @@
                             </td>
                             <td class="fw-semibold">18:30</td>
                             <td>
-                                <span class="status-pill cancelled">Cancelled</span>
+                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1 rounded-2">Cancelled</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#8b5cf6;" title="KOHA">KOHA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="KOHA">KOHA</div>
                                 </div>
                             </td>
                             <td>
@@ -592,11 +584,11 @@
                             </td>
                             <td class="fw-semibold">52:10</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#eab308;" title="ST">ST</div><div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#eab308;" title="ST">ST</div><div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div>
                                 </div>
                             </td>
                             <td>
@@ -624,11 +616,11 @@
                             </td>
                             <td class="fw-semibold">40:00</td>
                             <td>
-                                <span class="status-pill test">test</span>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle px-2.5 py-1 rounded-2">test</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#3b82f6;" title="AD">AD</div><div class="staff-avatar-circle" style="background:#8b5cf6;" title="KOHA">KOHA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#3b82f6;" title="AD">AD</div><div class="badge rounded-circle p-2 text-white" style="background:#8b5cf6;" title="KOHA">KOHA</div>
                                 </div>
                             </td>
                             <td>
@@ -656,11 +648,11 @@
                             </td>
                             <td class="fw-semibold">12:00</td>
                             <td>
-                                <span class="status-pill in-progress">In Progress</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                             </td>
                             <td>
-                                <div class="staff-avatar-group">
-                                    <div class="staff-avatar-circle" style="background:#ec4899;" title="MK">MK</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="badge rounded-circle p-2 text-white" style="background:#ec4899;" title="MK">MK</div>
                                 </div>
                             </td>
                             <td>
@@ -678,8 +670,8 @@
 </main>
 
 <!-- PROJECT MILESTONE OFFCANVAS DRAWER -->
-<div class="offcanvas offcanvas-end milestone-offcanvas" tabindex="-1" id="projectMilestoneOffcanvas" aria-labelledby="milestoneOffcanvasLabel">
-    <div class="offcanvas-header text-white border-bottom">
+<div class="offcanvas offcanvas-end" style="width: min(900px, 95vw);" tabindex="-1" id="projectMilestoneOffcanvas" aria-labelledby="milestoneOffcanvasLabel">
+    <div class="offcanvas-header bg-dark text-white border-bottom">
         <div>
             <h5 class="offcanvas-title fw-bold m-0" id="milestoneOffcanvasLabel">
                 <i class="bi bi-diagram-3-fill me-2 text-warning"></i> Project Milestones Breakdown
@@ -693,7 +685,7 @@
 
     <div class="offcanvas-body p-4">
         <!-- Milestone Summary KPI Cards -->
-        <div class="milestone-kpi-bar">
+        <div class="card border-0 bg-light rounded-3 p-3 mb-3">
             <div class="row g-3 text-center align-items-center">
                 <div class="col-4 border-end">
                     <div class="text-muted small fw-bold text-uppercase">Total Milestones</div>
@@ -706,7 +698,7 @@
                 <div class="col-4">
                     <div class="text-muted small fw-bold text-uppercase">Project Status</div>
                     <div class="mt-1" id="kpiProjectStatusPill">
-                        <span class="status-pill in-progress">In Progress</span>
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>
                     </div>
                 </div>
             </div>
@@ -715,7 +707,7 @@
         <!-- Add Milestone Top Control Bar -->
         <div class="d-flex align-items-center justify-content-between mb-3">
             <div class="fw-bold text-dark fs-6">
-                <i class="bi bi-flag-fill me-1" style="color:var(--primary, #16a34a);"></i> Milestones List
+                <i class="bi bi-flag-fill me-1 text-success"></i> Milestones List
             </div>
             <button type="button" class="btn btn-sm btn-primary fw-bold rounded-3 px-3 shadow-sm" onclick="openAddMilestoneModal()">
                 <i class="bi bi-plus-lg me-1"></i> Add Milestone
@@ -724,8 +716,8 @@
 
         <!-- Milestone Table (Matching User Screenshot Headers) -->
         <div class="table-responsive rounded-3 border bg-white shadow-sm">
-            <table class="milestone-table">
-                <thead>
+            <table class="table table-bordered table-hover align-middle text-center mb-0">
+                <thead class="table-light">
                     <tr>
                         <th rowspan="2" style="min-width: 90px;">Milestone ID</th>
                         <th rowspan="2" style="min-width: 150px;">Milestone Name</th>
@@ -769,7 +761,7 @@
 <div class="modal fade" id="addMilestoneModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg">
-            <div class="modal-header text-white rounded-top-4" style="background: linear-gradient(135deg, var(--primary, #16a34a) 0%, var(--primary-dark, #0f7a38) 100%);">
+            <div class="modal-header bg-primary text-white rounded-top-4">
                 <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle me-2"></i>Create New Milestone</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -818,7 +810,7 @@
 <div class="modal fade" id="detailedOverviewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg">
-            <div class="modal-header bg-slate-900 text-white rounded-top-4">
+            <div class="modal-header bg-dark text-white rounded-top-4">
                 <h5 class="modal-title fw-bold">
                     <i class="bi bi-bar-chart-steps text-info me-2"></i> Detailed Project Overview
                 </h5>
@@ -917,13 +909,13 @@
             var pctVal = parseInt(m.pct) || 0;
             totalPctSum += pctVal;
 
-            var statusBadge = '<span class="status-pill in-progress">In Progress</span>';
+            var statusBadge = '<span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-2">In Progress</span>';
             if (m.status === 'Completed') {
-                statusBadge = '<span class="status-pill finished">Completed</span>';
+                statusBadge = '<span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1 rounded-2">Completed</span>';
             } else if (m.status === 'Not Started') {
-                statusBadge = '<span class="status-pill not-started">Not Started</span>';
+                statusBadge = '<span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-2.5 py-1 rounded-2">Not Started</span>';
             } else if (m.status === 'On Hold') {
-                statusBadge = '<span class="status-pill on-hold">On Hold</span>';
+                statusBadge = '<span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2.5 py-1 rounded-2">On Hold</span>';
             }
 
             html += '<tr>' +

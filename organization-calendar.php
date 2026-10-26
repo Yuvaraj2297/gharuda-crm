@@ -1,96 +1,131 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/organization-calendar.css">
+<style>
+.cal-month, .cal-month-label { display: none; }
+.cal-month.active, .cal-month-label.active { display: block; }
+.cal-grid, .cal-dow-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-day { min-height: 110px; padding: 6px; border: 1px solid #eef2f6; border-radius: 8px; background: #fff; transition: background 0.15s; }
+.cal-day:hover { background: #f8fafc; }
+.cal-day.weekend { background: #fefce8; }
+.cal-day.other-month { background: #f8fafc; opacity: 0.6; }
+.cal-day.today { border: 2px solid #0d6efd; background: #eff6ff; }
+.cal-day-header { padding: 8px 4px; text-align: center; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 6px; background: #f1f5f9; color: #475569; }
+.cal-day-header.weekend { background: #fef3c7; color: #b45309; }
+.cal-events { display: flex; flex-direction: column; gap: 3px; }
+.cal-event { display: flex; align-items: center; gap: 4px; padding: 3px 6px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; text-decoration: none; overflow: hidden; }
+.cal-event.evt-blue { background: #dbeafe; color: #1d4ed8; }
+.cal-event.evt-purple { background: #f3e8ff; color: #7e22ce; }
+.cal-event.evt-pink { background: #fce7f3; color: #be185d; }
+.cal-event.evt-green { background: #dcfce7; color: #15803d; }
+.cal-event.evt-amber { background: #fef3c7; color: #b45309; }
+.cal-event.evt-red { background: #fee2e2; color: #b91c1c; }
+.cal-event.evt-grouped { justify-content: flex-start; }
+.cal-event.evt-grouped .evt-group-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,.08); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.cal-event.evt-grouped .evt-count-badge { margin-left: auto; min-width: 18px; height: 18px; border-radius: 9px; background: rgba(0,0,0,.1); color: inherit; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 4px; flex-shrink: 0; }
+.cal-more-events { font-size: 11px; font-weight: 600; color: #64748b; padding: 2px 6px; cursor: pointer; border-radius: 4px; }
+.cal-more-events:hover { background: #f1f5f9; }
+[data-view="absent-leave"] .cal-event[data-status="shift"] { display: none; }
+[data-view="shift"] .cal-event:not([data-status="shift"]) { display: none; }
+.cal-filter-panel { display: none; }
+.cal-filter-panel.show { display: flex; }
+</style>
 
-<!-- ===== Page header ===== -->
-<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-    <div class="w-100">
-        <h1 class="font-display fw-bold mb-1 cal-main-title">Calendar</h1>
-    </div>
-</div>
+<main class="py-3 pb-5">
+    <div class="container-fluid px-3 px-md-4">
 
-<!-- ===== Calendar card ===== -->
-<div class="cal-wrap" id="calWrap" data-view="absent-leave">
-    <!-- Header -->
-    <div class="cal-header">
-        <div class="cal-nav">
-            <button type="button" class="cal-nav-btn" id="calPrev" title="Previous month">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-            <button type="button" class="cal-nav-btn today-btn" id="calToday">
-                <i class="bi bi-calendar3"></i> Today
-            </button>
-            <button type="button" class="cal-nav-btn" id="calNext" title="Next month">
-                <i class="bi bi-chevron-right"></i>
-            </button>
-            <span class="cal-month-label">January 2026</span>
-            <span class="cal-month-label">February 2026</span>
-            <span class="cal-month-label">March 2026</span>
-            <span class="cal-month-label">April 2026</span>
-            <span class="cal-month-label">May 2026</span>
-            <span class="cal-month-label">June 2026</span>
-            <span class="cal-month-label">July 2026</span>
-            <span class="cal-month-label">August 2026</span>
-            <span class="cal-month-label">September 2026</span>
-            <span class="cal-month-label active">October 2026</span>
-            <span class="cal-month-label">November 2026</span>
-            <span class="cal-month-label">December 2026</span>
+        <!-- ===== Page header ===== -->
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h1 class="font-display fw-bold mb-0 fs-3 text-dark d-flex align-items-center">
+                <i class="bi bi-calendar3 text-primary me-2"></i> Organization Calendar
+            </h1>
         </div>
-        <button type="button" class="cal-filter-btn d-none" id="calFilterBtn" title="Toggle filters">
-            <i class="bi bi-funnel"></i>
-        </button>
-    </div>
 
-    <!-- View tabs -->
-    <div class="cal-view-tabs" id="calViewTabs">
-        <button type="button" class="cal-view-tab active" data-status="absent-leave"><span class="vt-dot vt-dot-purple"></span>Leave Status</button>
-        <button type="button" class="cal-view-tab" data-status="shift"><span class="vt-dot vt-dot-blue"></span>Shift Status</button>
-    </div>
+        <!-- ===== Calendar card ===== -->
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden bg-white mb-4" id="calWrap" data-view="absent-leave">
+            <!-- Header -->
+            <div class="card-header bg-white border-bottom p-3 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2 p-1 bg-light border rounded-pill shadow-sm">
+                    <button type="button" class="btn btn-sm btn-light border-0 rounded-circle d-flex align-items-center justify-content-center" id="calPrev" style="width:32px;height:32px;" title="Previous month">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary-subtle text-primary border-0 rounded-pill px-3 fw-bold" id="calToday">
+                        <i class="bi bi-calendar3 me-1"></i> Today
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light border-0 rounded-circle d-flex align-items-center justify-content-center" id="calNext" style="width:32px;height:32px;" title="Next month">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">January 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">February 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">March 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">April 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">May 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">June 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">July 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">August 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">September 2026</span>
+                    <span class="cal-month-label active fw-bold text-dark fs-5 px-3">October 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">November 2026</span>
+                    <span class="cal-month-label fw-bold text-dark fs-5 px-3">December 2026</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 d-none" id="calFilterBtn" title="Toggle filters">
+                    <i class="bi bi-funnel me-1"></i> Filter
+                </button>
+            </div>
 
-    <!-- Filter panel -->
-    <div class="cal-filter-panel" id="calFilterPanel">
-        <div class="form-group">
-            <label>Department</label>
-            <select class="form-select select2 select-minw-160" id="calFilterDept">
-                <option value="">All Departments</option>
-                <option value="HR">HR</option>
-                <option value="IT">IT</option>
-                <option value="Management">Management</option>
-                <option value="Marketing">Marketing</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Employee</label>
-            <select class="form-select select2 select-minw-180" id="calFilterEmp">
-                <option value="">All Employees</option>
-                <option value="1">1 - 5056 - Vickey G</option>
-                <option value="2">S2 - Lilly Williams</option>
-                <option value="3">S3 - Clarkson Walter</option>
-                <option value="4">S5 - Priya Sharma</option>
-                <option value="5">S6 - Arjun Nair</option>
-                <option value="6">S9 - Rahul Verma</option>
-                <option value="7">S10 - Sneha Iyer</option>
-                <option value="8">S14 - Emily Davis</option>
-                <option value="9">S12 - Karthik Raja</option>
-                <option value="10">S15 - James Wilson</option>
-                <option value="11">S16 - Ethan Taylor</option>
-                <option value="12">S17 - Grace Lee</option>
-                <option value="13">S18 - Isabella Moore</option>
-                <option value="14">S21 - Aiden Thomas</option>
-                <option value="15">S22 - Mia Anderson</option>
-                <option value="16">S23 - Lucas White</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Status</label>
-            <select class="form-select select2 select-minw-160" id="calFilterStatus">
-                <option value="">All Status</option>
-                <option value="absent">Absent</option>
-                <option value="leave">Leave</option>
-                <option value="shift">Shift</option>
-            </select>
-        </div>
-    </div>
+            <!-- View tabs -->
+            <div class="p-2.5 px-3 border-bottom bg-light d-flex align-items-center gap-2" id="calViewTabs">
+                <button type="button" class="btn btn-sm btn-outline-primary active cal-view-tab rounded-pill px-3 fw-bold" data-status="absent-leave">
+                    <span class="badge rounded-circle me-1 d-inline-block" style="width:8px;height:8px;background:#9333ea;"></span> Leave Status
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary cal-view-tab rounded-pill px-3 fw-bold" data-status="shift">
+                    <span class="badge bg-primary rounded-circle me-1 d-inline-block" style="width:8px;height:8px;"></span> Shift Status
+                </button>
+            </div>
+
+            <!-- Filter panel -->
+            <div class="cal-filter-panel p-3 border-bottom bg-white d-flex align-items-end gap-3 flex-wrap" id="calFilterPanel">
+                <div>
+                    <label class="form-label small fw-bold text-secondary mb-1">Department</label>
+                    <select class="form-select select2" id="calFilterDept" style="min-width:160px;">
+                        <option value="">All Departments</option>
+                        <option value="HR">HR</option>
+                        <option value="IT">IT</option>
+                        <option value="Management">Management</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label small fw-bold text-secondary mb-1">Employee</label>
+                    <select class="form-select select2" id="calFilterEmp" style="min-width:180px;">
+                        <option value="">All Employees</option>
+                        <option value="1">1 - 5056 - Vickey G</option>
+                        <option value="2">S2 - Lilly Williams</option>
+                        <option value="3">S3 - Clarkson Walter</option>
+                        <option value="4">S5 - Priya Sharma</option>
+                        <option value="5">S6 - Arjun Nair</option>
+                        <option value="6">S9 - Rahul Verma</option>
+                        <option value="7">S10 - Sneha Iyer</option>
+                        <option value="8">S14 - Emily Davis</option>
+                        <option value="9">S12 - Karthik Raja</option>
+                        <option value="10">S15 - James Wilson</option>
+                        <option value="11">S16 - Ethan Taylor</option>
+                        <option value="12">S17 - Grace Lee</option>
+                        <option value="13">S18 - Isabella Moore</option>
+                        <option value="14">S21 - Aiden Thomas</option>
+                        <option value="15">S22 - Mia Anderson</option>
+                        <option value="16">S23 - Lucas White</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label small fw-bold text-secondary mb-1">Status</label>
+                    <select class="form-select select2" id="calFilterStatus" style="min-width:160px;">
+                        <option value="">All Status</option>
+                        <option value="absent">Absent</option>
+                        <option value="leave">Leave</option>
+                        <option value="shift">Shift</option>
+                    </select>
+                </div>
+            </div>
 
     <!-- ===== Months (static, Jan - Dec 2026) ===== -->
     <div class="cal-month" data-month="2026-01">
@@ -7773,6 +7808,8 @@
         </div>
     </div>
 </div>
+    </div>
+</main>
 
 <script>
 /* Everything above is static HTML. This script only shows / hides things on click. */

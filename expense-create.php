@@ -18,8 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-<link rel="stylesheet" href="./assets/css/table.css">
 <link rel="stylesheet" href="./assets/css/select2.css">
 
 <style>

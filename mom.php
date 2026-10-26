@@ -1,98 +1,159 @@
-<?php include 'header.php'; ?>
+<?php
+$currentPage = 'mom.php';
+include 'header.php';
+?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
+<!-- =========================================================================
+     PURE BOOTSTRAP 5 MINUTES OF MEETING (MOM)
+     Zero Custom CSS - Clean Native Bootstrap 5.3 Architecture
+     ========================================================================= -->
+
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
-<link rel="stylesheet" href="./assets/css/mom.css">
 
-<main class="mom-page">
-    <!-- Title row -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-        <div>
-            <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Minutes of Meeting</h1>
-        </div>
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-            <div class="mom-date-range">
-                <i class="bi bi-calendar3 me-1"></i>Date: <span id="momToday">17-10-2026</span>
-            </div>
-            <div class="mom-pills d-flex align-items-center gap-2">
-                <a href="appointments.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-calendar2-week me-1"></i>Appointments</a>
-                <a href="past-meeting.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
-                <a href="callbacks.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
-            </div>
-            <button type="button" class="btn btn-primary btn-sm" id="momNewBtn">
-                <i class="bi bi-plus-lg me-1"></i>New MOM
-            </button>
-        </div>
-    </div>
+<div class="container-fluid px-0">
 
-    <!-- ===== Pending MOM strip (finished appointments without MOM) ===== -->
-    <div class="mom-pending-strip" id="momPendingStrip">
-        <div class="mom-pending-head">
-            <span class="pulse-dot"></span>
-            Pending MOM — Finished Appointments (<span id="momPendingCount">2</span>)
-        </div>
-        <div class="mom-pending-row" id="momPendingRow">
-            <div class="mom-appt-chip">
-                <div class="mom-appt-info">
-                    <span class="mom-appt-when">13-07-2026 10:00</span>
-                    <span class="badge rounded-pill" style="background:#eef2ff;color:#4f46e5;font-size:9.5px;font-weight:800;margin-left:6px;vertical-align:middle;">DEV - Online</span>
-                    <div class="mom-appt-title">Test Appointment</div>
-                    <div class="mom-appt-meta"><i class="bi bi-building me-1"></i>Raja Enterprises</div>
-                </div>
-                <button type="button" class="mom-create-btn" data-pendingid="501"><i class="bi bi-plus-lg me-1"></i>Create MOM</button>
-            </div>
-            <div class="mom-appt-chip">
-                <div class="mom-appt-info">
-                    <span class="mom-appt-when">21-07-2026 15:30</span>
-                    <span class="badge rounded-pill" style="background:#eef2ff;color:#4f46e5;font-size:9.5px;font-weight:800;margin-left:6px;vertical-align:middle;">Onsite</span>
-                    <div class="mom-appt-title">Site Survey Discussion</div>
-                    <div class="mom-appt-meta"><i class="bi bi-building me-1"></i>GODREJ</div>
-                </div>
-                <button type="button" class="mom-create-btn" data-pendingid="502"><i class="bi bi-plus-lg me-1"></i>Create MOM</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== Stat chips ===== -->
-    <div class="row g-3 mb-3">
-        <div class="col-xl-4 col-md-6">
-            <div class="mom-stat">
-                <span class="mom-stat-ico t-green"><i class="bi bi-journal-check"></i></span>
+    <!-- Title Row & Quick Nav -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white">
+        <div class="card-body p-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                 <div>
-                    <div class="mom-stat-val" id="momStatTotal">5</div>
-                    <div class="mom-stat-lbl">Total MOMs</div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">Appointments &amp; MOM</span>
+                        <span class="badge bg-success-subtle text-success fw-semibold px-3 py-1 rounded-pill">Pure Bootstrap</span>
+                    </div>
+                    <h1 class="h3 fw-bold text-dark mb-1">Minutes of Meeting (MOM)</h1>
+                    <p class="text-secondary small mb-0">Record, organize, review customer meetings and generate verified PDF minutes.</p>
                 </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="mom-stat">
-                <span class="mom-stat-ico t-amber"><i class="bi bi-hourglass-split"></i></span>
-                <div>
-                    <div class="mom-stat-val" id="momStatPending">2</div>
-                    <div class="mom-stat-lbl">Pending MOMs (appointments)</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="mom-stat">
-                <span class="mom-stat-ico t-blue"><i class="bi bi-arrow-repeat"></i></span>
-                <div>
-                    <div class="mom-stat-val" id="momStatCR">3</div>
-                    <div class="mom-stat-lbl">Open change requests</div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">
+                        <i class="bi bi-calendar3 me-1 text-primary"></i>Date: <span id="momToday" class="fw-bold">17-10-2026</span>
+                    </span>
+                    <a href="appointments.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                        <i class="bi bi-calendar2-week me-1"></i>Appointments
+                    </a>
+                    <a href="past-meeting.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                        <i class="bi bi-calendar-check me-1"></i>Past Meetings
+                    </a>
+                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" id="momNewBtn">
+                        <i class="bi bi-plus-lg me-1"></i>New MOM
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== MOM list (jobtype.php table flow with datatable class) ===== -->
-    <div class="card-custom p-0 overflow-hidden" id="momTableWrap">
-        <!-- Table (toolbar + export + column visibility + pagination auto-created by datatable class via auto-master-table.js) -->
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="momTable" data-table-name="Minutes of Meeting">
-                <thead>
+    <!-- Pending MOM Strip (Finished Appointments Requiring MOM) -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white" id="momPendingStrip">
+        <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-1 fw-semibold">
+                    <i class="bi bi-hourglass-split me-1"></i>Pending MOMs (<span id="momPendingCount">2</span>)
+                </span>
+                <span class="text-secondary small">Finished appointments awaiting minutes documentation</span>
+            </div>
+        </div>
+        <div class="card-body p-3">
+            <div class="d-flex gap-3 overflow-auto pb-1" id="momPendingRow">
+                <!-- Appt 1 -->
+                <div class="border rounded-3 p-3 bg-light-subtle d-flex justify-content-between align-items-center gap-3 flex-shrink-0" style="min-width: 320px;">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <span class="small text-secondary"><i class="bi bi-clock me-1"></i>13-07-2026 10:00</span>
+                            <span class="badge rounded-pill bg-primary-subtle text-primary small">DEV - Online</span>
+                        </div>
+                        <div class="fw-bold text-dark small mb-1">Test Appointment</div>
+                        <div class="text-secondary small"><i class="bi bi-building me-1"></i>Raja Enterprises</div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3 text-nowrap" data-pendingid="501">
+                        <i class="bi bi-plus-lg me-1"></i>Create
+                    </button>
+                </div>
+
+                <!-- Appt 2 -->
+                <div class="border rounded-3 p-3 bg-light-subtle d-flex justify-content-between align-items-center gap-3 flex-shrink-0" style="min-width: 320px;">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <span class="small text-secondary"><i class="bi bi-clock me-1"></i>21-07-2026 15:30</span>
+                            <span class="badge rounded-pill bg-info-subtle text-info small">Onsite</span>
+                        </div>
+                        <div class="fw-bold text-dark small mb-1">Site Survey Discussion</div>
+                        <div class="text-secondary small"><i class="bi bi-building me-1"></i>GODREJ</div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3 text-nowrap" data-pendingid="502">
+                        <i class="bi bi-plus-lg me-1"></i>Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stat Metric Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-body p-3 d-flex align-items-center gap-3">
+                    <div class="bg-success-subtle text-success rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                        <i class="bi bi-journal-check fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="h4 fw-bold mb-0 text-dark" id="momStatTotal">5</div>
+                        <div class="text-secondary small fw-medium">Total Minutes Recorded</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-body p-3 d-flex align-items-center gap-3">
+                    <div class="bg-warning-subtle text-warning-emphasis rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                        <i class="bi bi-hourglass-split fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="h4 fw-bold mb-0 text-dark" id="momStatPending">2</div>
+                        <div class="text-secondary small fw-medium">Pending Documentation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card-body p-3 d-flex align-items-center gap-3">
+                    <div class="bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                        <i class="bi bi-arrow-repeat fs-4"></i>
+                    </div>
+                    <div>
+                        <div class="h4 fw-bold mb-0 text-dark" id="momStatCR">3</div>
+                        <div class="text-secondary small fw-medium">Open Change Requests</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOM List Table -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white" id="momTableWrap">
+        <div class="card-header bg-white py-3 border-bottom d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+                <h6 class="fw-bold text-dark mb-0">Minutes of Meeting Directory</h6>
+                <small class="text-secondary">Historical logs, attendee sign-offs, and downloadable PDF minutes</small>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="input-group input-group-sm" style="max-width: 220px;">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control border-start-0" placeholder="Search MOM...">
+                </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.print()">
+                    <i class="bi bi-printer me-1"></i> Print
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="momTable" data-table-name="Minutes of Meeting">
+                <thead class="table-light text-uppercase text-secondary small fw-bold">
                     <tr>
-                        <th style="width: 60px;">S.No</th>
-                        <th>Document Number</th>
+                        <th style="width: 45px;" class="text-center">#</th>
+                        <th>Document No</th>
                         <th>Customer</th>
                         <th>Project</th>
                         <th>Appointment Subject</th>
@@ -103,179 +164,265 @@
                         <th>Attachment</th>
                         <th>Change Request</th>
                         <th>Created</th>
-                        <th style="width: 110px;">Options</th>
+                        <th style="width: 110px;" class="text-center">Options</th>
                     </tr>
                 </thead>
                 <tbody id="momTbody">
+                    <!-- Record 1 -->
                     <tr data-id="1">
-                        <td>1</td>
-                        <td><a href="#" class="mom-doc-pill" data-momdoc="1" onclick="return false;" style="text-decoration:none;">MOM-20260610-005</a></td>
-                        <td>GODREJ</td>
-                        <td>GHARUDA book</td>
-                        <td><span class="fw-bold" style="font-size:12px;">GHARUDA Electrical Work Project</span></td>
-                        <td>10-06-2026 09:00</td>
-                        <td><span class="mom-person"><span class="mom-av" style="background:#d97706;" title="Madhu S">MS</span>Madhu S</span></td>
+                        <td class="text-center text-secondary small">1</td>
                         <td>
-                            <span class="mom-av-stack">
-                                <span class="mom-av" style="background:#7c3aed;" title="Akash Kumar">AK</span>
-                                <span class="mom-av" style="background:#2563eb;" title="ARUN KUMAR">AK</span>
-                                <span class="mom-av" style="background:#0ca308;" title="GHARUDA TESTER">GT</span>
-                            </span>
+                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="1">
+                                MOM-20260610-005
+                            </a>
                         </td>
-                        <td><div class="mom-desc">Discussion regarding project installation dates, electrical wiring specifications, and safety clearances.</div></td>
-                        <td><span class="text-muted">—</span></td>
-                        <td><span class="text-muted">—</span></td>
-                        <td>10-06-2026 19:10:24</td>
+                        <td class="fw-semibold text-dark small">GODREJ</td>
+                        <td class="text-secondary small">GHARUDA book</td>
+                        <td><span class="fw-semibold text-dark small">GHARUDA Electrical Work Project</span></td>
+                        <td class="text-secondary small">10-06-2026 09:00</td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="mom-mini-btn edit" title="Edit" data-momact="edit" data-id="1" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(53,100,224,.1);color:#3564e0;font-size:12.5px;cursor:pointer;"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="mom-mini-btn pdf" title="View PDF" data-momact="pdf" data-id="1" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(22,163,74,.1);color:#16a34a;font-size:12.5px;cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i></button>
-                                <button type="button" class="mom-mini-btn del" title="Delete" data-momact="del" data-id="1" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(229,72,77,.1);color:#e5484d;font-size:12.5px;cursor:pointer;"><i class="bi bi-trash"></i></button>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                                <span class="small text-dark">Madhu S</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="Akash Kumar">AK</span>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ARUN KUMAR">AK</span>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0ca308;" title="GHARUDA TESTER">GT</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-secondary small text-truncate" style="max-width: 220px;" title="Discussion regarding project installation dates, electrical wiring specifications, and safety clearances.">
+                                Discussion regarding project installation dates, electrical wiring specifications, and safety clearances.
+                            </div>
+                        </td>
+                        <td><span class="text-muted small">&mdash;</span></td>
+                        <td><span class="text-muted small">&mdash;</span></td>
+                        <td class="text-secondary small">10-06-2026</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="1"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="1"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="1"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
+
+                    <!-- Record 2 -->
                     <tr data-id="2">
-                        <td>2</td>
-                        <td><a href="#" class="mom-doc-pill" data-momdoc="2" onclick="return false;" style="text-decoration:none;">MOM-20260610-4C7A</a></td>
-                        <td>Abcd c</td>
-                        <td>Check and Charge</td>
-                        <td><span class="fw-bold" style="font-size:12px;">Direct Visit</span></td>
-                        <td>06-05-2026 09:00</td>
-                        <td><span class="mom-person"><span class="mom-av" style="background:#dc2626;" title="ram krishnan">RK</span>ram krishnan</span></td>
+                        <td class="text-center text-secondary small">2</td>
                         <td>
-                            <span class="mom-av-stack">
-                                <span class="mom-av" style="background:#0891b2;" title="Abarna Devi">AD</span>
-                            </span>
+                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="2">
+                                MOM-20260610-4C7A
+                            </a>
                         </td>
-                        <td><div class="mom-desc">Direct customer site review and status review with site team.</div></td>
-                        <td><span class="text-muted">—</span></td>
-                        <td><span class="text-muted">—</span></td>
-                        <td>10-06-2026 19:03:12</td>
+                        <td class="fw-semibold text-dark small">Abcd c</td>
+                        <td class="text-secondary small">Check and Charge</td>
+                        <td><span class="fw-semibold text-dark small">Direct Visit</span></td>
+                        <td class="text-secondary small">06-05-2026 09:00</td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="mom-mini-btn edit" title="Edit" data-momact="edit" data-id="2" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(53,100,224,.1);color:#3564e0;font-size:12.5px;cursor:pointer;"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="mom-mini-btn pdf" title="View PDF" data-momact="pdf" data-id="2" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(22,163,74,.1);color:#16a34a;font-size:12.5px;cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i></button>
-                                <button type="button" class="mom-mini-btn del" title="Delete" data-momact="del" data-id="2" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(229,72,77,.1);color:#e5484d;font-size:12.5px;cursor:pointer;"><i class="bi bi-trash"></i></button>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#dc2626;" title="ram krishnan">RK</span>
+                                <span class="small text-dark">ram krishnan</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0891b2;" title="Abarna Devi">AD</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-secondary small text-truncate" style="max-width: 220px;" title="Direct customer site review and status review with site team.">
+                                Direct customer site review and status review with site team.
+                            </div>
+                        </td>
+                        <td><span class="text-muted small">&mdash;</span></td>
+                        <td><span class="text-muted small">&mdash;</span></td>
+                        <td class="text-secondary small">10-06-2026</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="2"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="2"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="2"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
+
+                    <!-- Record 3 -->
                     <tr data-id="3">
-                        <td>3</td>
-                        <td><a href="#" class="mom-doc-pill momcp" data-momdoc="3" onclick="return false;" style="text-decoration:none;">MOMCP20260612-002</a></td>
-                        <td>GHARUDA soft</td>
-                        <td>Construction project</td>
-                        <td><span class="fw-bold" style="font-size:12px;">REG: Mag Tech security management</span></td>
-                        <td>13-12-2025 14:00</td>
-                        <td><span class="mom-person"><span class="mom-av" style="background:#7c3aed;" title="gharuda SOFTWARE">GS</span>gharuda SOFTWARE</span></td>
+                        <td class="text-center text-secondary small">3</td>
                         <td>
-                            <span class="mom-av-stack">
-                                <span class="mom-av" style="background:#2563eb;" title="ASHISH">AS</span>
-                            </span>
+                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="3">
+                                MOMCP20260612-002
+                            </a>
                         </td>
-                        <td><div class="mom-desc">The following requirements have been discussed. GHARUDA Software Technology Team handled the scope breakdown.</div></td>
-                        <td><span class="mom-attach"><i class="bi bi-paperclip"></i><span>mom_1781256060_6a2bc.pdf</span></span></td>
-                        <td>
-                            <div class="mom-cr">
-                                <span class="mom-cr-chip pending" title="Founder · INCO TERMS SHOULD COME IN MAST…">Founder · INCO TERMS SHOULD COME IN MAST…</span>
-                                <span class="mom-cr-chip pending" title="Beam · FOR PAYMENT TERMS · NEED A DEF…">Beam · FOR PAYMENT TERMS · NEED A DEF…</span>
-                            </div>
-                        </td>
-                        <td>12-06-2026 14:51:00</td>
+                        <td class="fw-semibold text-dark small">GHARUDA soft</td>
+                        <td class="text-secondary small">Construction project</td>
+                        <td><span class="fw-semibold text-dark small">REG: Mag Tech security management</span></td>
+                        <td class="text-secondary small">13-12-2025 14:00</td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="mom-mini-btn edit" title="Edit" data-momact="edit" data-id="3" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(53,100,224,.1);color:#3564e0;font-size:12.5px;cursor:pointer;"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="mom-mini-btn pdf" title="View PDF" data-momact="pdf" data-id="3" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(22,163,74,.1);color:#16a34a;font-size:12.5px;cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i></button>
-                                <button type="button" class="mom-mini-btn del" title="Delete" data-momact="del" data-id="3" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(229,72,77,.1);color:#e5484d;font-size:12.5px;cursor:pointer;"><i class="bi bi-trash"></i></button>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="gharuda SOFTWARE">GS</span>
+                                <span class="small text-dark">gharuda SOFTWARE</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ASHISH">AS</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-secondary small text-truncate" style="max-width: 220px;" title="The following requirements have been discussed. GHARUDA Software Technology Team handled the scope breakdown.">
+                                Requirements discussed. GHARUDA Software Team handled scope breakdown.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>mom_178...</span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis small">2 CRs Pending</span>
+                        </td>
+                        <td class="text-secondary small">12-06-2026</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="3"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="3"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="3"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
+
+                    <!-- Record 4 -->
                     <tr data-id="4">
-                        <td>4</td>
-                        <td><a href="#" class="mom-doc-pill" data-momdoc="4" onclick="return false;" style="text-decoration:none;">MOM-20260714-8F12</a></td>
-                        <td>Raja Enterprises</td>
-                        <td>GHARUDA Electrical Work Project</td>
-                        <td><span class="fw-bold" style="font-size:12px;">Test Appointment</span></td>
-                        <td>14-07-2026 10:00</td>
-                        <td><span class="mom-person"><span class="mom-av" style="background:#d97706;" title="Madhu S">MS</span>Madhu S</span></td>
+                        <td class="text-center text-secondary small">4</td>
                         <td>
-                            <span class="mom-av-stack">
-                                <span class="mom-av" style="background:#7c3aed;" title="Akash Kumar">AK</span>
-                                <span class="mom-av" style="background:#d97706;" title="Madhu S">MS</span>
-                            </span>
+                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="4">
+                                MOM-20260714-8F12
+                            </a>
                         </td>
-                        <td><div class="mom-desc">Detailed technical walkthrough on CRM integration and database schema migration.</div></td>
-                        <td><span class="mom-attach"><i class="bi bi-paperclip"></i><span>integration_notes_rev2.pdf</span></span></td>
-                        <td>
-                            <div class="mom-cr">
-                                <span class="mom-cr-chip done" title="Design · Responsive UI Layout Fixes">Design · Responsive UI Layout Fixes</span>
-                            </div>
-                        </td>
-                        <td>14-07-2026 11:45:10</td>
+                        <td class="fw-semibold text-dark small">Raja Enterprises</td>
+                        <td class="text-secondary small">GHARUDA Electrical Project</td>
+                        <td><span class="fw-semibold text-dark small">Test Appointment</span></td>
+                        <td class="text-secondary small">14-07-2026 10:00</td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="mom-mini-btn edit" title="Edit" data-momact="edit" data-id="4" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(53,100,224,.1);color:#3564e0;font-size:12.5px;cursor:pointer;"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="mom-mini-btn pdf" title="View PDF" data-momact="pdf" data-id="4" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(22,163,74,.1);color:#16a34a;font-size:12.5px;cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i></button>
-                                <button type="button" class="mom-mini-btn del" title="Delete" data-momact="del" data-id="4" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(229,72,77,.1);color:#e5484d;font-size:12.5px;cursor:pointer;"><i class="bi bi-trash"></i></button>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                                <span class="small text-dark">Madhu S</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="Akash Kumar">AK</span>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-secondary small text-truncate" style="max-width: 220px;" title="Detailed technical walkthrough on CRM integration and database schema migration.">
+                                Detailed technical walkthrough on CRM integration.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>notes_rev2.pdf</span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-success-subtle text-success small">1 CR Done</span>
+                        </td>
+                        <td class="text-secondary small">14-07-2026</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="4"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="4"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="4"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
+
+                    <!-- Record 5 -->
                     <tr data-id="5">
-                        <td>5</td>
-                        <td><a href="#" class="mom-doc-pill" data-momdoc="5" onclick="return false;" style="text-decoration:none;">MOM-20260802-9A4B</a></td>
-                        <td>GHARUDA Software Technology</td>
-                        <td>GHARUDA book</td>
-                        <td><span class="fw-bold" style="font-size:12px;">Site Survey Discussion</span></td>
-                        <td>02-08-2026 15:30</td>
-                        <td><span class="mom-person"><span class="mom-av" style="background:#dc2626;" title="ram krishnan">RK</span>ram krishnan</span></td>
+                        <td class="text-center text-secondary small">5</td>
                         <td>
-                            <span class="mom-av-stack">
-                                <span class="mom-av" style="background:#2563eb;" title="ARUN KUMAR">AK</span>
-                                <span class="mom-av" style="background:#0891b2;" title="Abarna Devi">AD</span>
-                                <span class="mom-av" style="background:#7c3aed;" title="ASHISH">AS</span>
-                            </span>
+                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="5">
+                                MOM-20260802-9A4B
+                            </a>
                         </td>
-                        <td><div class="mom-desc">Site survey finalized. Cable routing and network rack placement agreed upon by both teams.</div></td>
-                        <td><span class="mom-attach"><i class="bi bi-paperclip"></i><span>site_survey_ghr.pdf</span></span></td>
-                        <td>
-                            <div class="mom-cr">
-                                <span class="mom-cr-chip pending" title="Handover · Final signoff document draft">Handover · Final signoff document draft</span>
-                            </div>
-                        </td>
-                        <td>02-08-2026 17:15:30</td>
+                        <td class="fw-semibold text-dark small">GHARUDA Tech</td>
+                        <td class="text-secondary small">GHARUDA book</td>
+                        <td><span class="fw-semibold text-dark small">Site Survey Discussion</span></td>
+                        <td class="text-secondary small">02-08-2026 15:30</td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="mom-mini-btn edit" title="Edit" data-momact="edit" data-id="5" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(53,100,224,.1);color:#3564e0;font-size:12.5px;cursor:pointer;"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="mom-mini-btn pdf" title="View PDF" data-momact="pdf" data-id="5" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(22,163,74,.1);color:#16a34a;font-size:12.5px;cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i></button>
-                                <button type="button" class="mom-mini-btn del" title="Delete" data-momact="del" data-id="5" style="width:28px;height:28px;border-radius:8px;border:none;background:rgba(229,72,77,.1);color:#e5484d;font-size:12.5px;cursor:pointer;"><i class="bi bi-trash"></i></button>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#dc2626;" title="ram krishnan">RK</span>
+                                <span class="small text-dark">ram krishnan</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ARUN KUMAR">AK</span>
+                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0891b2;" title="Abarna Devi">AD</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-secondary small text-truncate" style="max-width: 220px;" title="Site survey finalized. Cable routing and network rack placement agreed upon by both teams.">
+                                Site survey finalized. Cable routing and network placement agreed upon.
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>survey_ghr.pdf</span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis small">1 CR Pending</span>
+                        </td>
+                        <td class="text-secondary small">02-08-2026</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="5"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="5"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="5"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-</main>
 
-<!-- ===== New MOM Modal (fullscreen — reference image flow) ===== -->
+        <div class="card-footer bg-white py-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <span class="text-secondary small">Showing 1 to 5 of 5 entries</span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+<!-- =========================================================================
+     NEW / EDIT MOM FULLSCREEN MODAL
+     ========================================================================= -->
 <div class="modal fade" id="momNewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="fw-bold mb-0" style="font-size:15.5px;"><i class="bi bi-journal-text me-2 text-primary"></i><span id="momModalTitle">New MOM</span></h5>
+            <div class="modal-header border-bottom bg-light-subtle">
+                <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-journal-text me-2 text-primary"></i><span id="momModalTitle">New MOM</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Document Number</label>
+                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Document Number</label>
                         <div class="input-group">
-                            <input type="text" class="form-control autofill" id="momDocNo" readonly placeholder="Auto-generated">
+                            <input type="text" class="form-control" id="momDocNo" readonly placeholder="Auto-generated">
                             <button type="button" class="btn btn-outline-secondary" id="momDocRegen" title="Regenerate number"><i class="bi bi-arrow-repeat"></i></button>
                         </div>
-                        <div class="small text-muted mt-1" style="font-size:11px;">Auto-generated. Regenerates when project is selected.</div>
+                        <div class="small text-muted mt-1">Auto-generated. Regenerates on demand.</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Customer Name</label>
+                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Customer Name</label>
                         <select class="form-select select2" id="momCustomer" data-placeholder="-- Select Customer --">
                             <option value=""></option>
                             <option>GODREJ</option>
@@ -286,7 +433,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Project Name</label>
+                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Project Name</label>
                         <select class="form-select select2" id="momProject" data-placeholder="-- Select Project --">
                             <option value=""></option>
                             <option>GHARUDA book</option>
@@ -296,7 +443,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Appointment Subject</label>
+                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Appointment Subject</label>
                         <select class="form-select select2" id="momApptSel" data-placeholder="-- Select Appointment --">
                             <option value=""></option>
                             <option>GHARUDA Electrical Work Project</option>
@@ -307,11 +454,11 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Appointment Date &amp; Time</label>
-                        <input type="text" class="form-control autofill" id="momDateTime" readonly placeholder="Auto-filled on appointment select">
+                        <label class="form-label small fw-semibold text-secondary">Appointment Date &amp; Time</label>
+                        <input type="text" class="form-control" id="momDateTime" readonly placeholder="Auto-filled on appointment select">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Initiated By</label>
+                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Initiated By</label>
                         <select class="form-select select2" id="momInitiated" data-placeholder="-- Select Staff --">
                             <option value=""></option>
                             <option selected>gharuda SOFTWARE</option>
@@ -320,8 +467,8 @@
                             <option>GHARUDA SOFTWARE</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Attended By</label>
+                    <div class="col-12">
+                        <label class="form-label small fw-semibold text-secondary">Attended By</label>
                         <select class="form-select select2" id="momAttendees" multiple data-placeholder="-- Select Attendees --">
                             <option>Akash Kumar</option>
                             <option>ARUN KUMAR</option>
@@ -336,10 +483,10 @@
 
                 <!-- Attendee Details (Customer Side) -->
                 <div class="mt-4">
-                    <label class="form-label fw-bold">Attendee Details (Customer Side)</label>
+                    <label class="form-label fw-bold small text-dark text-uppercase">Attendee Details (Customer Side)</label>
                     <div class="table-responsive">
-                        <table class="momx-table">
-                            <thead>
+                        <table class="table table-bordered table-sm align-middle mb-2">
+                            <thead class="table-light text-secondary small">
                                 <tr>
                                     <th style="width:22%;">Customer Name</th>
                                     <th style="width:18%;">Department</th>
@@ -351,40 +498,44 @@
                             </thead>
                             <tbody id="momAttBody">
                                 <tr>
-                                    <td><input type="text" class="form-control" placeholder="Name"></td>
-                                    <td><input type="text" class="form-control" placeholder="Department"></td>
-                                    <td><input type="text" class="form-control" placeholder="Designation"></td>
-                                    <td><input type="email" class="form-control" placeholder="Email"></td>
-                                    <td><input type="text" class="form-control" placeholder="Mobile"></td>
-                                    <td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>
+                                    <td><input type="text" class="form-control form-control-sm" placeholder="Name"></td>
+                                    <td><input type="text" class="form-control form-control-sm" placeholder="Department"></td>
+                                    <td><input type="text" class="form-control form-control-sm" placeholder="Designation"></td>
+                                    <td><input type="email" class="form-control form-control-sm" placeholder="Email"></td>
+                                    <td><input type="text" class="form-control form-control-sm" placeholder="Mobile"></td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" class="momx-add-btn mt-2" id="momAttAdd" title="Add attendee row"><i class="bi bi-plus-lg"></i></button>
+                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" id="momAttAdd" title="Add attendee row">
+                        <i class="bi bi-plus-lg me-1"></i>Add Row
+                    </button>
                 </div>
 
                 <!-- Description (Quill) -->
                 <div class="mt-4">
-                    <label class="form-label fw-bold">Description</label>
-                    <div class="momx-quill-wrap">
-                        <div id="momQuill"></div>
+                    <label class="form-label fw-bold small text-dark text-uppercase">Description &amp; Meeting Minutes</label>
+                    <div class="border rounded-3 p-1 bg-white">
+                        <div id="momQuill" style="min-height: 160px;"></div>
                     </div>
                 </div>
 
                 <!-- Attachment -->
                 <div class="mt-4">
-                    <label class="form-label fw-bold">Attachment</label>
+                    <label class="form-label fw-bold small text-dark text-uppercase">Attachment</label>
                     <input type="file" class="form-control" id="momAttachment" style="max-width:460px;">
-                    <div class="small text-muted mt-1" style="font-size:11px;">Upload a file (PDF, DOC, image, etc.)</div>
+                    <div class="small text-muted mt-1">Upload relevant documentation (PDF, DOC, image, etc.)</div>
                 </div>
 
-                <!-- Change Request rows -->
+                <!-- Change Request Rows -->
                 <div class="mt-4">
-                    <label class="form-label fw-bold">Change Request</label>
+                    <label class="form-label fw-bold small text-dark text-uppercase">Change Requests</label>
                     <div class="table-responsive">
-                        <table class="momx-table">
-                            <thead>
+                        <table class="table table-bordered table-sm align-middle mb-2">
+                            <thead class="table-light text-secondary small">
                                 <tr>
                                     <th style="width:32%;">Milestone</th>
                                     <th style="width:40%;">Task</th>
@@ -395,7 +546,7 @@
                             <tbody id="momCrBody">
                                 <tr>
                                     <td>
-                                        <select class="form-select select2" data-placeholder="-- Select Milestone --">
+                                        <select class="form-select form-select-sm select2" data-placeholder="-- Select Milestone --">
                                             <option value="">-- Select Milestone --</option>
                                             <option>Founder</option>
                                             <option>Beam</option>
@@ -403,55 +554,105 @@
                                             <option>Handover</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control" placeholder="Task"></td>
+                                    <td><input type="text" class="form-control form-control-sm" placeholder="Task description"></td>
                                     <td>
-                                        <select class="form-select select2" data-placeholder="Status">
+                                        <select class="form-select form-select-sm select2" data-placeholder="Status">
                                             <option selected>Pending</option>
                                             <option>Done</option>
                                         </select>
                                     </td>
-                                    <td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" class="momx-add-btn mt-2" id="momCrAdd" title="Add change request row"><i class="bi bi-plus-lg"></i></button>
+                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" id="momCrAdd" title="Add change request row">
+                        <i class="bi bi-plus-lg me-1"></i>Add Row
+                    </button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="momSubmitBtn"><i class="bi bi-save me-1"></i>Save MOM</button>
+            <div class="modal-footer border-top bg-light-subtle">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary px-4" id="momSubmitBtn"><i class="bi bi-save me-1"></i>Save MOM</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ===== MOM Detail Modal ===== -->
+<!-- =========================================================================
+     MOM DETAIL MODAL (Centered & Scrollable)
+     ========================================================================= -->
 <div class="modal fade" id="momDetailModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="mom-d-head">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content border-0 shadow rounded-3">
+            <div class="modal-header border-bottom bg-light-subtle">
                 <div>
-                    <div class="mom-d-title" id="momDTitle">MOM</div>
-                    <div class="mom-d-sub" id="momDSub">—</div>
+                    <h5 class="modal-title fw-bold text-dark" id="momDTitle">MOM Details</h5>
+                    <small class="text-secondary" id="momDSub">&mdash;</small>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mom-d-body">
-                <div class="mom-d-grid">
-                    <div class="mom-d-item"><div class="lbl">Document Number</div><div class="val" id="momDDoc">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Customer</div><div class="val" id="momDCustomer">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Project</div><div class="val" id="momDProject">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Date &amp; Time</div><div class="val" id="momDDateTime">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Initiated By</div><div class="val" id="momDInitiated">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Attended By</div><div class="val" id="momDAttendees">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Attachment</div><div class="val" id="momDAttachment">—</div></div>
-                    <div class="mom-d-item"><div class="lbl">Change Request</div><div class="val" id="momDCR">—</div></div>
+            <div class="modal-body p-4">
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Document No</span>
+                            <span class="fw-bold text-dark small" id="momDDoc">&mdash;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Customer</span>
+                            <span class="fw-bold text-dark small" id="momDCustomer">&mdash;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Project</span>
+                            <span class="fw-bold text-dark small" id="momDProject">&mdash;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Date &amp; Time</span>
+                            <span class="fw-bold text-dark small" id="momDDateTime">&mdash;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Initiated By</span>
+                            <span class="fw-bold text-dark small" id="momDInitiated">&mdash;</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-2 border rounded-3 bg-light-subtle">
+                            <span class="text-secondary small d-block">Attended By</span>
+                            <span class="fw-bold text-dark small" id="momDAttendees">&mdash;</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="mom-d-section-title">Attendee Details (Customer Side)</div>
-                <div id="momDAttRows"></div>
-                <div class="mom-d-section-title">Discussion Notes</div>
-                <div class="mom-d-desc" id="momDDesc">—</div>
+
+                <h6 class="fw-bold text-dark small text-uppercase mb-2">Customer-Side Attendees</h6>
+                <div id="momDAttRows" class="mb-4"></div>
+
+                <h6 class="fw-bold text-dark small text-uppercase mb-2">Discussion Notes</h6>
+                <div class="p-3 bg-light rounded-3 text-secondary small mb-4" id="momDDesc">&mdash;</div>
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2 border-top">
+                    <div>
+                        <span class="text-secondary small me-2">Attachment:</span>
+                        <span id="momDAttachment" class="small fw-semibold">&mdash;</span>
+                    </div>
+                    <div>
+                        <span class="text-secondary small me-2">Change Requests:</span>
+                        <span id="momDCR" class="small">&mdash;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top bg-light-subtle">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -465,16 +666,6 @@
         /* ---------- Helpers ---------- */
         var pad = function(n) { return String(n).padStart(2, '0'); };
         function fmtDMY(d) { return pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear(); }
-        function fmtTime(d) { return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
-        function initials(name) {
-            return String(name || '?').split(/\s+/).map(function(w) { return w.charAt(0); }).join('').toUpperCase().slice(0, 2);
-        }
-        var AV_COLORS = ['#7c3aed', '#2563eb', '#0ca308', '#d97706', '#dc2626', '#0891b2'];
-        function avColor(name) {
-            var h = 0;
-            for (var i = 0; i < String(name).length; i++) h = (h * 31 + String(name).charCodeAt(i)) % 997;
-            return AV_COLORS[h % AV_COLORS.length];
-        }
 
         var TODAY = new Date();
         var todayEl = document.getElementById('momToday');
@@ -628,12 +819,12 @@
 
         function attRowHtml() {
             return '<tr>' +
-                '<td><input type="text" class="form-control" placeholder="Name"></td>' +
-                '<td><input type="text" class="form-control" placeholder="Department"></td>' +
-                '<td><input type="text" class="form-control" placeholder="Designation"></td>' +
-                '<td><input type="email" class="form-control" placeholder="Email"></td>' +
-                '<td><input type="text" class="form-control" placeholder="Mobile"></td>' +
-                '<td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>' +
+                '<td><input type="text" class="form-control form-control-sm" placeholder="Name"></td>' +
+                '<td><input type="text" class="form-control form-control-sm" placeholder="Department"></td>' +
+                '<td><input type="text" class="form-control form-control-sm" placeholder="Designation"></td>' +
+                '<td><input type="email" class="form-control form-control-sm" placeholder="Email"></td>' +
+                '<td><input type="text" class="form-control form-control-sm" placeholder="Mobile"></td>' +
+                '<td class="text-center"><button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1 mom-del-row" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button></td>' +
                 '</tr>';
         }
 
@@ -648,17 +839,17 @@
         var attBody = document.getElementById('momAttBody');
         if (attBody) {
             attBody.addEventListener('click', function(e) {
-                var btn = e.target.closest('.momx-del-btn');
+                var btn = e.target.closest('.mom-del-row');
                 if (btn) btn.closest('tr').remove();
             });
         }
 
         function crRowHtml() {
             return '<tr>' +
-                '<td><select class="form-select select2" data-placeholder="-- Select Milestone --"><option value="">-- Select Milestone --</option><option>Founder</option><option>Beam</option><option>Design</option><option>Handover</option></select></td>' +
-                '<td><input type="text" class="form-control" placeholder="Task"></td>' +
-                '<td><select class="form-select select2" data-placeholder="Status"><option selected>Pending</option><option>Done</option></select></td>' +
-                '<td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>' +
+                '<td><select class="form-select form-select-sm select2" data-placeholder="-- Select Milestone --"><option value="">-- Select Milestone --</option><option>Founder</option><option>Beam</option><option>Design</option><option>Handover</option></select></td>' +
+                '<td><input type="text" class="form-control form-control-sm" placeholder="Task description"></td>' +
+                '<td><select class="form-select form-select-sm select2" data-placeholder="Status"><option selected>Pending</option><option>Done</option></select></td>' +
+                '<td class="text-center"><button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1 mom-del-row" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button></td>' +
                 '</tr>';
         }
 
@@ -676,7 +867,7 @@
         var crBody = document.getElementById('momCrBody');
         if (crBody) {
             crBody.addEventListener('click', function(e) {
-                var btn = e.target.closest('.momx-del-btn');
+                var btn = e.target.closest('.mom-del-row');
                 if (btn) btn.closest('tr').remove();
             });
         }
@@ -714,12 +905,12 @@
         function fillAttRows(details) {
             var html = (details || []).map(function(a) {
                 return '<tr>' +
-                    '<td><input type="text" class="form-control" placeholder="Name" value="' + (a.name || '') + '"></td>' +
-                    '<td><input type="text" class="form-control" placeholder="Department" value="' + (a.dept || '') + '"></td>' +
-                    '<td><input type="text" class="form-control" placeholder="Designation" value="' + (a.desig || '') + '"></td>' +
-                    '<td><input type="email" class="form-control" placeholder="Email" value="' + (a.email || '') + '"></td>' +
-                    '<td><input type="text" class="form-control" placeholder="Mobile" value="' + (a.mobile || '') + '"></td>' +
-                    '<td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>' +
+                    '<td><input type="text" class="form-control form-control-sm" placeholder="Name" value="' + (a.name || '') + '"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm" placeholder="Department" value="' + (a.dept || '') + '"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm" placeholder="Designation" value="' + (a.desig || '') + '"></td>' +
+                    '<td><input type="email" class="form-control form-control-sm" placeholder="Email" value="' + (a.email || '') + '"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm" placeholder="Mobile" value="' + (a.mobile || '') + '"></td>' +
+                    '<td class="text-center"><button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1 mom-del-row" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button></td>' +
                     '</tr>';
             }).join('');
             var body = document.getElementById('momAttBody');
@@ -731,10 +922,10 @@
                 var parts = String(cr.title || '').split(' · ');
                 var task = parts.slice(1).join(' · ');
                 return '<tr>' +
-                    '<td><select class="form-select select2" data-placeholder="-- Select Milestone --"><option value="">-- Select Milestone --</option><option>Founder</option><option>Beam</option><option>Design</option><option>Handover</option></select></td>' +
-                    '<td><input type="text" class="form-control" placeholder="Task" value="' + task + '"></td>' +
-                    '<td><select class="form-select select2" data-placeholder="Status"><option selected>Pending</option><option>Done</option></select></td>' +
-                    '<td style="text-align:center;"><button type="button" class="momx-del-btn" title="Remove"><i class="bi bi-trash"></i></button></td>' +
+                    '<td><select class="form-select form-select-sm select2" data-placeholder="-- Select Milestone --"><option value="">-- Select Milestone --</option><option>Founder</option><option>Beam</option><option>Design</option><option>Handover</option></select></td>' +
+                    '<td><input type="text" class="form-control form-control-sm" placeholder="Task" value="' + task + '"></td>' +
+                    '<td><select class="form-select form-select-sm select2" data-placeholder="Status"><option selected>Pending</option><option>Done</option></select></td>' +
+                    '<td class="text-center"><button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-1 mom-del-row" title="Remove" style="width:28px;height:28px;"><i class="bi bi-trash"></i></button></td>' +
                     '</tr>';
             }).join('');
             var body = document.getElementById('momCrBody');
@@ -871,17 +1062,18 @@
             document.getElementById('momDInitiated').textContent = rec.initiated;
             document.getElementById('momDAttendees').textContent = (rec.attendees || []).join(', ');
             document.getElementById('momDAttachment').innerHTML = rec.attachment ?
-                '<span class="mom-attach"><i class="bi bi-paperclip"></i><span>' + rec.attachment + '</span></span>' : '—';
+                '<span class="badge bg-light text-dark border"><i class="bi bi-paperclip me-1"></i>' + rec.attachment + '</span>' : '&mdash;';
             document.getElementById('momDAttRows').innerHTML = (rec.attendeeDetails && rec.attendeeDetails.length) ?
-                '<div class="table-responsive"><table class="momx-table"><thead><tr><th>Name</th><th>Department</th><th>Designation</th><th>Email</th><th>Mobile</th></tr></thead><tbody>' +
+                '<div class="table-responsive"><table class="table table-bordered table-sm align-middle"><thead class="table-light text-secondary small"><tr><th>Name</th><th>Department</th><th>Designation</th><th>Email</th><th>Mobile</th></tr></thead><tbody>' +
                 rec.attendeeDetails.map(function(a) {
                     return '<tr><td>' + a.name + '</td><td>' + (a.dept || '—') + '</td><td>' + (a.desig || '—') + '</td><td>' + (a.email || '—') + '</td><td>' + (a.mobile || '—') + '</td></tr>';
                 }).join('') + '</tbody></table></div>' :
-                '<div class="small text-muted" style="font-weight:600;">No customer-side attendee details.</div>';
+                '<div class="small text-muted">No customer-side attendee details.</div>';
             document.getElementById('momDCR').innerHTML = (rec.crs && rec.crs.length) ?
                 rec.crs.map(function(cr) {
-                    return '<span class="mom-cr-chip ' + (cr.status === 'Pending' ? 'pending' : 'done') + '">' + cr.title + '</span>';
-                }).join(' ') : '—';
+                    var cls = cr.status === 'Pending' ? 'bg-warning-subtle text-warning-emphasis' : 'bg-success-subtle text-success';
+                    return '<span class="badge rounded-pill ' + cls + ' me-1 mb-1">' + cr.title + '</span>';
+                }).join(' ') : '&mdash;';
             document.getElementById('momDDesc').textContent = rec.desc || 'No discussion notes recorded.';
             bootstrap.Modal.getOrCreateInstance(document.getElementById('momDetailModal')).show();
         }
@@ -1139,5 +1331,3 @@
     })();
 </script>
 <?php include 'footer.php'; ?>
-
-

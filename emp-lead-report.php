@@ -1,7 +1,5 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
-
 <div class="card-custom p-0" id="empLeadReportWrap">
 
     <!-- Card Head -->

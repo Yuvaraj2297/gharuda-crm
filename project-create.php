@@ -1,22 +1,19 @@
 <?php include 'header.php'; ?>
-
-<link rel="stylesheet" href="./assets/css/table.css">
 <link rel="stylesheet" href="./assets/css/date-picker.css">
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
-<link rel="stylesheet" href="./assets/css/project-create.css">
 
-<main class="prj-create-page">
-    <div class="container-fluid px-0">
+<main class="py-4 pb-5">
+    <div class="container-fluid px-3 px-md-4">
         
         <!-- Header Row (CRM Standard Flow) -->
         <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
             <div class="d-flex align-items-center gap-3">
-                <div class="prj-title-ico">
+                <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:48px; height:48px; font-size:22px;">
                     <i class="bi bi-folder-plus"></i>
                 </div>
                 <div>
-                    <h1 class="font-display fw-bold mb-1" style="font-size:1.65rem; color:#0f172a;">Add New Project</h1>
-                    <nav class="d-flex align-items-center gap-2 text-neutral" style="font-size:13px;">
+                    <h1 class="font-display fw-bold mb-1 fs-3 text-dark">Add New Project</h1>
+                    <nav class="d-flex align-items-center gap-2 small text-secondary">
                         <span>CRM</span>
                         <i class="bi bi-chevron-right" style="font-size:10px;"></i>
                         <a href="projects-list.php" class="text-secondary text-decoration-none fw-medium">Projects</a>
@@ -27,43 +24,47 @@
             </div>
 
             <div class="d-flex align-items-center gap-2">
-                <a href="projects-list.php" class="btn btn-outline-secondary px-3 py-2 fw-semibold" style="border-radius:9px; font-size:13.5px;">
+                <a href="projects-list.php" class="btn btn-outline-secondary px-3 py-2 fw-semibold rounded-2 shadow-sm">
                     <i class="bi bi-arrow-left me-1"></i> Back to Projects
                 </a>
             </div>
         </div>
 
         <!-- Main Form Card Container -->
-        <div class="prj-main-card">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden bg-white">
             
             <!-- Modern Nav Tabs -->
-            <div class="prj-nav-tabs">
-                <button type="button" class="prj-tab-btn active" id="tabBtnProject" onclick="switchProjTab('project')">
-                    <i class="bi bi-briefcase-fill"></i> Project Details
-                </button>
-                <button type="button" class="prj-tab-btn" id="tabBtnSettings" onclick="switchProjTab('settings')">
-                    <i class="bi bi-gear-wide-connected"></i> Project Settings
-                </button>
-            </div>
+            <ul class="nav nav-tabs px-3 pt-2 bg-light border-bottom" id="projectCreateTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active fw-bold text-dark d-flex align-items-center gap-2" id="tabBtnProject" type="button" onclick="switchProjTab('project')">
+                        <i class="bi bi-briefcase-fill text-primary"></i> Project Details
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link fw-semibold text-secondary d-flex align-items-center gap-2" id="tabBtnSettings" type="button" onclick="switchProjTab('settings')">
+                        <i class="bi bi-gear-wide-connected"></i> Project Settings
+                    </button>
+                </li>
+            </ul>
 
             <form id="createProjectMainForm" method="POST" action="#" onsubmit="handleSubmitProject(event)">
                 
                 <!-- ================= TAB 1: PROJECT FORM ================= -->
-                <div class="prj-pane" id="tabContentProject">
+                <div class="p-4" id="tabContentProject">
                     <div class="row g-4">
                         
                         <!-- 1. Project Name -->
                         <div class="col-12">
-                            <label class="form-label-custom" for="projName">
-                                <span class="required-star">*</span> Project Name
+                            <label class="form-label fw-bold text-dark small mb-1" for="projName">
+                                <span class="text-danger">*</span> Project Name
                             </label>
-                            <input type="text" class="form-control-custom form-control" id="projName" name="project_name" required placeholder="Enter project name (e.g. Website Redesign & SEO Portal)">
+                            <input type="text" class="form-control" id="projName" name="project_name" required placeholder="Enter project name (e.g. Website Redesign & SEO Portal)">
                         </div>
 
                         <!-- 2. Customer -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projCustomer">
-                                <span class="required-star">*</span> Customer
+                            <label class="form-label fw-bold text-dark small mb-1" for="projCustomer">
+                                <span class="text-danger">*</span> Customer
                             </label>
                             <select class="form-select select2" id="projCustomer" name="customer_id" required data-placeholder="Select and begin typing...">
                                 <option value=""></option>
@@ -80,7 +81,7 @@
 
                         <!-- 3. Device -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projDevice">Device / Platform</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projDevice">Device / Platform</label>
                             <select class="form-select select2" id="projDevice" name="device" data-placeholder="Non selected">
                                 <option value=""></option>
                                 <option value="Web">Web Application</option>
@@ -94,26 +95,26 @@
                         <div class="col-12">
                             <div class="form-check form-switch mb-2">
                                 <input class="form-check-input" type="checkbox" id="calcTaskProgress" name="calc_progress_tasks" checked onchange="toggleProgressCalc(this)">
-                                <label class="form-check-label fw-bold text-dark ms-1" for="calcTaskProgress" style="font-size:13.5px;">
+                                <label class="form-check-label fw-bold text-dark ms-1 small" for="calcTaskProgress">
                                     Calculate progress through tasks
                                 </label>
                             </div>
                             
-                            <div class="proj-progress-box">
+                            <div class="p-3 bg-light rounded-3 border">
                                 <div class="d-flex justify-content-between align-items-center mb-1">
                                     <span class="small fw-bold text-muted">Progress Indicator</span>
-                                    <span class="progress-val-text" id="progressValText">0%</span>
+                                    <span class="small fw-bold text-dark" id="progressValText">0%</span>
                                 </div>
-                                <div class="progress-bar-custom">
-                                    <div class="progress-fill-custom" id="progressFillBar"></div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-primary" id="progressFillBar" role="progressbar" style="width: 0%;"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 5. Billing Type & Status -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projBillingType">
-                                <span class="required-star">*</span> Billing Type
+                            <label class="form-label fw-bold text-dark small mb-1" for="projBillingType">
+                                <span class="text-danger">*</span> Billing Type
                             </label>
                             <select class="form-select select2" id="projBillingType" name="billing_type" required data-placeholder="Select billing type">
                                 <option value="Fixed Rate" selected>Fixed Rate</option>
@@ -123,7 +124,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projStatus">Status</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projStatus">Status</label>
                             <select class="form-select select2" id="projStatus" name="status" data-placeholder="Select status">
                                 <option value="In Progress" selected>In Progress</option>
                                 <option value="Not Started">Not Started</option>
@@ -136,26 +137,26 @@
 
                         <!-- 6. Project Deadline Date Extend Limit & Total Rate -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projExtendLimit">Project Deadline Date Extend Limit</label>
-                            <input type="text" class="form-control-custom form-control" id="projExtendLimit" name="extend_limit" placeholder="e.g. 0 days">
+                            <label class="form-label fw-bold text-dark small mb-1" for="projExtendLimit">Project Deadline Date Extend Limit</label>
+                            <input type="text" class="form-control" id="projExtendLimit" name="extend_limit" placeholder="e.g. 0 days">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projTotalRate">Total Rate</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projTotalRate">Total Rate</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light text-muted border-end-0" style="border-radius:9px 0 0 9px;">₹</span>
-                                <input type="text" class="form-control-custom form-control border-start-0" id="projTotalRate" name="total_rate" placeholder="0.00" style="border-radius:0 9px 9px 0;">
+                                <span class="input-group-text bg-light text-muted">₹</span>
+                                <input type="text" class="form-control" id="projTotalRate" name="total_rate" placeholder="0.00">
                             </div>
                         </div>
 
                         <!-- 7. Estimated Hours & Members -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projEstHours">Estimated Hours</label>
-                            <input type="number" class="form-control-custom form-control" id="projEstHours" name="estimated_hours" placeholder="e.g. 100" min="0" step="any">
+                            <label class="form-label fw-bold text-dark small mb-1" for="projEstHours">Estimated Hours</label>
+                            <input type="number" class="form-control" id="projEstHours" name="estimated_hours" placeholder="e.g. 100" min="0" step="any">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projMembers">Members</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projMembers">Members</label>
                             <select class="form-select select2" id="projMembers" name="members[]" multiple data-placeholder="Select staff members">
                                 <option value="gharuda SOFTWARE" selected>gharuda SOFTWARE</option>
                                 <option value="Asif">Asif</option>
@@ -167,7 +168,7 @@
 
                         <!-- 8. Follower & Super Follower -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projFollower">Follower</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projFollower">Follower</label>
                             <select class="form-select select2" id="projFollower" name="follower" data-placeholder="Non selected">
                                 <option value=""></option>
                                 <option value="1">gharuda SOFTWARE</option>
@@ -177,7 +178,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projSuperFollower">Super Follower</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projSuperFollower">Super Follower</label>
                             <select class="form-select select2" id="projSuperFollower" name="super_follower" data-placeholder="Non selected">
                                 <option value=""></option>
                                 <option value="1">gharuda SOFTWARE</option>
@@ -188,8 +189,8 @@
 
                         <!-- 9. Start Date & Deadline (CRM Datepicker Flow) -->
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projStartDate">
-                                <span class="required-star">*</span> Start Date
+                            <label class="form-label fw-bold text-dark small mb-1" for="projStartDate">
+                                <span class="text-danger">*</span> Start Date
                             </label>
                             <div class="date-picker">
                                 <input type="text" class="date-input form-control" id="projStartDate" name="start_date" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off" value="<?= date('d-m-Y') ?>" required>
@@ -197,7 +198,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom" for="projDeadline">Deadline</label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projDeadline">Deadline</label>
                             <div class="date-picker">
                                 <input type="text" class="date-input form-control" id="projDeadline" name="deadline" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
                             </div>
@@ -205,17 +206,17 @@
 
                         <!-- 10. Tags -->
                         <div class="col-12">
-                            <label class="form-label-custom" for="projTags">
+                            <label class="form-label fw-bold text-dark small mb-1" for="projTags">
                                 <i class="bi bi-tag-fill text-secondary me-1"></i> Tags
                             </label>
-                            <input type="text" class="form-control-custom form-control" id="projTags" name="tags" placeholder="Tags (e.g. Web, Production, Solar, ERP)">
+                            <input type="text" class="form-control" id="projTags" name="tags" placeholder="Tags (e.g. Web, Production, Solar, ERP)">
                         </div>
 
                         <!-- 11. Description (Quill Rich Text Editor Flow) -->
                         <div class="col-12">
-                            <label class="form-label-custom">Description</label>
-                            <div class="cv-prj-quill-wrap">
-                                <div id="projectQuillEditor"></div>
+                            <label class="form-label fw-bold text-dark small mb-1">Description</label>
+                            <div class="border rounded-3 p-1 bg-white">
+                                <div id="projectQuillEditor" style="min-height: 180px;"></div>
                                 <textarea name="description" id="projDescription" class="d-none"></textarea>
                             </div>
                         </div>
@@ -224,12 +225,12 @@
                 </div>
 
                 <!-- ================= TAB 2: PROJECT SETTINGS ================= -->
-                <div class="prj-pane" id="tabContentSettings" style="display: none;">
+                <div class="p-4" id="tabContentSettings" style="display: none;">
                     
                     <!-- Contacts Notifications Selection -->
-                    <div class="card p-3 rounded-3 mb-4" style="background: var(--primary-soft, #eafaf1); border: 1px solid var(--primary-lightTwo, #d0eddb);">
-                        <label class="form-label-custom mb-2" for="projNotify">
-                            <i class="bi bi-bell-fill me-1" style="color: var(--primary, #16a34a);"></i> Send Contacts Notifications
+                    <div class="card p-3 rounded-3 mb-4 bg-light border-0">
+                        <label class="form-label fw-bold text-dark small mb-2" for="projNotify">
+                            <i class="bi bi-bell-fill me-1 text-success"></i> Send Contacts Notifications
                         </label>
                         <select class="form-select select2" id="projNotify" name="notify_contacts" data-placeholder="Select notification rule">
                             <option value="all" selected>To all contacts with notifications for projects enabled</option>
@@ -242,65 +243,65 @@
                         
                         <!-- Section A: Tasks & Comments -->
                         <div class="col-lg-6">
-                            <div class="settings-section-card">
-                                <div class="settings-card-header">
-                                    <span><i class="bi bi-list-check me-2"></i>Tasks &amp; Checklist Control</span>
+                            <div class="card border-0 bg-light rounded-3 p-3">
+                                <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center">
+                                    <i class="bi bi-list-check me-2 text-primary"></i> Tasks &amp; Checklist Control
                                 </div>
                                 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view tasks</span>
-                                        <span class="setting-sub">Clients can view project task progression</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view tasks</div>
+                                        <div class="text-muted small">Clients can view project task progression</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_tasks" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to create tasks</span>
-                                        <span class="setting-sub">Clients can submit new task requests</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to create tasks</div>
+                                        <div class="text-muted small">Clients can submit new task requests</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_create_tasks" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to comment on tasks</span>
-                                        <span class="setting-sub">Enable collaborative comments on tasks</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to comment on tasks</div>
+                                        <div class="text-muted small">Enable collaborative comments on tasks</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_comment_tasks" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view task attachments</span>
-                                        <span class="setting-sub">Show file attachments uploaded to tasks</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view task attachments</div>
+                                        <div class="text-muted small">Show file attachments uploaded to tasks</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_attachments" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view checklist items</span>
-                                        <span class="setting-sub">Show subtasks and checklist items</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view checklist items</div>
+                                        <div class="text-muted small">Show subtasks and checklist items</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_checklists" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2">
                                     <div>
-                                        <span class="setting-label">Allow customer to upload task files</span>
-                                        <span class="setting-sub">Clients can upload assets directly to tasks</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to upload task files</div>
+                                        <div class="text-muted small">Clients can upload assets directly to tasks</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_upload_task_files" checked>
@@ -311,65 +312,65 @@
 
                         <!-- Section B: Communication, Finance & Milestones -->
                         <div class="col-lg-6">
-                            <div class="settings-section-card">
-                                <div class="settings-card-header">
-                                    <span><i class="bi bi-shield-lock-fill me-2"></i>Discussions, Finance &amp; Privacy</span>
+                            <div class="card border-0 bg-light rounded-3 p-3">
+                                <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center">
+                                    <i class="bi bi-shield-lock-fill me-2 text-primary"></i> Discussions, Finance &amp; Privacy
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view discussions</span>
-                                        <span class="setting-sub">Clients can read project discussions</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view discussions</div>
+                                        <div class="text-muted small">Clients can read project discussions</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_discussions" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to open discussions</span>
-                                        <span class="setting-sub">Enable starting new discussion threads</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to open discussions</div>
+                                        <div class="text-muted small">Enable starting new discussion threads</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_open_discussions" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view milestones</span>
-                                        <span class="setting-sub">Show project milestone timelines</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view milestones</div>
+                                        <div class="text-muted small">Show project milestone timelines</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_milestones" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view Gantt chart</span>
-                                        <span class="setting-sub">Display interactive Gantt schedule</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view Gantt chart</div>
+                                        <div class="text-muted small">Display interactive Gantt schedule</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_gantt" checked>
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div>
-                                        <span class="setting-label">Allow customer to view project finance</span>
-                                        <span class="setting-sub">Invoices, estimates, and expenses</span>
+                                        <div class="fw-semibold text-dark small">Allow customer to view project finance</div>
+                                        <div class="text-muted small">Invoices, estimates, and expenses</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_view_finance">
                                     </div>
                                 </div>
 
-                                <div class="setting-item">
+                                <div class="d-flex align-items-center justify-content-between py-2">
                                     <div>
-                                        <span class="setting-label">Hide project tasks from customer</span>
-                                        <span class="setting-sub">Strict internal mode for all tasks</span>
+                                        <div class="fw-semibold text-dark small">Hide project tasks from customer</div>
+                                        <div class="text-muted small">Strict internal mode for all tasks</div>
                                     </div>
                                     <div class="form-check form-switch m-0">
                                         <input class="form-check-input" type="checkbox" name="settings_hide_tasks">
@@ -382,20 +383,20 @@
                 </div>
 
                 <!-- Footer Submit Bar -->
-                <div class="form-footer-bar">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 p-4 bg-light border-top">
                     <div class="form-check m-0">
                         <input class="form-check-input" type="checkbox" id="sendCreatedEmail" name="send_created_email">
-                        <label class="form-check-label fw-semibold text-secondary" for="sendCreatedEmail" style="font-size:13.5px; cursor:pointer;">
+                        <label class="form-check-label fw-semibold text-secondary small" for="sendCreatedEmail" style="cursor:pointer;">
                             Send project created notification email to client
                         </label>
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <a href="projects-list.php" class="btn-cancel-proj">
-                            <i class="bi bi-x-circle"></i> Cancel
+                        <a href="projects-list.php" class="btn btn-outline-secondary px-4 py-2 fw-semibold rounded-2">
+                            <i class="bi bi-x-circle me-1"></i> Cancel
                         </a>
-                        <button type="submit" class="btn-submit-proj">
-                            <i class="bi bi-check2-circle"></i> Create Project
+                        <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold rounded-2 shadow-sm">
+                            <i class="bi bi-check2-circle me-1"></i> Create Project
                         </button>
                     </div>
                 </div>

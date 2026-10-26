@@ -1,7 +1,5 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
-
 <div class="card-custom p-0" id="leadStageTableWrap">
     <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
         <div class="d-flex align-items-center gap-3">

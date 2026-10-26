@@ -1,129 +1,132 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/appointments.css">
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
 
-
-
-<div class="apm-page">
+<div class="container-fluid px-0">
 
     <!-- Title row -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-        <h1 class="font-display fw-bold mb-1 page-title">Appointments</h1>
-    </div>
-
-    <!-- ===== Today hero ===== -->
-    <div class="apm-hero">
-        <div class="apm-hero-left">
-            <div class="apm-hero-icon"><i class="bi bi-bell"></i></div>
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
+                <i class="bi bi-calendar2-week"></i>
+            </div>
             <div>
-                <div class="apm-hero-msg" id="apmTodayMsg">You have 2 appointments for today</div>
-                <div class="apm-hero-sub" id="apmTodaySub">Today · 1 upcoming · 2 pending approval</div>
+                <h4 class="fw-bold text-dark mb-0">Appointments</h4>
+                <span class="text-muted small">Schedule, manage, and track customer meetings and internal sessions</span>
             </div>
         </div>
-        <div class="apm-hero-right">
-            <div class="apm-next" id="apmNextWrap" title="Next upcoming appointment">
-                <span class="apm-next-label">Next up</span>
-                <span class="apm-next-title" id="apmNextTitle">Callback — Ravi Shankar</span>
-                <span class="apm-date-chip" id="apmNextDate">26-09-2026 10:30 AM</span>
-            </div>
-            <span class="apm-today-chip" id="apmTodayChip">17-10-2026</span>
+        <div class="d-flex align-items-center gap-2">
+            <a href="callbacks.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
+            <a href="past-meeting.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
+            <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
         </div>
     </div>
 
-    <div class="row g-3">
-
-        <!-- ===== Appointments table (full width) ===== -->
-        <div class="col-12 mb-3">
-            <div class="card-custom apm-list-card">
-
-                <!-- Head: actions row -->
-                <div class="apm-table-head">
-                    <div class="d-flex align-items-center gap-2 flex-wrap w-100">
-
-                        <div class="apm-menu-wrap">
-                            <button type="button" class="btn apm-btn-green btn-sm" id="apmNewDropBtn">
-                                <i class="bi bi-plus-lg me-1"></i>Create <i class="bi bi-chevron-down ms-1"
-                                    style="font-size:10px;"></i>
-                            </button>
-                            <div class="apm-menu apm-create-menu" id="apmCreateMenu" style="min-width:230px;">
-                                <button type="button" class="apm-status-menu-item" data-create-type="contact">
-                                    <i class="bi bi-person-lines-fill"></i>Contact, Lead, External
-                                </button>
-                                <button type="button" class="apm-status-menu-item" data-create-type="staff">
-                                    <i class="bi bi-people-fill"></i>Staff Meeting
-                                </button>
-                            </div>
-                        </div>
-                        <a href="callbacks.php?new=1" class="btn apm-btn-green btn-sm apm-callback-btn"
-                            id="apmCallbackBtn">
-                            <i class="bi bi-telephone-forward me-1"></i>Callback
-                        </a>
-                        <div class="date-picker date-range-picker right-0 ms-auto"
-                            style="min-width:240px;max-width:260px;">
-                            <input type="text" class="date-input form-control form-control-sm" id="apmDateRangeFilter"
-                                placeholder="DD-MM-YYYY to DD-MM-YYYY" autocomplete="off"
-                                style="height:34px;font-size:12px;">
-                        </div>
-                        <div class="apm-menu-wrap">
-                            <button type="button" class="apm-icon-btn" id="apmFilterBtn" title="Filter by status">
-                                <i class="bi bi-funnel"></i>
-                                <span class="apm-filter-dot"></span>
-                            </button>
-                            <div class="apm-menu apm-list-menu" id="apmFilterMenu">
-                                <button type="button" class="apm-list-item active" data-status-filter="">All</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Approved">Approved</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Pending Approval">Pending Approval</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Cancelled">Cancelled</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Finished">Finished</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Upcoming">Upcoming</button>
-                                <button type="button" class="apm-list-item" data-status-filter="Missed">Missed</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Internal">Internal</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="External">External</button>
-                                <button type="button" class="apm-list-item"
-                                    data-status-filter="Recurring">Recurring</button>
-                                <button type="button" class="apm-list-item" data-status-filter="Lead">Lead</button>
-                                <button type="button" class="apm-list-item" data-status-filter="Internal Staff">Internal
-                                    Staff</button>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Today hero -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-primary-subtle bg-opacity-25">
+        <div class="card-body p-3 p-md-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:44px;height:44px;font-size:20px;">
+                    <i class="bi bi-bell"></i>
                 </div>
-
-                <!-- Summary chips (click to filter the table) -->
-                <div class="apm-chips-row" id="apmSummaryRow">
-                    <button type="button" class="apm-chip c-blue active" data-summary="all">
-                        <span class="dot"></span>Total <b data-count="total">15</b>
-                    </button>
-                    <button type="button" class="apm-chip c-blue" data-summary="upcoming">
-                        <span class="dot"></span>Upcoming <b data-count="upcoming">1</b>
-                    </button>
-                    <button type="button" class="apm-chip c-amber" data-summary="pending">
-                        <span class="dot"></span>Pending approval <b data-count="pending">2</b>
-                    </button>
-                    <button type="button" class="apm-chip c-rose" data-summary="cancelled">
-                        <span class="dot"></span>Cancelled <b data-count="cancelled">1</b>
-                    </button>
-                    <button type="button" class="apm-chip c-red" data-summary="missed">
-                        <span class="dot"></span>Missed <b data-count="missed">4</b>
-                    </button>
-                    <button type="button" class="apm-chip c-green" data-summary="finished">
-                        <span class="dot"></span>Finished <b data-count="finished">7</b>
-                    </button>
+                <div>
+                    <h5 class="fw-bold text-dark mb-1" id="apmTodayMsg">You have 2 appointments for today</h5>
+                    <span class="text-secondary small" id="apmTodaySub">Today · 1 upcoming · 2 pending approval</span>
                 </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="bg-white rounded-3 p-2 px-3 shadow-sm border border-light" id="apmNextWrap" role="button" title="Next upcoming appointment">
+                    <span class="badge bg-secondary-subtle text-secondary me-2">Next up</span>
+                    <span class="fw-semibold text-dark me-2" id="apmNextTitle">Callback — Ravi Shankar</span>
+                    <span class="badge bg-light text-dark font-monospace border" id="apmNextDate">26-09-2026 10:30 AM</span>
+                </div>
+                <span class="badge bg-white text-dark border shadow-sm p-2 px-3 font-monospace" id="apmTodayChip">17-10-2026</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- Table (toolbar auto-created by master-table.js) -->
-                <div class="table-responsive table-modern-wrap overflow-auto column-border">
-                    <table class="table-modern w-100 datatable" id="apmAppointmentsTable"
-                        data-table-name="Appointments">
-                        <thead>
+    <!-- Action row & Filters -->
+    <div class="card border-0 shadow-sm rounded-3 mb-3 p-3">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <!-- Create dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmNewDropBtn">
+                    <i class="bi bi-plus-lg me-1"></i>Create
+                </button>
+                <ul class="dropdown-menu shadow border-0" id="apmCreateMenu">
+                    <li>
+                        <button type="button" class="dropdown-item py-2 d-flex align-items-center gap-2" data-create-type="contact">
+                            <i class="bi bi-person-lines-fill text-primary"></i>Contact, Lead, External
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item py-2 d-flex align-items-center gap-2" data-create-type="staff">
+                            <i class="bi bi-people-fill text-success"></i>Staff Meeting
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Callback button -->
+            <a href="callbacks.php?new=1" class="btn btn-outline-primary btn-sm" id="apmCallbackBtn">
+                <i class="bi bi-telephone-forward me-1"></i>Callback
+            </a>
+
+            <!-- Date Range Filter -->
+            <div class="date-picker date-range-picker ms-auto" style="min-width:240px;max-width:260px;">
+                <input type="text" class="date-input form-control form-control-sm" id="apmDateRangeFilter" placeholder="DD-MM-YYYY to DD-MM-YYYY" autocomplete="off">
+            </div>
+
+            <!-- Filter dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmFilterBtn" title="Filter by status">
+                    <i class="bi bi-funnel me-1"></i>Filter
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0" id="apmFilterMenu" style="max-height: 280px; overflow-y: auto;">
+                    <li><button type="button" class="dropdown-item apm-list-item active" data-status-filter="">All</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Approved">Approved</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Pending Approval">Pending Approval</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Cancelled">Cancelled</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Finished">Finished</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Upcoming">Upcoming</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Missed">Missed</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Internal">Internal</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="External">External</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Recurring">Recurring</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Lead">Lead</button></li>
+                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Internal Staff">Internal Staff</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Summary chips (click to filter the table) -->
+        <div class="d-flex flex-wrap gap-2 pt-3 mt-3 border-top" id="apmSummaryRow">
+            <button type="button" class="btn btn-sm btn-outline-primary active apm-chip" data-summary="all">
+                Total <span class="badge bg-primary text-white ms-1" data-count="total">15</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary apm-chip" data-summary="upcoming">
+                Upcoming <span class="badge bg-primary text-white ms-1" data-count="upcoming">1</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-warning apm-chip" data-summary="pending">
+                Pending approval <span class="badge bg-warning text-dark ms-1" data-count="pending">2</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger apm-chip" data-summary="cancelled">
+                Cancelled <span class="badge bg-danger text-white ms-1" data-count="cancelled">1</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary apm-chip" data-summary="missed">
+                Missed <span class="badge bg-secondary text-white ms-1" data-count="missed">4</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-success apm-chip" data-summary="finished">
+                Finished <span class="badge bg-success text-white ms-1" data-count="finished">7</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Table (toolbar auto-created by master-table.js) -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 datatable" id="apmAppointmentsTable" data-table-name="Appointments">
+                <thead class="table-light">
                             <tr>
                                 <th class="text-nowrap" style="width: 70px;">S.No</th>
                                 <th class="text-nowrap">Subject</th>
@@ -700,58 +703,60 @@
         </div>
     </div>
 
-    <!-- ===== Below: agenda + meetings report (side by side) ===== -->
+    <!-- ===== Below: agenda + meetings report (side by side — pure Bootstrap 5) ===== -->
     <div class="row g-3">
 
         <!-- Today's agenda -->
         <div class="col-xl-6 col-lg-6">
-            <div class="apm-side-card">
-                <div class="apm-side-head">
-                    <h3 class="apm-side-title"><i class="bi bi-clock-history"></i>Today's agenda</h3>
-                    <span class="apm-side-sub" id="apmAgenSub">4 upcoming</span>
+            <div class="card border-0 shadow-sm rounded-3 h-100">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-clock-history me-2 text-primary"></i>Today's Agenda</h6>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle" id="apmAgenSub">4 upcoming</span>
                 </div>
-                <div class="apm-agenda" id="apmAgendaList">
-                    <div class="apm-agenda-item" data-date="2026-09-26" title="Filter table to 26-09-2026">
-                        <span class="apm-agenda-time">10:30 AM</span>
-                        <div class="apm-agenda-body">
-                            <div class="apm-agenda-title">Callback — Ravi Shankar</div>
-                            <div class="apm-agenda-meta">
-                                <span class="apm-status st-scheduled">SCHEDULED</span>
-                                <span class="apm-agenda-src">Lead</span>
-                                <span class="apm-agenda-date">26-09-2026</span>
+                <div class="card-body p-0" id="apmAgendaList">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 apm-agenda-item" data-date="2026-09-26" style="cursor:pointer;" title="Filter table to 26-09-2026">
+                            <span class="badge bg-light text-dark border font-monospace px-2 py-1">10:30 AM</span>
+                            <div class="flex-grow-1">
+                                <div class="fw-semibold text-dark">Callback — Ravi Shankar</div>
+                                <div class="d-flex align-items-center gap-2 mt-1 small">
+                                    <span class="badge bg-primary-subtle text-primary">SCHEDULED</span>
+                                    <span class="badge bg-secondary-subtle text-secondary">Lead</span>
+                                    <span class="text-muted"><i class="bi bi-calendar3 me-1"></i>26-09-2026</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="apm-agenda-item" data-date="2026-09-27" title="Filter table to 27-09-2026">
-                        <span class="apm-agenda-time">11:00 AM</span>
-                        <div class="apm-agenda-body">
-                            <div class="apm-agenda-title">Callback — Lakshmi Pharma</div>
-                            <div class="apm-agenda-meta">
-                                <span class="apm-status st-finished">FINISHED</span>
-                                <span class="apm-agenda-src">External</span>
-                                <span class="apm-agenda-date">27-09-2026</span>
+                        <div class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 apm-agenda-item" data-date="2026-09-27" style="cursor:pointer;" title="Filter table to 27-09-2026">
+                            <span class="badge bg-light text-dark border font-monospace px-2 py-1">11:00 AM</span>
+                            <div class="flex-grow-1">
+                                <div class="fw-semibold text-dark">Callback — Lakshmi Pharma</div>
+                                <div class="d-flex align-items-center gap-2 mt-1 small">
+                                    <span class="badge bg-success-subtle text-success">FINISHED</span>
+                                    <span class="badge bg-secondary-subtle text-secondary">External</span>
+                                    <span class="text-muted"><i class="bi bi-calendar3 me-1"></i>27-09-2026</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="apm-agenda-item" data-date="2026-09-28" title="Filter table to 28-09-2026">
-                        <span class="apm-agenda-time">03:00 PM</span>
-                        <div class="apm-agenda-body">
-                            <div class="apm-agenda-title">Callback — Meena Ramesh</div>
-                            <div class="apm-agenda-meta">
-                                <span class="apm-status st-pending">PENDING APPROVAL</span>
-                                <span class="apm-agenda-src">Lead</span>
-                                <span class="apm-agenda-date">28-09-2026</span>
+                        <div class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 apm-agenda-item" data-date="2026-09-28" style="cursor:pointer;" title="Filter table to 28-09-2026">
+                            <span class="badge bg-light text-dark border font-monospace px-2 py-1">03:00 PM</span>
+                            <div class="flex-grow-1">
+                                <div class="fw-semibold text-dark">Callback — Meena Ramesh</div>
+                                <div class="d-flex align-items-center gap-2 mt-1 small">
+                                    <span class="badge bg-warning-subtle text-warning">PENDING APPROVAL</span>
+                                    <span class="badge bg-secondary-subtle text-secondary">Lead</span>
+                                    <span class="text-muted"><i class="bi bi-calendar3 me-1"></i>28-09-2026</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="apm-agenda-item" data-date="2026-07-13" title="Filter table to 13-07-2026">
-                        <span class="apm-agenda-time">10:00 AM</span>
-                        <div class="apm-agenda-body">
-                            <div class="apm-agenda-title">Test Appointment</div>
-                            <div class="apm-agenda-meta">
-                                <span class="apm-status st-finished">FINISHED</span>
-                                <span class="apm-agenda-src">Internal</span>
-                                <span class="apm-agenda-date">13-07-2026</span>
+                        <div class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 apm-agenda-item" data-date="2026-07-13" style="cursor:pointer;" title="Filter table to 13-07-2026">
+                            <span class="badge bg-light text-dark border font-monospace px-2 py-1">10:00 AM</span>
+                            <div class="flex-grow-1">
+                                <div class="fw-semibold text-dark">Test Appointment</div>
+                                <div class="d-flex align-items-center gap-2 mt-1 small">
+                                    <span class="badge bg-success-subtle text-success">FINISHED</span>
+                                    <span class="badge bg-secondary-subtle text-secondary">Internal</span>
+                                    <span class="text-muted"><i class="bi bi-calendar3 me-1"></i>13-07-2026</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -761,79 +766,93 @@
 
         <!-- Meetings report -->
         <div class="col-xl-6 col-lg-6">
-            <div class="apm-side-card">
-                <div class="apm-side-head">
-                    <h3 class="apm-side-title"><i class="bi bi-graph-up"></i>Meetings report</h3>
-                    <span class="apm-side-sub">Last 7 days</span>
+            <div class="card border-0 shadow-sm rounded-3 h-100 d-flex flex-column">
+                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up me-2 text-primary"></i>Meetings Report</h6>
+                    <span class="badge bg-light text-secondary border">Last 7 days</span>
                 </div>
-                <div class="apm-report-list" id="apmReportList">
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">11-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:50%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>1</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>0</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                <div class="card-body p-3 flex-grow-1" id="apmReportList">
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">11-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>0</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">12-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:75%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>2</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>0</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>1</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">12-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>2</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>0</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>1</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">13-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:100%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>3</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>1</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">13-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>3</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">14-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:50%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>1</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>1</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">14-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">15-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:25%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>1</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>0</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">15-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>0</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day">16-10</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:50%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>2</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>0</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
+                        <span class="text-secondary small fw-medium font-monospace" style="min-width:70px;">16-10</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>2</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>0</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
-                    <div class="apm-rep-row">
-                        <span class="apm-rep-day apm-is-today">17-10 · Today</span>
-                        <span class="apm-rep-track"><span class="apm-rep-fill" style="width:75%"></span></span>
-                        <span class="apm-rep-nums">
-                            <span class="n ok" title="Attended"><i class="bi bi-check-circle-fill"></i>2</span>
-                            <span class="n bad" title="Missed"><i class="bi bi-x-circle-fill"></i>1</span>
-                            <span class="n mut" title="Cancelled"><i class="bi bi-dash-circle-fill"></i>0</span>
-                        </span>
+                    <div class="d-flex align-items-center justify-content-between gap-3 py-2">
+                        <span class="badge bg-primary text-white font-monospace" style="min-width:70px;">17-10 · Today</span>
+                        <div class="progress flex-grow-1" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 small">
+                            <span class="badge bg-success-subtle text-success" title="Attended"><i class="bi bi-check-circle-fill me-1"></i>2</span>
+                            <span class="badge bg-danger-subtle text-danger" title="Missed"><i class="bi bi-x-circle-fill me-1"></i>1</span>
+                            <span class="badge bg-secondary-subtle text-secondary" title="Cancelled"><i class="bi bi-dash-circle-fill me-1"></i>0</span>
+                        </div>
                     </div>
                 </div>
-                <div class="apm-report-total" id="apmReportTotal">
-                    <span>Total <b>14</b> scheduled</span>
-                    <span><b>10</b> attended · <b>3</b> missed · <b>1</b> other</span>
+                <div class="card-footer bg-light border-top py-2 px-3 d-flex justify-content-between small text-muted" id="apmReportTotal">
+                    <span>Total <strong class="text-dark">14</strong> scheduled</span>
+                    <span><strong class="text-success">10</strong> attended · <strong class="text-danger">3</strong> missed · <strong class="text-secondary">1</strong> other</span>
                 </div>
             </div>
         </div>
@@ -1453,81 +1472,130 @@
     </div>
 </div>
 
-<!-- ===== Appointment Overview (fullscreen view) ===== -->
-<div class="modal fade apm-view-modal" id="apmViewModal" tabindex="-1" aria-hidden="true">
+<!-- ===== Appointment Overview (fullscreen view — pure Bootstrap 5) ===== -->
+<div class="modal fade" id="apmViewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="apm-view-body">
-                    <button type="button" class="btn apm-go-back" data-bs-dismiss="modal"><i
-                            class="bi bi-arrow-left me-1"></i>Go Back</button>
-
-                    <div class="text-center">
-                        <div class="apm-overview-title">Appointment overview <a href="#" onclick="return false;"
-                                title="Open full page"><i class="bi bi-arrow-up-right"></i></a></div>
+        <div class="modal-content bg-light">
+            <div class="modal-header bg-white border-bottom shadow-sm px-4 py-3">
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-arrow-left me-1"></i>Go Back
+                    </button>
+                    <h5 class="modal-title fw-bold text-dark mb-0">Appointment Overview</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="container-fluid" style="max-width: 1000px;">
+                    <!-- Status Banner Card -->
+                    <div class="card border-0 shadow-sm rounded-3 mb-4 text-center p-4">
+                        <h4 class="fw-bold text-dark mb-2" id="apmViewSubjectTitle">Appointment Overview</h4>
                         <div>
-                            <span class="apm-status-strip">
-                                <span class="lbl">Appointment Status</span>
-                                <span class="apm-status st-scheduled" id="apmViewStatus">SCHEDULED</span>
-                            </span>
+                            <span class="text-muted small text-uppercase fw-semibold me-2">Appointment Status:</span>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 fs-6" id="apmViewStatus">SCHEDULED</span>
                         </div>
                     </div>
 
-                    <div class="apm-ov-grid">
-                        <div>
-                            <div class="apm-ov-section-title">General Information</div>
-                            <div class="apm-ov-row"><span class="k">Initiated by</span><span class="v"
-                                    id="apmViewInitiated">Harish D.</span></div>
-                            <div class="apm-ov-row"><span class="k">Subject</span><span class="v"
-                                    id="apmViewSubject">Callback — Ravi Shankar</span></div>
-                            <div class="apm-ov-row"><span class="k">Description</span><span class="v"
-                                    id="apmViewDesc">Customer asked to call back about solar package</span></div>
-                            <div class="apm-ov-row"><span class="k">Appointment Date</span><span class="v"
-                                    id="apmViewDate">26-09-2026</span></div>
-                            <div class="apm-ov-row"><span class="k">Appointment scheduled to start at</span><span
-                                    class="v" id="apmViewTime">10:30 AM</span></div>
-                            <div class="apm-ov-row">
-                                <span class="k">Attendees</span>
-                                <span class="v"><span class="apm-ov-attendee" id="apmViewAttendeeChip">H</span></span>
+                    <div class="row g-4">
+                        <!-- General Information -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-3 h-100">
+                                <div class="card-header bg-white border-bottom py-3">
+                                    <h6 class="fw-bold mb-0 text-primary"><i class="bi bi-info-circle me-2"></i>General Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0 gy-2">
+                                        <dt class="col-sm-5 text-muted fw-normal">Initiated by</dt>
+                                        <dd class="col-sm-7 fw-semibold text-dark" id="apmViewInitiated">Harish D.</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Subject</dt>
+                                        <dd class="col-sm-7 fw-semibold text-dark" id="apmViewSubject">Callback — Ravi Shankar</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Description</dt>
+                                        <dd class="col-sm-7 text-dark" id="apmViewDesc">Customer asked to call back about solar package</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Appointment Date</dt>
+                                        <dd class="col-sm-7 fw-semibold text-dark" id="apmViewDate">26-09-2026</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Start Time</dt>
+                                        <dd class="col-sm-7 fw-semibold text-dark" id="apmViewTime">10:30 AM</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Attendees</dt>
+                                        <dd class="col-sm-7">
+                                            <span class="badge bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width:28px;height:28px;" id="apmViewAttendeeChip">H</span>
+                                        </dd>
+                                    </dl>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="apm-ov-section-title">Additional Information</div>
-                            <div class="apm-ov-row"><span class="k">Source</span><span class="v"
-                                    id="apmViewSource">Lead</span></div>
-                            <div class="apm-ov-row"><span class="k">Name</span><span class="v"><a href="#"
-                                        onclick="return false;">Ravi Shankar</a></span></div>
-                            <div class="apm-ov-row"><span class="k">Email</span><span class="v"><a href="#"
-                                        onclick="return false;">ravi.shankar@gmail.com</a></span></div>
-                            <div class="apm-ov-row">
-                                <span class="k">Phone</span>
-                                <span class="v">
-                                    <span class="apm-ov-phone-chip">SMS: 9807456321</span>
-                                    <span class="apm-ov-phone-chip">CALL: 9807456321</span>
-                                </span>
+
+                        <!-- Additional Information -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-3 h-100">
+                                <div class="card-header bg-white border-bottom py-3">
+                                    <h6 class="fw-bold mb-0 text-primary"><i class="bi bi-person-lines-fill me-2"></i>Additional Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0 gy-2">
+                                        <dt class="col-sm-5 text-muted fw-normal">Source</dt>
+                                        <dd class="col-sm-7"><span class="badge bg-secondary-subtle text-secondary" id="apmViewSource">Lead</span></dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Name</dt>
+                                        <dd class="col-sm-7"><a href="#" class="text-decoration-none fw-semibold">Ravi Shankar</a></dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Email</dt>
+                                        <dd class="col-sm-7"><a href="#" class="text-decoration-none">ravi.shankar@gmail.com</a></dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Phone</dt>
+                                        <dd class="col-sm-7" id="apmViewPhone">
+                                            <span class="badge bg-info-subtle text-info border border-info-subtle me-1">SMS: 9807456321</span>
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle">CALL: 9807456321</span>
+                                        </dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Location</dt>
+                                        <dd class="col-sm-7 text-dark" id="apmViewLocation">Gharuda Office, Chennai</dd>
+
+                                        <dt class="col-sm-5 text-muted fw-normal">Email Tracking</dt>
+                                        <dd class="col-sm-7 text-dark"><span class="badge bg-success-subtle text-success">Read</span></dd>
+                                    </dl>
+                                </div>
                             </div>
-                            <div class="apm-ov-row"><span class="k">Location / Address</span><span class="v"
-                                    id="apmViewLocation">Gharuda Office, Chennai</span></div>
-                            <div class="apm-ov-row"><span class="k">Email tracking (is appointment email
-                                    read)</span><span class="v">Read</span></div>
                         </div>
-                    </div>
 
-                    <div class="apm-ov-section-title">Appointment Reminders</div>
-                    <div class="apm-ov-row"><span class="k">Reminder notification by SMS triggered (applies only for
-                            clients)</span><span class="v" id="apmViewSmsReminder">Yes</span></div>
-                    <div class="apm-ov-row"><span class="k">Reminder notification by Email triggered</span><span
-                            class="v" id="apmViewEmailReminder">Yes</span></div>
-
-                    <div class="apm-ov-footer">
-                        <button type="button" class="apm-ov-btn b-blue" id="apmViewRemindBtn">Send Early
-                            Reminders</button>
-                        <div class="d-flex gap-2 flex-wrap">
-                            <button type="button" class="apm-ov-btn b-red" id="apmViewCancelBtn">Cancel
-                                Appointment</button>
-                            <button type="button" class="apm-ov-btn b-green" id="apmViewFinishBtn">Mark as
-                                Finished</button>
+                        <!-- Reminders Card -->
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-3">
+                                <div class="card-header bg-white border-bottom py-3">
+                                    <h6 class="fw-bold mb-0 text-primary"><i class="bi bi-bell me-2"></i>Appointment Reminders</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 d-flex align-items-center justify-content-between p-3 bg-light rounded-2">
+                                            <span class="text-muted">SMS notification triggered</span>
+                                            <span class="badge bg-success-subtle text-success" id="apmViewSmsReminder"><i class="bi bi-check-circle me-1"></i>Yes</span>
+                                        </div>
+                                        <div class="col-md-6 d-flex align-items-center justify-content-between p-3 bg-light rounded-2">
+                                            <span class="text-muted">Email notification triggered</span>
+                                            <span class="badge bg-success-subtle text-success" id="apmViewEmailReminder"><i class="bi bi-check-circle me-1"></i>Yes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-white border-top py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <button type="button" class="btn btn-outline-primary" id="apmViewRemindBtn">
+                                        <i class="bi bi-send me-1"></i>Send Early Reminders
+                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-outline-danger" id="apmViewCancelBtn">
+                                            <i class="bi bi-x-circle me-1"></i>Cancel Appointment
+                                        </button>
+                                        <button type="button" class="btn btn-success" id="apmViewFinishBtn">
+                                            <i class="bi bi-check-circle me-1"></i>Mark as Finished
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -2004,7 +2072,11 @@
                         var statusEl = document.getElementById('apmViewStatus');
                         if (statusEl) {
                             statusEl.textContent = st.toUpperCase();
-                            statusEl.className = 'apm-status ' + (st === 'Finished' ? 'st-finished' : (st === 'Missed' ? 'st-missed' : (st === 'Cancelled' ? 'st-cancelled' : (st === 'Pending Approval' ? 'st-pending' : 'st-scheduled'))));
+                            var badgeCls = st === 'Finished' ? 'bg-success-subtle text-success border-success-subtle' :
+                                           (st === 'Missed' ? 'bg-warning-subtle text-warning border-warning-subtle' :
+                                           (st === 'Cancelled' ? 'bg-danger-subtle text-danger border-danger-subtle' :
+                                           (st === 'Pending Approval' ? 'bg-info-subtle text-info border-info-subtle' : 'bg-primary-subtle text-primary border-primary-subtle')));
+                            statusEl.className = 'badge border px-3 py-2 fs-6 ' + badgeCls;
                         }
                         if (document.getElementById('apmViewSubject')) document.getElementById('apmViewSubject').textContent = subj;
                         if (document.getElementById('apmViewDate')) document.getElementById('apmViewDate').textContent = dt;

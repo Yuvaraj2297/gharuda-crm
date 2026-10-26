@@ -1,17 +1,14 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/lead-board.css">
-
-
-<main class="lead-dash-page">
+<main class="container-fluid px-0">
     <!-- ===== Page header ===== -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
-        <div class="overflow-auto">
-            <h1 class="font-display fw-bold mb-1 page-title">Sales Analytics</h1>
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-0">Sales Analytics</h1>
         </div>
-        <form method="get" class="ld-period-form">
-            <i class="bi bi-calendar3"></i>
-            <select class="form-select form-select-sm gh-w-auto select2" name="month" aria-label="Month">
+        <form method="get" class="d-inline-flex align-items-center gap-2 p-2 bg-white border rounded-3 shadow-sm">
+            <i class="bi bi-calendar3 text-primary ms-1"></i>
+            <select class="form-select form-select-sm select2 border-0" name="month" aria-label="Month" style="width: auto;">
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
@@ -25,7 +22,7 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-            <select class="form-select form-select-sm gh-w-auto select2" name="year" aria-label="Year">
+            <select class="form-select form-select-sm select2 border-0" name="year" aria-label="Year" style="width: auto;">
                 <option value="2023">2023</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -37,53 +34,68 @@
     </div>
 
     <!-- ===== Overview: spotlight + KPI grid ===== -->
-    <div class="row g-3 mb-3">
+    <div class="row g-3 mb-4">
         <div class="col-xl-4 col-lg-5">
-            <div class="ld-spot">
-                <div class="ld-spot-head">
-                    <span class="ld-spot-head-l"><span class="ld-spot-trophy"><i
-                                class="bi bi-trophy-fill"></i></span>Revenue by sales rep</span>
-                    <span>October 2026</span>
+            <div class="card border-0 shadow-sm rounded-3 h-100 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="d-inline-flex align-items-center gap-2 fw-semibold text-dark">
+                        <span class="badge bg-warning-subtle text-warning p-2 rounded-circle"><i class="bi bi-trophy-fill"></i></span>
+                        Revenue by sales rep
+                    </span>
+                    <span class="badge bg-light text-secondary border">October 2026</span>
                 </div>
-                <div class="ld-spot-top">
-                    <div class="ld-spot-avatar">
-                        G <span class="crown"><i class="bi bi-trophy-fill"></i></span>
+                <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-3 mb-3">
+                    <div class="position-relative">
+                        <span class="badge rounded-circle bg-primary text-white fs-4 d-inline-flex align-items-center justify-content-center" style="width:52px;height:52px;">G</span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark"><i class="bi bi-trophy-fill"></i></span>
                     </div>
                     <div>
-                        <div class="ld-spot-name">GHARUDA SOFTWARE</div>
-                        <div class="ld-spot-amount">₹ 999.00</div>
-                        <span class="ld-spot-tag"><i class="bi bi-patch-check-fill"></i>Top performer</span>
+                        <div class="fw-bold text-dark">GHARUDA SOFTWARE</div>
+                        <div class="h4 fw-bold text-primary mb-1">₹ 999.00</div>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-patch-check-fill me-1"></i>Top performer</span>
                     </div>
                 </div>
-                <ul class="ld-board">
-                    <li>
-                        <span class="rank">1</span>
-                        <div class="who-wrap">
-                            <span class="who">GHARUDA SOFTWARE</span>
-                            <span class="bar"><i style="width:100%"></i></span>
+                <ul class="list-unstyled mb-3 flex-grow-1">
+                    <li class="d-flex align-items-center gap-2 py-2 border-bottom">
+                        <span class="badge bg-primary text-white rounded-circle" style="width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;">1</span>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between small fw-medium mb-1">
+                                <span class="text-dark">GHARUDA SOFTWARE</span>
+                                <span class="fw-bold text-dark">₹ 999.00</span>
+                            </div>
+                            <div class="progress" style="height:5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width:100%"></div>
+                            </div>
                         </div>
-                        <span class="amt">₹ 999.00</span>
                     </li>
-                    <li>
-                        <span class="rank">2</span>
-                        <div class="who-wrap">
-                            <span class="who">ASHISH</span>
-                            <span class="bar"><i style="width:0%"></i></span>
+                    <li class="d-flex align-items-center gap-2 py-2 border-bottom">
+                        <span class="badge bg-light text-secondary border rounded-circle" style="width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;">2</span>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between small fw-medium mb-1">
+                                <span class="text-secondary">ASHISH</span>
+                                <span class="text-muted">₹ 0.00</span>
+                            </div>
+                            <div class="progress" style="height:5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width:0%"></div>
+                            </div>
                         </div>
-                        <span class="amt">₹ 0.00</span>
                     </li>
-                    <li>
-                        <span class="rank">3</span>
-                        <div class="who-wrap">
-                            <span class="who">Thilak Ma</span>
-                            <span class="bar"><i style="width:0%"></i></span>
+                    <li class="d-flex align-items-center gap-2 py-2">
+                        <span class="badge bg-light text-secondary border rounded-circle" style="width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;">3</span>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between small fw-medium mb-1">
+                                <span class="text-secondary">Thilak Ma</span>
+                                <span class="text-muted">₹ 0.00</span>
+                            </div>
+                            <div class="progress" style="height:5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width:0%"></div>
+                            </div>
                         </div>
-                        <span class="amt">₹ 0.00</span>
                     </li>
                 </ul>
-                <div class="ld-spot-foot">
-                    <span><i class="bi bi-people-fill me-1"></i>Team revenue · 3 reps</span>
-                    <strong>₹ 999.00</strong>
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top small">
+                    <span class="text-muted"><i class="bi bi-people-fill me-1"></i>Team revenue · 3 reps</span>
+                    <strong class="text-dark">₹ 999.00</strong>
                 </div>
             </div>
         </div>
@@ -91,117 +103,104 @@
         <div class="col-xl-8 col-lg-7">
             <div class="row g-3 h-100">
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-green">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-green"><i class="bi bi-people"></i></span>
-                            <span class="ld-kpi-label">Total customers</span>
-                            <span class="ld-kpi-delta up"><i class="bi bi-arrow-up-right"></i>+13</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-people"></i></span>
+                                <span class="text-muted small fw-semibold">Total customers</span>
+                            </div>
+                            <span class="badge bg-success-subtle text-success"><i class="bi bi-arrow-up-right me-1"></i>+13</span>
                         </div>
-                        <div class="ld-kpi-value">43</div>
-                        <div class="ld-kpi-sub">All time</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,31 14.29,27 28.57,21 42.86,19 57.14,15 71.43,11 85.71,9 100,5 100,34"
-                                fill="#16a34a" opacity=".12" />
-                            <polyline points="0,31 14.29,27 28.57,21 42.86,19 57.14,15 71.43,11 85.71,9 100,5"
-                                fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">43</div>
+                        <div class="text-muted small mb-2">All time</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,31 14.29,27 28.57,21 42.86,19 57.14,15 71.43,11 85.71,9 100,5 100,34" fill="#16a34a" opacity=".12" />
+                            <polyline points="0,31 14.29,27 28.57,21 42.86,19 57.14,15 71.43,11 85.71,9 100,5" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-blue">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-blue"><i class="bi bi-person-plus"></i></span>
-                            <span class="ld-kpi-label">New customers</span>
-                            <span class="ld-kpi-delta up"><i class="bi bi-arrow-up-right"></i>+4</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-person-plus"></i></span>
+                                <span class="text-muted small fw-semibold">New customers</span>
+                            </div>
+                            <span class="badge bg-primary-subtle text-primary"><i class="bi bi-arrow-up-right me-1"></i>+4</span>
                         </div>
-                        <div class="ld-kpi-value">4</div>
-                        <div class="ld-kpi-sub">October 2026</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,31 14.29,24.5 28.57,24.5 42.86,18 57.14,18 71.43,11.5 85.71,11.5 100,5 100,34"
-                                fill="#3b82f6" opacity=".12" />
-                            <polyline points="0,31 14.29,24.5 28.57,24.5 42.86,18 57.14,18 71.43,11.5 85.71,11.5 100,5"
-                                fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">4</div>
+                        <div class="text-muted small mb-2">October 2026</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,31 14.29,24.5 28.57,24.5 42.86,18 57.14,18 71.43,11.5 85.71,11.5 100,5 100,34" fill="#3b82f6" opacity=".12" />
+                            <polyline points="0,31 14.29,24.5 28.57,24.5 42.86,18 57.14,18 71.43,11.5 85.71,11.5 100,5" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-amber">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-amber"><i class="bi bi-bullseye"></i></span>
-                            <span class="ld-kpi-label">Total leads</span>
-                            <span class="ld-kpi-delta up"><i class="bi bi-arrow-up-right"></i>+2</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-warning-subtle text-warning p-2 rounded-2 fs-6"><i class="bi bi-bullseye"></i></span>
+                                <span class="text-muted small fw-semibold">Total leads</span>
+                            </div>
+                            <span class="badge bg-warning-subtle text-warning"><i class="bi bi-arrow-up-right me-1"></i>+2</span>
                         </div>
-                        <div class="ld-kpi-value">2</div>
-                        <div class="ld-kpi-sub">₹ 5.60</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,31 14.29,31 28.57,18 42.86,31 57.14,31 71.43,18 85.71,31 100,5 100,34"
-                                fill="#f59e0b" opacity=".12" />
-                            <polyline points="0,31 14.29,31 28.57,18 42.86,31 57.14,31 71.43,18 85.71,31 100,5"
-                                fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">2</div>
+                        <div class="text-muted small mb-2">₹ 5.60</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,31 14.29,31 28.57,18 42.86,31 57.14,31 71.43,18 85.71,31 100,5 100,34" fill="#f59e0b" opacity=".12" />
+                            <polyline points="0,31 14.29,31 28.57,18 42.86,31 57.14,31 71.43,18 85.71,31 100,5" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-red">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-red"><i class="bi bi-x-circle"></i></span>
-                            <span class="ld-kpi-label">Leads lost</span>
-                            <span class="ld-kpi-delta flat"><i class="bi bi-dash"></i>±0</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-danger-subtle text-danger p-2 rounded-2 fs-6"><i class="bi bi-x-circle"></i></span>
+                                <span class="text-muted small fw-semibold">Leads lost</span>
+                            </div>
+                            <span class="badge bg-secondary-subtle text-secondary"><i class="bi bi-dash me-1"></i>±0</span>
                         </div>
-                        <div class="ld-kpi-value">0</div>
-                        <div class="ld-kpi-sub">₹ 0.00</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,17 14.29,17 28.57,17 42.86,17 57.14,17 71.43,17 85.71,17 100,17 100,34"
-                                fill="#ef4444" opacity=".12" />
-                            <polyline points="0,17 14.29,17 28.57,17 42.86,17 57.14,17 71.43,17 85.71,17 100,17"
-                                fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">0</div>
+                        <div class="text-muted small mb-2">₹ 0.00</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,17 14.29,17 28.57,17 42.86,17 57.14,17 71.43,17 85.71,17 100,17 100,34" fill="#ef4444" opacity=".12" />
+                            <polyline points="0,17 14.29,17 28.57,17 42.86,17 57.14,17 71.43,17 85.71,17 100,17" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-violet">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-violet"><i class="bi bi-file-earmark-text"></i></span>
-                            <span class="ld-kpi-label">Total quotes</span>
-                            <span class="ld-kpi-delta flat"><i class="bi bi-dash"></i>±0</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-info-subtle text-info p-2 rounded-2 fs-6"><i class="bi bi-file-earmark-text"></i></span>
+                                <span class="text-muted small fw-semibold">Total quotes</span>
+                            </div>
+                            <span class="badge bg-secondary-subtle text-secondary"><i class="bi bi-dash me-1"></i>±0</span>
                         </div>
-                        <div class="ld-kpi-value">9</div>
-                        <div class="ld-kpi-sub">₹ 5,35,498.18</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,22.33 14.29,31 28.57,13.67 42.86,22.33 57.14,31 71.43,5 85.71,22.33 100,22.33 100,34"
-                                fill="#8b5cf6" opacity=".12" />
-                            <polyline
-                                points="0,22.33 14.29,31 28.57,13.67 42.86,22.33 57.14,31 71.43,5 85.71,22.33 100,22.33"
-                                fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">9</div>
+                        <div class="text-muted small mb-2">₹ 5,35,498.18</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,22.33 14.29,31 28.57,13.67 42.86,22.33 57.14,31 71.43,5 85.71,22.33 100,22.33 100,34" fill="#8b5cf6" opacity=".12" />
+                            <polyline points="0,22.33 14.29,31 28.57,13.67 42.86,22.33 57.14,31 71.43,5 85.71,22.33 100,22.33" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="ld-kpi is-green">
-                        <div class="ld-kpi-top">
-                            <span class="ld-ico tint-green"><i class="bi bi-arrow-repeat"></i></span>
-                            <span class="ld-kpi-label">Quotes converted</span>
-                            <span class="ld-kpi-delta up"><i class="bi bi-arrow-up-right"></i>+1</span>
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100 position-relative overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-arrow-repeat"></i></span>
+                                <span class="text-muted small fw-semibold">Quotes converted</span>
+                            </div>
+                            <span class="badge bg-success-subtle text-success"><i class="bi bi-arrow-up-right me-1"></i>+1</span>
                         </div>
-                        <div class="ld-kpi-value">1</div>
-                        <div class="ld-kpi-sub">₹ 119.18</div>
-                        <svg class="ld-spark" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
-                            <polygon
-                                points="0,34 0,31 14.29,31 28.57,31 42.86,5 57.14,31 71.43,31 85.71,31 100,5 100,34"
-                                fill="#16a34a" opacity=".12" />
-                            <polyline points="0,31 14.29,31 28.57,31 42.86,5 57.14,31 71.43,31 85.71,31 100,5"
-                                fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                        <div class="h3 fw-bold text-dark mb-0">1</div>
+                        <div class="text-muted small mb-2">₹ 119.18</div>
+                        <svg class="w-100" style="height:34px;" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true">
+                            <polygon points="0,34 0,31 14.29,31 28.57,31 42.86,5 57.14,31 71.43,31 85.71,31 100,5 100,34" fill="#16a34a" opacity=".12" />
+                            <polyline points="0,31 14.29,31 28.57,31 42.86,5 57.14,31 71.43,31 85.71,31 100,5" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
                         </svg>
                     </div>
                 </div>
@@ -210,85 +209,117 @@
     </div>
 
     <!-- ===== Section tabs ===== -->
-    <div class="ld-tabs" id="ldTabs">
-        <button type="button" class="ld-tab active" data-tab="targets"><i class="bi bi-bullseye"></i>Targets &amp;
-            Team</button>
-        <button type="button" class="ld-tab" data-tab="activity"><i class="bi bi-telephone"></i>Calls &amp;
-            Pipeline</button>
-        <button type="button" class="ld-tab" data-tab="sales"><i class="bi bi-graph-up-arrow"></i>Sales &amp;
-            Funnel</button>
-        <button type="button" class="ld-tab" data-tab="sources"><i class="bi bi-bar-chart"></i>Sources &amp;
-            Averages</button>
-    </div>
+    <ul class="nav nav-pills gap-2 mb-4 bg-white p-2 border rounded-3 shadow-sm" id="ldTabs">
+        <li class="nav-item">
+            <button type="button" class="nav-link active py-2 px-3 ld-tab" data-tab="targets">
+                <i class="bi bi-bullseye me-1"></i>Targets &amp; Team
+            </button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link py-2 px-3 ld-tab" data-tab="activity">
+                <i class="bi bi-telephone me-1"></i>Calls &amp; Pipeline
+            </button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link py-2 px-3 ld-tab" data-tab="sales">
+                <i class="bi bi-graph-up-arrow me-1"></i>Sales &amp; Funnel
+            </button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link py-2 px-3 ld-tab" data-tab="sources">
+                <i class="bi bi-bar-chart me-1"></i>Sources &amp; Averages
+            </button>
+        </li>
+    </ul>
 
     <!-- ===== PANEL: Targets & Team ===== -->
     <div class="ld-panel active" id="ldPanel-targets">
         <!-- ===== Targets ===== -->
         <div class="row g-3 mb-3">
             <div class="col-lg-6">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-green"><i class="bi bi-flag"></i></span>
-                            <h2 class="ld-title">Goals</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-flag"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Goals</h6>
                         </div>
-                        <span class="ld-pill">October 2026</span>
+                        <span class="badge bg-light text-secondary border">October 2026</span>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-target">
-                            <div class="ld-gauge-wrap">
-                                <svg class="ld-gauge" viewBox="0 0 100 100" aria-hidden="true">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-around flex-wrap gap-3 py-3">
+                            <div class="position-relative text-center" style="width:120px;height:120px;">
+                                <svg class="w-100 h-100" viewBox="0 0 100 100" aria-hidden="true">
                                     <circle cx="50" cy="50" r="42" fill="none" stroke="#eef0f3" stroke-width="9" />
                                     <circle cx="50" cy="50" r="42" fill="none" stroke="#16a34a" stroke-width="9"
                                         stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="263.89"
                                         transform="rotate(-90 50 50)" />
                                 </svg>
-                                <div class="ld-gauge-center"><strong>0%</strong><span>achieved</span></div>
-                            </div>
-                            <div class="ld-stats">
-                                <div class="ld-stat" style="--dot:#3b82f6;"><span>Total</span><strong>₹ 0.00</strong>
+                                <div class="position-absolute top-50 start-50 translate-middle">
+                                    <strong class="h4 fw-bold text-dark d-block mb-0">0%</strong>
+                                    <span class="text-muted small">achieved</span>
                                 </div>
-                                <div class="ld-stat" style="--dot:#16a34a;"><span>Achieved</span><strong class="neg">₹
-                                        -1,05,708.24</strong></div>
-                                <div class="ld-stat" style="--dot:#ef4444;"><span>Pending</span><strong>₹ 0.00</strong>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-primary me-1" style="width:8px;height:8px;padding:0;"> </span>Total</span>
+                                    <strong class="text-dark">₹ 0.00</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-success me-1" style="width:8px;height:8px;padding:0;"> </span>Achieved</span>
+                                    <strong class="text-danger">₹ -1,05,708.24</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-danger me-1" style="width:8px;height:8px;padding:0;"> </span>Pending</span>
+                                    <strong class="text-dark">₹ 0.00</strong>
                                 </div>
                             </div>
                         </div>
-                        <div class="ld-note"><i class="bi bi-info-circle me-1"></i>No target is set for October 2026.
+                        <div class="alert alert-info py-2 px-3 small mb-0 rounded-2">
+                            <i class="bi bi-info-circle me-1"></i>No target is set for October 2026.
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-green"><i class="bi bi-cash-stack"></i></span>
-                            <h2 class="ld-title">Revenue target</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-cash-stack"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Revenue target</h6>
                         </div>
-                        <span class="ld-pill">October 2026</span>
+                        <span class="badge bg-light text-secondary border">October 2026</span>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-target">
-                            <div class="ld-gauge-wrap">
-                                <svg class="ld-gauge" viewBox="0 0 100 100" aria-hidden="true">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-around flex-wrap gap-3 py-3">
+                            <div class="position-relative text-center" style="width:120px;height:120px;">
+                                <svg class="w-100 h-100" viewBox="0 0 100 100" aria-hidden="true">
                                     <circle cx="50" cy="50" r="42" fill="none" stroke="#eef0f3" stroke-width="9" />
                                     <circle cx="50" cy="50" r="42" fill="none" stroke="#16a34a" stroke-width="9"
                                         stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="263.89"
                                         transform="rotate(-90 50 50)" />
                                 </svg>
-                                <div class="ld-gauge-center"><strong>0%</strong><span>achieved</span></div>
-                            </div>
-                            <div class="ld-stats">
-                                <div class="ld-stat" style="--dot:#3b82f6;"><span>Total</span><strong>₹ 0.00</strong>
+                                <div class="position-absolute top-50 start-50 translate-middle">
+                                    <strong class="h4 fw-bold text-dark d-block mb-0">0%</strong>
+                                    <span class="text-muted small">achieved</span>
                                 </div>
-                                <div class="ld-stat" style="--dot:#16a34a;"><span>Achieved</span><strong class="">₹
-                                        999.00</strong></div>
-                                <div class="ld-stat" style="--dot:#ef4444;"><span>Pending</span><strong>₹ 0.00</strong>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-primary me-1" style="width:8px;height:8px;padding:0;"> </span>Total</span>
+                                    <strong class="text-dark">₹ 0.00</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-success me-1" style="width:8px;height:8px;padding:0;"> </span>Achieved</span>
+                                    <strong class="text-success">₹ 999.00</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                    <span class="text-muted small"><span class="badge rounded-circle bg-danger me-1" style="width:8px;height:8px;padding:0;"> </span>Pending</span>
+                                    <strong class="text-dark">₹ 0.00</strong>
                                 </div>
                             </div>
                         </div>
-                        <div class="ld-note"><i class="bi bi-info-circle me-1"></i>No target is set for October 2026.
+                        <div class="alert alert-info py-2 px-3 small mb-0 rounded-2">
+                            <i class="bi bi-info-circle me-1"></i>No target is set for October 2026.
                         </div>
                     </div>
                 </div>
@@ -296,25 +327,25 @@
         </div>
 
         <!-- ===== Staff-wise business summary ===== -->
-        <div class="ld-card mb-3" style="height:auto;">
-            <div class="ld-head">
-                <div class="ld-head-left">
-                    <span class="ld-ico tint-blue"><i class="bi bi-person-lines-fill"></i></span>
+        <div class="card border-0 shadow-sm rounded-3 mb-3 overflow-hidden">
+            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-person-lines-fill"></i></span>
                     <div>
-                        <h2 class="ld-title">Staff-wise business summary</h2>
-                        <div class="ld-sub">Won deals · business wise</div>
+                        <h6 class="fw-bold mb-0 text-dark">Staff-wise business summary</h6>
+                        <div class="small text-muted">Won deals · business wise</div>
                     </div>
                 </div>
-                <div class="ld-controls">
-                    <span class="ld-pill"><i class="bi bi-people-fill me-1"></i>6 staff</span>
-                    <div class="ld-sum-search">
-                        <i class="bi bi-search"></i>
-                        <input type="text" id="ldSumSearch" placeholder="Search staff..." autocomplete="off">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-light text-secondary border"><i class="bi bi-people-fill me-1"></i>6 staff</span>
+                    <div class="input-group input-group-sm" style="max-width:200px;">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control border-start-0" id="ldSumSearch" placeholder="Search staff..." autocomplete="off">
                     </div>
                 </div>
             </div>
-            <div class="ld-table-wrap">
-                <table class="ld-table ld-sum" id="ldSumTable">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle mb-0 text-center" id="ldSumTable">
                     <thead>
                         <tr>
                             <th rowspan="2" class="stick-1" style="background:#f4f6f8;">S.No</th>
@@ -525,35 +556,35 @@
     </div><!-- /ldPanel-targets -->
 
     <!-- ===== PANEL: Calls & Pipeline ===== -->
-    <div class="ld-panel" id="ldPanel-activity">
+    <div class="ld-panel d-none" id="ldPanel-activity">
         <!-- ===== Calls & meetings + Pipeline ===== -->
         <div class="row g-3 mb-3">
             <div class="col-lg-7">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-green"><i class="bi bi-telephone"></i></span>
-                            <h2 class="ld-title">Calls &amp; meeting summary</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-telephone"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Calls &amp; meeting summary</h6>
                         </div>
-                        <span class="ld-pill">October 2026</span>
+                        <span class="badge bg-light text-secondary border">October 2026</span>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-chart"><canvas id="ldCallsChart"></canvas></div>
+                    <div class="card-body p-3">
+                        <div style="height: 320px; position: relative;"><canvas id="ldCallsChart"></canvas></div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-violet"><i class="bi bi-pie-chart"></i></span>
-                            <h2 class="ld-title">Pipeline breakdown</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-pie-chart"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Pipeline breakdown</h6>
                         </div>
-                        <span class="ld-pill">October 2026</span>
+                        <span class="badge bg-light text-secondary border">October 2026</span>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-chart sm"><canvas id="ldPipelineChart"></canvas></div>
-                        <div class="ld-legend" id="ldPipelineLegend"></div>
+                    <div class="card-body p-3">
+                        <div style="height: 220px; position: relative;"><canvas id="ldPipelineChart"></canvas></div>
+                        <div class="mt-3" id="ldPipelineLegend"></div>
                     </div>
                 </div>
             </div>
@@ -562,43 +593,41 @@
     </div><!-- /ldPanel-activity -->
 
     <!-- ===== PANEL: Sales & Funnel ===== -->
-    <div class="ld-panel" id="ldPanel-sales">
+    <div class="ld-panel d-none" id="ldPanel-sales">
         <!-- ===== Sales - proposals / quotations ===== -->
-        <div class="ld-card mb-3" style="height:auto;">
-            <div class="ld-head">
-                <div class="ld-head-left">
-                    <span class="ld-ico tint-blue"><i class="bi bi-graph-up-arrow"></i></span>
+        <div class="card border-0 shadow-sm rounded-3 mb-3">
+            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-graph-up-arrow"></i></span>
                     <div>
-                        <h2 class="ld-title">Sales – proposals / quotations</h2>
-                        <div class="ld-sub">October 2026</div>
+                        <h6 class="fw-bold mb-0 text-dark">Sales – proposals / quotations</h6>
+                        <small class="text-muted">October 2026</small>
                     </div>
                 </div>
-                <div class="ld-controls">
-                    <div class="ld-seg" id="ldPropSeg" role="group" aria-label="Proposal period">
-                        <button type="button" class="active" data-period="monthly">Monthly</button>
-                        <button type="button" data-period="weekly">Weekly</button>
-                        <button type="button" data-period="yearly">Yearly</button>
-                    </div>
+                <div class="btn-group btn-group-sm" id="ldPropSeg" role="group" aria-label="Proposal period">
+                    <button type="button" class="btn btn-outline-primary active" data-period="monthly">Monthly</button>
+                    <button type="button" class="btn btn-outline-primary" data-period="weekly">Weekly</button>
+                    <button type="button" class="btn btn-outline-primary" data-period="yearly">Yearly</button>
                 </div>
             </div>
-            <div class="ld-body">
-                <div class="ld-metrics" id="ldPropMetrics"></div>
-                <div class="ld-chart"><canvas id="ldProposalChart"></canvas></div>
+            <div class="card-body p-3">
+                <div class="row g-2 mb-3" id="ldPropMetrics"></div>
+                <div style="height: 320px; position: relative;"><canvas id="ldProposalChart"></canvas></div>
             </div>
         </div>
 
         <!-- ===== Sales funnel overview ===== -->
-        <div class="ld-card mb-3" style="height:auto;">
-            <div class="ld-head">
-                <div class="ld-head-left">
-                    <span class="ld-ico tint-amber"><i class="bi bi-funnel"></i></span>
+        <div class="card border-0 shadow-sm rounded-3 mb-3">
+            <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-warning-subtle text-warning p-2 rounded-2 fs-6"><i class="bi bi-funnel"></i></span>
                     <div>
-                        <h2 class="ld-title">Sales funnel overview</h2>
-                        <div class="ld-sub">October 2026</div>
+                        <h6 class="fw-bold mb-0 text-dark">Sales funnel overview</h6>
+                        <small class="text-muted">October 2026</small>
                     </div>
                 </div>
-                <div class="ld-controls">
-                    <select class="form-select form-select-sm gh-w-auto select2" id="ldFunnelStaff" aria-label="Staff">
+                <div class="d-flex align-items-center gap-2">
+                    <select class="form-select form-select-sm select2" id="ldFunnelStaff" style="width: auto;" aria-label="Staff">
                         <option value="">All staff</option>
                         <option>Thilak</option>
                         <option>ASHISH</option>
@@ -607,41 +636,41 @@
                         <option>KISHORE</option>
                         <option>GHARUDA</option>
                     </select>
-                    <div class="ld-seg" id="ldFunnelSeg" role="group" aria-label="Funnel period">
-                        <button type="button" data-period="today">Today</button>
-                        <button type="button" data-period="weekly">Weekly</button>
-                        <button type="button" class="active" data-period="monthly">Monthly</button>
-                        <button type="button" data-period="yearly">Yearly</button>
+                    <div class="btn-group btn-group-sm" id="ldFunnelSeg" role="group" aria-label="Funnel period">
+                        <button type="button" class="btn btn-outline-primary" data-period="today">Today</button>
+                        <button type="button" class="btn btn-outline-primary" data-period="weekly">Weekly</button>
+                        <button type="button" class="btn btn-outline-primary active" data-period="monthly">Monthly</button>
+                        <button type="button" class="btn btn-outline-primary" data-period="yearly">Yearly</button>
                     </div>
                 </div>
             </div>
-            <div class="ld-body">
-                <div class="ld-steps" id="ldFunnelSteps"></div>
-                <div class="ld-chart"><canvas id="ldFunnelChart"></canvas></div>
+            <div class="card-body p-3">
+                <div class="row g-2 mb-3" id="ldFunnelSteps"></div>
+                <div style="height: 320px; position: relative;"><canvas id="ldFunnelChart"></canvas></div>
             </div>
         </div>
 
     </div><!-- /ldPanel-sales -->
 
     <!-- ===== PANEL: Sources & Averages ===== -->
-    <div class="ld-panel" id="ldPanel-sources">
+    <div class="ld-panel d-none" id="ldPanel-sources">
         <!-- ===== Source-wise summary ===== -->
         <div class="row g-3 mb-3">
             <div class="col-lg-7">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-green"><i class="bi bi-diagram-3"></i></span>
-                            <h2 class="ld-title">Source-wise summary</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-diagram-3"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Source-wise summary</h6>
                         </div>
-                        <span class="ld-pill">October 2026</span>
+                        <span class="badge bg-light text-secondary border">October 2026</span>
                     </div>
-                    <div class="ld-table-wrap scroll-y">
-                        <table class="ld-table sticky-head">
-                            <thead>
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-hover align-middle mb-0 text-center small">
+                            <thead class="table-light sticky-top">
                                 <tr>
                                     <th style="width:60px;">S.No</th>
-                                    <th class="left">Source</th>
+                                    <th class="text-start">Source</th>
                                     <th style="min-width:170px;">Total lead</th>
                                     <th>Total quote</th>
                                     <th>Customer</th>
@@ -649,110 +678,140 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="ld-rank top">1</span></td>
-                                    <td class="left"><strong>IndiaMART</strong></td>
+                                    <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">1</span></td>
+                                    <td class="text-start fw-bold">IndiaMART</td>
                                     <td>
-                                        <div class="ld-pct"><b>97</b>
-                                            <div class="ld-bar"><i style="width:100%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">97</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:100%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>4</td>
                                     <td>17</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank top">2</span></td>
-                                    <td class="left"><strong>test</strong></td>
+                                    <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">2</span></td>
+                                    <td class="text-start fw-bold">test</td>
                                     <td>
-                                        <div class="ld-pct"><b>5</b>
-                                            <div class="ld-bar"><i style="width:5%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">5</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:5%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>4</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank top">3</span></td>
-                                    <td class="left"><strong>Exihibition</strong></td>
+                                    <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">3</span></td>
+                                    <td class="text-start fw-bold">Exihibition</td>
                                     <td>
-                                        <div class="ld-pct"><b>3</b>
-                                            <div class="ld-bar"><i style="width:3%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">3</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:3%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>3</td>
                                     <td>1</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">4</span></td>
-                                    <td class="left"><strong>Mail</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">4</span></td>
+                                    <td class="text-start fw-bold">Mail</td>
                                     <td>
-                                        <div class="ld-pct"><b>2</b>
-                                            <div class="ld-bar"><i style="width:2%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">2</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:2%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>5</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">5</span></td>
-                                    <td class="left"><strong>Gokul(Reference)</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">5</span></td>
+                                    <td class="text-start fw-bold">Gokul(Reference)</td>
                                     <td>
-                                        <div class="ld-pct"><b>1</b>
-                                            <div class="ld-bar"><i style="width:1%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">1</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:1%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>1</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">6</span></td>
-                                    <td class="left"><strong>Telegram</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">6</span></td>
+                                    <td class="text-start fw-bold">Telegram</td>
                                     <td>
-                                        <div class="ld-pct"><b>1</b>
-                                            <div class="ld-bar"><i style="width:1%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">1</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:1%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">7</span></td>
-                                    <td class="left"><strong>demo</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">7</span></td>
+                                    <td class="text-start fw-bold">demo</td>
                                     <td>
-                                        <div class="ld-pct"><b>0</b>
-                                            <div class="ld-bar"><i style="width:0%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">0</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:0%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">8</span></td>
-                                    <td class="left"><strong>Market</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">8</span></td>
+                                    <td class="text-start fw-bold">Market</td>
                                     <td>
-                                        <div class="ld-pct"><b>0</b>
-                                            <div class="ld-bar"><i style="width:0%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">0</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:0%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">9</span></td>
-                                    <td class="left"><strong>Facebook Lead Ads</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">9</span></td>
+                                    <td class="text-start fw-bold">Facebook Lead Ads</td>
                                     <td>
-                                        <div class="ld-pct"><b>0</b>
-                                            <div class="ld-bar"><i style="width:0%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">0</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:0%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>0</td>
                                     <td>0</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="ld-rank">10</span></td>
-                                    <td class="left"><strong>Insta</strong></td>
+                                    <td><span class="badge bg-light text-secondary border rounded-circle p-2">10</span></td>
+                                    <td class="text-start fw-bold">Insta</td>
                                     <td>
-                                        <div class="ld-pct"><b>0</b>
-                                            <div class="ld-bar"><i style="width:0%"></i></div>
+                                        <div class="d-flex align-items-center gap-2 justify-content-center">
+                                            <span class="fw-bold" style="min-width:24px;">0</span>
+                                            <div class="progress flex-grow-1" style="height:6px; min-width:80px;">
+                                                <div class="progress-bar bg-primary" style="width:0%"></div>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>0</td>
@@ -764,15 +823,15 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-blue"><i class="bi bi-bar-chart"></i></span>
-                            <h2 class="ld-title">Top lead sources</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-bar-chart"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark">Top lead sources</h6>
                         </div>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-chart" style="height:330px;"><canvas id="ldSourceChart"></canvas></div>
+                    <div class="card-body p-3">
+                        <div style="height:330px; position: relative;"><canvas id="ldSourceChart"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -781,46 +840,56 @@
         <!-- ===== Average sales monthly ===== -->
         <div class="row g-3 mb-3">
             <div class="col-lg-4">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-green"><i class="bi bi-graph-up"></i></span>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-graph-up"></i></span>
                             <div>
-                                <h2 class="ld-title">Average sales monthly</h2>
-                                <div class="ld-sub">October 2026</div>
+                                <h6 class="fw-bold mb-0 text-dark">Average sales monthly</h6>
+                                <small class="text-muted">October 2026</small>
                             </div>
                         </div>
                     </div>
-                    <div class="ld-body">
-                        <div class="row g-3">
+                    <div class="card-body p-3">
+                        <div class="row g-2">
                             <div class="col-6 col-lg-12">
-                                <div class="ld-mini">
-                                    <div class="ld-mini-top"><span class="ld-ico tint-blue"><i
-                                                class="bi bi-currency-rupee"></i></span>Revenue</div>
-                                    <div class="ld-mini-value neg">₹ -94,708.24</div>
+                                <div class="card border-0 bg-light p-2 rounded-3">
+                                    <div class="d-flex align-items-center gap-2 text-muted small fw-semibold mb-1">
+                                        <span class="badge bg-primary-subtle text-primary p-1 rounded-circle"><i class="bi bi-currency-rupee"></i></span>
+                                        Revenue
+                                    </div>
+                                    <div class="fs-6 fw-bold text-danger">₹ -94,708.24</div>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-12">
-                                <div class="ld-mini">
-                                    <div class="ld-mini-top"><span class="ld-ico tint-green"><i
-                                                class="bi bi-stars"></i></span>Quality leads</div>
-                                    <div class="ld-mini-value">2 <span class="ld-sub">/ 150</span></div>
-                                    <div class="ld-bar"><i style="width:2%"></i></div>
+                                <div class="card border-0 bg-light p-2 rounded-3">
+                                    <div class="d-flex align-items-center gap-2 text-muted small fw-semibold mb-1">
+                                        <span class="badge bg-success-subtle text-success p-1 rounded-circle"><i class="bi bi-stars"></i></span>
+                                        Quality leads
+                                    </div>
+                                    <div class="fs-6 fw-bold text-dark">2 <small class="text-muted fw-normal">/ 150</small></div>
+                                    <div class="progress mt-1" style="height: 4px;">
+                                        <div class="progress-bar bg-success" style="width:2%"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-12">
-                                <div class="ld-mini">
-                                    <div class="ld-mini-top"><span class="ld-ico tint-amber"><i
-                                                class="bi bi-trophy"></i></span>Win rate</div>
-                                    <div class="ld-mini-value">22.22%</div>
-                                    <div class="ld-mini-sub">Lead : 2 / Quote : 9</div>
+                                <div class="card border-0 bg-light p-2 rounded-3">
+                                    <div class="d-flex align-items-center gap-2 text-muted small fw-semibold mb-1">
+                                        <span class="badge bg-warning-subtle text-warning p-1 rounded-circle"><i class="bi bi-trophy"></i></span>
+                                        Win rate
+                                    </div>
+                                    <div class="fs-6 fw-bold text-dark">22.22%</div>
+                                    <div class="small text-muted" style="font-size: 0.75rem;">Lead : 2 / Quote : 9</div>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-12">
-                                <div class="ld-mini">
-                                    <div class="ld-mini-top"><span class="ld-ico tint-red"><i
-                                                class="bi bi-hand-thumbs-down"></i></span>Lost rate</div>
-                                    <div class="ld-mini-value">0%</div>
+                                <div class="card border-0 bg-light p-2 rounded-3">
+                                    <div class="d-flex align-items-center gap-2 text-muted small fw-semibold mb-1">
+                                        <span class="badge bg-danger-subtle text-danger p-1 rounded-circle"><i class="bi bi-hand-thumbs-down"></i></span>
+                                        Lost rate
+                                    </div>
+                                    <div class="fs-6 fw-bold text-dark">0%</div>
                                 </div>
                             </div>
                         </div>
@@ -828,20 +897,20 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <div class="ld-card">
-                    <div class="ld-head">
-                        <div class="ld-head-left">
-                            <span class="ld-ico tint-violet"><i class="bi bi-bar-chart-line"></i></span>
-                            <h2 class="ld-title" id="ldAvgTitle">Revenue by staff</h2>
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-info-subtle text-info p-2 rounded-2 fs-6"><i class="bi bi-bar-chart-line"></i></span>
+                            <h6 class="fw-bold mb-0 text-dark" id="ldAvgTitle">Revenue by staff</h6>
                         </div>
-                        <div class="ld-seg" id="ldAvgTabs" role="tablist" aria-label="Average sales view">
-                            <button type="button" class="active" data-tab="revenue" role="tab">Revenue</button>
-                            <button type="button" data-tab="leads" role="tab">Leads</button>
-                            <button type="button" data-tab="wl" role="tab">W/L</button>
+                        <div class="btn-group btn-group-sm" id="ldAvgTabs" role="tablist" aria-label="Average sales view">
+                            <button type="button" class="btn btn-outline-primary active" data-tab="revenue" role="tab">Revenue</button>
+                            <button type="button" class="btn btn-outline-primary" data-tab="leads" role="tab">Leads</button>
+                            <button type="button" class="btn btn-outline-primary" data-tab="wl" role="tab">W/L</button>
                         </div>
                     </div>
-                    <div class="ld-body">
-                        <div class="ld-chart lg"><canvas id="ldAvgChart"></canvas></div>
+                    <div class="card-body p-3">
+                        <div style="height: 320px; position: relative;"><canvas id="ldAvgChart"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -1057,7 +1126,7 @@
         }
 
         function metric(color, label, value) {
-            return '<div class="ld-metric" style="--mc:' + color + ';"><div class="ld-metric-label">' + label + '</div><div class="ld-metric-value">' + value + '</div></div>';
+            return '<div class="col-6 col-md-3"><div class="card border-0 bg-light p-2 text-center rounded-3"><small class="text-muted fw-semibold">' + label + '</small><div class="fs-6 fw-bold text-dark mt-1">' + value + '</div></div></div>';
         }
 
         // ===== Proposals / quotations =====
@@ -1116,23 +1185,24 @@
 
         // ===== Sales funnel =====
         function step(cls, icon, label, value, sub) {
-            return '<div class="ld-step"><div class="ld-step-top"><span class="ld-ico tint-' + cls + '"><i class="bi ' + icon + '"></i></span>' + label + '</div>' +
-                '<div class="ld-step-value">' + value + '</div><div class="ld-step-sub">' + (sub || '&nbsp;') + '</div></div>';
+            var bgSubtle = cls === 'blue' ? 'bg-primary-subtle text-primary' : (cls === 'green' ? 'bg-success-subtle text-success' : (cls === 'amber' ? 'bg-warning-subtle text-warning' : (cls === 'pink' ? 'bg-danger-subtle text-danger' : (cls === 'violet' ? 'bg-info-subtle text-info' : 'bg-secondary-subtle text-secondary'))));
+            return '<div class="col"><div class="card border-0 bg-light p-2 rounded-3 h-100 text-center"><div class="d-flex align-items-center justify-content-center gap-1 text-muted small fw-semibold mb-1"><span class="badge ' + bgSubtle + ' p-1 rounded-circle"><i class="bi ' + icon + '"></i></span> ' + label + '</div><div class="fw-bold fs-6 text-dark">' + value + '</div><div class="small text-muted" style="font-size:0.75rem;">' + (sub || '&nbsp;') + '</div></div></div>';
         }
 
         function buildFunnel(period) {
             var keys = ['leads', 'quotes', 'pvalue', 'orders', 'ovalue', 'proforma', 'pfvalue', 'invoice', 'icount', 'payments', 'paycount'];
             var a = agg(period, keys),
-                s = a.series,
-                arrow = '<i class="bi bi-chevron-right ld-step-arrow"></i>';
+                s = a.series;
 
             document.getElementById('ldFunnelSteps').innerHTML =
-                step('blue', 'bi-bullseye', 'Leads', sum(s.leads), '') + arrow +
-                step('amber', 'bi-file-earmark-text', 'Quotes', sum(s.quotes), fmtInr(sum(s.pvalue))) + arrow +
-                step('grey', 'bi-cart-check', 'Sales orders', sum(s.orders), fmtInr(sum(s.ovalue))) + arrow +
-                step('pink', 'bi-receipt', 'Proforma', sum(s.proforma), fmtInr(sum(s.pfvalue))) + arrow +
-                step('green', 'bi-cash-stack', 'Invoice value', fmtInr(sum(s.invoice)), sum(s.icount) + ' invoices') + arrow +
-                step('violet', 'bi-wallet2', 'Payments', fmtInr(sum(s.payments)), sum(s.paycount) + ' payments');
+                '<div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-2 w-100 m-0">' +
+                step('blue', 'bi-bullseye', 'Leads', sum(s.leads), '') +
+                step('amber', 'bi-file-earmark-text', 'Quotes', sum(s.quotes), fmtInr(sum(s.pvalue))) +
+                step('grey', 'bi-cart-check', 'Sales orders', sum(s.orders), fmtInr(sum(s.ovalue))) +
+                step('pink', 'bi-receipt', 'Proforma', sum(s.proforma), fmtInr(sum(s.pfvalue))) +
+                step('green', 'bi-cash-stack', 'Invoice value', fmtInr(sum(s.invoice)), sum(s.icount) + ' invoices') +
+                step('violet', 'bi-wallet2', 'Payments', fmtInr(sum(s.payments)), sum(s.paycount) + ' payments') +
+                '</div>';
 
             var opt = baseOptions();
             opt.scales = moneyAndCountScales();
@@ -1318,7 +1388,7 @@
 
             document.getElementById('ldPipelineLegend').innerHTML = LD.pipeline.map(function (p, i) {
                 var share = totalAbs ? Math.round(p[1] / totalAbs * 100) : 0;
-                return '<div class="ld-legend-row" style="--c:' + colors[i] + ';"><i></i><span class="name">' + p[0] + ' <span class="ld-sub">(' + share + '%)</span></span><span class="val">' + fmtInr(p[2]) + '</span></div>';
+                return '<div class="d-flex align-items-center justify-content-between py-1 border-bottom"><span class="d-flex align-items-center gap-2 small"><span class="badge rounded-circle p-1" style="background:' + colors[i] + '"> </span><span class="fw-semibold text-dark">' + p[0] + '</span> <span class="text-muted">(' + share + '%)</span></span><span class="fw-bold small text-dark">' + fmtInr(p[2]) + '</span></div>';
             }).join('');
         }
 
@@ -1555,9 +1625,13 @@
                 ldTabs.forEach(function (t) { t.classList.remove('active'); });
                 tab.classList.add('active');
                 var name = tab.dataset.tab;
-                document.querySelectorAll('.lead-dash-page .ld-panel').forEach(function (p) { p.classList.remove('active'); });
+                document.querySelectorAll('.lead-dash-page .ld-panel').forEach(function (p) {
+                    p.classList.remove('active');
+                    p.classList.add('d-none');
+                });
                 var panel = document.getElementById('ldPanel-' + name);
                 if (panel) {
+                    panel.classList.remove('d-none');
                     panel.classList.add('active');
                     /* hidden canvases had 0 size — re-measure charts on show */
                     requestAnimationFrame(function () {

@@ -1,34 +1,37 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/callbacks.css">
-
-<div class="cb5-page">
+<div class="container-fluid px-0">
 
     <!-- Title row -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
         <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
+                <i class="bi bi-telephone-forward"></i>
+            </div>
             <div>
-                <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Callbacks</h1>
+                <h4 class="fw-bold text-dark mb-0">Callbacks</h4>
+                <span class="text-muted small">Manage client callback requests and scheduled contact follow-ups</span>
             </div>
         </div>
         <div class="d-flex align-items-center gap-2">
             <a href="appointments.php" class="btn btn-sm btn-outline-success"><i class="bi bi-calendar2-week me-1"></i>Appointments</a>
             <a href="past-meeting.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
-            <button type="button" class="cb5-new-btn ms-2" id="cb5NewBtn">
-                <i class="bi bi-plus-lg"></i>New Callback
+            <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
+            <button type="button" class="btn btn-sm btn-primary ms-1" id="cb5NewBtn">
+                <i class="bi bi-plus-lg me-1"></i>New Callback
             </button>
         </div>
     </div>
 
     <!-- Filter by -->
-    <div class="cb5-card">
-        <div class="cb5-card-head">
-            <h2 class="cb5-card-title"><i class="bi bi-funnel-fill"></i>Filter by</h2>
+    <div class="card border-0 shadow-sm rounded-3 mb-3">
+        <div class="card-header bg-white border-bottom py-3">
+            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-funnel-fill text-primary me-2"></i>Filter by</h6>
         </div>
-        <div class="cb5-card-body">
-            <div class="cb5-filter-grid">
-                <div class="cb5-fld">
-                    <label class="lbl" for="cb5Assignees">Assignees</label>
+        <div class="card-body p-3">
+            <div class="row g-3">
+                <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5Assignees">Assignees</label>
                     <select class="form-select select2" id="cb5Assignees">
                         <option value="">All Assignees</option>
                         <option value="Harish D.">Harish D.</option>
@@ -39,8 +42,8 @@
                         <option value="Arun K.">Arun K.</option>
                     </select>
                 </div>
-                <div class="cb5-fld">
-                    <label class="lbl" for="cb5Status">Status</label>
+                <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5Status">Status</label>
                     <select class="form-select select2" id="cb5Status">
                         <option value="">All Statuses</option>
                         <option value="Upcoming" data-color="#2563eb">Upcoming</option>
@@ -49,8 +52,8 @@
                         <option value="Complete" data-color="#16a34a">Complete</option>
                     </select>
                 </div>
-                <div class="cb5-fld">
-                    <label class="lbl" for="cb5Tz">Timezone</label>
+                <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5Tz">Timezone</label>
                     <select class="form-select select2" id="cb5Tz">
                         <option value="">All Timezones</option>
                         <option value="Asia/Kolkata (GMT+5:30)">Asia/Kolkata (GMT+5:30)</option>
@@ -60,20 +63,20 @@
                         <option value="Europe/London (GMT+0:00)">Europe/London (GMT+0:00)</option>
                     </select>
                 </div>
-                <div class="cb5-fld">
+                <div class="col-md-4 col-lg-2">
                     <div class="date-picker">
-                        <label class="lbl form-label" for="cb5From">From Date</label>
+                        <label class="form-label fw-semibold small text-secondary" for="cb5From">From Date</label>
                         <input type="text" class="date-input form-control" id="cb5From" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
                     </div>
                 </div>
-                <div class="cb5-fld">
+                <div class="col-md-4 col-lg-2">
                     <div class="date-picker">
-                        <label class="lbl form-label" for="cb5To">To Date</label>
+                        <label class="form-label fw-semibold small text-secondary" for="cb5To">To Date</label>
                         <input type="text" class="date-input form-control" id="cb5To" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
                     </div>
                 </div>
-                <div class="cb5-fld">
-                    <label class="lbl" for="cb5Source">Source</label>
+                <div class="col-md-4 col-lg-2">
+                    <label class="form-label fw-semibold small text-secondary" for="cb5Source">Source</label>
                     <select class="form-select select2" id="cb5Source">
                         <option value="">All Sources</option>
                         <option value="Contact">Contact</option>
@@ -83,9 +86,9 @@
                     </select>
                 </div>
             </div>
-            <div class="cb5-filter-actions">
-                <button type="button" class="cb5-search-btn" id="cb5SearchBtn">Search</button>
-                <button type="button" class="cb5-ghost-btn" id="cb5ClearBtn">
+            <div class="d-flex align-items-center gap-2 mt-3 pt-3 border-top">
+                <button type="button" class="btn btn-primary btn-sm px-4" id="cb5SearchBtn"><i class="bi bi-search me-1"></i>Search</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="cb5ClearBtn">
                     <i class="bi bi-arrow-counterclockwise me-1"></i>Clear
                 </button>
             </div>
@@ -93,60 +96,90 @@
     </div>
 
     <!-- Alert banner & Quick filter buttons -->
-    <div class="cb5-alert">
-        <div class="cb5-alert-top">
-            <span class="cb5-alert-ico"><i class="bi bi-exclamation-triangle-fill"></i></span>
+    <div class="alert alert-warning border-0 shadow-sm rounded-3 mb-3 p-3">
+        <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="rounded-circle bg-warning text-dark d-flex align-items-center justify-content-center flex-shrink-0" style="width:38px;height:38px;font-size:18px;">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
             <div>
-                <div class="cb5-alert-title">Alert: <b id="cb5OverdueCount">3</b> Callbacks Overdue</div>
-                <div class="cb5-alert-sub">You currently have <span id="cb5OverdueCount2">3</span> callbacks still marked Upcoming whose available time has already passed.</div>
+                <div class="fw-bold text-dark">Alert: <span id="cb5OverdueCount">3</span> Callbacks Overdue</div>
+                <div class="text-secondary small">You currently have <span id="cb5OverdueCount2">3</span> callbacks still marked Upcoming whose available time has already passed.</div>
             </div>
         </div>
-        <div class="cb5-quick">
-            <button type="button" class="cb5-quick-btn q-green" data-quick="todayCallback">Today's Callback</button>
-            <button type="button" class="cb5-quick-btn q-blue" data-quick="upcoming">Upcoming Callback</button>
-            <button type="button" class="cb5-quick-btn q-red" data-quick="datePassed">Date Passed Callback</button>
-            <button type="button" class="cb5-quick-btn q-maroon" data-quick="postponed">Postponed</button>
-            <button type="button" class="cb5-quick-btn q-amber" data-quick="reset">Reset Filters</button>
+        <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-outline-success cb5-quick-btn" data-quick="todayCallback">Today's Callback</button>
+            <button type="button" class="btn btn-sm btn-outline-primary cb5-quick-btn" data-quick="upcoming">Upcoming Callback</button>
+            <button type="button" class="btn btn-sm btn-outline-danger cb5-quick-btn" data-quick="datePassed">Date Passed Callback</button>
+            <button type="button" class="btn btn-sm btn-outline-warning cb5-quick-btn" data-quick="postponed">Postponed</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary cb5-quick-btn" data-quick="reset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset Filters</button>
         </div>
     </div>
 
     <!-- Callbacks Summary -->
-    <div class="cb5-card">
-        <div class="cb5-card-head">
-            <h2 class="cb5-card-title"><i class="bi bi-clipboard-data-fill"></i>Callbacks Summary</h2>
-            <span class="cb5-card-total">Total: <b id="cb5TotalCount">32</b></span>
+    <div class="card border-0 shadow-sm rounded-3 mb-3">
+        <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
+            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-clipboard-data-fill text-primary me-2"></i>Callbacks Summary</h6>
+            <span class="badge bg-light text-dark border">Total: <strong id="cb5TotalCount">32</strong></span>
         </div>
-        <div class="cb5-card-body p-0">
-            <div class="cb5-sum-grid" id="cb5SumGrid">
-                <div class="cb5-sum" data-sum-status="Upcoming">
-                    <div><span class="num s-upcoming">8</span><span class="lbl s-upcoming">Upcoming</span></div>
-                    <div class="bar bars-upcoming"><span style="width:25%;"></span></div>
-                    <div class="sub">Callbacks assigned to me: 2</div>
+        <div class="card-body p-3">
+            <div class="row g-3" id="cb5SumGrid">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-primary-subtle bg-primary-subtle bg-opacity-10 rounded-3 p-3 h-100 cb5-sum cursor-pointer shadow-none" role="button" data-sum-status="Upcoming">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fs-4 fw-bold text-primary">8</span>
+                            <span class="badge bg-primary">Upcoming</span>
+                        </div>
+                        <div class="progress mb-2" style="height:6px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width:25%;"></div>
+                        </div>
+                        <div class="text-muted small">Assigned to me: 2</div>
+                    </div>
                 </div>
-                <div class="cb5-sum" data-sum-status="Postponed">
-                    <div><span class="num s-postponed">5</span><span class="lbl s-postponed">Postponed</span></div>
-                    <div class="bar bars-postponed"><span style="width:16%;"></span></div>
-                    <div class="sub">Callbacks assigned to me: 1</div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-warning-subtle bg-warning-subtle bg-opacity-10 rounded-3 p-3 h-100 cb5-sum cursor-pointer shadow-none" role="button" data-sum-status="Postponed">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fs-4 fw-bold text-warning">5</span>
+                            <span class="badge bg-warning text-dark">Postponed</span>
+                        </div>
+                        <div class="progress mb-2" style="height:6px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width:16%;"></div>
+                        </div>
+                        <div class="text-muted small">Assigned to me: 1</div>
+                    </div>
                 </div>
-                <div class="cb5-sum" data-sum-status="Cancelled">
-                    <div><span class="num s-cancelled">3</span><span class="lbl s-cancelled">Cancelled</span></div>
-                    <div class="bar bars-cancelled"><span style="width:9%;"></span></div>
-                    <div class="sub">Callbacks assigned to me: 1</div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-danger-subtle bg-danger-subtle bg-opacity-10 rounded-3 p-3 h-100 cb5-sum cursor-pointer shadow-none" role="button" data-sum-status="Cancelled">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fs-4 fw-bold text-danger">3</span>
+                            <span class="badge bg-danger">Cancelled</span>
+                        </div>
+                        <div class="progress mb-2" style="height:6px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width:9%;"></div>
+                        </div>
+                        <div class="text-muted small">Assigned to me: 1</div>
+                    </div>
                 </div>
-                <div class="cb5-sum" data-sum-status="Complete">
-                    <div><span class="num s-complete">16</span><span class="lbl s-complete">Complete</span></div>
-                    <div class="bar bars-complete"><span style="width:50%;"></span></div>
-                    <div class="sub">Callbacks assigned to me: 4</div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card border border-success-subtle bg-success-subtle bg-opacity-10 rounded-3 p-3 h-100 cb5-sum cursor-pointer shadow-none" role="button" data-sum-status="Complete">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fs-4 fw-bold text-success">16</span>
+                            <span class="badge bg-success">Complete</span>
+                        </div>
+                        <div class="progress mb-2" style="height:6px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width:50%;"></div>
+                        </div>
+                        <div class="text-muted small">Assigned to me: 4</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Table (toolbar + export + column visibility + pagination auto-created by datatable class via auto-master-table.js) -->
-    <div class="card-custom p-0 overflow-hidden" id="cb5TableWrap">
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="cb5Table" data-table-name="Callbacks">
-                <thead>
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden" id="cb5TableWrap">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 datatable" id="cb5Table" data-table-name="Callbacks">
+                <thead class="table-light">
                     <tr>
                         <th style="width:60px;">S.No</th>
                         <th style="min-width:220px;">Full Name</th>
@@ -1449,27 +1482,27 @@
 
 </div>
 
-<!-- Modal: New / Edit Callback -->
-<div class="modal fade cb5-modal" id="cb5Modal" tabindex="-1" aria-hidden="true">
+<!-- Modal: New / Edit Callback (pure Bootstrap 5) -->
+<div class="modal fade" id="cb5Modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="bi bi-telephone-forward-fill me-2"></i><span id="cb5ModalTitle">New Callback</span></h5>
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-telephone-forward-fill text-primary me-2"></i><span id="cb5ModalTitle">New Callback</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
                 <input type="hidden" id="cb5EditId" value="">
                 <div class="row g-3">
                     <div class="col-md-7">
-                        <label class="form-label">* Full Name</label>
+                        <label class="form-label fw-semibold text-secondary small">* Full Name</label>
                         <input type="text" class="form-control" id="cb5NmName" placeholder="Ex: Ravi Shankar" autocomplete="off">
                     </div>
                     <div class="col-md-5">
-                        <label class="form-label">* Phone</label>
+                        <label class="form-label fw-semibold text-secondary small">* Phone</label>
                         <input type="text" class="form-control" id="cb5NmPhone" placeholder="Ex: 9840123456" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Timezone</label>
+                        <label class="form-label fw-semibold text-secondary small">Timezone</label>
                         <select class="form-select select2" id="cb5NmTz">
                             <option value="Asia/Kolkata (GMT+5:30)" selected>Asia/Kolkata (GMT+5:30)</option>
                             <option value="Asia/Colombo (GMT+5:30)">Asia/Colombo (GMT+5:30)</option>
@@ -1479,7 +1512,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Source</label>
+                        <label class="form-label fw-semibold text-secondary small">Source</label>
                         <select class="form-select select2" id="cb5NmSource">
                             <option value="Contact" selected>Contact</option>
                             <option value="Lead">Lead</option>
@@ -1489,7 +1522,7 @@
                     </div>
                     <!-- Available From (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label">* Available From</label>
+                        <label class="form-label fw-semibold text-secondary small">* Available From</label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1505,7 +1538,7 @@
                     </div>
                     <!-- To (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label">* To</label>
+                        <label class="form-label fw-semibold text-secondary small">* To</label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1520,7 +1553,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Status</label>
+                        <label class="form-label fw-semibold text-secondary small">Status</label>
                         <select class="form-select select2" id="cb5NmStatus">
                             <option value="Upcoming" data-color="#2563eb" selected>Upcoming</option>
                             <option value="Postponed" data-color="#d97706">Postponed</option>
@@ -1529,7 +1562,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Priority</label>
+                        <label class="form-label fw-semibold text-secondary small">Priority</label>
                         <select class="form-select select2" id="cb5NmPriority">
                             <option value="High" data-color="#dc2626">High</option>
                             <option value="Medium" data-color="#f59e0b" selected>Medium</option>
@@ -1537,7 +1570,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Assignees</label>
+                        <label class="form-label fw-semibold text-secondary small">Assignees</label>
                         <select class="form-select select2" id="cb5NmAssignees">
                             <option value="Harish D." selected>Harish D.</option>
                             <option value="Divya A.">Divya A.</option>
@@ -1549,18 +1582,18 @@
                     </div>
                     <!-- Date requested (DatePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label">Date requested</label>
+                        <label class="form-label fw-semibold text-secondary small">Date requested</label>
                         <div class="date-picker">
                             <input type="text" class="date-input form-control" id="cb5NmRequested" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off" value="25-09-2026">
                         </div>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Note</label>
-                        <textarea class="form-control" id="cb5NmNote" rows="2" placeholder="Enna topic pathi pesanum..."></textarea>
+                        <label class="form-label fw-semibold text-secondary small">Note</label>
+                        <textarea class="form-control" id="cb5NmNote" rows="2" placeholder="Topic notes..."></textarea>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer border-top bg-light">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="cb5NmSubmit">Save Callback</button>
             </div>
@@ -1591,28 +1624,25 @@
 
             var cbModalEl = document.getElementById('cb5Modal');
 
-            /* Toast Notification */
-            var toastWrap = null;
+            /* Pure Bootstrap 5 Toast Notification */
+            var toastContainer = null;
             function showToast(msg, isWarn) {
-                if (!toastWrap) {
-                    toastWrap = document.createElement('div');
-                    toastWrap.className = 'cb5-toast-wrap';
-                    document.body.appendChild(toastWrap);
+                if (!toastContainer) {
+                    toastContainer = document.createElement('div');
+                    toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                    toastContainer.style.zIndex = '1090';
+                    document.body.appendChild(toastContainer);
                 }
-                var t = document.createElement('div');
-                t.className = 'cb5-toast' + (isWarn ? ' is-warn' : '');
-                t.innerHTML = '<span class="cb5-toast-ico"><i class="bi ' + (isWarn ? 'bi-exclamation-triangle-fill' : 'bi-check-lg') + '"></i></span>' +
-                    '<span class="cb5-toast-msg"></span>' +
-                    '<button type="button" class="cb5-toast-x" title="Close"><i class="bi bi-x-lg"></i></button>';
-                t.querySelector('.cb5-toast-msg').textContent = msg;
-                toastWrap.appendChild(t);
-
-                function dismiss() {
-                    t.classList.add('cb5-toast-out');
-                    setTimeout(function () { t.remove(); }, 260);
-                }
-                t.querySelector('.cb5-toast-x').addEventListener('click', dismiss);
-                setTimeout(dismiss, 4000);
+                var toastEl = document.createElement('div');
+                toastEl.className = 'toast align-items-center text-bg-' + (isWarn ? 'warning' : 'primary') + ' border-0 shadow';
+                toastEl.setAttribute('role', 'alert');
+                toastEl.setAttribute('aria-live', 'assertive');
+                toastEl.setAttribute('aria-atomic', 'true');
+                toastEl.innerHTML = '<div class="d-flex"><div class="toast-body d-flex align-items-center gap-2"><i class="bi ' + (isWarn ? 'bi-exclamation-triangle-fill' : 'bi-check-circle-fill') + ' fs-5"></i><span>' + msg + '</span></div><button type="button" class="btn-close ' + (isWarn ? '' : 'btn-close-white') + ' me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>';
+                toastContainer.appendChild(toastEl);
+                var bsToast = new bootstrap.Toast(toastEl, { delay: 4000 });
+                bsToast.show();
+                toastEl.addEventListener('hidden.bs.toast', function () { toastEl.remove(); });
             }
 
             /* New Callback button */

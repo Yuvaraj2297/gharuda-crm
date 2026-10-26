@@ -1,63 +1,74 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/manage-lead.css">
-
-
-
-<div class="ml-page">
+<div class="container-fluid px-0">
 
     <!-- Title row -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-        <h1 class="font-display fw-bold mb-1 page-title page-title-lead">Manage Leads</h1>
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+        <h1 class="h3 fw-bold text-dark mb-0">Manage Leads</h1>
     </div>
 
-    <!-- Filters card (leave-report style: toggle + collapse + apply/clear) -->
-    <div class="card-custom mb-3 filters-card">
-        <div class="filters-toggle-row"><span class="fw-semibold" style="font-size:14.5px;color:var(--ink-900);"><i
-                    class="bi bi-funnel me-1"></i> Filter Leads</span><button type="button" class="filters-toggle-btn"
-                id="mlFiltersToggle"><span>Filters</span><i class="bi bi-chevron-down chevron"></i></button></div>
-        <div class="filters-collapse" id="mlFiltersCollapse">
+    <!-- Filters card (pure Bootstrap 5) -->
+    <div class="card border-0 shadow-sm rounded-3 mb-3">
+        <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+            <span class="fw-semibold text-dark"><i class="bi bi-funnel me-1 text-primary"></i> Filter Leads</span>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="mlFiltersToggle">
+                <span>Filters</span><i class="bi bi-chevron-down ms-1"></i>
+            </button>
+        </div>
+        <div class="card-body" id="mlFiltersCollapse">
             <div class="row g-3" id="mlFiltersForm">
-                <div class="col-lg-3 col-md-4 col-sm-6"><label class="form-label">Search Lead</label><input
-                        class="form-control" id="mlfSearch" placeholder="Name, company or phone"></div>
-                <div class="col-lg-3 col-md-4 col-sm-6"><label class="form-label">Status</label><select
-                        class="form-select select2" id="mlfStatus">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label class="form-label small fw-semibold text-muted">Search Lead</label>
+                    <input class="form-control" id="mlfSearch" placeholder="Name, company or phone">
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label class="form-label small fw-semibold text-muted">Status</label>
+                    <select class="form-select select2" id="mlfStatus">
                         <option>All Status</option>
-                    </select></div>
-                <div class="col-lg-3 col-md-4 col-sm-6"><label class="form-label">Assigned</label><select
-                        class="form-select select2" id="mlfAssigned">
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label class="form-label small fw-semibold text-muted">Assigned</label>
+                    <select class="form-select select2" id="mlfAssigned">
                         <option>All Assigned</option>
-                    </select></div>
-                <div class="col-lg-3 col-md-4 col-sm-6"><label class="form-label">Lead Source</label><select
-                        class="form-select select2" id="mlfSource">
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label class="form-label small fw-semibold text-muted">Lead Source</label>
+                    <select class="form-select select2" id="mlfSource">
                         <option>All Sources</option>
-                    </select></div>
-                <div class="col-lg-3 col-md-4 col-sm-6"><label class="form-label">Year</label><select
-                        class="form-select select2" id="mlfYear">
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label class="form-label small fw-semibold text-muted">Year</label>
+                    <select class="form-select select2" id="mlfYear">
                         <option>All Years</option>
-                    </select></div>
+                    </select>
+                </div>
                 <div class="col-lg-4 col-md-6 align-self-end">
-                    <div class="d-flex gap-2 w-100"><button type="button"
-                            class="btn btn-outline-secondary flex-fill w-100" id="mlfClear">Clear
-                            Filters</button><button type="button" class="btn btn-primary w-100 flex-fill"
-                            id="mlfApply"><i class="bi bi-funnel me-1"></i>Apply Filters</button></div>
+                    <div class="d-flex gap-2 w-100">
+                        <button type="button" class="btn btn-outline-secondary flex-fill w-100" id="mlfClear">Clear Filters</button>
+                        <button type="button" class="btn btn-primary w-100 flex-fill" id="mlfApply"><i class="bi bi-funnel me-1"></i>Apply Filters</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Active filters bar (chips) -->
-    <div class="ml-active-bar" id="mlActiveBar" hidden><span class="ml-active-label"><i
-                class="bi bi-funnel-fill me-1"></i>Active Filters:</span>
-        <div id="mlActiveList" class="d-flex flex-wrap gap-2"></div>
-        <button type="button" class="ml-active-clear" id="mlActiveClear">Clear All</button>
+    <div class="card border-0 shadow-sm rounded-3 mb-3 p-3 bg-white" id="mlActiveBar" hidden>
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <span class="text-muted small fw-semibold"><i class="bi bi-funnel-fill me-1 text-primary"></i>Active Filters:</span>
+            <div id="mlActiveList" class="d-flex flex-wrap gap-2"></div>
+            <button type="button" class="btn btn-link btn-sm text-danger text-decoration-none ms-auto p-0" id="mlActiveClear">Clear All</button>
+        </div>
     </div>
 
-    <!-- Table (toolbar, search, show, export, columns, pagination auto-created by datatable class) -->
-    <div class="card-custom p-0 ml-list-card" id="manageLeadsTableWrap">
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="manageLeadsTable" data-table-name="Manage Leads">
-                <thead>
+    <!-- Table Card Wrap -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4 overflow-hidden" id="manageLeadsTableWrap">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 datatable" id="manageLeadsTable" data-table-name="Manage Leads">
+                <thead class="table-light">
                     <tr>
                         <th class="text-nowrap" style="width: 70px;">S.No</th>
                         <th class="text-nowrap">Name</th>
@@ -1059,18 +1070,15 @@
                 <h5 class="modal-title" id="mlViewTitle">#172 - f</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="mlv-tabs" id="mlvTabs">
-                <button type="button" class="mlv-tab active" data-tab="all">All <span
-                        class="mlv-tab-count">0</span></button>
-                <button type="button" class="mlv-tab" data-tab="call">Call Details <span
-                        class="mlv-tab-count">0</span></button>
-                <button type="button" class="mlv-tab" data-tab="sms">Sms <span class="mlv-tab-count">0</span></button>
-                <button type="button" class="mlv-tab" data-tab="recordings">Recordings <span
-                        class="mlv-tab-count">0</span></button>
-                <button type="button" class="mlv-tab" data-tab="conference">Conference call <span
-                        class="mlv-tab-count">0</span></button>
-                <button type="button" class="mlv-tab" data-tab="remarks">Remarks <span
-                        class="mlv-tab-count">0</span></button>
+            <div class="px-4 pt-3 border-bottom bg-white">
+                <ul class="nav nav-pills gap-1" id="mlvTabs">
+                    <li class="nav-item"><button type="button" class="nav-link active py-1 px-3 mlv-tab" data-tab="all">All <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link py-1 px-3 mlv-tab" data-tab="call">Call Details <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link py-1 px-3 mlv-tab" data-tab="sms">Sms <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link py-1 px-3 mlv-tab" data-tab="recordings">Recordings <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link py-1 px-3 mlv-tab" data-tab="conference">Conference call <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link py-1 px-3 mlv-tab" data-tab="remarks">Remarks <span class="badge bg-secondary-subtle text-secondary ms-1 mlv-tab-count">0</span></button></li>
+                </ul>
             </div>
             <div class="modal-body">
                 <div class="mlv-timeline" id="mlvActivityList"></div>
@@ -1301,18 +1309,15 @@
                             items.forEach(function (it) {
                                 var initials = it.by.split(' ').map(function (w) { return w[0]; }).join('').substring(0, 4).toUpperCase();
                                 html +=
-                                    '<div class="mrv-card">' +
-                                    '<span class="mrv-dot"><i class="bi bi-sticky-fill"></i></span>' +
-                                    '<div class="mrv-row">' +
-                                    '<span class="mrv-label"><i class="bi bi-chat-left-quote-fill"></i>REMARK</span>' +
-                                    '<span class="mrv-text">' + it.text + '</span>' +
+                                    '<div class="card border-0 shadow-sm rounded-3 mb-3 p-3">' +
+                                    '<div class="d-flex justify-content-between align-items-center mb-2">' +
+                                    '<span class="badge bg-primary-subtle text-primary border border-primary-subtle"><i class="bi bi-chat-left-quote-fill me-1"></i>REMARK</span>' +
+                                    '<span class="text-muted small">' + it.when + '</span>' +
                                     '</div>' +
-                                    '<div class="mrv-foot">' +
-                                    '<span class="mrv-when">' + it.when + '</span>' +
-                                    '<span class="mrv-by">' +
-                                    '<span class="ml-avatar" style="background:#7b1fa2;">' + initials + '</span>' +
-                                    '<span class="by-name">' + it.by + '</span>' +
-                                    '</span>' +
+                                    '<p class="mb-2 text-dark">' + it.text + '</p>' +
+                                    '<div class="d-flex align-items-center justify-content-end gap-2 pt-2 border-top small text-muted">' +
+                                    '<span class="badge rounded-circle bg-secondary-subtle text-secondary fw-bold" style="width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;">' + initials + '</span>' +
+                                    '<span>' + it.by + '</span>' +
                                     '</div>' +
                                     '</div>';
                             });
@@ -1521,20 +1526,21 @@
                 filtered.forEach(function (a) {
                     var ts = typeStyle[a.type] || typeStyle.remarks;
                     html +=
-                        '<div class="mlv-act-card" style="--tlc:' + ts.c + ';">' +
-                        '<span class="mlv-act-dot"><i class="bi ' + ts.icon + '"></i></span>' +
-                        '<div class="mlv-act-top">' +
-                        '<span class="mlv-act-label"><i class="bi ' + ts.icon + '"></i>' + a.label + '</span>' +
-                        '<span class="mlv-act-text">' + a.text + '</span>' +
-                        '<span class="mlv-act-meta">' +
-                        '<span class="mlv-chip ' + (a.direction === 'Incoming' ? 'c-blue' : 'c-green') + '"><i class="bi bi-arrow-left-right"></i>Direction : ' + a.direction + '</span>' +
-                        '<span class="mlv-chip ' + (a.recorded === 'Yes' ? 'c-green' : 'c-grey') + '"><i class="bi bi-mic"></i>Recorded : ' + a.recorded + '</span>' +
-                        '</span>' +
+                        '<div class="card border-0 shadow-sm rounded-3 mb-3 p-3">' +
+                        '<div class="d-flex justify-content-between align-items-start mb-2">' +
+                        '<span class="badge bg-primary-subtle text-primary border border-primary-subtle"><i class="bi ' + ts.icon + ' me-1"></i>' + a.label + '</span>' +
+                        '<span class="text-muted small">' + a.when + '</span>' +
                         '</div>' +
-                        '<div class="mlv-act-when">' + a.when + '</div>' +
-                        '<div class="mlv-act-by">' +
-                        '<span class="ml-avatar">GHR</span>' +
-                        '<span class="by-name">' + a.by + '</span>' +
+                        '<p class="mb-2 text-dark fw-medium">' + a.text + '</p>' +
+                        '<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">' +
+                        '<div class="d-flex gap-2">' +
+                        '<span class="badge ' + (a.direction === 'Incoming' ? 'bg-info-subtle text-info' : 'bg-success-subtle text-success') + '"><i class="bi bi-arrow-left-right me-1"></i>Direction: ' + a.direction + '</span>' +
+                        '<span class="badge ' + (a.recorded === 'Yes' ? 'bg-success-subtle text-success' : 'bg-light text-secondary border') + '"><i class="bi bi-mic me-1"></i>Recorded: ' + a.recorded + '</span>' +
+                        '</div>' +
+                        '<div class="d-flex align-items-center gap-2 small text-muted">' +
+                        '<span class="badge rounded-circle bg-secondary-subtle text-secondary fw-bold" style="width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;">G</span>' +
+                        '<span>' + a.by + '</span>' +
+                        '</div>' +
                         '</div>' +
                         '</div>';
                 });
@@ -1608,9 +1614,9 @@
                 list.innerHTML = '';
                 items.forEach(function (it) {
                     var chip = document.createElement('span');
-                    chip.className = 'mlf-chip';
+                    chip.className = 'badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center gap-2 py-2 px-3 fw-semibold';
                     chip.innerHTML = it.label + ': ' + it.value +
-                        ' <button type="button" class="mlf-chip-close" aria-label="Remove ' + it.label + ' filter">&times;</button>';
+                        ' <button type="button" class="btn-close btn-close-sm mlf-chip-close" style="font-size:8px;" aria-label="Remove ' + it.label + ' filter"></button>';
                     chip.querySelector('.mlf-chip-close').addEventListener('click', function () {
                         mlfApplied[it.key] = '';
                         var fieldMap = { search: 'mlfSearch', status: 'mlfStatus', assigned: 'mlfAssigned', source: 'mlfSource', year: 'mlfYear' };
@@ -1708,10 +1714,13 @@
             var mlfToggle = document.getElementById('mlFiltersToggle');
             if (mlfToggle) {
                 mlfToggle.addEventListener('click', function () {
-                    var panel = document.getElementById('mlFiltersCollapse'),
-                        open = panel.classList.toggle('open');
-                    this.classList.toggle('open', open);
-                    this.querySelector('span').textContent = open ? 'Hide Filters' : 'Filters';
+                    var panel = document.getElementById('mlFiltersCollapse');
+                    if (panel) {
+                        var isHidden = panel.classList.toggle('d-none');
+                        this.querySelector('span').textContent = isHidden ? 'Filters' : 'Hide Filters';
+                        var icon = this.querySelector('i');
+                        if (icon) icon.className = isHidden ? 'bi bi-chevron-down ms-1' : 'bi bi-chevron-up ms-1';
+                    }
                 });
             }
         });

@@ -1,7 +1,5 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
-
 <style>
     /* ===== Page ===== */
     .as-page {

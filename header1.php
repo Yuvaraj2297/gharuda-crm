@@ -1580,26 +1580,22 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <!-- Flyout shown on hover when sidebar is collapsed -->
             <div class="nav-flyout">
               <div class="nav-flyout-title">UI Elements</div>
-              <a class="nav-link-custom <?= ($currentPage == 'table.php') ? 'active' : '' ?>" href="table.php"><i class="bi bi-people"></i> <span>Table Block</span></a>
-              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="date.php"><i class="bi bi-people"></i> <span>Date Picker</span></a>
-              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="buttons.php"><i class="bi bi-diagram-3"></i> <span>Button Block</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-calendar-check"></i> <span>Attendance</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-calendar-week"></i> <span>Leave Management</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-person-plus"></i> <span>Recruitment</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-file-earmark-text"></i> <span>Contracts</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-award"></i> <span>Performance</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'ui-library.php') ? 'active' : '' ?>" href="ui-library.php"><i class="bi bi-bootstrap text-primary"></i> <span>UI Component Library</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'table.php') ? 'active' : '' ?>" href="table.php"><i class="bi bi-table"></i> <span>Table Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'buttons.php') ? 'active' : '' ?>" href="buttons.php"><i class="bi bi-menu-button-wide"></i> <span>Button Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'input-block.php') ? 'active' : '' ?>" href="input-block.php"><i class="bi bi-input-cursor-text"></i> <span>Input Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'modal&offcanvas.php') ? 'active' : '' ?>" href="modal&offcanvas.php"><i class="bi bi-window-stack"></i> <span>Modal & Offcanvas</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="date.php"><i class="bi bi-calendar3"></i> <span>Date Picker</span></a>
             </div>
           </div>
           <div class="nav-group-links">
             <div class="nav-group-links-inner">
-              <a class="nav-link-custom <?= ($currentPage == 'table.php') ? 'active' : '' ?>" href="table.php"><i class="bi bi-people"></i> <span>Table Block</span></a>
-              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="date.php"><i class="bi bi-people"></i> <span>Date Picker</span></a>
-              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="buttons.php"><i class="bi bi-diagram-3"></i> <span>Button Block</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-calendar-check"></i> <span>Attendance</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-calendar-week"></i> <span>Leave Management</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-person-plus"></i> <span>Recruitment</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-file-earmark-text"></i> <span>Contracts</span></a>
-              <a class="nav-link-custom" href="#"><i class="bi bi-award"></i> <span>Performance</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'ui-library.php') ? 'active' : '' ?>" href="ui-library.php"><i class="bi bi-bootstrap text-primary"></i> <span>UI Component Library</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'table.php') ? 'active' : '' ?>" href="table.php"><i class="bi bi-table"></i> <span>Table Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'buttons.php') ? 'active' : '' ?>" href="buttons.php"><i class="bi bi-menu-button-wide"></i> <span>Button Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'input-block.php') ? 'active' : '' ?>" href="input-block.php"><i class="bi bi-input-cursor-text"></i> <span>Input Block</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'modal&offcanvas.php') ? 'active' : '' ?>" href="modal&offcanvas.php"><i class="bi bi-window-stack"></i> <span>Modal & Offcanvas</span></a>
+              <a class="nav-link-custom <?= ($currentPage == 'date.php') ? 'active' : '' ?>" href="date.php"><i class="bi bi-calendar3"></i> <span>Date Picker</span></a>
             </div>
           </div>
         </div>

@@ -1,16 +1,13 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
-<link rel="stylesheet" href="./assets/css/brand-target.css">
-
-<main class="bt5-page">
+<main class="container-fluid px-0">
     <!-- Title row -->
     <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
         <div class="d-flex align-items-center gap-3">
-            <div class="bt5-title-ico"><i class="bi bi-tags-fill"></i></div>
+            <span class="badge bg-primary-subtle text-primary p-3 rounded-3 fs-4"><i class="bi bi-tags-fill"></i></span>
             <div>
                 <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Brand Target</h1>
-                <nav class="d-flex align-items-center gap-2 text-neutral" style="font-size:13px;">
+                <nav class="d-flex align-items-center gap-2 text-muted" style="font-size:13px;">
                     <span>CRM</span>
                     <i class="bi bi-chevron-right" style="font-size:10px;"></i>
                     <span class="fw-bold text-dark">Brand Target</span>
@@ -23,51 +20,54 @@
     </div>
 
     <!-- ===== Filter strip ===== -->
-    <div class="bt5-filter-bar mb-3">
-        <div>
-            <div class="bt5-filter-label">Brands</div>
-            <select class="form-select select2 bt5-field" id="bt5BrandFilter" data-placeholder="All Brands" style="min-width:190px;">
-                <option value="">All Brands</option>
-                <option value="PhDAssistance">PhDAssistance</option>
-                <option value="GEO Care">GEO Care</option>
-                <option value="gharuda Software">gharuda Software</option>
-                <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
-                <option value="Zen Publications">Zen Publications</option>
-            </select>
-        </div>
-        <div>
-            <label class="bt5-filter-label" for="bt5FromDate">From Date</label>
-            <div class="date-picker">
-                <input type="text" class="date-input form-control bt5-field" id="bt5FromDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
+    <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="form-label small fw-bold text-muted text-uppercase mb-1">Brands</label>
+                <select class="form-select select2" id="bt5BrandFilter" data-placeholder="All Brands">
+                    <option value="">All Brands</option>
+                    <option value="PhDAssistance">PhDAssistance</option>
+                    <option value="GEO Care">GEO Care</option>
+                    <option value="gharuda Software">gharuda Software</option>
+                    <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
+                    <option value="Zen Publications">Zen Publications</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="form-label small fw-bold text-muted text-uppercase mb-1" for="bt5FromDate">From Date</label>
+                <div class="date-picker">
+                    <input type="text" class="date-input form-control" id="bt5FromDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="form-label small fw-bold text-muted text-uppercase mb-1" for="bt5ToDate">To Date</label>
+                <div class="date-picker">
+                    <input type="text" class="date-input form-control" id="bt5ToDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <button type="button" class="btn btn-primary w-100" id="bt5SearchBtn">
+                    <i class="bi bi-search me-1"></i>Search
+                </button>
             </div>
         </div>
-        <div>
-            <label class="bt5-filter-label" for="bt5ToDate">To Date</label>
-            <div class="date-picker">
-                <input type="text" class="date-input form-control bt5-field" id="bt5ToDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
-            </div>
-        </div>
-        <button type="button" class="btn btn-primary px-4" id="bt5SearchBtn">
-            <i class="bi bi-search me-1"></i>Search
-        </button>
     </div>
 
-    <!-- ===== Grouped table card (jobtype.php table flow with datatable class) ===== -->
-    <div class="card-custom p-0 overflow-hidden mb-3" id="brandTargetTableWrap">
-        <!-- Table (toolbar + export + column visibility + search + show entries + pagination auto-created by datatable class via auto-master-table.js) -->
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="bt5Table" data-table-name="Brand Targets">
-                <thead>
+    <!-- ===== Grouped table card ===== -->
+    <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3" id="brandTargetTableWrap">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-center datatable" id="bt5Table" data-table-name="Brand Targets">
+                <thead class="table-light">
                     <tr>
                         <th rowspan="2" style="width:60px;">S.No</th>
                         <th rowspan="2" style="min-width:150px;">Month &amp; Year</th>
                         <th rowspan="2" style="min-width:200px;">Brand Name</th>
-                        <th colspan="2" class="thead-group gb-cvv">CV Value</th>
+                        <th colspan="2" class="fw-bold border-bottom">CV Value</th>
                         <th rowspan="2" style="width:110px;">Option</th>
                     </tr>
                     <tr>
-                        <th class="thead-sub" data-col-title="CV Value (Actual)">Actual</th>
-                        <th class="thead-sub" data-col-title="CV Value (Achieved)">Achieved</th>
+                        <th class="small text-muted" data-col-title="CV Value (Actual)">Actual</th>
+                        <th class="small text-muted" data-col-title="CV Value (Achieved)">Achieved</th>
                     </tr>
                 </thead>
                 <tbody id="bt5Tbody">
@@ -252,11 +252,11 @@
                         </td>
                     </tr>
                 </tbody>
-                <tfoot>
+                <tfoot class="table-light fw-bold">
                     <tr class="bt5-subtotal">
-                        <td colspan="3" class="bt-label">Target Vs Achieved</td>
-                        <td class="bt-actual">₹ 11,40,000.00</td>
-                        <td class="bt-ach">₹ 10,79,000.00</td>
+                        <td colspan="3" class="text-center bg-danger-subtle text-danger">Target Vs Achieved</td>
+                        <td class="bg-warning-subtle">₹ 11,40,000.00</td>
+                        <td class="bg-success-subtle">₹ 10,79,000.00</td>
                         <td></td>
                     </tr>
                 </tfoot>
@@ -271,7 +271,7 @@
         <div class="modal-content">
             <div class="modal-header py-3">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="bt5-modal-ico"><i class="bi bi-tags-fill"></i></div>
+                    <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-tags-fill"></i></span>
                     <h6 class="fw-bold mb-0" style="font-size:15px;" id="bt5ModalTitle">New Brand Target</h6>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -368,9 +368,9 @@
         }
 
         function achPill(v, act) {
-            var cls = v > act ? 'pill-up' : v < act ? 'pill-down' : 'pill-flat';
+            var cls = v > act ? 'bg-success-subtle text-success border border-success-subtle' : v < act ? 'bg-danger-subtle text-danger border border-danger-subtle' : 'bg-light text-secondary border';
             var ico = v > act ? 'bi-arrow-up-right' : v < act ? 'bi-arrow-down-right' : 'bi-dash-lg';
-            return '<span class="ach-pill ' + cls + '"><i class="bi ' + ico + '"></i>' + inrFmt(v) + '</span>';
+            return '<span class="badge ' + cls + '"><i class="bi ' + ico + ' me-1"></i>' + inrFmt(v) + '</span>';
         }
 
         /* ---------- Date helper ---------- */

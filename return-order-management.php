@@ -14,8 +14,6 @@ $plOpts = function (array $a) {
 };
 ?>
 
-<link rel="stylesheet" href="./assets/css/table.css">
-
 <style>
     .rom-page .filters-card { position: relative; z-index: 50; }
     .rom-page .filters-toggle-row { display: flex; align-items: center; justify-content: space-between; }

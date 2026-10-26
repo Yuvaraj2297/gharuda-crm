@@ -1,39 +1,36 @@
 <?php include 'header.php'; ?>
-
-<link rel="stylesheet" href="./assets/css/table.css">
 <link rel="stylesheet" href="./assets/css/date-picker.css">
-<link rel="stylesheet" href="./assets/css/projects-list.css">
 
-<main class="projects-wrapper">
+<main class="projects-wrapper pb-5">
     <div class="container-fluid px-3 px-md-4">
         <!-- Title row (Gharuda CRM Standard Flow) -->
         <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
             <div class="d-flex align-items-center gap-3">
                 <div>
-                    <h1 class="font-display fw-bold mb-1" style="font-size:1.65rem; color:var(--ink-900, #16202b);">Projects Directory</h1>
+                    <h1 class="font-display fw-bold mb-1 fs-3 text-dark">Projects Directory</h1>
                 </div>
             </div>
             
             <div class="d-flex align-items-center gap-2 flex-wrap">
-                <a href="project-create.php" class="btn-new-proj">
+                <a href="project-create.php" class="btn btn-primary d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2 rounded-2 shadow-sm">
                     <i class="bi bi-plus-circle-fill"></i> Create Project
                 </a>
-                <button type="button" class="btn btn-outline-secondary px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#newProjectModal" style="border-radius:10px; font-size:13.5px;">
-                    <i class="bi bi-lightning-charge-fill me-1" style="color:var(--primary, #16a34a);"></i> Quick Add
+                <button type="button" class="btn btn-outline-secondary bg-white px-3 py-2 fw-semibold rounded-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                    <i class="bi bi-lightning-charge-fill me-1 text-success"></i> Quick Add
                 </button>
-                <button class="btn-action-icon" id="toggleFilterBtn" data-bs-toggle="tooltip" title="Toggle Search Filters">
+                <button class="btn btn-outline-secondary bg-white text-secondary px-3 py-2 rounded-2 shadow-sm" id="toggleFilterBtn" data-bs-toggle="tooltip" title="Toggle Search Filters">
                     <i class="bi bi-funnel-fill"></i>
                 </button>
-                <button class="btn-action-icon" onclick="reloadTableData()" data-bs-toggle="tooltip" title="Refresh Table Data">
+                <button class="btn btn-outline-secondary bg-white text-secondary px-3 py-2 rounded-2 shadow-sm" onclick="reloadTableData()" data-bs-toggle="tooltip" title="Refresh Table Data">
                     <i class="bi bi-arrow-clockwise"></i>
                 </button>
             </div>
         </div>
 
         <!-- Filter Form Section -->
-        <div class="filter-card" id="filterCardSection">
-            <div class="filter-card-header">
-                <i class="bi bi-sliders me-1" style="color:var(--primary, #16a34a);"></i> Advanced Project Filters
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white" id="filterCardSection">
+            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
+                <i class="bi bi-sliders text-success me-2"></i> Advanced Project Filters
             </div>
             <form id="projectFilterForm" onsubmit="return false;">
                 <div class="row g-3 align-items-end">
@@ -64,7 +61,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6">
-                        <button class="btn-filter-apply w-100 py-2 d-flex align-items-center justify-content-center gap-2 rounded-3 shadow-sm fw-bold" onclick="applyProjectFilters()">
+                        <button class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 rounded-2 shadow-sm fw-semibold" onclick="applyProjectFilters()">
                             <i class="bi bi-search"></i> Apply Filter
                         </button>
                     </div>
@@ -73,171 +70,161 @@
         </div>
 
         <!-- Quick Action Filter Pills -->
-        <div class="quick-filter-pills">
-            <button class="pill-btn pill-btn-deadline" onclick="filterByQuickPill('deadline_today')">
-                <i class="bi bi-clock-history"></i> Today's Deadline
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-3" id="quickFilterPills">
+            <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('deadline_today')">
+                <i class="bi bi-clock-history me-1"></i> Today's Deadline
             </button>
-            <button class="pill-btn pill-btn-upcoming" onclick="filterByQuickPill('upcoming')">
-                <i class="bi bi-calendar-event"></i> Upcoming Projects
+            <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('upcoming')">
+                <i class="bi bi-calendar-event me-1"></i> Upcoming Projects
             </button>
-            <button class="pill-btn pill-btn-today" onclick="filterByQuickPill('today')">
-                <i class="bi bi-calendar-check"></i> Today's Projects
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('today')">
+                <i class="bi bi-calendar-check me-1"></i> Today's Projects
             </button>
-            <button class="pill-btn pill-btn-overdue" onclick="filterByQuickPill('overdue')">
-                <i class="bi bi-exclamation-triangle"></i> Overdue Projects
+            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('overdue')">
+                <i class="bi bi-exclamation-triangle me-1"></i> Overdue Projects
             </button>
-            <button class="pill-btn pill-btn-reset" onclick="resetProjectFilters()">
-                <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 fw-semibold" onclick="resetProjectFilters()">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
             </button>
-            <button class="pill-btn pill-btn-overview" onclick="toggleSummaryOverview()">
-                <i class="bi bi-bar-chart-line"></i> Summary Overview
+            <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3 py-1 fw-semibold" onclick="toggleSummaryOverview()">
+                <i class="bi bi-bar-chart-line me-1"></i> Summary Overview
             </button>
         </div>
 
         <!-- Projects KPI Metrics & Activity Overview Card -->
-        <div class="summary-card" id="summaryOverviewCard">
-            <div class="summary-title">
-                <i class="bi bi-pie-chart-fill me-1" style="color:var(--primary, #16a34a);"></i> Project Lifecycle Summary
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white" id="summaryOverviewCard" style="display:none;">
+            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
+                <i class="bi bi-pie-chart-fill text-success me-2"></i> Project Lifecycle Summary
             </div>
             
-            <div class="kpi-grid">
-                <div class="kpi-tile">
-                    <div class="kpi-icon not-started"><i class="bi bi-circle"></i></div>
-                    <div>
-                        <div class="kpi-val" id="count-not-started">0</div>
-                        <div class="kpi-lbl">Not Started</div>
+            <div class="row g-3 mb-3">
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-secondary mb-1"><i class="bi bi-circle"></i></div>
+                        <div class="fs-4 fw-bold text-dark" id="count-not-started">0</div>
+                        <div class="small text-muted fw-semibold">Not Started</div>
                     </div>
                 </div>
-                <div class="kpi-tile">
-                    <div class="kpi-icon in-progress"><i class="bi bi-play-circle-fill"></i></div>
-                    <div>
-                        <div class="kpi-val text-primary" id="count-in-progress">15</div>
-                        <div class="kpi-lbl">In Progress</div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-primary mb-1"><i class="bi bi-play-circle-fill"></i></div>
+                        <div class="fs-4 fw-bold text-primary" id="count-in-progress">15</div>
+                        <div class="small text-muted fw-semibold">In Progress</div>
                     </div>
                 </div>
-                <div class="kpi-tile">
-                    <div class="kpi-icon on-hold"><i class="bi bi-pause-circle-fill"></i></div>
-                    <div>
-                        <div class="kpi-val text-warning" id="count-on-hold">0</div>
-                        <div class="kpi-lbl">On Hold</div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-warning mb-1"><i class="bi bi-pause-circle-fill"></i></div>
+                        <div class="fs-4 fw-bold text-warning" id="count-on-hold">0</div>
+                        <div class="small text-muted fw-semibold">On Hold</div>
                     </div>
                 </div>
-                <div class="kpi-tile">
-                    <div class="kpi-icon cancelled"><i class="bi bi-x-circle-fill"></i></div>
-                    <div>
-                        <div class="kpi-val text-danger" id="count-cancelled">0</div>
-                        <div class="kpi-lbl">Cancelled</div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-danger mb-1"><i class="bi bi-x-circle-fill"></i></div>
+                        <div class="fs-4 fw-bold text-danger" id="count-cancelled">0</div>
+                        <div class="small text-muted fw-semibold">Cancelled</div>
                     </div>
                 </div>
-                <div class="kpi-tile">
-                    <div class="kpi-icon test"><i class="bi bi-bug-fill"></i></div>
-                    <div>
-                        <div class="kpi-val text-purple" id="count-test">1</div>
-                        <div class="kpi-lbl">Testing</div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-info mb-1"><i class="bi bi-bug-fill"></i></div>
+                        <div class="fs-4 fw-bold text-info" id="count-test">1</div>
+                        <div class="small text-muted fw-semibold">Testing</div>
                     </div>
                 </div>
-                <div class="kpi-tile">
-                    <div class="kpi-icon finished"><i class="bi bi-check-circle-fill"></i></div>
-                    <div>
-                        <div class="kpi-val text-success" id="count-finished">1</div>
-                        <div class="kpi-lbl">Finished</div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    <div class="card border-0 bg-light p-3 text-center rounded-3">
+                        <div class="fs-4 text-success mb-1"><i class="bi bi-check-circle-fill"></i></div>
+                        <div class="fs-4 fw-bold text-success" id="count-finished">1</div>
+                        <div class="small text-muted fw-semibold">Finished</div>
                     </div>
                 </div>
             </div>
 
-            <div class="act-log-container">
+            <div class="bg-light p-3 rounded-3">
                 <div class="fw-bold text-dark small mb-2 d-flex align-items-center gap-2">
                     <i class="bi bi-activity text-secondary"></i> Activity Updates Timeline
                 </div>
-                <div class="act-log-grid">
-                    <div class="act-log-col">
-                        <div class="act-log-time">Last 24 Hours</div>
-                        <div class="act-log-stat"><i class="bi bi-play-fill text-primary"></i> <strong>15</strong> Active In Progress</div>
+                <div class="row g-2 text-center">
+                    <div class="col">
+                        <div class="small text-muted">Last 24 Hours</div>
+                        <div class="fw-bold text-primary small"><i class="bi bi-play-fill"></i> <strong>15</strong> Active In Progress</div>
                     </div>
-                    <div class="act-log-col">
-                        <div class="act-log-time">Last 3 Days</div>
-                        <div class="act-log-stat text-warning"><i class="bi bi-pause-fill"></i> <strong>0</strong> On Hold Requests</div>
+                    <div class="col">
+                        <div class="small text-muted">Last 3 Days</div>
+                        <div class="fw-bold text-warning small"><i class="bi bi-pause-fill"></i> <strong>0</strong> On Hold Requests</div>
                     </div>
-                    <div class="act-log-col">
-                        <div class="act-log-time">Last 7 Days</div>
-                        <div class="act-log-stat text-danger"><i class="bi bi-slash-circle"></i> <strong>0</strong> Cancelled</div>
+                    <div class="col">
+                        <div class="small text-muted">Last 7 Days</div>
+                        <div class="fw-bold text-danger small"><i class="bi bi-slash-circle"></i> <strong>0</strong> Cancelled</div>
                     </div>
-                    <div class="act-log-col">
-                        <div class="act-log-time">QA Review</div>
-                        <div class="act-log-stat text-purple"><i class="bi bi-gear-fill"></i> <strong>1</strong> In Testing</div>
+                    <div class="col">
+                        <div class="small text-muted">QA Review</div>
+                        <div class="fw-bold text-info small"><i class="bi bi-gear-fill"></i> <strong>1</strong> In Testing</div>
                     </div>
-                    <div class="act-log-col">
-                        <div class="act-log-time">Milestones</div>
-                        <div class="act-log-stat text-success"><i class="bi bi-check2-all"></i> <strong>1</strong> Finished</div>
+                    <div class="col">
+                        <div class="small text-muted">Milestones</div>
+                        <div class="fw-bold text-success small"><i class="bi bi-check2-all"></i> <strong>1</strong> Finished</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Table Card Section (jobtype.php table flow with datatable class) -->
-        <div class="card-custom p-0 overflow-hidden mb-3" id="projectsTableWrap">
+        <!-- Table Card Section -->
+        <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3 bg-white" id="projectsTableWrap">
             <!-- Table (toolbar + export + column visibility + live search + show entries + pagination auto-created by datatable class via auto-master-table.js) -->
-            <div class="table-responsive table-modern-wrap overflow-auto column-border">
-                <table class="table-modern w-100 datatable" id="projectsListTable" data-table-name="Projects">
-                    <thead>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 datatable" id="projectsListTable" data-table-name="Projects">
+                    <thead class="table-light">
                         <tr>
                             <th class="text-nowrap" style="width: 50px;">S.No</th>
                             <th class="text-nowrap">Project Name</th>
                             <th class="text-nowrap">Customer</th>
                             <th class="text-nowrap">Tag</th>
-                            <th class="text-nowrap">Progress</th>
+                            <th class="text-nowrap text-center">Progress</th>
                             <th class="text-nowrap">Start Date</th>
                             <th class="text-nowrap">Deadline</th>
                             <th class="text-nowrap">Deadline Status</th>
                             <th class="text-nowrap">Team Members</th>
                             <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap" style="min-width: 175px;">Action</th>
+                            <th class="text-nowrap text-center" style="min-width: 175px;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="projectsTableBody">
                         <tr data-status="in-progress" data-customer="GHARUDA">
                             <td class="fw-bold text-muted">1</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon">B</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">B</span>
                                     <span>bel</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">GHARUDA</td>
-                            <td><span class="badge bg-soft-primary text-primary border border-primary-subtle px-2 py-1 rounded-2">Web</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">Web</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">04-09-2026</td>
                             <td class="fw-semibold text-secondary">--</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (0d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (0d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill purple" data-bs-toggle="tooltip" title="Member 1">M1</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Member 1">M1</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('bel')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('bel')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('bel', 'GHARUDA')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('bel')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('bel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('bel')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('bel', 'GHARUDA')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('bel')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -245,49 +232,39 @@
                         <tr data-status="in-progress" data-customer="Asif">
                             <td class="fw-bold text-muted">2</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-info text-info">S</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-circle p-2">S</span>
                                     <span>Sugar Test</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Asif</td>
-                            <td><span class="badge bg-soft-secondary text-secondary border px-2 py-1 rounded-2">Testing</span></td>
+                            <td><span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded-2">Testing</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">29-04-2026</td>
                             <td class="fw-semibold text-secondary">29-09-2027</td>
                             <td>
-                                <span class="remaining-tag active">
-                                    <i class="bi bi-clock-history"></i> 370 days remaining
+                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
+                                    <i class="bi bi-clock-history me-1"></i> 370 days remaining
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill green" data-bs-toggle="tooltip" title="Dev 1">D1</div>
-                                    <div class="avatar-pill purple" data-bs-toggle="tooltip" title="Dev 2">D2</div>
-                                    <div class="avatar-pill amber" data-bs-toggle="tooltip" title="Dev 3">D3</div>
-                                    <div class="avatar-pill pink" data-bs-toggle="tooltip" title="+10">+10</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 1">D1</span>
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 2">D2</span>
+                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 3">D3</span>
+                                    <span class="badge bg-light border text-muted rounded-circle p-2" data-bs-toggle="tooltip" title="+10">+10</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Sugar Test')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Sugar Test')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Sugar Test', 'Asif')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Sugar Test')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Sugar Test')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Sugar Test')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Sugar Test', 'Asif')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Sugar Test')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -295,47 +272,37 @@
                         <tr data-status="in-progress" data-customer="Sundar Arumugam">
                             <td class="fw-bold text-muted">3</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-success text-success">S</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">S</span>
                                     <span>Solar Panel Installation</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Sundar Arumugam</td>
-                            <td><span class="badge bg-soft-warning text-warning border border-warning-subtle px-2 py-1 rounded-2">Solar</span></td>
+                            <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2 py-1 rounded-2">Solar</span></td>
                             <td class="text-center">
-                                <div class="progress-circle complete mx-auto">100%</div>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">05-05-2026</td>
                             <td class="fw-semibold text-secondary">05-06-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (110d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (110d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill green" data-bs-toggle="tooltip" title="Sundar">SA</div>
-                                    <div class="avatar-pill purple" data-bs-toggle="tooltip" title="Arun">AR</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Sundar">SA</span>
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Arun">AR</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Solar Panel Installation')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Solar Panel Installation')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Solar Panel Installation', 'Sundar Arumugam')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Solar Panel Installation')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Solar Panel Installation')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Solar Panel Installation')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Solar Panel Installation', 'Sundar Arumugam')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Solar Panel Installation')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -343,46 +310,36 @@
                         <tr data-status="in-progress" data-customer="Hindustan Hydraulics & Pneumatics">
                             <td class="fw-bold text-muted">4</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-warning text-warning">C</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">C</span>
                                     <span>Check and Charge</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Hindustan Hydraulics & Pneumatics</td>
-                            <td><span class="badge bg-soft-info text-info border px-2 py-1 rounded-2">Maintenance</span></td>
+                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Maintenance</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">13-04-2026</td>
                             <td class="fw-semibold text-secondary">31-05-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (115d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (115d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill amber" data-bs-toggle="tooltip" title="Hindustan">HH</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Hindustan">HH</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Check and Charge')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Check and Charge')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Check and Charge', 'Hindustan Hydraulics & Pneumatics')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Check and Charge')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Check and Charge')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Check and Charge')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Check and Charge', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Check and Charge')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -390,46 +347,36 @@
                         <tr data-status="in-progress" data-customer="GHARUDA soft">
                             <td class="fw-bold text-muted">5</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-danger text-danger">C</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-circle p-2">C</span>
                                     <span>Construction project</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">GHARUDA soft</td>
-                            <td><span class="badge bg-soft-primary text-primary border px-2 py-1 rounded-2">Civil</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border px-2 py-1 rounded-2">Civil</span></td>
                             <td class="text-center">
-                                <div class="progress-circle complete mx-auto">100%</div>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">14-02-2026</td>
                             <td class="fw-semibold text-secondary">30-04-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (146d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (146d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill pink" data-bs-toggle="tooltip" title="GHARUDA Dev">KS</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-danger-subtle text-danger rounded-circle p-2" data-bs-toggle="tooltip" title="GHARUDA Dev">KS</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Construction project')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Construction project')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Construction project', 'GHARUDA soft')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Construction project')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Construction project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Construction project')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Construction project', 'GHARUDA soft')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Construction project')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -437,46 +384,36 @@
                         <tr data-status="in-progress" data-customer="Hindustan Hydraulics & Pneumatics">
                             <td class="fw-bold text-muted">6</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-purple text-purple">R</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-circle p-2">R</span>
                                     <span>RBR Arch</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Hindustan Hydraulics & Pneumatics</td>
-                            <td><span class="badge bg-soft-secondary text-secondary border px-2 py-1 rounded-2">Architecture</span></td>
+                            <td><span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded-2">Architecture</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">28-03-2026</td>
                             <td class="fw-semibold text-secondary">27-03-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (180d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (180d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill purple" data-bs-toggle="tooltip" title="Arch Team">RA</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Arch Team">RA</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('RBR Arch')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('RBR Arch')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('RBR Arch', 'Hindustan Hydraulics & Pneumatics')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('RBR Arch')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('RBR Arch')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('RBR Arch')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('RBR Arch', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('RBR Arch')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -484,46 +421,36 @@
                         <tr data-status="in-progress" data-customer="Power Spares Engineering">
                             <td class="fw-bold text-muted">7</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-info text-info">C</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-circle p-2">C</span>
                                     <span>College Project</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Power Spares Engineering</td>
-                            <td><span class="badge bg-soft-info text-info border px-2 py-1 rounded-2">Education</span></td>
+                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Education</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">10-03-2026</td>
                             <td class="fw-semibold text-secondary">25-03-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (182d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (182d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill green" data-bs-toggle="tooltip" title="Power Spares">PS</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Power Spares">PS</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('College Project')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('College Project')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('College Project', 'Power Spares Engineering')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('College Project')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('College Project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('College Project')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('College Project', 'Power Spares Engineering')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('College Project')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -531,46 +458,36 @@
                         <tr data-status="in-progress" data-customer="Prabhu photos">
                             <td class="fw-bold text-muted">8</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-warning text-warning">S</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">S</span>
                                     <span>Solar panel</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Prabhu photos</td>
-                            <td><span class="badge bg-soft-warning text-warning border px-2 py-1 rounded-2">Hardware</span></td>
+                            <td><span class="badge bg-warning-subtle text-warning border px-2 py-1 rounded-2">Hardware</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">0%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">03-03-2026</td>
                             <td class="fw-semibold text-secondary">25-03-2026</td>
                             <td>
-                                <span class="remaining-tag overdue">
-                                    <i class="bi bi-exclamation-circle-fill"></i> Deadline passed (182d)
+                                <span class="remaining-tag badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-2 overdue">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> Deadline passed (182d)
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill amber" data-bs-toggle="tooltip" title="Prabhu Team">PP</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Prabhu Team">PP</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Solar panel')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Solar panel')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Solar panel', 'Prabhu photos')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Solar panel')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Solar panel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Solar panel')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Solar panel', 'Prabhu photos')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Solar panel')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -578,47 +495,37 @@
                         <tr data-status="in-progress" data-customer="GHARUDA">
                             <td class="fw-bold text-muted">9</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-primary text-primary">C</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">C</span>
                                     <span>Cloud Infrastructure Migration</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">GHARUDA</td>
-                            <td><span class="badge bg-soft-info text-info border px-2 py-1 rounded-2">Cloud</span></td>
+                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Cloud</span></td>
                             <td class="text-center">
-                                <div class="progress-circle in-progress mx-auto">65%</div>
+                                <span class="badge bg-light border text-secondary fw-semibold">65%</span>
                             </td>
                             <td class="fw-semibold text-secondary">15-05-2026</td>
                             <td class="fw-semibold text-secondary">30-11-2026</td>
                             <td>
-                                <span class="remaining-tag active">
-                                    <i class="bi bi-clock-history"></i> 120 days remaining
+                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
+                                    <i class="bi bi-clock-history me-1"></i> 120 days remaining
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill purple" data-bs-toggle="tooltip" title="Cloud Team">CM</div>
-                                    <div class="avatar-pill green" data-bs-toggle="tooltip" title="Dev Lead">AS</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Cloud Team">CM</span>
+                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Dev Lead">AS</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('Cloud Infrastructure Migration')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('Cloud Infrastructure Migration')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('Cloud Infrastructure Migration', 'GHARUDA')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('Cloud Infrastructure Migration')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('Cloud Infrastructure Migration')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('Cloud Infrastructure Migration')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Cloud Infrastructure Migration', 'GHARUDA')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Cloud Infrastructure Migration')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -626,47 +533,37 @@
                         <tr data-status="finished" data-customer="Zen Publications">
                             <td class="fw-bold text-muted">10</td>
                             <td>
-                                <a href="project-dashboard.php" class="proj-name-link">
-                                    <span class="proj-avatar-icon bg-soft-success text-success">E</span>
+                                <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">E</span>
                                     <span>E-Commerce Portal Upgrade</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Zen Publications</td>
-                            <td><span class="badge bg-soft-success text-success border px-2 py-1 rounded-2">E-Commerce</span></td>
+                            <td><span class="badge bg-success-subtle text-success border px-2 py-1 rounded-2">E-Commerce</span></td>
                             <td class="text-center">
-                                <div class="progress-circle complete mx-auto">100%</div>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">01-01-2026</td>
                             <td class="fw-semibold text-secondary">15-03-2026</td>
                             <td>
-                                <span class="remaining-tag active">
-                                    <i class="bi bi-check-circle-fill text-success"></i> Completed
+                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
+                                    <i class="bi bi-check-circle-fill text-success me-1"></i> Completed
                                 </span>
                             </td>
                             <td>
-                                <div class="avatar-stack">
-                                    <div class="avatar-pill amber" data-bs-toggle="tooltip" title="Zen Lead">ZP</div>
-                                    <div class="avatar-pill pink" data-bs-toggle="tooltip" title="UI Dev">DV</div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Zen Lead">ZP</span>
+                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="UI Dev">DV</span>
                                 </div>
                             </td>
-                            <td><span class="status-badge status-finished">Finished</span></td>
+                            <td><span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-2">Finished</span></td>
                             <td class="text-center">
-                                <div class="proj-action-group">
-                                    <a href="project-dashboard.php" class="proj-icon-btn btn-view" data-bs-toggle="tooltip" title="View Project">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" onclick="editProject('E-Commerce Portal Upgrade')" class="proj-icon-btn btn-edit" data-bs-toggle="tooltip" title="Edit Project">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" onclick="deleteProject('E-Commerce Portal Upgrade')" class="proj-icon-btn btn-delete" data-bs-toggle="tooltip" title="Delete Project">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button type="button" onclick="openSendEmailModal('E-Commerce Portal Upgrade', 'Zen Publications')" class="proj-icon-btn btn-email" data-bs-toggle="tooltip" title="Send Email">
-                                        <i class="bi bi-envelope"></i>
-                                    </button>
-                                    <button type="button" onclick="copyProject('E-Commerce Portal Upgrade')" class="proj-icon-btn btn-copy" data-bs-toggle="tooltip" title="Copy Project">
-                                        <i class="bi bi-copy"></i>
-                                    </button>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
+                                    <button type="button" onclick="editProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" onclick="deleteProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('E-Commerce Portal Upgrade', 'Zen Publications')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>

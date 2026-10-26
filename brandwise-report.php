@@ -1,20 +1,69 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/brandwise-report.css">
-
-<main class="bwr-page">
+<main class="container-fluid px-0">
 
     <!-- ===== Hero header + filters ===== -->
-    <div class="bwr-hero">
-        <div class="bwr-hero-inner">
-            <div class="bwr-hero-head">
-                <div class="bwr-hero-title-l">
-                    <div class="bwr-hero-ava"><i class="bi bi-graph-up-arrow"></i></div>
-                    <div>
-                        <div class="bwr-hero-title">Sales Performance Dashboard</div>
-                        <div class="bwr-hero-sub">Brand-wise lead, conversion &amp; revenue analytics · 17-10-2026</div>
-                    </div>
+    <div class="card border-0 bg-primary text-white rounded-3 p-4 mb-3 shadow-sm position-relative overflow-hidden">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-white bg-opacity-25 text-white p-3 rounded-3 fs-4"><i class="bi bi-graph-up-arrow"></i></span>
+                <div>
+                    <h5 class="fw-bold mb-1 text-white">Sales Performance Dashboard</h5>
+                    <small class="text-white-50">Brand-wise lead, conversion &amp; revenue analytics · 17-10-2026</small>
                 </div>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <div class="btn-group btn-group-sm bg-white bg-opacity-10 p-1 rounded-pill" id="bwrRange" role="group">
+                    <button type="button" class="btn btn-sm text-white rounded-pill px-3 active" data-range="today">Today</button>
+                    <button type="button" class="btn btn-sm text-white rounded-pill px-3" data-range="week">This Week</button>
+                    <button type="button" class="btn btn-sm text-white rounded-pill px-3" data-range="month">This Month</button>
+                    <button type="button" class="btn btn-sm text-white rounded-pill px-3" data-range="year">This Year</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-light rounded-pill px-3 text-primary fw-semibold" id="bwrRefresh"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+            </div>
+        </div>
+
+        <form class="card border-0 bg-white bg-opacity-10 rounded-3 p-3 text-white row g-2 align-items-end" autocomplete="off">
+            <div class="col-lg-2 col-md-3 col-6">
+                <label class="form-label small fw-bold text-white-50 text-uppercase mb-1" for="bwrDate">Date</label>
+                <div class="date-picker">
+                    <input type="text" class="date-input form-control form-control-sm" id="bwrDate" placeholder="Select date" autocomplete="off">
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <label class="form-label small fw-bold text-white-50 text-uppercase mb-1" for="bwrBrand">Brand</label>
+                <select class="form-select form-select-sm select2" id="bwrBrand" data-placeholder="Non selected" data-allow-clear="true">
+                    <option></option>
+                    <option>PhD Assistance</option>
+                    <option>Thesis Writing</option>
+                    <option>Journal Support</option>
+                    <option>Publication</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <label class="form-label small fw-bold text-white-50 text-uppercase mb-1" for="bwrProduct">Product</label>
+                <select class="form-select form-select-sm select2" id="bwrProduct" data-placeholder="Choose Product" data-allow-clear="true">
+                    <option></option>
+                    <option>Thesis Writing</option>
+                    <option>Journal Publication</option>
+                    <option>PhD Assistance</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <label class="form-label small fw-bold text-white-50 text-uppercase mb-1" for="bwrSource">Lead Source</label>
+                <select class="form-select form-select-sm select2" id="bwrSource" data-placeholder="Source" data-allow-clear="true">
+                    <option></option>
+                    <option>Indiamart</option>
+                    <option>Website</option>
+                    <option>Direct</option>
+                    <option>Google</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6">
+                <button type="button" class="btn btn-sm btn-light w-100 text-primary fw-bold"><i class="bi bi-search me-1"></i>Search</button>
+            </div>
+        </form>
+    </div>
                 <div class="bwr-hero-actions">
                     <div class="bwr-range" id="bwrRange">
                         <button type="button" data-range="today" class="active">Today</button>
@@ -72,92 +121,100 @@
     <!-- ===== KPI cards (always visible) ===== -->
     <div class="row g-3 mb-3">
         <div class="col-xl-3 col-md-6">
-            <div class="bwr-kpi k-blue">
-                <div class="bwr-kpi-top">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                        <div class="bwr-kpi-label">Total Leads</div>
-                        <div class="bwr-kpi-sub">All sources</div>
+                        <small class="text-muted fw-bold text-uppercase d-block" style="font-size: 0.7rem; letter-spacing: 0.05em;">Total Leads</small>
+                        <small class="text-muted" style="font-size: 0.75rem;">All sources</small>
                     </div>
-                    <div class="bwr-kpi-icon"><i class="bi bi-people-fill"></i></div>
+                    <span class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-people-fill"></i></span>
                 </div>
-                <div class="bwr-kpi-val">150</div>
-                <div class="bwr-kpi-delta"><i class="bi bi-arrow-up-short"></i>16.8% vs last month</div>
+                <div class="fs-4 fw-bold text-dark">150</div>
+                <div class="mt-2"><span class="badge bg-success-subtle text-success"><i class="bi bi-arrow-up-short"></i>16.8% vs last month</span></div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="bwr-kpi k-amber">
-                <div class="bwr-kpi-top">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                        <div class="bwr-kpi-label">Conversion Rate</div>
-                        <div class="bwr-kpi-sub">Converted customers</div>
+                        <small class="text-muted fw-bold text-uppercase d-block" style="font-size: 0.7rem; letter-spacing: 0.05em;">Conversion Rate</small>
+                        <small class="text-muted" style="font-size: 0.75rem;">Converted customers</small>
                     </div>
-                    <div class="bwr-kpi-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                    <span class="badge bg-warning-subtle text-warning p-2 rounded-2 fs-6"><i class="bi bi-graph-up-arrow"></i></span>
                 </div>
-                <div class="bwr-kpi-val">17.3%</div>
-                <div class="bwr-kpi-delta"><i class="bi bi-arrow-up-short"></i>17.3% vs last month</div>
+                <div class="fs-4 fw-bold text-dark">17.3%</div>
+                <div class="mt-2"><span class="badge bg-success-subtle text-success"><i class="bi bi-arrow-up-short"></i>17.3% vs last month</span></div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="bwr-kpi k-green">
-                <div class="bwr-kpi-top">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                        <div class="bwr-kpi-label">Monthly Revenue</div>
-                        <div class="bwr-kpi-sub">Current month</div>
+                        <small class="text-muted fw-bold text-uppercase d-block" style="font-size: 0.7rem; letter-spacing: 0.05em;">Monthly Revenue</small>
+                        <small class="text-muted" style="font-size: 0.75rem;">Current month</small>
                     </div>
-                    <div class="bwr-kpi-icon"><i class="bi bi-currency-rupee"></i></div>
+                    <span class="badge bg-success-subtle text-success p-2 rounded-2 fs-6"><i class="bi bi-currency-rupee"></i></span>
                 </div>
-                <div class="bwr-kpi-val">₹ 3,356,047</div>
-                <div class="bwr-kpi-delta"><i class="bi bi-arrow-up-short"></i>9.0% vs last month</div>
+                <div class="fs-4 fw-bold text-dark">₹ 3,356,047</div>
+                <div class="mt-2"><span class="badge bg-success-subtle text-success"><i class="bi bi-arrow-up-short"></i>9.0% vs last month</span></div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="bwr-kpi k-red">
-                <div class="bwr-kpi-top">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                        <div class="bwr-kpi-label">Outstanding Balance</div>
-                        <div class="bwr-kpi-sub">Across all brands</div>
+                        <small class="text-muted fw-bold text-uppercase d-block" style="font-size: 0.7rem; letter-spacing: 0.05em;">Outstanding Balance</small>
+                        <small class="text-muted" style="font-size: 0.75rem;">Across all brands</small>
                     </div>
-                    <div class="bwr-kpi-icon"><i class="bi bi-wallet2"></i></div>
+                    <span class="badge bg-danger-subtle text-danger p-2 rounded-2 fs-6"><i class="bi bi-wallet2"></i></span>
                 </div>
-                <div class="bwr-kpi-val">₹ 12,638,319</div>
-                <div class="bwr-kpi-delta"><i class="bi bi-arrow-up-short"></i>3.2% vs last month</div>
+                <div class="fs-4 fw-bold text-dark">₹ 12,638,319</div>
+                <div class="mt-2"><span class="badge bg-danger-subtle text-danger"><i class="bi bi-arrow-up-short"></i>3.2% vs last month</span></div>
             </div>
         </div>
     </div>
 
     <!-- ===== Section tabs ===== -->
-    <div class="bwr-tabs-card" id="bwrTabs">
-        <button type="button" class="bwr-tab active" data-tab="overview"><i class="bi bi-speedometer2"></i>Overview</button>
-        <button type="button" class="bwr-tab" data-tab="leads"><i class="bi bi-person-plus-fill"></i>Lead Generation</button>
-        <button type="button" class="bwr-tab" data-tab="qualification"><i class="bi bi-funnel-fill"></i>Qualification &amp; Brands</button>
-        <button type="button" class="bwr-tab" data-tab="geo"><i class="bi bi-globe-americas"></i>Geography &amp; Products</button>
-    </div>
+    <ul class="nav nav-pills gap-2 mb-3" id="bwrTabs">
+        <li class="nav-item">
+            <button type="button" class="nav-link active bwr-tab" data-tab="overview"><i class="bi bi-speedometer2 me-1"></i>Overview</button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link bwr-tab" data-tab="leads"><i class="bi bi-person-plus-fill me-1"></i>Lead Generation</button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link bwr-tab" data-tab="qualification"><i class="bi bi-funnel-fill me-1"></i>Qualification &amp; Brands</button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="nav-link bwr-tab" data-tab="geo"><i class="bi bi-globe-americas me-1"></i>Geography &amp; Products</button>
+        </li>
+    </ul>
 
     <!-- ============ PANEL: OVERVIEW ============ -->
     <div class="bwr-panel active" id="bwrPanel-overview" style="display: block;">
-        <div class="bwr-section">
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
             <div class="bwr-sec-head">
                 <div class="bwr-sec-title-l">
-                    <div class="bwr-sec-ico"><i class="bi bi-trophy-fill"></i></div>
+                    <div class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-trophy-fill"></i></div>
                     <div>
                         <div class="bwr-sec-title">Performance Summary</div>
                         <div class="bwr-sec-sub">Revenue trend, target progress and customer mix at a glance</div>
                     </div>
                 </div>
-                <span class="bwr-sec-meta"><i class="bi bi-cash-stack me-1"></i>₹ 812,000 revenue YTD</span>
+                <span class="badge bg-light text-secondary border small"><i class="bi bi-cash-stack me-1"></i>₹ 812,000 revenue YTD</span>
             </div>
             <div class="row g-3">
                 <div class="col-lg-6">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Monthly Revenue Trend</span>
-                            <span class="bwr-chart-badge">Jan – Dec</span>
+                            <span class="badge bg-light text-secondary border small">Jan – Dec</span>
                         </div>
                         <canvas id="bwrRevChart" height="235"></canvas>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Target vs Achieved</span>
                         </div>
@@ -173,7 +230,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Customer Insights</span>
                         </div>
@@ -186,41 +243,41 @@
 
     <!-- ============ PANEL: LEAD GENERATION ============ -->
     <div class="bwr-panel" id="bwrPanel-leads" style="display: none;">
-        <div class="bwr-section">
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
             <div class="bwr-sec-head">
                 <div class="bwr-sec-title-l">
-                    <div class="bwr-sec-ico"><i class="bi bi-person-plus-fill"></i></div>
+                    <div class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-person-plus-fill"></i></div>
                     <div>
                         <div class="bwr-sec-title">Lead Generation &amp; Distribution</div>
                         <div class="bwr-sec-sub">Daily inflow, source-wise split and conversion behaviour</div>
                     </div>
                 </div>
-                <span class="bwr-sec-meta"><i class="bi bi-lightning-charge-fill me-1"></i>318 leads this period</span>
+                <span class="badge bg-light text-secondary border small"><i class="bi bi-lightning-charge-fill me-1"></i>318 leads this period</span>
             </div>
             <div class="row g-3 mb-3">
                 <div class="col-lg-7">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Leads by Date</span>
-                            <span class="bwr-chart-badge">Last 30 days</span>
+                            <span class="badge bg-light text-secondary border small">Last 30 days</span>
                         </div>
                         <canvas id="bwrLeadsDateChart" height="230"></canvas>
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Leads by Source</span>
-                            <span class="bwr-chart-badge">12 sources</span>
+                            <span class="badge bg-light text-secondary border small">12 sources</span>
                         </div>
                         <canvas id="bwrLeadsSourceChart" height="230"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="bwr-chart-box">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                 <div class="bwr-chart-head">
                     <span class="bwr-chart-title">Conversion Overview</span>
-                    <div class="bwr-seg" id="bwrHourSeg">
+                    <div class="btn-group btn-group-sm" id="bwrHourSeg">
                         <button type="button" data-tab="day" class="active">Day</button>
                         <button type="button" data-tab="week">Week</button>
                         <button type="button" data-tab="month">Month</button>
@@ -233,20 +290,20 @@
 
     <!-- ============ PANEL: QUALIFICATION & BRANDS ============ -->
     <div class="bwr-panel" id="bwrPanel-qualification" style="display: none;">
-        <div class="bwr-section">
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
             <div class="bwr-sec-head">
                 <div class="bwr-sec-title-l">
-                    <div class="bwr-sec-ico"><i class="bi bi-funnel-fill"></i></div>
+                    <div class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-funnel-fill"></i></div>
                     <div>
                         <div class="bwr-sec-title">Qualification &amp; Brand Performance</div>
                         <div class="bwr-sec-sub">SQL / MQL / UQL mix and conversion rate across brands</div>
                     </div>
                 </div>
-                <span class="bwr-sec-meta"><i class="bi bi-bullseye me-1"></i>100 qualified leads</span>
+                <span class="badge bg-light text-secondary border small"><i class="bi bi-bullseye me-1"></i>100 qualified leads</span>
             </div>
             <div class="row g-3">
                 <div class="col-lg-4">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Lead Qualification</span>
                         </div>
@@ -254,10 +311,10 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div class="bwr-chart-box">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                         <div class="bwr-chart-head">
                             <span class="bwr-chart-title">Conversion Rate by Brand</span>
-                            <span class="bwr-chart-badge">Avg 13.2%</span>
+                            <span class="badge bg-light text-secondary border small">Avg 13.2%</span>
                         </div>
                         <canvas id="bwrBrandConvChart" height="240"></canvas>
                     </div>
@@ -268,16 +325,16 @@
 
     <!-- ============ PANEL: GEOGRAPHY & PRODUCTS ============ -->
     <div class="bwr-panel" id="bwrPanel-geo" style="display: none;">
-        <div class="bwr-section">
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
             <div class="bwr-sec-head">
                 <div class="bwr-sec-title-l">
-                    <div class="bwr-sec-ico"><i class="bi bi-globe-americas"></i></div>
+                    <div class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-globe-americas"></i></div>
                     <div>
                         <div class="bwr-sec-title">Country Specific Sales</div>
                         <div class="bwr-sec-sub">Revenue contribution by country</div>
                     </div>
                 </div>
-                <span class="bwr-sec-meta"><i class="bi bi-globe2 me-1"></i>5 countries · 100% share</span>
+                <span class="badge bg-light text-secondary border small"><i class="bi bi-globe2 me-1"></i>5 countries · 100% share</span>
             </div>
             <div class="bwr-country-row">
                 <span class="crank">1</span>
@@ -321,21 +378,21 @@
             </div>
         </div>
 
-        <div class="bwr-section">
+        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
             <div class="bwr-sec-head">
                 <div class="bwr-sec-title-l">
-                    <div class="bwr-sec-ico"><i class="bi bi-box-seam-fill"></i></div>
+                    <div class="badge bg-primary-subtle text-primary p-2 rounded-2 fs-6"><i class="bi bi-box-seam-fill"></i></div>
                     <div>
                         <div class="bwr-sec-title">Product / Service Performance</div>
                         <div class="bwr-sec-sub">Units sold per product, highest first</div>
                     </div>
                 </div>
-                <span class="bwr-sec-meta"><i class="bi bi-boxes me-1"></i>22 products tracked</span>
+                <span class="badge bg-light text-secondary border small"><i class="bi bi-boxes me-1"></i>22 products tracked</span>
             </div>
-            <div class="bwr-chart-box">
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
                 <div class="bwr-chart-head">
                     <span class="bwr-chart-title">Revenue by Product</span>
-                    <span class="bwr-chart-badge">Top: Full XL (92)</span>
+                    <span class="badge bg-light text-secondary border small">Top: Full XL (92)</span>
                 </div>
                 <canvas id="bwrProductChart" height="420"></canvas>
             </div>

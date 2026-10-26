@@ -1,6 +1,4 @@
 <?php include 'header.php'; ?>
-
-<link rel="stylesheet" href="./assets/css/table.css">
 <link rel="stylesheet" href="./assets/css/select2.css">
 
 <style>

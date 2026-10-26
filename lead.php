@@ -1,7 +1,40 @@
 <?php include 'header.php'; ?>
-
-<link rel="stylesheet" href="./assets/css/table.css">
-<link rel="stylesheet" href="./assets/css/lead.css">
+<style>
+/* Scoped interactive styling for lead page components */
+.ld-tab-panel:not(.active), .ap-panel:not(.active) { display: none !important; }
+.ld-nav { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.5rem 0.75rem; border: none; background: transparent; border-radius: 0.375rem; color: #495057; font-size: 0.875rem; text-align: left; transition: all 0.15s ease-in-out; }
+.ld-nav:hover { background-color: #f8f9fa; color: #0d6efd; }
+.ld-nav.active { background-color: #e7f1ff !important; color: #0d6efd !important; font-weight: 600; }
+.ld-nav .badge { margin-left: auto; font-size: 0.75rem; }
+.ld-pipe-step { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.35rem 0.75rem; border-radius: 50rem; font-size: 0.8125rem; font-weight: 500; }
+.ld-pipe-step.done { background-color: #d1e7dd; color: #0f5132; }
+.ld-pipe-step.current { background-color: #cfe2ff; color: #084298; font-weight: 600; }
+.ld-pipe-step.pending { background-color: #f8f9fa; color: #6c757d; border: 1px dashed #ced4da; }
+.ap-green-btn { background-color: #198754; color: #fff; border: 1px solid #198754; }
+.ap-green-btn:hover { background-color: #157347; color: #fff; }
+.ap-gray-btn { background-color: #f8f9fa; color: #212529; border: 1px solid #dee2e6; }
+.ap-gray-btn:hover { background-color: #e9ecef; }
+.ap-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; border: 1px solid #dee2e6; background: #fff; color: #495057; cursor: pointer; }
+.ap-icon-btn:hover { background-color: #f8f9fa; color: #0d6efd; }
+.ap-dtab { padding: 0.35rem 0.85rem; border: 1px solid #dee2e6; background: #fff; border-radius: 0.375rem; color: #495057; font-size: 0.875rem; font-weight: 500; cursor: pointer; }
+.ap-dtab:hover { background-color: #f8f9fa; }
+.ap-dtab.active { background-color: #0d6efd !important; border-color: #0d6efd !important; color: #fff !important; }
+.ld-prop-status { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 50rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.ld-prop-status.draft { background-color: #e2e3e5; color: #41464b; }
+.ld-prop-status.accepted { background-color: #d1e7dd; color: #0f5132; }
+.ld-prop-status.sent { background-color: #cff4fc; color: #055160; }
+.ld-prop-status.rejected { background-color: #f8d7da; color: #842029; }
+.apv-sign-canvas-wrap { position: relative; border: 1px dashed #ced4da; border-radius: 6px; background: #fafafa; height: 160px; }
+.apv-sign-canvas-wrap canvas { width: 100%; height: 100%; }
+.apv-sign-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #adb5bd; pointer-events: none; font-size: 0.875rem; }
+.af-drop, .at2-drop, .tk-drop { border: 2px dashed #ced4da; border-radius: 8px; padding: 1.5rem; text-align: center; background: #f8f9fa; cursor: pointer; transition: border-color .15s; }
+.af-drop:hover, .at2-drop:hover, .tk-drop:hover { border-color: #0d6efd; background: #f1f7ff; }
+.nl-tags-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; padding: 0.375rem 0.75rem; border: 1px solid #ced4da; border-radius: 0.375rem; background: #fff; min-height: 38px; }
+.nl-tags-chips { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.nl-tag-chip { display: inline-flex; align-items: center; gap: 0.25rem; background: #e9ecef; color: #495057; border-radius: 50rem; padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 500; }
+.nl-tag-x { cursor: pointer; opacity: 0.6; } .nl-tag-x:hover { opacity: 1; }
+.nl-tags-input { border: none; outline: none; background: transparent; flex-grow: 1; min-width: 120px; font-size: 0.875rem; padding: 0; }
+</style>
 
 
 
@@ -26,9 +59,9 @@
 </div>
 
 <!-- ===== Page view tabs ===== -->
-<div class="lp-tabs" id="lpTabs">
-    <button type="button" class="lp-tab active" data-tab="leads"><i class="bi bi-table"></i>All Leads</button>
-    <button type="button" class="lp-tab" data-tab="stats"><i class="bi bi-grid-3x3-gap-fill"></i>Activity Stats</button>
+<div class="d-flex gap-2 mb-3 border-bottom pb-2" id="lpTabs">
+    <button type="button" class="btn btn-sm btn-primary lp-tab active" data-tab="leads"><i class="bi bi-table me-1"></i>All Leads</button>
+    <button type="button" class="btn btn-sm btn-outline-primary lp-tab" data-tab="stats"><i class="bi bi-grid-3x3-gap-fill me-1"></i>Activity Stats</button>
 </div>
 
 <!-- ===== PANEL: Activity Stats ===== -->
@@ -38,135 +71,157 @@
     <div class="row g-3">
         <!-- Follow Up -->
         <div class="col-xl-4 col-md-6">
-            <div class="ast-card ast-followup">
-                <div class="ast-head">
-                    <span class="ast-ico"><i class="bi bi-arrow-repeat"></i></span>
-                    <span class="ast-title">Follow Up</span>
-                    <span class="ast-badge">1</span>
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-arrow-repeat text-primary fs-5"></i>
+                        <span>Follow Up</span>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill">1</span>
                 </div>
-                <div class="ast-body">
-                    <ul class="ast-list">
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Actual</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open fu-link" data-group="Follow Up" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val">0</span></span>
-                            <span class="ast-cell ast-open fu-link" data-group="Follow Up" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val">0</span></span>
-                            <span class="ast-cell ast-open fu-link" data-group="Follow Up" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val">1</span></span>
-                        </li>
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Completed</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open fu-link is-danger" data-group="Follow Up (Completed)" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val danger">0</span></span>
-                            <span class="ast-cell ast-open fu-link" data-group="Follow Up (Completed)" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open fu-link" data-group="Follow Up (Completed)" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val zero">-</span></span>
-                        </li>
-                    </ul>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link" data-group="Follow Up" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">0</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link" data-group="Follow Up" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">0</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link" data-group="Follow Up" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-primary">1</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link is-danger" data-group="Follow Up (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-danger">0</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link" data-group="Follow Up (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open fu-link" data-group="Follow Up (Completed)" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                    </div>
                 </div>
             </div>
         </div>
-
         <!-- Appointment -->
         <div class="col-xl-4 col-md-6">
-            <div class="ast-card ast-converted">
-                <div class="ast-head">
-                    <span class="ast-ico"><i class="bi bi-calendar2-week"></i></span>
-                    <span class="ast-title">Appointment</span>
-                    <span class="ast-badge zero">0</span>
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-calendar2-week text-info fs-5"></i>
+                        <span>Appointment</span>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary rounded-pill">0</span>
                 </div>
-                <div class="ast-body">
-                    <ul class="ast-list">
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Actual</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Appointment" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val">0</span></span>
-                            <span class="ast-cell ast-open" data-group="Appointment" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val">0</span></span>
-                        </li>
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Completed</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open is-danger" data-group="Appointment (Completed)" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val danger">0</span></span>
-                            <span class="ast-cell ast-open" data-group="Appointment (Completed)" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val zero">0</span></span>
-                        </li>
-                    </ul>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Appointment" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">0</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Appointment" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">0</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open is-danger" data-group="Appointment (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-danger">0</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Appointment (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">0</div></div>
+                    </div>
                 </div>
             </div>
         </div>
-
         <!-- Calls (Activity) -->
         <div class="col-xl-4 col-md-6">
-            <div class="ast-card ast-lead">
-                <div class="ast-head">
-                    <span class="ast-ico"><i class="bi bi-telephone-outbound"></i></span>
-                    <span class="ast-title">Calls (Activity)</span>
-                    <span class="ast-badge">3</span>
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-telephone-outbound text-warning fs-5"></i>
+                        <span>Calls (Activity)</span>
+                    </div>
+                    <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">3</span>
                 </div>
-                <div class="ast-body">
-                    <ul class="ast-list">
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Actual</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Calls" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val">1</span></span>
-                            <span class="ast-cell ast-open" data-group="Calls" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val">2</span></span>
-                        </li>
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Completed</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Calls (Completed)" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open" data-group="Calls (Completed)" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val zero">-</span></span>
-                        </li>
-                    </ul>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Calls" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">1</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Calls" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">2</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Calls (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Calls (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Quote -->
+        <!-- Hot Lead -->
         <div class="col-xl-4 col-md-6">
-            <div class="ast-card ast-meeting">
-                <div class="ast-head">
-                    <span class="ast-ico"><i class="bi bi-file-earmark-text"></i></span>
-                    <span class="ast-title">Quote</span>
-                    <span class="ast-badge">3</span>
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-fire text-danger fs-5"></i>
+                        <span>Hot Lead</span>
+                    </div>
+                    <span class="badge bg-danger-subtle text-danger rounded-pill">1</span>
                 </div>
-                <div class="ast-body">
-                    <ul class="ast-list">
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Actual</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Quote" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val">1 / ₹0.00</span></span>
-                            <span class="ast-cell ast-open" data-group="Quote" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val">2 / ₹23,629.00</span></span>
-                            <span class="ast-cell ast-open" data-group="Quote" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val">3 / ₹1,41,629.00</span></span>
-                        </li>
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Completed</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Quote (Completed)" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open" data-group="Quote (Completed)" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open" data-group="Quote (Completed)" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val zero">-</span></span>
-                        </li>
-                    </ul>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">1</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">1</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-danger">1</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Hot Lead (Completed)" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <!-- Won -->
+        <div class="col-xl-4 col-md-6">
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-trophy text-success fs-5"></i>
+                        <span>Won</span>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary rounded-pill">0</span>
+                </div>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Won (Completed)" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Expected Closure -->
         <div class="col-xl-4 col-md-6">
-            <div class="ast-card ast-lost">
-                <div class="ast-head">
-                    <span class="ast-ico"><i class="bi bi-flag"></i></span>
-                    <span class="ast-title">Expected Closure</span>
-                    <span class="ast-badge zero">0</span>
+            <div class="card border shadow-sm h-100">
+                <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-flag text-primary fs-5"></i>
+                        <span>Expected Closure</span>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary rounded-pill">0</span>
                 </div>
-                <div class="ast-body">
-                    <ul class="ast-list">
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Actual</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Expected Closure" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val">0 / ₹0.00</span></span>
-                            <span class="ast-cell ast-open" data-group="Expected Closure" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val">0 / ₹0.00</span></span>
-                            <span class="ast-cell ast-open" data-group="Expected Closure" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val">0 / ₹0.00</span></span>
-                        </li>
-                        <li class="ast-row px-2 py-2 ms-1 fw-bolder">Completed</li>
-                        <li class="ast-row">
-                            <span class="ast-cell ast-open" data-group="Expected Closure (Completed)" data-period="Today" data-range="today"><span class="ast-period">Today</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open" data-group="Expected Closure (Completed)" data-period="Weekly" data-range="weekly"><span class="ast-period">Weekly</span><span class="ast-val zero">-</span></span>
-                            <span class="ast-cell ast-open" data-group="Expected Closure (Completed)" data-period="Monthly" data-range="monthly"><span class="ast-period">Monthly</span><span class="ast-val zero">-</span></span>
-                        </li>
-                    </ul>
+                <div class="card-body p-3">
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Actual</div>
+                    <div class="d-flex gap-2 mb-3">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-dark">0 / ₹0.00</div></div>
+                    </div>
+                    <div class="text-uppercase text-muted fw-bold small mb-2">Completed</div>
+                    <div class="d-flex gap-2">
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure (Completed)" data-period="Today" data-range="today"><div class="small text-muted mb-1">Today</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure (Completed)" data-period="Weekly" data-range="weekly"><div class="small text-muted mb-1">Weekly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                        <div class="flex-fill p-2 border rounded text-center bg-light-subtle cursor-pointer ast-open" data-group="Expected Closure (Completed)" data-period="Monthly" data-range="monthly"><div class="small text-muted mb-1">Monthly</div><div class="fs-5 fw-bold text-muted">-</div></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+</div>
 
 </div><!-- /lpPanel-stats -->
 
@@ -453,9 +508,11 @@
         lpTabs.forEach(function(tab) {
             tab.addEventListener('click', function() {
                 lpTabs.forEach(function(t) {
-                    t.classList.remove('active');
+                    t.classList.remove('active', 'btn-primary');
+                    t.classList.add('btn-outline-primary');
                 });
-                tab.classList.add('active');
+                tab.classList.add('active', 'btn-primary');
+                tab.classList.remove('btn-outline-primary');
                 document.querySelectorAll('.lp-panel').forEach(function(p) {
                     p.classList.remove('active');
                 });
@@ -509,30 +566,28 @@
 <div class="modal fade" id="newLeadModal" tabindex="-1" aria-hidden="true">
 
     <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content modal-content-rounded-0">
-            <div class="modal-header nl-header">
-                <div class="nl-hero">
-                    <span class="ico"><i class="bi bi-person-plus-fill"></i></span>
+        <div class="modal-content border-0">
+            <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-person-plus-fill"></i></div>
                     <div>
-                        <h5>New Lead</h5>
-                        <div class="nl-hero-sub"><i class="bi bi-lightning-charge"></i>Capture every lead detail in one flow</div>
+                        <h5 class="modal-title mb-0">New Lead</h5>
+                        <div class="small text-muted"><i class="bi bi-lightning-charge me-1"></i>Capture every lead detail in one flow</div>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form id="newLeadForm" class="d-flex flex-column modal-flex-col">
-                <div class="modal-body">
-
-
+                <div class="modal-body p-4 bg-light-subtle">
                     <div class="nl-body">
 
                     <!-- Section: Classification -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="row g-3">
                         <div class="col-lg-3 col-md-6">
                             <label class="form-label">Status <span class="text-danger">*</span></label>
-                            <div class="nl-add-row">
-                                <div class="nl-select-wrap">
+                            <div class="d-flex gap-2">
+                                <div class="flex-grow-1">
                                     <select class="form-select select2 nl-select" id="nl_status" data-placeholder="Select status">
                                         <option value=""></option>
                                         <option>Lead</option>
@@ -544,13 +599,13 @@
                                         <option>Lost</option>
                                     </select>
                                 </div>
-                                <button type="button" class="nl-add-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                                <button type="button" class="btn btn-outline-primary nl-add-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <label class="form-label">Source *</label>
-                            <div class="nl-add-row">
-                                <div class="nl-select-wrap">
+                            <div class="d-flex gap-2">
+                                <div class="flex-grow-1">
                                     <select class="form-select select2 nl-select" id="nl_source" data-placeholder="Select source">
                                         <option value=""></option>
                                         <option>IndiaMart</option>
@@ -562,7 +617,7 @@
                                         <option>Cold Call</option>
                                     </select>
                                 </div>
-                                <button type="button" class="nl-add-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                                <button type="button" class="btn btn-outline-primary nl-add-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
@@ -608,7 +663,7 @@
                     </div>
 
                     <!-- Section: Contact Details -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="row g-3">
                             <div class="col-lg-3 col-md-6">
                                 <label class="form-label">Company <span class="text-danger">*</span></label>
@@ -677,7 +732,7 @@
                     </div>
 
                     <!-- Section: Company Profile — GST, Turnover, Employee Size, Customer Type -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="row g-3">
                             <div class="col-lg-3 col-md-6">
                                 <label class="form-label">Company GST</label>
@@ -703,7 +758,7 @@
                     </div>
 
                     <!-- Section: Location & Product -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="row g-3">
                             <div class="col-lg-3 col-md-6">
                                 <label class="form-label">Country</label>
@@ -764,7 +819,7 @@
                     </div>
 
                     <!-- Section: Deal Info -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="row g-3">
                             <div class="col-lg-3 col-md-6">
                                 <label class="form-label">Lead value</label>
@@ -796,7 +851,7 @@
                     </div>
 
                     <!-- Section: Items & Point of Contact -->
-                    <div class="nl-fsec">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Items</label>
                             <div class="table-responsive">
@@ -848,7 +903,7 @@
 
                     </div><!-- /nl-body -->
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Submit</button>
                 </div>
@@ -860,20 +915,20 @@
 <!-- ===== New Lead: Add Option mini modal (+ button) ===== -->
 <div class="modal fade" id="nlAddOptionModal" tabindex="-1" aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered modal-dialog-w420">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><span class="nl-add-ico"><i class="bi bi-plus-lg"></i></span><span id="nlAddOptionTitle">Add New Option</span></h5>
+                <h5 class="modal-title"><span id="nlAddOptionTitle">Add New Option</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <label class="form-label">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="nlAddOptionInput" placeholder="Type new option...">
-                <div class="nl-add-hint"><i class="bi bi-info-circle me-1"></i>Press Enter to add quickly</div>
+                <div class="form-text small text-muted"><i class="bi bi-info-circle me-1"></i>Press Enter to add quickly</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-cancel" id="nlAddOptionCancel">Cancel</button>
-                <button type="button" class="btn btn-save" id="nlAddOptionSave"><i class="bi bi-check-lg me-1"></i>Add</button>
+                <button type="button" class="btn btn-outline-secondary" id="nlAddOptionCancel">Cancel</button>
+                <button type="button" class="btn btn-primary" id="nlAddOptionSave"><i class="bi bi-check-lg me-1"></i>Add</button>
             </div>
         </div>
     </div>
@@ -1059,18 +1114,18 @@
 <!-- ===== Import Leads Modal ===== -->
 <div class="modal fade" id="importLeadsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-18">
+        <div class="modal-content border-0 shadow-lg">
             <div class="modal-header">
                 <h5 class="fw-bold mb-0"><i class="bi bi-upload me-2 text-primary"></i>Import Leads</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
-                <div class="im-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Choose CSV File</label>
                     <input type="file" class="form-control" id="importFile" accept=".csv,.xlsx,.xls">
                 </div>
-                <div class="im-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Status (fallback)</label>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="importStatus">
@@ -1084,14 +1139,14 @@
                             <option>Customer</option>
                             <option>Waiting for Response</option>
                         </select>
-                        <button type="button" class="im-inline-add" data-im-target="importStatus" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                        <button type="button" class="btn btn-outline-primary im-inline-add" data-im-target="importStatus" title="Add new status"><i class="bi bi-plus-lg"></i></button>
                     </div>
                     <div class="im-inline-wrap" id="imInlineStatus">
                         <input type="text" class="form-control form-control-sm" placeholder="New status name">
                         <button type="button" class="im-inline-add im-inline-save im-inline-primary"><i class="bi bi-check-lg"></i></button>
                     </div>
                 </div>
-                <div class="im-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Source (fallback)</label>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="importSource">
@@ -1105,14 +1160,14 @@
                             <option>Walk-in</option>
                             <option>Cold Call</option>
                         </select>
-                        <button type="button" class="im-inline-add" data-im-target="importSource" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                        <button type="button" class="btn btn-outline-primary im-inline-add" data-im-target="importSource" title="Add new source"><i class="bi bi-plus-lg"></i></button>
                     </div>
                     <div class="im-inline-wrap" id="imInlineSource">
                         <input type="text" class="form-control form-control-sm" placeholder="New source name">
                         <button type="button" class="im-inline-add im-inline-save im-inline-primary"><i class="bi bi-check-lg"></i></button>
                     </div>
                 </div>
-                <div class="im-field">
+                <div class="mb-3">
                     <label>Responsible (Assignee)</label>
                     <select class="form-select" id="importAssignee">
                         <option value="" selected>Non selected</option>
@@ -1123,10 +1178,11 @@
                         <option>Priya S.</option>
                     </select>
                 </div>
-                <a href="#" class="im-sample-link" id="importSampleLink"><i class="bi bi-download"></i>Download sample</a>
-                <div class="im-footer mt-3">
+                <a href="#" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 mb-3" id="importSampleLink"><i class="bi bi-download"></i>Download sample</a>
+                <div class="modal-footer bg-light border-top p-3 d-flex justify-content-end gap-2 mt-3">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnSimulateImport"><i class="bi bi-play-fill me-1"></i>Simulate Import</button>
                     <button type="button" class="btn btn-primary" id="btnDoImport"><i class="bi bi-upload me-1"></i>Import</button>
-                    <button type="button" class="btn btn-primary" id="btnSimulateImport"><i class="bi bi-play-fill me-1"></i>Simulate Import</button>
                 </div>
             </div>
             <script>
@@ -1221,39 +1277,37 @@
 <!-- ===== Lead Detail Modal ===== -->
 <div class="modal fade" id="leadDetailModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content modal-content-rounded-0">
+        <div class="modal-content border-0">
 
-            <div class="ld-header">
-                <div class="ld-hero">
+            <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3"><span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary p-2 fs-5"><i class="bi bi-person-lines-fill"></i></span><div><h5 class="modal-title fw-bold m-0 fs-5">
                     <span class="ico"><i class="bi bi-person-lines-fill"></i></span>
                     <div>
-                        <h5><span class="ld-id"><span id="ldNumber">1</span> &ndash;</span> <span id="ldName">Suresh Babu</span><span class="ld-state-pill d-none" id="ldStatePill"></span></h5>
-                    </div>
-                </div>
+                        <h5><span class="ld-id"><span id="ldNumber">1</span> &ndash;</span> <span id="ldName">Suresh Babu</span><span class="ld-state-pill d-none" id="ldStatePill"></span></h5></div></div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body modal-flex-col-hidden">
-                <div class="ld-body">
-                    <aside class="ld-rail">
-                        <div class="ld-rail-group">Lead</div>
+            <div class="modal-body p-0 overflow-hidden bg-light-subtle">
+                <div class="d-flex flex-column flex-md-row h-100">
+                    <aside class="ld-rail bg-white border-end p-2 d-flex flex-column gap-1" style="min-width: 200px; width: 220px;">
+                        <div class="text-uppercase small fw-bold text-muted px-3 pt-2 pb-1">Lead</div>
                         <button class="ld-nav active" type="button" data-panel="ldPanelProfile"><i class="bi bi-person-vcard"></i>Profile</button>
                         <button class="ld-nav" type="button" data-panel="ldPanelProposals"><i class="bi bi-file-earmark-text"></i>Proposals <span class="badge">1</span></button>
                         <button class="ld-nav" type="button" data-panel="ldPanelAppointments"><i class="bi bi-calendar2-check"></i>Appointments</button>
                         <button class="ld-nav" type="button" data-panel="ldPanelTasks"><i class="bi bi-list-check"></i>Tasks <span class="badge">1</span></button>
                         <button class="ld-nav" type="button" data-panel="ldPanelAttachments"><i class="bi bi-paperclip"></i>Attachments <span class="badge">1</span></button>
-                        <div class="ld-rail-group">Engage</div>
+                        <div class="text-uppercase small fw-bold text-muted px-3 pt-2 pb-1">Engage</div>
                         <button class="ld-nav" type="button" data-panel="ldPanelReminders"><i class="bi bi-bell"></i>Reminders</button>
                         <button class="ld-nav" type="button" data-panel="ldPanelNotes"><i class="bi bi-journal-text"></i>Notes <span class="badge" id="ldNotesBadge">1</span></button>
                         <button class="ld-nav" type="button" data-panel="ldPanelActivityLog"><i class="bi bi-clock-history"></i>Activity Log</button>
-                        <div class="ld-rail-group">Insights</div>
+                        <div class="text-uppercase small fw-bold text-muted px-3 pt-2 pb-1">Insights</div>
                         <button class="ld-nav" type="button" data-panel="ldPanelLeadSource"><i class="bi bi-star"></i>Lead Score</button>
                         <button class="ld-nav" type="button" data-panel="ldPanelEmailLog"><i class="bi bi-envelope"></i>Email Log</button>
                     </aside>
-                    <section class="ld-content">
+                    <section class="ld-content flex-grow-1 p-4 overflow-auto">
 
                 <!-- ===== Profile Tab Panel ===== -->
                 <div class="ld-tab-panel active" id="ldPanelProfile">
-                    <div class="ld-pipeline">
+                    <div class="ld-pipeline card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center gap-2 flex-wrap">
                         <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Qualified</span>
                         <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Quote</span>
                         <span class="ld-pipe-step current">Negotiation</span>
@@ -1262,7 +1316,7 @@
                             <div class="stage-ring stage-ring-lead"><span>65%</span></div>
                         </div>
                     </div>
-                <div class="ld-contact-bar">
+                <div class="ld-contact-bar card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
                     <span class="ld-act-dot" id="ldContactDot"></span>
                     <span class="ld-act-avatar d-none" id="ldContactAvatar">KO</span>
                     <span id="ldContactText"><b>GHRAUDA SOFTWARE</b> &middot; Created new proposal &nbsp;<a href="#">New Proposal</a> &nbsp; PRQ-147</span>
@@ -1286,46 +1340,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ld-body-grid">
+                    <div class="row g-3 mb-3">
                         <!-- Lead Info -->
-                        <div class="ld-section">
-                            <div class="ld-section-title">Lead Info</div>
-                            <div class="ld-info-row"><span class="ld-info-label">Name</span><span class="ld-info-value" id="ldInfoName">Suresh Babu</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Position</span><span class="ld-info-value" id="ldInfoPosition">Managing Director</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Email Address</span><span class="ld-info-value" id="ldInfoEmail"><a href="mailto:suresh.babu@annanagarbuilders.com">suresh.babu@annanagarbuilders.com</a></span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Website</span><span class="ld-info-value"><a href="https://annanagarbuilders.com" target="_blank">annanagarbuilders.com</a></span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Phone</span><span class="ld-info-value" id="ldInfoPhone"><a href="tel:9500123456">+91 95001 23456</a></span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Lead value</span><span class="ld-info-value text-crm-primary" id="ldInfoValue">₹23,629.00</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Company</span><span class="ld-info-value" id="ldInfoCompany">Anna Nagar Builders</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Address</span><span class="ld-info-value" id="ldInfoAddress">Old Machinery, Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Country</span><span class="ld-info-value">India</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">State</span><span class="ld-info-value">Tamil Nadu</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">City</span><span class="ld-info-value">Chennai</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Zip Code</span><span class="ld-info-value">600100</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Area</span><span class="ld-info-value">Pallikaranai</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Description</span><span class="ld-info-value">Client requires payroll, attendance tracking, and HRMS management integration.</span></div>
+                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
+                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Lead Info</div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Name</span><span class="fw-medium text-dark text-end" id="ldInfoName">Suresh Babu</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Position</span><span class="fw-medium text-dark text-end" id="ldInfoPosition">Managing Director</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Email Address</span><span class="fw-medium text-dark text-end" id="ldInfoEmail"><a href="mailto:suresh.babu@annanagarbuilders.com">suresh.babu@annanagarbuilders.com</a></span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Website</span><span class="fw-medium text-dark text-end"><a href="https://annanagarbuilders.com" target="_blank">annanagarbuilders.com</a></span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Phone</span><span class="fw-medium text-dark text-end" id="ldInfoPhone"><a href="tel:9500123456">+91 95001 23456</a></span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Lead value</span><span class="ld-info-value text-crm-primary" id="ldInfoValue">₹23,629.00</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Company</span><span class="fw-medium text-dark text-end" id="ldInfoCompany">Anna Nagar Builders</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Address</span><span class="fw-medium text-dark text-end" id="ldInfoAddress">Old Machinery, Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Country</span><span class="fw-medium text-dark text-end">India</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">State</span><span class="fw-medium text-dark text-end">Tamil Nadu</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">City</span><span class="fw-medium text-dark text-end">Chennai</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Zip Code</span><span class="fw-medium text-dark text-end">600100</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Area</span><span class="fw-medium text-dark text-end">Pallikaranai</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Description</span><span class="fw-medium text-dark text-end">Client requires payroll, attendance tracking, and HRMS management integration.</span></div>
                         </div>
-                        <!-- General Information -->
-                        <div class="ld-section">
-                            <div class="ld-section-title">General Information</div>
-                            <div class="ld-info-row"><span class="ld-info-label">Status</span><span class="ld-info-value"><span class="status-badge" id="ldInfoStatus">Lead</span></span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Source</span><span class="ld-info-value" id="ldInfoSource">Exhibition</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Assigned</span><span class="ld-info-value" id="ldInfoAssigned">Divya A.</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Sourcer</span><span class="ld-info-value" id="ldInfoSourcer">Harish D.</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Tags</span><span class="ld-info-value" id="ldInfoTags"><span class="lead-tag-pill">Warm Lead</span></span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Created</span><span class="ld-info-value">25-04-2026 14:42:55</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Last Contact</span><span class="ld-info-value">27-11-2025 15:45:21</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Public</span><span class="ld-info-value">No</span></div>
-                            <div class="ld-info-row"><span class="ld-info-label">Closure Date</span><span class="ld-info-value">15-07-2026 11:47:00</span></div>
+                        </div></div><!-- General Information -->
+                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
+                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">General Information</div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Status</span><span class="fw-medium text-dark text-end"><span class="status-badge" id="ldInfoStatus">Lead</span></span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Source</span><span class="fw-medium text-dark text-end" id="ldInfoSource">Exhibition</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Assigned</span><span class="fw-medium text-dark text-end" id="ldInfoAssigned">Divya A.</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Sourcer</span><span class="fw-medium text-dark text-end" id="ldInfoSourcer">Harish D.</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Tags</span><span class="fw-medium text-dark text-end" id="ldInfoTags"><span class="lead-tag-pill">Warm Lead</span></span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Created</span><span class="fw-medium text-dark text-end">25-04-2026 14:42:55</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Last Contact</span><span class="fw-medium text-dark text-end">27-11-2025 15:45:21</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Public</span><span class="fw-medium text-dark text-end">No</span></div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Closure Date</span><span class="fw-medium text-dark text-end">15-07-2026 11:47:00</span></div>
                         </div>
-                        <!-- Custom Fields -->
-                        <div class="ld-section">
-                            <div class="ld-section-title">Custom Fields</div>
-                            <div class="ld-info-row"><span class="ld-info-label">Profession</span><span class="ld-info-value">Builders</span></div>
-                        </div>
-                    </div>
-                    <div class="ld-activity">
-                        <div class="ld-activity-title">Latest Activity</div>
+                        </div></div><!-- Custom Fields -->
+                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
+                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Custom Fields</div>
+                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Profession</span><span class="fw-medium text-dark text-end">Builders</span></div>
+                        </div></div></div>
+                    <div class="card border shadow-sm p-3 bg-white mt-3">
+                        <div class="fw-bold fs-6 pb-2 mb-2 border-bottom text-dark">Latest Activity</div>
                         <div class="ld-activity-empty" id="ldActivityEmpty"><i class="bi bi-clock-history"></i>No recent activity recorded.</div>
                     </div>
                 </div><!-- /ld-tab-panel Profile -->
@@ -1841,20 +1894,20 @@
 <!-- ===== Compose Email Modal (Send Email) ===== -->
 <div class="modal fade" id="ldComposeEmailModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Compose Email</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="ce-field">
+                <div class="mb-3">
                     <label class="text-uppercase">Send email using (SMTP)</label>
                     <select class="form-select" id="ldCeSmtp">
                         <option selected>USE SYSTEM SMTP ( info@GHRatechnology.com )</option>
                     </select>
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Templates</label>
                     <select class="form-select" id="ldCeTemplate">
                         <option value="" selected>Non selected</option>
@@ -1862,25 +1915,25 @@
                         <option>Solar Installation</option>
                     </select>
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Email To</label>
                     <input type="email" class="form-control" id="ldCeTo" placeholder="">
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Email CC</label>
                     <input type="email" class="form-control" id="ldCeCc" placeholder="">
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Email Subject</label>
                     <input type="text" class="form-control" id="ldCeSubject" placeholder="">
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Email Content</label>
                     <div class="ce-quill-wrap">
                         <div id="ldCeQuill"></div>
                     </div>
                 </div>
-                <div class="ce-field">
+                <div class="mb-3">
                     <label>Attachment</label>
                     <div class="ce-attach-row">
                         <input type="file" class="form-control" id="ldCeAttachment" multiple>
@@ -1889,7 +1942,7 @@
                     <div id="ldCeFileList" class="mt-2"></div>
                 </div>
             </div>
-            <div class="ce-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="ldCeSend">send</button>
             </div>
@@ -1900,28 +1953,28 @@
 <!-- ===== Sync Data Modal ===== -->
 <div class="modal fade" id="syncDataModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Sync Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="sd-info">All proposal data is stored separately for each proposal after creation. Updating the lead info won't affect previously created proposals for this lead.</div>
-                <div class="sd-info">If you recently updated your lead info you can sync all new data to associated proposals.<br>Here is a list of fields you can sync.</div>
-                <div class="sd-field">
+                <div class="alert alert-info py-2 px-3 small mb-3">All proposal data is stored separately for each proposal after creation. Updating the lead info won't affect previously created proposals for this lead.</div>
+                <div class="alert alert-info py-2 px-3 small mb-3">If you recently updated your lead info you can sync all new data to associated proposals.<br>Here is a list of fields you can sync.</div>
+                <div class="mb-3">
                     <label>Address</label>
                     <textarea class="form-control" id="sdAddress" rows="3">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="sd-field">
+                        <div class="mb-3">
                             <label>City</label>
                             <input type="text" class="form-control" id="sdCity" value="910">
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="sd-field">
+                        <div class="mb-3">
                             <label>State</label>
                             <input type="text" class="form-control" id="sdState" value="128">
                         </div>
@@ -1929,7 +1982,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="sd-field">
+                        <div class="mb-3">
                             <label>Country</label>
                             <select class="form-select" id="sdCountry">
                                 <option selected>India IN</option>
@@ -1940,18 +1993,18 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="sd-field">
+                        <div class="mb-3">
                             <label>Zip Code</label>
                             <input type="text" class="form-control" id="sdZip" value="600100">
                         </div>
                     </div>
                 </div>
-                <div class="sd-field">
+                <div class="mb-3">
                     <label>Phone</label>
                     <input type="text" class="form-control" id="sdPhone" value="9876543218">
                 </div>
             </div>
-            <div class="sd-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-primary" id="sdSyncNow">Sync Now</button>
             </div>
         </div>
@@ -2035,37 +2088,35 @@
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <!-- Gradient header: logo + title + status + actions -->
-            <div class="apv-head">
+            <div class="modal-header bg-light border-bottom p-3">
                 <button type="button" class="btn-close apv-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="d-flex align-items-center gap-3 flex-wrap">
-                    <div class="apv-logo" id="apvLogo">KOH</div>
+                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold fs-5 shadow-sm" style="width:48px;height:48px;" id="apvLogo">KOH</div>
                     <div class="me-auto">
                         <h5 class="fw-bold mb-1 fs-18" id="apvNo"># PRO-000</h5>
                         <div class="d-flex align-items-center gap-2 flex-wrap">
                             <span class="fs-12-5 text-slate" id="apvSubject">New Proposal</span>
-                            <span class="apv-chip" id="apvStatusChip">DRAFT</span>
+                            <span class="badge bg-secondary rounded-pill" id="apvStatusChip">DRAFT</span>
                         </div>
                     </div>
                     <div class="d-flex gap-2 flex-wrap position-relative me-4 z-1">
-                        <button type="button" class="apv-btn" id="apvDownloadBtn"><i class="bi bi-download me-1"></i>Download</button>
-                        <button type="button" class="apv-btn" id="apvDeclineBtn"><i class="bi bi-x-lg me-1"></i>Decline</button>
-                        <button type="button" class="apv-btn apv-accept"><i class="bi bi-check-lg me-1"></i>Accept</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="apvDownloadBtn"><i class="bi bi-download me-1"></i>Download</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="apvDeclineBtn"><i class="bi bi-x-lg me-1"></i>Decline</button>
+                        <button type="button" class="btn btn-sm btn-primary apv-accept"><i class="bi bi-check-lg me-1"></i>Accept</button>
                     </div>
                 </div>
             </div>
 
             <!-- Summary / Discussion tabs -->
-            <div class="apv-tabs">
-                <button type="button" class="apv-tab active" data-apvtab="summary"><i class="bi bi-file-text me-1"></i>Summary</button>
-                <button type="button" class="apv-tab" data-apvtab="discussion"><i class="bi bi-chat me-1"></i>Discussion</button>
+            <div class="nav nav-pills p-2 bg-light border-bottom gap-2">
+                <button type="button" class="btn btn-sm btn-primary apv-tab active" data-apvtab="summary"><i class="bi bi-file-text me-1"></i>Summary</button>
+                <button type="button" class="btn btn-sm btn-outline-primary apv-tab" data-apvtab="discussion"><i class="bi bi-chat me-1"></i>Discussion</button>
             </div>
 
             <div class="modal-body">
-                <div class="apv-body">
-                    <!-- LEFT: items card + totals + words -->
-                    <div>
-                        <div class="apv-card overflow-hidden">
-                            <table class="apv-item-table">
+                <div class="row g-4"><!-- LEFT: items card + totals + words --><div class="col-12 col-lg-7">
+                        <div class="card border shadow-sm overflow-hidden mb-3">
+                            <table class="table table-bordered align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th class="col-w-36">#</th>
@@ -2080,19 +2131,18 @@
                                 </thead>
                                 <tbody id="apvItemBody"></tbody>
                             </table>
-                            <div class="apv-totals">
-                                <div class="apv-totals-row"><span>Sub Total</span><span id="apvSubTotal">₹ 0.00</span></div>
+                            <div class="p-3 bg-light-subtle border-top d-flex flex-column gap-2 text-end">
+                                <div class="d-flex justify-content-between align-items-center small"><span>Sub Total</span><span id="apvSubTotal">₹ 0.00</span></div>
                                 <div class="apv-totals-row d-none" id="apvDiscountRow"><span id="apvDiscountLbl">0.00 (0.00%)</span><span id="apvDiscountVal">₹ 0.00</span></div>
-                                <div class="apv-totals-row grand"><span>Total</span><span id="apvTotal">₹ 0.00</span></div>
+                                <div class="d-flex justify-content-between align-items-center fw-bold fs-6 text-primary border-top pt-2 mt-1"><span>Total</span><span id="apvTotal">₹ 0.00</span></div>
                             </div>
                         </div>
-                        <div class="apv-words">With words: <b id="apvWords"></b></div>
+                        <div class="small text-muted p-2 bg-light rounded border">With words: <b id="apvWords"></b></div>
                     </div>
 
-                    <!-- RIGHT: summary / discussion panels -->
-                    <div>
+                    <!-- RIGHT: summary / discussion panels --><div class="col-12 col-lg-5">
                         <div id="apvPanelSummary">
-                            <div class="apv-card apv-card-pad">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white">
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="apv-client-av" id="apvClientAv">KO</div>
                                     <div class="min-w-0">
@@ -2114,12 +2164,12 @@
                                 </div>
                             </div>
 
-                            <div class="apv-total-big mt-3">
+                            <div class="card bg-primary text-white p-3 text-center rounded shadow-sm mb-3">
                                 <span class="lbl">Proposal Total</span>
                                 <span class="val" id="apvTotalBig">₹ 0.00</span>
                             </div>
 
-                            <div class="apv-card mt-3 apv-card-pad">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white">
                                 <div class="apv-sec-title">Proposal Information</div>
                                 <div class="fs-12-5 text-dark-gray" id="apvRelInfo">Stantec</div>
                                 <hr class="my-3">
@@ -2132,7 +2182,7 @@
                         </div>
 
                         <div id="apvPanelDiscussion" class="d-none">
-                            <div class="apv-card apv-card-pad">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white">
                                 <div class="apv-sec-title">Discussion</div>
                                 <div id="apvDiscList">
                                     <div class="apv-disc-item">
@@ -2166,19 +2216,19 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <div class="apv-sign-label"><span class="req">*</span> First Name</div>
+                        <div class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> First Name</div>
                         <input type="text" class="form-control" id="apvSignFirst">
                     </div>
                     <div class="col-12">
-                        <div class="apv-sign-label"><span class="req">*</span> Last Name</div>
+                        <div class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> Last Name</div>
                         <input type="text" class="form-control" id="apvSignLast">
                     </div>
                     <div class="col-12">
-                        <div class="apv-sign-label">Email</div>
+                        <div class="form-label fw-medium small text-muted mb-1">Email</div>
                         <input type="email" class="form-control" id="apvSignEmail">
                     </div>
                     <div class="col-12">
-                        <div class="apv-sign-label">Signature</div>
+                        <div class="form-label fw-medium small text-muted mb-1">Signature</div>
                         <div class="apv-sign-canvas-wrap" id="apvSignWrap">
                             <canvas id="apvSignCanvas"></canvas>
                             <div class="apv-sign-placeholder" id="apvSignPlaceholder">Draw your signature here with mouse</div>
@@ -2189,13 +2239,13 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="apv-sign-note">By clicking on "Sign", I consent to be legally bound by this electronic representation of my signature.</div>
+                        <div class="small text-muted mt-2">By clicking on "Sign", I consent to be legally bound by this electronic representation of my signature.</div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-cancelled" data-bs-dismiss="modal">Cancelled</button>
-                <button type="button" class="btn-sign" id="apvSignSubmit">Sign</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelled</button>
+                <button type="button" class="btn btn-primary" id="apvSignSubmit">Sign</button>
             </div>
         </div>
     </div>
@@ -2206,21 +2256,17 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content border-0">
 
-            <div class="ap-header">
-                <div class="ap-hero">
-                    <span class="ico"><i class="bi bi-magic"></i></span>
-                    <div>
-                        <h5>Automatic Proposal</h5>
-                        <div class="ap-lead-ctx" id="apLeadCtx"><i class="bi bi-person-badge"></i>Lead #166 &ndash; Suresh Babu</div>
-                    </div>
+            <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3"><span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary p-2 fs-5"><i class="bi bi-magic"></i></span><div><h5 class="modal-title fw-bold m-0 fs-5">Automatic Proposal</h5><div class="small text-muted" id="apLeadCtx"><i class="bi bi-person-badge me-1"></i>Lead #166 &ndash; Suresh Babu</div></div></div>
+                    
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body modal-flex-col-hidden">
-                <div class="ap-split">
+            <div class="modal-body p-0 overflow-hidden bg-light-subtle">
+                <div class="d-flex flex-column flex-lg-row h-100">
                     <!-- Left: proposals list -->
-                    <div class="ap-list-pane card-custom p-0 overflow-hidden border-end card-flat">
-                        <div class="ap-toolbar">
+                    <div class="ap-list-pane col-12 col-lg-5 col-xl-4 border-end bg-white p-3 overflow-auto">
+                        <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
                             <button type="button" class="btn" id="apNewProposalBtn"><i class="bi bi-plus-lg me-1"></i>New Proposal</button>
                             <span class="toolbar-sep"></span>
                             <button type="button" class="btn active" id="apAutoBtn">Automatic Proposal</button>
@@ -2376,8 +2422,8 @@
                         <!-- Footer (showing + pagination auto-created by master-table.js) -->
                     </div>
                     <!-- Right: proposal detail -->
-                    <div class="ap-detail-pane">
-                        <div class="ap-tabs-row">
+                    <div class="ap-detail-pane col-12 col-lg-7 col-xl-8 bg-light-subtle p-3 overflow-auto flex-grow-1">
+                        <div class="nav nav-pills gap-2 mb-3 bg-white p-2 border rounded shadow-sm align-items-center">
                             <button class="ap-dtab ap-invoice-tab d-none" data-aptab="invoice" type="button">Invoice</button>
                             <button class="ap-dtab active" data-aptab="proposal" type="button">Proposal</button>
                             <button class="ap-dtab" data-aptab="comments" type="button">Comments</button>
@@ -2393,8 +2439,8 @@
                         </div>
                         <!-- Proposal panel -->
                         <div class="ap-panel active" data-appanel="proposal">
-                            <div class="ap-actions-wrap">
-                                <div class="ap-actions-bar">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <span class="ld-prop-status draft" id="apStatusChip">Draft</span>
                                     <button type="button" class="ap-icon-btn ms-auto" title="Edit" data-bs-toggle="modal" data-bs-target="#newProposalModal"><i class="bi bi-pencil-square"></i></button>
                                     <div class="dropdown ap-save-dd">
@@ -2433,25 +2479,25 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="ap-actions-bar right">
+                                <div class="d-flex align-items-center gap-2 ms-auto">
                                     <button type="button" class="btn ap-green-btn" id="apApprovalBtn"><i class="bi bi-send-check me-1"></i>Send approval request</button>
                                 </div>
                             </div>
-                            <div class="ap-doc">
-                                <div class="ap-doc-left">
-                                    <div class="ap-doc-no" id="apPropNo">PRO-152</div>
-                                    <div class="ap-doc-subject" id="apPropSubject">New Proposal</div>
-                                    <div class="ap-doc-company" id="apFromCompany">GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
-                                    <div class="ap-doc-lines" id="apFromAddr">PC 20 / 3, 3rd Block, Mogappair West<br>Chennai - 560086, Tamil Nadu<br>India<br>9865321470<br>GST Number: 29AABCR796N000</div>
+                            <div class="card border shadow-sm p-4 mb-3 bg-white d-flex flex-column flex-md-row justify-content-between gap-4">
+                                <div class="flex-fill">
+                                    <div class="fs-4 fw-bold text-primary mb-1" id="apPropNo">PRO-152</div>
+                                    <div class="fs-6 fw-bold text-dark mb-2" id="apPropSubject">New Proposal</div>
+                                    <div class="fw-bold fs-6 text-dark mb-1" id="apFromCompany">GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
+                                    <div class="small text-muted line-height-1-6 mb-2" id="apFromAddr">PC 20 / 3, 3rd Block, Mogappair West<br>Chennai - 560086, Tamil Nadu<br>India<br>9865321470<br>GST Number: 29AABCR796N000</div>
                                 </div>
-                                <div class="ap-doc-right">
+                                <div class="flex-fill text-md-end">
                                     <div class="ap-to-label">To:</div>
-                                    <div class="ap-doc-company" id="apToName">GHRA SOFTWARE TECHNOLOGY</div>
-                                    <div class="ap-doc-lines" id="apToAddr">214, Velachery - Tambaram Main Rd, Narayanapuram,<br>Pallikaranai, Chennai, Tamil Nadu 600100</div>
-                                    <div class="ap-doc-lines" id="apToContact">IN 600100<br>9876543218<br><a href="mailto:pm@GHRatechnology.com">pm@GHRatechnology.com</a></div>
+                                    <div class="fw-bold fs-6 text-dark mb-1" id="apToName">GHRA SOFTWARE TECHNOLOGY</div>
+                                    <div class="small text-muted line-height-1-6 mb-2" id="apToAddr">214, Velachery - Tambaram Main Rd, Narayanapuram,<br>Pallikaranai, Chennai, Tamil Nadu 600100</div>
+                                    <div class="small text-muted line-height-1-6 mb-2" id="apToContact">IN 600100<br>9876543218<br><a href="mailto:pm@GHRatechnology.com">pm@GHRatechnology.com</a></div>
                                 </div>
                             </div>
-                            <div class="ap-merge-row">
+                            <div class="mb-2 text-end">
                                 <div class="dropdown">
                                     <a href="#" class="ap-merge-link" data-bs-toggle="dropdown">Available merge fields</a>
                                     <div class="dropdown-menu dropdown-menu-end ap-merge-menu p-3 apv-dropdown-menu">
@@ -2472,8 +2518,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ap-editor">
-                                <textarea id="apContentArea" spellcheck="false">Proposal: PRO-152
+                            <div class="card border shadow-sm p-3 mb-3 bg-white">
+                                <textarea id="apContentArea" spellcheck="false" class="form-control font-monospace border-0 bg-light-subtle" rows="18">Proposal: PRO-152
 Subject: New Proposal
 Prepared For: GHRA SOFTWARE TECHNOLOGY
 
@@ -2499,8 +2545,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <!-- Tracked emails sent panel -->
                         <div class="ap-panel" data-appanel="tracked-emails">
                             
-                            <div class="ap-actions-wrap">
-                                <div class="ap-actions-bar">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <span class="ld-prop-status sent">Tracked Emails</span>
                                     <button type="button" class="btn ap-gray-btn ms-auto" id="apTrackBackBtn"><i class="bi bi-arrow-left me-1"></i>Back to Proposal</button>
                                 </div>
@@ -2616,8 +2662,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <!-- Tracked views panel (proposal viewed by customer) -->
                         <div class="ap-panel" data-appanel="tracked-views">
                             
-                            <div class="ap-actions-wrap">
-                                <div class="ap-actions-bar">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <span class="ld-prop-status accepted">Tracked Views</span>
                                     <button type="button" class="btn ap-gray-btn ms-auto" id="apViewBackBtn"><i class="bi bi-arrow-left me-1"></i>Back to Proposal</button>
                                 </div>
@@ -2671,8 +2717,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         </div>
                         <!-- Invoice panel (INV-259 click → invoice view) -->
                         <div class="ap-panel" data-appanel="invoice">
-                            <div class="ap-actions-wrap">
-                                <div class="ap-actions-bar">
+                            <div class="card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <span class="ld-prop-status rejected" id="apInvStatusChip">Unpaid</span>
                                     <span class="ms-auto d-flex align-items-center gap-1">
                                         <button type="button" class="ap-icon-btn" title="Edit invoice"><i class="bi bi-pencil-square"></i></button>
@@ -2693,15 +2739,15 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <button type="button" class="btn ap-green-btn" id="apInvPaymentBtn"><i class="bi bi-credit-card me-1"></i>Payment</button>
                                     </span>
                                 </div>
-                                <div class="ap-actions-bar right">
+                                <div class="d-flex align-items-center gap-2 ms-auto">
                                     <button type="button" class="btn ap-green-btn" id="apInvWhatsappBtn"><i class="bi bi-whatsapp me-1"></i>Send to Whatsapp</button>
                                 </div>
                             </div>
                             <div class="ap-doc pt-2">
-                                <div class="ap-doc-left">
+                                <div class="flex-fill">
                                     <div class="ap-doc-no text-theme-blue">INV-259</div>
-                                    <div class="ap-doc-company">GHARUDA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
-                                    <div class="ap-doc-lines">PC 20 / 3, 3rd Block, Mogappair West<br>Chennai - 560086, Tamil Nadu<br>India<br>9865321470<br>GST Number: 29AABCR7796N1O0O</div>
+                                    <div class="fw-bold fs-6 text-dark mb-1">GHARUDA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
+                                    <div class="small text-muted line-height-1-6 mb-2">PC 20 / 3, 3rd Block, Mogappair West<br>Chennai - 560086, Tamil Nadu<br>India<br>9865321470<br>GST Number: 29AABCR7796N1O0O</div>
                                 </div>
                                 <div class="ap-doc-right text-end">
                                     <div class="fs-12 fw-bold text-dark-gray">Bill To</div>
@@ -2737,11 +2783,11 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 </table>
                             </div>
                             <div class="np-totals ap-totals-pad">
-                                <div class="np-totals-table">
-                                    <div class="np-totals-row"><span class="total-label">Sub Total</span><span class="total-val">₹ 3,75,000.00</span></div>
-                                    <div class="np-totals-row"><span class="total-label">GST 5% (5.00%)</span><span class="total-val">₹ 18,750.00</span></div>
-                                    <div class="np-totals-row"><span class="total-label">Total</span><span class="total-val">₹ 3,93,750.00</span></div>
-                                    <div class="np-totals-row"><span class="total-label text-danger fw-bold">Amount Due</span><span class="total-val text-danger" id="apInvAmountDue">₹ 3,93,750.00</span></div>
+                                <div class="d-flex flex-column gap-2 text-end" style="min-width: 320px;">
+                                    <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Sub Total</span><span class="fw-bold fs-6 text-dark">₹ 3,75,000.00</span></div>
+                                    <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">GST 5% (5.00%)</span><span class="fw-bold fs-6 text-dark">₹ 18,750.00</span></div>
+                                    <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Total</span><span class="fw-bold fs-6 text-dark">₹ 3,93,750.00</span></div>
+                                    <div class="d-flex align-items-center justify-content-end gap-3"><span class="total-label text-danger fw-bold">Amount Due</span><span class="total-val text-danger" id="apInvAmountDue">₹ 3,93,750.00</span></div>
                                 </div>
                             </div>
                         </div>
@@ -2879,7 +2925,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         </div>
                         <!-- Templates panel -->
                         <div class="ap-panel" data-appanel="templates">
-                            <div class="ap-actions-bar">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
                                 <button type="button" class="btn btn-primary" id="apAddTemplateBtn"><i class="bi bi-plus-lg me-1"></i>Add Template</button>
                             </div>
                             <div id="apTplCardList">
@@ -2911,25 +2957,25 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <div class="modal fade" id="apAddTemplateModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Add Template</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="tp-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Template Name</label>
                     <input type="text" class="form-control" id="apTplName" placeholder="">
                 </div>
-                <div class="tp-field">
+                <div class="mb-3">
                     <label>Template Content</label>
                     <div class="tp-quill-wrap">
                         <div id="apTplQuill"></div>
                     </div>
                 </div>
             </div>
-            <div class="tp-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="apTplSubmit">Submit</button>
             </div>
@@ -2940,7 +2986,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Send Proposal to Email Modal ===== -->
 <div class="modal fade" id="apSendEmailModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Send Proposal to Email</h5>
@@ -2971,7 +3017,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Attach File Modal (proposal) ===== -->
 <div class="modal fade" id="apAttachFileModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Attach File</h5>
@@ -2991,18 +3037,18 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Set Proposal Reminder Modal ===== -->
 <div class="modal fade" id="setProposalReminderModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5 class="fw-bold mb-0 fs-15 text-darkest"><i class="bi bi-question-circle me-2 text-subtle"></i>Set Proposal Reminder</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Date to be notified</label>
                     <input type="date" class="form-control" id="apReminderDate">
                 </div>
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Set reminder to</label>
                     <select class="form-select" id="apReminderStaff">
                         <option selected>GHARUDA SOFTWARE</option>
@@ -3012,13 +3058,13 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <option>Divya A.</option>
                     </select>
                 </div>
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Description</label>
                     <textarea class="form-control" id="apReminderDesc" rows="4"></textarea>
                 </div>
                 <div class="rm-check"><input type="checkbox" id="apReminderEmail"><label for="apReminderEmail">Send also an email for this reminder</label></div>
             </div>
-            <div class="rm-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="apReminderSubmit">Submit</button>
             </div>
@@ -3029,18 +3075,18 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Set Lead Reminder Modal ===== -->
 <div class="modal fade" id="setLeadReminderModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5 class="fw-bold mb-0 fs-15 text-darkest"><i class="bi bi-question-circle me-2 text-subtle"></i>Set Lead Reminder</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body modal-body-pad-20-24">
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Date to be notified</label>
                     <input type="date" class="form-control" id="ldReminderDate">
                 </div>
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Set reminder to</label>
                     <select class="form-select" id="ldReminderStaff">
                         <option selected>GHARUDA SOFTWARE</option>
@@ -3050,13 +3096,13 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <option>Divya A.</option>
                     </select>
                 </div>
-                <div class="rm-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Description</label>
                     <textarea class="form-control" id="ldReminderDesc" rows="4"></textarea>
                 </div>
                 <div class="rm-check"><input type="checkbox" id="ldReminderEmail"><label for="ldReminderEmail">Send also an email for this reminder</label></div>
             </div>
-            <div class="rm-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="ldReminderSubmit">Submit</button>
             </div>
@@ -3067,7 +3113,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Add New Task Modal (from Auto Proposal) ===== -->
 <div class="modal fade" id="apAddTaskModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5 class="fw-bold mb-0 fs-15 text-darkest">Add new task</h5>
@@ -3075,8 +3121,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             </div>
             <div class="modal-body">
                 <!-- Public / Billable -->
-                <div class="at2-top">
-                    <div class="at2-checks">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex gap-3">
                         <label><input type="checkbox" id="apTaskPublic"> Public</label>
                         <label><input type="checkbox" id="apTaskBillable" checked> Billable</label>
                     </div>
@@ -3090,29 +3136,29 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <div id="apTaskFileList"></div>
                 <!-- Subject -->
-                <div class="at2-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Subject</label>
                     <input type="text" class="form-control" id="apTaskSubject">
                 </div>
                 <!-- Hourly Rate -->
-                <div class="at2-field">
+                <div class="mb-3">
                     <label>Hourly Rate</label>
                     <input type="number" class="form-control" id="apTaskRate" value="0">
                 </div>
                 <!-- Start Date / Due Date -->
                 <div class="at2-row">
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label><span class="req">*</span>Start Date</label>
                         <input type="date" class="form-control" id="apTaskStart" value="2026-09-21">
                     </div>
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Due Date</label>
                         <input type="date" class="form-control" id="apTaskDue">
                     </div>
                 </div>
                 <!-- Repeat every / Priority -->
                 <div class="at2-row">
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Repeat every</label>
                         <select class="form-select" id="apTaskRepeat">
                             <option selected>Non selected</option>
@@ -3125,7 +3171,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Every year</option>
                         </select>
                     </div>
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Priority</label>
                         <select class="form-select" id="apTaskPriority">
                             <option>Low</option>
@@ -3137,7 +3183,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <!-- Related To / Proposal -->
                 <div class="at2-row">
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Related To</label>
                         <select class="form-select" id="apTaskRelated">
                             <option selected>Proposal</option>
@@ -3146,7 +3192,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Project</option>
                         </select>
                     </div>
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Proposal</label>
                         <select class="form-select" id="apTaskProposalSel"></select>
                     </div>
@@ -3155,7 +3201,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <div class="at2-dep"><input type="checkbox" id="apTaskDependency"><label for="apTaskDependency">Dependency</label></div>
                 <!-- Assignees / Followers -->
                 <div class="at2-row">
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Assignees</label>
                         <select class="form-select" id="apTaskAssignees">
                             <option selected>GHARUDA SOFTWARE</option>
@@ -3165,7 +3211,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Divya A.</option>
                         </select>
                     </div>
-                    <div class="at2-field">
+                    <div class="mb-3">
                         <label>Followers</label>
                         <select class="form-select" id="apTaskFollowers">
                             <option selected>Non selected</option>
@@ -3176,7 +3222,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                 </div>
                 <!-- Insert Checklist Templates -->
-                <div class="at2-field">
+                <div class="mb-3">
                     <label>Insert Checklist Templates</label>
                     <select class="form-select" id="apTaskChecklist">
                         <option selected>Non selected</option>
@@ -3185,7 +3231,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </select>
                 </div>
                 <!-- Tags (chip input) -->
-                <div class="at2-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Tags</label>
                     <div class="nl-tags-wrap w-100" id="apTaskTagsWrap">
                         <div class="nl-tags-chips" id="apTaskTagsChips"></div>
@@ -3193,12 +3239,12 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                 </div>
                 <!-- Task Description -->
-                <div class="at2-field">
+                <div class="mb-3">
                     <label>Task Description</label>
                     <textarea class="form-control" id="apTaskDesc" rows="4" placeholder="Add description"></textarea>
                 </div>
             </div>
-            <div class="at2-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="apTaskSubmit">Submit</button>
             </div>
@@ -3211,43 +3257,40 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content border-0">
             
-            <div class="np-header">
-                <h5>New Proposal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body modal-flex-col-scroll">
-                <div class="np-body">
-                    <div class="np-grid">
+            <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between"><h5 class="modal-title fw-bold m-0 fs-5">New Proposal</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="container-fluid px-0">
+                    <div class="row g-4 mb-4">
                         <!-- Left Column -->
-                        <div>
-                            <div class="np-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
-                            <div class="np-field"><label><span class="req">*</span>Related</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
+                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="np-field"><label><span class="req">*</span>Lead</label><select class="form-select" id="npLeadSelect">
+                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select" id="npLeadSelect">
                                     <option>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
-                                <div class="np-field"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
+<div class="col-md-6"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
                                         <option>GBP £</option>
                                     </select></div>
-                                <div class="np-field"><label>Discount type</label><select class="form-select">
+<div class="col-md-6"><label>Discount type</label><select class="form-select">
                                         <option selected>No discount</option>
                                         <option>Before Tax</option>
                                         <option>After Tax</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field">
+</div>
+                            <div class="mb-3">
                                 <label><i class="bi bi-tag me-1"></i>Tags</label>
                                 <div class="nl-tags-wrap w-100" id="npTagsWrap">
                                     <div class="nl-tags-chips" id="npTagsChips"></div>
@@ -3255,60 +3298,60 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 </div>
                                 <input type="hidden" id="np_tags" value="">
                             </div>
-                            <div class="np-field">
-                                <div class="np-toggle"><input type="checkbox" checked id="npAllowComments"><label for="npAllowComments">Allow Comments</label></div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch mt-2"><input class="form-check-input" type="checkbox" checked id="npAllowComments"><label class="form-check-label small fw-medium" for="npAllowComments">Allow Comments</label></div>
                             </div>
                         </div>
                         <!-- Right Column -->
-                        <div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Status</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Status</label><select class="form-select">
                                         <option selected>Draft</option>
                                         <option>Sent</option>
                                         <option>Accepted</option>
                                         <option>Rejected</option>
                                     </select></div>
-                                <div class="np-field"><label>Assigned</label><select class="form-select">
+<div class="col-md-6"><label>Assigned</label><select class="form-select">
                                         <option selected>GHRAUDA SOFTWARE</option>
                                         <option>Harish D.</option>
                                         <option>Divya A.</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
-                            <div class="np-field"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Country</label><select class="form-select">
+</div>
+                            <div class="mb-3"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Country</label><select class="form-select">
                                         <option selected>India</option>
                                         <option>USA</option>
                                         <option>UK</option>
                                     </select></div>
-                                <div class="np-field"><label>State</label><select class="form-select">
+<div class="col-md-6"><label>State</label><select class="form-select">
                                         <option value="">Nothing selected</option>
                                         <option>Tamil Nadu</option>
                                         <option>Karnataka</option>
                                         <option>Maharashtra</option>
                                     </select></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label>City</label><select class="form-select">
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>City</label><select class="form-select">
                                         <option value="">Nothing selected</option>
                                         <option>Chennai</option>
                                         <option>Bangalore</option>
                                         <option>Mumbai</option>
                                     </select></div>
-                                <div class="np-field"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
-                                <div class="np-field"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
-                            </div>
+<div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
+</div>
                         </div>
                     </div>
 
                     <!-- Items Section -->
-                    <div class="np-items-section">
-                        <div class="np-items-toolbar">
-                            <div class="np-add-item-wrap">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                            <div class="d-flex align-items-center gap-2">
                                 <select class="form-select" id="npAddItemSelect">
                                     <option value="">Add Item</option>
                                     <option>HRMS Subscription</option>
@@ -3318,7 +3361,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 </select>
                                 <button type="button" class="btn btn-primary" id="npAddItemBtn" title="Add item"><i class="bi bi-plus-lg"></i></button>
                             </div>
-                            <div class="np-qty-radio">
+                            <div class="d-flex align-items-center gap-3 small text-muted">
                                 <span>Show quantity as:</span>
                                 <label><input type="radio" name="npQtyType" checked> Qty</label>
                                 <label><input type="radio" name="npQtyType"> Hours</label>
@@ -3326,7 +3369,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="np-item-table">
+                            <table class="table table-bordered align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th class="col-w-30"><i class="bi bi-info-circle text-border-light"></i></th>
@@ -3355,33 +3398,33 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                                 <option>GST 18%</option>
                                             </select></td>
                                         <td><span class="fw-bold text-darkest">₹ 0.00</span></td>
-                                        <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                        <td><button type="button" class="btn btn-sm btn-primary rounded-circle np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <!-- Totals -->
-                        <div class="np-totals">
-                            <div class="np-totals-table">
-                                <div class="np-totals-row"><span class="total-label">Sub Total :</span><span class="total-val ap-totals-margin-n10">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Total :</span><span class="total-val total-grand ap-totals-margin-n10">₹ 0.00</span></div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <div class="d-flex flex-column gap-2 text-end" style="min-width: 320px;">
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Sub Total :</span><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Total :</span><span class="fw-bold fs-5 text-primary">₹ 0.00</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Notes Section -->
-                    <div class="np-notes-section">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="mb-3"><label>Client Note</label><textarea class="form-control" placeholder="Enter client note..."></textarea></div>
                         <div><label>Terms & Conditions</label><textarea class="form-control np-tc" placeholder="Enter terms and conditions..."></textarea></div>
                     </div>
                 </div>
             </div><!-- /modal-body -->
             <!-- Footer -->
-            <div class="np-footer">
-                <span class="np-hint">Include proposal items with merge field anywhere in proposal content as {proposal_items}</span>
-                <div class="np-actions">
+            <div class="modal-footer bg-white border-top p-3 d-flex align-items-center justify-content-between">
+                <span class="small text-muted">Include proposal items with merge field anywhere in proposal content as {proposal_items}</span>
+                <div class="d-flex gap-2">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Submit</button>
                 </div>
@@ -3395,101 +3438,98 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content border-0">
             
-            <div class="np-header">
-                <h5><i class="bi bi-file-earmark-text me-2 text-crm-primary"></i>New Estimate</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body modal-flex-col-scroll">
-                <div class="np-body">
-                    <div class="np-grid">
+            <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between"><h5 class="modal-title fw-bold m-0 fs-5"><i class="bi bi-file-earmark-text me-2 text-crm-primary"></i>New Estimate</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="container-fluid px-0">
+                    <div class="row g-4 mb-4">
                         <!-- Left Column -->
-                        <div>
-                            <div class="np-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Estimate"></div>
-                            <div class="np-field"><label><span class="req">*</span>Related</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Estimate"></div>
+                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="np-field"><label><span class="req">*</span>Lead</label><select class="form-select">
+                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select">
                                     <option selected>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                                <div class="np-field"><label>Open Till</label><input type="date" class="form-control" value="2026-09-30"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+<div class="col-md-6"><label>Open Till</label><input type="date" class="form-control" value="2026-09-30"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
                                         <option>GBP £</option>
                                     </select></div>
-                                <div class="np-field"><label>Discount type</label><select class="form-select">
+<div class="col-md-6"><label>Discount type</label><select class="form-select">
                                         <option selected>No discount</option>
                                         <option>Before Tax</option>
                                         <option>After Tax</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field">
+</div>
+                            <div class="mb-3">
                                 <label><i class="bi bi-tag me-1"></i>Tags</label>
                                 <div class="nl-tags-wrap w-100">
                                     <div class="nl-tags-chips"><span class="nl-tag-chip">Estimate</span></div>
                                 </div>
                             </div>
-                            <div class="np-field">
-                                <div class="np-toggle"><input type="checkbox" checked id="esAllowComments"><label for="esAllowComments">Allow Comments</label></div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch mt-2"><input class="form-check-input" type="checkbox" checked id="esAllowComments"><label class="form-check-label small fw-medium" for="esAllowComments">Allow Comments</label></div>
                             </div>
                         </div>
                         <!-- Right Column -->
-                        <div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Status</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Status</label><select class="form-select">
                                         <option selected>Draft</option>
                                         <option>Sent</option>
                                         <option>Accepted</option>
                                         <option>Rejected</option>
                                         <option>Expired</option>
                                     </select></div>
-                                <div class="np-field"><label>Assigned</label><select class="form-select">
+<div class="col-md-6"><label>Assigned</label><select class="form-select">
                                         <option selected>GHRAUDA SOFTWARE</option>
                                         <option>Harish D.</option>
                                         <option>Divya A.</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
-                            <div class="np-field"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Country</label><select class="form-select">
+</div>
+                            <div class="mb-3"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Country</label><select class="form-select">
                                         <option selected>India</option>
                                         <option>USA</option>
                                         <option>UK</option>
                                     </select></div>
-                                <div class="np-field"><label>State</label><select class="form-select">
+<div class="col-md-6"><label>State</label><select class="form-select">
                                         <option selected>Tamil Nadu</option>
                                         <option>Karnataka</option>
                                         <option>Maharashtra</option>
                                     </select></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label>City</label><select class="form-select">
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>City</label><select class="form-select">
                                         <option selected>Chennai</option>
                                         <option>Bangalore</option>
                                         <option>Mumbai</option>
                                     </select></div>
-                                <div class="np-field"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
-                                <div class="np-field"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
-                            </div>
+<div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
+</div>
                         </div>
                     </div>
 
                     <!-- Items Section -->
-                    <div class="np-items-section">
-                        <div class="np-items-toolbar">
-                            <div class="np-add-item-wrap">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                            <div class="d-flex align-items-center gap-2">
                                 <select class="form-select">
                                     <option value="">Add Item</option>
                                     <option>HRMS Subscription</option>
@@ -3499,7 +3539,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 </select>
                                 <button type="button" class="btn btn-primary" title="Add item"><i class="bi bi-plus-lg"></i></button>
                             </div>
-                            <div class="np-qty-radio">
+                            <div class="d-flex align-items-center gap-3 small text-muted">
                                 <span>Show quantity as:</span>
                                 <label><input type="radio" name="esQtyType" checked> Qty</label>
                                 <label><input type="radio" name="esQtyType"> Hours</label>
@@ -3507,7 +3547,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="np-item-table">
+                            <table class="table table-bordered align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th class="col-w-30"><i class="bi bi-info-circle text-border-light"></i></th>
@@ -3536,7 +3576,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                                 <option>GST 18%</option>
                                             </select></td>
                                         <td><span class="fw-bold text-darkest">₹ 99,750.00</span></td>
-                                        <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                        <td><button type="button" class="btn btn-sm btn-primary rounded-circle np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi bi-info-circle text-border-light fs-12"></i></td>
@@ -3552,24 +3592,24 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                                 <option>GST 18%</option>
                                             </select></td>
                                         <td><span class="fw-bold text-darkest">₹ 18,000.00</span></td>
-                                        <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                        <td><button type="button" class="btn btn-sm btn-primary rounded-circle np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <!-- Totals -->
-                        <div class="np-totals">
-                            <div class="np-totals-table">
-                                <div class="np-totals-row"><span class="total-label">Sub Total :</span><span class="total-val ap-totals-margin-n10">₹ 1,13,000.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Total :</span><span class="total-val total-grand ap-totals-margin-n10">₹ 1,13,000.00</span></div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <div class="d-flex flex-column gap-2 text-end" style="min-width: 320px;">
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Sub Total :</span><span class="fw-bold fs-6 text-dark">₹ 1,13,000.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Total :</span><span class="fw-bold fs-5 text-primary">₹ 1,13,000.00</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Notes Section -->
-                    <div class="np-notes-section">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="mb-3"><label>Client Note</label><textarea class="form-control">Estimate valid for 7 days. Price inclusive of standard installation.</textarea></div>
                         <div><label>Terms & Conditions</label><textarea class="form-control np-tc">1. 50% advance payment required to confirm the order.
 2. Installation timeline: 7 working days from advance receipt.
@@ -3578,9 +3618,9 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
             </div><!-- /modal-body -->
             <!-- Footer -->
-            <div class="np-footer">
-                <span class="np-hint">Include estimate items with merge field anywhere in estimate content as {estimate_items}</span>
-                <div class="np-actions">
+            <div class="modal-footer bg-white border-top p-3 d-flex align-items-center justify-content-between">
+                <span class="small text-muted">Include estimate items with merge field anywhere in estimate content as {estimate_items}</span>
+                <div class="d-flex gap-2">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Submit</button>
                 </div>
@@ -3594,57 +3634,54 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content border-0">
             
-            <div class="np-header">
-                <h5><i class="bi bi-receipt me-2 text-crm-primary"></i>New Invoice</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body modal-flex-col-scroll">
-                <div class="np-body">
-                    <div class="np-grid">
+            <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between"><h5 class="modal-title fw-bold m-0 fs-5"><i class="bi bi-receipt me-2 text-crm-primary"></i>New Invoice</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="container-fluid px-0">
+                    <div class="row g-4 mb-4">
                         <!-- Left Column -->
-                        <div>
-                            <div class="np-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Invoice INV-259"></div>
-                            <div class="np-field"><label><span class="req">*</span>Related</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Invoice INV-259"></div>
+                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="np-field"><label><span class="req">*</span>Lead</label><select class="form-select">
+                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select">
                                     <option selected>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Invoice Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                                <div class="np-field"><label><span class="req">*</span>Due Date</label><input type="date" class="form-control" value="2026-09-30"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Invoice Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+<div class="col-md-6"><label><span class="req">*</span>Due Date</label><input type="date" class="form-control" value="2026-09-30"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
                                         <option>GBP £</option>
                                     </select></div>
-                                <div class="np-field"><label>Discount type</label><select class="form-select">
+<div class="col-md-6"><label>Discount type</label><select class="form-select">
                                         <option selected>No discount</option>
                                         <option>Before Tax</option>
                                         <option>After Tax</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field">
+</div>
+                            <div class="mb-3">
                                 <label><i class="bi bi-tag me-1"></i>Tags</label>
                                 <div class="nl-tags-wrap w-100">
                                     <div class="nl-tags-chips"><span class="nl-tag-chip">Invoice</span></div>
                                 </div>
                             </div>
-                            <div class="np-field">
-                                <div class="np-toggle"><input type="checkbox" checked id="invAllowComments"><label for="invAllowComments">Allow Comments</label></div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch mt-2"><input class="form-check-input" type="checkbox" checked id="invAllowComments"><label class="form-check-label small fw-medium" for="invAllowComments">Allow Comments</label></div>
                             </div>
-                            <div class="np-field"><label>Reference #</label><input type="text" class="form-control" value="INV-259"></div>
+                            <div class="mb-3"><label>Reference #</label><input type="text" class="form-control" value="INV-259"></div>
                         </div>
                         <!-- Right Column -->
-                        <div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Status</label><select class="form-select">
+                        <div class="col-12 col-xl-6">
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Status</label><select class="form-select">
                                         <option selected>Unpaid</option>
                                         <option>Paid</option>
                                         <option>Partially Paid</option>
@@ -3652,45 +3689,45 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <option>Cancelled</option>
                                         <option>Draft</option>
                                     </select></div>
-                                <div class="np-field"><label>Assigned</label><select class="form-select">
+<div class="col-md-6"><label>Assigned</label><select class="form-select">
                                         <option selected>GHRAUDA SOFTWARE</option>
                                         <option>Harish D.</option>
                                         <option>Divya A.</option>
                                     </select></div>
-                            </div>
-                            <div class="np-field"><label><span class="req">*</span>Bill To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
-                            <div class="np-field"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
-                            <div class="np-row">
-                                <div class="np-field"><label>Country</label><select class="form-select">
+</div>
+                            <div class="mb-3"><label><span class="req">*</span>Bill To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>Country</label><select class="form-select">
                                         <option selected>India</option>
                                         <option>USA</option>
                                         <option>UK</option>
                                     </select></div>
-                                <div class="np-field"><label>State</label><select class="form-select">
+<div class="col-md-6"><label>State</label><select class="form-select">
                                         <option selected>Tamil Nadu</option>
                                         <option>Karnataka</option>
                                         <option>Maharashtra</option>
                                     </select></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label>City</label><select class="form-select">
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label>City</label><select class="form-select">
                                         <option selected>Chennai</option>
                                         <option>Bangalore</option>
                                         <option>Mumbai</option>
                                     </select></div>
-                                <div class="np-field"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
-                            </div>
-                            <div class="np-row">
-                                <div class="np-field"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
-                                <div class="np-field"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
-                            </div>
+<div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
+</div>
+                            <div class="row g-3 mb-3">
+<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
+</div>
                         </div>
                     </div>
 
                     <!-- Items Section -->
-                    <div class="np-items-section">
-                        <div class="np-items-toolbar">
-                            <div class="np-add-item-wrap">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                            <div class="d-flex align-items-center gap-2">
                                 <select class="form-select">
                                     <option value="">Add Item</option>
                                     <option>HRMS Subscription</option>
@@ -3700,7 +3737,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 </select>
                                 <button type="button" class="btn btn-primary" title="Add item"><i class="bi bi-plus-lg"></i></button>
                             </div>
-                            <div class="np-qty-radio">
+                            <div class="d-flex align-items-center gap-3 small text-muted">
                                 <span>Show quantity as:</span>
                                 <label><input type="radio" name="invQtyType" checked> Qty</label>
                                 <label><input type="radio" name="invQtyType"> Hours</label>
@@ -3708,7 +3745,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="np-item-table">
+                            <table class="table table-bordered align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th class="col-w-30"><i class="bi bi-info-circle text-border-light"></i></th>
@@ -3737,7 +3774,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                                 <option>GST 18%</option>
                                             </select></td>
                                         <td><span class="fw-bold text-darkest">₹ 99,750.00</span></td>
-                                        <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                        <td><button type="button" class="btn btn-sm btn-primary rounded-circle np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi bi-info-circle text-border-light fs-12"></i></td>
@@ -3753,25 +3790,25 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                                 <option>GST 18%</option>
                                             </select></td>
                                         <td><span class="fw-bold text-darkest">₹ 18,000.00</span></td>
-                                        <td><button type="button" class="np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                        <td><button type="button" class="btn btn-sm btn-primary rounded-circle np-check-btn" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <!-- Totals -->
-                        <div class="np-totals">
-                            <div class="np-totals-table">
-                                <div class="np-totals-row"><span class="total-label">Sub Total :</span><span class="total-val ap-totals-margin-n10">₹ 1,13,000.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Amount Paid</span><input type="number" class="form-control col-w-120" value="0"><span class="total-val">₹ 0.00</span></div>
-                                <div class="np-totals-row"><span class="total-label">Balance Due :</span><span class="total-val total-grand ap-totals-margin-n10">₹ 1,13,000.00</span></div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <div class="d-flex flex-column gap-2 text-end" style="min-width: 320px;">
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Sub Total :</span><span class="fw-bold fs-6 text-dark">₹ 1,13,000.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Adjustment</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Transport Amount</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Amount Paid</span><input type="number" class="form-control col-w-120" value="0"><span class="fw-bold fs-6 text-dark">₹ 0.00</span></div>
+                                <div class="d-flex align-items-center justify-content-end gap-3"><span class="small fw-semibold text-muted">Balance Due :</span><span class="fw-bold fs-5 text-primary">₹ 1,13,000.00</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Notes Section -->
-                    <div class="np-notes-section">
+                    <div class="card border shadow-sm p-4 mb-4 bg-white">
                         <div class="mb-3"><label>Client Note</label><textarea class="form-control">Payment due within 7 days. Invoice INV-259 generated from accepted proposal.</textarea></div>
                         <div><label>Terms & Conditions</label><textarea class="form-control np-tc">1. Payment via NEFT/UPI/Cheque in favour of GHRA TECHNOLOGY.
 2. Late payments attract 2% interest per month.
@@ -3780,9 +3817,9 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
             </div><!-- /modal-body -->
             <!-- Footer -->
-            <div class="np-footer">
-                <span class="np-hint">Include invoice items with merge field anywhere in invoice content as {invoice_items}</span>
-                <div class="np-actions">
+            <div class="modal-footer bg-white border-top p-3 d-flex align-items-center justify-content-between">
+                <span class="small text-muted">Include invoice items with merge field anywhere in invoice content as {invoice_items}</span>
+                <div class="d-flex gap-2">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="niSubmitBtn">Submit</button>
                 </div>
@@ -3794,32 +3831,32 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Record Payment Modal (Invoice panel → Payment) ===== -->
 <div class="modal fade" id="apRecordPaymentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
-            <div class="modal-header pv-header-border">
+            <div class="modal-header border-bottom py-3 px-4">
                 <h5 class="modal-title fs-5 fw-bold">Record Payment for <span class="text-theme-blue">INV-259</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpAmount"><span class="req">*</span>Amount Received</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpAmount"><span class="req">*</span>Amount Received</label>
                         <input type="text" class="form-control" id="rpAmount" value="393750.00">
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpTxnId">Transaction ID</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpTxnId">Transaction ID</label>
                         <input type="text" class="form-control" id="rpTxnId" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpDate"><span class="req">*</span>Payment Date</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpDate"><span class="req">*</span>Payment Date</label>
                         <input type="date" class="form-control" id="rpDate" value="2026-09-23">
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpNote">Leave a note</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpNote">Leave a note</label>
                         <textarea class="form-control resize-vertical" id="rpNote" rows="4" placeholder="Admin Note"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpMode"><span class="req">*</span>Payment Mode</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpMode"><span class="req">*</span>Payment Mode</label>
                         <select class="form-select" id="rpMode">
                             <option value="">Non selected</option>
                             <option>Cash</option>
@@ -3831,7 +3868,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpAgent">Sales Agent</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpAgent">Sales Agent</label>
                         <select class="form-select" id="rpAgent">
                             <option value="">Non selected</option>
                             <option>gharuda SOFTWARE</option>
@@ -3840,7 +3877,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpDeposit">Deposit To</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpDeposit">Deposit To</label>
                         <select class="form-select" id="rpDeposit">
                             <option value="">Non selected</option>
                             <option>Cash Account</option>
@@ -3849,7 +3886,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="rp-label" for="rpAccount">Payment Account</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpAccount">Payment Account</label>
                         <select class="form-select" id="rpAccount">
                             <option value="">Non selected</option>
                             <option>HDFC Bank - ****4521</option>
@@ -3864,7 +3901,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer pv-footer-border">
+            <div class="modal-footer border-top py-3 px-4">
                 <button type="button" class="btn btn-danger btn-rounded-8-fs13" data-bs-dismiss="modal">Cancelled</button>
                 <button type="button" class="btn btn-primary btn-rounded-8-fs13" id="rpSubmitBtn">Submit</button>
             </div>
@@ -3875,26 +3912,26 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <!-- ===== Payment Receipt View Modal (fullscreen) ===== -->
 <div class="modal fade" id="apPaymentViewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content modal-content-rounded-0">
+        <div class="modal-content border-0">
             
-            <div class="pv-body pv-body-layout">
-                <div class="d-flex align-items-start gap-3 modal-flex-col">
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="row g-4">
                     <!-- Left: payment form summary -->
-                    <div class="pv-card pv-card-left">
+                    <div class="col-12 col-lg-5"><div class="card border shadow-sm p-4 bg-white">
                         <div class="fs-14 fw-bold text-darkest mb-3">Payment for Invoice <span class="text-theme-blue">INV-259</span></div>
-                        <div class="mb-3"><label class="pv-label"><span class="req">*</span> Amount Received</label><input type="text" class="form-control" id="pvAmount" readonly></div>
-                        <div class="mb-3"><label class="pv-label"><span class="req">*</span> Payment Date</label><input type="date" class="form-control" id="pvDate" readonly></div>
-                        <div class="mb-3"><label class="pv-label">Payment Mode</label><input type="text" class="form-control" id="pvMode" readonly></div>
-                        <div class="mb-3"><label class="pv-label">Transaction ID</label><input type="text" class="form-control" id="pvTxn" readonly placeholder="—"></div>
-                        <div class="mb-3"><label class="pv-label">Sale Agent</label><input type="text" class="form-control" id="pvAgent" readonly placeholder="—"></div>
-                        <div class="mb-3"><label class="pv-label">Note</label><textarea class="form-control" id="pvNote" rows="4" readonly placeholder="—"></textarea></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> Amount Received</label><input type="text" class="form-control" id="pvAmount" readonly></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> Payment Date</label><input type="date" class="form-control" id="pvDate" readonly></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Payment Mode</label><input type="text" class="form-control" id="pvMode" readonly></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Transaction ID</label><input type="text" class="form-control" id="pvTxn" readonly placeholder="—"></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Sale Agent</label><input type="text" class="form-control" id="pvAgent" readonly placeholder="—"></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Note</label><textarea class="form-control" id="pvNote" rows="4" readonly placeholder="—"></textarea></div>
                         <div class="row g-2">
-                            <div class="col-6"><label class="pv-label">Payment Account</label><input type="text" class="form-control" id="pvAccount" readonly placeholder="Non selected"></div>
-                            <div class="col-6"><label class="pv-label">Deposit To</label><input type="text" class="form-control" id="pvDeposit" readonly placeholder="Non selected"></div>
+                            <div class="col-6"><label class="form-label fw-medium small text-muted mb-1">Payment Account</label><input type="text" class="form-control" id="pvAccount" readonly placeholder="Non selected"></div>
+                            <div class="col-6"><label class="form-label fw-medium small text-muted mb-1">Deposit To</label><input type="text" class="form-control" id="pvDeposit" readonly placeholder="Non selected"></div>
                         </div>
                     </div>
                     <!-- Right: payment receipt -->
-                    <div class="pv-card pv-card-right">
+                    </div></div><div class="col-12 col-lg-7"><div class="card border shadow-sm p-4 bg-white">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <div class="fs-14 fw-bold text-darkest">Payment</div>
                             <div class="d-flex align-items-center gap-2">
@@ -3914,12 +3951,12 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                 <div class="inv-address-text">1/2 VOC STREET MENABADU AMBATTUR CHENNAI<br>Chennai<br>IN 6006</div>
                             </div>
                         </div>
-                        <div class="pv-receipt-header">PAYMENT RECEIPT</div>
+                        <div class="text-center fw-bold fs-5 my-3 text-uppercase text-primary border-bottom pb-2">PAYMENT RECEIPT</div>
                         <table class="pv-receipt-table">
                             <tr><td class="pv-receipt-td">Payment Date:</td><td class="pv-receipt-val" id="pvReceiptDate">23-09-2026</td></tr>
                             <tr><td class="pv-receipt-td">Payment Mode:</td><td class="pv-receipt-val" id="pvReceiptMode">Bank</td></tr>
                         </table>
-                        <div class="pv-total-box">Total Amount<br><span class="fs-16" id="pvReceiptTotal">₹ 393,750.00</span></div>
+                        <div class="card bg-light-subtle border text-center p-3 my-3 fw-bold fs-5">Total Amount<br><span class="fs-16" id="pvReceiptTotal">₹ 393,750.00</span></div>
                         <div class="fs-13 fw-bold text-muted my-3">Payment For</div>
                         <div class="table-responsive">
                             <table class="table-modern w-100 mb-0">
@@ -3948,10 +3985,10 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
     </div>
 </div>
 
-<!-- ===== New Task Modal ===== -->
+</div></div><!-- ===== New Task Modal ===== -->
 <div class="modal fade" id="newTaskModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog-w620">
-        <div class="modal-content modal-content-rounded-12">
+        <div class="modal-content border-0 shadow-lg">
             
             <div class="modal-header">
                 <h5>Add new task</h5>
@@ -3959,8 +3996,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             </div>
             <div class="modal-body">
                 <!-- Public / Billable -->
-                <div class="tk-top-row">
-                    <div class="tk-checks">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex gap-3">
                         <label><input type="checkbox" id="tkPublic"> Public</label>
                         <label><input type="checkbox" id="tkBillable" checked> Billable</label>
                     </div>
@@ -3974,29 +4011,29 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <div id="tkFileList"></div>
                 <!-- Subject -->
-                <div class="tk-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Subject</label>
                     <input type="text" class="form-control" id="tkSubject" placeholder="">
                 </div>
                 <!-- Hourly Rate -->
-                <div class="tk-field">
+                <div class="mb-3">
                     <label>Hourly Rate</label>
                     <input type="number" class="form-control" id="tkHourlyRate" value="0">
                 </div>
                 <!-- Start Date / Due Date -->
                 <div class="tk-2col">
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label><span class="req">*</span>Start Date</label>
                         <input type="date" class="form-control" id="tkStartDate" value="2026-09-21">
                     </div>
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Due Date</label>
                         <input type="date" class="form-control" id="tkDueDate">
                     </div>
                 </div>
                 <!-- Repeat every / Priority -->
                 <div class="tk-2col">
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Repeat every</label>
                         <select class="form-select" id="tkRepeat">
                             <option selected>Non selected</option>
@@ -4006,7 +4043,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Every year</option>
                         </select>
                     </div>
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Priority</label>
                         <select class="form-select" id="tkPriority">
                             <option>Low</option>
@@ -4018,7 +4055,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <!-- Related To / Proposal -->
                 <div class="tk-2col">
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Related To</label>
                         <select class="form-select" id="tkRelatedTo">
                             <option selected>Proposal</option>
@@ -4027,7 +4064,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Project</option>
                         </select>
                     </div>
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Proposal</label>
                         <select class="form-select" id="tkProposalSel">
                             <option selected>PRO-152</option>
@@ -4044,7 +4081,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <div class="tk-dep"><input type="checkbox" id="tkDependency"><label for="tkDependency">Dependency</label></div>
                 <!-- Assignees / Followers -->
                 <div class="tk-2col">
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Assignees</label>
                         <select class="form-select" id="tkAssignees">
                             <option selected>GHARUDA SOFTWARE</option>
@@ -4053,7 +4090,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                             <option>Suresh Babu</option>
                         </select>
                     </div>
-                    <div class="tk-field">
+                    <div class="mb-3">
                         <label>Followers</label>
                         <select class="form-select" id="tkFollowers">
                             <option selected>Non selected</option>
@@ -4064,7 +4101,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                 </div>
                 <!-- Insert Checklist Templates -->
-                <div class="tk-field">
+                <div class="mb-3">
                     <label>Insert Checklist Templates</label>
                     <select class="form-select" id="tkChecklist">
                         <option selected>Non selected</option>
@@ -4074,7 +4111,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </select>
                 </div>
                 <!-- Tags (chip input) -->
-                <div class="tk-field">
+                <div class="mb-3">
                     <label><span class="req">*</span>Tags</label>
                     <div class="nl-tags-wrap w-100" id="tkTagsWrap">
                         <div class="nl-tags-chips" id="tkTagsChips"></div>
@@ -4082,13 +4119,13 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </div>
                 </div>
                 <!-- Task Description -->
-                <div class="tk-field">
+                <div class="mb-3">
                     <label>Task Description</label>
                     <textarea class="form-control" id="tkDescription" placeholder="Add description"></textarea>
                 </div>
             </div>
             <!-- Footer -->
-            <div class="tk-footer">
+            <div class="modal-footer border-top p-3">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="tkTaskSubmit">Submit</button>
             </div>

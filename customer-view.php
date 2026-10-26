@@ -1,10 +1,28 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/customer-view.css">
+<style>
+.cv-side-link {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+  border-radius: 8px; color: var(--ink-700, #334155); font-size: 13px;
+  font-weight: 500; text-decoration: none; transition: all 0.15s ease;
+}
+.cv-side-link i { width: 18px; text-align: center; font-size: 15px; }
+.cv-side-link:hover { background: #f1f5f9; color: var(--primary, #0d6efd); }
+.cv-side-link.active { background: var(--primary-light, #e7f1ff); color: var(--primary, #0d6efd); font-weight: 600; }
+.cv-subtabs { display: flex; gap: 6px; border-bottom: 1px solid #e2e8f0; padding: 12px 16px; overflow-x: auto; }
+.cv-subtab { background: none; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 500; color: #64748b; cursor: pointer; transition: all 0.15s ease; }
+.cv-subtab:hover { background: #f8fafc; color: #0d6efd; }
+.cv-subtab.active { background: var(--primary-light, #e7f1ff); color: var(--primary, #0d6efd); font-weight: 600; }
+.cv-prj-pane:not(.active) { display: none !important; }
+.cv-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #1e293b; }
+.cv-cl-yn { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2px; }
+.cv-cl-yn label { padding: 4px 10px; font-size: 12px; font-weight: 500; border-radius: 6px; cursor: pointer; }
+.cv-cl-yn input:checked + label { background: var(--primary, #0d6efd); color: #fff; }
+</style>
 
 
-<main class="cv-page">
-  <div class="cv-head">
+<main class="container-fluid px-3 py-2">
+  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
     <div>
       <h1 class="font-display fw-bold mb-1 page-title">#46 GG COMPANY</h1>
       <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap overflow-auto breadcrumb-text">
@@ -15,20 +33,20 @@
     <a href="customers.php" class="btn btn-outline-primary"><i class="bi bi-arrow-left me-1"></i>Back to customers</a>
   </div>
 
-  <div class="cv-layout">
+  <div class="row g-0 bg-white rounded-4 border overflow-hidden shadow-sm align-items-start">
     <!-- Left sidebar (Bootstrap pills — toggles the panes on the right, URL hash follows) -->
-    <aside class="card-custom cv-side" id="cvSide" role="tablist" aria-orientation="vertical" aria-label="Customer sections">
-      <div class="cv-side-group">
-        <div class="cv-side-label">Overview</div>
+    <aside class="col-12 col-lg-3 col-xl-2 border-end p-2 bg-white sticky-top cv-side" style="top:calc(var(--topbar-h, 70px) + 12px);max-height:calc(100vh - var(--topbar-h, 70px) - 36px);overflow-y:auto;" id="cvSide" role="tablist" aria-orientation="vertical" aria-label="Customer sections">
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Overview</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-profile" data-tab="profile" data-bs-target="#cvTab-profile" role="tab" aria-controls="cvTab-profile" aria-selected="false">
           <i class="bi bi-person-circle"></i>Profile </a>
         <a href="javascript:void(0)" class="cv-side-link active" id="cvSideLink-contacts" data-tab="contacts" data-bs-target="#cvTab-contacts" role="tab" aria-controls="cvTab-contacts" aria-selected="true">
-          <i class="bi bi-person-fill"></i>Contacts <span class="cv-badge">4</span> </a>
+          <i class="bi bi-person-fill"></i>Contacts <span class="badge bg-primary-subtle text-primary rounded-pill ms-auto">4</span> </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-notes" data-tab="notes" data-bs-target="#cvTab-notes" role="tab" aria-controls="cvTab-notes" aria-selected="false">
           <i class="bi bi-journal-text"></i>Notes </a>
       </div>
-      <div class="cv-side-group">
-        <div class="cv-side-label">Sales</div>
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Sales</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-proposals" data-tab="proposals" data-bs-target="#cvTab-proposals" role="tab" aria-controls="cvTab-proposals" aria-selected="false">
           <i class="bi bi-file-earmark"></i>Proposals </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-estimates" data-tab="estimates" data-bs-target="#cvTab-estimates" role="tab" aria-controls="cvTab-estimates" aria-selected="false">
@@ -36,8 +54,8 @@
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-appointments" data-tab="appointments" data-bs-target="#cvTab-appointments" role="tab" aria-controls="cvTab-appointments" aria-selected="false">
           <i class="bi bi-calendar3"></i>Appointments </a>
       </div>
-      <div class="cv-side-group">
-        <div class="cv-side-label">Finance</div>
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Finance</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-invoices" data-tab="invoices" data-bs-target="#cvTab-invoices" role="tab" aria-controls="cvTab-invoices" aria-selected="false">
           <i class="bi bi-file-earmark-text"></i>Invoices </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-payments" data-tab="payments" data-bs-target="#cvTab-payments" role="tab" aria-controls="cvTab-payments" aria-selected="false">
@@ -55,24 +73,24 @@
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-contracts" data-tab="contracts" data-bs-target="#cvTab-contracts" role="tab" aria-controls="cvTab-contracts" aria-selected="false">
           <i class="bi bi-file-earmark-ruled"></i>Contracts </a>
       </div>
-      <div class="cv-side-group">
-        <div class="cv-side-label">Work</div>
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Work</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-projects" data-tab="projects" data-bs-target="#cvTab-projects" role="tab" aria-controls="cvTab-projects" aria-selected="false">
           <i class="bi bi-diagram-3"></i>Projects </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-tasks" data-tab="tasks" data-bs-target="#cvTab-tasks" role="tab" aria-controls="cvTab-tasks" aria-selected="false">
           <i class="bi bi-list-check"></i>Tasks </a>
       </div>
-      <div class="cv-side-group">
-        <div class="cv-side-label">Support</div>
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Support</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-tickets" data-tab="tickets" data-bs-target="#cvTab-tickets" role="tab" aria-controls="cvTab-tickets" aria-selected="false">
-          <i class="bi bi-life-preserver"></i>Support Tickets <span class="cv-badge">1</span> </a>
+          <i class="bi bi-life-preserver"></i>Support Tickets <span class="badge bg-primary-subtle text-primary rounded-pill ms-auto">1</span> </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-email_log" data-tab="email_log" data-bs-target="#cvTab-email_log" role="tab" aria-controls="cvTab-email_log" aria-selected="false">
-          <i class="bi bi-envelope-fill"></i>Email Log <span class="cv-badge">1</span> </a>
+          <i class="bi bi-envelope-fill"></i>Email Log <span class="badge bg-primary-subtle text-primary rounded-pill ms-auto">1</span> </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-call_logs" data-tab="call_logs" data-bs-target="#cvTab-call_logs" role="tab" aria-controls="cvTab-call_logs" aria-selected="false">
           <i class="bi bi-telephone-fill"></i>Call Logs </a>
       </div>
-      <div class="cv-side-group">
-        <div class="cv-side-label">Other</div>
+      <div class="mb-2">
+        <div class="text-uppercase text-muted fw-bold px-3 pt-2 pb-1" style="font-size:11px;letter-spacing:0.5px;">Other</div>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-shipping" data-tab="shipping" data-bs-target="#cvTab-shipping" role="tab" aria-controls="cvTab-shipping" aria-selected="false">
           <i class="bi bi-truck"></i>View Shipping Address </a>
         <a href="javascript:void(0)" class="cv-side-link" id="cvSideLink-map" data-tab="map" data-bs-target="#cvTab-map" role="tab" aria-controls="cvTab-map" aria-selected="false">
@@ -89,7 +107,7 @@
     </aside>
 
     <!-- Right content -->
-    <section class="pt-2">
+    <section class="col-12 col-lg-9 col-xl-10 p-3">
       <div class="tab-content" id="cvTabContent">
         <div class="tab-pane fade" id="cvTab-profile" role="tabpanel" aria-labelledby="cvSideLink-profile" tabindex="0">
           <div class="cv-title">Profile</div>
@@ -104,39 +122,57 @@
             <div class="tab-content">
               <!-- Customer Details -->
               <div class="tab-pane cv-pane fade show active" id="cvSub-details" data-pane="details" role="tabpanel" aria-labelledby="cvSubBtn-details">
-
-                <div class="cv-form">
-                  <label class="cv-check mb-3"><input type="checkbox" class="form-check-input" id="dShowContact"> <span>Show primary contact full name on Invoices, Estimates, Payments, Credit Notes</span></label>
-
-                  <div class="cv-field"><label class="form-label" for="dClientCode">Client code</label><input class="form-control" id="dClientCode"></div>
-                  <div class="cv-field"><label class="form-label cv-required" for="dCompany">Company</label><input class="form-control" id="dCompany" value="GG COMPANY">
-                    <div class="cv-err" hidden>Company is required.</div>
+                <div class="p-3" style="max-width: 820px;">
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="dShowContact">
+                    <label class="form-check-label small fw-semibold" for="dShowContact">Show primary contact full name on Invoices, Estimates, Payments, Credit Notes</label>
                   </div>
 
-                  <div class="cv-grid-2">
-                    <div class="cv-field"><label class="form-label" for="dBalance">Balance</label><input class="form-control" id="dBalance" inputmode="decimal"></div>
-                    <div class="cv-field"><label class="form-label" for="dBalanceDate">as of</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dClientCode">Client code</label>
+                    <input class="form-control" id="dClientCode">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dCompany"><span class="text-danger">* </span>Company</label>
+                    <input class="form-control" id="dCompany" value="GG COMPANY">
+                    <div class="text-danger small mt-1 cv-err" hidden>Company is required.</div>
+                  </div>
+
+                  <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label small fw-bold" for="dBalance">Balance</label>
+                      <input class="form-control" id="dBalance" inputmode="decimal">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label small fw-bold" for="dBalanceDate">as of</label>
                       <div class="date-picker"><input type="text" class="date-input form-control" id="dBalanceDate" placeholder="dd-mm-yyyy" autocomplete="off"></div>
                     </div>
                   </div>
 
-                  <div class="cv-field"><label class="form-label" for="dPhone">Phone</label><input class="form-control" id="dPhone" value="9677063368"></div>
-                  <div class="cv-field"><label class="form-label" for="dWebsite">Website</label><input class="form-control" id="dWebsite"></div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dPhone">Phone</label>
+                    <input class="form-control" id="dPhone" value="9677063368">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dWebsite">Website</label>
+                    <input class="form-control" id="dWebsite">
+                  </div>
 
-                  <div class="cv-field">
-                    <label class="form-label" for="dGroups">Groups</label>
-                    <div class="cv-with-btn">
-                      <select class="form-select cv-select" id="dGroups">
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dGroups">Groups</label>
+                    <div class="d-flex">
+                      <select class="form-select cv-select rounded-end-0" id="dGroups">
                         <option value="">Non selected</option>
                         <option selected>Anand Mehta</option>
                         <option>VIP</option>
                         <option>Retail</option>
                       </select>
-                      <button type="button" class="btn cv-plus js-demo" title="Add group" aria-label="Add group"><i class="bi bi-plus-lg"></i></button>
+                      <button type="button" class="btn btn-outline-secondary rounded-start-0 js-demo" title="Add group" aria-label="Add group"><i class="bi bi-plus-lg"></i></button>
                     </div>
                   </div>
 
-                  <div class="cv-field"><label class="form-label" for="dCredit">Credit Days</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dCredit">Credit Days</label>
                     <select class="form-select cv-select" id="dCredit">
                       <option>0</option>
                       <option selected>1</option>
@@ -147,7 +183,8 @@
                       <option>60</option>
                     </select>
                   </div>
-                  <div class="cv-field"><label class="form-label" for="dCurrency"><i class="bi bi-question-circle me-1"></i>Currency</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dCurrency"><i class="bi bi-question-circle me-1"></i>Currency</label>
                     <select class="form-select cv-select" id="dCurrency">
                       <option>System Default</option>
                       <option>INR (₹)</option>
@@ -156,10 +193,14 @@
                     </select>
                   </div>
 
-                  <hr class="cv-divider">
+                  <hr class="my-4 text-muted">
 
-                  <div class="cv-field"><label class="form-label" for="dAddress">Address</label><textarea class="form-control" id="dAddress" rows="3">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea></div>
-                  <div class="cv-field"><label class="form-label" for="dCountry">Country</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dAddress">Address</label>
+                    <textarea class="form-control" id="dAddress" rows="3">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dCountry">Country</label>
                     <select class="form-select cv-select" id="dCountry">
                       <option selected>India</option>
                       <option>United States</option>
@@ -167,7 +208,8 @@
                       <option>United Arab Emirates</option>
                     </select>
                   </div>
-                  <div class="cv-field"><label class="form-label" for="dState">State</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dState">State</label>
                     <select class="form-select cv-select" id="dState">
                       <option value="">Nothing selected</option>
                       <option>Tamil Nadu</option>
@@ -177,8 +219,12 @@
                       <option>Andhra Pradesh</option>
                     </select>
                   </div>
-                  <div class="cv-field"><label class="form-label" for="dStateCode">State Code</label><input class="form-control" id="dStateCode"></div>
-                  <div class="cv-field"><label class="form-label" for="dCity">City</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dStateCode">State Code</label>
+                    <input class="form-control" id="dStateCode">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dCity">City</label>
                     <select class="form-select cv-select" id="dCity">
                       <option value="">Nothing selected</option>
                       <option selected>Chennai</option>
@@ -188,20 +234,36 @@
                       <option>Kochi</option>
                     </select>
                   </div>
-                  <div class="cv-field"><label class="form-label" for="dZip">Zip Code</label><input class="form-control" id="dZip" value="600006"></div>
-                  <div class="cv-field"><label class="form-label" for="dPan">PAN No</label><input class="form-control" id="dPan" maxlength="10"></div>
-                  <div class="cv-field"><label class="form-label" for="dGst">GST Number</label><input class="form-control" id="dGst" maxlength="15"></div>
-                  <div class="cv-field"><label class="form-label" for="dIndustry">Industry Type</label><textarea class="form-control" id="dIndustry" rows="3"></textarea></div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dZip">Zip Code</label>
+                    <input class="form-control" id="dZip" value="600006">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dPan">PAN No</label>
+                    <input class="form-control" id="dPan" maxlength="10">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dGst">GST Number</label>
+                    <input class="form-control" id="dGst" maxlength="15">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="dIndustry">Industry Type</label>
+                    <textarea class="form-control" id="dIndustry" rows="3"></textarea>
+                  </div>
 
-                  <div class="cv-grid-2">
-                    <div class="cv-field mb-0"><label class="form-label" for="dOpening">Opening Balance</label><input class="form-control" id="dOpening" placeholder="0.000" inputmode="decimal"></div>
-                    <div class="cv-field mb-0"><label class="form-label" for="dOpeningDate">As Of</label>
+                  <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label small fw-bold" for="dOpening">Opening Balance</label>
+                      <input class="form-control" id="dOpening" placeholder="0.000" inputmode="decimal">
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label class="form-label small fw-bold" for="dOpeningDate">As Of</label>
                       <div class="date-picker"><input type="text" class="date-input form-control" id="dOpeningDate" placeholder="dd-mm-yyyy" autocomplete="off"></div>
                     </div>
                   </div>
 
-                  <div class="cv-field mb-0">
-                    <label class="form-label cv-required" for="cProfession">Profession</label>
+                  <div class="mb-3">
+                    <label class="form-label small fw-bold" for="cProfession"><span class="text-danger">* </span>Profession</label>
                     <select class="form-select cv-select" id="cProfession">
                       <option value="">Select profession</option>
                       <option selected>Builders</option>
@@ -210,20 +272,25 @@
                       <option>Manufacturing</option>
                       <option>Retail</option>
                     </select>
-                    <div class="cv-err" hidden>Profession is required.</div>
+                    <div class="text-danger small mt-1 cv-err" hidden>Profession is required.</div>
                   </div>
                 </div>
-
               </div>
 
               <!-- Billing & Shipping -->
               <div class="tab-pane cv-pane fade" id="cvSub-billing" data-pane="billing" role="tabpanel" aria-labelledby="cvSubBtn-billing">
-
-                <div class="cv-grid-2 cv-bill-grid">
-                  <div>
-                    <div class="cv-addr-head"><span>Billing Address</span><button type="button" class="cv-textlink" id="cvSameAsInfo">Same as Customer Info</button></div>
-                    <div class="cv-field"><label class="form-label cv-required" for="bStreet">Street</label><textarea class="form-control" id="bStreet" rows="4">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea></div>
-                    <div class="cv-field"><label class="form-label" for="bCountry">Country</label>
+                <div class="row g-4 p-3">
+                  <div class="col-12 col-lg-6">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <span class="fw-bold">Billing Address</span>
+                      <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none" id="cvSameAsInfo">Same as Customer Info</button>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="bStreet"><span class="text-danger">* </span>Street</label>
+                      <textarea class="form-control" id="bStreet" rows="4">1/2 VOC STREET MENABADU AMBATTUR CHENNAI</textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="bCountry">Country</label>
                       <select class="form-select cv-select" id="bCountry">
                         <option value="">Non selected</option>
                         <option selected>India</option>
@@ -232,7 +299,8 @@
                         <option>United Arab Emirates</option>
                       </select>
                     </div>
-                    <div class="cv-field"><label class="form-label" for="bState">State</label>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="bState">State</label>
                       <select class="form-select cv-select" id="bState">
                         <option value="">Nothing selected</option>
                         <option>Tamil Nadu</option>
@@ -242,7 +310,8 @@
                         <option>Andhra Pradesh</option>
                       </select>
                     </div>
-                    <div class="cv-field"><label class="form-label" for="bCity">City</label>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="bCity">City</label>
                       <select class="form-select cv-select" id="bCity">
                         <option value="">Nothing selected</option>
                         <option selected>Chennai</option>
@@ -252,12 +321,22 @@
                         <option>Kochi</option>
                       </select>
                     </div>
-                    <div class="cv-field mb-0"><label class="form-label" for="bZip">Zip Code</label><input class="form-control" id="bZip" value="600006"></div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="bZip">Zip Code</label>
+                      <input class="form-control" id="bZip" value="600006">
+                    </div>
                   </div>
-                  <div>
-                    <div class="cv-addr-head"><span><i class="bi bi-question-circle me-1"></i>Shipping Address</span><button type="button" class="cv-textlink" id="cvCopyBilling">Copy Billing Address</button></div>
-                    <div class="cv-field"><label class="form-label cv-required" for="sStreet">Street</label><textarea class="form-control" id="sStreet" rows="4"></textarea></div>
-                    <div class="cv-field"><label class="form-label" for="sCountry">Country</label>
+                  <div class="col-12 col-lg-6">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <span class="fw-bold"><i class="bi bi-question-circle me-1"></i>Shipping Address</span>
+                      <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none" id="cvCopyBilling">Copy Billing Address</button>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="sStreet"><span class="text-danger">* </span>Street</label>
+                      <textarea class="form-control" id="sStreet" rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="sCountry">Country</label>
                       <select class="form-select cv-select" id="sCountry">
                         <option value="">Non selected</option>
                         <option>India</option>
@@ -266,7 +345,8 @@
                         <option>United Arab Emirates</option>
                       </select>
                     </div>
-                    <div class="cv-field"><label class="form-label" for="sState">State</label>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="sState">State</label>
                       <select class="form-select cv-select" id="sState">
                         <option value="">Nothing selected</option>
                         <option>Tamil Nadu</option>
@@ -276,7 +356,8 @@
                         <option>Andhra Pradesh</option>
                       </select>
                     </div>
-                    <div class="cv-field"><label class="form-label" for="sCity">City</label>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="sCity">City</label>
                       <select class="form-select cv-select" id="sCity">
                         <option value="">Nothing selected</option>
                         <option>Chennai</option>
@@ -286,10 +367,12 @@
                         <option>Kochi</option>
                       </select>
                     </div>
-                    <div class="cv-field mb-0"><label class="form-label" for="sZip">Zip Code</label><input class="form-control" id="sZip"></div>
+                    <div class="mb-3">
+                      <label class="form-label small fw-bold" for="sZip">Zip Code</label>
+                      <input class="form-control" id="sZip">
+                    </div>
                   </div>
                 </div>
-
               </div>
 
               <!-- Customer Admins -->
@@ -315,14 +398,14 @@
                       </thead>
                       <tbody id="cvBody-admins">
                         <tr>
-                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Karthik R</span></span></td>
+                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="rounded-circle" style="width:26px;height:26px;object-fit:cover;" alt=""><span>Karthik R</span></span></td>
                           <td>16-09-2026 11:53</td>
-                          <td><button type="button" class="btn btn-sm danger cv-icon-btn" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
+                          <td><button type="button" class="btn btn-sm btn-outline-danger" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
                         </tr>
                         <tr>
-                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="cv-avatar" alt=""><span>Divya M</span></span></td>
+                          <td><span class="d-inline-flex align-items-center gap-2"><img src="./assets/img/profile-1.jpg" class="rounded-circle" style="width:26px;height:26px;object-fit:cover;" alt=""><span>Divya M</span></span></td>
                           <td>16-09-2026 11:53</td>
-                          <td><button type="button" class="btn btn-sm danger cv-icon-btn" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
+                          <td><button type="button" class="btn btn-sm btn-outline-danger" title="Remove admin"><i class="mdi mdi-delete"></i></button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -340,7 +423,6 @@
                         <h3 class="card-title mb-0">Purchase Order</h3>
                       </div>
                     </div>
-
                   </div>
                   <div class="table-responsive table-modern-wrap overflow-auto column-border">
                     <table class="table-modern w-100 datatable" id="cvTbl-profile-po">
@@ -355,14 +437,14 @@
                       </thead>
                       <tbody id="cvBody-profile-po">
                         <tr>
-                          <td><a href="#" class="cv-link">PO-2026-001</a></td>
+                          <td><a href="#" class="text-primary fw-semibold text-decoration-none">PO-2026-001</a></td>
                           <td>₹ 45,000</td>
                           <td>₹ 8,100</td>
                           <td>₹ 53,100</td>
                           <td>16-09-2026</td>
                         </tr>
                         <tr>
-                          <td><a href="#" class="cv-link">PO-2026-002</a></td>
+                          <td><a href="#" class="text-primary fw-semibold text-decoration-none">PO-2026-002</a></td>
                           <td>₹ 32,000</td>
                           <td>₹ 5,760</td>
                           <td>₹ 37,760</td>
@@ -375,7 +457,7 @@
               </div>
             </div>
 
-            <div class="cv-form-foot" id="cvFormFoot"><button type="button" class="btn btn-primary" id="cvSubmit">Submit</button></div>
+            <div class="d-flex justify-content-end p-3 border-top" id="cvFormFoot"><button type="button" class="btn btn-primary" id="cvSubmit">Submit</button></div>
           </div>
         </div>
         <div class="tab-pane fade show active" id="cvTab-contacts" role="tabpanel" aria-labelledby="cvSideLink-contacts" tabindex="0">
@@ -595,27 +677,12 @@
           </div>
 
           <!-- Status summary KPI cards (blue → primary) -->
-          <div class="cv-est-kpis ms-3">
-            <div class="cv-est-kpi c-green">
-              <div class="k">Draft</div>
-              <div class="v">₹ 22,000</div>
-            </div>
-            <div class="cv-est-kpi c-green">
-              <div class="k">Sent</div>
-              <div class="v">₹ 38,000</div>
-            </div>
-            <div class="cv-est-kpi c-amber">
-              <div class="k">Expired</div>
-              <div class="v">₹ 0.00</div>
-            </div>
-            <div class="cv-est-kpi c-red">
-              <div class="k">Declined</div>
-              <div class="v">₹ 15,000</div>
-            </div>
-            <div class="cv-est-kpi c-green">
-              <div class="k">Accepted</div>
-              <div class="v">₹ 0.00</div>
-            </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Draft</div><div class="fs-5 fw-bold text-dark">₹ 22,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Sent</div><div class="fs-5 fw-bold text-dark">₹ 38,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-warning">Expired</div><div class="fs-5 fw-bold text-dark">₹ 0.00</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">Declined</div><div class="fs-5 fw-bold text-dark">₹ 15,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Accepted</div><div class="fs-5 fw-bold text-dark">₹ 0.00</div></div></div>
           </div>
 
           <div class="card-custom p-0" id="cvCard-estimates">
@@ -657,7 +724,7 @@
                     <td>
                       Solar Installation </td>
                     <td>
-                      <span class="cv-tag-chip">Hot</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Hot</span>
                     </td>
                     <td>
                       03-09-2026 </td>
@@ -682,7 +749,7 @@
                     <td>
                       AMC Renewal </td>
                     <td>
-                      <span class="cv-tag-chip">Warm</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Warm</span>
                     </td>
                     <td>
                       20-08-2026 </td>
@@ -707,7 +774,7 @@
                     <td>
                       Event Management </td>
                     <td>
-                      <span class="cv-tag-chip">Hot</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Hot</span>
                     </td>
                     <td>
                       10-08-2026 </td>
@@ -728,68 +795,64 @@
             <div class="modal fade" id="cvNewEstimateModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content cv-inv-modal">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-file-earmark"></i></div>
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-file-earmark"></i></div>
                       <div style="min-width:0;">
-                        <h3 class="mb-0">Create New Estimate</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New estimate</div>
+                        <h5 class="modal-title mb-0 fw-bold">Create New Estimate</h5>
+                        <div class="small text-muted">GG COMPANY · New estimate</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body cv-inv-body">
-                    <div class="cv-est-grid">
-                      <!-- Left column -->
-                      <div>
-                        <div class="cv-est-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
-                        <div class="cv-est-addr-row">
+                  <div class="modal-body p-4 bg-light-subtle">
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white"><div class="row g-4"><!-- Left column --><div class="col-12 col-lg-6">
+                        <div class="mb-3"><label><span class="text-danger">* </span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                        <div class="row g-3 mb-3">
                           <div>
-                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <label class="form-label small fw-bold"><i class="bi bi-pencil-square"></i> Bill To</label>
                             <div class="cv-inv-addr-text">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>Chennai, Tamil Nadu<br>IN, 600100</div>
                           </div>
                           <div>
-                            <label class="cv-inv-mini-label">Ship to</label>
+                            <label class="form-label small fw-bold">Ship to</label>
                             <div class="cv-inv-addr-text" style="color:#9ca3af;">---, ---<br>---, ---</div>
                           </div>
                         </div>
-                        <div class="cv-est-field">
-                          <label><span class="req">*</span>Estimate Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
-                          <div class="cv-est-num-wrap"><span class="cv-est-prefix">EST-</span><input type="text" class="form-control" value="059"></div>
+                        <div class="mb-3">
+                          <label><span class="text-danger">* </span>Estimate Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                          <div class="input-group"><span class="input-group-text bg-light fw-bold text-muted">EST-</span><input type="text" class="form-control" value="059"></div>
                         </div>
-                        <div class="cv-est-addr-row">
-                          <div class="cv-est-field"><label><span class="req">*</span>Estimate Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                          <div class="cv-est-field"><label>Expiry Date</label><input type="date" class="form-control" value="2026-09-30"></div>
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label><span class="text-danger">* </span>Estimate Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                          <div class="mb-3"><label>Expiry Date</label><input type="date" class="form-control" value="2026-09-30"></div>
                         </div>
-                        <div class="cv-est-addr-row">
-                          <div class="cv-est-field"><label>Advance Payment</label><select class="form-select">
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label>Advance Payment</label><select class="form-select">
                               <option selected>Select Advance Payment</option>
                               <option>25% Advance</option>
                               <option>50% Advance</option>
                               <option>Full Advance</option>
                             </select></div>
-                          <div class="cv-est-field"><label>Bank Accounts</label><select class="form-select">
+                          <div class="mb-3"><label>Bank Accounts</label><select class="form-select">
                               <option selected>Select Banking</option>
                               <option>HDFC Bank - 50100234567890</option>
                               <option>ICICI Bank - 602305123456</option>
                             </select></div>
                         </div>
-                      </div>
-                      <!-- Right column -->
-                      <div>
-                        <div class="cv-est-field">
+                      </div><!-- Right column --><div class="col-12 col-lg-6">
+                        <div class="mb-3">
                           <label><i class="bi bi-tag me-1"></i>Tags</label>
                           <div class="nl-tags-wrap" style="max-width:100%;">
                             <div class="nl-tags-chips"></div>
                             <input type="text" class="nl-tags-input" placeholder="Tag">
                           </div>
                         </div>
-                        <div class="cv-est-addr-row">
-                          <div class="cv-est-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label><span class="text-danger">* </span>Currency</label><select class="form-select">
                               <option selected>INR ₹</option>
                               <option>USD $</option>
                             </select></div>
-                          <div class="cv-est-field"><label>Status</label><select class="form-select">
+                          <div class="mb-3"><label>Status</label><select class="form-select">
                               <option selected>Draft</option>
                               <option>Sent</option>
                               <option>Expired</option>
@@ -797,31 +860,31 @@
                               <option>Accepted</option>
                             </select></div>
                         </div>
-                        <div class="cv-est-field"><label>Reference #</label><input type="text" class="form-control"></div>
-                        <div class="cv-est-field"><label>Purchase order</label><select class="form-select">
+                        <div class="mb-3"><label>Reference #</label><input type="text" class="form-control"></div>
+                        <div class="mb-3"><label>Purchase order</label><select class="form-select">
                             <option selected>Non selected</option>
                             <option>PO-0011 — Event setup</option>
                             <option>PO-0014 — AMC renewal</option>
                           </select></div>
-                        <div class="cv-est-addr-row">
-                          <div class="cv-est-field"><label>Sale Agent</label><select class="form-select">
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label>Sale Agent</label><select class="form-select">
                               <option selected>gharuda SOFTWARE</option>
                               <option>Karthik R</option>
                               <option>Divya M</option>
                             </select></div>
-                          <div class="cv-est-field"><label>Discount type</label><select class="form-select">
+                          <div class="mb-3"><label>Discount type</label><select class="form-select">
                               <option selected>No discount</option>
                               <option>Before Tax</option>
                               <option>After Tax</option>
                             </select></div>
                         </div>
-                        <div class="cv-est-field"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
+                        <div class="mb-3"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
                       </div>
                     </div>
 
                     <!-- Items section -->
                     <div class="cv-inv-items" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
-                      <div class="cv-inv-items-toolbar">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div class="d-flex align-items-center gap-2">
                           <select class="form-select cv-inv-add-item">
                             <option value="">Add Item</option>
@@ -832,7 +895,7 @@
                           </select>
                           <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvEstAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
                         </div>
-                        <div class="cv-inv-qty-radio">
+                        <div class="d-flex align-items-center gap-3 small">
                           <span>Show quantity as:</span>
                           <label><input type="radio" name="cvEstQty" checked> Qty</label>
                           <label><input type="radio" name="cvEstQty"> Hours</label>
@@ -840,7 +903,7 @@
                         </div>
                       </div>
                       <div class="table-responsive">
-                        <table class="cv-inv-item-table">
+                        <table class="table table-bordered align-middle">
                           <thead>
                             <tr>
                               <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
@@ -879,11 +942,11 @@
                       <!-- Totals -->
                       <div class="cv-inv-totals">
                         <div class="cv-inv-totals-box">
-                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Transport Amount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl cv-est-adv">Advance Received</span><span class="val cv-est-adv">0</span></div>
-                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Transport Amount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl cv-est-adv">Advance Received</span><span class="val cv-est-adv">0</span></div>
+                          <div class="d-flex justify-content-between align-items-center fs-6 fw-bold text-primary border-top pt-2 mt-2" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
                         </div>
                       </div>
                     </div>
@@ -913,20 +976,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="estItDesc"></div>
-                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="estItLongDesc" rows="3"></textarea></div>
+                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="estItDesc"></div>
+                    <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="estItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="estItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="estItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="estItHsn"></div>
+                        <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="estItHsn"></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="estItRateUsd" step="0.01"></div>
+                    <div class="mb-3"><label>Rate - USD</label><input type="number" class="form-control" id="estItRateUsd" step="0.01"></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="estItTax1">
+                        <div class="mb-3 mb-0"><label>Tax 1</label><select class="form-select" id="estItTax1">
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -934,7 +997,7 @@
                           </select></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="estItTax2" disabled>
+                        <div class="mb-3 mb-0"><label>Tax 2</label><select class="form-select" id="estItTax2" disabled>
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -942,8 +1005,8 @@
                           </select></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="estItUnit" placeholder="Unit"></div>
-                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="estItGroup">
+                    <div class="mb-3"><label>Unit</label><input type="text" class="form-control" id="estItUnit" placeholder="Unit"></div>
+                    <div class="mb-3 mb-0"><label>Item Group</label><select class="form-select" id="estItGroup">
                         <option value="">Non selected</option>
                         <option>Services</option>
                         <option>Products</option>
@@ -964,26 +1027,26 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
                       <h5 class="modal-title" id="cvEstZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Estimates</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field">
+                    <div class="mb-3">
                       <label>Status</label>
-                      <div class="cv-zip-status">
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Draft"><span class="cv-zip-pill"><i class="bi bi-pencil"></i>Draft</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Sent"><span class="cv-zip-pill"><i class="bi bi-send"></i>Sent</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Expired"><span class="cv-zip-pill"><i class="bi bi-clock-history"></i>Expired</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Declined"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Declined</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvEstZipStatus" value="Accepted"><span class="cv-zip-pill"><i class="bi bi-check-circle"></i>Accepted</span></label>
+                      <div class="d-flex flex-wrap gap-2 mt-2">
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="All" checked><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="Draft"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-pencil"></i>Draft</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="Sent"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-send"></i>Sent</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="Expired"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-clock-history"></i>Expired</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="Declined"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-x-circle"></i>Declined</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvEstZipStatus" value="Accepted"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-check-circle"></i>Accepted</span></label>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvEstZipFrom"></div>
-                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvEstZipTo"></div>
-                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Estimates matching the selected status and date range will be bundled into a single ZIP file.</div>
+                    <div class="mb-3"><label>From Date:</label><input type="date" class="form-control" id="cvEstZipFrom"></div>
+                    <div class="mb-3 mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvEstZipTo"></div>
+                    <div class="alert alert-info py-2 px-3 small d-flex align-items-center gap-2 mt-3"><i class="bi bi-info-circle me-1"></i>Estimates matching the selected status and date range will be bundled into a single ZIP file.</div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -1179,6 +1242,7 @@
             </script>
           </div>
         </div>
+      </div>
         <div class="tab-pane fade" id="cvTab-appointments" role="tabpanel" aria-labelledby="cvSideLink-appointments" tabindex="0">
           <div class="card-custom p-0" id="cvCard-appointments">
             <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
@@ -1247,27 +1311,12 @@
               <option>2025</option>
               <option>2024</option>
             </select>
-            <div class="cv-inv-kpis">
-              <div class="cv-inv-kpi k-blue">
-                <div class="k">Opening Balance</div>
-                <div class="v">₹ 0.00</div>
-              </div>
-              <div class="cv-inv-kpi k-amber">
-                <div class="k">Invoices Outstanding</div>
-                <div class="v">₹ 45,000</div>
-              </div>
-              <div class="cv-inv-kpi k-red">
-                <div class="k">Total Outstanding</div>
-                <div class="v">₹ 53,000</div>
-              </div>
-              <div class="cv-inv-kpi k-red">
-                <div class="k">Past Due Invoices</div>
-                <div class="v">₹ 8,000</div>
-              </div>
-              <div class="cv-inv-kpi k-green">
-                <div class="k">Paid Invoices</div>
-                <div class="v">₹ 12,500</div>
-              </div>
+            <div class="row g-2 mb-3">
+              <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-primary">Opening Balance</div><div class="fs-5 fw-bold text-dark">₹ 0.00</div></div></div>
+              <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-warning">Invoices Outstanding</div><div class="fs-5 fw-bold text-dark">₹ 45,000</div></div></div>
+              <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">Total Outstanding</div><div class="fs-5 fw-bold text-dark">₹ 53,000</div></div></div>
+              <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">Past Due Invoices</div><div class="fs-5 fw-bold text-dark">₹ 8,000</div></div></div>
+              <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Paid Invoices</div><div class="fs-5 fw-bold text-dark">₹ 12,500</div></div></div>
             </div>
           </div>
 
@@ -1305,7 +1354,7 @@
                     <td>01-09-2026</td>
                     <td>Karthik R</td>
                     <td>Solar Installation</td>
-                    <td><span class="cv-tag-chip">Hot</span></td>
+                    <td><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Hot</span></td>
                     <td>15-09-2026</td>
                     <td><span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Partially Paid</span></td>
                   </tr>
@@ -1316,7 +1365,7 @@
                     <td>10-08-2026</td>
                     <td>Divya M</td>
                     <td>AMC Renewal</td>
-                    <td><span class="cv-tag-chip">Warm</span></td>
+                    <td><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Warm</span></td>
                     <td>24-08-2026</td>
                     <td><span class="cv-pill ok"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Paid</span></td>
                   </tr>
@@ -1338,188 +1387,253 @@
             <!-- Create New Invoice modal -->
             <div class="modal fade" id="cvNewInvoiceModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content cv-inv-modal">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-receipt-cutoff"></i></div>
-                      <div style="min-width:0;">
-                        <h3 class="mb-0">Create New Invoice</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New invoice</div>
+                <div class="modal-content">
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-receipt-cutoff fs-5"></i></div>
+                      <div>
+                        <h5 class="modal-title mb-0 fw-bold">Create New Invoice</h5>
+                        <div class="small text-muted">GG COMPANY · New invoice</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body cv-inv-body">
-                    <div class="cv-inv-grid">
-                      <!-- Left column -->
-                      <div>
-                        <div class="cv-inv-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
-                        <div class="cv-inv-field"><label>Sales Order</label><select class="form-select">
-                            <option value="">Non selected</option>
-                            <option>SO-0003 — Solar Installation</option>
-                            <option>SO-0007 — AMC Renewal</option>
-                          </select></div>
-                        <div class="cv-inv-addr-row">
-                          <div>
-                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill to</label>
-                            <div class="cv-inv-addr-text">1/2 VOC STREET MENABADU AMBATTUR CHENNAI<br>Chennai, ---<br>IN, 006</div>
+                  <div class="modal-body p-4 bg-light-subtle">
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+                      <div class="row g-4">
+                        <!-- Left column -->
+                        <div class="col-12 col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold"><span class="text-danger">* </span>Customer</label>
+                            <input type="text" class="form-control" value="GG COMPANY" readonly>
                           </div>
-                          <div>
-                            <label class="cv-inv-mini-label">Ship to</label>
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold">Sales Order</label>
                             <select class="form-select">
-                              <option selected>Select Shipping Address</option>
-                              <option>GG COMPANY - Anna Nagar</option>
-                              <option>GG COMPANY - T. Nagar</option>
+                              <option value="">Non selected</option>
+                              <option>SO-0003 — Solar Installation</option>
+                              <option>SO-0007 — AMC Renewal</option>
                             </select>
                           </div>
-                        </div>
-                        <div class="cv-inv-field"><label>Credit Days</label><select class="form-select">
-                            <option>0</option>
-                            <option selected>1</option>
-                            <option>7</option>
-                            <option>15</option>
-                            <option>30</option>
-                            <option>45</option>
-                            <option>60</option>
-                          </select></div>
-                        <div class="cv-inv-field">
-                          <label><span class="req">*</span>Invoice Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
-                          <div class="cv-inv-num-wrap"><span class="cv-inv-prefix">INV-</span><input type="text" class="form-control" value="258"></div>
-                        </div>
-                        <div class="cv-inv-addr-row">
-                          <div class="cv-inv-field"><label><span class="req">*</span>Invoice Date</label><input type="date" class="form-control" value="2026-09-22"></div>
-                          <div class="cv-inv-field"><label>Due Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                        </div>
-                        <div class="cv-inv-addr-row">
-                          <div class="cv-inv-field"><label>Customer PO No.</label><input type="text" class="form-control"></div>
-                          <div class="cv-inv-field"><label>Vehicle Number</label><input type="text" class="form-control"></div>
-                        </div>
-                        <label class="cv-check" style="font-size:12.5px;"><input type="checkbox" class="form-check-input"> <span>Prevent sending overdue reminders for this invoice</span></label>
-                      </div>
-                      <!-- Right column -->
-                      <div>
-                        <div class="cv-inv-field">
-                          <label><i class="bi bi-tag me-1"></i>Tags</label>
-                          <div class="nl-tags-wrap" style="max-width:100%;">
-                            <div class="nl-tags-chips"></div>
-                            <input type="text" class="nl-tags-input" placeholder="Tag">
+                          <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold"><i class="bi bi-pencil-square me-1"></i>Bill to</label>
+                              <div class="small text-muted p-2 bg-light rounded border">1/2 VOC STREET MENABADU AMBATTUR CHENNAI<br>Chennai, ---<br>IN, 006</div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Ship to</label>
+                              <select class="form-select">
+                                <option selected>Select Shipping Address</option>
+                                <option>GG COMPANY - Anna Nagar</option>
+                                <option>GG COMPANY - T. Nagar</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold">Credit Days</label>
+                            <select class="form-select">
+                              <option>0</option>
+                              <option selected>1</option>
+                              <option>7</option>
+                              <option>15</option>
+                              <option>30</option>
+                              <option>45</option>
+                              <option>60</option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold"><span class="text-danger">* </span>Invoice Number <i class="bi bi-question-circle text-muted"></i></label>
+                            <div class="input-group">
+                              <span class="input-group-text bg-light fw-bold text-muted">INV-</span>
+                              <input type="text" class="form-control" value="258">
+                            </div>
+                          </div>
+                          <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold"><span class="text-danger">* </span>Invoice Date</label>
+                              <input type="date" class="form-control" value="2026-09-22">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Due Date</label>
+                              <input type="date" class="form-control" value="2026-09-23">
+                            </div>
+                          </div>
+                          <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Customer PO No.</label>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Vehicle Number</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="cvInvPreventOverdue">
+                            <label class="form-check-label small text-muted" for="cvInvPreventOverdue">Prevent sending overdue reminders for this invoice</label>
                           </div>
                         </div>
-                        <div class="cv-inv-field"><label>Allowed payment modes for this invoice</label><select class="form-select">
-                            <option>Bank, Rave, Instamojo, Paypal Smart Checkout, PayPal, PayU Money, Stripe Checkout</option>
-                          </select></div>
-                        <div class="cv-inv-addr-row">
-                          <div class="cv-inv-field"><label><span class="req">*</span>Currency</label><input type="text" class="form-control" value="INR ₹" readonly></div>
-                          <div class="cv-inv-field"><label>Sale Agent</label><select class="form-select">
-                              <option selected>GHARUDA SOFTWARE</option>
-                              <option>Karthik R</option>
-                              <option>Divya M</option>
-                            </select></div>
+                        <!-- Right column -->
+                        <div class="col-12 col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold"><i class="bi bi-tag me-1"></i>Tags</label>
+                            <div class="border rounded p-2 bg-white d-flex flex-wrap gap-1 align-items-center" style="min-height:38px;">
+                              <div class="nl-tags-chips"></div>
+                              <input type="text" class="border-0 outline-0 flex-grow-1 nl-tags-input" placeholder="Tag" style="outline:none;">
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold">Allowed payment modes for this invoice</label>
+                            <select class="form-select">
+                              <option>Bank, Rave, Instamojo, Paypal Smart Checkout, PayPal, PayU Money, Stripe Checkout</option>
+                            </select>
+                          </div>
+                          <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold"><i class="bi bi-question-circle text-muted me-1"></i>Currency</label>
+                              <select class="form-select">
+                                <option>System Default</option>
+                                <option>INR (₹)</option>
+                                <option>USD ($)</option>
+                              </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Sale Agent</label>
+                              <select class="form-select">
+                                <option>Non selected</option>
+                                <option selected>Karthik R</option>
+                                <option>Divya M</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Discount Type</label>
+                              <select class="form-select">
+                                <option>No discount</option>
+                                <option>Before Tax</option>
+                                <option>After Tax</option>
+                              </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <label class="form-label small fw-bold">Recurring Invoice?</label>
+                              <select class="form-select">
+                                <option>No</option>
+                                <option>Every 1 month</option>
+                                <option>Every 3 months</option>
+                                <option>Every 6 months</option>
+                                <option>Every 12 months</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label small fw-bold">Admin note</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter admin note..."></textarea>
+                          </div>
                         </div>
-                        <div class="cv-inv-field"><label>Recurring Invoice?</label><select class="form-select">
-                            <option selected>No</option>
-                            <option>Weekly</option>
-                            <option>Monthly</option>
-                            <option>Yearly</option>
-                          </select></div>
-                        <div class="cv-inv-field"><label>Discount type</label><select class="form-select">
-                            <option selected>No discount</option>
-                            <option>Before Tax</option>
-                            <option>After Tax</option>
-                          </select></div>
-                        <div class="cv-inv-field"><label>Admin Note</label><textarea class="form-control" rows="3"></textarea></div>
-                        <div class="cv-inv-field"><label>Bank Accounts</label><select class="form-select">
-                            <option selected>Select Banking</option>
-                            <option>HDFC Bank - 50100234567890</option>
-                            <option>ICICI Bank - 602305123456</option>
-                          </select></div>
                       </div>
                     </div>
 
-                    <!-- Items section -->
-                    <div class="cv-inv-items">
-                      <div class="cv-inv-items-toolbar">
+                    <!-- Items Section -->
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div class="d-flex align-items-center gap-2">
-                          <select class="form-select cv-inv-add-item">
-                            <option value="">Add Item</option>
-                            <option>HRMS Subscription</option>
-                            <option>Solar Panel — 450W</option>
-                            <option>Installation Service</option>
-                            <option>AMC Charges</option>
-                          </select>
-                          <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvInvAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm d-flex align-items-center gap-1" id="cvInvAddItem" title="Add item"><i class="bi bi-plus-lg"></i> Add Item</button>
                         </div>
-                        <div class="d-flex align-items-center gap-2">
-                          <select class="form-select cv-inv-add-item">
-                            <option value="">Bill Tasks</option>
-                            <option>Task #12 — Site inspection</option>
-                            <option>Task #14 — Panel mounting</option>
-                          </select>
-                          <i class="bi bi-question-circle" style="color:#9ca3af;"></i>
-                        </div>
-                        <div class="cv-inv-qty-radio">
-                          <span>Show quantity as:</span>
-                          <label><input type="radio" name="cvInvQty" checked> Qty</label>
-                          <label><input type="radio" name="cvInvQty"> Hours</label>
-                          <label><input type="radio" name="cvInvQty"> Qty/Hours</label>
+                        <div class="d-flex align-items-center gap-3 small">
+                          <span class="text-muted fw-bold">Show quantity as:</span>
+                          <div class="form-check form-check-inline mb-0">
+                            <input class="form-check-input" type="radio" name="cvInvQty" id="cvInvQty1" checked>
+                            <label class="form-check-label" for="cvInvQty1">Qty</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-0">
+                            <input class="form-check-input" type="radio" name="cvInvQty" id="cvInvQty2">
+                            <label class="form-check-label" for="cvInvQty2">Hours</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-0">
+                            <input class="form-check-input" type="radio" name="cvInvQty" id="cvInvQty3">
+                            <label class="form-check-label" for="cvInvQty3">Qty/Hours</label>
+                          </div>
                         </div>
                       </div>
                       <div class="table-responsive">
-                        <table class="cv-inv-item-table">
-                          <thead>
+                        <table class="table table-bordered align-middle">
+                          <thead class="table-light">
                             <tr>
-                              <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
+                              <th style="width:30px;"><i class="bi bi-info-circle text-muted"></i></th>
                               <th>Item</th>
-                              <th style="width:190px;">Description</th>
-                              <th style="width:80px;">Qty</th>
-                              <th style="width:110px;">Rate</th>
-                              <th style="width:100px;">Discount %</th>
-                              <th style="width:110px;">Tax</th>
-                              <th style="width:110px;">Amount</th>
-                              <th style="width:40px;"><i class="bi bi-gear"></i></th>
+                              <th style="width:200px;">Description</th>
+                              <th style="width:100px;">Qty</th>
+                              <th style="width:120px;">Rate</th>
+                              <th style="width:110px;">Discount %</th>
+                              <th style="width:130px;">Tax</th>
+                              <th style="width:120px;">Amount</th>
+                              <th style="width:50px;"><i class="bi bi-gear text-muted"></i></th>
                             </tr>
                           </thead>
                           <tbody id="cvInvItemBody">
                             <tr>
-                              <td><i class="bi bi-info-circle" style="color:#9ca3af;font-size:12px;"></i></td>
+                              <td class="text-center"><i class="bi bi-info-circle text-muted"></i></td>
                               <td><textarea class="form-control" placeholder="Description" rows="2"></textarea></td>
                               <td><textarea class="form-control" placeholder="Long description" rows="2"></textarea></td>
-                              <td><input type="number" class="form-control" value="1" min="0">
-                                <div class="cv-inv-unit">Unit</div>
+                              <td>
+                                <input type="number" class="form-control mb-1" value="1" min="0">
+                                <span class="small text-muted">Unit</span>
                               </td>
                               <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
                               <td><input type="number" class="form-control" value="0.00" step="0.01"></td>
-                              <td><select class="form-select">
+                              <td>
+                                <select class="form-select">
                                   <option selected>No Tax</option>
                                   <option>GST 5%</option>
                                   <option>GST 12%</option>
                                   <option>GST 18%</option>
-                                </select></td>
-                              <td><span class="cv-inv-amt">₹ 0.00</span></td>
-                              <td><button type="button" class="cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
+                                </select>
+                              </td>
+                              <td><span class="fw-bold text-dark cv-inv-amt">₹ 0.00</span></td>
+                              <td><button type="button" class="btn btn-sm btn-outline-success cv-inv-check" title="Confirm"><i class="bi bi-check-lg"></i></button></td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                       <!-- Totals -->
-                      <div class="cv-inv-totals">
-                        <div class="cv-inv-totals-box">
-                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Transport Amount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                      <div class="d-flex justify-content-end mt-3">
+                        <div class="border rounded-3 p-3 bg-light" style="width: 360px;">
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="text-muted fw-bold">Sub Total :</span><span class="fw-bold">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small">
+                            <span class="text-muted fw-bold">Adjustment</span>
+                            <div class="d-flex align-items-center gap-2">
+                              <input type="number" class="form-control form-control-sm" style="width:80px;" value="0">
+                              <span class="fw-bold">₹ 0.00</span>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small">
+                            <span class="text-muted fw-bold">Transport Amount</span>
+                            <div class="d-flex align-items-center gap-2">
+                              <input type="number" class="form-control form-control-sm" style="width:80px;" value="0">
+                              <span class="fw-bold">₹ 0.00</span>
+                            </div>
+                          </div>
+                          <hr class="my-2">
+                          <div class="d-flex justify-content-between align-items-center fs-6 fw-bold text-primary"><span>Total :</span><span>₹ 0.00</span></div>
                         </div>
                       </div>
                     </div>
 
                     <!-- Notes -->
-                    <div class="cv-inv-notes">
-                      <div class="mb-3"><label>Client Note</label><textarea class="form-control" placeholder="Enter client note..."></textarea></div>
-                      <div class="mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3" placeholder="Enter terms and conditions..."></textarea></div>
+                    <div class="card border-0 shadow-sm p-4 bg-white">
+                      <div class="mb-3">
+                        <label class="form-label small fw-bold">Client Note</label>
+                        <textarea class="form-control" placeholder="Enter client note..."></textarea>
+                      </div>
+                      <div class="mb-0">
+                        <label class="form-label small fw-bold">Terms &amp; Conditions</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter terms and conditions..."></textarea>
+                      </div>
                     </div>
                   </div>
-                  <div class="cv-inv-footer">
-                    <span class="cv-inv-hint">Include invoice items with merge field anywhere in invoice content as {invoice_items}</span>
+                  <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center">
+                    <span class="small text-muted">Include invoice items with merge field anywhere in invoice content as {invoice_items}</span>
                     <div class="d-flex gap-2">
                       <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Save as Draft</button>
                       <button type="button" class="btn btn-primary" id="cvInvSubmit">Submit</button>
@@ -1538,20 +1652,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cvItDesc"></div>
-                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="cvItLongDesc" rows="3"></textarea></div>
+                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cvItDesc"></div>
+                    <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="cvItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cvItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cvItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cvItHsn"></div>
+                        <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cvItHsn"></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="cvItRateUsd" step="0.01"></div>
+                    <div class="mb-3"><label>Rate - USD</label><input type="number" class="form-control" id="cvItRateUsd" step="0.01"></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="cvItTax1">
+                        <div class="mb-3 mb-0"><label>Tax 1</label><select class="form-select" id="cvItTax1">
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -1559,7 +1673,7 @@
                           </select></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="cvItTax2" disabled>
+                        <div class="mb-3 mb-0"><label>Tax 2</label><select class="form-select" id="cvItTax2" disabled>
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -1567,8 +1681,8 @@
                           </select></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="cvItUnit" placeholder="Unit"></div>
-                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="cvItGroup">
+                    <div class="mb-3"><label>Unit</label><input type="text" class="form-control" id="cvItUnit" placeholder="Unit"></div>
+                    <div class="mb-3 mb-0"><label>Item Group</label><select class="form-select" id="cvItGroup">
                         <option value="">Non selected</option>
                         <option>Services</option>
                         <option>Products</option>
@@ -1589,33 +1703,33 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
                       <h5 class="modal-title" id="cvZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Invoices</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field">
+                    <div class="mb-3">
                       <label>Status</label>
-                      <div class="cv-zip-status">
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Unpaid"><span class="cv-zip-pill"><i class="bi bi-hourglass-split"></i>Unpaid</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Paid"><span class="cv-zip-pill"><i class="bi bi-check2-circle"></i>Paid</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Partially Paid"><span class="cv-zip-pill"><i class="bi bi-pie-chart"></i>Partially Paid</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Overdue"><span class="cv-zip-pill"><i class="bi bi-exclamation-circle"></i>Overdue</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Cancelled"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Cancelled</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvZipStatus" value="Draft"><span class="cv-zip-pill"><i class="bi bi-pencil"></i>Draft</span></label>
+                      <div class="d-flex flex-wrap gap-2 mt-2">
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="All" checked><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Unpaid"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-hourglass-split"></i>Unpaid</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Paid"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-check2-circle"></i>Paid</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Partially Paid"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-pie-chart"></i>Partially Paid</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Overdue"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-exclamation-circle"></i>Overdue</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Cancelled"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-x-circle"></i>Cancelled</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvZipStatus" value="Draft"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-pencil"></i>Draft</span></label>
                       </div>
                     </div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>From Date:</label><input type="date" class="form-control" id="cvZipFrom"></div>
+                        <div class="mb-3 mb-0"><label>From Date:</label><input type="date" class="form-control" id="cvZipFrom"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvZipTo"></div>
+                        <div class="mb-3 mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvZipTo"></div>
                       </div>
                     </div>
-                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Invoices matching the selected status and date range will be bundled into a single ZIP file.</div>
+                    <div class="alert alert-info py-2 px-3 small d-flex align-items-center gap-2 mt-3"><i class="bi bi-info-circle me-1"></i>Invoices matching the selected status and date range will be bundled into a single ZIP file.</div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -1736,13 +1850,13 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
                       <h5 class="modal-title" id="cvZipPayTitle" style="font-size:15.5px;font-weight:800;">ZIP Payments</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-zip-field">
+                    <div class="mb-3">
                       <label>Payment made by</label>
                       <select class="form-select select2" id="cvZipPayBy" data-placeholder="Non selected">
                         <option></option>
@@ -1753,11 +1867,11 @@
                         <option>Harish D.</option>
                       </select>
                     </div>
-                    <div class="cv-zip-field">
+                    <div class="mb-3">
                       <label>From Date:</label>
                       <input type="date" class="form-control" id="cvZipPayFrom">
                     </div>
-                    <div class="cv-zip-field mb-0">
+                    <div class="mb-3 mb-0">
                       <label>To Date:</label>
                       <input type="date" class="form-control" id="cvZipPayTo">
                     </div>
@@ -1814,92 +1928,103 @@
           </div>
         </div>
         <div class="tab-pane fade" id="cvTab-statement" role="tabpanel" aria-labelledby="cvSideLink-statement" tabindex="0">
-          <div class="cv-title">Statement</div>
+          <div class="font-display fw-bold fs-5 mb-3">Statement</div>
 
           <!-- Customer Statement — document style view -->
-          <div class="card-custom p-0 cv-stmt-wrap">
-            <div class="cv-stmt-toolbar">
-              <input type="text" class="form-control cv-stmt-period" value="01-09-2026 to 30-09-2026" readonly aria-label="Statement period">
-              <div class="cv-stmt-acts">
-                <button type="button" class="cv-stmt-btn js-stmt-print" title="Print"><i class="bi bi-printer"></i></button>
-                <button type="button" class="cv-stmt-btn js-stmt-pdf" title="Download PDF"><i class="bi bi-file-earmark-pdf"></i></button>
-                <button type="button" class="cv-stmt-btn js-stmt-email" title="Send by email"><i class="bi bi-envelope"></i></button>
-                <button type="button" class="cv-stmt-btn js-stmt-wa" title="Send via WhatsApp"><i class="bi bi-whatsapp"></i></button>
+          <div class="card border shadow-sm p-0 mb-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 p-3 border-bottom">
+              <input type="text" class="form-control form-control-sm" style="max-width: 260px;" value="01-09-2026 to 30-09-2026" readonly aria-label="Statement period">
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm js-stmt-print" title="Print"><i class="bi bi-printer"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm js-stmt-pdf" title="Download PDF"><i class="bi bi-file-earmark-pdf"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm js-stmt-email" title="Send by email"><i class="bi bi-envelope"></i></button>
+                <button type="button" class="btn btn-outline-secondary btn-sm js-stmt-wa" title="Send via WhatsApp"><i class="bi bi-whatsapp"></i></button>
               </div>
             </div>
 
-            <div class="cv-stmt-doc" id="cvStmtDoc">
+            <div class="p-4 bg-white" id="cvStmtDoc">
               <!-- Letterhead -->
-              <div class="cv-stmt-head">
-                <div class="cv-stmt-brand">
-                  <div class="cv-stmt-logo">KS</div>
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 pb-3 border-bottom mb-4">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-3 bg-primary text-white fs-4 fw-bold d-flex align-items-center justify-content-center shadow-sm" style="width:52px;height:52px;flex-shrink:0;">KS</div>
                   <div style="min-width:0;">
-                    <div class="cv-stmt-co-name">ghrA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
-                    <div class="cv-stmt-co-addr">
+                    <div class="fw-bold fs-6 mb-1">ghrA SOFTWARE TECHNOLOGY PRIVATE LIMITED</div>
+                    <div class="small text-muted" style="line-height:1.6;">
                       PC 20 /3, 3rd Block, Mogappair West, Chennai- 560038, Tamil Nadu, India<br>
                       9865321670 · GST Number: 28AABCR7796N0O0
                     </div>
                   </div>
                 </div>
-                <div class="cv-stmt-meta">
-                  <div class="cv-stmt-doc-type"><i class="bi bi-receipt"></i> Customer Statement</div>
-                  <div class="cv-stmt-meta-row"><span>Statement #</span><b>STMT-2026-0092</b></div>
-                  <div class="cv-stmt-meta-row"><span>Issue date</span><b>16-09-2026</b></div>
-                  <div class="cv-stmt-meta-row"><span>Period</span><b>01-09-2026 – 30-09-2026</b></div>
+                <div class="border rounded-3 p-3 bg-light" style="min-width:240px;">
+                  <span class="badge bg-primary-subtle text-primary mb-2 text-uppercase"><i class="bi bi-receipt me-1"></i> Customer Statement</span>
+                  <div class="d-flex justify-content-between small py-1"><span class="text-muted">Statement #</span><b>STMT-2026-0092</b></div>
+                  <div class="d-flex justify-content-between small py-1"><span class="text-muted">Issue date</span><b>16-09-2026</b></div>
+                  <div class="d-flex justify-content-between small py-1"><span class="text-muted">Period</span><b>01-09-2026 – 30-09-2026</b></div>
                 </div>
               </div>
 
-              <div class="cv-stmt-title">Customer Statement For GG COMPANY</div>
+              <div class="fs-5 fw-bold mb-3">Customer Statement For GG COMPANY</div>
 
               <!-- Parties -->
-              <div class="cv-stmt-parties">
-                <div class="cv-stmt-to">
-                  <div class="cv-stmt-to-label">Billed to</div>
-                  <div class="cv-stmt-to-box">
-                    <div class="cv-stmt-to-ava">GG</div>
+              <div class="row g-3 align-items-stretch mb-4">
+                <div class="col-12 col-md-8">
+                  <div class="text-uppercase small fw-bold text-muted mb-2">Billed to</div>
+                  <div class="card p-3 h-100 border bg-light-subtle d-flex flex-row align-items-start gap-3">
+                    <div class="rounded-circle bg-secondary-subtle text-secondary fw-bold fs-5 d-flex align-items-center justify-content-center" style="width:44px;height:44px;flex-shrink:0;">GG</div>
                     <div style="min-width:0;">
-                      <div class="cv-stmt-to-name">GG COMPANY</div>
-                      <div class="cv-stmt-to-line"><i class="bi bi-person"></i>MOHAN S</div>
-                      <div class="cv-stmt-to-line"><i class="bi bi-envelope"></i>kaviyarasu@ghratechnology.com</div>
-                      <div class="cv-stmt-to-line"><i class="bi bi-geo-alt"></i>1/2 VOC Street, Menabadu, Ambattur, Chennai - 600053</div>
-                      <div class="cv-stmt-to-line"><i class="bi bi-telephone"></i>9677063368</div>
+                      <div class="fw-bold fs-6 mb-1">GG COMPANY</div>
+                      <div class="text-muted small mb-1"><i class="bi bi-person me-2"></i>MOHAN S</div>
+                      <div class="text-muted small mb-1"><i class="bi bi-envelope me-2"></i>kaviyarasu@ghratechnology.com</div>
+                      <div class="text-muted small mb-1"><i class="bi bi-geo-alt me-2"></i>1/2 VOC Street, Menabadu, Ambattur, Chennai - 600053</div>
+                      <div class="text-muted small mb-1"><i class="bi bi-telephone me-2"></i>9677063368</div>
                     </div>
                   </div>
                 </div>
-                <div class="cv-stmt-due">
-                  <div class="k">Total amount due</div>
-                  <div class="v">₹ 37,500</div>
-                  <div class="d">3 transactions this period</div>
+                <div class="col-12 col-md-4">
+                  <div class="card p-4 h-100 border-0 bg-primary-subtle text-primary d-flex flex-column justify-content-center rounded-3">
+                    <div class="small fw-semibold text-uppercase">Total amount due</div>
+                    <div class="fs-2 fw-bold my-1">₹ 37,500</div>
+                    <div class="small text-muted">3 transactions this period</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="cv-stmt-kpis">
-                <div class="cv-stmt-kpi">
-                  <span class="ic i-grey"><i class="bi bi-play-circle"></i></span>
-                  <div>
-                    <div class="k">Opening Balance</div>
-                    <div class="v">₹ 0.00</div>
+              <!-- KPIs -->
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-xl-3">
+                  <div class="card p-3 border shadow-sm h-100 d-flex flex-row align-items-center gap-3">
+                    <div class="rounded-circle bg-secondary-subtle text-secondary fs-4 p-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;"><i class="bi bi-play-circle"></i></div>
+                    <div>
+                      <div class="small text-muted fw-semibold">Opening Balance</div>
+                      <div class="fs-6 fw-bold">₹ 0.00</div>
+                    </div>
                   </div>
                 </div>
-                <div class="cv-stmt-kpi">
-                  <span class="ic i-red"><i class="bi bi-file-earmark-arrow-up"></i></span>
-                  <div>
-                    <div class="k">Invoiced this period</div>
-                    <div class="v">₹ 57,500</div>
+                <div class="col-6 col-xl-3">
+                  <div class="card p-3 border shadow-sm h-100 d-flex flex-row align-items-center gap-3">
+                    <div class="rounded-circle bg-danger-subtle text-danger fs-4 p-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;"><i class="bi bi-file-earmark-arrow-up"></i></div>
+                    <div>
+                      <div class="small text-muted fw-semibold">Invoiced this period</div>
+                      <div class="fs-6 fw-bold">₹ 57,500</div>
+                    </div>
                   </div>
                 </div>
-                <div class="cv-stmt-kpi">
-                  <span class="ic i-blue"><i class="bi bi-cash-coin"></i></span>
-                  <div>
-                    <div class="k">Payments received</div>
-                    <div class="v">₹ 20,000</div>
+                <div class="col-6 col-xl-3">
+                  <div class="card p-3 border shadow-sm h-100 d-flex flex-row align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-subtle text-primary fs-4 p-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;"><i class="bi bi-cash-coin"></i></div>
+                    <div>
+                      <div class="small text-muted fw-semibold">Payments received</div>
+                      <div class="fs-6 fw-bold">₹ 20,000</div>
+                    </div>
                   </div>
                 </div>
-                <div class="cv-stmt-kpi">
-                  <span class="ic i-green"><i class="bi bi-wallet2"></i></span>
-                  <div>
-                    <div class="k">Closing Balance</div>
-                    <div class="v">₹ 37,500</div>
+                <div class="col-6 col-xl-3">
+                  <div class="card p-3 border shadow-sm h-100 d-flex flex-row align-items-center gap-3">
+                    <div class="rounded-circle bg-success-subtle text-success fs-4 p-2 d-flex align-items-center justify-content-center" style="width:44px;height:44px;"><i class="bi bi-wallet2"></i></div>
+                    <div>
+                      <div class="small text-muted fw-semibold">Closing Balance</div>
+                      <div class="fs-6 fw-bold">₹ 37,500</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1923,7 +2048,7 @@
                       <td>₹ 45,000</td>
                       <td>—</td>
                       <td>₹ 45,000</td>
-                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                      <td><button type="button" class="btn btn-sm btn-outline-primary cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
                     </tr>
                     <tr class="cv-row" data-date="08-09-2026" data-ref="PAY-000034" data-type="Payment" data-mode="Bank Transfer (NEFT)" data-debit="—" data-credit="₹ 20,000" data-balance="₹ 25,000" data-desc="Payment PAY-000034" data-notes="Payment received against invoice INV-000112.">
                       <td>08-09-2026</td>
@@ -1931,7 +2056,7 @@
                       <td>—</td>
                       <td>₹ 20,000</td>
                       <td>₹ 25,000</td>
-                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                      <td><button type="button" class="btn btn-sm btn-outline-primary cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
                     </tr>
                     <tr class="cv-row" data-date="15-09-2026" data-ref="INV-000118" data-type="Invoice" data-mode="Credit" data-debit="₹ 12,500" data-credit="—" data-balance="₹ 37,500" data-desc="Invoice INV-000118" data-notes="AMC service charges for Q3 2026 as per service agreement.">
                       <td>15-09-2026</td>
@@ -1939,9 +2064,9 @@
                       <td>₹ 12,500</td>
                       <td>—</td>
                       <td>₹ 37,500</td>
-                      <td><button type="button" class="cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
+                      <td><button type="button" class="btn btn-sm btn-outline-primary cv-stmt-view" title="View transaction" aria-label="View transaction"><i class="bi bi-eye-fill"></i></button></td>
                     </tr>
-                    <tr class="cv-stmt-total">
+                    <tr class="table-light fw-bold">
                       <td colspan="2">Total</td>
                       <td>₹ 57,500</td>
                       <td>₹ 20,000</td>
@@ -1956,61 +2081,60 @@
 
           <!-- Transaction details modal -->
           <div class="leave-reject-modal" id="cvStmtModal" role="dialog" aria-modal="true" aria-labelledby="cvStmtTitle">
-            <div class="leave-reject-dialog cv-note-dialog">
-              <div class="cv-contact-head">
-                <div class="cv-contact-head-l">
-                  <div class="cv-contact-ava"><i class="bi bi-receipt"></i></div>
-                  <div style="min-width:0;">
-                    <h3 id="cvStmtTitle" class="mb-0">Transaction details</h3>
-                    <div class="cv-contact-sub">Statement entry for GG COMPANY</div>
+            <div class="card shadow-lg border-0 rounded-4" style="max-width: 520px; width: 100%; margin: auto;">
+              <div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-receipt fs-5"></i></div>
+                  <div>
+                    <h5 id="cvStmtTitle" class="mb-0 fw-bold">Transaction details</h5>
+                    <div class="small text-muted">Statement entry for GG COMPANY</div>
                   </div>
                 </div>
-                <button type="button" class="modal-close" id="cvStmtClose" aria-label="Close">&times;</button>
+                <button type="button" class="btn-close" id="cvStmtClose" aria-label="Close"></button>
               </div>
 
-              <div class="leave-reject-body cv-note-body">
-                <div class="cv-stmt-detail-grid">
-                  <div class="cv-stmt-df">
-                    <div class="k">Date</div>
-                    <div class="v" id="sdDate">—</div>
+              <div class="card-body p-4">
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="small text-muted">Date</div>
+                    <div class="fw-bold" id="sdDate">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Reference #</div>
-                    <div class="v" id="sdRef">—</div>
+                  <div class="col-6">
+                    <div class="small text-muted">Reference #</div>
+                    <div class="fw-bold" id="sdRef">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Type</div>
-                    <div class="v" id="sdType">—</div>
+                  <div class="col-6">
+                    <div class="small text-muted">Type</div>
+                    <div class="fw-bold" id="sdType">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Payment Mode</div>
-                    <div class="v" id="sdMode">—</div>
+                  <div class="col-6">
+                    <div class="small text-muted">Payment Mode</div>
+                    <div class="fw-bold" id="sdMode">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Debit</div>
-                    <div class="v" id="sdDebit">—</div>
+                  <div class="col-6">
+                    <div class="small text-muted">Debit</div>
+                    <div class="fw-bold" id="sdDebit">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Credit</div>
-                    <div class="v" id="sdCredit">—</div>
+                  <div class="col-6">
+                    <div class="small text-muted">Credit</div>
+                    <div class="fw-bold" id="sdCredit">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Balance</div>
-                    <div class="v" id="sdBal">—</div>
+                  <div class="col-12">
+                    <div class="small text-muted">Running Balance</div>
+                    <div class="fw-bold fs-5 text-primary" id="sdBal">—</div>
                   </div>
-                  <div class="cv-stmt-df">
-                    <div class="k">Description</div>
-                    <div class="v" id="sdDesc">—</div>
+                  <div class="col-12">
+                    <div class="small text-muted">Description</div>
+                    <div class="fw-semibold" id="sdDesc">—</div>
                   </div>
-                  <div class="cv-stmt-df cv-stmt-df-full">
-                    <div class="k">Notes</div>
-                    <div class="v" id="sdNotes">—</div>
+                  <div class="col-12">
+                    <div class="small text-muted">Notes</div>
+                    <div class="small text-muted bg-light p-2 rounded" id="sdNotes">—</div>
                   </div>
                 </div>
               </div>
-
-              <div class="leave-reject-foot pt-3">
-                <button type="button" class="btn btn-reject" id="cvStmtCancel">Close</button>
+              <div class="card-footer bg-white border-top p-3 d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-secondary" id="cvStmtCancel">Close</button>
               </div>
             </div>
           </div>
@@ -2080,62 +2204,57 @@
             <div class="modal fade" id="cvNewCreditNoteModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content cv-inv-modal">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-file-earmark-minus"></i></div>
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-file-earmark-minus"></i></div>
                       <div style="min-width:0;">
-                        <h3 class="mb-0">New Credit Note</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New credit note</div>
+                        <h5 class="modal-title mb-0 fw-bold">New Credit Note</h5>
+                        <div class="small text-muted">GG COMPANY · New credit note</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body cv-inv-body">
-                    <div class="cv-cn-grid">
-                      <!-- Left column -->
-                      <div>
-                        <div class="cv-cn-field"><label><span class="req">*</span>Customer</label><select class="form-select">
+                  <div class="modal-body p-4 bg-light-subtle">
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white"><div class="row g-4"><!-- Left column --><div class="col-12 col-lg-6">
+                        <div class="mb-3"><label><span class="text-danger">* </span>Customer</label><select class="form-select">
                             <option selected>GG COMPANY</option>
                           </select></div>
-                        <div class="cv-cn-addr-row">
+                        <div class="row g-3 mb-3">
                           <div>
-                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
-                            <div class="cv-cn-addr-text">214, Vadasery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>IN, 600100</div>
+                            <label class="form-label small fw-bold"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <div class="small text-muted p-2 bg-light rounded border">214, Vadasery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>IN, 600100</div>
                           </div>
                           <div>
-                            <label class="cv-inv-mini-label">Ship to</label>
-                            <div class="cv-cn-addr-text" style="color:#9ca3af;">---<br>---<br>---, ---</div>
+                            <label class="form-label small fw-bold">Ship to</label>
+                            <div class="small text-muted p-2 bg-light rounded border" style="color:#9ca3af;">---<br>---<br>---, ---</div>
                           </div>
                         </div>
-                        <div class="cv-cn-addr-row">
-                          <div class="cv-cn-field"><label><span class="req">*</span>Credit Note Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                          <div class="cv-cn-field">
-                            <label><span class="req">*</span>Credit Note # <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
-                            <div class="cv-cn-num-wrap"><span class="cv-cn-prefix">CN-</span><input type="text" class="form-control" value="23"></div>
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label><span class="text-danger">* </span>Credit Note Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                          <div class="mb-3">
+                            <label><span class="text-danger">* </span>Credit Note # <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                            <div class="input-group"><span class="input-group-text bg-light fw-bold text-muted">CN-</span><input type="text" class="form-control" value="23"></div>
                           </div>
                         </div>
-                      </div>
-                      <!-- Right column -->
-                      <div>
-                        <div class="cv-cn-addr-row">
-                          <div class="cv-cn-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                      </div><!-- Right column --><div class="col-12 col-lg-6">
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label><span class="text-danger">* </span>Currency</label><select class="form-select">
                               <option selected>INR ₹</option>
                               <option>USD $</option>
                             </select></div>
-                          <div class="cv-cn-field"><label>Discount type</label><select class="form-select">
+                          <div class="mb-3"><label>Discount type</label><select class="form-select">
                               <option selected>No discount</option>
                               <option>Before Tax</option>
                               <option>After Tax</option>
                             </select></div>
                         </div>
-                        <div class="cv-cn-field"><label>Reference #</label><input type="text" class="form-control"></div>
-                        <div class="cv-cn-field"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
+                        <div class="mb-3"><label>Reference #</label><input type="text" class="form-control"></div>
+                        <div class="mb-3"><label>Admin Note</label><textarea class="form-control" rows="4"></textarea></div>
                       </div>
                     </div>
 
-                    <!-- Items section -->
-                    <div class="cv-cn-items">
-                      <div class="cv-inv-items-toolbar">
+                    <!-- Items section --><div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div class="d-flex align-items-center gap-2">
                           <select class="form-select cv-inv-add-item">
                             <option value="">Add Item</option>
@@ -2146,7 +2265,7 @@
                           </select>
                           <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvCnAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
                         </div>
-                        <div class="cv-inv-qty-radio">
+                        <div class="d-flex align-items-center gap-3 small">
                           <span>Show quantity as:</span>
                           <label><input type="radio" name="cvCnQty" checked> Qty</label>
                           <label><input type="radio" name="cvCnQty"> Only</label>
@@ -2155,7 +2274,7 @@
                         </div>
                       </div>
                       <div class="table-responsive">
-                        <table class="cv-inv-item-table">
+                        <table class="table table-bordered align-middle">
                           <thead>
                             <tr>
                               <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
@@ -2192,21 +2311,20 @@
                       <!-- Totals -->
                       <div class="cv-inv-totals">
                         <div class="cv-inv-totals-box">
-                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Discount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Discount</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center fs-6 fw-bold text-primary border-top pt-2 mt-2" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
                         </div>
                       </div>
                     </div>
 
-                    <!-- Notes -->
-                    <div class="cv-cn-notes">
+                    </div><!-- Notes --><div class="card border-0 shadow-sm p-4 mb-4 bg-white">
                       <div class="mb-3"><label>Client Note</label><textarea class="form-control"></textarea></div>
                       <div class="mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3"></textarea></div>
                     </div>
                   </div>
-                  <div class="cv-cn-footer">
+                  <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center">
                     <span class="hint">Include credit note items with merge field anywhere in credit note content as {credit_note_items}</span>
                     <div class="d-flex gap-2">
                       <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Save &amp; Send</button>
@@ -2215,7 +2333,6 @@
                   </div>
                 </div>
               </div>
-            </div>
 
             <!-- ZIP Credit Notes modal — cvZipModal design (image 3) -->
             <div class="modal fade" id="cvCnZipModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvCnZipTitle">
@@ -2223,24 +2340,24 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
                       <h5 class="modal-title" id="cvCnZipTitle" style="font-size:15.5px;font-weight:800;">Zip Credit Notes</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field">
+                    <div class="mb-3">
                       <label>Status</label>
-                      <div class="cv-zip-status">
-                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Open"><span class="cv-zip-pill"><i class="bi bi-door-open"></i>Open</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Closed"><span class="cv-zip-pill"><i class="bi bi-lock"></i>Closed</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvCnZipStatus" value="Void"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Void</span></label>
+                      <div class="d-flex flex-wrap gap-2 mt-2">
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvCnZipStatus" value="All" checked><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvCnZipStatus" value="Open"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-door-open"></i>Open</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvCnZipStatus" value="Closed"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-lock"></i>Closed</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvCnZipStatus" value="Void"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-x-circle"></i>Void</span></label>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvCnZipFrom"></div>
-                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvCnZipTo"></div>
-                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Credit notes matching the selected status and date range will be bundled into a single ZIP file.</div>
+                    <div class="mb-3"><label>From Date:</label><input type="date" class="form-control" id="cvCnZipFrom"></div>
+                    <div class="mb-3 mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvCnZipTo"></div>
+                    <div class="alert alert-info py-2 px-3 small d-flex align-items-center gap-2 mt-3"><i class="bi bi-info-circle me-1"></i>Credit notes matching the selected status and date range will be bundled into a single ZIP file.</div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -2259,20 +2376,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cnItDesc"></div>
-                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="cnItLongDesc" rows="3"></textarea></div>
+                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cnItDesc"></div>
+                    <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="cnItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cnItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cnItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cnItHsn"></div>
+                        <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cnItHsn"></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="cnItRateUsd" step="0.01"></div>
+                    <div class="mb-3"><label>Rate - USD</label><input type="number" class="form-control" id="cnItRateUsd" step="0.01"></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="cnItTax1">
+                        <div class="mb-3 mb-0"><label>Tax 1</label><select class="form-select" id="cnItTax1">
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -2280,7 +2397,7 @@
                           </select></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="cnItTax2" disabled>
+                        <div class="mb-3 mb-0"><label>Tax 2</label><select class="form-select" id="cnItTax2" disabled>
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -2288,8 +2405,8 @@
                           </select></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="cnItUnit" placeholder="Unit"></div>
-                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="cnItGroup">
+                    <div class="mb-3"><label>Unit</label><input type="text" class="form-control" id="cnItUnit" placeholder="Unit"></div>
+                    <div class="mb-3 mb-0"><label>Item Group</label><select class="form-select" id="cnItGroup">
                         <option value="">Non selected</option>
                         <option>Services</option>
                         <option>Products</option>
@@ -2488,6 +2605,7 @@
             </script>
           </div>
         </div>
+      </div>
         <div class="tab-pane fade" id="cvTab-purchase_orders" role="tabpanel" aria-labelledby="cvSideLink-purchase_orders" tabindex="0">
           <!-- Purchase Orders — estimates design flow (title + buttons + year + KPI cards + table) -->
 
@@ -2505,19 +2623,10 @@
           </div>
 
           <!-- Status summary KPI cards -->
-          <div class="cv-po-kpis ms-3 mb-0">
-            <div class="cv-po-kpi c-green">
-              <div class="k">New</div>
-              <div class="v">₹ 27,000</div>
-            </div>
-            <div class="cv-po-kpi c-red">
-              <div class="k">Cancelled</div>
-              <div class="v">₹ 12,000</div>
-            </div>
-            <div class="cv-po-kpi c-green">
-              <div class="k">Confirmed</div>
-              <div class="v">₹ 45,500</div>
-            </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">New</div><div class="fs-5 fw-bold text-dark">₹ 27,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">Cancelled</div><div class="fs-5 fw-bold text-dark">₹ 12,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Confirmed</div><div class="fs-5 fw-bold text-dark">₹ 45,500</div></div></div>
           </div>
 
           <div class="card-custom p-0" id="cvCard-purchase_orders">
@@ -2565,7 +2674,7 @@
                     <td>
                       Solar Installation </td>
                     <td>
-                      <span class="cv-tag-chip">Material</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Material</span>
                     </td>
                     <td>
                       06-09-2026 </td>
@@ -2599,7 +2708,7 @@
                     <td>
                       AMC Renewal </td>
                     <td>
-                      <span class="cv-tag-chip">Service</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">Service</span>
                     </td>
                     <td>
                       28-08-2026 </td>
@@ -2658,28 +2767,26 @@
             <div class="modal fade" id="cvNewPOModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content cv-inv-modal">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-file-earmark-check"></i></div>
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-file-earmark-check"></i></div>
                       <div style="min-width:0;">
-                        <h3 class="mb-0">Create New Purchase Order</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New purchase order</div>
+                        <h5 class="modal-title mb-0 fw-bold">Create New Purchase Order</h5>
+                        <div class="small text-muted">GG COMPANY · New purchase order</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body cv-inv-body">
-                    <div class="cv-po-grid">
-                      <!-- Left column -->
-                      <div>
-                        <div class="cv-po-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
-                        <div class="cv-po-addr-row">
+                  <div class="modal-body p-4 bg-light-subtle">
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white"><div class="row g-4"><!-- Left column --><div class="col-12 col-lg-6">
+                        <div class="mb-3"><label><span class="text-danger">* </span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                        <div class="row g-3 mb-3">
                           <div>
-                            <label class="cv-inv-mini-label"><i class="bi bi-pencil-square"></i> Bill To</label>
+                            <label class="form-label small fw-bold"><i class="bi bi-pencil-square"></i> Bill To</label>
                             <div class="cv-inv-addr-text">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100<br>Chennai, Tamil Nadu<br>IN, 600100</div>
                           </div>
                           <div>
-                            <label class="cv-inv-mini-label">Ship to</label>
+                            <label class="form-label small fw-bold">Ship to</label>
                             <select class="form-select">
                               <option selected>Select Shipping Address</option>
                               <option>GG COMPANY - Anna Nagar</option>
@@ -2687,52 +2794,50 @@
                             </select>
                           </div>
                         </div>
-                        <div class="cv-po-field">
-                          <label><span class="req">*</span>Purchase Order Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
-                          <div class="cv-po-num-wrap"><span class="cv-po-prefix">PO-</span><input type="text" class="form-control" value="163"></div>
+                        <div class="mb-3">
+                          <label><span class="text-danger">* </span>Purchase Order Number <i class="bi bi-question-circle" style="color:#9ca3af;"></i></label>
+                          <div class="input-group"><span class="input-group-text bg-light fw-bold text-muted">PO-</span><input type="text" class="form-control" value="163"></div>
                         </div>
-                        <div class="cv-po-field"><label><span class="req">*</span>Purchase Order Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-                      </div>
-                      <!-- Right column -->
-                      <div>
-                        <div class="cv-po-field">
+                        <div class="mb-3"><label><span class="text-danger">* </span>Purchase Order Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+                      </div><!-- Right column --><div class="col-12 col-lg-6">
+                        <div class="mb-3">
                           <label><i class="bi bi-tag me-1"></i>Tags</label>
                           <div class="nl-tags-wrap" style="max-width:100%;">
                             <div class="nl-tags-chips"></div>
                             <input type="text" class="nl-tags-input" placeholder="Tag">
                           </div>
                         </div>
-                        <div class="cv-po-addr-row">
-                          <div class="cv-po-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label><span class="text-danger">* </span>Currency</label><select class="form-select">
                               <option selected>INR ₹</option>
                               <option>USD $</option>
                             </select></div>
-                          <div class="cv-po-field"><label>Status</label><select class="form-select">
+                          <div class="mb-3"><label>Status</label><select class="form-select">
                               <option selected>New</option>
                               <option>Cancelled</option>
                               <option>Confirmed</option>
                             </select></div>
                         </div>
-                        <div class="cv-po-field"><label>Customer PO No.</label><input type="text" class="form-control"></div>
-                        <div class="cv-po-addr-row">
-                          <div class="cv-po-field"><label>Sale Agent</label><select class="form-select">
+                        <div class="mb-3"><label>Customer PO No.</label><input type="text" class="form-control"></div>
+                        <div class="row g-3 mb-3">
+                          <div class="mb-3"><label>Sale Agent</label><select class="form-select">
                               <option selected>gharuda SOFTWARE</option>
                               <option>Karthik R</option>
                               <option>Divya M</option>
                             </select></div>
-                          <div class="cv-po-field"><label>Discount type</label><select class="form-select">
+                          <div class="mb-3"><label>Discount type</label><select class="form-select">
                               <option selected>No discount</option>
                               <option>Before Tax</option>
                               <option>After Tax</option>
                             </select></div>
                         </div>
-                        <div class="cv-po-field"><label>Admin Note</label><textarea class="form-control" rows="5"></textarea></div>
+                        <div class="mb-3"><label>Admin Note</label><textarea class="form-control" rows="5"></textarea></div>
                       </div>
                     </div>
 
                     <!-- Items section -->
                     <div class="cv-inv-items" style="margin-top:20px;border-top:1px solid #e5e7eb;padding-top:20px;">
-                      <div class="cv-inv-items-toolbar">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div class="d-flex align-items-center gap-2">
                           <select class="form-select cv-inv-add-item">
                             <option value="">Add Item</option>
@@ -2743,7 +2848,7 @@
                           </select>
                           <button type="button" class="btn btn-primary cv-inv-item-btn" id="cvPoAddItem" title="Add item"><i class="bi bi-plus-lg"></i></button>
                         </div>
-                        <div class="cv-inv-qty-radio">
+                        <div class="d-flex align-items-center gap-3 small">
                           <span>Show quantity as:</span>
                           <label><input type="radio" name="cvPoQty" checked> Qty</label>
                           <label><input type="radio" name="cvPoQty"> Hours</label>
@@ -2751,7 +2856,7 @@
                         </div>
                       </div>
                       <div class="table-responsive">
-                        <table class="cv-inv-item-table">
+                        <table class="table table-bordered align-middle">
                           <thead>
                             <tr>
                               <th style="width:30px;"><i class="bi bi-info-circle"></i></th>
@@ -2788,10 +2893,10 @@
                       <!-- Totals (image 2) -->
                       <div class="cv-inv-totals">
                         <div class="cv-inv-totals-box">
-                          <div class="cv-inv-trow" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Discount</span><input type="number" class="form-control" value="0" style="max-width:110px;"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
-                          <div class="cv-inv-trow total" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small" style="margin-right:-10px;"><span class="lbl">Sub Total :</span><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Discount</span><input type="number" class="form-control" value="0" style="max-width:110px;"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="lbl">Adjustment</span><input type="number" class="form-control" value="0"><span class="val">₹ 0.00</span></div>
+                          <div class="d-flex justify-content-between align-items-center fs-6 fw-bold text-primary border-top pt-2 mt-2" style="margin-right:-10px;"><span class="lbl">Total :</span><span class="val">₹ 0.00</span></div>
                         </div>
                       </div>
                     </div>
@@ -2818,20 +2923,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="poItDesc"></div>
-                    <div class="cv-it-field"><label>Long Description</label><textarea class="form-control" id="poItLongDesc" rows="3"></textarea></div>
+                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="poItDesc"></div>
+                    <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="poItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="poItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="poItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>HSN Code</label><input type="text" class="form-control" id="poItHsn"></div>
+                        <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="poItHsn"></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Rate - USD</label><input type="number" class="form-control" id="poItRateUsd" step="0.01"></div>
+                    <div class="mb-3"><label>Rate - USD</label><input type="number" class="form-control" id="poItRateUsd" step="0.01"></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 1</label><select class="form-select" id="poItTax1">
+                        <div class="mb-3 mb-0"><label>Tax 1</label><select class="form-select" id="poItTax1">
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -2839,7 +2944,7 @@
                           </select></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="cv-it-field mb-0"><label>Tax 2</label><select class="form-select" id="poItTax2" disabled>
+                        <div class="mb-3 mb-0"><label>Tax 2</label><select class="form-select" id="poItTax2" disabled>
                             <option selected>No Tax</option>
                             <option>GST 5%</option>
                             <option>GST 12%</option>
@@ -2847,8 +2952,8 @@
                           </select></div>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>Unit</label><input type="text" class="form-control" id="poItUnit" placeholder="Unit"></div>
-                    <div class="cv-it-field mb-0"><label>Item Group</label><select class="form-select" id="poItGroup">
+                    <div class="mb-3"><label>Unit</label><input type="text" class="form-control" id="poItUnit" placeholder="Unit"></div>
+                    <div class="mb-3 mb-0"><label>Item Group</label><select class="form-select" id="poItGroup">
                         <option value="">Non selected</option>
                         <option>Services</option>
                         <option>Products</option>
@@ -2869,24 +2974,24 @@
                 <div class="modal-content" style="border:none;border-radius:0;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-zip"></i></div>
                       <h5 class="modal-title" id="cvPoZipTitle" style="font-size:15.5px;font-weight:800;">ZIP Purchase Orders</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-it-field">
+                    <div class="mb-3">
                       <label>Status</label>
-                      <div class="cv-zip-status">
-                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="All" checked><span class="cv-zip-pill"><i class="bi bi-circle-half"></i>All</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="New"><span class="cv-zip-pill"><i class="bi bi-plus-circle"></i>New</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="Cancelled"><span class="cv-zip-pill"><i class="bi bi-x-circle"></i>Cancelled</span></label>
-                        <label class="cv-zip-radio"><input type="radio" name="cvPoZipStatus" value="Confirmed"><span class="cv-zip-pill"><i class="bi bi-check-circle"></i>Confirmed</span></label>
+                      <div class="d-flex flex-wrap gap-2 mt-2">
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvPoZipStatus" value="All" checked><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-circle-half"></i>All</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvPoZipStatus" value="New"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-plus-circle"></i>New</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvPoZipStatus" value="Cancelled"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-x-circle"></i>Cancelled</span></label>
+                        <label class="d-inline-flex align-items-center gap-1 border rounded-pill px-3 py-1 bg-light small cursor-pointer"><input type="radio" name="cvPoZipStatus" value="Confirmed"><span class="d-inline-flex align-items-center gap-1 text-secondary fw-semibold"><i class="bi bi-check-circle"></i>Confirmed</span></label>
                       </div>
                     </div>
-                    <div class="cv-it-field"><label>From Date:</label><input type="date" class="form-control" id="cvPoZipFrom"></div>
-                    <div class="cv-it-field mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvPoZipTo"></div>
-                    <div class="cv-zip-note"><i class="bi bi-info-circle me-1"></i>Purchase orders matching the selected status and date range will be bundled into a single ZIP file.</div>
+                    <div class="mb-3"><label>From Date:</label><input type="date" class="form-control" id="cvPoZipFrom"></div>
+                    <div class="mb-3 mb-0"><label>To Date:</label><input type="date" class="form-control" id="cvPoZipTo"></div>
+                    <div class="alert alert-info py-2 px-3 small d-flex align-items-center gap-2 mt-3"><i class="bi bi-info-circle me-1"></i>Purchase orders matching the selected status and date range will be bundled into a single ZIP file.</div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -3083,11 +3188,12 @@
             </script>
           </div>
         </div>
+      </div>
         <div class="tab-pane fade" id="cvTab-subscriptions" role="tabpanel" aria-labelledby="cvSideLink-subscriptions" tabindex="0">
           <!-- Subscriptions — title + New Subscription + table flow -->
 
 
-          <div class="cv-sub-head ms-3 mb-0 mt-3">
+          <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center ms-3 mb-0 mt-3">
             <button type="button" class="btn btn-primary" id="cvSubNewBtn"><i class="bi bi-plus-lg me-1"></i>New Subscription</button>
           </div>
 
@@ -3183,15 +3289,15 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-arrow-repeat"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-arrow-repeat"></i></div>
                       <h5 class="modal-title" id="cvNewSubTitle" style="font-size:15.5px;font-weight:800;">New Subscription</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-sub-field"><label><span class="req">*</span>Subscription Name</label><input type="text" class="form-control" id="subName" autocomplete="off"></div>
-                    <div class="cv-sub-field"><label>Description</label><textarea class="form-control" id="subDesc" rows="3" placeholder="Short description of this subscription..."></textarea></div>
-                    <div class="cv-sub-field">
+                    <div class="mb-3"><label><span class="req">*</span>Subscription Name</label><input type="text" class="form-control" id="subName" autocomplete="off"></div>
+                    <div class="mb-3"><label>Description</label><textarea class="form-control" id="subDesc" rows="3" placeholder="Short description of this subscription..."></textarea></div>
+                    <div class="mb-3">
                       <label><span class="req">*</span>Billing Plan</label>
                       <select class="form-select" id="subPlan">
                         <option value="">Select plan</option>
@@ -3200,37 +3306,37 @@
                         <option>Enterprise Yearly — ₹ 49,999</option>
                       </select>
                     </div>
-                    <div class="cv-sub-row">
-                      <div class="cv-sub-field"><label><span class="req">*</span>Quantity</label><input type="number" class="form-control" id="subQty" value="1" min="1"></div>
-                      <div class="cv-sub-field"><label><span class="req">*</span>First Billing Date</label><input type="date" class="form-control" id="subFirstDate" value="2026-10-01"></div>
-                    </div>
-                    <div class="cv-sub-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
-                    <div class="cv-sub-row">
-                      <div class="cv-sub-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Quantity</label><input type="number" class="form-control" id="subQty" value="1" min="1"></div>
+  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>First Billing Date</label><input type="date" class="form-control" id="subFirstDate" value="2026-10-01"></div>
+</div>
+                    <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Currency</label><select class="form-select">
                           <option selected>INR ₹</option>
                           <option>USD $</option>
                         </select></div>
-                      <div class="cv-sub-field"><label>Status</label><select class="form-select" id="subStatus">
+  <div class="col-12 col-md-6 mb-3"><label>Status</label><select class="form-select" id="subStatus">
                           <option selected>Active</option>
                           <option>Paused</option>
                           <option>Cancelled</option>
                         </select></div>
-                    </div>
-                    <div class="cv-sub-row">
-                      <div class="cv-sub-field"><label>Tax 1</label><select class="form-select">
+</div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Tax 1</label><select class="form-select">
                           <option selected>No Tax</option>
                           <option>GST 5%</option>
                           <option>GST 12%</option>
                           <option>GST 18%</option>
                         </select></div>
-                      <div class="cv-sub-field"><label>Tax 2</label><select class="form-select">
+  <div class="col-12 col-md-6 mb-3"><label>Tax 2</label><select class="form-select">
                           <option selected>No Tax</option>
                           <option>GST 5%</option>
                           <option>GST 12%</option>
                           <option>GST 18%</option>
                         </select></div>
-                    </div>
-                    <div class="cv-sub-field mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3" placeholder="Enter customer terms &amp; conditions to be displayed before subscribe to the subscription."></textarea></div>
+</div>
+                    <div class="mb-3 mb-0"><label>Terms &amp; Conditions</label><textarea class="form-control" rows="3" placeholder="Enter customer terms &amp; conditions to be displayed before subscribe to the subscription."></textarea></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -3321,7 +3427,7 @@
         <div class="tab-pane fade" id="cvTab-expenses" role="tabpanel" aria-labelledby="cvSideLink-expenses" tabindex="0">
           <!-- Expenses — title + Record Expense + year + KPI cards + table flow -->
 
-          <div class="cv-exp-head justify-content-start mt-3 ms-3">
+          <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center justify-content-start mt-3 ms-3">
             <select class="form-select mb-0 bg-white form-select-sm cv-exp-year" aria-label="Year">
               <option selected>2026</option>
               <option>2025</option>
@@ -3331,27 +3437,12 @@
           </div>
 
           <!-- Summary KPI cards (image colors) -->
-          <div class="cv-exp-kpis ms-3 mb-0 me-3">
-            <div class="cv-exp-kpi c-amber">
-              <div class="k">Total</div>
-              <div class="v">₹ 12,600</div>
-            </div>
-            <div class="cv-exp-kpi c-green">
-              <div class="k">Billable</div>
-              <div class="v">₹ 4,600</div>
-            </div>
-            <div class="cv-exp-kpi c-amber">
-              <div class="k">Non Billable</div>
-              <div class="v">₹ 8,000</div>
-            </div>
-            <div class="cv-exp-kpi c-red">
-              <div class="k">Not Invoiced</div>
-              <div class="v">₹ 4,600</div>
-            </div>
-            <div class="cv-exp-kpi c-green">
-              <div class="k">Billed</div>
-              <div class="v">₹ 8,000</div>
-            </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-warning">Total</div><div class="fs-5 fw-bold text-dark">₹ 12,600</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Billable</div><div class="fs-5 fw-bold text-dark">₹ 4,600</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-warning">Non Billable</div><div class="fs-5 fw-bold text-dark">₹ 8,000</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">Not Invoiced</div><div class="fs-5 fw-bold text-dark">₹ 4,600</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Billed</div><div class="fs-5 fw-bold text-dark">₹ 8,000</div></div></div>
           </div>
 
           <div class="card-custom p-0" id="cvCard-expenses">
@@ -3495,57 +3586,55 @@
             <div class="modal fade" id="cvNewExpenseModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content cv-inv-modal">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-receipt"></i></div>
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-receipt"></i></div>
                       <div style="min-width:0;">
                         <h3 class="mb-0">Record Expense</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New expense</div>
+                        <div class="small text-muted">GG COMPANY · New expense</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div class="cv-exp-grid">
+                    <div class="row g-3">
                       <!-- Left card -->
-                      <div class="cv-exp-card">
-                        <div class="cv-exp-card-head">Add new Expense of GG COMPANY</div>
-                        <div class="cv-exp-card-body">
-                          <div class="cv-exp-field"><label>Vendors</label><select class="form-select" id="expVendor">
+                      <div class="col-12 col-lg-6">
+                        <div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light fw-bold py-2 px-3">Add new Expense of GG COMPANY</div>
+                          <div class="card-body p-3">
+                          <div class="mb-3"><label>Vendors</label><select class="form-select" id="expVendor">
                               <option value="" selected>None</option>
                               <option>Fast Cabs</option>
                               <option>Print World</option>
                               <option>Zen Cloud</option>
                               <option>Office Supplies Co</option>
                             </select></div>
-                          <div class="cv-exp-field"><label><i class="bi bi-info-circle me-1"></i>Name</label><input type="text" class="form-control" id="expName" autocomplete="off"></div>
-                          <div class="cv-exp-field"><label><i class="bi bi-info-circle me-1"></i>Note</label><textarea class="form-control" id="expNote" rows="4"></textarea></div>
-                          <div class="cv-exp-field">
+                          <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i>Name</label><input type="text" class="form-control" id="expName" autocomplete="off"></div>
+                          <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i>Note</label><textarea class="form-control" id="expNote" rows="4"></textarea></div>
+                          <div class="mb-3">
                             <label><span class="req">*</span>Expense Category</label>
-                            <div class="cv-exp-cat-wrap">
-                              <select class="form-select" id="expCat">
+                            <div class="input-group"><select class="form-select" id="expCat">
                                 <option value="" selected>Non selected</option>
                                 <option>Travel</option>
                                 <option>Printing</option>
                                 <option>Software</option>
                                 <option>Office Supplies</option>
                                 <option>Marketing</option>
-                              </select>
-                              <button type="button" class="btn btn-primary cv-exp-cat-add" id="expCatAdd" title="Add category"><i class="bi bi-plus-lg"></i></button>
-                            </div>
+                              </select><button type="button" class="btn btn-primary" id="expCatAdd" title="Add category"><i class="bi bi-plus-lg"></i></button></div>
                           </div>
-                          <div class="cv-exp-field"><label>Expense Sub Category</label><select class="form-select" id="expSubCat">
+                          <div class="mb-3"><label>Expense Sub Category</label><select class="form-select" id="expSubCat">
                               <option value="" selected>Non selected</option>
                               <option>Cab</option>
                               <option>Fuel</option>
                               <option>Brochures</option>
                               <option>Subscription</option>
                             </select></div>
-                          <div class="cv-exp-field"><label><span class="req">*</span>Expense Date</label><input type="date" class="form-control" id="expDate" value="2026-09-23"></div>
-                          <div class="cv-exp-field"><label><span class="req">*</span>Amount</label><input type="number" class="form-control" id="expAmount" step="0.01"></div>
-                          <label class="cv-exp-check"><input type="checkbox" class="form-check-input" id="expBillable"> Billable</label>
-                          <div class="cv-exp-field"><label>Customer</label><input type="text" class="form-control" value="GG COMPANY"></div>
-                          <div class="cv-exp-field mb-0"><label>Project</label><select class="form-select">
+                          <div class="mb-3"><label><span class="req">*</span>Expense Date</label><input type="date" class="form-control" id="expDate" value="2026-09-23"></div>
+                          <div class="mb-3"><label><span class="req">*</span>Amount</label><input type="number" class="form-control" id="expAmount" step="0.01"></div>
+                          <div class="form-check mb-3"><input type="checkbox" class="form-check-input" id="expBillable"><label class="form-check-label small fw-semibold" for="expBillable">Billable</label></div>
+                          <div class="mb-3"><label>Customer</label><input type="text" class="form-control" value="GG COMPANY"></div>
+                          <div class="mb-3 mb-0"><label>Project</label><select class="form-select">
                               <option selected>Select and begin typing</option>
                               <option>Solar Installation</option>
                               <option>Event Management</option>
@@ -3553,31 +3642,34 @@
                             </select></div>
                         </div>
                       </div>
+                        </div>
+                      </div>
                       <!-- Right card -->
-                      <div class="cv-exp-card">
-                        <div class="cv-exp-card-head">Advanced Options</div>
-                        <div class="cv-exp-card-body">
-                          <div class="cv-exp-field"><label><span class="req">*</span>Currency</label><select class="form-select" id="expCurrency">
+                      <div class="col-12 col-lg-6">
+                        <div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light fw-bold py-2 px-3">Advanced Options</div>
+                          <div class="card-body p-3">
+                          <div class="mb-3"><label><span class="req">*</span>Currency</label><select class="form-select" id="expCurrency">
                               <option selected>INR ₹</option>
                               <option>USD $</option>
                             </select></div>
-                          <div class="cv-exp-row">
-                            <div class="cv-exp-field"><label>Tax 1</label><select class="form-select">
+                          <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Tax 1</label><select class="form-select">
                                 <option selected>No Tax</option>
                                 <option>GST 5%</option>
                                 <option>GST 12%</option>
                                 <option>GST 18%</option>
                               </select></div>
-                            <div class="cv-exp-field"><label>Tax 2</label><select class="form-select">
+  <div class="col-12 col-md-6 mb-3"><label>Tax 2</label><select class="form-select">
                                 <option selected>No Tax</option>
                                 <option>GST 5%</option>
                                 <option>GST 12%</option>
                                 <option>GST 18%</option>
                               </select></div>
-                          </div>
-                          <div class="cv-exp-field"><label>Attatment</label><input type="file" class="form-control" id="expFile"></div>
-                          <div class="cv-exp-row">
-                            <div class="cv-exp-field"><label>Payment Mode</label><select class="form-select" id="expPayMode">
+</div>
+                          <div class="mb-3"><label>Attatment</label><input type="file" class="form-control" id="expFile"></div>
+                          <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Payment Mode</label><select class="form-select" id="expPayMode">
                                 <option value="" selected>Non selected</option>
                                 <option>Cash</option>
                                 <option>Bank Transfer</option>
@@ -3585,35 +3677,35 @@
                                 <option>Card</option>
                                 <option>Cheque</option>
                               </select></div>
-                            <div class="cv-exp-field"><label>Reference #</label><input type="text" class="form-control" id="expRef" autocomplete="off"></div>
-                          </div>
-                          <div class="cv-exp-field"><label>Repeat everyss</label><select class="form-select">
+  <div class="col-12 col-md-6 mb-3"><label>Reference #</label><input type="text" class="form-control" id="expRef" autocomplete="off"></div>
+</div>
+                          <div class="mb-3"><label>Repeat everyss</label><select class="form-select">
                               <option value="" selected>Non selected</option>
                               <option>Daily</option>
                               <option>Weekly</option>
                               <option>Monthly</option>
                               <option>Yearly</option>
                             </select></div>
-                          <div class="cv-exp-field"><label>Staff</label><select class="form-select">
+                          <div class="mb-3"><label>Staff</label><select class="form-select">
                               <option value="" selected>Nothing selected</option>
                               <option>Admin</option>
                               <option>Karthik R</option>
                               <option>Divya M</option>
                             </select></div>
-                          <div class="cv-exp-row">
-                            <div class="cv-exp-field"><label>Payment Account</label><select class="form-select">
+                          <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Payment Account</label><select class="form-select">
                                 <option value="" selected>Non selected</option>
                                 <option>HDFC</option>
                                 <option>ICICI</option>
                                 <option>Cash in Hand</option>
                               </select></div>
-                            <div class="cv-exp-field"><label>Deposit To</label><select class="form-select">
+  <div class="col-12 col-md-6 mb-3"><label>Deposit To</label><select class="form-select">
                                 <option value="" selected>Non selected</option>
                                 <option>Cash Account</option>
                                 <option>HDFC</option>
                                 <option>ICICI</option>
                               </select></div>
-                          </div>
+</div>
                         </div>
                       </div>
                     </div>
@@ -3638,8 +3730,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-exp-field"><label><span class="req">*</span>Category Name</label><input type="text" class="form-control" id="newCatName" autocomplete="off"></div>
-                    <div class="cv-exp-field mb-0"><label>Category Description</label><textarea class="form-control" id="newCatDesc" rows="4"></textarea></div>
+                    <div class="mb-3"><label><span class="req">*</span>Category Name</label><input type="text" class="form-control" id="newCatName" autocomplete="off"></div>
+                    <div class="mb-3 mb-0"><label>Category Description</label><textarea class="form-control" id="newCatDesc" rows="4"></textarea></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -3806,7 +3898,7 @@
           <!-- Contracts — title + New Contract + table flow -->
 
 
-          <div class="cv-con-head mt-3 mb-0 ms-3">
+          <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center mt-3 mb-0 ms-3">
             <button type="button" class="btn btn-primary" id="cvConNewBtn"><i class="bi bi-plus-lg me-1"></i>New contract</button>
           </div>
 
@@ -3912,40 +4004,37 @@
                 <div class="modal-content" style="border:none;border-radius:14px;">
                   <div class="modal-header" style="border-bottom:1px solid #eef0f3;padding:16px 22px;">
                     <div class="d-flex align-items-center gap-2">
-                      <div class="cv-contact-ava" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-earmark-ruled"></i></div>
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;" style="width:36px;height:36px;border-radius:10px;font-size:16px;"><i class="bi bi-file-earmark-ruled"></i></div>
                       <h5 class="modal-title" id="cvConTitle" style="font-size:15.5px;font-weight:800;">Contract Information</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-con-checks">
-                      <label class="cv-con-check"><input type="checkbox" class="form-check-input" id="conTrash"> <i class="bi bi-trash"></i> Trash</label>
-                      <label class="cv-con-check"><input type="checkbox" class="form-check-input" id="conHide"> Hide from customer</label>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                      <div class="form-check"><input type="checkbox" class="form-check-input" id="conTrash"><label class="form-check-label small fw-semibold" for="conTrash"><i class="bi bi-trash"></i> Trash</label></div>
+                      <div class="form-check"><input type="checkbox" class="form-check-input" id="conHide"><label class="form-check-label small fw-semibold" for="conHide">Hide from customer</label></div>
                     </div>
-                    <div class="cv-con-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" id="conCustomer" value="GG COMPANY" readonly></div>
-                    <div class="cv-con-field"><label><i class="bi bi-info-circle me-1"></i><span class="req">*</span>Subject</label><input type="text" class="form-control" id="conSubject" autocomplete="off"></div>
-                    <div class="cv-con-field">
+                    <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" id="conCustomer" value="GG COMPANY" readonly></div>
+                    <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i><span class="req">*</span>Subject</label><input type="text" class="form-control" id="conSubject" autocomplete="off"></div>
+                    <div class="mb-3">
                       <label>Contract Value</label>
-                      <div class="cv-con-val-wrap"><input type="number" class="form-control" id="conValue" step="0.01"><span class="cv-con-suffix">₹</span></div>
+                      <div class="input-group"><input type="number" class="form-control" id="conValue" step="0.01"><span class="input-group-text">₹</span></div>
                     </div>
-                    <div class="cv-con-field">
+                    <div class="mb-3">
                       <label>Contract type</label>
-                      <div class="cv-con-type-wrap">
-                        <select class="form-select" id="conType">
+                      <div class="input-group"><select class="form-select" id="conType">
                           <option value="" selected>Non selected</option>
                           <option>Service</option>
                           <option>Maintenance</option>
                           <option>Project</option>
                           <option>Retainer</option>
-                        </select>
-                        <button type="button" class="btn btn-primary cv-con-type-add" id="conTypeAdd" title="Add contract type"><i class="bi bi-plus-lg"></i></button>
-                      </div>
+                        </select><button type="button" class="btn btn-primary" id="conTypeAdd" title="Add contract type"><i class="bi bi-plus-lg"></i></button></div>
                     </div>
-                    <div class="cv-con-row">
-                      <div class="cv-con-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="conStart" value="2026-09-23"></div>
-                      <div class="cv-con-field"><label>End Date</label><input type="date" class="form-control" id="conEnd"></div>
-                    </div>
-                    <div class="cv-con-field mb-0"><label>Contract description</label><textarea class="form-control" id="conDesc" rows="5"></textarea></div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="conStart" value="2026-09-23"></div>
+  <div class="col-12 col-md-6 mb-3"><label>End Date</label><input type="date" class="form-control" id="conEnd"></div>
+</div>
+                    <div class="mb-3 mb-0"><label>Contract description</label><textarea class="form-control" id="conDesc" rows="5"></textarea></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -3964,7 +4053,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-con-field mb-0"><label><span class="req">*</span>Name</label><input type="text" class="form-control" id="conTypeName" autocomplete="off"></div>
+                    <div class="mb-3 mb-0"><label><span class="req">*</span>Name</label><input type="text" class="form-control" id="conTypeName" autocomplete="off"></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -4125,36 +4214,18 @@
           <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
 
-          <div class="cv-prj-head ms-3 mt-3">
+          <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center ms-3 mt-3">
             <button type="button" class="btn btn-primary" id="cvPrjNewBtn"><i class="bi bi-plus-lg me-1"></i>New Project</button>
           </div>
 
           <!-- Status KPI cards (image 1 — Not Started, In Progress, On Hold, Cancelled, test, Finished) -->
-          <div class="cv-prj-kpis ms-3 me-3 mb-0">
-            <div class="cv-prj-kpi c-dim">
-              <div class="k">Not Started</div>
-              <div class="v">0</div>
-            </div>
-            <div class="cv-prj-kpi c-green">
-              <div class="k">In Progress</div>
-              <div class="v">1</div>
-            </div>
-            <div class="cv-prj-kpi c-amber">
-              <div class="k">On Hold</div>
-              <div class="v">1</div>
-            </div>
-            <div class="cv-prj-kpi c-dim">
-              <div class="k">Cancelled</div>
-              <div class="v">0</div>
-            </div>
-            <div class="cv-prj-kpi c-red">
-              <div class="k">test</div>
-              <div class="v">0</div>
-            </div>
-            <div class="cv-prj-kpi c-green">
-              <div class="k">Finished</div>
-              <div class="v">1</div>
-            </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-secondary">Not Started</div><div class="fs-5 fw-bold text-dark">0</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">In Progress</div><div class="fs-5 fw-bold text-dark">1</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-warning">On Hold</div><div class="fs-5 fw-bold text-dark">1</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-secondary">Cancelled</div><div class="fs-5 fw-bold text-dark">0</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-danger">test</div><div class="fs-5 fw-bold text-dark">0</div></div></div>
+            <div class="col-6 col-md"><div class="card p-3 border shadow-sm h-100 bg-white"><div class="small fw-bold mb-1 text-success">Finished</div><div class="fs-5 fw-bold text-dark">1</div></div></div>
           </div>
 
           <div class="card-custom p-0" id="cvCard-projects">
@@ -4192,7 +4263,7 @@
                       <a href="#" class="cv-link">ERP Rollout 2026</a>
                     </td>
                     <td>
-                      <span class="cv-tag-chip">hot</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">hot</span>
                     </td>
                     <td>
                       <div class="cv-prj-prog">
@@ -4221,7 +4292,7 @@
                       <a href="#" class="cv-link">Website Revamp</a>
                     </td>
                     <td>
-                      <span class="cv-tag-chip">low</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">low</span>
                     </td>
                     <td>
                       <div class="cv-prj-prog">
@@ -4278,28 +4349,28 @@
             <div class="modal fade" id="cvNewProjectModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
-                  <div class="cv-contact-head">
-                    <div class="cv-contact-head-l">
-                      <div class="cv-contact-ava"><i class="bi bi-kanban"></i></div>
+                  <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-kanban"></i></div>
                       <div style="min-width:0;">
                         <h3 class="mb-0">Add new project</h3>
-                        <div class="cv-contact-sub">GG COMPANY · New project</div>
+                        <div class="small text-muted">GG COMPANY · New project</div>
                       </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div class="cv-prj-tabs">
-                      <button type="button" class="cv-prj-tab active" data-prjtab="project">Project</button>
-                      <button type="button" class="cv-prj-tab" data-prjtab="settings">Project Settings</button>
+                    <div class="d-flex gap-2 mb-3 border-bottom pb-2 cv-prj-tabs">
+                      <button type="button" class="btn btn-sm btn-outline-primary cv-prj-tab active" data-prjtab="project">Project</button>
+                      <button type="button" class="btn btn-sm btn-outline-primary cv-prj-tab" data-prjtab="settings">Project Settings</button>
                     </div>
 
                     <!-- Project pane -->
                     <div class="cv-prj-pane active" data-prjpane="project">
-                      <div class="cv-prj-field"><label><span class="req">*</span>Project Name</label><input type="text" class="form-control" id="prjName" autocomplete="off"></div>
-                      <div class="cv-prj-field"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
-                      <div class="cv-prj-grid">
-                        <div class="cv-prj-field"><label>Device</label><select class="form-select">
+                      <div class="mb-3"><label><span class="req">*</span>Project Name</label><input type="text" class="form-control" id="prjName" autocomplete="off"></div>
+                      <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                      <div class="row g-3">
+                        <div class="mb-3"><label>Device</label><select class="form-select">
                             <option value="" selected>Non selected</option>
                             <option>Desktop</option>
                             <option>Mobile</option>
@@ -4309,49 +4380,49 @@
                       <label class="cv-prj-check"><input type="checkbox" id="prjCalcTasks" checked> Calculate progress through tasks</label>
                       <div class="cv-prj-prog-wrap">
                         <div class="cv-prj-prog-lbl">Progress <span id="prjProgVal">0%</span></div>
-                        <input type="range" class="cv-prj-range" id="prjProg" min="0" max="100" value="0">
+                        <input type="range" class="form-range cv-prj-range" id="prjProg" min="0" max="100" value="0">
                       </div>
-                      <div class="cv-prj-grid">
-                        <div class="cv-prj-field"><label><span class="req">*</span>Billing Type</label><select class="form-select" id="prjBilling">
+                      <div class="row g-3">
+                        <div class="mb-3"><label><span class="req">*</span>Billing Type</label><select class="form-select" id="prjBilling">
                             <option selected>Fixed Rate</option>
                             <option>Hourly Rate</option>
                             <option>Project Hours</option>
                           </select></div>
-                        <div class="cv-prj-field"><label>Status</label><select class="form-select" id="prjStatus">
+                        <div class="mb-3"><label>Status</label><select class="form-select" id="prjStatus">
                             <option selected>In Progress</option>
                             <option>Not Started</option>
                             <option>On Hold</option>
                             <option>Cancelled</option>
                             <option>Finished</option>
                           </select></div>
-                        <div class="cv-prj-field full"><label>Project Deadline Date Extend Limit</label><input type="text" class="form-control" id="prjDeadlineLimit"></div>
-                        <div class="cv-prj-field"><label>Total Rate</label><input type="text" class="form-control" id="prjTotalRate"></div>
-                        <div class="cv-prj-field"><label>Estimated Hours</label><input type="text" class="form-control" id="prjHours"></div>
-                        <div class="cv-prj-field"><label>Members</label><select class="form-select" id="prjMembers">
+                        <div class="mb-3 full"><label>Project Deadline Date Extend Limit</label><input type="text" class="form-control" id="prjDeadlineLimit"></div>
+                        <div class="mb-3"><label>Total Rate</label><input type="text" class="form-control" id="prjTotalRate"></div>
+                        <div class="mb-3"><label>Estimated Hours</label><input type="text" class="form-control" id="prjHours"></div>
+                        <div class="mb-3"><label>Members</label><select class="form-select" id="prjMembers">
                             <option selected>gharuda SOFTWARE</option>
                             <option>Karthik R</option>
                             <option>Divya M</option>
                             <option>Arun Kumar</option>
                           </select></div>
-                        <div class="cv-prj-field"><label>Follower</label><select class="form-select" id="prjFollower">
+                        <div class="mb-3"><label>Follower</label><select class="form-select" id="prjFollower">
                             <option value="" selected>Non selected</option>
                             <option>Karthik R</option>
                             <option>Divya M</option>
                           </select></div>
-                        <div class="cv-prj-field"><label>Super Follower</label><select class="form-select" id="prjSuperFollower">
+                        <div class="mb-3"><label>Super Follower</label><select class="form-select" id="prjSuperFollower">
                             <option value="" selected>Non selected</option>
                             <option>Admin</option>
                           </select></div>
-                        <div class="cv-prj-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="prjStart" value="2026-09-23"></div>
-                        <div class="cv-prj-field"><label>Deadline</label><input type="date" class="form-control" id="prjDeadline"></div>
-                        <div class="cv-prj-field full">
+                        <div class="mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="prjStart" value="2026-09-23"></div>
+                        <div class="mb-3"><label>Deadline</label><input type="date" class="form-control" id="prjDeadline"></div>
+                        <div class="mb-3 full">
                           <label><i class="bi bi-tag me-1"></i>Tags</label>
                           <div class="nl-tags-wrap" style="max-width:100%;">
                             <div class="nl-tags-chips"></div>
                             <input type="text" class="nl-tags-input" placeholder="Tag">
                           </div>
                         </div>
-                        <div class="cv-prj-field full">
+                        <div class="mb-3 full">
                           <label>Description</label>
                           <div class="cv-prj-quill-wrap">
                             <div id="cvPrjQuill"></div>
@@ -4363,71 +4434,71 @@
 
                     <!-- Project Settings pane — grouped toggle design -->
                     <div class="cv-prj-pane" data-prjpane="settings">
-                      <div class="cv-prj-field"><label><span class="req">*</span>Send contacts notifications</label>
+                      <div class="mb-3"><label><span class="req">*</span>Send contacts notifications</label>
                         <select class="form-select" id="prjNotify">
                           <option selected>To all contacts with notifications for projects enabled</option>
                           <option>To primary contact only</option>
                           <option>Do not send notifications</option>
                         </select>
                       </div>
-                      <div class="cv-prj-field"><label>Visible Tabs</label>
-                        <div class="cv-prj-tabsbox" id="prjVisibleTabs">
-                          <span class="cv-tag-chip" data-tab="Profit &amp; Loss">Profit &amp; Loss<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Tasks">Tasks<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Timesheets">Timesheets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Milestones">Milestones<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Files">Files<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Discussions">Discussions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Gantt">Gantt<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Tickets">Tickets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Video Library">Video Library<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Contracts">Contracts<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Proposals">Proposals<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Estimates">Estimates<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Purchase Orders">Purchase Orders<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Invoices">Invoices<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Subscriptions">Subscriptions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Expenses">Expenses<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="cv-tag-chip" data-tab="Credit Notes">Credit Notes<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span>
+                      <div class="mb-3"><label>Visible Tabs</label>
+                        <div class="d-flex flex-wrap gap-2 align-items-center p-2 border rounded bg-light cv-prj-tabsbox" id="prjVisibleTabs">
+                          <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Profit &amp; Loss">Profit &amp; Loss<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Tasks">Tasks<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Timesheets">Timesheets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Milestones">Milestones<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Files">Files<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Discussions">Discussions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Gantt">Gantt<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Tickets">Tickets<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Video Library">Video Library<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Contracts">Contracts<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Proposals">Proposals<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Estimates">Estimates<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Purchase Orders">Purchase Orders<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Invoices">Invoices<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Subscriptions">Subscriptions<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Expenses">Expenses<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span><span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip" data-tab="Credit Notes">Credit Notes<button type="button" class="chip-x" aria-label="Remove"><i class="bi bi-x-lg"></i></button></span>
                           <div class="dropdown cv-prj-tabs-dd">
-                            <button type="button" class="cv-prj-tabs-add" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"><i class="bi bi-plus-lg"></i>Add tabs <i class="bi bi-chevron-down" style="font-size:9px;"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-primary cv-prj-tabs-add" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"><i class="bi bi-plus-lg"></i>Add tabs <i class="bi bi-chevron-down" style="font-size:9px;"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end cv-prj-tabs-menu" id="prjTabsMenu"></ul>
                           </div>
                         </div>
                       </div>
 
-                      <div class="cv-prj-set-grid">
+                      <div class="row g-3 cv-prj-set-grid">
                         <!-- Tasks & Comments -->
-                        <div class="cv-prj-set-card">
-                          <div class="cv-prj-set-head"><i class="bi bi-list-check"></i><span class="t">Tasks &amp; Comments</span><span class="c">9 on</span></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to create tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to edit tasks (only tasks created from contact)</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to comment on project tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task comments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task attachments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task checklist items</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to upload attachments on tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view task total logged time</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                        </div>
+                        <div class="col-12 col-md-6"><div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold"><i class="bi bi-list-check"></i><span class="t">Tasks &amp; Comments</span><span class="c">9 on</span></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to create tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to edit tasks (only tasks created from contact)</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to comment on project tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view task comments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view task attachments</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view task checklist items</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to upload attachments on tasks</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view task total logged time</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div></div>
 
                         <!-- Files & Discussions -->
-                        <div class="cv-prj-set-card">
-                          <div class="cv-prj-set-head"><i class="bi bi-folder2-open"></i><span class="t">Files &amp; Discussions</span><span class="c">3 on</span></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to upload files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to open discussions</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                        </div>
+                        <div class="col-12 col-md-6"><div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold"><i class="bi bi-folder2-open"></i><span class="t">Files &amp; Discussions</span><span class="c">3 on</span></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to upload files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to open discussions</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view files</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div></div>
 
                         <!-- Milestones & Planning -->
-                        <div class="cv-prj-set-card">
-                          <div class="cv-prj-set-head"><i class="bi bi-diagram-3"></i><span class="t">Milestones &amp; Planning</span><span class="c">3 on</span></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view milestones</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view Gantt</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view timesheets</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                        </div>
+                        <div class="col-12 col-md-6"><div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold"><i class="bi bi-diagram-3"></i><span class="t">Milestones &amp; Planning</span><span class="c">3 on</span></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view milestones</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view Gantt</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view timesheets</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        </div></div>
 
                         <!-- Finance, Log & Team -->
-                        <div class="cv-prj-set-card">
-                          <div class="cv-prj-set-head"><i class="bi bi-graph-up"></i><span class="t">Finance, Log &amp; Team</span><span class="c">3 on</span></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view finance overview</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view activity log</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                          <div class="cv-prj-set-row"><span class="lbl">Allow customer to view team members</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                        <div class="col-12 col-md-6"><div class="card border shadow-sm h-100">
+                          <div class="card-header bg-light d-flex align-items-center justify-content-between py-2 px-3 fw-bold"><i class="bi bi-graph-up"></i><span class="t">Finance, Log &amp; Team</span><span class="c">3 on</span></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view finance overview</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view activity log</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                          <div class="d-flex align-items-center justify-content-between py-2 px-3 border-bottom small"><span class="lbl">Allow customer to view team members</span><label class="cust-switch"><input type="checkbox" checked><span class="slider"></span></label></div>
                         </div>
                       </div>
 
-                      <div class="cv-prj-set-foot">
+                      <div class="card border shadow-sm p-3 mt-3 d-flex flex-row align-items-center justify-content-between">
                         <i class="bi bi-eye-slash-fill"></i>
                         <span class="lbl">Hide project tasks on main tasks table (admin area)</span>
                         <label class="cust-switch"><input type="checkbox"><span class="slider"></span></label>
                       </div>
                     </div>
                   </div>
-                  <div class="cv-prj-footer">
+                  <div class="modal-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
                     <span class="cv-inv-hint"><span style="color:#dc2626;">*</span> marked fields are required</span>
                     <div class="d-flex gap-2">
                       <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -4661,6 +4732,7 @@
             </script>
           </div>
         </div>
+      </div>
         <div class="tab-pane fade" id="cvTab-tasks" role="tabpanel" aria-labelledby="cvSideLink-tasks" tabindex="0">
           <!-- Tasks — New Task + Related To + filter + namba table flow + Add new task modal -->
 
@@ -4676,7 +4748,7 @@
 
             </div>
 
-            <div class="cv-tsk-toolbar-row">
+            <div class="d-flex align-items-center justify-content-between mb-3">
               <button type="button" class="btn btn-primary" id="cvTskNewBtn"><i class="bi bi-plus-lg me-1"></i>New Task</button>
               <!-- <div class="dropdown">
                             <button type="button" class="cv-tsk-filter-btn" id="cvTskFilterBtn" data-bs-toggle="dropdown" title="Filter tasks" aria-expanded="false" aria-label="Filter tasks"><i class="bi bi-funnel"></i><span class="cv-tsk-active-dot"></span></button>
@@ -4701,19 +4773,19 @@
                         </div> -->
             </div>
 
-            <div class="cv-tsk-related">
+            <div class="d-flex flex-wrap align-items-center gap-3 my-3">
               <span class="lbl">Related To:</span>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input" checked> Customer</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Projects</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Invoices</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Estimates</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Contracts</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Support Tickets</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Expenses</label>
-              <label class="cv-tsk-check"><input type="checkbox" class="form-check-input"> Proposals</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input" checked> Customer</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Projects</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Invoices</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Estimates</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Contracts</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Support Tickets</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Expenses</label>
+              <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input"> Proposals</label>
             </div>
 
-            <hr class="cv-tsk-div">
+            <hr class="my-3 text-muted opacity-25">
 
             <div class="table-responsive table-modern-wrap overflow-auto column-border">
               <table class="table-modern w-100 datatable" id="cvTbl-tasks">
@@ -4747,7 +4819,7 @@
                     <td>
                       Divya M </td>
                     <td>
-                      <span class="cv-tag-chip">urgent</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">urgent</span>
                     </td>
                     <td>
                       <span class="cv-pill bad"><i class="bi bi-circle-fill" style="font-size:6px;"></i>High</span>
@@ -4793,7 +4865,7 @@
                     <td>
                       gharuda SOFTWARE </td>
                     <td>
-                      <span class="cv-tag-chip">release</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">release</span>
                     </td>
                     <td>
                       <span class="cv-pill wait"><i class="bi bi-circle-fill" style="font-size:6px;"></i>Medium</span>
@@ -4812,28 +4884,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;max-height:70vh;overflow-y:auto;">
-                    <div class="cv-tsk-top">
-                      <div class="cv-tsk-top-checks">
-                        <label class="cv-tsk-top-check"><input type="checkbox" class="form-check-input" id="tskPublic"> Public</label>
-                        <label class="cv-tsk-top-check"><input type="checkbox" class="form-check-input" id="tskBillable" checked> Billable</label>
+                    <div class="mb-3">
+                      <div class="d-flex align-items-center gap-3 mb-3">
+                        <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input" id="tskPublic"> Public</label>
+                        <label class="form-check form-check-inline mb-0"><input type="checkbox" class="form-check-input" id="tskBillable" checked> Billable</label>
                       </div>
                     </div>
                     <!-- Attach Files: drag & drop zone + selected file list -->
-                    <div class="cv-tsk-drop" id="cvTskDropZone">
+                    <div class="border border-2 border-dashed rounded p-4 text-center mb-3 bg-light-subtle cursor-pointer cv-tsk-drop" id="cvTskDropZone">
                       <i class="bi bi-cloud-arrow-up"></i>
                       <div class="t1">Drag &amp; drop files here, or <span>Browse</span></div>
                       <div class="t2">Images, documents, spreadsheets — you can attach multiple files</div>
                       <input type="file" id="cvTskFileInput" multiple style="display:none;">
                     </div>
                     <div id="cvTskFileList"></div>
-                    <div class="cv-tsk-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" id="tskSubject" autocomplete="off"></div>
-                    <div class="cv-tsk-field"><label>Hourly Rate</label><input type="number" class="form-control" id="tskRate" value="0" min="0" step="0.5"></div>
-                    <div class="cv-tsk-row">
-                      <div class="cv-tsk-field"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="tskStart" value="2026-09-23"></div>
-                      <div class="cv-tsk-field"><label>Due Date</label><input type="date" class="form-control" id="tskDue"></div>
-                    </div>
-                    <div class="cv-tsk-row">
-                      <div class="cv-tsk-field"><label>Repeat every</label><select class="form-select" id="tskRepeat">
+                    <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" id="tskSubject" autocomplete="off"></div>
+                    <div class="mb-3"><label>Hourly Rate</label><input type="number" class="form-control" id="tskRate" value="0" min="0" step="0.5"></div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="tskStart" value="2026-09-23"></div>
+  <div class="col-12 col-md-6 mb-3"><label>Due Date</label><input type="date" class="form-control" id="tskDue"></div>
+</div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Repeat every</label><select class="form-select" id="tskRepeat">
                           <option value="" selected>Non selected</option>
                           <option>Daily</option>
                           <option>Weekdays</option>
@@ -4841,15 +4913,15 @@
                           <option>Monthly</option>
                           <option>Yearly</option>
                         </select></div>
-                      <div class="cv-tsk-field"><label>Priority</label><select class="form-select" id="tskPriority">
+  <div class="col-12 col-md-6 mb-3"><label>Priority</label><select class="form-select" id="tskPriority">
                           <option>Low</option>
                           <option selected>Medium</option>
                           <option>High</option>
                           <option>Urgent</option>
                         </select></div>
-                    </div>
-                    <div class="cv-tsk-row">
-                      <div class="cv-tsk-field"><label>Related To</label><select class="form-select" id="tskRelated">
+</div>
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Related To</label><select class="form-select" id="tskRelated">
                           <option selected>Customer</option>
                           <option>Projects</option>
                           <option>Invoices</option>
@@ -4859,36 +4931,36 @@
                           <option>Expenses</option>
                           <option>Proposals</option>
                         </select></div>
-                      <div class="cv-tsk-field"><label>Customer</label><select class="form-select" id="tskCustomer">
+  <div class="col-12 col-md-6 mb-3"><label>Customer</label><select class="form-select" id="tskCustomer">
                           <option selected>GG COMPANY</option>
                         </select></div>
-                    </div>
+</div>
                     <label class="cv-tsk-top-check mb-3"><input type="checkbox" class="form-check-input" id="tskDep"> Dependency</label>
-                    <div class="cv-tsk-row">
-                      <div class="cv-tsk-field"><label>Assignees</label><select class="form-select" id="tskAssignees">
+                    <div class="row g-3">
+  <div class="col-12 col-md-6 mb-3"><label>Assignees</label><select class="form-select" id="tskAssignees">
                           <option selected>gharuda SOFTWARE</option>
                           <option>Admin</option>
                           <option>Karthik R</option>
                           <option>Divya M</option>
                         </select></div>
-                      <div class="cv-tsk-field"><label>Followers</label><select class="form-select" id="tskFollowers">
+  <div class="col-12 col-md-6 mb-3"><label>Followers</label><select class="form-select" id="tskFollowers">
                           <option value="" selected>Non selected</option>
                           <option>Admin</option>
                           <option>Karthik R</option>
                           <option>Divya M</option>
                         </select></div>
-                    </div>
-                    <div class="cv-tsk-field"><label>Insert Checklist Templates</label><select class="form-select" id="tskChecklist">
+</div>
+                    <div class="mb-3"><label>Insert Checklist Templates</label><select class="form-select" id="tskChecklist">
                         <option value="" selected>Non selected</option>
                         <option>Dev handoff checklist</option>
                         <option>QA checklist</option>
                         <option>Bug triage checklist</option>
                       </select></div>
-                    <div class="cv-tsk-field">
-                      <div class="cv-tsk-tags-lbl"><i class="bi bi-tags"></i>Tags</div>
+                    <div class="mb-3">
+                      <div class="form-label small fw-bold"><i class="bi bi-tags"></i>Tags</div>
                       <input type="text" class="form-control" id="tskTags" placeholder="Tag" autocomplete="off">
                     </div>
-                    <div class="cv-tsk-field mb-0"><label>Task Description</label><textarea class="form-control" id="tskDesc" rows="4" placeholder="Add Description"></textarea></div>
+                    <div class="mb-3 mb-0"><label>Task Description</label><textarea class="form-control" id="tskDesc" rows="4" placeholder="Add Description"></textarea></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -5141,7 +5213,7 @@
                     '<td>' + fmt(start.value) + '</td>' +
                     '<td>' + fmt(document.getElementById('tskDue').value) + '</td>' +
                     '<td>' + esc(assignee) + '</td>' +
-                    '<td>' + (tags ? '<span class="cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
+                    '<td>' + (tags ? '<span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
                     '<td><span class="cv-pill ' + pcls + '"><i class="bi bi-circle-fill" style="font-size:6px;"></i>' + esc(priority) + '</span></td>';
                   if (window.refreshAttendanceTable) window.refreshAttendanceTable();
                   bootstrap.Modal.getOrCreateInstance(tskModal).hide();
@@ -5192,7 +5264,7 @@
                       <a href="#" class="cv-link">Unable to download invoice</a>
                     </td>
                     <td>
-                      <span class="cv-tag-chip">billing</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">billing</span>
                     </td>
                     <td>
                       Billing </td>
@@ -5219,7 +5291,7 @@
                       <a href="#" class="cv-link">Login page not loading</a>
                     </td>
                     <td>
-                      <span class="cv-tag-chip">bug</span>
+                      <span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">bug</span>
                     </td>
                     <td>
                       Technical </td>
@@ -5279,17 +5351,17 @@
                   </div>
                   <div class="modal-body">
                     <!-- Top card: ticket fields -->
-                    <div class="cv-tkt-card">
-                      <div class="cv-tkt-grid">
-                        <div class="cv-tkt-field full">
+                    <div class="card border shadow-sm p-3 mb-3">
+                      <div class="row g-3">
+                        <div class="mb-3 full">
                           <label>Subject</label>
                           <input type="text" class="form-control" id="tktSubject" autocomplete="off">
                         </div>
-                        <div class="cv-tkt-field">
-                          <div class="cv-tsk-tags-lbl"><i class="bi bi-tags"></i>Tags</div>
+                        <div class="mb-3">
+                          <div class="form-label small fw-bold"><i class="bi bi-tags"></i>Tags</div>
                           <input type="text" class="form-control" id="tktTags" placeholder="Tag" autocomplete="off">
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Contact</label>
                           <select class="form-select" id="tktContact">
                             <option selected>Suresh s</option>
@@ -5297,7 +5369,7 @@
                             <option>Karthik R</option>
                           </select>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Assign ticket (default is current user)</label>
                           <select class="form-select" id="tktAssign">
                             <option selected>gharuda SOFTWARE</option>
@@ -5305,15 +5377,15 @@
                             <option>Karthik R</option>
                           </select>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Name</label>
                           <input type="text" class="form-control" id="tktName" value="Suresh s" readonly>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Email address</label>
                           <input type="text" class="form-control" id="tktEmail" value="pm@GHARUDAtechnology.com" readonly>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Priority</label>
                           <select class="form-select" id="tktPriority">
                             <option>Low</option>
@@ -5322,7 +5394,7 @@
                             <option>Urgent</option>
                           </select>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Follower ticket (default is current user)</label>
                           <select class="form-select" id="tktFollower">
                             <option selected>gharuda SOFTWARE</option>
@@ -5330,7 +5402,7 @@
                             <option>Karthik R</option>
                           </select>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Department</label>
                           <select class="form-select" id="tktDept">
                             <option value="" selected>Non selected</option>
@@ -5340,19 +5412,16 @@
                             <option>Support</option>
                           </select>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>Service</label>
-                          <div class="cv-tkt-type-wrap">
-                            <select class="form-select" id="tktService">
+                          <div class="input-group"><select class="form-select" id="tktService">
                               <option value="" selected>Non selected</option>
                               <option>Website Support</option>
                               <option>Hosting</option>
                               <option>Maintenance</option>
-                            </select>
-                            <button type="button" class="btn btn-primary cv-tkt-type-add" id="tktServiceAdd" title="Add service"><i class="bi bi-plus-lg"></i></button>
-                          </div>
+                            </select><button type="button" class="btn btn-primary" id="tktServiceAdd" title="Add service"><i class="bi bi-plus-lg"></i></button></div>
                         </div>
-                        <div class="cv-tkt-field">
+                        <div class="mb-3">
                           <label>CC</label>
                           <input type="text" class="form-control" id="tktCc" autocomplete="off">
                         </div>
@@ -5360,36 +5429,31 @@
                     </div>
 
                     <!-- Ticket Body card -->
-                    <div class="cv-tkt-card mb-0">
-                      <div class="cv-tkt-field"><label>Ticket Body</label></div>
-                      <div class="cv-tkt-body-grid">
+                    <div class="card border shadow-sm p-3 mb-0">
+                      <div class="mb-3"><label>Ticket Body</label></div>
+                      <div class="row g-2 mb-2"><div class="col-12 col-md-6">
                         <select class="form-select" id="tktPredefined" style="border-radius:10px;font-size:13px;">
                           <option value="" selected>Insert predefined reply</option>
                           <option>Thank you — we are looking into it</option>
                           <option>Issue resolved — closing ticket</option>
-                        </select>
-                        <select class="form-select" id="tktKbLink" style="border-radius:10px;font-size:13px;">
+                        </select></div><div class="col-12 col-md-6"><select class="form-select" id="tktKbLink" style="border-radius:10px;font-size:13px;">
                           <option value="" selected>Insert knowledge base link</option>
                           <option>How to reset your password</option>
                           <option>Invoice & payment FAQ</option>
-                        </select>
-                      </div>
-                      <div class="cv-tkt-quill-wrap mt-2">
+                        </select></div></div>
+                      <div class="border rounded bg-white mt-2">
                         <div id="cvTktQuill"></div>
                       </div>
                       <div class="row justify-content-start mt-3">
                         <div class="col-auto" style="min-width:380px;max-width:100%;">
                           <div class="cv-tkt-att-lbl">Attachments</div>
-                          <div class="cv-tkt-att-wrap">
-                            <input type="file" class="form-control" id="tktFile" multiple>
-                            <button type="button" class="btn btn-primary cv-tkt-att-add" id="tktFileAdd" title="Add more"><i class="bi bi-plus-lg"></i></button>
-                          </div>
+                          <div class="input-group"><input type="file" class="form-control" id="tktFile" multiple><button type="button" class="btn btn-primary" id="tktFileAdd" title="Add more"><i class="bi bi-plus-lg"></i></button></div>
                           <div id="tktFileList"></div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="cv-tkt-foot">
+                  <div class="modal-footer bg-light border-top p-3">
                     <button type="button" class="btn btn-primary" id="cvTktSubmit">Open Ticket</button>
                   </div>
                 </div>
@@ -5405,7 +5469,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-tkt-field mb-0"><label><span style="color:#dc2626;margin-right:2px;">*</span>Service Name</label><input type="text" class="form-control" id="svcName" autocomplete="off"></div>
+                    <div class="mb-3 mb-0"><label><span style="color:#dc2626;margin-right:2px;">*</span>Service Name</label><input type="text" class="form-control" id="svcName" autocomplete="off"></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -5687,7 +5751,7 @@
                   tr.className = 'cv-row';
                   tr.innerHTML = '<td><span style="color:var(--ink-500);font-weight:600;">#' + next + '</span></td>' +
                     '<td><a href="#" class="cv-link">' + esc(subj.value.trim()) + '</a></td>' +
-                    '<td>' + (tags ? '<span class="cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
+                    '<td>' + (tags ? '<span class="badge bg-white text-dark border d-flex align-items-center gap-1 cv-tag-chip">' + esc(tags) + '</span>' : '—') + '</td>' +
                     '<td>' + esc(dept) + '</td>' +
                     '<td>' + esc(service) + '</td>' +
                     '<td>' + esc(contact) + '</td>' +
@@ -5753,14 +5817,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="cv-em-field">
+                    <div class="mb-3">
                       <label class="cv-em-upper">Send Email Using (SMTP)</label>
                       <select class="form-select" id="cvEmSmtp">
                         <option>USE SYSTEM SMTP ( info@GHARUDAtechnology.com )</option>
                         <option>USE CUSTOM SMTP</option>
                       </select>
                     </div>
-                    <div class="cv-em-field">
+                    <div class="mb-3">
                       <label>Templates</label>
                       <select class="form-select" id="cvEmTemplate">
                         <option value="">Non selected</option>
@@ -5769,7 +5833,7 @@
                         <option value="invoice">Invoice Reminder</option>
                       </select>
                     </div>
-                    <div class="cv-em-field">
+                    <div class="mb-3">
                       <label>Email To</label>
                       <select class="form-select" id="cvEmTo">
                         <option>Suresh s ( pm@GHARUDAtechnology.com )</option>
@@ -5777,14 +5841,14 @@
                         <option>Priya K ( priya@GHARUDAtechnology.com )</option>
                       </select>
                     </div>
-                    <div class="cv-em-field"><label>Email CC</label><input type="text" class="form-control" id="cvEmCc" autocomplete="off"></div>
-                    <div class="cv-em-field"><label>Email Subject</label><input type="text" class="form-control" id="cvEmSubject" autocomplete="off"></div>
-                    <div class="cv-em-field">
+                    <div class="mb-3"><label>Email CC</label><input type="text" class="form-control" id="cvEmCc" autocomplete="off"></div>
+                    <div class="mb-3"><label>Email Subject</label><input type="text" class="form-control" id="cvEmSubject" autocomplete="off"></div>
+                    <div class="mb-3">
                       <div class="cv-em-quill-wrap">
                         <div id="cvEmQuill"></div>
                       </div>
                     </div>
-                    <div class="cv-em-field mb-0">
+                    <div class="mb-3 mb-0">
                       <label>Attachment</label>
                       <div id="cvEmAttachList">
                         <div class="cv-em-attach-row">
@@ -6120,12 +6184,12 @@
             <!-- Add address modal -->
             <div class="leave-reject-modal" id="cvAddrModal" role="dialog" aria-modal="true" aria-labelledby="cvAddrTitle">
               <div class="leave-reject-dialog cv-note-dialog">
-                <div class="cv-contact-head">
-                  <div class="cv-contact-head-l">
-                    <div class="cv-contact-ava"><i class="bi bi-geo-alt-fill"></i></div>
+                <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-geo-alt-fill"></i></div>
                     <div style="min-width:0;">
                       <h3 id="cvAddrTitle" class="mb-0">Add address</h3>
-                      <div class="cv-contact-sub">GG COMPANY · New shipping outlet</div>
+                      <div class="small text-muted">GG COMPANY · New shipping outlet</div>
                     </div>
                   </div>
                   <button type="button" class="modal-close" id="cvAddrClose" aria-label="Close">&times;</button>
@@ -6265,11 +6329,11 @@
             </div>
 
             <!-- API key note -->
-            <div class="cv-map-note"><i class="bi bi-key-fill"></i>Setup Google API key in settings to unlock advanced map options for this customer map.</div>
+            <div class="alert alert-warning d-flex align-items-center gap-2 mb-3"><i class="bi bi-key-fill"></i><div>Setup Google API key in settings to unlock advanced map options for this customer map.</div></div>
 
             <!-- Live map preview (Google Maps embed — API key not required) -->
-            <div class="cv-map-frame-wrap">
-              <div class="cv-map-err" id="cvMapPreview">
+            <div class="ratio ratio-16x9 border rounded overflow-hidden bg-light position-relative">
+              <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4 text-center" id="cvMapPreview">
                 <i class="bi bi-geo-alt-fill"></i>
                 <span>Enter coordinates and click "Show on map"</span>
                 <span class="cv-err" id="cvMapErr" hidden>Please enter both Latitude and Longitude.</span>
@@ -6336,7 +6400,7 @@
           <!-- Files — info note + drop-to-upload zone + namba table flow -->
 
 
-          <div class="cv-fl-note ms-3">Files from projects and tasks linked to the customer are not shown on this table.</div>
+          <div class="alert alert-info py-2 px-3 mx-3 mb-3 small d-flex align-items-center gap-2"><i class="bi bi-info-circle"></i><div>Files from projects and tasks linked to the customer are not shown on this table.</div></div>
 
           <!-- Share File With modal -->
           <div class="modal fade" id="cvShareFileModal" tabindex="-1" aria-hidden="true" aria-labelledby="cvShfTitle">
@@ -6347,7 +6411,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="padding:20px 22px;">
-                  <div class="cv-sf-field mb-0"><label>Contacts</label><select class="form-control form-select" id="shfContact">
+                  <div class="mb-3 mb-0"><label>Contacts</label><select class="form-control form-select" id="shfContact">
                       <option selected>Suresh s</option>
                       <option>Divya M</option>
                       <option>Karthik R</option>
@@ -6370,9 +6434,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="padding:20px 22px;">
-                  <div class="cv-sf-field"><label>Email Subject</label><input type="text" class="form-control" id="sfSubject" autocomplete="off"></div>
-                  <div class="cv-sf-field"><label>Email Address</label><input type="email" class="form-control" id="sfEmail" autocomplete="off"></div>
-                  <div class="cv-sf-field mb-0"><label>Message</label><textarea class="form-control" id="sfMessage" rows="5"></textarea></div>
+                  <div class="mb-3"><label>Email Subject</label><input type="text" class="form-control" id="sfSubject" autocomplete="off"></div>
+                  <div class="mb-3"><label>Email Address</label><input type="email" class="form-control" id="sfEmail" autocomplete="off"></div>
+                  <div class="mb-3 mb-0"><label>Message</label><textarea class="form-control" id="sfMessage" rows="5"></textarea></div>
                 </div>
                 <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -6383,8 +6447,8 @@
           </div>
 
           <!-- Drop files to upload zone -->
-          <div class="cv-fl-drop mx-3" id="cvFlDropZone">
-            <div class="t1">Drop files here to upload</div>
+          <div class="border border-2 border-dashed rounded p-4 text-center mx-3 mb-3 bg-light-subtle cursor-pointer cv-fl-drop" id="cvFlDropZone">
+            <div class="fw-semibold text-muted"><i class="bi bi-cloud-arrow-up fs-2 d-block mb-1 text-primary"></i>Drop files here to upload</div>
             <input type="file" id="cvFlFileInput" multiple style="display:none;">
           </div>
           <div class="mx-3" id="cvFlFileList"></div>
@@ -6750,43 +6814,39 @@
           </div>
         </div>
         <div class="tab-pane fade" id="cvTab-activity_log" role="tabpanel" aria-labelledby="cvSideLink-activity_log" tabindex="0">
-          <div class="cv-title">Activity Log</div>
+          <div class="font-display fw-bold fs-5 mb-3">Activity Log</div>
 
-          <!-- Activity Log tab: table-a timeline format-a render pannirukom -->
-
-
-          <div class="card-custom p-4">
-            <div class="cv-tl-head">
+          <div class="card border-0 shadow-sm p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
               <div>
-                <div class="cv-tl-title"><i class="bi bi-card-list"></i> Activity Trail</div>
-                <div class="cv-tl-sub">All activities for GG COMPANY — latest first</div>
+                <div class="fw-bold fs-6 text-dark d-flex align-items-center gap-2"><i class="bi bi-card-list text-primary"></i> Activity Trail</div>
+                <div class="small text-muted">All activities for GG COMPANY — latest first</div>
               </div>
-              <span class="cv-tl-count">2 activities</span>
+              <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill">2 activities</span>
             </div>
 
-            <div class="cv-tl">
-              <div class="cv-tl-item">
-                <div class="cv-tl-marker">
-                  <span class="cv-tl-dot"><i class="bi bi-person-up"></i></span>
-                  <span class="cv-tl-line"></span>
-                </div>
-                <div class="cv-tl-card">
-                  <div class="cv-tl-text">Customer converted from lead</div>
-                  <div class="cv-tl-meta">
-                    <span><i class="bi bi-person-fill"></i>Admin</span>
-                    <span><i class="bi bi-clock"></i>16-09-2026 11:53:29</span>
+            <div class="position-relative ps-4" style="border-left: 2px solid #e9ecef; margin-left: 14px;">
+              <div class="position-relative mb-4">
+                <span class="position-absolute rounded-circle bg-white border border-2 border-primary text-primary d-flex align-items-center justify-content-center shadow-sm" style="left: -38px; top: 0; width: 28px; height: 28px; font-size: 13px;">
+                  <i class="bi bi-person-up"></i>
+                </span>
+                <div class="card p-3 border shadow-sm rounded-3 bg-light-subtle">
+                  <div class="fw-semibold text-dark mb-1">Customer converted from lead</div>
+                  <div class="d-flex gap-3 text-muted small">
+                    <span><i class="bi bi-person-fill me-1"></i>Admin</span>
+                    <span><i class="bi bi-clock me-1"></i>16-09-2026 11:53:29</span>
                   </div>
                 </div>
               </div>
-              <div class="cv-tl-item">
-                <div class="cv-tl-marker">
-                  <span class="cv-tl-dot"><i class="bi bi-person-plus-fill"></i></span>
-                </div>
-                <div class="cv-tl-card">
-                  <div class="cv-tl-text">Contact added: MOHAN S</div>
-                  <div class="cv-tl-meta">
-                    <span><i class="bi bi-person-fill"></i>Admin</span>
-                    <span><i class="bi bi-clock"></i>16-09-2026 11:53:29</span>
+              <div class="position-relative mb-2">
+                <span class="position-absolute rounded-circle bg-white border border-2 border-primary text-primary d-flex align-items-center justify-content-center shadow-sm" style="left: -38px; top: 0; width: 28px; height: 28px; font-size: 13px;">
+                  <i class="bi bi-person-plus-fill"></i>
+                </span>
+                <div class="card p-3 border shadow-sm rounded-3 bg-light-subtle">
+                  <div class="fw-semibold text-dark mb-1">Contact added: MOHAN S</div>
+                  <div class="d-flex gap-3 text-muted small">
+                    <span><i class="bi bi-person-fill me-1"></i>Admin</span>
+                    <span><i class="bi bi-clock me-1"></i>16-09-2026 11:53:29</span>
                   </div>
                 </div>
               </div>
@@ -6819,68 +6879,67 @@
   </div>
   <!-- Add new contact modal (same modal pattern as Leave Report) -->
   <div class="leave-reject-modal" id="cvContactModal" role="dialog" aria-modal="true" aria-labelledby="cvContactTitle">
-    <div class="leave-reject-dialog cv-contact-dialog">
-      <div class="cv-contact-head">
-        <div class="cv-contact-head-l">
-          <div class="cv-contact-ava"><i class="bi bi-person-plus-fill"></i></div>
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="max-width: 780px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; margin: auto;"><div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-person-plus-fill"></i></div>
           <div style="min-width:0;">
-            <h3 id="cvContactTitle" class="mb-0">Add new contact</h3>
-            <div class="cv-contact-sub">GG COMPANY · Contact information & permissions</div>
+            <h5 id="cvContactTitle" class="mb-0 fw-bold">Add new contact</h5>
+            <div class="small text-muted">GG COMPANY · Contact information & permissions</div>
           </div>
         </div>
-        <button type="button" class="modal-close" id="cvContactClose" aria-label="Close">&times;</button>
+        <button type="button" class="btn-close" id="cvContactClose" aria-label="Close"></button>
       </div>
 
-      <div class="leave-reject-body cv-contact-body">
+      <div class="card-body p-4 overflow-auto">
         <!-- Avatar + identity -->
-        <div class="cv-avatar-upload">
-          <div class="cv-avatar-preview" id="ctAvatarPreview"><i class="bi bi-person-fill"></i></div>
+        <div class="card p-3 border mb-3 bg-light-subtle d-flex flex-row align-items-center gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center fs-3" style="width:54px;height:54px;flex-shrink:0;" id="ctAvatarPreview"><i class="bi bi-person-fill"></i></div>
           <div style="min-width:0;">
-            <div class="cv-avatar-title">Profile image</div>
-            <p class="cv-avatar-hint">PNG or JPG, up to 2MB. Square images look best.</p>
+            <div class="fw-bold small mb-1">Profile image</div>
+            <p class="small text-muted mb-2">PNG or JPG, up to 2MB. Square images look best.</p>
             <input type="file" class="form-control form-control-sm" id="ctImage" accept="image/*">
           </div>
         </div>
 
         <!-- Contact details -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-person-vcard"></i> Contact details</div>
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-person-vcard"></i> Contact details</div>
           <div class="row g-3">
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="ctFirst">First Name</label>
                 <input type="text" class="form-control" id="ctFirst" autocomplete="off">
-                <div class="cv-err" hidden>First name is required.</div>
+                <div class="text-danger small mt-1 cv-err" hidden>First name is required.</div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="ctLast">Last Name</label>
                 <input type="text" class="form-control" id="ctLast" autocomplete="off">
-                <div class="cv-err" hidden>Last name is required.</div>
+                <div class="text-danger small mt-1 cv-err" hidden>Last name is required.</div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="ctEmail">Email</label>
                 <input type="email" class="form-control" id="ctEmail" autocomplete="off">
-                <div class="cv-err" hidden>Email is required.</div>
+                <div class="text-danger small mt-1 cv-err" hidden>Email is required.</div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label" for="ctPhone">Phone</label>
                 <input type="tel" class="form-control" id="ctPhone" value="+91 " autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label" for="ctRole">Role Position</label>
                 <input type="text" class="form-control" id="ctRole" autocomplete="off">
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label" for="ctDirection">Direction</label>
                 <select class="form-select" id="ctDirection">
                   <option value="">System Default</option>
@@ -6893,24 +6952,24 @@
         </div>
 
         <!-- Security -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-shield-lock"></i> Security</div>
-          <div class="cv-field mb-0">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-shield-lock"></i> Security</div>
+          <div class="mb-3">
             <label class="form-label cv-required" for="ctPassword" id="ctPasswordLabel">Password</label>
-            <div class="cv-pass-wrap">
+            <div class="input-group mb-2">
               <input type="password" class="form-control" id="ctPassword" autocomplete="new-password">
-              <button type="button" class="cv-pass-btn" id="ctTogglePass" title="Show / hide password" aria-label="Show password"><i class="bi bi-eye-fill"></i></button>
-              <button type="button" class="cv-pass-btn" id="ctGenPass" title="Generate password" aria-label="Generate password"><i class="bi bi-arrow-repeat"></i></button>
+              <button type="button" class="btn btn-outline-secondary" id="ctTogglePass" title="Show / hide password" aria-label="Show password"><i class="bi bi-eye-fill"></i></button>
+              <button type="button" class="btn btn-outline-secondary" id="ctGenPass" title="Generate password" aria-label="Generate password"><i class="bi bi-arrow-repeat"></i></button>
             </div>
-            <div class="cv-err" hidden>Password is required.</div>
+            <div class="text-danger small mt-1 cv-err" hidden>Password is required.</div>
             <div class="cv-pass-meter"><i id="ctPassMeter"></i></div>
-            <div class="cv-pass-hint" id="ctPassHint">Password strength — type to see strength</div>
+            <div class="form-text small text-muted" id="ctPassHint">Password strength — type to see strength</div>
           </div>
         </div>
 
         <!-- Options -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-envelope-gear"></i> Email options</div>
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-envelope-gear"></i> Email options</div>
           <div class="cv-check-grid">
             <label class="cv-check-card">
               <input type="checkbox" class="form-check-input" id="ctPrimary">
@@ -6928,43 +6987,43 @@
         </div>
 
         <!-- Permissions -->
-        <div class="cv-section">
-          <div class="cv-sec-head">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2">
             <i class="bi bi-key"></i> Permissions
             <label class="cv-sec-all" title="Toggle all permissions"><input type="checkbox" class="form-check-input" id="ctAllPerms" checked> Toggle all</label>
           </div>
           <p class="cv-warn">Make sure to set appropriate permissions for this contact.</p>
-          <div class="cv-perm-grid">
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Invoices</span>
+          <div class="d-flex flex-column gap-2">
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Invoices</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Invoices" checked aria-label="Invoices permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Estimates</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Estimates</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Estimates" checked aria-label="Estimates permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Contracts</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Contracts</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Contracts" checked aria-label="Contracts permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Proposals</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Proposals</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Proposals" checked aria-label="Proposals permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Support</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Support</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Support" checked aria-label="Support permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Projects</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Projects</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Projects" checked aria-label="Projects permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Purchase Orders</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Purchase Orders</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Purchase Orders" checked aria-label="Purchase Orders permission"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Assets</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Assets</span>
               <label class="cust-switch"><input type="checkbox" class="ct-perm" data-perm="Assets" checked aria-label="Assets permission"><span class="slider"></span></label>
             </div>
           </div>
@@ -6972,45 +7031,45 @@
 
         <!-- Email notifications -->
         <div class="cv-section mb-0">
-          <div class="cv-sec-head">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2">
             <i class="bi bi-bell"></i> Email notifications
             <label class="cv-sec-all" title="Toggle all notifications"><input type="checkbox" class="form-check-input" id="ctAllNotifs" checked> Toggle all</label>
           </div>
-          <div class="cv-perm-grid">
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Invoice</span>
+          <div class="d-flex flex-column gap-2">
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Invoice</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Invoice" checked aria-label="Invoice email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Estimate</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Estimate</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Estimate" checked aria-label="Estimate email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Credit Note</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Credit Note</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Credit Note" checked aria-label="Credit Note email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Project</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Project</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Project" checked aria-label="Project email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Support Tickets</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Support Tickets</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Support Tickets" checked aria-label="Support Tickets email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label">Contract</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark">Contract</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Contract" checked aria-label="Contract email notification"><span class="slider"></span></label>
             </div>
-            <div class="cv-perm-card">
-              <span class="cv-perm-label"><i class="bi bi-question-circle"></i>Task</span>
+            <div class="border rounded p-3 mb-3 bg-light-subtle">
+              <span class="small fw-bold text-dark"><i class="bi bi-question-circle"></i>Task</span>
               <label class="cust-switch"><input type="checkbox" class="ct-notif" data-notif="Task" checked aria-label="Task email notification"><span class="slider"></span></label>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="leave-reject-foot pt-3">
-        <button type="button" class="btn btn-reject" id="cvContactCancel">Close</button>
+      <div class="card-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" id="cvContactCancel">Close</button>
         <button type="button" class="btn btn-outline-primary me-2" id="cvContactReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
         <button type="button" class="btn btn-primary" id="cvContactSubmit"><i class="bi bi-check2 me-1"></i>Save contact</button>
       </div>
@@ -7019,12 +7078,12 @@
   <!-- Add note modal -->
   <div class="leave-reject-modal" id="cvNoteModal" role="dialog" aria-modal="true" aria-labelledby="cvNoteTitle">
     <div class="leave-reject-dialog cv-note-dialog">
-      <div class="cv-contact-head">
-        <div class="cv-contact-head-l">
-          <div class="cv-contact-ava"><i class="bi bi-journal-text"></i></div>
+      <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-journal-text"></i></div>
           <div style="min-width:0;">
             <h3 id="cvNoteTitle" class="mb-0">Add new note</h3>
-            <div class="cv-contact-sub">GG COMPANY · Internal note for this customer</div>
+            <div class="small text-muted">GG COMPANY · Internal note for this customer</div>
           </div>
         </div>
         <button type="button" class="modal-close" id="cvNoteClose" aria-label="Close">&times;</button>
@@ -7048,7 +7107,7 @@
 
 
   <!-- New Appointment modal (appointments.php la irundhu copy — customer details prefill aagum) -->
-  <div class="modal fade apm-modal" id="apmContactModal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="apmContactModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -7231,25 +7290,23 @@
   <div class="modal fade" id="cvNewCallLogModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
-        <div class="cv-cl-header">
-          <div class="cv-contact-head-l">
-            <div class="cv-contact-ava"><i class="bi bi-telephone-fill"></i></div>
+        <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-telephone-fill"></i></div>
             <div style="min-width:0;">
-              <h3 id="cvCallLogTitle" class="mb-0">Add new call log</h3>
-              <div class="cv-contact-sub">GG COMPANY · Record call details & follow-ups</div>
+              <h5 id="cvCallLogTitle" class="mb-0 fw-bold">Add new call log</h5>
+              <div class="small text-muted">GG COMPANY · Record call details & follow-ups</div>
             </div>
           </div>
-          <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body cv-cl-body">
-          <div class="cv-cl-grid">
-            <!-- Left: main details -->
-            <div class="cv-cl-card">
-              <div class="cv-cl-card-head"><i class="bi bi-telephone-outbound"></i> Call details</div>
+        <div class="modal-body p-4 bg-light-subtle">
+          <div class="row g-4"><!-- Left column --><div class="col-12 col-lg-6"><div class="card border-0 shadow-sm p-4 bg-white h-100">
+              <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-telephone-outbound"></i> Call details</div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Related</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Related</label>
                 <select class="form-select" id="clRelated">
                   <option value="Customer" selected>Customer</option>
                   <option value="Lead">Lead</option>
@@ -7257,26 +7314,24 @@
                 </select>
               </div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Customer</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Customer</label>
                 <select class="form-select" id="clCustomer">
                   <option selected>GG COMPANY</option>
                 </select>
               </div>
 
-              <div class="cv-cl-grid-2">
-                <div class="cv-cl-field mb-0">
-                  <label class="cv-required">Type</label>
+              <div class="row g-3">
+                <div class="mb-3">
+                  <label class="form-label small fw-bold"><span class="text-danger">* </span>Type</label>
                   <select class="form-select" id="clType">
                     <option value="">Non selected</option>
                     <option value="Outgoing">Outgoing</option>
                     <option value="Incoming">Incoming</option>
                     <option value="Missed">Missed</option>
                   </select>
-                  <div class="cv-err" id="clTypeErr" hidden>Please select a call type.</div>
-                </div>
-                <div class="cv-cl-field mb-0">
-                  <label>Call Type</label>
+                  <div class="text-danger small mt-1 cv-err" id="clTypeErr" hidden>Please select a call type.</div>
+                </div><div class="col-12 col-sm-6 mb-3"><label class="form-label small fw-bold">Call Type</label>
                   <select class="form-select" id="clCallType">
                     <option value="">Non selected</option>
                     <option value="Support">Support</option>
@@ -7287,28 +7342,28 @@
                 </div>
               </div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Caller</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Caller</label>
                 <input type="text" class="form-control" id="clCaller" placeholder="Caller name" autocomplete="off">
-                <div class="cv-err" id="clCallerErr" hidden>Caller is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="clCallerErr" hidden>Caller is required.</div>
               </div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Contact</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Contact</label>
                 <input type="tel" class="form-control" id="clContact" placeholder="Contact number" autocomplete="off">
-                <div class="cv-err" id="clContactErr" hidden>Contact number is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="clContactErr" hidden>Contact number is required.</div>
               </div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Call Purpose</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Call Purpose</label>
                 <input type="text" class="form-control" id="clPurpose" placeholder="e.g. Discuss proposal" autocomplete="off">
-                <div class="cv-err" id="clPurposeErr" hidden>Call purpose is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="clPurposeErr" hidden>Call purpose is required.</div>
               </div>
 
-              <div class="cv-cl-field">
-                <label class="cv-required">Call Summary</label>
+              <div class="mb-3">
+                <label class="form-label small fw-bold"><span class="text-danger">* </span>Call Summary</label>
                 <textarea class="form-control cv-cl-textarea" id="clSummary" rows="4" placeholder="What was discussed in the call?"></textarea>
-                <div class="cv-err" id="clSummaryErr" hidden>Call summary is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="clSummaryErr" hidden>Call summary is required.</div>
               </div>
 
               <div class="cv-cl-inline">
@@ -7319,63 +7374,66 @@
                 </div>
               </div>
             </div>
+          </div>
 
             <!-- Right: advanced options -->
-            <div class="cv-cl-card">
-              <div class="cv-cl-card-head"><i class="bi bi-sliders"></i> Advanced options</div>
+            <div class="col-12 col-lg-6">
+              <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-sliders"></i> Advanced options</div>
 
-              <div class="cv-cl-field">
-                <label>Call Start Time</label>
-                <input type="datetime-local" class="form-control" id="clStart">
-              </div>
-
-              <div class="cv-cl-field">
-                <label>Call End Time</label>
-                <input type="datetime-local" class="form-control" id="clEnd">
-              </div>
-
-              <div class="cv-cl-field">
-                <label>Call Duration</label>
-                <input type="text" class="form-control" id="clDuration" readonly placeholder="Auto-calculated from start & end time">
-              </div>
-
-              <div class="cv-cl-field">
-                <label>Call Owner</label>
-                <input type="text" class="form-control" id="clOwner" value="info@GHARUDAtechnology.com" readonly style="background:#f8f9fa;">
-              </div>
-
-              <div class="cv-cl-field">
-                <label>Call with Staff Member</label>
-                <select class="form-select" id="clStaff">
-                  <option value="">Non selected</option>
-                  <option>gharuda SOFTWARE</option>
-                  <option>Karthik R</option>
-                  <option>Divya M</option>
-                  <option>Madhupriya S</option>
-                </select>
-              </div>
-
-              <div class="cv-cl-inline">
-                <span class="cv-cl-inline-lbl">Completed</span>
-                <div class="cv-cl-yn" role="radiogroup">
-                  <label><input type="radio" name="clCompleted" value="Yes"><span>Yes</span></label>
-                  <label><input type="radio" name="clCompleted" value="No" checked><span>No</span></label>
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Call Start Time</label>
+                  <input type="datetime-local" class="form-control" id="clStart">
                 </div>
-              </div>
 
-              <div class="cv-cl-inline">
-                <span class="cv-cl-inline-lbl">Important</span>
-                <div class="cv-cl-yn" role="radiogroup">
-                  <label><input type="radio" name="clImportant" value="Yes"><span>Yes</span></label>
-                  <label><input type="radio" name="clImportant" value="No" checked><span>No</span></label>
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Call End Time</label>
+                  <input type="datetime-local" class="form-control" id="clEnd">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Call Duration</label>
+                  <input type="text" class="form-control" id="clDuration" readonly placeholder="Auto-calculated from start & end time">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Call Owner</label>
+                  <input type="text" class="form-control" id="clOwner" value="info@GHARUDAtechnology.com" readonly style="background:#f8f9fa;">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Call with Staff Member</label>
+                  <select class="form-select" id="clStaff">
+                    <option value="">Non selected</option>
+                    <option>gharuda SOFTWARE</option>
+                    <option>Karthik R</option>
+                    <option>Divya M</option>
+                    <option>Madhupriya S</option>
+                  </select>
+                </div>
+
+                <div class="cv-cl-inline mb-3">
+                  <span class="cv-cl-inline-lbl">Completed</span>
+                  <div class="cv-cl-yn" role="radiogroup">
+                    <label><input type="radio" name="clCompleted" value="Yes"><span>Yes</span></label>
+                    <label><input type="radio" name="clCompleted" value="No" checked><span>No</span></label>
+                  </div>
+                </div>
+
+                <div class="cv-cl-inline mb-0">
+                  <span class="cv-cl-inline-lbl">Important</span>
+                  <div class="cv-cl-yn" role="radiogroup">
+                    <label><input type="radio" name="clImportant" value="Yes"><span>Yes</span></label>
+                    <label><input type="radio" name="clImportant" value="No" checked><span>No</span></label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="cv-cl-footer">
-          <button type="button" class="btn btn-reject" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="clSubmit"><i class="bi bi-telephone-fill me-1"></i>Submit</button>
         </div>
       </div>
@@ -7383,32 +7441,31 @@
   </div>
   <!-- Add vault entry modal -->
   <div class="leave-reject-modal" id="cvVaultModal" role="dialog" aria-modal="true" aria-labelledby="cvVaultTitle">
-    <div class="leave-reject-dialog cv-vault-dialog">
-      <div class="cv-contact-head">
-        <div class="cv-contact-head-l">
-          <div class="cv-contact-ava cv-vault-ava"><i class="bi bi-lock-fill"></i></div>
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="max-width: 720px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; margin: auto;"><div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-lock-fill"></i></div>
           <div style="min-width:0;">
-            <h3 id="cvVaultTitle" class="mb-0">Add vault entry</h3>
-            <div class="cv-contact-sub">GG COMPANY · Securely store server & login credentials</div>
+            <h5 id="cvVaultTitle" class="mb-0 fw-bold">Add vault entry</h5>
+            <div class="small text-muted">GG COMPANY · Securely store server & login credentials</div>
           </div>
         </div>
-        <button type="button" class="modal-close" id="cvVaultClose" aria-label="Close">&times;</button>
+        <button type="button" class="btn-close" id="cvVaultClose" aria-label="Close"></button>
       </div>
 
-      <div class="leave-reject-body cv-contact-body">
+      <div class="card-body p-4 overflow-auto">
         <!-- Server details -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-hdd-network"></i> Server details</div>
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-hdd-network"></i> Server details</div>
           <div class="row g-3">
             <div class="col-md-8">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="cvServer">Server Address</label>
                 <input type="text" class="form-control" id="cvServer" placeholder="e.g. ftp.example.com" autocomplete="off">
-                <div class="cv-err" id="cvServerErr" hidden>Server address is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="cvServerErr" hidden>Server address is required.</div>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label" for="cvPort">Port</label>
                 <input type="text" class="form-control" id="cvPort" placeholder="e.g. 21" autocomplete="off">
               </div>
@@ -7417,72 +7474,72 @@
         </div>
 
         <!-- Login credentials -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-person-fill-lock"></i> Login credentials</div>
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-person-fill-lock"></i> Login credentials</div>
           <div class="row g-3">
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="cvUser">Username</label>
                 <input type="text" class="form-control" id="cvUser" placeholder="Login username" autocomplete="off">
-                <div class="cv-err" id="cvUserErr" hidden>Username is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="cvUserErr" hidden>Username is required.</div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="cvPass">Password</label>
-                <div class="cv-pass-wrap">
+                <div class="input-group mb-1">
                   <input type="password" class="form-control" id="cvPass" placeholder="••••••••" autocomplete="new-password">
-                  <button type="button" class="cv-pass-eye" id="cvPassToggle" aria-label="Show password" tabindex="-1"><i class="bi bi-eye"></i></button>
-                  <button type="button" class="cv-pass-gen" id="cvPassGen" title="Generate strong password" aria-label="Generate password" tabindex="-1"><i class="bi bi-magic"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="cvPassToggle" aria-label="Show password" tabindex="-1"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn btn-outline-secondary" id="cvPassGen" title="Generate strong password" aria-label="Generate password" tabindex="-1"><i class="bi bi-magic"></i></button>
                 </div>
-                <div class="cv-err" id="cvPassErr" hidden>Password is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="cvPassErr" hidden>Password is required.</div>
                 <div class="cv-pass-meter"><i id="cvPassBar"></i></div>
-                <div class="cv-pass-hint" id="cvPassHint">Use 8+ characters with letters, numbers & symbols.</div>
+                <div class="form-text small text-muted" id="cvPassHint">Use 8+ characters with letters, numbers & symbols.</div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Description -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-card-text"></i> Description</div>
-          <div class="cv-field mb-0">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-card-text"></i> Description</div>
+          <div class="mb-3">
             <label class="form-label" for="cvDesc">Short Description</label>
             <textarea class="form-control cv-vault-textarea" id="cvDesc" rows="4" placeholder="What is this credential for? e.g. cPanel login, FTP access..."></textarea>
           </div>
         </div>
 
         <!-- Visibility -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-shield-lock"></i> Who can see this entry?</div>
-          <div class="cv-vault-vis-grid">
-            <label class="cv-vault-vis">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-shield-lock"></i> Who can see this entry?</div>
+          <div class="row g-2 mb-3">
+            <label class="col-12 col-md-4">
               <input type="radio" name="cvVisibility" value="staff" checked>
-              <span class="cv-vault-vis-body">
-                <span class="cv-vault-vis-title"><i class="bi bi-people-fill"></i> All staff</span>
-                <span class="cv-vault-vis-desc">Visible to all staff members who have access to this customer</span>
+              <span class="card p-3 border h-100 bg-light-subtle cursor-pointer">
+                <span class="small fw-bold text-dark mb-1"><i class="bi bi-people-fill"></i> All staff</span>
+                <span class="small text-muted">Visible to all staff members who have access to this customer</span>
               </span>
             </label>
-            <label class="cv-vault-vis">
+            <label class="col-12 col-md-4">
               <input type="radio" name="cvVisibility" value="admins">
-              <span class="cv-vault-vis-body">
-                <span class="cv-vault-vis-title"><i class="bi bi-person-badge-fill"></i> Administrators only</span>
-                <span class="cv-vault-vis-desc">Visible only to administrators of this customer</span>
+              <span class="card p-3 border h-100 bg-light-subtle cursor-pointer">
+                <span class="small fw-bold text-dark mb-1"><i class="bi bi-person-badge-fill"></i> Administrators only</span>
+                <span class="small text-muted">Visible only to administrators of this customer</span>
               </span>
             </label>
-            <label class="cv-vault-vis">
+            <label class="col-12 col-md-4">
               <input type="radio" name="cvVisibility" value="me">
-              <span class="cv-vault-vis-body">
-                <span class="cv-vault-vis-title"><i class="bi bi-person-lock"></i> Only me</span>
-                <span class="cv-vault-vis-desc">Visible only to me (administrators are not excluded)</span>
+              <span class="card p-3 border h-100 bg-light-subtle cursor-pointer">
+                <span class="small fw-bold text-dark mb-1"><i class="bi bi-person-lock"></i> Only me</span>
+                <span class="small text-muted">Visible only to me (administrators are not excluded)</span>
               </span>
             </label>
           </div>
 
           <label class="cv-vault-share">
             <input type="checkbox" id="cvShareProjects">
-            <span class="cv-vault-share-box"><i class="bi bi-check2"></i></span>
-            <span class="cv-vault-share-text">
+            <span class="border rounded p-3 bg-light-subtle mb-3"><i class="bi bi-check2"></i></span>
+            <span class="small text-muted">
               <span class="t">Share in projects</span>
               <span class="d">Share this vault entry in projects with project members</span>
             </span>
@@ -7490,40 +7547,39 @@
         </div>
       </div>
 
-      <div class="leave-reject-foot pt-3">
-        <button type="button" class="btn btn-reject" id="cvVaultCancel">Close</button>
+      <div class="card-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" id="cvVaultCancel">Close</button>
         <button type="button" class="btn btn-primary" id="cvVaultSubmit"><i class="bi bi-lock-fill me-1"></i>Save entry</button>
       </div>
     </div>
   </div>
   <!-- Set reminder modal -->
   <div class="leave-reject-modal" id="cvReminderModal" role="dialog" aria-modal="true" aria-labelledby="cvReminderTitle">
-    <div class="leave-reject-dialog cv-vault-dialog" id="cvReminderDialog">
-      <div class="cv-contact-head">
-        <div class="cv-contact-head-l">
-          <div class="cv-contact-ava"><i class="bi bi-bell-fill"></i></div>
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden" id="cvReminderDialog" style="max-width: 650px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; margin: auto;"><div class="card-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-bell-fill"></i></div>
           <div style="min-width:0;">
-            <h3 id="cvReminderTitle" class="mb-0">Set reminder</h3>
-            <div class="cv-contact-sub">GG COMPANY · Get notified about important follow-ups</div>
+            <h5 id="cvReminderTitle" class="mb-0 fw-bold">Set reminder</h5>
+            <div class="small text-muted">GG COMPANY · Get notified about important follow-ups</div>
           </div>
         </div>
-        <button type="button" class="modal-close" id="cvReminderClose" aria-label="Close">&times;</button>
+        <button type="button" class="btn-close" id="cvReminderClose" aria-label="Close"></button>
       </div>
 
-      <div class="leave-reject-body cv-contact-body cv-reminder-body">
+      <div class="card-body p-4 overflow-auto">
         <!-- Date to be notified -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-calendar-event"></i> Reminder date & time</div>
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-calendar-event"></i> Reminder date & time</div>
           <div class="row g-3">
             <div class="col-md-7">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label cv-required" for="cvRemDate">Date to be notified</label>
                 <input type="date" class="form-control" id="cvRemDate">
-                <div class="cv-err" id="cvRemDateErr" hidden>Date to be notified is required.</div>
+                <div class="text-danger small mt-1 cv-err" id="cvRemDateErr" hidden>Date to be notified is required.</div>
               </div>
             </div>
             <div class="col-md-5">
-              <div class="cv-field mb-0">
+              <div class="mb-3">
                 <label class="form-label" for="cvRemTime">Time</label>
                 <input type="time" class="form-control" id="cvRemTime">
               </div>
@@ -7532,9 +7588,9 @@
         </div>
 
         <!-- Assign to -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-person-check"></i> Notify whom?</div>
-          <div class="cv-field mb-0">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-person-check"></i> Notify whom?</div>
+          <div class="mb-3">
             <label class="form-label cv-required" for="cvRemStaff">Set reminder to</label>
             <select class="form-select" id="cvRemStaff">
               <option value="">Select staff member</option>
@@ -7543,34 +7599,34 @@
               <option>Divya M</option>
               <option>Madhupriya S</option>
             </select>
-            <div class="cv-err" id="cvRemStaffErr" hidden>Please select a staff member.</div>
+            <div class="text-danger small mt-1 cv-err" id="cvRemStaffErr" hidden>Please select a staff member.</div>
           </div>
         </div>
 
         <!-- Description -->
-        <div class="cv-section">
-          <div class="cv-sec-head"><i class="bi bi-card-text"></i> Description</div>
-          <div class="cv-field mb-0">
+        <div class="card border p-3 mb-3 bg-white">
+          <div class="fw-bold text-dark mb-3 pb-2 border-bottom d-flex align-items-center gap-2"><i class="bi bi-card-text"></i> Description</div>
+          <div class="mb-3">
             <label class="form-label cv-required" for="cvRemDesc">Description</label>
             <textarea class="form-control cv-reminder-textarea" id="cvRemDesc" rows="4" placeholder="What should they be reminded about? e.g. Follow up on proposal..."></textarea>
-            <div class="cv-err" id="cvRemDescErr" hidden>Description is required.</div>
-            <div class="cv-reminder-hint">Tip: press Ctrl + Enter to submit quickly.</div>
+            <div class="text-danger small mt-1 cv-err" id="cvRemDescErr" hidden>Description is required.</div>
+            <div class="form-text small text-muted">Tip: press Ctrl + Enter to submit quickly.</div>
           </div>
         </div>
 
         <!-- Email option -->
         <label class="cv-reminder-email">
           <input type="checkbox" id="cvRemEmail">
-          <span class="cv-reminder-email-box"><i class="bi bi-check2"></i></span>
-          <span class="cv-reminder-email-text">
+          <span class="border rounded p-3 bg-light-subtle mb-3"><i class="bi bi-check2"></i></span>
+          <span class="small text-muted">
             <span class="t">Send email notification</span>
             <span class="d">Also send an email for this reminder to the selected staff</span>
           </span>
         </label>
       </div>
 
-      <div class="leave-reject-foot pt-3">
-        <button type="button" class="btn btn-reject" id="cvReminderCancel">Close</button>
+      <div class="card-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" id="cvReminderCancel">Close</button>
         <button type="button" class="btn btn-primary" id="cvReminderSubmit"><i class="bi bi-bell-fill me-1"></i>Set reminder</button>
       </div>
     </div>
@@ -8165,43 +8221,43 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content" style="border:none;">
 
-      <div class="np-header">
+      <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
         <h5>New Proposal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0;overflow-y:auto;padding:0;">
-        <div class="np-body">
+        <div class="modal-body p-4 bg-light-subtle">
           <div class="np-grid">
             <!-- Left Column -->
             <div>
-              <div class="np-field"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
-              <div class="np-field"><label><span class="req">*</span>Related</label><select class="form-select">
+              <div class="mb-3"><label><span class="text-danger">* </span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
+              <div class="mb-3"><label><span class="text-danger">* </span>Related</label><select class="form-select">
                   <option selected>Lead</option>
                   <option>Customer</option>
                 </select></div>
-              <div class="np-field"><label><span class="req">*</span>Lead</label><select class="form-select" id="npLeadSelect">
+              <div class="mb-3"><label><span class="text-danger">* </span>Lead</label><select class="form-select" id="npLeadSelect">
                   <option>Suresh - gh@gharuda.com</option>
                   <option>Arun Kumar - info@vetri.co</option>
                   <option>Meena Ramesh - meena@srlakshmi.in</option>
                 </select></div>
-              <div class="np-row">
-                <div class="np-field"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
-                <div class="np-field"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label><span class="text-danger">* </span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
+                <div class="mb-3"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
               </div>
-              <div class="np-row">
-                <div class="np-field"><label><span class="req">*</span>Currency</label><select class="form-select">
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label><span class="text-danger">* </span>Currency</label><select class="form-select">
                     <option selected>INR ₹</option>
                     <option>USD $</option>
                     <option>EUR €</option>
                     <option>GBP £</option>
                   </select></div>
-                <div class="np-field"><label>Discount type</label><select class="form-select">
+                <div class="mb-3"><label>Discount type</label><select class="form-select">
                     <option selected>No discount</option>
                     <option>Before Tax</option>
                     <option>After Tax</option>
                   </select></div>
               </div>
-              <div class="np-field">
+              <div class="mb-3">
                 <label><i class="bi bi-tag me-1"></i>Tags</label>
                 <div class="nl-tags-wrap" id="npTagsWrap" style="max-width:100%;">
                   <div class="nl-tags-chips" id="npTagsChips"></div>
@@ -8209,59 +8265,59 @@
                 </div>
                 <input type="hidden" id="np_tags" value="">
               </div>
-              <div class="np-field">
+              <div class="mb-3">
                 <div class="np-toggle"><input type="checkbox" checked id="npAllowComments"><label for="npAllowComments">Allow Comments</label></div>
               </div>
             </div>
             <!-- Right Column -->
             <div>
-              <div class="np-row">
-                <div class="np-field"><label>Status</label><select class="form-select">
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label>Status</label><select class="form-select">
                     <option selected>Draft</option>
                     <option>Sent</option>
                     <option>Accepted</option>
                     <option>Rejected</option>
                   </select></div>
-                <div class="np-field"><label>Assigned</label><select class="form-select">
+                <div class="mb-3"><label>Assigned</label><select class="form-select">
                     <option selected>GHRAUDA SOFTWARE</option>
                     <option>Harish D.</option>
                     <option>Divya A.</option>
                   </select></div>
               </div>
-              <div class="np-field"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
-              <div class="np-field"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
-              <div class="np-row">
-                <div class="np-field"><label>Country</label><select class="form-select">
+              <div class="mb-3"><label><span class="text-danger">* </span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+              <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label>Country</label><select class="form-select">
                     <option selected>India</option>
                     <option>USA</option>
                     <option>UK</option>
                   </select></div>
-                <div class="np-field"><label>State</label><select class="form-select">
+                <div class="mb-3"><label>State</label><select class="form-select">
                     <option value="">Nothing selected</option>
                     <option>Tamil Nadu</option>
                     <option>Karnataka</option>
                     <option>Maharashtra</option>
                   </select></div>
               </div>
-              <div class="np-row">
-                <div class="np-field"><label>City</label><select class="form-select">
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label>City</label><select class="form-select">
                     <option value="">Nothing selected</option>
                     <option>Chennai</option>
                     <option>Bangalore</option>
                     <option>Mumbai</option>
                   </select></div>
-                <div class="np-field"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
+                <div class="mb-3"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
               </div>
-              <div class="np-row">
-                <div class="np-field"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
-                <div class="np-field"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
+              <div class="row g-3 mb-3">
+                <div class="mb-3"><label><span class="text-danger">* </span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+                <div class="mb-3"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
               </div>
             </div>
           </div>
 
           <!-- Items Section -->
           <div class="np-items-section">
-            <div class="np-items-toolbar">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
               <div class="np-add-item-wrap">
                 <select class="form-select" id="npAddItemSelect">
                   <option value="">Add Item</option>
@@ -8272,7 +8328,7 @@
                 </select>
                 <button type="button" class="btn btn-primary" id="npAddItemBtn" title="Add item"><i class="bi bi-plus-lg"></i></button>
               </div>
-              <div class="np-qty-radio">
+              <div class="d-flex align-items-center gap-3 small">
                 <span>Show quantity as:</span>
                 <label><input type="radio" name="npQtyType" checked> Qty</label>
                 <label><input type="radio" name="npQtyType"> Hours</label>
@@ -8280,7 +8336,7 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table class="np-item-table">
+              <table class="table table-bordered align-middle">
                 <thead>
                   <tr>
                     <th style="width:30px;"><i class="bi bi-info-circle" style="color:#9ca3af;"></i></th>
@@ -8317,10 +8373,10 @@
             <!-- Totals -->
             <div class="np-totals">
               <div class="np-totals-table">
-                <div class="np-totals-row"><span class="total-label">Sub Total :</span><span class="total-val" style="margin-right: -10px;">₹ 0.00</span></div>
-                <div class="np-totals-row"><span class="total-label">Adjustment</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
-                <div class="np-totals-row"><span class="total-label">Transport Amount</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
-                <div class="np-totals-row"><span class="total-label">Total :</span><span class="total-val total-grand" style="margin-right: -10px;">₹ 0.00</span></div>
+                <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="total-label">Sub Total :</span><span class="total-val" style="margin-right: -10px;">₹ 0.00</span></div>
+                <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="total-label">Adjustment</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
+                <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="total-label">Transport Amount</span><input type="number" class="form-control" value="0" style="width:120px;"><span class="total-val">₹ 0.00</span></div>
+                <div class="d-flex justify-content-between align-items-center mb-2 small"><span class="total-label">Total :</span><span class="total-val total-grand" style="margin-right: -10px;">₹ 0.00</span></div>
               </div>
             </div>
           </div>
@@ -8333,9 +8389,9 @@
         </div>
       </div><!-- /modal-body -->
       <!-- Footer -->
-      <div class="np-footer">
-        <span class="np-hint">Include proposal items with merge field anywhere in proposal content as {proposal_items}</span>
-        <div class="np-actions">
+      <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center">
+        <span class="small text-muted">Include proposal items with merge field anywhere in proposal content as {proposal_items}</span>
+        <div class="d-flex gap-2">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">View PDF</button>
           <button type="button" class="btn btn-primary">Download</button>
           <button type="button" class="btn btn-primary">Print</button>

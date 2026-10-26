@@ -1,18 +1,16 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/target.css">
-
-<main class="tgt5-page">
+<main class="container-fluid px-0">
     <!-- Title row -->
     <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
         <div>
             <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Target</h1>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
-            <div class="tgt5-year-pills" id="tgt5YearPills">
-                <button type="button" class="tgt5-year-pill" data-year="2027">2027</button>
-                <button type="button" class="tgt5-year-pill active" data-year="2026">2026</button>
-                <button type="button" class="tgt5-year-pill" data-year="2025">2025</button>
+            <div class="btn-group btn-group-sm" id="tgt5YearPills" role="group" aria-label="Target year">
+                <button type="button" class="btn btn-outline-primary tgt5-year-pill" data-year="2027">2027</button>
+                <button type="button" class="btn btn-outline-primary tgt5-year-pill active" data-year="2026">2026</button>
+                <button type="button" class="btn btn-outline-primary tgt5-year-pill" data-year="2025">2025</button>
             </div>
             <button type="button" class="btn btn-primary btn-sm" id="tgt5CreateBtn">
                 <i class="bi bi-plus-lg me-1"></i>Create New Target
@@ -23,60 +21,63 @@
     <!-- ===== KPI strip ===== -->
     <div class="row g-3 mb-3">
         <div class="col-xl-3 col-md-6">
-            <div class="tgt5-kpi">
-                <div class="lbl">Business Target</div>
-                <div class="val" id="tgt5KpiBv">₹10.60 L</div>
-                <div class="bar"><span id="tgt5KpiBvBar" style="width:51%;"></span></div>
-                <div class="sub" id="tgt5KpiBvSub">51% achieved</div>
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <small class="text-muted fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.05em;">Business Target</small>
+                <div class="fs-4 fw-bold text-dark mt-1" id="tgt5KpiBv">₹10.60 L</div>
+                <div class="progress mt-2" style="height: 5px;">
+                    <div class="progress-bar bg-primary" id="tgt5KpiBvBar" style="width:51%;"></div>
+                </div>
+                <small class="text-muted fw-semibold mt-1 d-block" id="tgt5KpiBvSub">51% achieved</small>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="tgt5-kpi">
-                <div class="lbl">Business Achieved</div>
-                <div class="val" id="tgt5KpiBvA">₹5.35 L</div>
-                <div class="sub" id="tgt5KpiBvGap">Gap: ₹5.25 L</div>
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <small class="text-muted fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.05em;">Business Achieved</small>
+                <div class="fs-4 fw-bold text-dark mt-1" id="tgt5KpiBvA">₹5.35 L</div>
+                <small class="text-muted fw-semibold mt-2 d-block" id="tgt5KpiBvGap">Gap: ₹5.25 L</small>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="tgt5-kpi">
-                <div class="lbl">Collection Target</div>
-                <div class="val" id="tgt5KpiCv">₹65.00 L</div>
-                <div class="bar"><span id="tgt5KpiCvBar" style="width:22%;"></span></div>
-                <div class="sub" id="tgt5KpiCvSub">22% achieved</div>
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <small class="text-muted fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.05em;">Collection Target</small>
+                <div class="fs-4 fw-bold text-dark mt-1" id="tgt5KpiCv">₹65.00 L</div>
+                <div class="progress mt-2" style="height: 5px;">
+                    <div class="progress-bar bg-primary" id="tgt5KpiCvBar" style="width:22%;"></div>
+                </div>
+                <small class="text-muted fw-semibold mt-1 d-block" id="tgt5KpiCvSub">22% achieved</small>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="tgt5-kpi">
-                <div class="lbl">Collection Achieved</div>
-                <div class="val" id="tgt5KpiCvA">₹14.10 L</div>
-                <div class="sub" id="tgt5KpiCvGap">Gap: ₹50.90 L</div>
+            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
+                <small class="text-muted fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.05em;">Collection Achieved</small>
+                <div class="fs-4 fw-bold text-dark mt-1" id="tgt5KpiCvA">₹14.10 L</div>
+                <small class="text-muted fw-semibold mt-2 d-block" id="tgt5KpiCvGap">Gap: ₹50.90 L</small>
             </div>
         </div>
     </div>
 
-    <!-- ===== Grouped table card (jobtype.php table flow with datatable class) ===== -->
-    <div class="card-custom p-0 overflow-hidden mb-3" id="targetTableWrap">
-        <!-- Table (toolbar + export + column visibility + pagination auto-created by datatable class via auto-master-table.js) -->
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="targetTable" data-table-name="Targets">
-                <thead>
+    <!-- ===== Grouped table card ===== -->
+    <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3" id="targetTableWrap">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-center datatable" id="targetTable" data-table-name="Targets">
+                <thead class="table-light">
                     <tr>
                         <th rowspan="2" style="width:60px;">S.No</th>
                         <th rowspan="2" style="min-width:150px;">Month &amp; Year</th>
                         <th rowspan="2" style="min-width:170px;">Staff Name</th>
                         <th rowspan="2" style="width:90px;">Sourcing</th>
-                        <th colspan="2" class="thead-group gb-bvn">BV Numbers</th>
-                        <th colspan="2" class="thead-group gb-bvv">BV Value</th>
-                        <th colspan="2" class="thead-group gb-cvv">CV Value</th>
+                        <th colspan="2" class="fw-bold border-bottom">BV Numbers</th>
+                        <th colspan="2" class="fw-bold border-bottom">BV Value</th>
+                        <th colspan="2" class="fw-bold border-bottom">CV Value</th>
                         <th rowspan="2" style="width:110px;">Option</th>
                     </tr>
                     <tr>
-                        <th class="thead-sub" data-col-title="BV Numbers (Actual)">Actual</th>
-                        <th class="thead-sub" data-col-title="BV Numbers (Achieved)">Achieved</th>
-                        <th class="thead-sub" data-col-title="BV Value (Actual)">Actual</th>
-                        <th class="thead-sub" data-col-title="BV Value (Achieved)">Achieved</th>
-                        <th class="thead-sub" data-col-title="CV Value (Actual)">Actual</th>
-                        <th class="thead-sub" data-col-title="CV Value (Achieved)">Achieved</th>
+                        <th class="small text-muted" data-col-title="BV Numbers (Actual)">Actual</th>
+                        <th class="small text-muted" data-col-title="BV Numbers (Achieved)">Achieved</th>
+                        <th class="small text-muted" data-col-title="BV Value (Actual)">Actual</th>
+                        <th class="small text-muted" data-col-title="BV Value (Achieved)">Achieved</th>
+                        <th class="small text-muted" data-col-title="CV Value (Actual)">Actual</th>
+                        <th class="small text-muted" data-col-title="CV Value (Achieved)">Achieved</th>
                     </tr>
                 </thead>
                 <tbody id="targetTbody">
@@ -86,16 +87,16 @@
                         <td>gharuda SOFTWARE</td>
                         <td>0</td>
                         <td>5</td>
-                        <td><span class="up">6 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">6 ↑</span></td>
                         <td>₹ 1,50,000.00</td>
-                        <td><span class="up">₹ 3,00,400.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 3,00,400.00 ↑</span></td>
                         <td>₹ 10,00,000.00</td>
-                        <td><span class="down">₹ 0.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 0.00 ↓</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="1"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919500123456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="1"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919500123456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -105,16 +106,16 @@
                         <td>GEO Care</td>
                         <td>0</td>
                         <td>7</td>
-                        <td><span class="down">0 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">0 ↓</span></td>
                         <td>₹ 5,00,000.00</td>
-                        <td><span class="down">₹ 0.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 0.00 ↓</span></td>
                         <td>₹ 30,00,000.00</td>
-                        <td><span class="down">₹ 0.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 0.00 ↓</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="2"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919841023456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="2"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919841023456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -126,14 +127,14 @@
                         <td>4</td>
                         <td>4</td>
                         <td>₹ 1,20,000.00</td>
-                        <td><span class="up">₹ 1,35,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 1,35,000.00 ↑</span></td>
                         <td>₹ 8,00,000.00</td>
-                        <td><span class="up">₹ 9,10,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 9,10,000.00 ↑</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="3"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919791023456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="3"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919791023456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -143,16 +144,16 @@
                         <td>Harish D.</td>
                         <td>1</td>
                         <td>3</td>
-                        <td><span class="down">1 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">1 ↓</span></td>
                         <td>₹ 90,000.00</td>
-                        <td><span class="down">₹ 25,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 25,000.00 ↓</span></td>
                         <td>₹ 5,00,000.00</td>
-                        <td><span class="down">₹ 1,60,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 1,60,000.00 ↓</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="4"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919884023456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="4"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919884023456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -162,16 +163,16 @@
                         <td>Divya A.</td>
                         <td>3</td>
                         <td>6</td>
-                        <td><span class="down">2 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">2 ↓</span></td>
                         <td>₹ 2,00,000.00</td>
-                        <td><span class="down">₹ 75,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 75,000.00 ↓</span></td>
                         <td>₹ 12,00,000.00</td>
-                        <td><span class="down">₹ 3,40,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 3,40,000.00 ↓</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="5"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919962023456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="5"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919962023456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -183,14 +184,14 @@
                         <td>5</td>
                         <td>5</td>
                         <td>₹ 1,75,000.00</td>
-                        <td><span class="up">₹ 1,90,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 1,90,000.00 ↑</span></td>
                         <td>₹ 9,00,000.00</td>
-                        <td><span class="up">₹ 9,90,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 9,90,000.00 ↑</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="6"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="6"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919791023456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="6"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="6"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919791023456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -200,16 +201,16 @@
                         <td>Karthik R.</td>
                         <td>2</td>
                         <td>4</td>
-                        <td><span class="up">5 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">5 ↑</span></td>
                         <td>₹ 1,40,000.00</td>
-                        <td><span class="up">₹ 1,80,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 1,80,000.00 ↑</span></td>
                         <td>₹ 7,50,000.00</td>
-                        <td><span class="up">₹ 8,20,000.00 ↑</span></td>
+                        <td><span class="badge bg-success-subtle text-success">₹ 8,20,000.00 ↑</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="7"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="7"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919840123789" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="7"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="7"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919840123789" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -219,30 +220,30 @@
                         <td>Priya S.</td>
                         <td>1</td>
                         <td>5</td>
-                        <td><span class="down">3 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">3 ↓</span></td>
                         <td>₹ 1,60,000.00</td>
-                        <td><span class="down">₹ 95,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 95,000.00 ↓</span></td>
                         <td>₹ 8,50,000.00</td>
-                        <td><span class="down">₹ 4,10,000.00 ↓</span></td>
+                        <td><span class="badge bg-danger-subtle text-danger">₹ 4,10,000.00 ↓</span></td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <button type="button" class="tgt5-act edit" title="Edit" data-t5act="edit" data-id="8"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="tgt5-act del" title="Delete" data-t5act="del" data-id="8"><i class="bi bi-x-lg"></i></button>
-                                <a href="https://wa.me/919940123456" target="_blank" class="tgt5-act wa" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <button type="button" class="btn btn-sm btn-light border text-primary" title="Edit" data-t5act="edit" data-id="8"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-sm btn-light border text-danger" title="Delete" data-t5act="del" data-id="8"><i class="bi bi-x-lg"></i></button>
+                                <a href="https://wa.me/919940123456" target="_blank" class="btn btn-sm btn-light border text-success" title="Send to WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr class="tgt5-total-row" id="tgt5Totals">
-                        <td class="tt-label" colspan="3">Target Vs Achieved</td>
-                        <td class="tc-src">9</td>
-                        <td class="tc-bvn-actual">34</td>
-                        <td class="tc-bvn-ach">21</td>
-                        <td class="tc-bvv-actual">₹ 13,60,000.00</td>
-                        <td class="tc-bvv-ach">₹ 8,10,400.00</td>
-                        <td class="tc-cvv-actual">₹ 81,00,000.00</td>
-                        <td class="tc-cvv-ach">₹ 26,40,000.00</td>
+                <tfoot class="table-light fw-bold">
+                    <tr id="tgt5Totals">
+                        <td class="text-center text-danger bg-danger-subtle" colspan="3">Target Vs Achieved</td>
+                        <td class="bg-primary-subtle">9</td>
+                        <td class="bg-info-subtle">34</td>
+                        <td class="bg-success-subtle">21</td>
+                        <td class="bg-primary-subtle">₹ 13,60,000.00</td>
+                        <td class="bg-warning-subtle">₹ 8,10,400.00</td>
+                        <td class="bg-info-subtle">₹ 81,00,000.00</td>
+                        <td class="bg-danger-subtle">₹ 26,40,000.00</td>
                         <td></td>
                     </tr>
                 </tfoot>
@@ -251,14 +252,14 @@
     </div>
 
     <!-- ===== Chart card ===== -->
-    <div class="tgt5-chart-card">
-        <div class="tgt5-chart-head">
+    <div class="card border-0 shadow-sm rounded-3 p-3 mb-3">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
             <div>
-                <div class="tgt5-chart-title">Business &amp; Collection — Target vs Achieved</div>
-                <div class="tgt5-chart-sub" id="tgt5ChartSub">2026 · monthly totals, all staff</div>
+                <h6 class="fw-bold mb-0 text-dark">Business &amp; Collection — Target vs Achieved</h6>
+                <small class="text-muted" id="tgt5ChartSub">2026 · monthly totals, all staff</small>
             </div>
         </div>
-        <div class="tgt5-chart-wrap">
+        <div style="height: 300px; position: relative;">
             <canvas id="tgt5Chart"></canvas>
         </div>
     </div>

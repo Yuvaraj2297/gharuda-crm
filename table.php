@@ -1,485 +1,246 @@
-<?php include 'header.php'; ?>
+<?php
+$currentPage = 'table.php';
+include 'header.php';
+?>
 
-<link rel="stylesheet" href="./assets/css/select2.css">
- 
+<!-- =========================================================================
+     PURE BOOTSTRAP 5 DATA TABLE SHOWCASE
+     Zero Custom CSS - 100% Native Bootstrap 5.3 Classes
+     ========================================================================= -->
 
+<div class="container-fluid px-0">
 
-
-
-
-
-<div class="card-custom js-report-table mb-3 p-0">
-    <div class="card-head align-items-center justify-content-start border-light-subtle border-bottom mb-0 p-3">
-        <div class="icon-chip">
-            <i class="bi bi-file-earmark-text-fill"></i>
-        </div>
+    <!-- Top Navigation Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 bg-white p-4 rounded-4 shadow-sm border-0">
         <div>
-            <h3 class="card-title">Normal table</h3>
-        </div>
-    </div>
-
-
-    <div class="table-responsive overflow-auto column-border border-bottom mb-3">
-        <table class="table-modern  w-100" >
-            <thead>
-                <tr>
-                    <th class="gh-cursor-pointer text-nowrap">S.No</th>
-                    <th class="gh-cursor-pointer text-nowrap">Employee ID</th>
-                    <th class="gh-cursor-pointer text-nowrap">Employee Name</th>
-                    <th class="gh-cursor-pointer text-nowrap">Attendance Status</th>
-                    <th class="gh-cursor-pointer text-nowrap">Attendance Date</th>
-                    <th class="gh-cursor-pointer text-nowrap">Punch In Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Break Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Punch Out Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Total Working Hours</th>
-                    <th class="gh-cursor-pointer text-nowrap">Late Arrival Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Over Time Hours</th>
-                    <th class="gh-cursor-pointer text-nowrap">Early Exists</th>
-                    <th class="gh-cursor-pointer text-nowrap">Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="pgBody">
-
-                <!-- Record 1 -->
-                <tr>
-                    <td data-label="S.No">1</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP001</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-1.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Praveena</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 2 -->
-                <tr>
-                    <td data-label="S.No">2</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP002</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-2.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Keerthana</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-rejected">Absent</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In" class="text-muted">00:00</td>
-                    <td data-label="Break Time" class="text-muted">00:00</td>
-                    <td data-label="Punch Out" class="text-muted">00:00</td>
-                    <td data-label="Working Hours"><span class="status-pill status-pending">Leave</span></td>
-                    <td data-label="Late Arrival" class="text-muted">-</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 3 -->
-                <tr>
-                    <td data-label="S.No">3</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP003</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-3.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Mani</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 4 -->
-                <tr>
-                    <td data-label="S.No">4</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP004</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-4.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Lokesh</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 5 -->
-                <tr>
-                    <td data-label="S.No">5</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP005</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-2.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Krishna</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:00 AM</td>
-                    <td data-label="Break Time">15 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">8 hours</td>
-                    <td data-label="Late Arrival" class="text-muted">-</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-
-</div>
-
-
-<div class="card-custom js-report-table ">
-    <div class="card-head align-items-center justify-content-start border-light-subtle border-bottom p-3">
-        <div class="icon-chip">
-            <i class="bi bi-file-earmark-text-fill"></i>
-        </div>
-        <div>
-            <h3 class="card-title">Colum, Export, Pagination and Column Sticky Table</h3>
-        </div>
-    </div>
-
-    <div class="report-toolbar px-3 mb-0">
-        <div class="btn-group">
-            <button class="btn btn-soft-primary columns-btn"><i class="mdi mdi-eye me-1"></i>Columns</button>
-            <div class="border h-100"></div>
-            <button class="btn btn-soft-primary export-btn"><i class="mdi mdi-download me-1"></i>Export</button>
-        </div>
-
-        <div class="report-search">
-            <i class="mdi mdi-magnify"></i>
-            <input type="text" placeholder="search here..." id="employeeSearch">
-        </div>
-
-        <!-- <button class="report-date-btn date-picker" data-bs-toggle="tooltip" data-bs-placement="top" title="Calender Search">
-            <i class="mdi mdi-calendar"></i>
-        </button> -->
-    </div>
-
-    <div class="table-responsive table-modern-wrap overflow-auto column-border">
-        <table class="table-modern stickyBlock w-100" id="attendanceTable">
-            <thead>
-                <tr>
-                    <th class="gh-cursor-pointer text-nowrap">S.No</th>
-                    <th class="gh-cursor-pointer text-nowrap">Employee ID</th>
-                    <th class="gh-cursor-pointer text-nowrap">Employee Name</th>
-                    <th class="gh-cursor-pointer text-nowrap">Attendance Status</th>
-                    <th class="gh-cursor-pointer text-nowrap">Attendance Date</th>
-                    <th class="gh-cursor-pointer text-nowrap">Punch In Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Break Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Punch Out Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Total Working Hours</th>
-                    <th class="gh-cursor-pointer text-nowrap">Late Arrival Time</th>
-                    <th class="gh-cursor-pointer text-nowrap">Over Time Hours</th>
-                    <th class="gh-cursor-pointer text-nowrap">Early Exists</th>
-                    <th class="gh-cursor-pointer text-nowrap">Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="pgBody">
-
-                <!-- Record 1 -->
-                <tr>
-                    <td data-label="S.No">1</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP001</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-1.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Praveena</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 2 -->
-                <tr>
-                    <td data-label="S.No">2</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP002</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-2.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Keerthana</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-rejected">Absent</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In" class="text-muted">00:00</td>
-                    <td data-label="Break Time" class="text-muted">00:00</td>
-                    <td data-label="Punch Out" class="text-muted">00:00</td>
-                    <td data-label="Working Hours"><span class="status-pill status-pending">Leave</span></td>
-                    <td data-label="Late Arrival" class="text-muted">-</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 3 -->
-                <tr>
-                    <td data-label="S.No">3</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP003</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-3.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Mani</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 4 -->
-                <tr>
-                    <td data-label="S.No">4</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP004</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-4.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Lokesh</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:10 AM</td>
-                    <td data-label="Break Time">30 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">7 hours</td>
-                    <td data-label="Late Arrival">10 Minutes</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Record 5 -->
-                <tr>
-                    <td data-label="S.No">5</td>
-                    <td data-label="Employee ID"><span class="emp-id-chip"><i class="mdi mdi-badge-account-horizontal-outline"></i>EMP005</span></td>
-                    <td data-label="Employee Name">
-                        <div class="emp-name-cell">
-                            <div class="emp-avatar">
-                                <img src="./assets/img/profile-2.jpg" alt="" class="h-100 object-fit-cover rounded-5 w-100">
-                            </div>
-                            <span class="font-weight-bold">Krishna</span>
-                        </div>
-                    </td>
-                    <td data-label="Status"><span class="status-pill status-approved">Present</span></td>
-                    <td data-label="Date">4-8-2026</td>
-                    <td data-label="Punch In">10:00 AM</td>
-                    <td data-label="Break Time">15 Minutes</td>
-                    <td data-label="Punch Out">19:00 PM</td>
-                    <td data-label="Working Hours">8 hours</td>
-                    <td data-label="Late Arrival" class="text-muted">-</td>
-                    <td data-label="Over Time" class="text-muted">-</td>
-                    <td data-label="Early Exit" class="text-muted">-</td>
-                    <td data-label="Action" class="text-nowrap action-btns">
-                        <div class="btn-group">
-                            <button class="btn btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Edit"><i class="mdi mdi-pencil"></i></button>
-                            <button class="btn btn-sm danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip" data-bs-title="Delete"><i class="mdi mdi-delete"></i></button>
-                        </div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-
-    <div class="d-flex justify-content-between align-items-center report-footer p-3">
-        <div class="d-flex gap-2 align-items-center">
-            <div class="d-flex gap-2 align-items-center">
-                <span class="small text-muted text-nowrap">Show:</span>
-                <select class="form-select select2 form-select-sm gh-w-auto" id="showEntries">
-                    <option selected>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">UI Elements</span>
+                <span class="badge bg-success-subtle text-success fw-semibold px-3 py-1 rounded-pill">Pure Bootstrap</span>
             </div>
-            <span class="small text-muted text-nowrap">Showing <strong id="pgStart"></strong>–<strong
-                    id="pgEnd"></strong> of <strong id="pgTotal"></strong></span>
+            <h1 class="h3 fw-bold text-dark mb-1">Employee Attendance & Reports Table</h1>
+            <p class="text-secondary small mb-0">Built strictly using native Bootstrap 5 table utilities, badges, flex layouts, and shadows.</p>
         </div>
-        <nav>
-            <ul class="pagination pagination-sm mb-0" id="pgList">
-                <li class="page-item"><a class="page-link" href="#"><i
-                            class="mdi mdi-chevron-double-left"></i></a></li>
-                <li class="page-item"><a class="page-link" href="#">←</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item disabled"><span class="page-link">…</span></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
-                <li class="page-item"><a class="page-link" href="#">→</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i
-                            class="mdi mdi-chevron-double-right"></i></a></li>
-            </ul>
-        </nav>
+        <div class="d-flex gap-2">
+            <a href="ui-library.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                <i class="bi bi-grid-fill me-1"></i> UI Library
+            </a>
+            <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" onclick="window.print()">
+                <i class="bi bi-printer me-1"></i> Print
+            </button>
+        </div>
     </div>
+
+    <!-- Data Table Card -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+        <!-- Card Header & Filter Toolbar -->
+        <div class="card-header bg-white py-3 border-bottom">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                        <i class="bi bi-calendar-check-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-dark mb-0">Daily Attendance Log</h6>
+                        <small class="text-secondary">4 August 2026 &middot; Shift A (General)</small>
+                    </div>
+                </div>
+
+                <!-- Action Toolbar -->
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <div class="input-group input-group-sm" style="max-width: 220px;">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" id="tableSearch" placeholder="Search employee...">
+                    </div>
+                    <select class="form-select form-select-sm" style="width: auto;">
+                        <option selected>All Statuses</option>
+                        <option value="present">Present</option>
+                        <option value="absent">Absent</option>
+                        <option value="leave">On Leave</option>
+                    </select>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-outline-secondary"><i class="bi bi-file-earmark-arrow-down me-1"></i> Export</button>
+                        <button type="button" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Mark Attendance</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-uppercase text-secondary small fw-bold">
+                    <tr>
+                        <th scope="col" style="width: 45px;" class="text-center">#</th>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Punch In</th>
+                        <th scope="col">Break</th>
+                        <th scope="col">Punch Out</th>
+                        <th scope="col">Total Hours</th>
+                        <th scope="col">Late Arrival</th>
+                        <th scope="col">Overtime</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="pgBody">
+                    <!-- Record 1 -->
+                    <tr>
+                        <td class="text-center text-secondary small">1</td>
+                        <td>
+                            <span class="badge bg-light text-dark border px-2 py-1 font-monospace">
+                                <i class="bi bi-person-badge text-primary me-1"></i>EMP001
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="./assets/img/profile-1.jpg" alt="Praveena" class="rounded-circle object-fit-cover shadow-xs" width="34" height="34">
+                                <span class="fw-semibold text-dark">Praveena</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2 fw-semibold">
+                                <i class="bi bi-check-circle-fill me-1"></i> Present
+                            </span>
+                        </td>
+                        <td class="text-secondary small">04-08-2026</td>
+                        <td class="fw-medium text-dark small">10:10 AM</td>
+                        <td class="text-secondary small">30 Mins</td>
+                        <td class="fw-medium text-dark small">07:00 PM</td>
+                        <td class="fw-semibold text-dark small">7 hrs</td>
+                        <td class="text-danger small">10 Mins</td>
+                        <td class="text-muted small">-</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-title="Edit Record"><i class="bi bi-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="Delete Record"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Record 2 -->
+                    <tr>
+                        <td class="text-center text-secondary small">2</td>
+                        <td>
+                            <span class="badge bg-light text-dark border px-2 py-1 font-monospace">
+                                <i class="bi bi-person-badge text-primary me-1"></i>EMP002
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="./assets/img/profile-2.jpg" alt="Keerthana" class="rounded-circle object-fit-cover" width="34" height="34">
+                                <span class="fw-semibold text-dark">Keerthana</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-danger-subtle text-danger px-3 py-2 fw-semibold">
+                                <i class="bi bi-x-circle-fill me-1"></i> Absent
+                            </span>
+                        </td>
+                        <td class="text-secondary small">04-08-2026</td>
+                        <td class="text-muted small">00:00</td>
+                        <td class="text-muted small">00:00</td>
+                        <td class="text-muted small">00:00</td>
+                        <td>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis px-2 py-1 small">Leave</span>
+                        </td>
+                        <td class="text-muted small">-</td>
+                        <td class="text-muted small">-</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-title="Edit Record"><i class="bi bi-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="Delete Record"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Record 3 -->
+                    <tr>
+                        <td class="text-center text-secondary small">3</td>
+                        <td>
+                            <span class="badge bg-light text-dark border px-2 py-1 font-monospace">
+                                <i class="bi bi-person-badge text-primary me-1"></i>EMP003
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="./assets/img/profile-3.jpg" alt="Mani" class="rounded-circle object-fit-cover" width="34" height="34">
+                                <span class="fw-semibold text-dark">Mani Kandan</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2 fw-semibold">
+                                <i class="bi bi-check-circle-fill me-1"></i> Present
+                            </span>
+                        </td>
+                        <td class="text-secondary small">04-08-2026</td>
+                        <td class="fw-medium text-dark small">10:10 AM</td>
+                        <td class="text-secondary small">30 Mins</td>
+                        <td class="fw-medium text-dark small">07:00 PM</td>
+                        <td class="fw-semibold text-dark small">7 hrs</td>
+                        <td class="text-danger small">10 Mins</td>
+                        <td class="text-muted small">-</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-title="Edit Record"><i class="bi bi-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="Delete Record"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Record 4 -->
+                    <tr>
+                        <td class="text-center text-secondary small">4</td>
+                        <td>
+                            <span class="badge bg-light text-dark border px-2 py-1 font-monospace">
+                                <i class="bi bi-person-badge text-primary me-1"></i>EMP004
+                            </span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="./assets/img/profile-4.jpg" alt="Dinesh" class="rounded-circle object-fit-cover" width="34" height="34">
+                                <span class="fw-semibold text-dark">Dinesh Kumar</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2 fw-semibold">
+                                <i class="bi bi-check-circle-fill me-1"></i> Present
+                            </span>
+                        </td>
+                        <td class="text-secondary small">04-08-2026</td>
+                        <td class="fw-medium text-dark small">09:55 AM</td>
+                        <td class="text-secondary small">45 Mins</td>
+                        <td class="fw-medium text-dark small">07:15 PM</td>
+                        <td class="fw-semibold text-dark small">8 hrs</td>
+                        <td class="text-success small">On Time</td>
+                        <td class="text-primary small fw-semibold">+1.5 hrs</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-title="Edit Record"><i class="bi bi-pencil"></i></button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="Delete Record"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table Footer Pagination -->
+        <div class="card-footer bg-white py-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <span class="text-secondary small">Showing 1 to 4 of 24 entries</span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var wrap = document.querySelector('.table-modern-wrap');
-        if (!wrap) return;
-
-        function toggleStickyShadow() {
-            if (wrap.scrollLeft > 0) {
-                wrap.classList.add('is-scrolled');
-            } else {
-                wrap.classList.remove('is-scrolled');
-            }
-        }
-
-        wrap.addEventListener('scroll', toggleStickyShadow);
-        toggleStickyShadow();
-    });
-</script>
-
-<script src="./assets/js/tabel.js"></script>
-
 
 <?php include 'footer.php'; ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const tooltipTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="tooltip"]'
-        );
-
-        [...tooltipTriggerList].forEach(function(tooltipTriggerEl) {
-            new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-
-    });
-</script>
-
-
- 
-
-
