@@ -374,6 +374,66 @@ $toDate      = isset($_GET['to'])     ? trim($_GET['to'])     : '31-10-2026';
     </div>
 </main>
 
-<script src="./assets/js/pages/employee-revenue-report.js?v=<?php echo time(); ?>"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('revSearch');
+    const clearBtn = document.getElementById('revClear');
+    const cards = document.querySelectorAll('.rev-col');
+    const noResults = document.getElementById('revNoResults');
+
+    function filterCards() {
+        const query = (searchInput.value || '').toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const empId = (card.getAttribute('data-empid') || '').toLowerCase();
+            const name  = (card.getAttribute('data-name') || '').toLowerCase();
+            const text  = card.textContent.toLowerCase();
+
+            if (!query || empId.includes(query) || name.includes(query) || text.includes(query)) {
+                card.classList.remove('d-none');
+                visibleCount++;
+            } else {
+                card.classList.add('d-none');
+            }
+        });
+
+        if (noResults) {
+            noResults.classList.toggle('d-none', visibleCount > 0);
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterCards);
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (searchInput) {
+                searchInput.value = '';
+                filterCards();
+            }
+        });
+    }
+});
+
+function exportRevenueCSV() {
+    let csv = "Employee ID,Employee Name,Success Leads,Sourcer,Total BV,Total CV,Total Visits,Total Kilometers\n";
+    document.querySelectorAll('.rev-col').forEach(card => {
+        const id   = card.getAttribute('data-empid');
+        const name = card.querySelector('h6').textContent.trim();
+        const metrics = card.querySelectorAll('.rev-metric-val');
+        const values  = Array.from(metrics).map(m => `"${m.textContent.trim()}"`);
+        csv += `"${id}","${name}",` + values.join(',') + "\n";
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `employee_revenue_report_${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+}
+</script>
 
 <?php include 'footer.php'; ?>

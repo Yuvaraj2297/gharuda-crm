@@ -329,6 +329,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="./assets/js/jquery.min.js"></script>
 <script src="./assets/js/select2.js"></script>
 
-<script src="./assets/js/pages/petty-cash-create.js?v=<?php echo time(); ?>"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.jQuery && jQuery.fn.select2) {
+        jQuery('.select2').select2({
+            width: '100%'
+        });
+    }
+});
+</script>
 
 <?php include 'footer.php'; ?>
