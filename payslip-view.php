@@ -590,18 +590,9 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
     </div>
 </div>
 
-<script>
-    function triggerDownload() {
-        window.print();
-    }
-
-    <?php if ($action === 'download' || $action === 'print'): ?>
-    window.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            window.print();
-        }, 500);
-    });
-    <?php endif; ?>
-</script>
+<?php if ($action === 'download' || $action === 'print'): ?>
+<script>window.PAYSLIP_AUTO_PRINT = true;</script>
+<?php endif; ?>
+<script src="./assets/js/pages/payslip-view.js?v=<?php echo time(); ?>"></script>
 
 <?php include 'footer.php'; ?>

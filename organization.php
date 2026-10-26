@@ -456,15 +456,6 @@
 
 </div>
 
-<script>
-    document.querySelectorAll('.org-dept-item').forEach(function (item) {
-        item.addEventListener('click', function () {
-            document.querySelectorAll('.org-dept-item').forEach(function (i) {
-                i.classList.remove('active');
-            });
-            item.classList.add('active');
-        });
-    });
-</script>
+<script src="./assets/js/pages/organization.js?v=<?php echo time(); ?>"></script>
 
 <?php include 'footer.php'; ?>
