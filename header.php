@@ -604,9 +604,6 @@
                         <a data-active-pages="lead-status-master.php" class="nav-link-custom" href="lead-status-master.php">
                             <i class="bi bi-flag me-2"></i> <span>Lead Status</span>
                         </a>
-                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
-                        </a>
 
                         <!-- Customers & Categories -->
                         <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Customers &amp; Categories</div>
@@ -762,7 +759,6 @@
                             <a data-active-pages="employee-revenue-report.php" class="tree-link" href="employee-revenue-report.php">Employee Revenue Report</a>
                             <a data-active-pages="employee-lead-report.php" class="tree-link" href="employee-lead-report.php">Employee Lead Report</a>
                             <a data-active-pages="lead-source-report.php" class="tree-link" href="lead-source-report.php">Lead Source Report</a>
-                            <a data-active-pages="staff-visting-report.php,staff-visiting-location-report.php" class="tree-link" href="staff-visting-report.php">Staff Visiting Reports</a>
                             <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Sales Report</a>
                         </div>
                     </div>
@@ -789,8 +785,6 @@
                             href="invoice-create.php"><i class="bi bi-file-earmark-plus me-2"></i> <span>Create Tax Invoice</span></a>
                         <a data-active-pages="payments.php" class="nav-link-custom"
                             href="payments.php"><i class="bi bi-credit-card-2-front me-2"></i> <span>Payments Received</span></a>
-                        <a data-active-pages="contracts.php" class="nav-link-custom"
-                            href="contracts.php"><i class="bi bi-pen me-2"></i> <span>Contracts &amp; SLAs</span></a>
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom"
                             href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Field Expenses</span></a>
                     </div>
@@ -843,29 +837,7 @@
                             <i class="bi bi-pin-map me-2"></i> <span>Location Tracking Map</span>
                         </a>
 
-                        <!-- Performance & Quotas -->
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Performance &amp; Targets</div>
-                        <a data-active-pages="employee-revenue-report.php" class="nav-link-custom" href="employee-revenue-report.php">
-                            <i class="bi bi-cash-stack me-2"></i> <span>Rep Revenue Performance</span>
-                        </a>
-                        <a data-active-pages="employee-lead-report.php" class="nav-link-custom" href="employee-lead-report.php">
-                            <i class="bi bi-funnel me-2"></i> <span>Rep Lead Distribution</span>
-                        </a>
-                        <a data-active-pages="target.php,brand-target.php" class="nav-link-custom" href="target.php">
-                            <i class="bi bi-bullseye me-2"></i> <span>Sales Targets &amp; Goals</span>
-                        </a>
-                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Target Slabs Master</span>
-                        </a>
 
-                        <!-- Team Governance -->
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Governance &amp; Access</div>
-                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
-                            <i class="bi bi-building me-2"></i> <span>Branch Allocation</span>
-                        </a>
-                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
-                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Permissions</span>
-                        </a>
                     </div>
 
                     <!-- Appointments / MOM Panel Section -->
@@ -888,7 +860,6 @@
                             <a data-active-pages="past-meeting.php" class="tree-link" href="past-meeting.php">Past Meeting</a>
                             <a data-active-pages="callbacks.php" class="tree-link" href="callbacks.php">Callbacks</a>
                             <a data-active-pages="summary-report.php" class="tree-link" href="summary-report.php">Summary Report</a>
-                            <a data-active-pages="appointment-types.php" class="tree-link" href="appointment-types.php">Appointment Types</a>
                         </div>
                         <a data-active-pages="mom.php" class="nav-link-custom" href="mom.php"><i class="bi bi-journal-text me-2"></i> <span>Minutes of Meeting</span></a>
                     </div>
