@@ -67,6 +67,10 @@ var MasterTable = (function () {
 
         // Resolve table ref early
         var table = document.getElementById(cfg.tableId);
+        if (table) {
+            table.dataset.autoTableInit = 'true';
+            table.dataset.masterTableInit = 'true';
+        }
         var tableWrap = table ? (table.closest('.card-custom') || table.closest('.card') || (table.parentElement && table.parentElement.classList.contains('table-responsive') ? table.parentElement.parentElement : table.parentElement)) : null;
 
         // Graceful no-op: table (or tbody) missing in the DOM (e.g. panel not
@@ -97,9 +101,9 @@ var MasterTable = (function () {
         // ---- Auto-create toolbar ----
         function buildToolbar() {
             if (!tableWrap) return;
-            if (document.getElementById(ID.columnsBtn)) return;
+            if (document.getElementById(ID.columnsBtn) || tableWrap.querySelector('.columns-btn') || tableWrap.querySelector('.auto-table-toolbar')) return;
             var toolbar = document.createElement('div');
-            toolbar.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 p-3';
+            toolbar.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 p-3 auto-table-toolbar';
             toolbar.innerHTML =
                 '<div class="d-flex align-items-center gap-2 flex-wrap">' +
                     '<button type="button" class="btn columns-btn" id="' + ID.columnsBtn + '"><i class="bi bi-eye me-1"></i>Columns</button>' +
@@ -124,7 +128,7 @@ var MasterTable = (function () {
         // ---- Auto-create footer ----
         function buildFooter() {
             if (!tableWrap) return;
-            if (document.getElementById(ID.showEntries)) return;
+            if (document.getElementById(ID.showEntries) || tableWrap.querySelector('.report-footer')) return;
             var footer = document.createElement('div');
             footer.className = 'd-flex justify-content-between align-items-center report-footer p-3';
             footer.innerHTML =

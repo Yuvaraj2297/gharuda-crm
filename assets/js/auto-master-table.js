@@ -63,7 +63,12 @@
     var tableCounter = 0;
 
     function initTable(table, options) {
-        if (!table || table.dataset.autoTableInit === 'true') return table ? table.autoTable : null;
+        if (!table || table.dataset.autoTableInit === 'true' || table.dataset.masterTableInit === 'true') return table ? table.autoTable : null;
+        var existingWrap = table.closest('.card-custom') || table.closest('.card') || (table.parentElement && table.parentElement.classList.contains('table-responsive') ? table.parentElement.parentElement : table.parentElement);
+        if (existingWrap && (existingWrap.querySelector('.auto-table-toolbar') || existingWrap.querySelector('.columns-btn'))) {
+            table.dataset.autoTableInit = 'true';
+            return table.autoTable || null;
+        }
         table.dataset.autoTableInit = 'true';
         table.dataset.masterTableInit = 'true';
 
@@ -117,29 +122,29 @@
         };
 
         // Build Toolbar (Columns, Export, Search)
-        var toolbar = tableWrap.querySelector('.auto-table-toolbar');
-        if (!toolbar) {
+        var toolbar = tableWrap ? (tableWrap.querySelector('.auto-table-toolbar') || tableWrap.querySelector('.columns-btn')) : null;
+        if (!toolbar && tableWrap) {
             toolbar = document.createElement('div');
             toolbar.className = 'd-flex align-items-center justify-content-between flex-wrap gap-2 p-3 auto-table-toolbar';
             toolbar.innerHTML =
                 '<div class="d-flex align-items-center gap-2 flex-wrap">' +
-                    '<button type="button" class="btn columns-btn" id="' + ID.columnsBtn + '"><i class="bi bi-eye me-1"></i>Columns</button>' +
-                    '<div class="mt-export-menu">' +
-                        '<button type="button" class="btn export-btn-pdf mt-export-trigger" id="' + ID.exportTrigger + '" aria-expanded="false">' +
-                            '<i class="bi bi-download me-1"></i>Export <i class="bi bi-chevron-down ms-1" style="font-size:10px;"></i>' +
-                        '</button>' +
-                        '<div class="mt-export-dropdown" id="' + ID.exportDropdown + '" role="menu">' +
-                            '<button type="button" class="mt-export-item" id="' + ID.copy + '"><i class="bi bi-clipboard me-2"></i>Copy</button>' +
-                            '<button type="button" class="mt-export-item" id="' + ID.csv + '"><i class="bi bi-filetype-csv me-2"></i>CSV</button>' +
-                            '<button type="button" class="mt-export-item" id="' + ID.excel + '"><i class="bi bi-filetype-xlsx me-2"></i>Excel</button>' +
-                            '<button type="button" class="mt-export-item" id="' + ID.pdf + '"><i class="bi bi-filetype-pdf me-2"></i>PDF</button>' +
-                            '<button type="button" class="mt-export-item" id="' + ID.print + '"><i class="bi bi-printer me-2"></i>Print</button>' +
-                        '</div>' +
-                    '</div>' +
+                '<button type="button" class="btn columns-btn" id="' + ID.columnsBtn + '"><i class="bi bi-eye me-1"></i>Columns</button>' +
+                '<div class="mt-export-menu">' +
+                '<button type="button" class="btn export-btn-pdf mt-export-trigger" id="' + ID.exportTrigger + '" aria-expanded="false">' +
+                '<i class="bi bi-download me-1"></i>Export <i class="bi bi-chevron-down ms-1" style="font-size:10px;"></i>' +
+                '</button>' +
+                '<div class="mt-export-dropdown" id="' + ID.exportDropdown + '" role="menu">' +
+                '<button type="button" class="mt-export-item" id="' + ID.copy + '"><i class="bi bi-clipboard me-2"></i>Copy</button>' +
+                '<button type="button" class="mt-export-item" id="' + ID.csv + '"><i class="bi bi-filetype-csv me-2"></i>CSV</button>' +
+                '<button type="button" class="mt-export-item" id="' + ID.excel + '"><i class="bi bi-filetype-xlsx me-2"></i>Excel</button>' +
+                '<button type="button" class="mt-export-item" id="' + ID.pdf + '"><i class="bi bi-filetype-pdf me-2"></i>PDF</button>' +
+                '<button type="button" class="mt-export-item" id="' + ID.print + '"><i class="bi bi-printer me-2"></i>Print</button>' +
+                '</div>' +
+                '</div>' +
                 '</div>' +
                 '<div class="mt-search-wrap">' +
-                    '<i class="bi bi-search mt-search-icon"></i>' +
-                    '<input type="text" class="mt-search-input" id="' + ID.search + '" placeholder="' + searchPlaceholder + '">' +
+                '<i class="bi bi-search mt-search-icon"></i>' +
+                '<input type="text" class="mt-search-input" id="' + ID.search + '" placeholder="' + searchPlaceholder + '">' +
                 '</div>';
 
             if (tableResponsive && tableResponsive.parentElement === tableWrap) {
@@ -156,16 +161,16 @@
             footer.className = 'd-flex justify-content-between align-items-center report-footer p-3';
             footer.innerHTML =
                 '<div class="d-flex gap-2 align-items-center">' +
-                    '<span class="small text-muted text-nowrap">Show:</span>' +
-                    '<select class="form-select form-select-sm gh-w-auto" id="' + ID.showEntries + '">' +
-                        '<option value="10" selected>10</option>' +
-                        '<option value="25">25</option>' +
-                        '<option value="50">50</option>' +
-                        '<option value="100">100</option>' +
-                    '</select>' +
-                    '<span class="small text-muted text-nowrap">' +
-                        'Showing <strong id="' + ID.pgStart + '">0</strong>&ndash;<strong id="' + ID.pgEnd + '">0</strong> of <strong id="' + ID.pgTotal + '">0</strong>' +
-                    '</span>' +
+                '<span class="small text-muted text-nowrap">Show:</span>' +
+                '<select class="form-select form-select-sm gh-w-auto" id="' + ID.showEntries + '">' +
+                '<option value="10" selected>10</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '<option value="100">100</option>' +
+                '</select>' +
+                '<span class="small text-muted text-nowrap">' +
+                'Showing <strong id="' + ID.pgStart + '">0</strong>&ndash;<strong id="' + ID.pgEnd + '">0</strong> of <strong id="' + ID.pgTotal + '">0</strong>' +
+                '</span>' +
                 '</div>' +
                 '<nav><ul class="pagination pagination-sm mb-0" id="' + ID.pgList + '"></ul></nav>';
 
@@ -188,8 +193,8 @@
             oc.id = ID.offcanvas;
             oc.innerHTML =
                 '<div class="offcanvas-header border-bottom border-light-subtle">' +
-                    '<h5 class="offcanvas-title fw-bold">Columns Visibility</h5>' +
-                    '<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>' +
+                '<h5 class="offcanvas-title fw-bold">Columns Visibility</h5>' +
+                '<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>' +
                 '</div>' +
                 '<div class="offcanvas-body" id="' + ID.offcanvasBody + '"></div>';
             document.body.appendChild(oc);
@@ -264,8 +269,8 @@
                 var title = rawTitle.replace(/\s+/g, ' ');
                 var isSno = (th && th.hasAttribute('data-no-sno')) ? false : /^(s\.?no|#|no\.?|sl\.?no)$/i.test(title);
                 var isAction = /^(action|actions|operation|operations)$/i.test(title) ||
-                               (th && th.hasAttribute('data-no-export')) ||
-                               Boolean(th && th.querySelector('button, .btn, a.btn'));
+                    (th && th.hasAttribute('data-no-export')) ||
+                    Boolean(th && th.querySelector('button, .btn, a.btn'));
 
                 // Check if column cells contain action buttons
                 if (!isAction && !isSno) {
@@ -299,8 +304,8 @@
                 row.className = 'p-3 py-2 border rounded mb-2';
                 row.innerHTML =
                     '<div class="d-flex form-check form-switch justify-content-between align-items-center mb-0 ps-0 w-100">' +
-                        '<label class="form-check-label fw-semibold">' + escapeHtml(col.title) + '</label>' +
-                        '<input class="form-check-input" type="checkbox" data-col-index="' + col.index + '" ' + (col.visible ? 'checked' : '') + '>' +
+                    '<label class="form-check-label fw-semibold">' + escapeHtml(col.title) + '</label>' +
+                    '<input class="form-check-input" type="checkbox" data-col-index="' + col.index + '" ' + (col.visible ? 'checked' : '') + '>' +
                     '</div>';
                 body.appendChild(row);
             });
@@ -975,6 +980,7 @@
         var selector = 'table.datatable, table.data-table, table.table-auto, table.master-table';
         var tables = root.querySelectorAll(selector);
         tables.forEach(function (table) {
+            if (table.dataset.autoTableInit === 'true' || table.dataset.masterTableInit === 'true') return;
             initTable(table);
         });
     }

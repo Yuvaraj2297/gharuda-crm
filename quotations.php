@@ -103,9 +103,11 @@
                         <td class="fw-bold text-dark">₹5,90,000</td>
                         <td><span class="badge bg-success-subtle text-success">Accepted</span></td>
                         <td>
-                            <div class="btn-group">
-                                <a href="customer-view.php?id=1" class="btn btn-sm btn-light border" title="View Customer"><i class="bi bi-eye"></i></a>
-                                <button type="button" class="btn btn-sm btn-light border" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
+                            <div class="d-flex align-items-center gap-1">
+                                <a href="invoice-create.php?quote=QT-2026-084&client=Power+Spares+Engineering" class="btn btn-sm btn-outline-success py-1 px-2" title="Convert to Tax Invoice"><i class="bi bi-file-earmark-plus me-1"></i>Invoice</a>
+                                <a href="contracts.php?quote=QT-2026-084&client=Power+Spares+Engineering" class="btn btn-sm btn-light border py-1 px-2" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
+                                <a href="customer-view.php?id=1" class="btn btn-sm btn-light border py-1 px-2" title="View Customer"><i class="bi bi-eye"></i></a>
+                                <button type="button" class="btn btn-sm btn-light border py-1 px-2" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -122,9 +124,11 @@
                         <td class="fw-bold text-dark">₹8,90,000</td>
                         <td><span class="badge bg-warning-subtle text-warning">Sent / Pending</span></td>
                         <td>
-                            <div class="btn-group">
-                                <a href="customer-view.php?id=2" class="btn btn-sm btn-light border" title="View Customer"><i class="bi bi-eye"></i></a>
-                                <button type="button" class="btn btn-sm btn-light border" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
+                            <div class="d-flex align-items-center gap-1">
+                                <a href="invoice-create.php?quote=QT-2026-089&client=Zen+Publications" class="btn btn-sm btn-outline-success py-1 px-2" title="Convert to Tax Invoice"><i class="bi bi-file-earmark-plus me-1"></i>Invoice</a>
+                                <a href="contracts.php?quote=QT-2026-089&client=Zen+Publications" class="btn btn-sm btn-light border py-1 px-2" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
+                                <a href="customer-view.php?id=2" class="btn btn-sm btn-light border py-1 px-2" title="View Customer"><i class="bi bi-eye"></i></a>
+                                <button type="button" class="btn btn-sm btn-light border py-1 px-2" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -141,9 +145,11 @@
                         <td class="fw-bold text-dark">₹12,00,000</td>
                         <td><span class="badge bg-primary-subtle text-primary">In Negotiation</span></td>
                         <td>
-                            <div class="btn-group">
-                                <a href="customer-view.php?id=3" class="btn btn-sm btn-light border" title="View Customer"><i class="bi bi-eye"></i></a>
-                                <button type="button" class="btn btn-sm btn-light border" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
+                            <div class="d-flex align-items-center gap-1">
+                                <a href="invoice-create.php?quote=QT-2026-092&client=Hindustan+Hydraulics" class="btn btn-sm btn-outline-success py-1 px-2" title="Convert to Tax Invoice"><i class="bi bi-file-earmark-plus me-1"></i>Invoice</a>
+                                <a href="contracts.php?quote=QT-2026-092&client=Hindustan+Hydraulics" class="btn btn-sm btn-light border py-1 px-2" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
+                                <a href="customer-view.php?id=3" class="btn btn-sm btn-light border py-1 px-2" title="View Customer"><i class="bi bi-eye"></i></a>
+                                <button type="button" class="btn btn-sm btn-light border py-1 px-2" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
                     </tr>

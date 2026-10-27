@@ -88,7 +88,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0" id="paymentsTable">
+            <table class="table table-hover align-middle mb-0 datatable" id="paymentsTable" data-table-name="Payments Received">
                 <thead class="table-light">
                     <tr>
                         <th class="ps-3" style="font-size:12px;font-weight:700;">PAYMENT #</th>
@@ -332,8 +332,27 @@ function savePayment() {
     var modalEl = document.getElementById('recordPaymentModal');
     var modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
+    var tbl = document.getElementById('paymentsTable');
+    if (tbl && tbl.autoTable && typeof tbl.autoTable.refresh === 'function') tbl.autoTable.refresh();
     alert('Payment ' + payId + ' recorded successfully!');
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var searchEl = document.getElementById('paymentSearch');
+    var modeEl = document.getElementById('paymentModeFilter');
+    function filterPayments() {
+        var q = (searchEl ? searchEl.value : '').toLowerCase().trim();
+        var mode = (modeEl ? modeEl.value : '').toLowerCase().trim();
+        document.querySelectorAll('#paymentsTable tbody tr').forEach(function (tr) {
+            var text = tr.textContent.toLowerCase();
+            var matchQ = !q || text.indexOf(q) !== -1;
+            var matchM = !mode || text.indexOf(mode) !== -1;
+            tr.style.display = (matchQ && matchM) ? '' : 'none';
+        });
+    }
+    if (searchEl) searchEl.addEventListener('input', filterPayments);
+    if (modeEl) modeEl.addEventListener('change', filterPayments);
+});
 </script>
 
 <?php include 'footer.php'; ?>

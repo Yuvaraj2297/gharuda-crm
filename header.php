@@ -421,18 +421,41 @@
 
     <!-- ============ FULL-WIDTH TOP HEADER ============ -->
     <div class="topbar">
-        <div class="d-flex gap-2 align-items-center">
+        <a href="lead-dashboard.php" class="d-flex gap-2 align-items-center text-decoration-none" title="Go to Lead Dashboard">
             <img src="./assets/img/logo-icon.png" alt="" class="topbar-brand-icon">
             <img src="./assets/img/logo-text.png" alt="" class="topbar-brand-text">
-        </div>
+        </a>
         <button type="button" class="topbar-brand sbToggle" aria-label="Toggle sidebar">
             <i class="bi bi-list"></i>
         </button>
-        <div class="search-box ms-auto">
+        <div class="search-box ms-auto position-relative" id="globalSearchWrap">
             <i class="bi bi-search"></i>
-            <input type="text" id="globalSearchInput" placeholder="Search leads, clients, deals, tickets..." onkeydown="if(event.key==='Enter'&&this.value.trim()){window.location.href='lead-filter.php?q='+encodeURIComponent(this.value.trim());}">
+            <input type="text" id="globalSearchInput" autocomplete="off" placeholder="Search leads, clients, deals, quotes... (Ctrl+K)" onkeydown="if(event.key==='Enter'&&this.value.trim()){window.location.href='lead-filter.php?q='+encodeURIComponent(this.value.trim());}">
+            <div id="globalSearchDropdown" class=" shadow-lg border rounded-4 bg-white position-absolute start-0 end-0 mt-2 d-none" style="top:100%; z-index:2000; max-height:380px; overflow-y:auto;"></div>
         </div>
-        <div class="icon-pill"><i class="bi bi-question-circle"></i></div>
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary btn-sm d-none d-md-inline-flex align-items-center gap-1 fw-bold px-3 shadow-sm" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:999px; font-size:12.5px; height:36px;">
+                <i class="bi bi-plus-lg"></i> <span>Quick Create</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 p-2" style="min-width: 235px; font-size: 13px;">
+                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">CRM &amp; Pipeline</li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="lead.php"><i class="bi bi-person-plus text-success"></i> New Lead</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="deals.php"><i class="bi bi-currency-rupee text-primary"></i> New Opportunity / Deal</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="quotation-create.php"><i class="bi bi-file-earmark-text text-info"></i> Create Quotation</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="appointments.php"><i class="bi bi-calendar2-plus text-warning"></i> Book Appointment</a></li>
+                <li><hr class="dropdown-divider my-1"></li>
+                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Clients &amp; Execution</li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="customer-new.php"><i class="bi bi-building-add text-success"></i> New Customer Account</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="project-create.php"><i class="bi bi-briefcase text-primary"></i> New Project</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="task-create.php"><i class="bi bi-check2-square text-info"></i> Assign New Task</a></li>
+                <li><hr class="dropdown-divider my-1"></li>
+                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Billing &amp; Helpdesk</li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="invoice-create.php"><i class="bi bi-file-earmark-plus text-success"></i> Create Tax Invoice</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="expense-create.php"><i class="bi bi-receipt text-warning"></i> Record Field Expense</a></li>
+                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="support-create-ticket.php"><i class="bi bi-headset text-danger"></i> New Support Ticket</a></li>
+            </ul>
+        </div>
+        <div class="icon-pill" id="helpWorkflowBtn" style="cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="CRM Workflow Guide"><i class="bi bi-question-circle"></i></div>
         <div class="icon-pill" id="bellIcon" style="position:relative;cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Notifications">
             <i class="bi bi-bell"></i><span class="badge-dot">3</span>
         </div>
@@ -509,6 +532,112 @@
             <a href="manage-leads.php" class="btn btn-primary w-100" style="font-size:13px;font-weight:700;border-radius:10px;">
                 <i class="bi bi-box-arrow-in-right me-1"></i> View All Leads
             </a>
+        </div>
+    </div>
+
+    <!-- ===== CRM End-to-End Lifecycle Guide Offcanvas ===== -->
+    <div class="offcanvas offcanvas-end notif-oc" tabindex="-1" id="crmWorkflowOffcanvas" aria-labelledby="crmWorkflowOffcanvasLabel" style="width:430px;">
+        <div class="offcanvas-header border-bottom">
+            <div class="d-flex align-items-center gap-2 min-w-0">
+                <div class="notif-oc-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                <div class="min-w-0">
+                    <div class="notif-oc-title" id="crmWorkflowOffcanvasLabel">CRM Lifecycle &amp; Workflow</div>
+                    <div class="notif-oc-sub">End-to-End Pipeline Navigation</div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-success-subtle text-success fw-bold">Stage 1 &middot; Lead Capture</span>
+                        <a href="lead.php" class="small fw-bold text-decoration-none">Open Leads &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Capture inbound enquiries (IndiaMART, Website, Direct), score leads, and assign reps.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="lead-dashboard.php" class="badge bg-white text-dark border text-decoration-none">Lead Dashboard</a>
+                        <a href="lead.php" class="badge bg-white text-dark border text-decoration-none">All Leads</a>
+                        <a href="manage-leads.php" class="badge bg-white text-dark border text-decoration-none">Manage Leads</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-primary-subtle text-primary fw-bold">Stage 2 &middot; Engage &amp; Meet</span>
+                        <a href="follow-up-list.php" class="small fw-bold text-decoration-none">Follow-Ups &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Follow up via WhatsApp, Email, SMS, schedule client demos, and log Minutes of Meeting (MOM).</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="follow-up-list.php" class="badge bg-white text-dark border text-decoration-none">Follow-Up List</a>
+                        <a href="appointments.php" class="badge bg-white text-dark border text-decoration-none">Appointments</a>
+                        <a href="mom.php" class="badge bg-white text-dark border text-decoration-none">Minutes of Meeting</a>
+                        <a href="whatsapp-chat.php" class="badge bg-white text-dark border text-decoration-none">WhatsApp</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-info-subtle text-info fw-bold">Stage 3 &middot; Deals &amp; Proposals</span>
+                        <a href="deals.php" class="small fw-bold text-decoration-none">Pipeline &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Track opportunity stages, generate GST Quotations, and finalize client SLA Contracts.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="deals.php" class="badge bg-white text-dark border text-decoration-none">Deals Pipeline</a>
+                        <a href="quotations.php" class="badge bg-white text-dark border text-decoration-none">Quotations</a>
+                        <a href="quotation-create.php" class="badge bg-white text-dark border text-decoration-none">+ New Quote</a>
+                        <a href="contracts.php" class="badge bg-white text-dark border text-decoration-none">Contracts &amp; SLAs</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-warning-subtle text-warning fw-bold">Stage 4 &middot; Customer 360</span>
+                        <a href="customers.php" class="small fw-bold text-decoration-none">Customers &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Convert won deals into Customer Accounts with unified 360&deg; ledger, contacts, and files.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="customer-dashboard.php" class="badge bg-white text-dark border text-decoration-none">360 Dashboard</a>
+                        <a href="customers.php" class="badge bg-white text-dark border text-decoration-none">Customers Directory</a>
+                        <a href="contacts.php" class="badge bg-white text-dark border text-decoration-none">Contacts</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-secondary-subtle text-secondary fw-bold">Stage 5 &middot; Project Delivery</span>
+                        <a href="projects-list.php" class="small fw-bold text-decoration-none">Projects &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Deliver client projects, milestones, daily tasks, and track team KPI scorecards.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="project-dashboard.php" class="badge bg-white text-dark border text-decoration-none">Project Dashboard</a>
+                        <a href="projects-list.php" class="badge bg-white text-dark border text-decoration-none">Projects List</a>
+                        <a href="task-overview.php" class="badge bg-white text-dark border text-decoration-none">Tasks Kanban</a>
+                        <a href="score-card.php" class="badge bg-white text-dark border text-decoration-none">Score Card</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-success-subtle text-success fw-bold">Stage 6 &middot; Billing &amp; Finance</span>
+                        <a href="invoices.php" class="small fw-bold text-decoration-none">Invoices &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Issue GST Tax Invoices, record NEFT/UPI payments, and manage field expenses &amp; petty cash.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="invoices.php" class="badge bg-white text-dark border text-decoration-none">Invoices Ledger</a>
+                        <a href="invoice-create.php" class="badge bg-white text-dark border text-decoration-none">+ Tax Invoice</a>
+                        <a href="payments.php" class="badge bg-white text-dark border text-decoration-none">Payments</a>
+                        <a href="expenses.php" class="badge bg-white text-dark border text-decoration-none">Field Expenses</a>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-3 border bg-light-subtle">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="badge bg-danger-subtle text-danger fw-bold">Stage 7 &middot; Support &amp; SLA</span>
+                        <a href="ticket-dashboard.php" class="small fw-bold text-decoration-none">Helpdesk &rarr;</a>
+                    </div>
+                    <div class="small text-muted mb-2">Resolve post-sales client tickets with SLA response tracking and escalation alerts.</div>
+                    <div class="d-flex flex-wrap gap-1">
+                        <a href="ticket-dashboard.php" class="badge bg-white text-dark border text-decoration-none">Support Dashboard</a>
+                        <a href="support-tickets.php" class="badge bg-white text-dark border text-decoration-none">All Tickets</a>
+                        <a href="ticket-reports.php" class="badge bg-white text-dark border text-decoration-none">SLA Reports</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

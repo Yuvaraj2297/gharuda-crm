@@ -145,7 +145,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0" id="globalContactsTable">
+            <table class="table table-hover align-middle mb-0 datatable" id="globalContactsTable" data-table-name="Contacts Directory">
                 <thead class="table-light">
                     <tr>
                         <th class="ps-3" style="font-size:12px;font-weight:700;">CONTACT NAME</th>
@@ -411,8 +411,27 @@ function saveGlobalContact() {
     var modalEl = document.getElementById('newContactModal');
     var modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
+    var tbl = document.getElementById('globalContactsTable');
+    if (tbl && tbl.autoTable && typeof tbl.autoTable.refresh === 'function') tbl.autoTable.refresh();
     alert('Contact ' + name + ' added successfully!');
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var searchEl = document.getElementById('contactSearchInput');
+    var compEl = document.getElementById('contactCompanyFilter');
+    function filterContacts() {
+        var q = (searchEl ? searchEl.value : '').toLowerCase().trim();
+        var comp = (compEl ? compEl.value : '').toLowerCase().trim();
+        document.querySelectorAll('#globalContactsTable tbody tr').forEach(function (tr) {
+            var text = tr.textContent.toLowerCase();
+            var matchQ = !q || text.indexOf(q) !== -1;
+            var matchC = !comp || text.indexOf(comp) !== -1;
+            tr.style.display = (matchQ && matchC) ? '' : 'none';
+        });
+    }
+    if (searchEl) searchEl.addEventListener('input', filterContacts);
+    if (compEl) compEl.addEventListener('change', filterContacts);
+});
 </script>
 
 <?php include 'footer.php'; ?>

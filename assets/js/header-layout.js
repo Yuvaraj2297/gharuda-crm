@@ -26,6 +26,95 @@
                 });
             }
 
+            var helpBtn = document.getElementById('helpWorkflowBtn');
+            var helpOc = document.getElementById('crmWorkflowOffcanvas');
+            if (helpBtn && helpOc) {
+                helpBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (window.bootstrap && bootstrap.Offcanvas) {
+                        bootstrap.Offcanvas.getOrCreateInstance(helpOc).show();
+                    }
+                });
+            }
+
+            /* ----- Live Global Command Search Dropdown ----- */
+            var searchInput = document.getElementById('globalSearchInput');
+            var searchDropdown = document.getElementById('globalSearchDropdown');
+            if (searchInput && searchDropdown) {
+                var globalIndex = [
+                    { cat: 'Leads & Prospects', title: 'Suresh Babu · Power Spares Eng.', sub: 'Hot Lead · ₹5.0L · Qualified', url: 'lead.php', icon: 'bi-person-lines-fill text-success' },
+                    { cat: 'Leads & Prospects', title: 'Olivia Brown · IndiaMART Inbound', sub: 'New Lead · Assigned Today', url: 'manage-leads.php', icon: 'bi-kanban text-primary' },
+                    { cat: 'Leads & Prospects', title: 'Follow-Up Schedule & Callbacks', sub: 'Pending calls & WhatsApp follow-ups', url: 'follow-up-list.php', icon: 'bi-clock-history text-warning' },
+                    { cat: 'Customers & 360', title: 'Power Spares Engineering', sub: 'Enterprise Client · GST Active', url: 'customer-view.php?id=1&name=Power+Spares+Engineering', icon: 'bi-building text-primary' },
+                    { cat: 'Customers & 360', title: 'Zen Publications', sub: 'Corporate Account · Publishing CRM', url: 'customer-view.php?id=2&name=Zen+Publications', icon: 'bi-building text-info' },
+                    { cat: 'Customers & 360', title: 'Hindustan Hydraulics', sub: 'AMC & Retainer Client · ₹18.0L', url: 'customer-view.php?id=3&name=Hindustan+Hydraulics', icon: 'bi-building text-success' },
+                    { cat: 'Deals & Proposals', title: 'CRM Cloud Migration Pack (₹5,00,000)', sub: 'Deal Stage: Discovery / Qualified', url: 'deals.php', icon: 'bi-currency-rupee text-success' },
+                    { cat: 'Deals & Proposals', title: 'Quote #QT-2026-084 · ₹5,90,000', sub: 'Power Spares Engineering · Accepted', url: 'quotations.php', icon: 'bi-file-earmark-text text-primary' },
+                    { cat: 'Deals & Proposals', title: 'Contract #CTR-2026-001 · Annual AMC', sub: 'Active SLA Agreement · ₹12,50,000', url: 'contracts.php', icon: 'bi-pen text-info' },
+                    { cat: 'Billing & Projects', title: 'Invoice #INV-2026-088 · ₹2,50,000', sub: 'Zen Publications · Partially Paid', url: 'invoices.php', icon: 'bi-file-earmark-ruled text-warning' },
+                    { cat: 'Billing & Projects', title: 'Solar Panel Installation Project', sub: 'Active Delivery · 75% Completed', url: 'projects-list.php', icon: 'bi-briefcase text-primary' },
+                    { cat: 'Helpdesk & SLA', title: 'Support Tickets & SLA Queue', sub: 'Customer Helpdesk & Escalations', url: 'support-tickets.php', icon: 'bi-headset text-danger' }
+                ];
+
+                function renderSearch(q) {
+                    var query = (q || '').trim().toLowerCase();
+                    var matches = globalIndex.filter(function (item) {
+                        if (!query) return true;
+                        return item.title.toLowerCase().indexOf(query) !== -1 ||
+                            item.sub.toLowerCase().indexOf(query) !== -1 ||
+                            item.cat.toLowerCase().indexOf(query) !== -1;
+                    }).slice(0, 7);
+
+                    var html = '<div class="p-2">';
+                    if (matches.length === 0) {
+                        html += '<div class="p-3 text-center text-muted small">No direct matches. Press <b>Enter</b> to filter all leads.</div>';
+                    } else {
+                        var lastCat = '';
+                        matches.forEach(function (m) {
+                            if (m.cat !== lastCat) {
+                                lastCat = m.cat;
+                                html += '<div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px;letter-spacing:0.5px;">' + m.cat + '</div>';
+                            }
+                            html += '<a href="' + m.url + '" class="d-flex align-items-center gap-2.5 px-2.5 py-2 rounded-3 text-decoration-none text-dark hover-bg-light" style="transition:background .15s;">' +
+                                '<span class="d-inline-flex align-items-center justify-content-center rounded-2 bg-light p-2"><i class="bi ' + m.icon + '"></i></span>' +
+                                '<div class="min-w-0 flex-grow-1">' +
+                                '<div class="fw-bold text-truncate" style="font-size:12.5px;">' + m.title + '</div>' +
+                                '<div class="text-muted text-truncate" style="font-size:11px;">' + m.sub + '</div>' +
+                                '</div>' +
+                                '<i class="bi bi-arrow-up-right text-muted" style="font-size:11px;"></i>' +
+                                '</a>';
+                        });
+                    }
+                    if (query) {
+                        html += '<div class="border-top mt-1 pt-1"><a href="lead-filter.php?q=' + encodeURIComponent(q.trim()) + '" class="d-block px-2.5 py-1.5 small fw-bold text-primary text-decoration-none"><i class="bi bi-funnel me-1"></i>Search all leads for "' + q.trim().replace(/</g, '&lt;') + '" &rarr;</a></div>';
+                    }
+                    html += '</div>';
+                    searchDropdown.innerHTML = html;
+                    searchDropdown.classList.remove('d-none');
+                }
+
+                searchInput.addEventListener('focus', function () {
+                    renderSearch(searchInput.value);
+                });
+                searchInput.addEventListener('input', function () {
+                    renderSearch(searchInput.value);
+                });
+                document.addEventListener('click', function (e) {
+                    if (!e.target.closest('#globalSearchWrap')) {
+                        searchDropdown.classList.add('d-none');
+                    }
+                });
+                document.addEventListener('keydown', function (e) {
+                    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                        e.preventDefault();
+                        searchInput.focus();
+                        searchInput.select();
+                    } else if (e.key === 'Escape') {
+                        searchDropdown.classList.add('d-none');
+                    }
+                });
+            }
+
             /* ----- Leave notification: hover Approve / Reject icons ----- */
             var list = document.getElementById('notifPendingList');
             var countPill = ocEl ? ocEl.querySelector('.notif-count-pill') : null;
@@ -246,7 +335,7 @@
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
             var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'ticket-reports.php', 'my-tickets.php'];
             var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'contracts.php'];
-            var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-report.php'];
+            var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php', 'petty-cash-report.php'];
             var apptPages = ['appointments.php', 'appointment-schedule.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
 
             var F = {};
@@ -280,7 +369,7 @@
             F.isLeadActive = F.isLeadCoreActive || F.isDealActive || F.isCommActive || F.isLeadReportActive;
             F.isApptMomActive = has(apptMomPages);
             F.isApptActive = has(apptPages);
-            F.isTargetActive = cur === 'target.php' || cur === 'brand-target.php';
+            F.isTargetActive = cur === 'target.php' || cur === 'brand-target.php' || cur === 'sales-target-slabs.php';
             F.isProjectCoreActive = has(projectCorePages);
             F.isTaskCoreActive = has(taskCorePages);
             F.isProjectMgmtActive = F.isProjectCoreActive || F.isTaskCoreActive;

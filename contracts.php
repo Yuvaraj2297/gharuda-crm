@@ -88,7 +88,7 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0" id="contractsTable">
+            <table class="table table-hover align-middle mb-0 datatable" id="contractsTable" data-table-name="Contracts">
                 <thead class="table-light">
                     <tr>
                         <th class="ps-3" style="font-size:12px;font-weight:700;">CONTRACT #</th>
@@ -344,8 +344,27 @@ function saveContract() {
     var modalEl = document.getElementById('newContractModal');
     var modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
+    var tbl = document.getElementById('contractsTable');
+    if (tbl && tbl.autoTable && typeof tbl.autoTable.refresh === 'function') tbl.autoTable.refresh();
     alert('Contract ' + ctrId + ' created successfully!');
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var searchEl = document.getElementById('contractSearch');
+    var statusEl = document.getElementById('contractFilterStatus');
+    function filterContracts() {
+        var q = (searchEl ? searchEl.value : '').toLowerCase().trim();
+        var st = (statusEl ? statusEl.value : '').toLowerCase().trim();
+        document.querySelectorAll('#contractsTable tbody tr').forEach(function (tr) {
+            var text = tr.textContent.toLowerCase();
+            var matchQ = !q || text.indexOf(q) !== -1;
+            var matchSt = !st || text.indexOf(st) !== -1;
+            tr.style.display = (matchQ && matchSt) ? '' : 'none';
+        });
+    }
+    if (searchEl) searchEl.addEventListener('input', filterContracts);
+    if (statusEl) statusEl.addEventListener('change', filterContracts);
+});
 </script>
 
 <?php include 'footer.php'; ?>

@@ -12141,20 +12141,20 @@
     </div>
     <div class="auth-page">
         <div class="auth-card">
-            <a href="index.html" class="auth-brand">
+            <a href="lead-dashboard.php" class="auth-brand">
                 <img src="./assets/img/logo-icon.png" alt="" style="height: 60px;">
                 <img src="./assets/img/logo-text.png" alt="" style="width: 200px;margin-top: 15px;">
             </a>
             <h4 class="text-center mb-1 fw-bold">Welcome</h4>
             <p class="text-muted text-center mb-4">Login in to your account</p>
-            <form>
+            <form onsubmit="event.preventDefault(); window.location.href='lead-dashboard.php';">
                 <div class="mb-3"><label class="form-label">Username</label><input type="email" class="form-control"
                         placeholder="Enter username"></div>
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between"><label class="form-label">Password</label></div><input type="password"
+                    <div class="d-flex justify-content-between"><label class="form-label">Password</label><a href="forgot-password.php" class="small text-decoration-none">Forgot password?</a></div><input type="password"
                         class="form-control" placeholder="Enter password">
                 </div>
-                <a href="dashboard.php" class="btn btn-primary w-100 mb-3"><i class="mdi mdi-login me-1"></i>Login</a>
+                <a href="lead-dashboard.php" class="btn btn-primary w-100 mb-3"><i class="mdi mdi-login me-1"></i>Login</a>
 
             </form>
         </div>

@@ -14,12 +14,18 @@
                 <span class="badge bg-success-subtle text-success rounded-pill">₹58.4 Lakh Total Billed</span>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
             <a href="quotations.php" class="btn btn-outline-secondary btn-sm">
                 <i class="bi bi-file-earmark-text me-1"></i>Quotations
             </a>
+            <a href="payments.php" class="btn btn-outline-success btn-sm">
+                <i class="bi bi-credit-card-2-front me-1"></i>Payments Received
+            </a>
             <a href="expenses.php" class="btn btn-outline-primary btn-sm">
                 <i class="bi bi-receipt me-1"></i>Field Expenses
+            </a>
+            <a href="invoice-create.php" class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-lg me-1"></i>Create Tax Invoice
             </a>
         </div>
     </div>
@@ -188,10 +194,38 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm Payment</button>
+                <button type="button" class="btn btn-primary" id="confirmInvoicePayBtn" data-bs-dismiss="modal"><i class="bi bi-check2-circle me-1"></i>Confirm Payment</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var activeRow = null;
+    document.querySelectorAll('[data-bs-target="#recordPaymentModal"]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            activeRow = btn.closest('tr');
+            if (activeRow) {
+                var balText = (activeRow.children[6] ? activeRow.children[6].textContent : '').replace(/[^0-9]/g, '');
+                var amtInput = document.querySelector('#recordPaymentForm input[type="number"]');
+                if (amtInput && balText) amtInput.value = balText;
+            }
+        });
+    });
+    var confirmBtn = document.getElementById('confirmInvoicePayBtn');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function () {
+            if (activeRow) {
+                var totalText = activeRow.children[4].textContent;
+                activeRow.children[5].textContent = totalText;
+                activeRow.children[6].textContent = '₹0';
+                activeRow.children[6].className = 'text-muted';
+                activeRow.children[7].innerHTML = '<span class="badge bg-success-subtle text-success">Paid</span>';
+            }
+        });
+    }
+});
+</script>
 
 <?php include 'footer.php'; ?>

@@ -747,10 +747,13 @@
         <h1>Ticket Dashboard</h1>
     </div>
     <div class="hero-actions d-flex gap-2">
+        <a href="support-tickets.php" class="btn btn-hero-ghost">
+            <i class="bi bi-headset me-1"></i> All Tickets
+        </a>
         <a href="ticket-reports.php" class="btn btn-hero-ghost">
             <i class="bi bi-clipboard-data me-1"></i> Ticket Reports
         </a>
-        <a href="ticketing.php" class="btn btn-light fw-bold" style="border-radius:10px;">
+        <a href="support-create-ticket.php" class="btn btn-light fw-bold" style="border-radius:10px;">
             <i class="bi bi-plus-lg me-1"></i> New Ticket
         </a>
     </div>

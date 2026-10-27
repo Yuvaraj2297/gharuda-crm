@@ -437,16 +437,10 @@
     </div>
 </div>
 
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/js/select2.js"></script>
-<script src="./assets/js/master-table.js"></script>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        if (window.jQuery && jQuery.fn.select2) {
-            jQuery('.select2').select2({
-                width: '100%'
-            });
+        if (typeof window.initSelect2Elements === 'function') {
+            window.initSelect2Elements();
         }
 
         /* Sample Expense Records matching user attached image */

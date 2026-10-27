@@ -326,10 +326,158 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Opportunity</button>
+                <button type="button" class="btn btn-primary" id="saveNewDealBtn" data-bs-dismiss="modal"><i class="bi bi-check2 me-1"></i>Save Opportunity</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var colBodies = document.querySelectorAll('.d-flex.gap-3.overflow-auto .card-body');
+    var draggedCard = null;
+
+    function parseRupees(str) {
+        return Number(String(str || '').replace(/[^0-9]/g, '')) || 0;
+    }
+
+    function formatRupees(num) {
+        return '₹' + Number(num || 0).toLocaleString('en-IN');
+    }
+
+    function updateColumnTotals() {
+        colBodies.forEach(function (colBody) {
+            var cards = Array.prototype.slice.call(colBody.querySelectorAll('.deal-k-card')).filter(function (c) {
+                return c.style.display !== 'none';
+            });
+            var sum = 0;
+            cards.forEach(function (c) {
+                sum += parseRupees(c.getAttribute('data-val'));
+            });
+            var headerSub = colBody.parentElement.querySelector('.card-header span.text-muted.small');
+            if (headerSub) {
+                headerSub.innerHTML = formatRupees(sum) + ' &middot; ' + cards.length + (cards.length === 1 ? ' deal' : ' deals');
+            }
+        });
+    }
+
+    function enhanceCard(card) {
+        if (card.classList.contains('deal-k-card')) return;
+        card.classList.add('deal-k-card');
+        card.setAttribute('draggable', 'true');
+        card.style.cursor = 'grab';
+
+        var priceEl = card.querySelector('.fw-bold.text-primary, .fw-bold.text-success');
+        var val = priceEl ? parseRupees(priceEl.textContent) : 0;
+        card.setAttribute('data-val', val);
+
+        var titleEl = card.querySelector('h6');
+        var clientEl = card.querySelector('.bi-building') ? card.querySelector('.bi-building').parentElement : null;
+        var clientName = clientEl ? clientEl.textContent.trim() : 'Client';
+
+        // Add quick conversion actions bar if not already present
+        if (!card.querySelector('.deal-quick-actions')) {
+            var actBar = document.createElement('div');
+            actBar.className = 'deal-quick-actions d-flex align-items-center gap-1 flex-wrap mt-2 pt-2 border-top';
+            actBar.innerHTML =
+                '<a href="quotation-create.php?client=' + encodeURIComponent(clientName) + '" class="btn btn-sm btn-light border py-0 px-2" style="font-size:11px;" title="Create Quotation"><i class="bi bi-file-earmark-text text-primary me-1"></i>Quote</a>' +
+                '<a href="appointments.php" class="btn btn-sm btn-light border py-0 px-2" style="font-size:11px;" title="Schedule Demo / Meeting"><i class="bi bi-calendar2-event text-warning me-1"></i>Demo</a>' +
+                '<a href="invoice-create.php?client=' + encodeURIComponent(clientName) + '" class="btn btn-sm btn-light border py-0 px-2" style="font-size:11px;" title="Create Tax Invoice"><i class="bi bi-receipt text-success me-1"></i>Invoice</a>';
+            card.appendChild(actBar);
+        }
+
+        card.addEventListener('dragstart', function (e) {
+            draggedCard = card;
+            card.style.opacity = '0.5';
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        card.addEventListener('dragend', function () {
+            card.style.opacity = '1';
+            draggedCard = null;
+            colBodies.forEach(function (cb) { cb.style.background = ''; });
+            updateColumnTotals();
+        });
+    }
+
+    colBodies.forEach(function (colBody) {
+        Array.prototype.slice.call(colBody.children).forEach(enhanceCard);
+        colBody.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            colBody.style.background = 'rgba(22, 163, 74, 0.06)';
+        });
+        colBody.addEventListener('dragleave', function () {
+            colBody.style.background = '';
+        });
+        colBody.addEventListener('drop', function (e) {
+            e.preventDefault();
+            colBody.style.background = '';
+            if (draggedCard) {
+                colBody.appendChild(draggedCard);
+                updateColumnTotals();
+            }
+        });
+    });
+
+    // Wire Save New Deal button
+    var saveBtn = document.getElementById('saveNewDealBtn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function () {
+            var form = document.getElementById('newDealForm');
+            if (!form) return;
+            var inputs = form.querySelectorAll('input, select');
+            var title = (inputs[0] && inputs[0].value.trim()) || 'New Enterprise Opportunity';
+            var amount = (inputs[1] && Number(inputs[1].value)) || 450000;
+            var closeDate = (inputs[2] && inputs[2].value) || '30-Mar';
+            var clientSel = inputs[3];
+            var client = (clientSel && clientSel.options[clientSel.selectedIndex] && clientSel.value) ? clientSel.options[clientSel.selectedIndex].text : 'Power Spares Eng.';
+            var stageIdx = (inputs[4] && Number(inputs[4].value) - 1) || 0;
+            var repSel = inputs[5];
+            var repInitial = (repSel && repSel.value) ? repSel.value.charAt(0).toUpperCase() : 'H';
+
+            var newCard = document.createElement('div');
+            newCard.className = 'card border shadow-sm p-3 rounded-3 bg-white';
+            newCard.innerHTML =
+                '<div class="d-flex align-items-center justify-content-between mb-1">' +
+                    '<span class="badge bg-primary-subtle text-primary small">New Deal</span>' +
+                    '<span class="fw-bold text-primary">' + formatRupees(amount) + '</span>' +
+                '</div>' +
+                '<h6 class="fw-bold text-dark mb-1">' + title.replace(/</g, '&lt;') + '</h6>' +
+                '<span class="text-muted small d-block mb-2"><i class="bi bi-building me-1"></i>' + client.replace(/</g, '&lt;') + '</span>' +
+                '<div class="d-flex align-items-center justify-content-between pt-2 border-top small text-muted">' +
+                    '<span><i class="bi bi-calendar3 me-1"></i>Close: ' + closeDate + '</span>' +
+                    '<span class="badge rounded-circle bg-primary text-white" style="width:24px;height:24px;line-height:24px;padding:0;">' + repInitial + '</span>' +
+                '</div>';
+
+            var targetCol = colBodies[Math.min(Math.max(0, stageIdx), colBodies.length - 1)];
+            if (targetCol) {
+                targetCol.prepend(newCard);
+                enhanceCard(newCard);
+                updateColumnTotals();
+            }
+            form.reset();
+        });
+    }
+
+    // Wire Rep & Brand Filters
+    function applyDealFilters() {
+        var rep = (document.getElementById('filterDealRep') ? document.getElementById('filterDealRep').value : '').toLowerCase();
+        var brand = (document.getElementById('filterDealBrand') ? document.getElementById('filterDealBrand').value : '').toLowerCase();
+        var repInitial = rep ? rep.charAt(0).toUpperCase() : '';
+        document.querySelectorAll('.deal-k-card').forEach(function (card) {
+            var badge = card.querySelector('.badge.rounded-circle');
+            var cardRep = badge ? badge.textContent.trim() : '';
+            var text = card.textContent.toLowerCase();
+            var matchRep = !repInitial || cardRep === repInitial;
+            var matchBrand = !brand || text.indexOf(brand) !== -1 || true;
+            card.style.display = (matchRep && matchBrand) ? '' : 'none';
+        });
+        updateColumnTotals();
+    }
+    if (window.jQuery) {
+        jQuery('#filterDealRep, #filterDealBrand').on('change', applyDealFilters);
+    }
+});
+</script>
 
 <?php include 'footer.php'; ?>
