@@ -574,10 +574,6 @@
                     data-bs-title="Petty Cash" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-safe"></i>
                 </button>
-                <!-- Bootstrap UI Library Rail Button -->
-                <button type="button" class="rail-btn" data-panel-target="UI" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Bootstrap UI Library" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-bootstrap-fill text-primary"></i>
-                </button>
             </div>
 
             <div class="icon-rail-bottom">
@@ -592,25 +588,6 @@
 
             <div class="side-panel-inner">
                 <div class="panel-scroll">
-                    <!-- Bootstrap UI Library Panel Section -->
-                    <div class="panel-section" data-panel="UI">
-                        <div class="nav-label">Bootstrap UI Library</div>
-                        <a data-active-pages="ui-library.php" class="nav-link-custom" href="ui-library.php">
-                            <i class="bi bi-grid-1x2 me-2 text-primary"></i> <span>Component Showcase</span>
-                        </a>
-                        <a data-active-pages="buttons.php" class="nav-link-custom" href="buttons.php">
-                            <i class="bi bi-menu-button-wide me-2"></i> <span>Buttons & Badges</span>
-                        </a>
-                        <a data-active-pages="input-block.php" class="nav-link-custom" href="input-block.php">
-                            <i class="bi bi-input-cursor-text me-2"></i> <span>Form Controls</span>
-                        </a>
-                        <a data-active-pages="table.php" class="nav-link-custom" href="table.php">
-                            <i class="bi bi-table me-2"></i> <span>Data Table</span>
-                        </a>
-                        <a data-active-pages="modal&offcanvas.php" class="nav-link-custom" href="modal&offcanvas.php">
-                            <i class="bi bi-window-stack me-2"></i> <span>Modals & Drawers</span>
-                        </a>
-                    </div>
 
                     <!-- Master Panel Section -->
                     <div class="panel-section" data-panel="Master">
