@@ -214,10 +214,49 @@
       }).append(dot).append(jQuery('<span></span>').text(state.text));
     }
 
-    $('.select2').select2({
-      templateResult: ghColorOption,
-      templateSelection: ghColorOption,
-      width: '100%',
+    function initSelect2Elements(context) {
+      var $ctx = context ? jQuery(context) : jQuery(document);
+      $ctx.find('select.select2').each(function() {
+        var $el = jQuery(this);
+        if ($el.hasClass('select2-hidden-accessible')) {
+          return;
+        }
+
+        var isMultiple = $el.prop('multiple');
+        var placeholder = $el.attr('data-placeholder') || $el.attr('placeholder') || (isMultiple ? 'Select options...' : 'Select an option...');
+        var $modal = $el.closest('.modal');
+
+        var options = {
+          width: '100%',
+          placeholder: placeholder,
+          templateResult: ghColorOption,
+          templateSelection: ghColorOption
+        };
+
+        if (isMultiple) {
+          options.closeOnSelect = false;
+          options.dropdownCssClass = 'select2-dropdown-multiselect';
+        }
+
+        if ($modal.length) {
+          options.dropdownParent = $modal;
+        }
+
+        $el.select2(options);
+      });
+    }
+
+    window.ghInitSelect2 = initSelect2Elements;
+    initSelect2Elements();
+
+    // Re-initialize any Select2 elements when a modal is opened
+    jQuery(document).on('shown.bs.modal', function(e) {
+      initSelect2Elements(e.target);
+    });
+
+    // Re-sync on Bootstrap collapse show
+    jQuery(document).on('shown.bs.collapse', function(e) {
+      initSelect2Elements(e.target);
     });
   });
 </script>

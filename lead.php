@@ -4580,6 +4580,9 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             filterBtn.addEventListener('click', function() {
                 filterBtn.classList.toggle('open');
                 filterCollapse.classList.toggle('open');
+                if (filterCollapse.classList.contains('open') && typeof ghSyncSelect2 === 'function') {
+                    ghSyncSelect2(filterCollapse);
+                }
             });
         }
 
