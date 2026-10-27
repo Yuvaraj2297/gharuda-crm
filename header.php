@@ -655,46 +655,7 @@
                     </div>
 
                     <!-- Settings Panel Section -->
-                    <div class="panel-section" data-panel="Settings">
-                        <div class="nav-label">Settings</div>
 
-                        <!-- Central Settings Overview Hub -->
-                        <a data-active-pages="settings.php" class="nav-link-custom fw-semibold mb-2" href="settings.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
-                        </a>
-
-                        <!-- Organization & System -->
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Organization &amp; System</div>
-                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
-                        </a>
-                        <a data-active-pages="country.php" class="nav-link-custom" href="country.php">
-                            <i class="bi bi-globe-americas me-2"></i> <span>Countries</span>
-                        </a>
-                        <a data-active-pages="state.php" class="nav-link-custom" href="state.php">
-                            <i class="bi bi-map me-2"></i> <span>States &amp; Provinces</span>
-                        </a>
-                        <a data-active-pages="district.php" class="nav-link-custom" href="district.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Districts &amp; Cities</span>
-                        </a>
-
-                        <!-- Security & Permissions -->
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Security &amp; Access</div>
-                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
-                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access Control</span>
-                        </a>
-
-                        <!-- Finance & Policies -->
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Finance &amp; SLA Policies</div>
-                        <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
-                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
-                        </a>
-                        <a data-active-pages="sla-policies.php,sla-policies-severity.php" class="nav-link-custom" href="sla-policies.php">
-                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies &amp; Severity</span>
-                        </a>
-                    </div>
-
-                    <!-- CRM Panel Section -->
                     <div class="panel-section" data-panel="CRM">
                         <div class="nav-label">Lead &amp; Sales Management</div>
 
@@ -764,53 +725,7 @@
                     </div>
  
                     <!-- Support Panel Section -->
-                    <div class="panel-section" data-panel="Support">
-                        <div class="nav-label">Customer Support &amp; Helpdesk</div>
-                        <a data-active-pages="ticket-dashboard.php" class="nav-link-custom"
-                            href="ticket-dashboard.php"><i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span></a>
-                        <a data-active-pages="support-tickets.php" class="nav-link-custom"
-                            href="support-tickets.php"><i class="bi bi-headset me-2"></i> <span>Support Tickets</span></a>
-                        <a data-active-pages="support-create-ticket.php" class="nav-link-custom"
-                            href="support-create-ticket.php"><i class="bi bi-plus-circle me-2"></i> <span>New Ticket</span></a>
-                        <a data-active-pages="ticket-reports.php" class="nav-link-custom"
-                            href="ticket-reports.php"><i class="bi bi-file-earmark-bar-graph me-2"></i> <span>Ticket &amp; SLA Reports</span></a>
-                    </div>
- 
-                    <!-- Expenses & Invoicing Panel Section -->
-                    <div class="panel-section" data-panel="Expenses">
-                        <div class="nav-label">Billing &amp; Finance</div>
-                        <a data-active-pages="invoices.php" class="nav-link-custom"
-                            href="invoices.php"><i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices Ledger</span></a>
-                        <a data-active-pages="invoice-create.php" class="nav-link-custom"
-                            href="invoice-create.php"><i class="bi bi-file-earmark-plus me-2"></i> <span>Create Tax Invoice</span></a>
-                        <a data-active-pages="payments.php" class="nav-link-custom"
-                            href="payments.php"><i class="bi bi-credit-card-2-front me-2"></i> <span>Payments Received</span></a>
-                        <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom"
-                            href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Field Expenses</span></a>
-                    </div>
- 
-                    <!-- Petty Cash Panel Section (Outside Expenses) -->
-                    <div class="panel-section" data-panel="PettyCash">
-                        <div class="nav-label">Petty Cash</div>
-                        <a data-toggle-flag="isPettyCashActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
-                            data-bs-toggle="collapse" href="#pettyCashSubmenu" role="button"
-                            aria-expanded="false" aria-controls="pettyCashSubmenu">
-                            <span><i class="bi bi-safe me-2"></i> <span>Petty Cash</span></span>
-                            <i class="bi bi-chevron-down toggle-arrow"></i>
-                        </a>
-                        <div data-show-flag="isPettyCashActive" class="collapse tree-submenu" id="pettyCashSubmenu">
-                            <a data-active-pages="petty-cash.php,petty-cash-list.php" class="nav-link-custom"
-                                href="petty-cash.php">
-                                <span>Petty Cash List</span>
-                            </a>
-                            <a data-active-pages="petty-cash-report.php" class="nav-link-custom"
-                                href="petty-cash-report.php">
-                                <span>Petty Cash Report</span>
-                            </a>
-                        </div>
-                    </div>
 
-                    <!-- Customers Panel Section -->
                     <div class="panel-section" data-panel="Customers">
                         <div class="nav-label">Customers &amp; Contacts</div>
                         <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php"><i class="bi bi-pie-chart me-2"></i> <span>Customer 360 Dashboard</span></a>
@@ -819,6 +734,7 @@
                     </div>
 
                     <!-- Staff & Team Management Panel Section -->
+
                     <div class="panel-section" data-panel="Staff">
                         <div class="nav-label">Staff &amp; Team Management</div>
                         <a data-active-pages="staff.php" class="nav-link-custom fw-semibold mb-1" href="staff.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
@@ -841,6 +757,7 @@
                     </div>
 
                     <!-- Appointments / MOM Panel Section -->
+
                     <div class="panel-section" data-panel="Appointments">
                         <div class="nav-label">Appointments & MOM</div>
 
@@ -865,6 +782,7 @@
                     </div>
 
                     <!-- Target Panel Section -->
+
                     <div class="panel-section" data-panel="Target">
                         <div class="nav-label">Sales Targets</div>
                         <a data-active-pages="target.php" class="nav-link-custom" href="target.php"><i class="bi bi-bullseye me-2"></i> <span>Target Overview</span></a>
@@ -873,6 +791,7 @@
                     </div>
 
                     <!-- Project Management Panel Section -->
+
                     <div class="panel-section" data-panel="Project Management">
                         <div class="nav-label">Project Management</div>
                         <a data-active-pages="project-dashboard.php" class="nav-link-custom" href="project-dashboard.php"><i class="bi bi-speedometer2 me-2"></i> <span>Project Dashboard</span></a>
@@ -914,8 +833,96 @@
                                 href="score-card.php">Score Card</a>
                         </div>
                     </div>
-                </div>
 
+                    <div class="panel-section" data-panel="Support">
+                        <div class="nav-label">Customer Support &amp; Helpdesk</div>
+                        <a data-active-pages="ticket-dashboard.php" class="nav-link-custom"
+                            href="ticket-dashboard.php"><i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span></a>
+                        <a data-active-pages="support-tickets.php" class="nav-link-custom"
+                            href="support-tickets.php"><i class="bi bi-headset me-2"></i> <span>Support Tickets</span></a>
+                        <a data-active-pages="support-create-ticket.php" class="nav-link-custom"
+                            href="support-create-ticket.php"><i class="bi bi-plus-circle me-2"></i> <span>New Ticket</span></a>
+                        <a data-active-pages="ticket-reports.php" class="nav-link-custom"
+                            href="ticket-reports.php"><i class="bi bi-file-earmark-bar-graph me-2"></i> <span>Ticket &amp; SLA Reports</span></a>
+                    </div>
+ 
+                    <!-- Expenses & Invoicing Panel Section -->
+
+                    <div class="panel-section" data-panel="Expenses">
+                        <div class="nav-label">Billing &amp; Finance</div>
+                        <a data-active-pages="invoices.php" class="nav-link-custom"
+                            href="invoices.php"><i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices Ledger</span></a>
+                        <a data-active-pages="invoice-create.php" class="nav-link-custom"
+                            href="invoice-create.php"><i class="bi bi-file-earmark-plus me-2"></i> <span>Create Tax Invoice</span></a>
+                        <a data-active-pages="payments.php" class="nav-link-custom"
+                            href="payments.php"><i class="bi bi-credit-card-2-front me-2"></i> <span>Payments Received</span></a>
+                        <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom"
+                            href="expenses.php"><i class="bi bi-receipt me-2"></i> <span>Field Expenses</span></a>
+                    </div>
+ 
+                    <!-- Petty Cash Panel Section (Outside Expenses) -->
+
+                    <div class="panel-section" data-panel="PettyCash">
+                        <div class="nav-label">Petty Cash</div>
+                        <a data-toggle-flag="isPettyCashActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#pettyCashSubmenu" role="button"
+                            aria-expanded="false" aria-controls="pettyCashSubmenu">
+                            <span><i class="bi bi-safe me-2"></i> <span>Petty Cash</span></span>
+                            <i class="bi bi-chevron-down toggle-arrow"></i>
+                        </a>
+                        <div data-show-flag="isPettyCashActive" class="collapse tree-submenu" id="pettyCashSubmenu">
+                            <a data-active-pages="petty-cash.php,petty-cash-list.php" class="nav-link-custom"
+                                href="petty-cash.php">
+                                <span>Petty Cash List</span>
+                            </a>
+                            <a data-active-pages="petty-cash-report.php" class="nav-link-custom"
+                                href="petty-cash-report.php">
+                                <span>Petty Cash Report</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Customers Panel Section -->
+
+                    <div class="panel-section" data-panel="Settings">
+                        <div class="nav-label">Settings</div>
+
+                        <!-- Central Settings Overview Hub -->
+                        <a data-active-pages="settings.php" class="nav-link-custom fw-semibold mb-2" href="settings.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
+                        </a>
+
+                        <!-- Organization & System -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Organization &amp; System</div>
+                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
+                        </a>
+                        <a data-active-pages="country.php" class="nav-link-custom" href="country.php">
+                            <i class="bi bi-globe-americas me-2"></i> <span>Countries</span>
+                        </a>
+                        <a data-active-pages="state.php" class="nav-link-custom" href="state.php">
+                            <i class="bi bi-map me-2"></i> <span>States &amp; Provinces</span>
+                        </a>
+                        <a data-active-pages="district.php" class="nav-link-custom" href="district.php">
+                            <i class="bi bi-pin-map me-2"></i> <span>Districts &amp; Cities</span>
+                        </a>
+
+                        <!-- Security & Permissions -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Security &amp; Access</div>
+                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
+                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access Control</span>
+                        </a>
+
+                        <!-- Finance & Policies -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Finance &amp; SLA Policies</div>
+                        <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
+                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
+                        </a>
+                        <a data-active-pages="sla-policies.php,sla-policies-severity.php" class="nav-link-custom" href="sla-policies.php">
+                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies &amp; Severity</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </aside>
 
