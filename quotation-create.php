@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+include 'header.php';
+$preClient = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : (isset($_GET['client']) ? htmlspecialchars($_GET['client']) : '');
+?>
 
 <div class="container-fluid px-0">
     <!-- Header -->
@@ -34,11 +37,11 @@
                     <label class="form-label fw-semibold small">Client / Account <span class="text-danger">*</span></label>
                     <select class="form-select select2" name="customer" required>
                         <option value="">-- Choose Account --</option>
-                        <option value="Power Spares Engineering">Power Spares Engineering</option>
-                        <option value="Zen Publications">Zen Publications</option>
-                        <option value="Hindustan Hydraulics">Hindustan Hydraulics</option>
-                        <option value="Anand Associates">Anand Associates</option>
-                        <option value="Lakshmi Pharma">Lakshmi Pharma</option>
+                        <option value="Power Spares Engineering" <?php if (stripos($preClient, 'Power Spares') !== false) echo 'selected'; ?>>Power Spares Engineering</option>
+                        <option value="Zen Publications" <?php if (stripos($preClient, 'Zen') !== false) echo 'selected'; ?>>Zen Publications</option>
+                        <option value="Hindustan Hydraulics" <?php if (stripos($preClient, 'Hindustan') !== false) echo 'selected'; ?>>Hindustan Hydraulics</option>
+                        <option value="Anand Associates" <?php if (stripos($preClient, 'Anand') !== false) echo 'selected'; ?>>Anand Associates</option>
+                        <option value="Lakshmi Pharma" <?php if (stripos($preClient, 'Lakshmi') !== false) echo 'selected'; ?>>Lakshmi Pharma</option>
                     </select>
                 </div>
                 <div class="col-md-3">

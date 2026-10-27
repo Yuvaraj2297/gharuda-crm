@@ -1,6 +1,6 @@
 <?php 
 include 'header.php'; 
-$preCustomer = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '';
+$preCustomer = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : (isset($_GET['client']) ? htmlspecialchars($_GET['client']) : '');
 $preQuote = isset($_GET['quote']) ? htmlspecialchars($_GET['quote']) : '';
 ?>
 

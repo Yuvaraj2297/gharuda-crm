@@ -1431,7 +1431,11 @@
                     <span class="ld-act-dot" id="ldContactDot"></span>
                     <span class="ld-act-avatar d-none" id="ldContactAvatar">KO</span>
                     <span id="ldContactText"><b>GHRAUDA SOFTWARE</b> &middot; Created new proposal &nbsp;<a href="#">New Proposal</a> &nbsp; PRQ-147</span>
-                        <div class="ld-contact-actions">
+                        <div class="ld-contact-actions d-flex align-items-center gap-1.5 flex-wrap">
+                            <a href="whatsapp-chat.php" class="btn btn-sm btn-outline-success" style="border-radius:8px;font-size:12px;font-weight:600;" title="WhatsApp Lead"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+                            <a href="appointments.php" class="btn btn-sm btn-outline-primary" style="border-radius:8px;font-size:12px;font-weight:600;" title="Schedule Meeting / Demo"><i class="bi bi-calendar2-event me-1"></i>Book Meeting</a>
+                            <a href="quotation-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-outline-info" style="border-radius:8px;font-size:12px;font-weight:600;" title="Create Quotation"><i class="bi bi-file-earmark-text me-1"></i>Create Quote</a>
+                            <a href="deals.php" class="btn btn-sm btn-outline-dark" style="border-radius:8px;font-size:12px;font-weight:600;" title="Add to Deals Pipeline"><i class="bi bi-currency-rupee me-1"></i>Deal</a>
                             <button type="button" class="btn btn-sm ap-green-btn"><i class="bi bi-person-check me-1"></i>Convert to customer</button>
                             <button type="button" class="btn btn-sm ap-gray-btn" id="ldEditLeadBtn" title="Edit"><i class="bi bi-pencil-square"></i></button>
                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded-8-fs12"><i class="bi bi-printer"></i></button> -->
