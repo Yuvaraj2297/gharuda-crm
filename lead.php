@@ -34,6 +34,91 @@
 .nl-tag-chip { display: inline-flex; align-items: center; gap: 0.25rem; background: #e9ecef; color: #495057; border-radius: 50rem; padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 500; }
 .nl-tag-x { cursor: pointer; opacity: 0.6; } .nl-tag-x:hover { opacity: 1; }
 .nl-tags-input { border: none; outline: none; background: transparent; flex-grow: 1; min-width: 120px; font-size: 0.875rem; padding: 0; }
+
+/* ===== New Lead Modal: Frozen Header & Footer with Independent Inner Scroll ===== */
+#newLeadModal {
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+#newLeadModal .modal-dialog,
+#newLeadModal .modal-dialog.modal-fullscreen {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#newLeadModal .modal-content,
+#newLeadModal form#newLeadForm {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+#newLeadModal .modal-header {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1055 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+#newLeadModal .modal-body {
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 1.5rem !important;
+    background-color: #f8fafc !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Custom sleek scrollbar for New Lead modal body */
+#newLeadModal .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+#newLeadModal .modal-footer {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 1055 !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08) !important;
+    padding: 0.85rem 1.5rem !important;
+}
+
+#newLeadModal .nl-body {
+    max-width: 1440px;
+    margin: 0 auto;
+}
 </style>
 
 
@@ -565,8 +650,8 @@
 <!-- ===== New Lead Modal ===== -->
 <div class="modal fade" id="newLeadModal" tabindex="-1" aria-hidden="true">
 
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content border-0">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <form id="newLeadForm" class="modal-content border-0">
             <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
                     <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-person-plus-fill"></i></div>
@@ -577,8 +662,7 @@
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form id="newLeadForm" class="d-flex flex-column modal-flex-col">
-                <div class="modal-body p-4 bg-light-subtle">
+            <div class="modal-body p-4 bg-light-subtle">
                     <div class="nl-body">
 
                     <!-- Section: Classification -->
@@ -903,12 +987,25 @@
 
                     </div><!-- /nl-body -->
                 </div>
-                <div class="modal-footer bg-white border-top p-3 d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Submit</button>
+                <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-3 text-muted small">
+                        <span><i class="bi bi-shield-check text-success me-1"></i>All fields marked with <span class="text-danger fw-bold">*</span> are required</span>
+                        <span class="d-none d-md-inline text-muted">&bull;</span>
+                        <span class="d-none d-md-inline"><i class="bi bi-lightning-charge text-primary me-1"></i>Enquiry code auto-generated</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">
+                            <i class="bi bi-x-lg me-1"></i>Close
+                        </button>
+                        <button type="button" class="btn btn-outline-danger px-3" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary px-4 fw-semibold shadow-sm">
+                            <i class="bi bi-check-lg me-1"></i>Submit Lead
+                        </button>
+                    </div>
                 </div>
-            </form>
-        </div>
+        </form>
     </div>
 </div>
 
