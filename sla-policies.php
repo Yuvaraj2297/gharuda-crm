@@ -106,7 +106,7 @@
                         <input type="text" class="form-control" placeholder="Enter Policy Code" autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold small">Severity Level <span class=\"text-danger\">*</span></label>
+                        <label class="form-label fw-semibold small">Severity Level <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Enter Severity Level" autocomplete="off">
                     </div>
                     <div class="mb-3">
@@ -151,7 +151,7 @@
                         <input type="text" class="form-control" placeholder="Enter Policy Code" autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold small">Severity Level <span class=\"text-danger\">*</span></label>
+                        <label class="form-label fw-semibold small">Severity Level <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Enter Severity Level" autocomplete="off">
                     </div>
                     <div class="mb-3">

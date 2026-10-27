@@ -1377,11 +1377,25 @@
         <div class="modal-content border-0">
 
             <div class="modal-header border-bottom bg-white py-3 px-4 d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center gap-3"><span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary p-2 fs-5"><i class="bi bi-person-lines-fill"></i></span><div><h5 class="modal-title fw-bold m-0 fs-5">
-                    <span class="ico"><i class="bi bi-person-lines-fill"></i></span>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary p-2 fs-5" style="width:42px;height:42px;">
+                        <i class="bi bi-person-lines-fill"></i>
+                    </span>
                     <div>
-                        <h5><span class="ld-id"><span id="ldNumber">1</span> &ndash;</span> <span id="ldName">Suresh Babu</span><span class="ld-state-pill d-none" id="ldStatePill"></span></h5></div></div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <h5 class="modal-title fw-bold m-0 fs-5">
+                            <span class="ld-id text-muted me-1">#<span id="ldNumber">1</span> &ndash;</span>
+                            <span id="ldName" class="text-dark">Suresh Babu</span>
+                            <span class="ld-state-pill d-none ms-2" id="ldStatePill"></span>
+                        </h5>
+                        <small class="text-muted" id="ldCompanySubtitle">Lead Overview &amp; Interaction History</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1"></i> Close
+                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
             <div class="modal-body p-0 overflow-hidden bg-light-subtle">
                 <div class="d-flex flex-column flex-md-row h-100">
@@ -1439,41 +1453,51 @@
                     </div>
                     <div class="row g-3 mb-3">
                         <!-- Lead Info -->
-                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
-                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Lead Info</div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Name</span><span class="fw-medium text-dark text-end" id="ldInfoName">Suresh Babu</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Position</span><span class="fw-medium text-dark text-end" id="ldInfoPosition">Managing Director</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Email Address</span><span class="fw-medium text-dark text-end" id="ldInfoEmail"><a href="mailto:suresh.babu@annanagarbuilders.com">suresh.babu@annanagarbuilders.com</a></span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Website</span><span class="fw-medium text-dark text-end"><a href="https://annanagarbuilders.com" target="_blank">annanagarbuilders.com</a></span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Phone</span><span class="fw-medium text-dark text-end" id="ldInfoPhone"><a href="tel:9500123456">+91 95001 23456</a></span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Lead value</span><span class="ld-info-value text-crm-primary" id="ldInfoValue">₹23,629.00</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Company</span><span class="fw-medium text-dark text-end" id="ldInfoCompany">Anna Nagar Builders</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Address</span><span class="fw-medium text-dark text-end" id="ldInfoAddress">Old Machinery, Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Country</span><span class="fw-medium text-dark text-end">India</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">State</span><span class="fw-medium text-dark text-end">Tamil Nadu</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">City</span><span class="fw-medium text-dark text-end">Chennai</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Zip Code</span><span class="fw-medium text-dark text-end">600100</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Area</span><span class="fw-medium text-dark text-end">Pallikaranai</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Description</span><span class="fw-medium text-dark text-end">Client requires payroll, attendance tracking, and HRMS management integration.</span></div>
-                        </div>
-                        </div></div><!-- General Information -->
-                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
-                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">General Information</div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Status</span><span class="fw-medium text-dark text-end"><span class="status-badge" id="ldInfoStatus">Lead</span></span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Source</span><span class="fw-medium text-dark text-end" id="ldInfoSource">Exhibition</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Assigned</span><span class="fw-medium text-dark text-end" id="ldInfoAssigned">Divya A.</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Sourcer</span><span class="fw-medium text-dark text-end" id="ldInfoSourcer">Harish D.</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Tags</span><span class="fw-medium text-dark text-end" id="ldInfoTags"><span class="lead-tag-pill">Warm Lead</span></span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Created</span><span class="fw-medium text-dark text-end">25-04-2026 14:42:55</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Last Contact</span><span class="fw-medium text-dark text-end">27-11-2025 15:45:21</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Public</span><span class="fw-medium text-dark text-end">No</span></div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Closure Date</span><span class="fw-medium text-dark text-end">15-07-2026 11:47:00</span></div>
-                        </div>
-                        </div></div><!-- Custom Fields -->
-                        <div class="col-12 col-xl-4"><div class="card border shadow-sm p-3 h-100 bg-white">
-                            <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Custom Fields</div>
-                            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Profession</span><span class="fw-medium text-dark text-end">Builders</span></div>
-                        </div></div></div>
+                        <div class="col-12 col-xl-4">
+                            <div class="card border shadow-sm p-3 h-100 bg-white">
+                                <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Lead Info</div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Name</span><span class="fw-medium text-dark text-end" id="ldInfoName">Suresh Babu</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Position</span><span class="fw-medium text-dark text-end" id="ldInfoPosition">Managing Director</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Email Address</span><span class="fw-medium text-dark text-end" id="ldInfoEmail"><a href="mailto:suresh.babu@annanagarbuilders.com">suresh.babu@annanagarbuilders.com</a></span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Website</span><span class="fw-medium text-dark text-end"><a href="https://annanagarbuilders.com" target="_blank">annanagarbuilders.com</a></span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Phone</span><span class="fw-medium text-dark text-end" id="ldInfoPhone"><a href="tel:9500123456">+91 95001 23456</a></span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Lead value</span><span class="ld-info-value text-crm-primary" id="ldInfoValue">₹23,629.00</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Company</span><span class="fw-medium text-dark text-end" id="ldInfoCompany">Anna Nagar Builders</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Address</span><span class="fw-medium text-dark text-end" id="ldInfoAddress">Old Machinery, Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Country</span><span class="fw-medium text-dark text-end">India</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">State</span><span class="fw-medium text-dark text-end">Tamil Nadu</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">City</span><span class="fw-medium text-dark text-end">Chennai</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Zip Code</span><span class="fw-medium text-dark text-end">600100</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Area</span><span class="fw-medium text-dark text-end">Pallikaranai</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Description</span><span class="fw-medium text-dark text-end">Client requires payroll, attendance tracking, and HRMS management integration.</span></div>
+                            </div>
+                        </div><!-- /col Lead Info -->
+
+                        <!-- General Information -->
+                        <div class="col-12 col-xl-4">
+                            <div class="card border shadow-sm p-3 h-100 bg-white">
+                                <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">General Information</div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Status</span><span class="fw-medium text-dark text-end"><span class="status-badge" id="ldInfoStatus">Lead</span></span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Source</span><span class="fw-medium text-dark text-end" id="ldInfoSource">Exhibition</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Assigned</span><span class="fw-medium text-dark text-end" id="ldInfoAssigned">Divya A.</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Sourcer</span><span class="fw-medium text-dark text-end" id="ldInfoSourcer">Harish D.</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Tags</span><span class="fw-medium text-dark text-end" id="ldInfoTags"><span class="lead-tag-pill">Warm Lead</span></span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Created</span><span class="fw-medium text-dark text-end">25-04-2026 14:42:55</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Last Contact</span><span class="fw-medium text-dark text-end">27-11-2025 15:45:21</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Public</span><span class="fw-medium text-dark text-end">No</span></div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Closure Date</span><span class="fw-medium text-dark text-end">15-07-2026 11:47:00</span></div>
+                            </div>
+                        </div><!-- /col General Information -->
+
+                        <!-- Custom Fields -->
+                        <div class="col-12 col-xl-4">
+                            <div class="card border shadow-sm p-3 h-100 bg-white">
+                                <div class="fw-bold fs-6 pb-2 mb-3 border-bottom text-dark">Custom Fields</div>
+                                <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light small"><span class="text-muted">Profession</span><span class="fw-medium text-dark text-end">Builders</span></div>
+                            </div>
+                        </div><!-- /col Custom Fields -->
+                    </div><!-- /row g-3 mb-3 -->
+
                     <div class="card border shadow-sm p-3 bg-white mt-3">
                         <div class="fw-bold fs-6 pb-2 mb-2 border-bottom text-dark">Latest Activity</div>
                         <div class="ld-activity-empty" id="ldActivityEmpty"><i class="bi bi-clock-history"></i>No recent activity recorded.</div>
