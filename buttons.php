@@ -54,7 +54,7 @@ include 'header.php';
     </div>
 
     <!-- Outline Buttons -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">Outline Buttons</h6>
             <small class="text-secondary">Class: <code>.btn .btn-outline-[color]</code></small>
@@ -73,7 +73,7 @@ include 'header.php';
     </div>
 
     <!-- Button Sizes & Pill Shapes -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">Button Sizes & Pill Radii</h6>
             <small class="text-secondary">Classes: <code>.btn-lg</code>, <code>.btn-sm</code>, <code>.rounded-pill</code></small>
@@ -93,7 +93,7 @@ include 'header.php';
     </div>
 
     <!-- Button Groups & Split Dropdowns -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">Button Groups & Split Dropdowns</h6>
             <small class="text-secondary">Class: <code>.btn-group</code>, <code>.dropdown-toggle-split</code></small>
@@ -113,7 +113,7 @@ include 'header.php';
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                    <ul class="dropdown-menu dropdown-menu-end border">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-excel text-success me-2"></i>Export Excel</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-pdf text-danger me-2"></i>Export PDF</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-text text-primary me-2"></i>Export CSV</a></li>
@@ -131,7 +131,7 @@ include 'header.php';
     </div>
 
     <!-- Disabled & Loading States -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">States: Disabled & Loading Spinners</h6>
             <small class="text-secondary">Class: <code>disabled</code>, <code>.spinner-border-sm</code></small>
@@ -153,7 +153,7 @@ include 'header.php';
     </div>
 
     <!-- Badges & Status Pills -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">CRM Status Badges & Pills</h6>
             <small class="text-secondary">Class: <code>.badge .rounded-pill .bg-*-subtle .text-*</code></small>

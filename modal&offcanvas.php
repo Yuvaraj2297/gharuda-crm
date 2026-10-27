@@ -11,7 +11,7 @@ include 'header.php';
 <div class="container-fluid px-0">
 
     <!-- Top Navigation Header -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 bg-white p-4 rounded-4 shadow-sm border-0">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 bg-white p-4 rounded-4 border">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
                 <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">UI Elements</span>
@@ -28,7 +28,7 @@ include 'header.php';
     </div>
 
     <!-- Modals Section -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">1. Native Bootstrap Modals</h6>
             <small class="text-secondary">Class: <code>.modal</code>, <code>.modal-dialog</code>, <code>.modal-sm</code>, <code>.modal-lg</code>, <code>.modal-fullscreen</code></small>
@@ -56,7 +56,7 @@ include 'header.php';
     </div>
 
     <!-- Offcanvas Section -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
+    <div class="card border rounded-3 mb-4 bg-white">
         <div class="card-header bg-white py-3 border-bottom">
             <h6 class="fw-bold text-dark mb-0">2. Bootstrap Offcanvas Side Drawers</h6>
             <small class="text-secondary">Class: <code>.offcanvas-start</code>, <code>.offcanvas-end</code>, <code>.offcanvas-top</code>, <code>.offcanvas-bottom</code></small>

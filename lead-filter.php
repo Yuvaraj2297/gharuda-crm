@@ -325,7 +325,7 @@
     </div>
 
     <!-- ===== Table (MasterTable flow) ===== -->
-    <div class="card-custom lf-list-card" style="padding:0;border:none;border-radius:14px;box-shadow:0 1px 2px rgba(17,24,39,.05),0 4px 14px rgba(17,24,39,.04);overflow:hidden;">
+    <div class="card-custom lf-list-card" style="padding:0;border:1px solid var(--border-soft);border-radius:14px;box-shadow:none;overflow:hidden;">
         <div class="table-responsive">
             <table class="table-modern w-100 mb-0" id="leadFilterTable">
                 <thead>

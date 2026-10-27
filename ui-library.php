@@ -12,7 +12,7 @@ include 'header.php';
 <div class="container-fluid px-0">
 
     <!-- Hero Header Card -->
-    <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white">
+    <div class="card border rounded-4 mb-4 bg-white">
         <div class="card-body p-4">
             <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
                 <div>
@@ -76,7 +76,7 @@ include 'header.php';
         <!-- Metric Grid -->
         <div class="row g-3 mb-3">
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card border rounded-3 h-100 bg-white">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <span class="text-secondary small fw-medium">Total Leads</span>
@@ -97,7 +97,7 @@ include 'header.php';
             </div>
 
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card border rounded-3 h-100 bg-white">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <span class="text-secondary small fw-medium">Closed Won</span>
@@ -118,7 +118,7 @@ include 'header.php';
             </div>
 
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card border rounded-3 h-100 bg-white">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <span class="text-secondary small fw-medium">Appointments</span>
@@ -139,7 +139,7 @@ include 'header.php';
             </div>
 
             <div class="col-12 col-sm-6 col-xl-3">
-                <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
+                <div class="card border rounded-3 h-100 bg-white">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <span class="text-secondary small fw-medium">Pending Tickets</span>
@@ -162,11 +162,11 @@ include 'header.php';
 
         <!-- Collapsible Code Block -->
         <div class="collapse" id="code-metrics">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-metrics')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
-                <pre class="m-0 small text-light" id="snippet-metrics"><code>&lt;div class="card border-0 shadow-sm rounded-3 bg-white"&gt;
+                <pre class="m-0 small text-light" id="snippet-metrics"><code>&lt;div class="card border rounded-3 bg-white"&gt;
     &lt;div class="card-body p-3"&gt;
         &lt;div class="d-flex align-items-center justify-content-between mb-2"&gt;
             &lt;span class="text-secondary small fw-medium"&gt;Total Leads&lt;/span&gt;
@@ -202,7 +202,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 mb-3">
+        <div class="card border rounded-3 bg-white p-4 mb-3">
             <!-- Buttons Section -->
             <label class="form-label text-secondary small fw-bold text-uppercase d-block mb-2">Semantic Button Styles</label>
             <div class="d-flex gap-2 flex-wrap mb-4">
@@ -245,7 +245,7 @@ include 'header.php';
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                    <ul class="dropdown-menu dropdown-menu-end border">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-excel text-success me-2"></i>Export Excel</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-pdf text-danger me-2"></i>Export PDF</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-text text-primary me-2"></i>Export CSV</a></li>
@@ -287,7 +287,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-buttons">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-buttons')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
@@ -321,7 +321,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 mb-3">
+        <div class="card border rounded-3 bg-white p-4 mb-3">
             <form class="row g-3">
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold text-secondary">Contact Name <span class="text-danger">*</span></label>
@@ -430,7 +430,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-forms">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-forms')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
@@ -469,7 +469,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white mb-3">
+        <div class="card border rounded-3 bg-white mb-3">
             <!-- Header Toolbar -->
             <div class="card-header bg-white py-3 border-bottom d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                 <div class="d-flex align-items-center gap-2">
@@ -537,7 +537,7 @@ include 'header.php';
                                     <button class="btn btn-light btn-sm rounded-circle p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 30px; height: 30px;">
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                                    <ul class="dropdown-menu dropdown-menu-end border">
                                         <li><a class="dropdown-item" href="#"><i class="bi bi-eye text-primary me-2"></i>View</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="bi bi-pencil text-secondary me-2"></i>Edit</a></li>
                                         <li><hr class="dropdown-divider"></li>
@@ -574,7 +574,7 @@ include 'header.php';
                                     <button class="btn btn-light btn-sm rounded-circle p-1" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 30px; height: 30px;">
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                                    <ul class="dropdown-menu dropdown-menu-end border">
                                         <li><a class="dropdown-item" href="#"><i class="bi bi-eye text-primary me-2"></i>View</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="bi bi-pencil text-secondary me-2"></i>Edit</a></li>
                                         <li><hr class="dropdown-divider"></li>
@@ -602,7 +602,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-tables">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-tables')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
@@ -783,7 +783,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 mb-3">
+        <div class="card border rounded-3 bg-white p-4 mb-3">
             <label class="form-label text-secondary small fw-bold text-uppercase d-block mb-3">Live Modal Triggers</label>
             <div class="d-flex gap-2 flex-wrap mb-4">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalStandard">
@@ -815,7 +815,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-modals">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-modals')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
@@ -853,7 +853,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 mb-3">
+        <div class="card border rounded-3 bg-white p-4 mb-3">
             <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
                 <i class="bi bi-check-circle-fill fs-5 me-3 flex-shrink-0"></i>
                 <div><strong>Success!</strong> Customer record was updated successfully in the CRM database.</div>
@@ -884,7 +884,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-alerts">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-alerts')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
@@ -912,7 +912,7 @@ include 'header.php';
             </button>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 mb-3">
+        <div class="card border rounded-3 bg-white p-4 mb-3">
             <div class="row g-4">
                 <!-- Accordion -->
                 <div class="col-lg-6">
@@ -978,7 +978,7 @@ include 'header.php';
         </div>
 
         <div class="collapse" id="code-navs">
-            <div class="card border-0 shadow-sm rounded-3 bg-dark text-light p-3 position-relative mb-3">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
                 <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-navs')">
                     <i class="bi bi-clipboard me-1"></i> Copy
                 </button>
