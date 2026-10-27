@@ -430,7 +430,7 @@
         </button>
         <div class="search-box ms-auto">
             <i class="bi bi-search"></i>
-            <input type="text" placeholder="Search leads, clients, deals, tickets...">
+            <input type="text" id="globalSearchInput" placeholder="Search leads, clients, deals, tickets..." onkeydown="if(event.key==='Enter'&&this.value.trim()){window.location.href='lead-filter.php?q='+encodeURIComponent(this.value.trim());}">
         </div>
         <div class="icon-pill"><i class="bi bi-question-circle"></i></div>
         <div class="icon-pill" id="bellIcon" style="position:relative;cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Notifications">
@@ -827,6 +827,8 @@
                         <div data-show-flag="isTaskCoreActive" class="collapse tree-submenu" id="tasksSubmenu">
                             <a data-active-pages="tasks-list.php" class="tree-link"
                                 href="tasks-list.php">Tasks List</a>
+                            <a data-active-pages="task-overview.php" class="tree-link"
+                                href="task-overview.php">Tasks Kanban Board</a>
                             <a data-active-pages="task-create.php" class="tree-link"
                                 href="task-create.php">New Task</a>
                             <a data-active-pages="score-card.php" class="tree-link"
@@ -874,6 +876,10 @@
                             <a data-active-pages="petty-cash.php,petty-cash-list.php" class="nav-link-custom"
                                 href="petty-cash.php">
                                 <span>Petty Cash List</span>
+                            </a>
+                            <a data-active-pages="petty-cash-create.php" class="nav-link-custom"
+                                href="petty-cash-create.php">
+                                <span>Create Expense Voucher</span>
                             </a>
                             <a data-active-pages="petty-cash-report.php" class="nav-link-custom"
                                 href="petty-cash-report.php">

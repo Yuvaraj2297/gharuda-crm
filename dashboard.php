@@ -13,9 +13,9 @@
     <button class="btn btn-light border d-flex align-items-center gap-2" style="border-radius:10px;font-weight:600;font-size:13px;color:var(--ink-700);">
       <i class="bi bi-calendar3"></i> Aug 19, 2026
     </button>
-    <button class="btn d-flex align-items-center gap-2" style="background:var(--primary);color:#fff;border-radius:10px;font-weight:700;font-size:13px;">
-      <i class="bi bi-person-plus-fill"></i> Add Employee
-    </button>
+    <a href="staff-create.php" class="btn d-flex align-items-center gap-2" style="background:var(--primary);color:#fff;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">
+      <i class="bi bi-person-plus-fill"></i> Add Staff Member
+    </a>
   </div>
 </div>
 

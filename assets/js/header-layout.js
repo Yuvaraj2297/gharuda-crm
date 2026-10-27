@@ -242,7 +242,7 @@
             var taskCorePages = ['tasks-list.php', 'task-create.php', 'task-overview.php', 'score-card.php'];
             var staffPages = ['staff.php', 'staff-create.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'employee-revenue-report.php', 'employee-lead-report.php'];
             var customerPages = ['customers.php', 'customer-view.php', 'customer-new.php', 'customer-import.php', 'customer-dashboard.php', 'contacts.php'];
-            var inventoryPages = ['commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'package-list.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'return-order-management.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
+            var inventoryPages = ['commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
             var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'ticket-reports.php', 'my-tickets.php'];
             var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'contracts.php'];

@@ -65,6 +65,41 @@
     }
 
     if (quickCheckInBtn && quickCheckOutBtn) {
+        // Restore saved attendance state across page navigations
+        try {
+            const savedState = localStorage.getItem('gh_attendance_state');
+            if (savedState === 'checked_in') {
+                quickCheckInBtn.hidden = true;
+                quickCheckOutBtn.hidden = false;
+                quickBreakOutBtn.hidden = false;
+                quickBreakInBtn.hidden = true;
+                quickLunchOutBtn.hidden = true;
+                quickLunchInBtn.hidden = true;
+            } else if (savedState === 'break_out') {
+                quickCheckInBtn.hidden = true;
+                quickCheckOutBtn.hidden = false;
+                quickBreakOutBtn.hidden = true;
+                quickBreakInBtn.hidden = false;
+                quickLunchOutBtn.hidden = true;
+                quickLunchInBtn.hidden = true;
+            } else if (savedState === 'lunch_out') {
+                quickCheckInBtn.hidden = true;
+                quickCheckOutBtn.hidden = false;
+                quickBreakOutBtn.hidden = true;
+                quickBreakInBtn.hidden = true;
+                quickLunchOutBtn.hidden = true;
+                quickLunchInBtn.hidden = false;
+            } else if (savedState === 'checked_out') {
+                quickCheckInBtn.hidden = true;
+                quickCheckOutBtn.hidden = false;
+                quickCheckOutBtn.disabled = true;
+                quickBreakOutBtn.hidden = true;
+                quickBreakInBtn.hidden = true;
+                quickLunchOutBtn.hidden = true;
+                quickLunchInBtn.hidden = true;
+            }
+        } catch(e) {}
+
         quickCheckInBtn.addEventListener('click', function () {
             const time = getAttendanceTime();
             quickCheckInBtn.hidden = true;
@@ -73,6 +108,7 @@
             quickLunchOutBtn.hidden = true;
             quickLunchInBtn.hidden = true;
             lunchCompleted = false;
+            try { localStorage.setItem('gh_attendance_state', 'checked_in'); } catch(e) {}
             showAttendanceModal('Check-in', time);
         });
 
@@ -88,6 +124,7 @@
             quickLunchOutBtn.disabled = true;
             quickLunchInBtn.disabled = true;
             quickCheckOutBtn.title = 'Attendance completed';
+            try { localStorage.setItem('gh_attendance_state', 'checked_out'); } catch(e) {}
             showAttendanceModal('Check-out', time);
         });
 
@@ -95,12 +132,14 @@
             const time = getAttendanceTime();
             quickBreakOutBtn.hidden = true;
             quickBreakInBtn.hidden = false;
+            try { localStorage.setItem('gh_attendance_state', 'break_out'); } catch(e) {}
             showAttendanceModal('Break-out', time);
         });
 
         quickBreakInBtn.addEventListener('click', function () {
             const time = getAttendanceTime();
             quickBreakInBtn.hidden = true;
+            try { localStorage.setItem('gh_attendance_state', 'checked_in'); } catch(e) {}
             if (lunchCompleted) {
                 showAttendanceModal('Break-in', time);
                 quickBreakOutBtn.hidden = true;
@@ -114,6 +153,7 @@
             const time = getAttendanceTime();
             quickLunchOutBtn.hidden = true;
             quickLunchInBtn.hidden = false;
+            try { localStorage.setItem('gh_attendance_state', 'lunch_out'); } catch(e) {}
             showAttendanceModal('Lunch-out', time);
         });
 
@@ -122,6 +162,7 @@
             quickLunchInBtn.hidden = true;
             quickBreakOutBtn.hidden = false;
             lunchCompleted = true;
+            try { localStorage.setItem('gh_attendance_state', 'checked_in'); } catch(e) {}
             showAttendanceModal('Lunch-in', time);
         });
     }
