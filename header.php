@@ -406,6 +406,149 @@
         .notif-ico-btn:active {
             transform: scale(.92);
         }
+
+        /* ===== Quick Create High-Contrast Mega-Menu ===== */
+        .qc-trigger-btn {
+            border-radius: 999px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            height: 38px;
+            padding: 0 16px !important;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+            border: 1.5px solid #15803d !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.28) !important;
+            transition: all 0.2s ease !important;
+        }
+        .qc-trigger-btn:hover,
+        .qc-trigger-btn[aria-expanded="true"] {
+            background: linear-gradient(135deg, #15803d 0%, #166534 100%) !important;
+            box-shadow: 0 6px 18px rgba(22, 163, 74, 0.38) !important;
+            transform: translateY(-1px);
+        }
+        .qc-mega-menu {
+            width: 560px;
+            max-width: 94vw;
+            padding: 0 !important;
+            margin-top: 10px !important;
+            background: #ffffff !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 16px !important;
+            box-shadow: 0 24px 54px -10px rgba(15, 23, 42, 0.28), 0 8px 20px -4px rgba(15, 23, 42, 0.14) !important;
+            overflow: hidden;
+            z-index: 2050 !important;
+        }
+        .qc-mega-head {
+            background: linear-gradient(135deg, #0f172a 0%, #14532d 100%);
+            padding: 14px 18px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .qc-mega-body {
+            padding: 14px 16px;
+            background: #ffffff;
+            max-height: 74vh;
+            overflow-y: auto;
+        }
+        .qc-sec-label {
+            font-size: 10.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #475569;
+            margin: 6px 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .qc-sec-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .qc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 575.98px) {
+            .qc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .qc-card-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 11px;
+            border-radius: 11px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            text-decoration: none !important;
+            transition: all 0.16s ease;
+        }
+        .qc-card-item:hover {
+            background: #f0fdf4;
+            border-color: #86efac;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.10);
+            transform: translateY(-1px);
+        }
+        .qc-ico {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+        .qc-item-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+        .qc-card-item:hover .qc-item-title {
+            color: #15803d;
+        }
+        .qc-item-sub {
+            font-size: 11px;
+            font-weight: 500;
+            color: #64748b;
+            line-height: 1.25;
+            margin-top: 2px;
+        }
+        .qc-mega-foot {
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .qc-foot-link {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #334155;
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            transition: all 0.15s ease;
+        }
+        .qc-foot-link:hover {
+            background: #16a34a;
+            color: #ffffff;
+            border-color: #16a34a;
+        }
     </style>
 </head>
 
@@ -434,26 +577,124 @@
             <div id="globalSearchDropdown" class=" shadow-lg border rounded-4 bg-white position-absolute start-0 end-0 mt-2 d-none" style="top:100%; z-index:2000; max-height:380px; overflow-y:auto;"></div>
         </div>
         <div class="dropdown">
-            <button type="button" class="btn btn-primary btn-sm d-none d-md-inline-flex align-items-center gap-1 fw-bold px-3 shadow-sm" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:999px; font-size:12.5px; height:36px;">
-                <i class="bi bi-plus-lg"></i> <span>Quick Create</span>
+            <button type="button" class="btn qc-trigger-btn d-none d-md-inline-flex align-items-center gap-1.5" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-plus-circle-fill"></i> <span>Quick Create</span> <i class="bi bi-chevron-down" style="font-size:10px;"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 p-2" style="min-width: 235px; font-size: 13px;">
-                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">CRM &amp; Pipeline</li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="lead.php"><i class="bi bi-person-plus text-success"></i> New Lead</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="deals.php"><i class="bi bi-currency-rupee text-primary"></i> New Opportunity / Deal</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="quotation-create.php"><i class="bi bi-file-earmark-text text-info"></i> Create Quotation</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="appointments.php"><i class="bi bi-calendar2-plus text-warning"></i> Book Appointment</a></li>
-                <li><hr class="dropdown-divider my-1"></li>
-                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Clients &amp; Execution</li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="customer-new.php"><i class="bi bi-building-add text-success"></i> New Customer Account</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="project-create.php"><i class="bi bi-briefcase text-primary"></i> New Project</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="task-create.php"><i class="bi bi-check2-square text-info"></i> Assign New Task</a></li>
-                <li><hr class="dropdown-divider my-1"></li>
-                <li class="px-2 py-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Billing &amp; Helpdesk</li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="invoice-create.php"><i class="bi bi-file-earmark-plus text-success"></i> Create Tax Invoice</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="expense-create.php"><i class="bi bi-receipt text-warning"></i> Record Field Expense</a></li>
-                <li><a class="dropdown-item rounded-3 py-1.5 d-flex align-items-center gap-2" href="support-create-ticket.php"><i class="bi bi-headset text-danger"></i> New Support Ticket</a></li>
-            </ul>
+            <div class="dropdown-menu dropdown-menu-end qc-mega-menu">
+                <div class="qc-mega-head">
+                    <div class="d-flex align-items-center gap-2.5">
+                        <span class="d-inline-flex align-items-center justify-content-center rounded-3" style="width:34px;height:34px;background:rgba(255,255,255,0.16);font-size:17px;">
+                            <i class="bi bi-lightning-charge-fill text-warning"></i>
+                        </span>
+                        <div>
+                            <div class="fw-bold" style="font-size:14px;line-height:1.2;">Quick Create Center</div>
+                            <div style="font-size:11.5px;color:rgba(255,255,255,0.75);">Instant 1-click record creation across CRM modules</div>
+                        </div>
+                    </div>
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,0.18);font-size:11px;">15 Actions</span>
+                </div>
+                <div class="qc-mega-body">
+                    <div class="qc-sec-label"><i class="bi bi-kanban text-success"></i> Sales, Pipeline &amp; Meetings</div>
+                    <div class="qc-grid">
+                        <a href="lead.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#dcfce7;color:#15803d;"><i class="bi bi-person-plus-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">New Lead</div>
+                                <div class="qc-item-sub">Capture inbound enquiry</div>
+                            </div>
+                        </a>
+                        <a href="deals.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-currency-rupee"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">New Opportunity / Deal</div>
+                                <div class="qc-item-sub">Add sales pipeline deal</div>
+                            </div>
+                        </a>
+                        <a href="quotation-create.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#e0f2fe;color:#0369a1;"><i class="bi bi-file-earmark-text-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Create Quotation</div>
+                                <div class="qc-item-sub">Send GST estimate / quote</div>
+                            </div>
+                        </a>
+                        <a href="contracts.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#f3e8ff;color:#7e22ce;"><i class="bi bi-pen-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">New SLA Contract</div>
+                                <div class="qc-item-sub">Draft client AMC agreement</div>
+                            </div>
+                        </a>
+                        <a href="appointments.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#fef3c7;color:#b45309;"><i class="bi bi-calendar2-plus-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Book Appointment</div>
+                                <div class="qc-item-sub">Schedule client demo / visit</div>
+                            </div>
+                        </a>
+                        <a href="mom.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#fce7f3;color:#be185d;"><i class="bi bi-journal-text"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Minutes of Meeting</div>
+                                <div class="qc-item-sub">Record MOM &amp; action items</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="qc-sec-label"><i class="bi bi-briefcase text-primary"></i> Clients, Projects &amp; Billing</div>
+                    <div class="qc-grid mb-0">
+                        <a href="customer-new.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#dcfce7;color:#15803d;"><i class="bi bi-building-add"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">New Customer Account</div>
+                                <div class="qc-item-sub">Onboard B2B / B2C client</div>
+                            </div>
+                        </a>
+                        <a href="contacts.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#e0e7ff;color:#4338ca;"><i class="bi bi-person-badge-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Add Client Contact</div>
+                                <div class="qc-item-sub">Save key decision maker</div>
+                            </div>
+                        </a>
+                        <a href="project-create.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-briefcase-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Create New Project</div>
+                                <div class="qc-item-sub">Launch project milestones</div>
+                            </div>
+                        </a>
+                        <a href="task-create.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#ccfbf1;color:#0f766e;"><i class="bi bi-check2-square"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Assign New Task</div>
+                                <div class="qc-item-sub">Delegate team deliverable</div>
+                            </div>
+                        </a>
+                        <a href="invoice-create.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#dcfce7;color:#15803d;"><i class="bi bi-file-earmark-plus-fill"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Create Tax Invoice</div>
+                                <div class="qc-item-sub">Generate GST tax invoice</div>
+                            </div>
+                        </a>
+                        <a href="support-create-ticket.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#fee2e2;color:#dc2626;"><i class="bi bi-headset"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">New Support Ticket</div>
+                                <div class="qc-item-sub">Raise SLA helpdesk ticket</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="qc-mega-foot">
+                    <span class="text-muted fw-semibold" style="font-size:11px;">More Actions:</span>
+                    <div class="d-flex align-items-center gap-1.5 flex-wrap">
+                        <a href="expense-create.php" class="qc-foot-link"><i class="bi bi-receipt me-1 text-warning"></i>Field Expense</a>
+                        <a href="petty-cash-create.php" class="qc-foot-link"><i class="bi bi-safe me-1 text-primary"></i>Petty Cash Voucher</a>
+                        <a href="staff-create.php" class="qc-foot-link"><i class="bi bi-person-plus me-1 text-success"></i>Add Staff</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="icon-pill" id="helpWorkflowBtn" style="cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="CRM Workflow Guide"><i class="bi bi-question-circle"></i></div>
         <div class="icon-pill" id="bellIcon" style="position:relative;cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Notifications">
