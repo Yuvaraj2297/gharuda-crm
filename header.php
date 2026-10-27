@@ -532,6 +532,11 @@
                     <i class="bi bi-person-vcard"></i>
                 </button>
 
+                <!-- Staff / Team Management Link -->
+                <button data-rail-flag="isStaffActive" type="button" class="rail-btn" data-panel-target="Staff" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Staff &amp; Team" data-bs-custom-class="custom-tooltip">
+                    <i class="bi bi-people-fill"></i>
+                </button>
+
                 <!-- Appointments / MOM Link -->
                 <button data-rail-flag="isApptMomActive" type="button" class="rail-btn" data-panel-target="Appointments" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Appointments & MOM" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-calendar2-week"></i>
@@ -840,6 +845,50 @@
                         <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php"><i class="bi bi-pie-chart me-2"></i> <span>Customer 360 Dashboard</span></a>
                         <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php"><i class="bi bi-person-vcard me-2"></i> <span>Customers Directory</span></a>
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php"><i class="bi bi-people me-2"></i> <span>Contacts Directory</span></a>
+                    </div>
+
+                    <!-- Staff & Team Management Panel Section -->
+                    <div class="panel-section" data-panel="Staff">
+                        <div class="nav-label">Staff &amp; Team Management</div>
+                        <a data-active-pages="staff.php" class="nav-link-custom fw-semibold mb-1" href="staff.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                            <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
+                        </a>
+                        <a data-active-pages="staff-create.php" class="nav-link-custom mb-2" href="staff-create.php">
+                            <i class="bi bi-person-plus me-2 text-primary"></i> <span>Create Staff Member</span>
+                        </a>
+
+                        <!-- Field Operations -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Field Force &amp; Visits</div>
+                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Staff Visiting Reports</span>
+                        </a>
+                        <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
+                            <i class="bi bi-pin-map me-2"></i> <span>Location Tracking Map</span>
+                        </a>
+
+                        <!-- Performance & Quotas -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Performance &amp; Targets</div>
+                        <a data-active-pages="employee-revenue-report.php" class="nav-link-custom" href="employee-revenue-report.php">
+                            <i class="bi bi-cash-stack me-2"></i> <span>Rep Revenue Performance</span>
+                        </a>
+                        <a data-active-pages="employee-lead-report.php" class="nav-link-custom" href="employee-lead-report.php">
+                            <i class="bi bi-funnel me-2"></i> <span>Rep Lead Distribution</span>
+                        </a>
+                        <a data-active-pages="target.php,brand-target.php" class="nav-link-custom" href="target.php">
+                            <i class="bi bi-bullseye me-2"></i> <span>Sales Targets &amp; Goals</span>
+                        </a>
+                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
+                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Target Slabs Master</span>
+                        </a>
+
+                        <!-- Team Governance -->
+                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Governance &amp; Access</div>
+                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
+                            <i class="bi bi-building me-2"></i> <span>Branch Allocation</span>
+                        </a>
+                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
+                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Permissions</span>
+                        </a>
                     </div>
 
                     <!-- Appointments / MOM Panel Section -->

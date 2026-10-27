@@ -240,6 +240,7 @@
             var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
             var projectCorePages = ['project-dashboard.php', 'projects-list.php', 'projects-report.php', 'projectwise-daily-task-report.php', 'project-create.php'];
             var taskCorePages = ['tasks-list.php', 'task-create.php', 'task-overview.php', 'score-card.php'];
+            var staffPages = ['staff.php', 'staff-create.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'employee-revenue-report.php', 'employee-lead-report.php'];
             var customerPages = ['customers.php', 'customer-view.php', 'customer-new.php', 'customer-import.php', 'customer-dashboard.php', 'contacts.php'];
             var inventoryPages = ['commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'package-list.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'return-order-management.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
@@ -251,6 +252,7 @@
             var F = {};
             F.isMasterActive = has(masterPages);
             F.isSettingsActive = has(settingsPages) || cur === 'settings.php';
+            F.isStaffActive = has(staffPages);
             F.isRecruitmentActive = has(recruitmentPages);
             F.isOrgActive = has(orgPages);
             F.isEmpCreateActive = has(empCreatePages);
