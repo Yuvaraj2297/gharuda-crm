@@ -844,10 +844,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label class="form-label" for="aptNewName">* Name</label>
+                <label class="form-label" for="aptNewName">Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="aptNewName" placeholder="Ex: SD - Online Demo" autocomplete="off">
 
-                <label class="form-label mt-3">* Color</label>
+                <label class="form-label mt-3">Color <span class="text-danger">*</span></label>
                 <div class="apt-picker" id="aptPicker"></div>
 
                 <div class="apt-picked">

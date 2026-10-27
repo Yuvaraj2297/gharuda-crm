@@ -1042,15 +1042,15 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label">* Subject</label>
+                        <label class="form-label">Subject <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="apmCtSubject" autocomplete="off">
                     </div>
                     <div class="col-12">
-                        <label class="form-label">* Description</label>
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="apmCtDesc" rows="3"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Related</label>
+                        <label class="form-label">Related <span class="text-danger">*</span></label>
                         <select class="form-select" id="apmCtRelated">
                             <option value="">Non selected</option>
                             <option value="Contact">Internal (Contact)</option>
@@ -1106,7 +1106,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Date / Time</label>
+                        <label class="form-label">Date / Time <span class="text-danger">*</span></label>
                         <input type="datetime-local" class="form-control" id="apmCtDateTime">
                     </div>
                     <div class="col-md-6">
@@ -1114,7 +1114,7 @@
                         <input type="text" class="form-control" id="apmCtLocation" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Attendees</label>
+                        <label class="form-label">Attendees <span class="text-danger">*</span></label>
                         <select class="form-select" id="apmCtAttendees">
                             <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
                             <option value="Harish D.">Harish D.</option>
@@ -1219,11 +1219,11 @@
 
             <div class="modal-body">
                 <div class="mb-3">
-                    <label><span class="req">*</span>Choose CSV File</label>
+                    <label>Choose CSV File <span class="req">*</span></label>
                     <input type="file" class="form-control" id="importFile" accept=".csv,.xlsx,.xls">
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Status (fallback)</label>
+                    <label>Status (fallback) <span class="req">*</span></label>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="importStatus">
                             <option selected>Lead</option>
@@ -1244,7 +1244,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Source (fallback)</label>
+                    <label>Source (fallback) <span class="req">*</span></label>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="importSource">
                             <option selected>Indiamart</option>
@@ -2119,7 +2119,7 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label"><span class="text-danger">*</span> Description</label>
+                    <label class="form-label">Description <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="npiDesc">
                 </div>
                 <div class="mb-3">
@@ -2128,7 +2128,7 @@
                 </div>
                 <div class="row g-3 mb-3">
                     <div class="col-6">
-                        <label class="form-label"><span class="text-danger">*</span> Rate - INR (Base Currency)</label>
+                        <label class="form-label">Rate - INR (Base Currency) <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" id="npiRateInr" value="0.00" step="0.01">
                     </div>
                     <div class="col-6">
@@ -3062,7 +3062,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label><span class="req">*</span>Template Name</label>
+                    <label>Template Name <span class="req">*</span></label>
                     <input type="text" class="form-control" id="apTplName" placeholder="">
                 </div>
                 <div class="mb-3">
@@ -3142,11 +3142,11 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label><span class="req">*</span>Date to be notified</label>
+                    <label>Date to be notified <span class="req">*</span></label>
                     <input type="date" class="form-control" id="apReminderDate">
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Set reminder to</label>
+                    <label>Set reminder to <span class="req">*</span></label>
                     <select class="form-select" id="apReminderStaff">
                         <option selected>GHARUDA SOFTWARE</option>
                         <option>GHRAUDA SOFTWARE</option>
@@ -3156,7 +3156,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Description</label>
+                    <label>Description <span class="req">*</span></label>
                     <textarea class="form-control" id="apReminderDesc" rows="4"></textarea>
                 </div>
                 <div class="rm-check"><input type="checkbox" id="apReminderEmail"><label for="apReminderEmail">Send also an email for this reminder</label></div>
@@ -3180,11 +3180,11 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             </div>
             <div class="modal-body modal-body-pad-20-24">
                 <div class="mb-3">
-                    <label><span class="req">*</span>Date to be notified</label>
+                    <label>Date to be notified <span class="req">*</span></label>
                     <input type="date" class="form-control" id="ldReminderDate">
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Set reminder to</label>
+                    <label>Set reminder to <span class="req">*</span></label>
                     <select class="form-select" id="ldReminderStaff">
                         <option selected>GHARUDA SOFTWARE</option>
                         <option>GHRAUDA SOFTWARE</option>
@@ -3194,7 +3194,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label><span class="req">*</span>Description</label>
+                    <label>Description <span class="req">*</span></label>
                     <textarea class="form-control" id="ldReminderDesc" rows="4"></textarea>
                 </div>
                 <div class="rm-check"><input type="checkbox" id="ldReminderEmail"><label for="ldReminderEmail">Send also an email for this reminder</label></div>
@@ -3234,7 +3234,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <div id="apTaskFileList"></div>
                 <!-- Subject -->
                 <div class="mb-3">
-                    <label><span class="req">*</span>Subject</label>
+                    <label>Subject <span class="req">*</span></label>
                     <input type="text" class="form-control" id="apTaskSubject">
                 </div>
                 <!-- Hourly Rate -->
@@ -3245,7 +3245,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <!-- Start Date / Due Date -->
                 <div class="at2-row">
                     <div class="mb-3">
-                        <label><span class="req">*</span>Start Date</label>
+                        <label>Start Date <span class="req">*</span></label>
                         <input type="date" class="form-control" id="apTaskStart" value="2026-09-21">
                     </div>
                     <div class="mb-3">
@@ -3329,7 +3329,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <!-- Tags (chip input) -->
                 <div class="mb-3">
-                    <label><span class="req">*</span>Tags</label>
+                    <label>Tags <span class="req">*</span></label>
                     <div class="nl-tags-wrap w-100" id="apTaskTagsWrap">
                         <div class="nl-tags-chips" id="apTaskTagsChips"></div>
                         <input type="text" class="nl-tags-input" id="apTaskTagsInput" placeholder="Type and press Enter...">
@@ -3360,22 +3360,22 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     <div class="row g-4 mb-4">
                         <!-- Left Column -->
                         <div class="col-12 col-xl-6">
-                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" placeholder="Proposal subject"></div>
-                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
+                            <div class="mb-3"><label>Subject <span class="req">*</span></label><input type="text" class="form-control" placeholder="Proposal subject"></div>
+                            <div class="mb-3"><label>Related <span class="req">*</span></label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select" id="npLeadSelect">
+                            <div class="mb-3"><label>Lead <span class="req">*</span></label><select class="form-select" id="npLeadSelect">
                                     <option>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-19"></div>
+<div class="col-md-6"><label>Date <span class="req">*</span></label><input type="date" class="form-control" value="2026-09-19"></div>
 <div class="col-md-6"><label>Open Till</label><input type="date" class="form-control" value="2026-09-26"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
+<div class="col-md-6"><label>Currency <span class="req">*</span></label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
@@ -3414,7 +3414,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <option>Divya A.</option>
                                     </select></div>
 </div>
-                            <div class="mb-3"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>To <span class="req">*</span></label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
                             <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
                             <div class="row g-3 mb-3">
 <div class="col-md-6"><label>Country</label><select class="form-select">
@@ -3439,7 +3439,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Email <span class="req">*</span></label><input type="email" class="form-control" value="gh@gharuda.com"></div>
 <div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
 </div>
                         </div>
@@ -3541,22 +3541,22 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     <div class="row g-4 mb-4">
                         <!-- Left Column -->
                         <div class="col-12 col-xl-6">
-                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Estimate"></div>
-                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
+                            <div class="mb-3"><label>Subject <span class="req">*</span></label><input type="text" class="form-control" value="Solar Panel Installation - Estimate"></div>
+                            <div class="mb-3"><label>Related <span class="req">*</span></label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select">
+                            <div class="mb-3"><label>Lead <span class="req">*</span></label><select class="form-select">
                                     <option selected>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Date</label><input type="date" class="form-control" value="2026-09-23"></div>
+<div class="col-md-6"><label>Date <span class="req">*</span></label><input type="date" class="form-control" value="2026-09-23"></div>
 <div class="col-md-6"><label>Open Till</label><input type="date" class="form-control" value="2026-09-30"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
+<div class="col-md-6"><label>Currency <span class="req">*</span></label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
@@ -3594,7 +3594,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <option>Divya A.</option>
                                     </select></div>
 </div>
-                            <div class="mb-3"><label><span class="req">*</span>To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>To <span class="req">*</span></label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
                             <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
                             <div class="row g-3 mb-3">
 <div class="col-md-6"><label>Country</label><select class="form-select">
@@ -3617,7 +3617,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Email <span class="req">*</span></label><input type="email" class="form-control" value="gh@gharuda.com"></div>
 <div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
 </div>
                         </div>
@@ -3737,22 +3737,22 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     <div class="row g-4 mb-4">
                         <!-- Left Column -->
                         <div class="col-12 col-xl-6">
-                            <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" value="Solar Panel Installation - Invoice INV-259"></div>
-                            <div class="mb-3"><label><span class="req">*</span>Related</label><select class="form-select">
+                            <div class="mb-3"><label>Subject <span class="req">*</span></label><input type="text" class="form-control" value="Solar Panel Installation - Invoice INV-259"></div>
+                            <div class="mb-3"><label>Related <span class="req">*</span></label><select class="form-select">
                                     <option selected>Lead</option>
                                     <option>Customer</option>
                                 </select></div>
-                            <div class="mb-3"><label><span class="req">*</span>Lead</label><select class="form-select">
+                            <div class="mb-3"><label>Lead <span class="req">*</span></label><select class="form-select">
                                     <option selected>Suresh - gh@gharuda.com</option>
                                     <option>Arun Kumar - info@vetri.co</option>
                                     <option>Meena Ramesh - meena@srlakshmi.in</option>
                                 </select></div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Invoice Date</label><input type="date" class="form-control" value="2026-09-23"></div>
-<div class="col-md-6"><label><span class="req">*</span>Due Date</label><input type="date" class="form-control" value="2026-09-30"></div>
+<div class="col-md-6"><label>Invoice Date <span class="req">*</span></label><input type="date" class="form-control" value="2026-09-23"></div>
+<div class="col-md-6"><label>Due Date <span class="req">*</span></label><input type="date" class="form-control" value="2026-09-30"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Currency</label><select class="form-select">
+<div class="col-md-6"><label>Currency <span class="req">*</span></label><select class="form-select">
                                         <option selected>INR ₹</option>
                                         <option>USD $</option>
                                         <option>EUR €</option>
@@ -3792,7 +3792,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <option>Divya A.</option>
                                     </select></div>
 </div>
-                            <div class="mb-3"><label><span class="req">*</span>Bill To</label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
+                            <div class="mb-3"><label>Bill To <span class="req">*</span></label><input type="text" class="form-control" value="GHARUDA TECHNOLOGY"></div>
                             <div class="mb-3"><label>Address</label><textarea class="form-control" rows="2">214, Velachery - Tambaram Main Rd, Narayanapuram, Pallikaranai, Chennai, Tamil Nadu 600100</textarea></div>
                             <div class="row g-3 mb-3">
 <div class="col-md-6"><label>Country</label><select class="form-select">
@@ -3815,7 +3815,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 <div class="col-md-6"><label>Zip Code</label><input type="text" class="form-control" value="600100"></div>
 </div>
                             <div class="row g-3 mb-3">
-<div class="col-md-6"><label><span class="req">*</span>Email</label><input type="email" class="form-control" value="gh@gharuda.com"></div>
+<div class="col-md-6"><label>Email <span class="req">*</span></label><input type="email" class="form-control" value="gh@gharuda.com"></div>
 <div class="col-md-6"><label>Phone</label><input type="text" class="form-control" value="9876543218"></div>
 </div>
                         </div>
@@ -3937,7 +3937,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-medium small text-muted mb-1" for="rpAmount"><span class="req">*</span>Amount Received</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpAmount">Amount Received <span class="req">*</span></label>
                         <input type="text" class="form-control" id="rpAmount" value="393750.00">
                     </div>
                     <div class="col-md-6">
@@ -3945,7 +3945,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <input type="text" class="form-control" id="rpTxnId" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-medium small text-muted mb-1" for="rpDate"><span class="req">*</span>Payment Date</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpDate">Payment Date <span class="req">*</span></label>
                         <input type="date" class="form-control" id="rpDate" value="2026-09-23">
                     </div>
                     <div class="col-md-6">
@@ -3953,7 +3953,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                         <textarea class="form-control resize-vertical" id="rpNote" rows="4" placeholder="Admin Note"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-medium small text-muted mb-1" for="rpMode"><span class="req">*</span>Payment Mode</label>
+                        <label class="form-label fw-medium small text-muted mb-1" for="rpMode">Payment Mode <span class="req">*</span></label>
                         <select class="form-select" id="rpMode">
                             <option value="">Non selected</option>
                             <option>Cash</option>
@@ -4016,8 +4016,8 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                     <!-- Left: payment form summary -->
                     <div class="col-12 col-lg-5"><div class="card border shadow-sm p-4 bg-white">
                         <div class="fs-14 fw-bold text-darkest mb-3">Payment for Invoice <span class="text-theme-blue">INV-259</span></div>
-                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> Amount Received</label><input type="text" class="form-control" id="pvAmount" readonly></div>
-                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1"><span class="req">*</span> Payment Date</label><input type="date" class="form-control" id="pvDate" readonly></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Amount Received <span class="req">*</span></label><input type="text" class="form-control" id="pvAmount" readonly></div>
+                        <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Payment Date <span class="req">*</span></label><input type="date" class="form-control" id="pvDate" readonly></div>
                         <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Payment Mode</label><input type="text" class="form-control" id="pvMode" readonly></div>
                         <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Transaction ID</label><input type="text" class="form-control" id="pvTxn" readonly placeholder="—"></div>
                         <div class="mb-3"><label class="form-label fw-medium small text-muted mb-1">Sale Agent</label><input type="text" class="form-control" id="pvAgent" readonly placeholder="—"></div>
@@ -4109,7 +4109,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <div id="tkFileList"></div>
                 <!-- Subject -->
                 <div class="mb-3">
-                    <label><span class="req">*</span>Subject</label>
+                    <label>Subject <span class="req">*</span></label>
                     <input type="text" class="form-control" id="tkSubject" placeholder="">
                 </div>
                 <!-- Hourly Rate -->
@@ -4120,7 +4120,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 <!-- Start Date / Due Date -->
                 <div class="tk-2col">
                     <div class="mb-3">
-                        <label><span class="req">*</span>Start Date</label>
+                        <label>Start Date <span class="req">*</span></label>
                         <input type="date" class="form-control" id="tkStartDate" value="2026-09-21">
                     </div>
                     <div class="mb-3">
@@ -4209,7 +4209,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                 </div>
                 <!-- Tags (chip input) -->
                 <div class="mb-3">
-                    <label><span class="req">*</span>Tags</label>
+                    <label>Tags <span class="req">*</span></label>
                     <div class="nl-tags-wrap w-100" id="tkTagsWrap">
                         <div class="nl-tags-chips" id="tkTagsChips"></div>
                         <input type="text" class="nl-tags-input" id="tkTagsInput" placeholder="Type and press Enter...">

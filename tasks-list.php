@@ -896,7 +896,7 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label">* Task Name</label>
+                        <label class="form-label">Task Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="tkNewName" placeholder="Ex: Appointment: Contact name [ Sundar ]" autocomplete="off">
                     </div>
                     <div class="col-md-6">
@@ -908,11 +908,11 @@
                         <select class="form-select" id="tkNewAssigned"></select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Start Date</label>
+                        <label class="form-label">Start Date <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" id="tkNewStart">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Due Date</label>
+                        <label class="form-label">Due Date <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" id="tkNewDue">
                     </div>
                     <div class="col-md-6">

@@ -10,8 +10,8 @@
    ========================================================================= */
 
 :root {
-    --ui-font-size: .8125rem;          /* 13px  – body text in controls   */
-    --ui-label-size: .78rem;           /* 12.5px – form labels            */
+    --ui-font-size: .845rem;           /* 13.5px – body text in controls  */
+    --ui-label-size: .8125rem;         /* 13px   – form labels            */
     --ui-control-h: 40px;              /* standard input / select height  */
     --ui-control-h-sm: 32px;
     --ui-control-h-lg: 46px;
@@ -112,9 +112,13 @@ form label:not([class]) {
 
 .form-label .req,
 .form-label .text-danger,
-label .req {
-    color: var(--danger, #ef4444);
-    margin-right: 2px;
+label .req,
+label .text-danger {
+    color: var(--danger, #dc2626) !important;
+    margin-left: 3px !important;
+    margin-right: 0 !important;
+    font-weight: 700;
+    display: inline-block;
 }
 
 .form-text {
@@ -590,9 +594,14 @@ input[type="radio"]:not(.form-check-input):not(.btn-check) {
     --bs-card-cap-padding-y: 14px;
     --bs-card-cap-padding-x: var(--ui-card-pad);
     background-color: var(--bg-card, #fff);
-    border-color: var(--border-soft);
+    border: 1px solid var(--border-soft) !important;
     border-radius: var(--ui-card-radius);
-    box-shadow: var(--shadow-card);
+    box-shadow: none !important;
+}
+
+/* Global shadow avoidance for clean, modern flat interface */
+.shadow, .shadow-sm, .shadow-lg, .shadow-xs, .shadow-md {
+    box-shadow: none !important;
 }
 
 .card.shadow-none,
@@ -900,12 +909,34 @@ table.dataTable > thead > tr > th {
 
 
 /* =========================================================================
-   10. BUTTONS (sizes only – colours stay in app.css)
+   10. BUTTONS (Single Solid Colors - No Two-Color Mixing Gradients - No Shadows)
    ========================================================================= */
 .btn {
     border-radius: 8px;
     font-size: var(--ui-font-size);
     font-weight: 600;
+    box-shadow: none !important;
+    background-image: none !important;
+    transition: all .15s ease-in-out;
+}
+
+.btn-primary {
+    background-color: var(--primary) !important;
+    background-image: none !important;
+    border-color: var(--primary) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--primary-dark) !important;
+    background-image: none !important;
+    border-color: var(--primary-dark) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
 }
 
 .btn-sm {
@@ -1852,3 +1883,140 @@ table.dataTable > thead > tr > th {
 }
 
 
+
+
+/* =========================================================================
+   FOOTER FREEZER & INNER SCROLL ARCHITECTURE
+   Sticky header + inner vertical scroll + frozen footer for tables, cards & modals
+   ========================================================================= */
+
+/* 1. Table with Sticky Header and Frozen Footer (Inner Scroll) */
+.table-scroll-frozen {
+    max-height: 480px;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--ui-control-radius);
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll-frozen table {
+    margin-bottom: 0 !important;
+    width: 100%;
+}
+
+.table-scroll-frozen thead th {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    background-color: var(--ui-th-bg, #f8fafc) !important;
+    box-shadow: inset 0 -1px 0 var(--border-soft);
+}
+
+.table-scroll-frozen tfoot,
+.table-scroll-frozen .table-freeze-footer,
+.table-freeze-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 11;
+    background-color: #ffffff !important;
+    box-shadow: inset 0 1px 0 var(--border-soft);
+}
+
+.table-scroll-frozen tfoot td,
+.table-scroll-frozen tfoot th,
+.table-freeze-footer td,
+.table-freeze-footer th {
+    background-color: #f8fafc !important;
+    font-weight: 700;
+    color: var(--ink-900);
+    border-top: 1.5px solid var(--border-soft);
+    padding: 10px 16px;
+}
+
+/* 2. Card with Inner Scroll & Frozen Footer (Footer Freezer) */
+.card-frozen-footer {
+    display: flex;
+    flex-direction: column;
+    max-height: 520px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--ui-card-radius);
+    background: #fff;
+    box-shadow: none !important;
+}
+
+.card-frozen-footer > .card-header {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.card-frozen-footer > .card-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0;
+    padding: var(--ui-card-pad);
+}
+
+.card-frozen-footer > .card-footer,
+.card-footer.footer-freeze,
+.footer-freeze {
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    background: #ffffff !important;
+    border-top: 1px solid var(--border-soft) !important;
+}
+
+/* 3. Modal Inner Scroll with Frozen Footer */
+.modal-dialog-scrollable .modal-footer,
+.modal-footer.footer-freeze {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: #ffffff;
+    border-top: 1px solid var(--border-soft);
+}
+
+/* 4. Offcanvas Drawer Inner Scroll with Frozen Footer */
+.offcanvas .offcanvas-footer,
+.offcanvas-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: #ffffff;
+    border-top: 1px solid var(--border-soft);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 5. Responsive Mobile & Tablet Layout Adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 14px !important;
+    }
+    .card-header, .card-footer {
+        padding: 12px 14px !important;
+    }
+    .page-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .page-actions {
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+    .table-scroll-frozen {
+        max-height: 380px;
+    }
+}

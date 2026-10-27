@@ -11,14 +11,14 @@ include 'header.php';
 <div class="container-fluid px-0">
 
     <!-- Top Navigation Header -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 bg-white p-4 rounded-4 shadow-sm border-0">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 bg-white p-4 rounded-3 border">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">UI Elements</span>
-                <span class="badge bg-success-subtle text-success fw-semibold px-3 py-1 rounded-pill">Pure Bootstrap</span>
+                <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">UI Standard</span>
+                <span class="badge bg-secondary-subtle text-dark fw-semibold px-3 py-1 rounded-pill">Solid Colors &middot; Zero Shadows</span>
             </div>
-            <h1 class="h3 fw-bold text-dark mb-1">Buttons & Actions System</h1>
-            <p class="text-secondary small mb-0">Production-ready button styles, sizes, states, and icon configurations.</p>
+            <h1 class="h3 fw-bold text-dark mb-1">Buttons &amp; Actions System</h1>
+            <p class="text-secondary small mb-0">Single solid colors (no two-color gradient mixing), strict 2-5 palette enforcement, and zero drop shadows.</p>
         </div>
         <div class="d-flex gap-2">
             <a href="ui-library.php" class="btn btn-primary btn-sm rounded-pill px-3">
@@ -28,22 +28,27 @@ include 'header.php';
     </div>
 
     <!-- Solid Buttons -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
-        <div class="card-header bg-white py-3 border-bottom">
-            <h6 class="fw-bold text-dark mb-0">Solid Action Buttons</h6>
-            <small class="text-secondary">Class: <code>.btn .btn-[color]</code></small>
+    <div class="card border-0 rounded-3 mb-4 bg-white">
+        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="fw-bold text-dark mb-0">1. Core 2&ndash;5 Color Action Buttons</h6>
+                <small class="text-secondary">Class: <code>.btn .btn-[color]</code> &middot; Solid single-hue styling (two-color gradients disabled)</small>
+            </div>
+            <span class="badge bg-success-subtle text-success">Compliant</span>
         </div>
         <div class="card-body p-4">
+            <div class="alert alert-light border small text-dark mb-3 py-2 px-3">
+                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                <strong>Single Color Rule:</strong> Buttons are styled in clean, solid brand tones. Two-color mixed gradients and glowing box shadows have been disabled for crisp, professional readability.
+            </div>
             <div class="d-flex justify-content-start gap-2 align-items-center flex-wrap">
-                <button type="button" class="btn btn-primary"><i class="bi bi-check2 me-1"></i> Primary</button>
-                <button type="button" class="btn btn-secondary">Secondary</button>
-                <button type="button" class="btn btn-success"><i class="bi bi-plus-lg me-1"></i> Success</button>
-                <button type="button" class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Danger</button>
-                <button type="button" class="btn btn-warning text-dark"><i class="bi bi-exclamation-triangle me-1"></i> Warning</button>
-                <button type="button" class="btn btn-info text-white"><i class="bi bi-info-circle me-1"></i> Info</button>
-                <button type="button" class="btn btn-dark">Dark</button>
-                <button type="button" class="btn btn-light border">Light</button>
-                <button type="button" class="btn btn-link text-decoration-none">Link</button>
+                <button type="button" class="btn btn-primary"><i class="bi bi-check2 me-1"></i> Primary (Brand Green)</button>
+                <button type="button" class="btn btn-secondary">Secondary (Charcoal / Navy)</button>
+                <button type="button" class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Danger (Delete / Reject)</button>
+                <button type="button" class="btn btn-outline-primary">Outline Primary</button>
+                <button type="button" class="btn btn-outline-secondary">Outline Secondary</button>
+                <button type="button" class="btn btn-light border">Light Neutral</button>
+                <button type="button" class="btn btn-link text-decoration-none">Text Link</button>
             </div>
         </div>
     </div>

@@ -1306,11 +1306,11 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="estItDesc"></div>
+                    <div class="mb-3"><label>Description <span class="req">*</span></label><input type="text" class="form-control" id="estItDesc"></div>
                     <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="estItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="estItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label>Rate - INR (Base Currency) <span class="req">*</span></label><input type="number" class="form-control" id="estItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
                         <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="estItHsn"></div>
@@ -1982,11 +1982,11 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cvItDesc"></div>
+                    <div class="mb-3"><label>Description <span class="req">*</span></label><input type="text" class="form-control" id="cvItDesc"></div>
                     <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="cvItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cvItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label>Rate - INR (Base Currency) <span class="req">*</span></label><input type="number" class="form-control" id="cvItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
                         <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cvItHsn"></div>
@@ -2706,11 +2706,11 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="cnItDesc"></div>
+                    <div class="mb-3"><label>Description <span class="req">*</span></label><input type="text" class="form-control" id="cnItDesc"></div>
                     <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="cnItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="cnItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label>Rate - INR (Base Currency) <span class="req">*</span></label><input type="number" class="form-control" id="cnItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
                         <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="cnItHsn"></div>
@@ -3253,11 +3253,11 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Description</label><input type="text" class="form-control" id="poItDesc"></div>
+                    <div class="mb-3"><label>Description <span class="req">*</span></label><input type="text" class="form-control" id="poItDesc"></div>
                     <div class="mb-3"><label>Long Description</label><textarea class="form-control" id="poItLongDesc" rows="3"></textarea></div>
                     <div class="row g-3">
                       <div class="col-md-6">
-                        <div class="mb-3 mb-0"><label><span class="req">*</span>Rate - INR (Base Currency)</label><input type="number" class="form-control" id="poItRateInr" step="0.01"></div>
+                        <div class="mb-3 mb-0"><label>Rate - INR (Base Currency) <span class="req">*</span></label><input type="number" class="form-control" id="poItRateInr" step="0.01"></div>
                       </div>
                       <div class="col-md-6">
                         <div class="mb-3 mb-0"><label>HSN Code</label><input type="text" class="form-control" id="poItHsn"></div>
@@ -3625,10 +3625,10 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Subscription Name</label><input type="text" class="form-control" id="subName" autocomplete="off"></div>
+                    <div class="mb-3"><label>Subscription Name <span class="req">*</span></label><input type="text" class="form-control" id="subName" autocomplete="off"></div>
                     <div class="mb-3"><label>Description</label><textarea class="form-control" id="subDesc" rows="3" placeholder="Short description of this subscription..."></textarea></div>
                     <div class="mb-3">
-                      <label><span class="req">*</span>Billing Plan</label>
+                      <label>Billing Plan <span class="req">*</span></label>
                       <select class="form-select" id="subPlan">
                         <option value="">Select plan</option>
                         <option>Basic Monthly — ₹ 1,999</option>
@@ -3637,12 +3637,12 @@ if (empty($clientName)) {
                       </select>
                     </div>
                     <div class="row g-3">
-  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Quantity</label><input type="number" class="form-control" id="subQty" value="1" min="1"></div>
-  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>First Billing Date</label><input type="date" class="form-control" id="subFirstDate" value="2026-10-01"></div>
+  <div class="col-12 col-md-6 mb-3"><label>Quantity <span class="req">*</span></label><input type="number" class="form-control" id="subQty" value="1" min="1"></div>
+  <div class="col-12 col-md-6 mb-3"><label>First Billing Date <span class="req">*</span></label><input type="date" class="form-control" id="subFirstDate" value="2026-10-01"></div>
 </div>
-                    <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                    <div class="mb-3"><label>Customer <span class="req">*</span></label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
                     <div class="row g-3">
-  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Currency</label><select class="form-select">
+  <div class="col-12 col-md-6 mb-3"><label>Currency <span class="req">*</span></label><select class="form-select">
                           <option selected>INR ₹</option>
                           <option>USD $</option>
                         </select></div>
@@ -3943,7 +3943,7 @@ if (empty($clientName)) {
                           <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i>Name</label><input type="text" class="form-control" id="expName" autocomplete="off"></div>
                           <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i>Note</label><textarea class="form-control" id="expNote" rows="4"></textarea></div>
                           <div class="mb-3">
-                            <label><span class="req">*</span>Expense Category</label>
+                            <label>Expense Category <span class="req">*</span></label>
                             <div class="input-group"><select class="form-select" id="expCat">
                                 <option value="" selected>Non selected</option>
                                 <option>Travel</option>
@@ -3960,8 +3960,8 @@ if (empty($clientName)) {
                               <option>Brochures</option>
                               <option>Subscription</option>
                             </select></div>
-                          <div class="mb-3"><label><span class="req">*</span>Expense Date</label><input type="date" class="form-control" id="expDate" value="2026-09-23"></div>
-                          <div class="mb-3"><label><span class="req">*</span>Amount</label><input type="number" class="form-control" id="expAmount" step="0.01"></div>
+                          <div class="mb-3"><label>Expense Date <span class="req">*</span></label><input type="date" class="form-control" id="expDate" value="2026-09-23"></div>
+                          <div class="mb-3"><label>Amount <span class="req">*</span></label><input type="number" class="form-control" id="expAmount" step="0.01"></div>
                           <div class="form-check mb-3"><input type="checkbox" class="form-check-input" id="expBillable"><label class="form-check-label small fw-semibold" for="expBillable">Billable</label></div>
                           <div class="mb-3"><label>Customer</label><input type="text" class="form-control" value="GG COMPANY"></div>
                           <div class="mb-3 mb-0"><label>Project</label><select class="form-select">
@@ -3979,7 +3979,7 @@ if (empty($clientName)) {
                         <div class="card border shadow-sm h-100">
                           <div class="card-header bg-light fw-bold py-2 px-3">Advanced Options</div>
                           <div class="card-body p-3">
-                          <div class="mb-3"><label><span class="req">*</span>Currency</label><select class="form-select" id="expCurrency">
+                          <div class="mb-3"><label>Currency <span class="req">*</span></label><select class="form-select" id="expCurrency">
                               <option selected>INR ₹</option>
                               <option>USD $</option>
                             </select></div>
@@ -4060,7 +4060,7 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3"><label><span class="req">*</span>Category Name</label><input type="text" class="form-control" id="newCatName" autocomplete="off"></div>
+                    <div class="mb-3"><label>Category Name <span class="req">*</span></label><input type="text" class="form-control" id="newCatName" autocomplete="off"></div>
                     <div class="mb-3 mb-0"><label>Category Description</label><textarea class="form-control" id="newCatDesc" rows="4"></textarea></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
@@ -4344,7 +4344,7 @@ if (empty($clientName)) {
                       <div class="form-check"><input type="checkbox" class="form-check-input" id="conTrash"><label class="form-check-label small fw-semibold" for="conTrash"><i class="bi bi-trash"></i> Trash</label></div>
                       <div class="form-check"><input type="checkbox" class="form-check-input" id="conHide"><label class="form-check-label small fw-semibold" for="conHide">Hide from customer</label></div>
                     </div>
-                    <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" id="conCustomer" value="GG COMPANY" readonly></div>
+                    <div class="mb-3"><label>Customer <span class="req">*</span></label><input type="text" class="form-control" id="conCustomer" value="GG COMPANY" readonly></div>
                     <div class="mb-3"><label><i class="bi bi-info-circle me-1"></i><span class="req">*</span>Subject</label><input type="text" class="form-control" id="conSubject" autocomplete="off"></div>
                     <div class="mb-3">
                       <label>Contract Value</label>
@@ -4361,7 +4361,7 @@ if (empty($clientName)) {
                         </select><button type="button" class="btn btn-primary" id="conTypeAdd" title="Add contract type"><i class="bi bi-plus-lg"></i></button></div>
                     </div>
                     <div class="row g-3">
-  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="conStart" value="2026-09-23"></div>
+  <div class="col-12 col-md-6 mb-3"><label>Start Date <span class="req">*</span></label><input type="date" class="form-control" id="conStart" value="2026-09-23"></div>
   <div class="col-12 col-md-6 mb-3"><label>End Date</label><input type="date" class="form-control" id="conEnd"></div>
 </div>
                     <div class="mb-3 mb-0"><label>Contract description</label><textarea class="form-control" id="conDesc" rows="5"></textarea></div>
@@ -4383,7 +4383,7 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3 mb-0"><label><span class="req">*</span>Name</label><input type="text" class="form-control" id="conTypeName" autocomplete="off"></div>
+                    <div class="mb-3 mb-0"><label>Name <span class="req">*</span></label><input type="text" class="form-control" id="conTypeName" autocomplete="off"></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -4697,8 +4697,8 @@ if (empty($clientName)) {
 
                     <!-- Project pane -->
                     <div class="cv-prj-pane active" data-prjpane="project">
-                      <div class="mb-3"><label><span class="req">*</span>Project Name</label><input type="text" class="form-control" id="prjName" autocomplete="off"></div>
-                      <div class="mb-3"><label><span class="req">*</span>Customer</label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
+                      <div class="mb-3"><label>Project Name <span class="req">*</span></label><input type="text" class="form-control" id="prjName" autocomplete="off"></div>
+                      <div class="mb-3"><label>Customer <span class="req">*</span></label><input type="text" class="form-control" value="GG COMPANY" readonly></div>
                       <div class="row g-3">
                         <div class="mb-3"><label>Device</label><select class="form-select">
                             <option value="" selected>Non selected</option>
@@ -4713,7 +4713,7 @@ if (empty($clientName)) {
                         <input type="range" class="form-range cv-prj-range" id="prjProg" min="0" max="100" value="0">
                       </div>
                       <div class="row g-3">
-                        <div class="mb-3"><label><span class="req">*</span>Billing Type</label><select class="form-select" id="prjBilling">
+                        <div class="mb-3"><label>Billing Type <span class="req">*</span></label><select class="form-select" id="prjBilling">
                             <option selected>Fixed Rate</option>
                             <option>Hourly Rate</option>
                             <option>Project Hours</option>
@@ -4743,7 +4743,7 @@ if (empty($clientName)) {
                             <option value="" selected>Non selected</option>
                             <option>Admin</option>
                           </select></div>
-                        <div class="mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="prjStart" value="2026-09-23"></div>
+                        <div class="mb-3"><label>Start Date <span class="req">*</span></label><input type="date" class="form-control" id="prjStart" value="2026-09-23"></div>
                         <div class="mb-3"><label>Deadline</label><input type="date" class="form-control" id="prjDeadline"></div>
                         <div class="mb-3 full">
                           <label><i class="bi bi-tag me-1"></i>Tags</label>
@@ -4764,7 +4764,7 @@ if (empty($clientName)) {
 
                     <!-- Project Settings pane — grouped toggle design -->
                     <div class="cv-prj-pane" data-prjpane="settings">
-                      <div class="mb-3"><label><span class="req">*</span>Send contacts notifications</label>
+                      <div class="mb-3"><label>Send contacts notifications <span class="req">*</span></label>
                         <select class="form-select" id="prjNotify">
                           <option selected>To all contacts with notifications for projects enabled</option>
                           <option>To primary contact only</option>
@@ -5228,10 +5228,10 @@ if (empty($clientName)) {
                       <input type="file" id="cvTskFileInput" multiple style="display:none;">
                     </div>
                     <div id="cvTskFileList"></div>
-                    <div class="mb-3"><label><span class="req">*</span>Subject</label><input type="text" class="form-control" id="tskSubject" autocomplete="off"></div>
+                    <div class="mb-3"><label>Subject <span class="req">*</span></label><input type="text" class="form-control" id="tskSubject" autocomplete="off"></div>
                     <div class="mb-3"><label>Hourly Rate</label><input type="number" class="form-control" id="tskRate" value="0" min="0" step="0.5"></div>
                     <div class="row g-3">
-  <div class="col-12 col-md-6 mb-3"><label><span class="req">*</span>Start Date</label><input type="date" class="form-control" id="tskStart" value="2026-09-23"></div>
+  <div class="col-12 col-md-6 mb-3"><label>Start Date <span class="req">*</span></label><input type="date" class="form-control" id="tskStart" value="2026-09-23"></div>
   <div class="col-12 col-md-6 mb-3"><label>Due Date</label><input type="date" class="form-control" id="tskDue"></div>
 </div>
                     <div class="row g-3">
@@ -5799,7 +5799,7 @@ if (empty($clientName)) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="padding:20px 22px;">
-                    <div class="mb-3 mb-0"><label><span style="color:#dc2626;margin-right:2px;">*</span>Service Name</label><input type="text" class="form-control" id="svcName" autocomplete="off"></div>
+                    <div class="mb-3 mb-0"><label>Service Name <span style="color:#dc2626;margin-right:2px;">*</span></label><input type="text" class="form-control" id="svcName" autocomplete="off"></div>
                   </div>
                   <div class="modal-footer" style="border-top:1px solid #eef0f3;padding:12px 22px;">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -6639,14 +6639,14 @@ if (empty($clientName)) {
             <!-- Coordinates form -->
             <div class="cv-map-toolbar">
               <div class="cv-map-field">
-                <label for="cvMapLat"><span class="req">*</span>Latitude (Google Maps)</label>
+                <label for="cvMapLat">Latitude (Google Maps) <span class="req">*</span></label>
                 <div class="cv-map-inp-wrap">
                   <input type="text" class="form-control" id="cvMapLat" placeholder="e.g. 13.0827" autocomplete="off">
                   <i class="bi bi-geo-alt cv-map-inp-ic"></i>
                 </div>
               </div>
               <div class="cv-map-field">
-                <label for="cvMapLng"><span class="req">*</span>Longitude (Google Maps)</label>
+                <label for="cvMapLng">Longitude (Google Maps) <span class="req">*</span></label>
                 <div class="cv-map-inp-wrap">
                   <input type="text" class="form-control" id="cvMapLng" placeholder="e.g. 80.2707" autocomplete="off">
                   <i class="bi bi-geo-alt cv-map-inp-ic"></i>
@@ -7447,15 +7447,15 @@ if (empty($clientName)) {
         <div class="modal-body">
           <div class="row g-3">
             <div class="col-12">
-              <label class="form-label">* Subject</label>
+              <label class="form-label">Subject <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="apmCtSubject" autocomplete="off">
             </div>
             <div class="col-12">
-              <label class="form-label">* Description</label>
+              <label class="form-label">Description <span class="text-danger">*</span></label>
               <textarea class="form-control" id="apmCtDesc" rows="3"></textarea>
             </div>
             <div class="col-md-6">
-              <label class="form-label">* Related</label>
+              <label class="form-label">Related <span class="text-danger">*</span></label>
               <select class="form-select" id="apmCtRelated">
                 <option value="">Non selected</option>
                 <option value="Contact">Internal (Contact)</option>
@@ -7511,7 +7511,7 @@ if (empty($clientName)) {
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label">* Date / Time</label>
+              <label class="form-label">Date / Time <span class="text-danger">*</span></label>
               <input type="datetime-local" class="form-control" id="apmCtDateTime">
             </div>
             <div class="col-md-6">
@@ -7519,7 +7519,7 @@ if (empty($clientName)) {
               <input type="text" class="form-control" id="apmCtLocation" autocomplete="off">
             </div>
             <div class="col-md-6">
-              <label class="form-label">* Attendees</label>
+              <label class="form-label">Attendees <span class="text-danger">*</span></label>
               <select class="form-select" id="apmCtAttendees">
                 <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
                 <option value="Harish D.">Harish D.</option>

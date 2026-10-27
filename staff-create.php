@@ -86,17 +86,13 @@
                                 <div class="row g-3">
                                     <!-- Full Name -->
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold text-dark small mb-1" for="staffFullName">
-                                            <span class="text-danger">*</span> Full Name
-                                        </label>
+                                        <label class="form-label fw-bold text-dark small mb-1" for="staffFullName">Full Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control shadow-none" id="staffFullName" name="full_name" required placeholder="e.g. Ramesh Krishnan" oninput="updateStaffInitials(this.value)">
                                     </div>
 
                                     <!-- Employee ID -->
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold text-dark small mb-1" for="staffEmpId">
-                                            <span class="text-danger">*</span> Employee ID / Code
-                                        </label>
+                                        <label class="form-label fw-bold text-dark small mb-1" for="staffEmpId">Employee ID / Code <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light text-muted small"><i class="bi bi-hash"></i></span>
                                             <input type="text" class="form-control shadow-none" id="staffEmpId" name="emp_id" required value="EMP-1009" placeholder="EMP-1009">
@@ -105,9 +101,7 @@
 
                                     <!-- Official Work Email -->
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold text-dark small mb-1" for="staffWorkEmail">
-                                            <span class="text-danger">*</span> Work Email (CRM Login)
-                                        </label>
+                                        <label class="form-label fw-bold text-dark small mb-1" for="staffWorkEmail">Work Email (CRM Login) <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light text-muted small"><i class="bi bi-envelope"></i></span>
                                             <input type="email" class="form-control shadow-none" id="staffWorkEmail" name="work_email" required placeholder="ramesh.k@gharuda.com">
@@ -116,9 +110,7 @@
 
                                     <!-- Mobile Phone -->
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold text-dark small mb-1" for="staffPhone">
-                                            <span class="text-danger">*</span> Mobile Number (WhatsApp &amp; Calls)
-                                        </label>
+                                        <label class="form-label fw-bold text-dark small mb-1" for="staffPhone">Mobile Number (WhatsApp &amp; Calls) <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light text-muted small fw-semibold">+91</span>
                                             <input type="tel" class="form-control shadow-none" id="staffPhone" name="phone" required placeholder="98765 43210" pattern="[0-9]{10}" maxlength="10">
@@ -127,9 +119,7 @@
 
                                     <!-- Date of Joining -->
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold text-dark small mb-1" for="staffDoj">
-                                            <span class="text-danger">*</span> Date of Joining
-                                        </label>
+                                        <label class="form-label fw-bold text-dark small mb-1" for="staffDoj">Date of Joining <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control shadow-none" id="staffDoj" name="date_of_joining" value="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
 
@@ -174,9 +164,7 @@
                         <div class="row g-3">
                             <!-- Designation / Role -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffRole">
-                                    <span class="text-danger">*</span> Designation / Role
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffRole">Designation / Role <span class="text-danger">*</span></label>
                                 <select class="form-select shadow-none" id="staffRole" name="role" required>
                                     <option value="Enterprise AE">Enterprise AE (Account Executive)</option>
                                     <option value="Field Sales Officer" selected>Field Sales Officer (B2B)</option>
@@ -190,9 +178,7 @@
 
                             <!-- Department -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffDept">
-                                    <span class="text-danger">*</span> Department
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffDept">Department <span class="text-danger">*</span></label>
                                 <select class="form-select shadow-none" id="staffDept" name="department" required>
                                     <option value="Field Sales" selected>Direct &amp; Field Sales</option>
                                     <option value="Enterprise Sales">Enterprise Business Group</option>
@@ -204,9 +190,7 @@
 
                             <!-- Branch Location -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffBranch">
-                                    <span class="text-danger">*</span> Operating Branch
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffBranch">Operating Branch <span class="text-danger">*</span></label>
                                 <select class="form-select shadow-none" id="staffBranch" name="branch" required>
                                     <option value="Bangalore HQ" selected>Bangalore HQ (Indiranagar)</option>
                                     <option value="Chennai Central">Chennai Central (Anna Nagar)</option>
@@ -219,9 +203,7 @@
 
                             <!-- Assigned Sales Territory -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffTerritory">
-                                    <span class="text-danger">*</span> Assigned Sales Territory
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffTerritory">Assigned Sales Territory <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control shadow-none" id="staffTerritory" name="territory" required placeholder="e.g. South Bangalore - Electronic City & Hosur" value="Bangalore Tech Corridor">
                             </div>
 
@@ -263,9 +245,7 @@
                         <div class="row g-3">
                             <!-- Monthly Target Quota -->
                             <div class="col-md-3">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffTargetQuota">
-                                    <span class="text-danger">*</span> Monthly Revenue Quota (₹)
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffTargetQuota">Monthly Revenue Quota (₹) <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light text-muted small">₹</span>
                                     <input type="number" class="form-control shadow-none" id="staffTargetQuota" name="target_quota" required value="500000" step="50000" placeholder="500000">
@@ -323,9 +303,7 @@
                         <div class="row g-3">
                             <!-- System Username -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffUsername">
-                                    <span class="text-danger">*</span> Login Username
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffUsername">Login Username <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light text-muted small"><i class="bi bi-person"></i></span>
                                     <input type="text" class="form-control shadow-none" id="staffUsername" name="username" required placeholder="e.g. ramesh.krishnan">
@@ -334,9 +312,7 @@
 
                             <!-- Initial Password -->
                             <div class="col-md-4">
-                                <label class="form-label fw-bold text-dark small mb-1" for="staffPassword">
-                                    <span class="text-danger">*</span> Temporary Password
-                                </label>
+                                <label class="form-label fw-bold text-dark small mb-1" for="staffPassword">Temporary Password <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light text-muted small"><i class="bi bi-key"></i></span>
                                     <input type="password" class="form-control shadow-none" id="staffPassword" name="password" required value="Gharuda@2026">

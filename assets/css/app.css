@@ -39,7 +39,7 @@
             --radius-lg: 18px;
             --radius-md: 14px;
             --radius-sm: 10px;
-            --shadow-card: 0 1px 2px rgba(20, 30, 25, .04), 0 8px 24px -12px rgba(20, 30, 25, .08);
+            --shadow-card: none !important;
             --gh-radius: 28px;
 
             --table-th: #e8edf3;
@@ -51,7 +51,7 @@
 
 
             /* gradiant color  */
-            --grad-primary: linear-gradient(135deg, #077702 0%, #0ca308 100%) !important;
+            --grad-primary: var(--primary) !important;
 
             /* rail + panel sizing */
             --rail-w: 76px;
@@ -2284,22 +2284,26 @@
         }
 
         .btn-primary {
-            background: var(--grad-primary);
-            color: #fff;
-            box-shadow: 0 6px 18px var(--primary-light);
-            border: 0;
+            background: var(--primary) !important;
+            background-image: none !important;
+            color: #fff !important;
+            box-shadow: none !important;
+            border: 1px solid var(--primary) !important;
         }
 
         .btn-outline-primary {
-            --bs-btn-border-color: var(var(--primary))
+            --bs-btn-border-color: var(--primary);
         }
 
         .btn-primary:hover,
-        .btn-primary:focus {
-            background: var(--grad-primary);
-            color: #fff;
-            box-shadow: 0 10px 25px var(--primary-lightTwo);
-            transform: translateY(-1px);
+        .btn-primary:focus,
+        .btn-primary:active {
+            background: var(--primary-dark) !important;
+            background-image: none !important;
+            color: #fff !important;
+            border-color: var(--primary-dark) !important;
+            box-shadow: none !important;
+            transform: none !important;
         }
 
         .btn-group {

@@ -128,7 +128,7 @@
             <div class="modal-body">
                 <form id="creationForm" onsubmit="return false;">
                     <div class="mb-3">
-                        <label class="form-label" for="create_status_name"><span class="text-danger">*</span> Lead Status</label>
+                        <label class="form-label" for="create_status_name">Lead Status <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="create_status_name" placeholder="Enter Lead Status" autocomplete="off">
                     </div>
                     <div class="mb-3">
@@ -162,7 +162,7 @@
                 <form id="editForm" onsubmit="return false;">
                     <input type="hidden" id="edit_status_id">
                     <div class="mb-3">
-                        <label class="form-label" for="edit_status_name"><span class="text-danger">*</span> Lead Status</label>
+                        <label class="form-label" for="edit_status_name">Lead Status <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="edit_status_name" placeholder="Enter Lead Status" autocomplete="off">
                     </div>
                     <div class="mb-3">

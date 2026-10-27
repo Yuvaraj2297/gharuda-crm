@@ -51,6 +51,7 @@ include 'header.php';
                 <a href="#sec-buttons" class="btn btn-sm btn-light border rounded-pill px-3">Buttons &amp; Badges</a>
                 <a href="#sec-forms" class="btn btn-sm btn-light border rounded-pill px-3">Forms &amp; Inputs</a>
                 <a href="#sec-tables" class="btn btn-sm btn-light border rounded-pill px-3">Tables &amp; Grids</a>
+                <a href="#sec-freezer" class="btn btn-sm btn-light border rounded-pill px-3 text-primary fw-semibold"><i class="bi bi-pin-angle-fill me-1"></i>Footer Freezer &amp; Inner Scroll</a>
                 <a href="#sec-modals" class="btn btn-sm btn-light border rounded-pill px-3">Modals &amp; Drawers</a>
                 <a href="#sec-alerts" class="btn btn-sm btn-light border rounded-pill px-3">Alerts &amp; Feedback</a>
                 <a href="#sec-navs" class="btn btn-sm btn-light border rounded-pill px-3">Navs &amp; Accordions</a>
@@ -629,6 +630,140 @@ include 'header.php';
             &lt;/tr&gt;
         &lt;/tbody&gt;
     &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 4B: FOOTER FREEZER & INNER SCROLL ARCHITECTURE                -->
+    <!-- ===================================================================== -->
+    <div class="mb-4" id="sec-freezer">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+                <h5 class="fw-bold text-dark mb-0"><i class="bi bi-pin-angle-fill text-primary me-2"></i>4B. Footer Freezer &amp; Inner Scroll Containers</h5>
+                <small class="text-secondary">Sticky header + smooth vertical inner scrolling + frozen sticky summary/action footer</small>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#code-freezer">
+                <i class="bi bi-code-slash me-1"></i> View Code
+            </button>
+        </div>
+
+        <div class="row g-4 mb-3">
+            <!-- Table Footer Freezer -->
+            <div class="col-12 col-xl-7">
+                <div class="card border rounded-3 bg-white h-100">
+                    <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="fw-bold text-dark mb-0">1. Table with Sticky Header &amp; Frozen Footer</h6>
+                            <small class="text-secondary">Container: <code>.table-scroll-frozen</code> &middot; Footer: <code>tfoot.table-freeze-footer</code></small>
+                        </div>
+                        <span class="badge bg-primary-subtle text-primary">Live Scroll</span>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="table-scroll-frozen" style="max-height: 280px;">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light text-uppercase text-secondary small fw-bold">
+                                    <tr>
+                                        <th scope="col" style="width: 45px;">#</th>
+                                        <th scope="col">Account Name</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" class="text-end">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="text-secondary small">1</td><td class="fw-semibold">Zenith Logistics Ltd</td><td>Enterprise</td><td><span class="badge bg-success-subtle text-success">Active</span></td><td class="text-end fw-bold">₹ 4,80,000</td></tr>
+                                    <tr><td class="text-secondary small">2</td><td class="fw-semibold">Apex Infra Corp</td><td>Govt Tender</td><td><span class="badge bg-warning-subtle text-warning">Pending</span></td><td class="text-end fw-bold">₹ 12,50,000</td></tr>
+                                    <tr><td class="text-secondary small">3</td><td class="fw-semibold">Aura Tech Solutions</td><td>SME</td><td><span class="badge bg-success-subtle text-success">Active</span></td><td class="text-end fw-bold">₹ 1,75,000</td></tr>
+                                    <tr><td class="text-secondary small">4</td><td class="fw-semibold">Blue Horizon Export</td><td>Export</td><td><span class="badge bg-info-subtle text-info">In Review</span></td><td class="text-end fw-bold">₹ 8,90,000</td></tr>
+                                    <tr><td class="text-secondary small">5</td><td class="fw-semibold">Green Valley Agro</td><td>Agri</td><td><span class="badge bg-success-subtle text-success">Active</span></td><td class="text-end fw-bold">₹ 3,40,000</td></tr>
+                                    <tr><td class="text-secondary small">6</td><td class="fw-semibold">Vortex Media Labs</td><td>SME</td><td><span class="badge bg-danger-subtle text-danger">Overdue</span></td><td class="text-end fw-bold">₹ 95,000</td></tr>
+                                    <tr><td class="text-secondary small">7</td><td class="fw-semibold">Prime Steel Works</td><td>Industrial</td><td><span class="badge bg-success-subtle text-success">Active</span></td><td class="text-end fw-bold">₹ 15,60,000</td></tr>
+                                    <tr><td class="text-secondary small">8</td><td class="fw-semibold">Titan Pharma Chem</td><td>Healthcare</td><td><span class="badge bg-success-subtle text-success">Active</span></td><td class="text-end fw-bold">₹ 6,25,000</td></tr>
+                                </tbody>
+                                <tfoot class="table-freeze-footer">
+                                    <tr>
+                                        <th colspan="2" class="text-dark">Total 8 Accounts</th>
+                                        <th colspan="2" class="text-secondary small">6 Active &middot; 1 Pending &middot; 1 Overdue</th>
+                                        <th class="text-end text-primary fw-bold">₹ 54,15,000 Total</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card / Panel Footer Freezer -->
+            <div class="col-12 col-xl-5">
+                <div class="card card-frozen-footer bg-white h-100">
+                    <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold text-dark mb-0">2. Panel / Form Frozen Footer</h6>
+                        <span class="badge bg-light text-secondary border">Scrollable</span>
+                    </div>
+                    <div class="card-body p-3" style="max-height: 220px; overflow-y: auto;">
+                        <p class="text-secondary small mb-3">During long multi-field configurations or modal forms, this container scrolls internally while keeping the header and action buttons pinned:</p>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-secondary">Project Code <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" value="PRJ-2026-GH99" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-secondary">Assignee Team <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Enter team lead...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-secondary">Deadline Date <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control form-control-sm" value="2026-11-15">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold text-secondary">Execution Notes</label>
+                            <textarea class="form-control form-control-sm" rows="2" placeholder="Audit remarks..."></textarea>
+                        </div>
+                    </div>
+                    <div class="card-footer footer-freeze py-3 d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">Reset</button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-light border btn-sm">Draft</button>
+                            <button type="button" class="btn btn-primary btn-sm">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="code-freezer">
+            <div class="card border rounded-3 bg-dark text-light p-3 position-relative mb-3">
+                <button class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3" onclick="copySnippet('snippet-freezer')">
+                    <i class="bi bi-clipboard me-1"></i> Copy
+                </button>
+                <pre class="m-0 small text-light" id="snippet-freezer"><code>&lt;!-- 1. Frozen Footer Table --&gt;
+&lt;div class="table-scroll-frozen" style="max-height: 380px;"&gt;
+    &lt;table class="table table-hover align-middle mb-0"&gt;
+        &lt;thead class="table-light text-uppercase text-secondary small fw-bold"&gt;
+            &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th class="text-end"&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;!-- Content rows scroll vertically --&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot class="table-freeze-footer"&gt;
+            &lt;tr&gt;
+                &lt;th colspan="2"&gt;Totals / Summary&lt;/th&gt;
+                &lt;th class="text-end"&gt;Total Sum&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/tfoot&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- 2. Frozen Footer Card / Panel / Modal --&gt;
+&lt;div class="card card-frozen-footer"&gt;
+    &lt;div class="card-header bg-white"&gt;Header Title&lt;/div&gt;
+    &lt;div class="card-body" style="max-height: 280px; overflow-y: auto;"&gt;
+        &lt;!-- Scrollable fields --&gt;
+    &lt;/div&gt;
+    &lt;div class="card-footer footer-freeze"&gt;
+        &lt;button class="btn btn-primary btn-sm"&gt;Save Changes&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
             </div>
         </div>

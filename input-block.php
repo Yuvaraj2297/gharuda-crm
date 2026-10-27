@@ -28,36 +28,43 @@ include 'header.php';
     </div>
 
     <!-- Standard Form Inputs -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white">
-        <div class="card-header bg-white py-3 border-bottom">
-            <h6 class="fw-bold text-dark mb-0">1. Standard Text, Email & Password Controls</h6>
-            <small class="text-secondary">Class: <code>.form-control</code>, <code>.form-label</code></small>
+    <div class="card border-0 rounded-3 mb-4 bg-white">
+        <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="fw-bold text-dark mb-0">1. Standard Text, Email & Password Controls</h6>
+                <small class="text-secondary">Class: <code>.form-control</code>, <code>.form-label</code> &middot; Required Asterisk Rule: <strong>Label &lt;span class="text-danger"&gt;*&lt;/span&gt;</strong> (Next to label, never before)</small>
+            </div>
+            <span class="badge bg-primary-subtle text-primary fw-semibold px-2 py-1 rounded-pill">Standard Form</span>
         </div>
         <div class="card-body p-4">
+            <div class="alert alert-light border small text-dark mb-4 py-2 px-3">
+                <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                <strong>Label Asterisk Standard:</strong> Always place the required asterisk <code>*</code> <em>after / next to</em> the label text (e.g. <code>Full Name <span class="text-danger">*</span></code>). Never place it before the text.
+            </div>
             <div class="row g-3">
-                <div class="col-md-4">
-                    <label for="inputText" class="form-label small fw-semibold text-secondary">Full Name</label>
-                    <input type="text" class="form-control" id="inputText" placeholder="e.g. Arun Kumar">
+                <div class="col-12 col-md-4">
+                    <label for="inputText" class="form-label small fw-semibold text-secondary">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="inputText" placeholder="e.g. Arun Kumar" required>
                 </div>
-                <div class="col-md-4">
-                    <label for="inputEmail" class="form-label small fw-semibold text-secondary">Email Address</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="name@company.com">
+                <div class="col-12 col-md-4">
+                    <label for="inputEmail" class="form-label small fw-semibold text-secondary">Email Address <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="name@company.com" required>
                 </div>
-                <div class="col-md-4">
-                    <label for="inputPassword" class="form-label small fw-semibold text-secondary">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter secure password">
+                <div class="col-12 col-md-4">
+                    <label for="inputPassword" class="form-label small fw-semibold text-secondary">Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Enter secure password" required>
                 </div>
-                <div class="col-md-4">
-                    <label for="inputSelect" class="form-label small fw-semibold text-secondary">Standard Select</label>
-                    <select class="form-select" id="inputSelect" aria-label="Select option">
-                        <option selected>Choose branch location...</option>
+                <div class="col-12 col-md-4">
+                    <label for="inputSelect" class="form-label small fw-semibold text-secondary">Branch Location <span class="text-danger">*</span></label>
+                    <select class="form-select" id="inputSelect" aria-label="Select option" required>
+                        <option value="" selected>Choose branch location...</option>
                         <option value="1">Chennai - Anna Nagar</option>
                         <option value="2">Coimbatore - RS Puram</option>
                         <option value="3">Bengaluru - Indiranagar</option>
                     </select>
                 </div>
-                <div class="col-md-8">
-                    <label for="textareaDesc" class="form-label small fw-semibold text-secondary">Notes & Remarks</label>
+                <div class="col-12 col-md-8">
+                    <label for="textareaDesc" class="form-label small fw-semibold text-secondary">Notes &amp; Remarks (Optional)</label>
                     <textarea class="form-control" id="textareaDesc" rows="3" placeholder="Enter additional information..."></textarea>
                 </div>
             </div>

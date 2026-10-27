@@ -319,11 +319,11 @@
                         <input type="number" class="form-control" id="tgt5BvNumbers" min="0" placeholder="0">
                     </div>
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Business Value</label>
+                        <label class="form-label">Business Value <span style="color:#dc2626;">*</span></label>
                         <input type="number" class="form-control" id="tgt5BusinessValue" min="0" placeholder="0">
                     </div>
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Collection Value</label>
+                        <label class="form-label">Collection Value <span style="color:#dc2626;">*</span></label>
                         <input type="number" class="form-control" id="tgt5CollectionValue" min="0" placeholder="0">
                     </div>
                 </div>

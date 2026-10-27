@@ -872,15 +872,15 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label">* Subject</label>
+                        <label class="form-label">Subject <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="apmCtSubject" autocomplete="off">
                     </div>
                     <div class="col-12">
-                        <label class="form-label">* Description</label>
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="apmCtDesc" rows="3"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Related</label>
+                        <label class="form-label">Related <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="apmCtRelated">
                             <option value="">Non selected</option>
                             <option value="Contact">Internal (Contact)</option>
@@ -936,7 +936,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Date / Time</label>
+                        <label class="form-label">Date / Time <span class="text-danger">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -957,7 +957,7 @@
                         <input type="text" class="form-control" id="apmCtLocation" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Attendees</label>
+                        <label class="form-label">Attendees <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="apmCtAttendees">
                             <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
                             <option value="Harish D.">Harish D.</option>
@@ -1080,15 +1080,15 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label">* Subject</label>
+                        <label class="form-label">Subject <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="apmStSubject" autocomplete="off">
                     </div>
                     <div class="col-12">
-                        <label class="form-label">* Description</label>
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="apmStDesc" rows="3"></textarea>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Attendees</label>
+                        <label class="form-label">Attendees <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="apmStAttendees">
                             <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
                             <option value="Harish D.">Harish D.</option>
@@ -1097,7 +1097,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Date / Time</label>
+                        <label class="form-label">Date / Time <span class="text-danger">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1204,12 +1204,12 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label">* Subject</label>
+                        <label class="form-label">Subject <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="apmEdSubject" autocomplete="off"
                             value="Callback — Ravi Shankar">
                     </div>
                     <div class="col-12">
-                        <label class="form-label">* Description</label>
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="apmEdDesc"
                             rows="3">Customer asked to call back about solar package</textarea>
                     </div>
@@ -1222,11 +1222,11 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Name</label>
+                        <label class="form-label">Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="apmEdName" autocomplete="off" value="Ravi Shankar">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Email</label>
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="apmEdEmail" autocomplete="off"
                             value="ravi.shankar@gmail.com">
                     </div>
@@ -1236,7 +1236,7 @@
                             value="+91 98074 56321">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Date / Time</label>
+                        <label class="form-label">Date / Time <span class="text-danger">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1258,7 +1258,7 @@
                             value="Gharuda Office, Chennai">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">* Attendees</label>
+                        <label class="form-label">Attendees <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="apmEdAttendees">
                             <option value="Imala ina, gharuda SOFTWARE">Imala ina, gharuda SOFTWARE</option>
                             <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
@@ -1348,7 +1348,7 @@
                 <div id="atkFileList"></div>
                 <!-- Subject -->
                 <div class="tk-field">
-                    <label><span class="req">*</span>Subject</label>
+                    <label>Subject <span class="req">*</span></label>
                     <input type="text" class="form-control" id="atkSubject" placeholder="">
                 </div>
                 <!-- Hourly Rate -->
@@ -1359,7 +1359,7 @@
                 <!-- Start Date / Due Date -->
                 <div class="tk-2col">
                     <div class="tk-field">
-                        <label><span class="req">*</span>Start Date</label>
+                        <label>Start Date <span class="req">*</span></label>
                         <div class="date-picker">
                             <input type="text" class="date-input form-control" id="atkStartDate"
                                 placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
@@ -1450,7 +1450,7 @@
                 </div>
                 <!-- Tags (chip input) -->
                 <div class="tk-field">
-                    <label><span class="req">*</span>Tags</label>
+                    <label>Tags <span class="req">*</span></label>
                     <div class="nl-tags-wrap" id="atkTagsWrap" style="max-width:100%;">
                         <div class="nl-tags-chips" id="atkTagsChips"></div>
                         <input type="text" class="nl-tags-input" id="atkTagsInput"

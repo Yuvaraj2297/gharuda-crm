@@ -284,9 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <!-- Expense Category + Quick Add Button -->
                     <div class="mb-3">
-                        <label class="form-label" for="expenseCategory">
-                            <span class="text-danger">*</span> Expense Category
-                        </label>
+                        <label class="form-label" for="expenseCategory">Expense Category <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <div class="flex-grow-1">
                                 <select class="form-select select2" id="expenseCategory" name="category" required>
@@ -321,9 +319,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <!-- Expense Date -->
                     <div class="mb-3">
-                        <label class="form-label" for="expenseDate">
-                            <span class="text-danger">*</span> Expense Date
-                        </label>
+                        <label class="form-label" for="expenseDate">Expense Date <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <input type="date" class="form-control" id="expenseDate" name="expense_date" value="2026-10-01" required>
                             <span class="input-group-text bg-white text-muted" style="border-radius:0 10px 10px 0; border-color:#cbd5e1;">
@@ -334,9 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <!-- Amount -->
                     <div class="mb-3">
-                        <label class="form-label" for="expenseAmount">
-                            <span class="text-danger">*</span> Amount
-                        </label>
+                        <label class="form-label" for="expenseAmount">Amount <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text bg-light fw-bold text-secondary" style="border-radius:10px 0 0 10px; border-color:#cbd5e1;">₹</span>
                             <input type="number" step="0.01" class="form-control" id="expenseAmount" name="amount" placeholder="0.00" required style="border-radius:0 10px 10px 0;">
@@ -368,9 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <!-- Currency -->
                     <div class="mb-3">
-                        <label class="form-label" for="expenseCurrency">
-                            <span class="text-danger">*</span> Currency
-                        </label>
+                        <label class="form-label" for="expenseCurrency">Currency <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="expenseCurrency" name="currency">
                             <option value="INR" selected>INR ₹</option>
                             <option value="USD">USD $</option>

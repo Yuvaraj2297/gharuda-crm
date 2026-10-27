@@ -538,11 +538,11 @@
             <div class="modal-body p-4">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label class="form-label fw-semibold text-secondary">* Subject</label>
+                        <label class="form-label fw-semibold text-secondary">Subject <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="pm5EdSubject" autocomplete="off" value="Callback — Ravi Shankar">
                     </div>
                     <div class="col-12">
-                        <label class="form-label fw-semibold text-secondary">* Description</label>
+                        <label class="form-label fw-semibold text-secondary">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="pm5EdDesc" rows="3">Customer asked to call back about solar package</textarea>
                     </div>
                     <div class="col-md-6">
@@ -554,11 +554,11 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary">* Name</label>
+                        <label class="form-label fw-semibold text-secondary">Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="pm5EdName" autocomplete="off" value="Ravi Shankar">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary">* Email</label>
+                        <label class="form-label fw-semibold text-secondary">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="pm5EdEmail" autocomplete="off" value="ravi.shankar@gmail.com">
                     </div>
                     <div class="col-md-6">
@@ -566,7 +566,7 @@
                         <input type="text" class="form-control" id="pm5EdPhone" autocomplete="off" value="+91 98074 56321">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary">* Date / Time</label>
+                        <label class="form-label fw-semibold text-secondary">Date / Time <span class="text-danger">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -585,7 +585,7 @@
                         <input type="text" class="form-control" id="pm5EdLocation" autocomplete="off" value="Gharuda Office, Chennai">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary">* Attendees</label>
+                        <label class="form-label fw-semibold text-secondary">Attendees <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="pm5EdAttendees">
                             <option value="Imala ina, gharuda SOFTWARE">Imala ina, gharuda SOFTWARE</option>
                             <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>

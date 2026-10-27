@@ -110,7 +110,7 @@
             <div class="modal-body">
                 <form id="creationForm" onsubmit="return false;">
                     <div class="mb-3">
-                        <label class="form-label" for="create_brand_name"><span class="text-danger">*</span> Brand Name</label>
+                        <label class="form-label" for="create_brand_name">Brand Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="create_brand_name" placeholder="Enter Brand Name" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
@@ -148,7 +148,7 @@
                 <form id="editForm" onsubmit="return false;">
                     <input type="hidden" id="edit_brand_id">
                     <div class="mb-3">
-                        <label class="form-label" for="edit_brand_name"><span class="text-danger">*</span> Brand Name</label>
+                        <label class="form-label" for="edit_brand_name">Brand Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="edit_brand_name" placeholder="Enter Brand Name" autocomplete="off" required>
                     </div>
                     <div class="mb-3">

@@ -1502,11 +1502,11 @@
                 <input type="hidden" id="cb5EditId" value="">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small" for="cb5NmName"><span class="text-danger me-1">*</span>Full Name</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmName">Full Name <span class="text-danger me-1">*</span></label>
                         <input type="text" class="form-control" id="cb5NmName" placeholder="Ex: Ravi Shankar" autocomplete="off">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPhone"><span class="text-danger me-1">*</span>Phone</label>
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPhone">Phone <span class="text-danger me-1">*</span></label>
                         <input type="text" class="form-control" id="cb5NmPhone" placeholder="Ex: 9840123456" autocomplete="off">
                     </div>
                     <div class="col-md-6">
@@ -1530,7 +1530,7 @@
                     </div>
                     <!-- Available From (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small"><span class="text-danger me-1">*</span>Available From</label>
+                        <label class="form-label fw-semibold text-secondary small">Available From <span class="text-danger me-1">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">
@@ -1546,7 +1546,7 @@
                     </div>
                     <!-- To (DatePicker + TimePicker) -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold text-secondary small"><span class="text-danger me-1">*</span>To</label>
+                        <label class="form-label fw-semibold text-secondary small">To <span class="text-danger me-1">*</span></label>
                         <div class="row g-2">
                             <div class="col-7">
                                 <div class="date-picker">

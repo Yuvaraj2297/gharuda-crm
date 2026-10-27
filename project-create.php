@@ -55,17 +55,13 @@
                         
                         <!-- 1. Project Name -->
                         <div class="col-12">
-                            <label class="form-label fw-bold text-dark small mb-1" for="projName">
-                                <span class="text-danger">*</span> Project Name
-                            </label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projName">Project Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="projName" name="project_name" required placeholder="Enter project name (e.g. Website Redesign & SEO Portal)">
                         </div>
 
                         <!-- 2. Customer -->
                         <div class="col-md-6">
-                            <label class="form-label fw-bold text-dark small mb-1" for="projCustomer">
-                                <span class="text-danger">*</span> Customer
-                            </label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projCustomer">Customer <span class="text-danger">*</span></label>
                             <select class="form-select select2" id="projCustomer" name="customer_id" required data-placeholder="Select and begin typing...">
                                 <option value=""></option>
                                 <option value="GHARUDA">GHARUDA</option>
@@ -113,9 +109,7 @@
 
                         <!-- 5. Billing Type & Status -->
                         <div class="col-md-6">
-                            <label class="form-label fw-bold text-dark small mb-1" for="projBillingType">
-                                <span class="text-danger">*</span> Billing Type
-                            </label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projBillingType">Billing Type <span class="text-danger">*</span></label>
                             <select class="form-select select2" id="projBillingType" name="billing_type" required data-placeholder="Select billing type">
                                 <option value="Fixed Rate" selected>Fixed Rate</option>
                                 <option value="Project Hours">Project Hours</option>
@@ -189,9 +183,7 @@
 
                         <!-- 9. Start Date & Deadline (CRM Datepicker Flow) -->
                         <div class="col-md-6">
-                            <label class="form-label fw-bold text-dark small mb-1" for="projStartDate">
-                                <span class="text-danger">*</span> Start Date
-                            </label>
+                            <label class="form-label fw-bold text-dark small mb-1" for="projStartDate">Start Date <span class="text-danger">*</span></label>
                             <div class="date-picker">
                                 <input type="text" class="date-input form-control" id="projStartDate" name="start_date" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off" value="<?= date('d-m-Y') ?>" required>
                             </div>

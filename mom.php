@@ -414,7 +414,7 @@ include 'header.php';
             <div class="modal-body p-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Document Number</label>
+                        <label class="form-label small fw-semibold text-secondary">Document Number <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="momDocNo" readonly placeholder="Auto-generated">
                             <button type="button" class="btn btn-outline-secondary" id="momDocRegen" title="Regenerate number"><i class="bi bi-arrow-repeat"></i></button>
@@ -422,7 +422,7 @@ include 'header.php';
                         <div class="small text-muted mt-1">Auto-generated. Regenerates on demand.</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Customer Name</label>
+                        <label class="form-label small fw-semibold text-secondary">Customer Name <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="momCustomer" data-placeholder="-- Select Customer --">
                             <option value=""></option>
                             <option>GODREJ</option>
@@ -433,7 +433,7 @@ include 'header.php';
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Project Name</label>
+                        <label class="form-label small fw-semibold text-secondary">Project Name <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="momProject" data-placeholder="-- Select Project --">
                             <option value=""></option>
                             <option>GHARUDA book</option>
@@ -443,7 +443,7 @@ include 'header.php';
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Appointment Subject</label>
+                        <label class="form-label small fw-semibold text-secondary">Appointment Subject <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="momApptSel" data-placeholder="-- Select Appointment --">
                             <option value=""></option>
                             <option>GHARUDA Electrical Work Project</option>
@@ -458,7 +458,7 @@ include 'header.php';
                         <input type="text" class="form-control" id="momDateTime" readonly placeholder="Auto-filled on appointment select">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold text-secondary"><span class="text-danger">*</span> Initiated By</label>
+                        <label class="form-label small fw-semibold text-secondary">Initiated By <span class="text-danger">*</span></label>
                         <select class="form-select select2" id="momInitiated" data-placeholder="-- Select Staff --">
                             <option value=""></option>
                             <option selected>gharuda SOFTWARE</option>

@@ -279,7 +279,7 @@
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Year</label>
+                        <label class="form-label">Year <span style="color:#dc2626;">*</span></label>
                         <select class="form-select select2" id="bt5Year" data-placeholder="Select Year">
                             <option value=""></option>
                             <option value="2027">2027</option>
@@ -289,7 +289,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Month</label>
+                        <label class="form-label">Month <span style="color:#dc2626;">*</span></label>
                         <select class="form-select select2" id="bt5MonthSel" data-placeholder="Select Month">
                             <option value=""></option>
                             <option value="1">January</option>
@@ -307,7 +307,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Brand</label>
+                        <label class="form-label">Brand <span style="color:#dc2626;">*</span></label>
                         <select class="form-select select2" id="bt5Brand" data-placeholder="Select Brand">
                             <option value=""></option>
                             <option value="PhDAssistance">PhDAssistance</option>
@@ -318,7 +318,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <label class="form-label"><span style="color:#dc2626;">*</span> Collection Value</label>
+                        <label class="form-label">Collection Value <span style="color:#dc2626;">*</span></label>
                         <input type="number" class="form-control" id="bt5CollectionValue" min="0" placeholder="0">
                     </div>
                 </div>

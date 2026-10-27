@@ -768,7 +768,7 @@
             <div class="modal-body p-4">
                 <form id="addMilestoneForm" onsubmit="saveNewMilestone(event)">
                     <div class="mb-3">
-                        <label class="form-label fw-bold text-dark small"><span class="text-danger">*</span> Milestone Name</label>
+                        <label class="form-label fw-bold text-dark small">Milestone Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control rounded-3 py-2 px-3 fw-medium" id="mName" required placeholder="e.g. Design Wireframes / Database Setup">
                     </div>
                     <div class="row g-2 mb-3">

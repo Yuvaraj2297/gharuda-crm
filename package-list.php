@@ -439,12 +439,12 @@ $plOpts = function (array $a) {
                     <div class="row g-3">
                         <!-- LEFT COLUMN -->
                         <div class="col-lg-6">
-                            <label class="form-label" for="pl_voucher">* Inventory delivery voucher</label>
+                            <label class="form-label" for="pl_voucher">Inventory delivery voucher <span class="text-danger">*</span></label>
                             <select class="form-select select2" id="pl_voucher" data-placeholder="Non selected">
                                 <option value="">Non selected</option><?php $plOpts($plVouchers); ?>
                             </select>
 
-                            <label class="form-label mt-3" for="pl_customer">* Customer</label>
+                            <label class="form-label mt-3" for="pl_customer">Customer <span class="text-danger">*</span></label>
                             <select class="form-select select2" id="pl_customer" data-placeholder="Non selected">
                                 <option value="">Non selected</option><?php $plOpts($plCustomers); ?>
                             </select>

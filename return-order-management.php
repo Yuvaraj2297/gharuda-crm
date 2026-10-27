@@ -305,33 +305,25 @@ $plOpts = function (array $a) {
                 <form id="romForm" onsubmit="return false;" autocomplete="off">
                     <div class="row g-3 mb-4">
                         <div class="col-md-4">
-                            <label class="form-label" for="rom_order_no">
-                                <span class="required-star">*</span>Order Return Number
-                            </label>
+                            <label class="form-label" for="rom_order_no">Order Return Number <span class="required-star">*</span></label>
                             <input type="text" class="form-control" id="rom_order_no" placeholder="e.g. ORN-0001">
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="rom_customer">
-                                <span class="required-star">*</span>Customer Name
-                            </label>
+                            <label class="form-label" for="rom_customer">Customer Name <span class="required-star">*</span></label>
                             <select class="form-select select2" id="rom_customer" data-placeholder="Non selected">
                                 <option value="">Non selected</option>
                                 <?php $plOpts($plCustomers); ?>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="rom_type">
-                                <span class="required-star">*</span>Type
-                            </label>
+                            <label class="form-label" for="rom_type">Type <span class="required-star">*</span></label>
                             <select class="form-select select2" id="rom_type" data-placeholder="Non selected">
                                 <option value="">Non selected</option>
                                 <?php $plOpts($plTypes); ?>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label" for="rom_staff">
-                                <span class="required-star">*</span>Staff
-                            </label>
+                            <label class="form-label" for="rom_staff">Staff <span class="required-star">*</span></label>
                             <select class="form-select select2" id="rom_staff" data-placeholder="Non selected">
                                 <option value="">Non selected</option>
                                 <?php $plOpts($plStaff); ?>
@@ -450,9 +442,7 @@ $plOpts = function (array $a) {
                     <!-- Row 2: Customer | Date created | Return type -->
                     <div class="row g-3 mb-3">
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="rr_customer">
-                                <span class="required-star">*</span>Customer
-                            </label>
+                            <label class="form-label" for="rr_customer">Customer <span class="required-star">*</span></label>
                             <select class="form-select select2" id="rr_customer" data-placeholder="Non selected">
                                 <option value="">Non selected</option>
                                 <?php $plOpts($plCustomers); ?>
@@ -474,15 +464,11 @@ $plOpts = function (array $a) {
                     <!-- Row 3: Email | Phone Number -->
                     <div class="row g-3 mb-3">
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="rr_email">
-                                <span class="required-star">*</span>Email
-                            </label>
+                            <label class="form-label" for="rr_email">Email <span class="required-star">*</span></label>
                             <input type="email" class="form-control" id="rr_email" placeholder="Email">
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="rr_phone">
-                                <span class="required-star">*</span>Phone Number
-                            </label>
+                            <label class="form-label" for="rr_phone">Phone Number <span class="required-star">*</span></label>
                             <input type="text" class="form-control" id="rr_phone" placeholder="Phone Number">
                         </div>
                     </div>
@@ -625,9 +611,7 @@ $plOpts = function (array $a) {
                     <!-- Row 2: Vendor | Date created | Return type -->
                     <div class="row g-3 mb-3">
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="dr_vendor">
-                                <span class="required-star">*</span>Vendor
-                            </label>
+                            <label class="form-label" for="dr_vendor">Vendor <span class="required-star">*</span></label>
                             <select class="form-select select2" id="dr_vendor" data-placeholder="Non selected">
                                 <option value="">Non selected</option>
                                 <?php $plOpts($plVendors); ?>
@@ -649,15 +633,11 @@ $plOpts = function (array $a) {
                     <!-- Row 3: Email | Phone Number -->
                     <div class="row g-3 mb-3">
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="dr_email">
-                                <span class="required-star">*</span>Email
-                            </label>
+                            <label class="form-label" for="dr_email">Email <span class="required-star">*</span></label>
                             <input type="email" class="form-control" id="dr_email" placeholder="Email">
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label class="form-label" for="dr_phone">
-                                <span class="required-star">*</span>Phone Number
-                            </label>
+                            <label class="form-label" for="dr_phone">Phone Number <span class="required-star">*</span></label>
                             <input type="text" class="form-control" id="dr_phone" placeholder="Phone Number">
                         </div>
                     </div>
