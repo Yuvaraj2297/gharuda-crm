@@ -711,357 +711,284 @@
             <div class="side-panel-inner">
                 <div class="panel-scroll">
 
-                    <!-- 1. CRM: Leads, Deals, Quotes, Contracts & Omnichannel -->
+                    <!-- 1. CRM: Leads & Sales -->
                     <div class="panel-section" data-panel="CRM">
-                        <div class="nav-label">Leads &amp; Sales Pipeline</div>
+                        <div class="nav-label">Leads &amp; Sales</div>
 
-                        <a data-active-pages="lead-dashboard.php" class="nav-link-custom fw-semibold mb-2" href="lead-dashboard.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                        <a data-active-pages="lead-dashboard.php" class="nav-link-custom" href="lead-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Lead Dashboard</span>
                         </a>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">1. Lead Capture &amp; Follow-Up</div>
-                        <a data-active-pages="lead.php" class="nav-link-custom" href="lead.php">
-                            <i class="bi bi-person-lines-fill me-2"></i> <span>All Leads</span>
+                        <!-- Leads & Follow-Ups Group -->
+                        <a data-toggle-flag="isLeadCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#leadsSubmenu" role="button" aria-expanded="false" aria-controls="leadsSubmenu">
+                            <span><i class="bi bi-person-lines-fill me-2"></i> <span>Leads &amp; Follow-Ups</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="manage-leads.php" class="nav-link-custom" href="manage-leads.php">
-                            <i class="bi bi-kanban me-2"></i> <span>Manage Leads</span>
-                        </a>
-                        <a data-active-pages="follow-up-list.php" class="nav-link-custom" href="follow-up-list.php">
-                            <i class="bi bi-clock-history me-2"></i> <span>Follow-Up Schedule</span>
-                        </a>
-                        <a data-active-pages="lead-map.php" class="nav-link-custom" href="lead-map.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Lead Map View</span>
-                        </a>
-                        <a data-active-pages="lead-filter.php" class="nav-link-custom" href="lead-filter.php">
-                            <i class="bi bi-funnel me-2"></i> <span>Advanced Lead Filter</span>
-                        </a>
+                        <div data-show-flag="isLeadCoreActive" class="collapse tree-submenu" id="leadsSubmenu">
+                            <a data-active-pages="lead.php" class="tree-link" href="lead.php">All Leads</a>
+                            <a data-active-pages="manage-leads.php" class="tree-link" href="manage-leads.php">Manage Leads</a>
+                            <a data-active-pages="follow-up-list.php" class="tree-link" href="follow-up-list.php">Follow-Up List</a>
+                            <a data-active-pages="lead-map.php" class="tree-link" href="lead-map.php">Lead Map View</a>
+                            <a data-active-pages="lead-filter.php" class="tree-link" href="lead-filter.php">Search &amp; Filter</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">2. Deals, Quotes &amp; Contracts</div>
-                        <a data-active-pages="deals.php" class="nav-link-custom" href="deals.php">
-                            <i class="bi bi-currency-rupee me-2"></i> <span>Deals Pipeline</span>
+                        <!-- Deals & Quotations Group -->
+                        <a data-toggle-flag="isDealActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#dealsSubmenu" role="button" aria-expanded="false" aria-controls="dealsSubmenu">
+                            <span><i class="bi bi-currency-rupee me-2"></i> <span>Deals &amp; Quotations</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="quotations.php" class="nav-link-custom" href="quotations.php">
-                            <i class="bi bi-file-earmark-text me-2"></i> <span>Quotations &amp; Proposals</span>
-                        </a>
-                        <a data-active-pages="quotation-create.php" class="nav-link-custom" href="quotation-create.php">
-                            <i class="bi bi-file-earmark-plus me-2 text-primary"></i> <span>Create Quotation</span>
-                        </a>
-                        <a data-active-pages="contracts.php" class="nav-link-custom" href="contracts.php">
-                            <i class="bi bi-pen me-2"></i> <span>Contracts &amp; SLAs</span>
-                        </a>
+                        <div data-show-flag="isDealActive" class="collapse tree-submenu" id="dealsSubmenu">
+                            <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
+                            <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
+                            <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">3. Omnichannel Engage</div>
-                        <a data-active-pages="whatsapp-chat.php" class="nav-link-custom" href="whatsapp-chat.php">
-                            <i class="bi bi-whatsapp me-2 text-success"></i> <span>WhatsApp Chat</span>
+                        <!-- Communications Group -->
+                        <a data-toggle-flag="isCommActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#commSubmenu" role="button" aria-expanded="false" aria-controls="commSubmenu">
+                            <span><i class="bi bi-chat-dots me-2"></i> <span>Communications</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="mailbox.php" class="nav-link-custom" href="mailbox.php">
-                            <i class="bi bi-envelope me-2"></i> <span>Email Mailbox</span>
-                        </a>
-                        <a data-active-pages="sms-chat.php" class="nav-link-custom" href="sms-chat.php">
-                            <i class="bi bi-chat-dots me-2"></i> <span>SMS Center</span>
-                        </a>
+                        <div data-show-flag="isCommActive" class="collapse tree-submenu" id="commSubmenu">
+                            <a data-active-pages="whatsapp-chat.php" class="tree-link" href="whatsapp-chat.php">WhatsApp Chat</a>
+                            <a data-active-pages="mailbox.php" class="tree-link" href="mailbox.php">Mailbox</a>
+                            <a data-active-pages="sms-chat.php" class="tree-link" href="sms-chat.php">SMS Center</a>
+                        </div>
 
-                        <a data-toggle-flag="isLeadReportActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed mt-2"
-                            data-bs-toggle="collapse"
-                            href="#leadReportsSubmenu"
-                            role="button"
-                            aria-expanded="false"
-                            aria-controls="leadReportsSubmenu">
-                            <span><i class="bi bi-graph-up-arrow me-2 text-primary"></i> <span>Sales &amp; Lead Reports</span></span>
+                        <!-- Sales Reports Group -->
+                        <a data-toggle-flag="isLeadReportActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#leadReportsSubmenu" role="button" aria-expanded="false" aria-controls="leadReportsSubmenu">
+                            <span><i class="bi bi-graph-up-arrow me-2"></i> <span>Sales Reports</span></span>
                             <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
                         <div data-show-flag="isLeadReportActive" class="collapse tree-submenu" id="leadReportsSubmenu">
-                            <a data-active-pages="employee-revenue-report.php" class="tree-link" href="employee-revenue-report.php">Employee Revenue Report</a>
+                            <a data-active-pages="employee-revenue-report.php" class="tree-link" href="employee-revenue-report.php">Revenue Report</a>
                             <a data-active-pages="employee-lead-report.php" class="tree-link" href="employee-lead-report.php">Employee Lead Report</a>
                             <a data-active-pages="lead-source-report.php" class="tree-link" href="lead-source-report.php">Lead Source Report</a>
-                            <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Sales Report</a>
+                            <a data-active-pages="brandwise-report.php" class="tree-link" href="brandwise-report.php">Brandwise Sales</a>
                         </div>
                     </div>
 
-                    <!-- 2. Appointments & MOM Panel Section -->
+                    <!-- 2. Appointments & MOM -->
                     <div class="panel-section" data-panel="Appointments">
                         <div class="nav-label">Meetings &amp; MOM</div>
-
-                        <a data-active-pages="appointments.php" class="nav-link-custom fw-semibold mb-2" href="appointments.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-calendar2-week me-2"></i> <span>Appointments Overview</span>
+                        <a data-active-pages="appointments.php" class="nav-link-custom" href="appointments.php">
+                            <i class="bi bi-calendar2-week me-2"></i> <span>Appointments</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Schedule &amp; Follow-Ups</div>
                         <a data-active-pages="appointment-schedule.php" class="nav-link-custom" href="appointment-schedule.php">
                             <i class="bi bi-calendar-check me-2"></i> <span>Appointment Schedule</span>
                         </a>
                         <a data-active-pages="callbacks.php" class="nav-link-custom" href="callbacks.php">
-                            <i class="bi bi-telephone-inbound me-2"></i> <span>Client Callbacks</span>
+                            <i class="bi bi-telephone-inbound me-2"></i> <span>Callbacks</span>
                         </a>
                         <a data-active-pages="past-meeting.php" class="nav-link-custom" href="past-meeting.php">
-                            <i class="bi bi-clock-history me-2"></i> <span>Past Meetings Log</span>
+                            <i class="bi bi-clock-history me-2"></i> <span>Past Meetings</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Meeting Records &amp; Insights</div>
                         <a data-active-pages="mom.php" class="nav-link-custom" href="mom.php">
-                            <i class="bi bi-journal-text me-2"></i> <span>Minutes of Meeting (MOM)</span>
+                            <i class="bi bi-journal-text me-2"></i> <span>Minutes of Meeting</span>
                         </a>
                         <a data-active-pages="summary-report.php" class="nav-link-custom" href="summary-report.php">
-                            <i class="bi bi-bar-chart-line me-2"></i> <span>Meeting Summary Report</span>
+                            <i class="bi bi-bar-chart-line me-2"></i> <span>Summary Report</span>
                         </a>
                     </div>
 
-                    <!-- 3. Customers & Contacts Panel Section -->
+                    <!-- 3. Customers & Contacts -->
                     <div class="panel-section" data-panel="Customers">
-                        <div class="nav-label">Customers &amp; 360&deg;</div>
-
-                        <a data-active-pages="customer-dashboard.php" class="nav-link-custom fw-semibold mb-2" href="customer-dashboard.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg; Dashboard</span>
+                        <div class="nav-label">Customers</div>
+                        <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php">
+                            <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg;</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Accounts &amp; Contacts</div>
-                        <a data-active-pages="customers.php,customer-view.php" class="nav-link-custom" href="customers.php">
-                            <i class="bi bi-person-vcard me-2"></i> <span>Customers Directory</span>
-                        </a>
-                        <a data-active-pages="customer-new.php" class="nav-link-custom" href="customer-new.php">
-                            <i class="bi bi-building-add me-2 text-primary"></i> <span>Add New Customer</span>
+                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php">
+                            <i class="bi bi-person-vcard me-2"></i> <span>Customers List</span>
                         </a>
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php">
-                            <i class="bi bi-people me-2"></i> <span>Contacts Directory</span>
-                        </a>
-                        <a data-active-pages="customer-import.php" class="nav-link-custom" href="customer-import.php">
-                            <i class="bi bi-cloud-arrow-up me-2"></i> <span>Bulk Import Customers</span>
+                            <i class="bi bi-people me-2"></i> <span>Contacts</span>
                         </a>
                     </div>
 
-                    <!-- 4. Project Management & Tasks Panel Section -->
+                    <!-- 4. Project Management & Tasks -->
                     <div class="panel-section" data-panel="Project Management">
                         <div class="nav-label">Projects &amp; Tasks</div>
-
-                        <a data-active-pages="project-dashboard.php" class="nav-link-custom fw-semibold mb-2" href="project-dashboard.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
+                        <a data-active-pages="project-dashboard.php" class="nav-link-custom" href="project-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Project Dashboard</span>
                         </a>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Projects &amp; Milestones</div>
-                        <a data-active-pages="projects-list.php" class="nav-link-custom" href="projects-list.php">
-                            <i class="bi bi-briefcase me-2"></i> <span>Projects Directory</span>
+                        <!-- Projects Group -->
+                        <a data-toggle-flag="isProjectCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#projectsSubmenu" role="button" aria-expanded="false" aria-controls="projectsSubmenu">
+                            <span><i class="bi bi-briefcase me-2"></i> <span>Projects</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="project-create.php" class="nav-link-custom" href="project-create.php">
-                            <i class="bi bi-plus-circle me-2 text-primary"></i> <span>Create New Project</span>
-                        </a>
-                        <a data-active-pages="projects-report.php" class="nav-link-custom" href="projects-report.php">
-                            <i class="bi bi-clipboard-data me-2"></i> <span>Projects Status Report</span>
-                        </a>
-                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
-                            <i class="bi bi-calendar2-range me-2"></i> <span>Daily Task Log Report</span>
-                        </a>
+                        <div data-show-flag="isProjectCoreActive" class="collapse tree-submenu" id="projectsSubmenu">
+                            <a data-active-pages="projects-list.php,project-create.php" class="tree-link" href="projects-list.php">Projects List</a>
+                            <a data-active-pages="projects-report.php" class="tree-link" href="projects-report.php">Projects Report</a>
+                            <a data-active-pages="projectwise-daily-task-report.php" class="tree-link" href="projectwise-daily-task-report.php">Daily Task Report</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Tasks &amp; Team Execution</div>
-                        <a data-active-pages="task-overview.php" class="nav-link-custom" href="task-overview.php">
-                            <i class="bi bi-kanban me-2"></i> <span>Tasks Kanban Board</span>
+                        <!-- Tasks Group -->
+                        <a data-toggle-flag="isTaskCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#tasksSubmenu" role="button" aria-expanded="false" aria-controls="tasksSubmenu">
+                            <span><i class="bi bi-check2-square me-2"></i> <span>Tasks</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="tasks-list.php" class="nav-link-custom" href="tasks-list.php">
-                            <i class="bi bi-check2-square me-2"></i> <span>Tasks Directory</span>
-                        </a>
-                        <a data-active-pages="task-create.php" class="nav-link-custom" href="task-create.php">
-                            <i class="bi bi-plus-square me-2 text-primary"></i> <span>Assign New Task</span>
-                        </a>
-                        <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
-                            <i class="bi bi-trophy me-2"></i> <span>Team KPI Score Card</span>
-                        </a>
+                        <div data-show-flag="isTaskCoreActive" class="collapse tree-submenu" id="tasksSubmenu">
+                            <a data-active-pages="task-overview.php" class="tree-link" href="task-overview.php">Tasks Kanban</a>
+                            <a data-active-pages="tasks-list.php,task-create.php" class="tree-link" href="tasks-list.php">Tasks List</a>
+                            <a data-active-pages="score-card.php" class="tree-link" href="score-card.php">Score Card</a>
+                        </div>
                     </div>
 
-                    <!-- 5. Billing, Invoicing & Expenses Panel Section -->
+                    <!-- 5. Billing & Finance -->
                     <div class="panel-section" data-panel="Expenses">
-                        <div class="nav-label">Billing &amp; Invoicing</div>
-
-                        <a data-active-pages="invoices.php" class="nav-link-custom fw-semibold mb-2" href="invoices.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices Ledger</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Tax Billing &amp; Collections</div>
-                        <a data-active-pages="invoice-create.php" class="nav-link-custom" href="invoice-create.php">
-                            <i class="bi bi-file-earmark-plus me-2 text-primary"></i> <span>Create Tax Invoice</span>
+                        <div class="nav-label">Billing &amp; Finance</div>
+                        <a data-active-pages="invoices.php,invoice-create.php" class="nav-link-custom" href="invoices.php">
+                            <i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices</span>
                         </a>
                         <a data-active-pages="payments.php" class="nav-link-custom" href="payments.php">
                             <i class="bi bi-credit-card-2-front me-2"></i> <span>Payments Received</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Field Expense Claims</div>
-                        <a data-active-pages="expenses.php" class="nav-link-custom" href="expenses.php">
-                            <i class="bi bi-receipt me-2"></i> <span>Field Expenses Ledger</span>
-                        </a>
-                        <a data-active-pages="expense-create.php" class="nav-link-custom" href="expense-create.php">
-                            <i class="bi bi-plus-circle me-2 text-primary"></i> <span>Record Field Expense</span>
+                        <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom" href="expenses.php">
+                            <i class="bi bi-receipt me-2"></i> <span>Field Expenses</span>
                         </a>
                     </div>
 
-                    <!-- 6. Petty Cash Panel Section -->
+                    <!-- 6. Petty Cash -->
                     <div class="panel-section" data-panel="PettyCash">
                         <div class="nav-label">Petty Cash</div>
-
-                        <a data-active-pages="petty-cash.php,petty-cash-list.php" class="nav-link-custom fw-semibold mb-2" href="petty-cash.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-safe me-2"></i> <span>Petty Cash Ledger</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Vouchers &amp; Audits</div>
-                        <a data-active-pages="petty-cash-create.php" class="nav-link-custom" href="petty-cash-create.php">
-                            <i class="bi bi-file-earmark-plus me-2 text-primary"></i> <span>Create Expense Voucher</span>
+                        <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
+                            <i class="bi bi-safe me-2"></i> <span>Petty Cash List</span>
                         </a>
                         <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
                             <i class="bi bi-bar-chart-steps me-2"></i> <span>Petty Cash Report</span>
                         </a>
                     </div>
 
-                    <!-- 7. Customer Support & Helpdesk Panel Section -->
+                    <!-- 7. Support & SLA -->
                     <div class="panel-section" data-panel="Support">
-                        <div class="nav-label">Support &amp; SLA Helpdesk</div>
-
-                        <a data-active-pages="ticket-dashboard.php" class="nav-link-custom fw-semibold mb-2" href="ticket-dashboard.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-speedometer2 me-2"></i> <span>Support SLA Dashboard</span>
+                        <div class="nav-label">Support &amp; Helpdesk</div>
+                        <a data-active-pages="ticket-dashboard.php" class="nav-link-custom" href="ticket-dashboard.php">
+                            <i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Helpdesk Queue &amp; SLA</div>
-                        <a data-active-pages="support-tickets.php" class="nav-link-custom" href="support-tickets.php">
-                            <i class="bi bi-headset me-2"></i> <span>Support Tickets Queue</span>
-                        </a>
-                        <a data-active-pages="support-create-ticket.php" class="nav-link-custom" href="support-create-ticket.php">
-                            <i class="bi bi-plus-circle me-2 text-primary"></i> <span>Create Support Ticket</span>
+                        <a data-active-pages="support-tickets.php,support-create-ticket.php" class="nav-link-custom" href="support-tickets.php">
+                            <i class="bi bi-headset me-2"></i> <span>Support Tickets</span>
                         </a>
                         <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
-                            <i class="bi bi-file-earmark-bar-graph me-2"></i> <span>Ticket &amp; SLA Reports</span>
+                            <i class="bi bi-file-earmark-bar-graph me-2"></i> <span>SLA Reports</span>
                         </a>
                     </div>
 
-                    <!-- 8. Sales Targets & Quotas Panel Section -->
+                    <!-- 8. Sales Targets -->
                     <div class="panel-section" data-panel="Target">
-                        <div class="nav-label">Sales Targets &amp; Quotas</div>
-
-                        <a data-active-pages="target.php" class="nav-link-custom fw-semibold mb-2" href="target.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-bullseye me-2"></i> <span>Sales Target Overview</span>
+                        <div class="nav-label">Sales Targets</div>
+                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php">
+                            <i class="bi bi-bullseye me-2"></i> <span>Target Overview</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Quotas &amp; Incentive Slabs</div>
                         <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php">
-                            <i class="bi bi-tags me-2"></i> <span>Brand-wise Targets</span>
+                            <i class="bi bi-tags me-2"></i> <span>Brand Targets</span>
                         </a>
                         <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Target Incentive Slabs</span>
+                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Target Slabs</span>
                         </a>
                     </div>
 
-                    <!-- 9. Sales Team & Field Force Panel Section -->
+                    <!-- 9. Sales Team & Field Force -->
                     <div class="panel-section" data-panel="Staff">
-                        <div class="nav-label">Sales Team &amp; Field Force</div>
-
-                        <a data-active-pages="staff.php" class="nav-link-custom fw-semibold mb-2" href="staff.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-people-fill me-2"></i> <span>Staff &amp; Sales Directory</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Team Onboarding &amp; Field Visits</div>
-                        <a data-active-pages="staff-create.php" class="nav-link-custom" href="staff-create.php">
-                            <i class="bi bi-person-plus me-2 text-primary"></i> <span>Onboard Staff Member</span>
+                        <div class="nav-label">Staff &amp; Field Force</div>
+                        <a data-active-pages="staff.php,staff-create.php" class="nav-link-custom" href="staff.php">
+                            <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
                         </a>
                         <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Field Visit Reports</span>
+                            <i class="bi bi-geo-alt me-2"></i> <span>Visiting Reports</span>
                         </a>
                         <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Live GPS Location Map</span>
+                            <i class="bi bi-pin-map me-2"></i> <span>Location Map</span>
                         </a>
                     </div>
 
-                    <!-- 10. Master Data Panel Section -->
+                    <!-- 10. Master Data (Grouped into Clean Collapsible Categories) -->
                     <div class="panel-section" data-panel="Master">
                         <div class="nav-label">Master Data</div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">CRM &amp; Sales Pipeline</div>
-                        <a data-active-pages="lead-stage.php,lead-stages-master.php" class="nav-link-custom" href="lead-stage.php">
-                            <i class="bi bi-layers me-2"></i> <span>Lead Stages</span>
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#masterLeadSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-layers me-2"></i> <span>Lead Masters</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="lead-sources-master.php" class="nav-link-custom" href="lead-sources-master.php">
-                            <i class="bi bi-diagram-2 me-2"></i> <span>Lead Sources</span>
-                        </a>
-                        <a data-active-pages="lead-status-master.php" class="nav-link-custom" href="lead-status-master.php">
-                            <i class="bi bi-flag me-2"></i> <span>Lead Status</span>
-                        </a>
+                        <div class="collapse tree-submenu" id="masterLeadSubmenu">
+                            <a data-active-pages="lead-stage.php,lead-stages-master.php" class="tree-link" href="lead-stage.php">Lead Stages</a>
+                            <a data-active-pages="lead-sources-master.php" class="tree-link" href="lead-sources-master.php">Lead Sources</a>
+                            <a data-active-pages="lead-status-master.php" class="tree-link" href="lead-status-master.php">Lead Status</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Customers &amp; Billing</div>
-                        <a data-active-pages="customer-categories.php" class="nav-link-custom" href="customer-categories.php">
-                            <i class="bi bi-people me-2"></i> <span>Customer Categories</span>
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#masterCustSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-people me-2"></i> <span>Customer Masters</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="industry-verticals.php" class="nav-link-custom" href="industry-verticals.php">
-                            <i class="bi bi-buildings me-2"></i> <span>Industry Verticals</span>
-                        </a>
-                        <a data-active-pages="group-master.php" class="nav-link-custom" href="group-master.php">
-                            <i class="bi bi-collection me-2"></i> <span>Customer Groups</span>
-                        </a>
-                        <a data-active-pages="payment-terms-master.php" class="nav-link-custom" href="payment-terms-master.php">
-                            <i class="bi bi-credit-card-2-front me-2"></i> <span>Payment Terms</span>
-                        </a>
+                        <div class="collapse tree-submenu" id="masterCustSubmenu">
+                            <a data-active-pages="customer-categories.php" class="tree-link" href="customer-categories.php">Customer Categories</a>
+                            <a data-active-pages="industry-verticals.php" class="tree-link" href="industry-verticals.php">Industry Verticals</a>
+                            <a data-active-pages="group-master.php" class="tree-link" href="group-master.php">Customer Groups</a>
+                            <a data-active-pages="payment-terms-master.php" class="tree-link" href="payment-terms-master.php">Payment Terms</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Meetings &amp; Field Visits</div>
-                        <a data-active-pages="appointment-types.php,meeting-types-master.php" class="nav-link-custom" href="appointment-types.php">
-                            <i class="bi bi-calendar2-event me-2"></i> <span>Meeting Types</span>
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#masterMeetSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-calendar2-event me-2"></i> <span>Meeting Masters</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="meeting-outcomes-master.php" class="nav-link-custom" href="meeting-outcomes-master.php">
-                            <i class="bi bi-clipboard2-check me-2"></i> <span>Meeting Outcomes</span>
-                        </a>
-                        <a data-active-pages="visit-activity-types.php" class="nav-link-custom" href="visit-activity-types.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Visit Activity Types</span>
-                        </a>
+                        <div class="collapse tree-submenu" id="masterMeetSubmenu">
+                            <a data-active-pages="appointment-types.php,meeting-types-master.php" class="tree-link" href="appointment-types.php">Meeting Types</a>
+                            <a data-active-pages="meeting-outcomes-master.php" class="tree-link" href="meeting-outcomes-master.php">Meeting Outcomes</a>
+                            <a data-active-pages="visit-activity-types.php" class="tree-link" href="visit-activity-types.php">Visit Activity Types</a>
+                        </div>
 
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Projects &amp; Support</div>
-                        <a data-active-pages="project-types-master.php" class="nav-link-custom" href="project-types-master.php">
-                            <i class="bi bi-folder-check me-2"></i> <span>Project Types</span>
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#masterProjSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-box-seam me-2"></i> <span>Catalog &amp; Projects</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
-                        <a data-active-pages="milestone-templates.php" class="nav-link-custom" href="milestone-templates.php">
-                            <i class="bi bi-signpost-split me-2"></i> <span>Milestone Templates</span>
-                        </a>
-                        <a data-active-pages="ticket-categories.php" class="nav-link-custom" href="ticket-categories.php">
-                            <i class="bi bi-ticket-perforated me-2"></i> <span>Ticket Categories</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Brand &amp; Product Catalog</div>
-                        <a data-active-pages="brand-master.php" class="nav-link-custom" href="brand-master.php">
-                            <i class="bi bi-patch-check me-2"></i> <span>Brand Master</span>
-                        </a>
-                        <a data-active-pages="product-catalog-master.php" class="nav-link-custom" href="product-catalog-master.php">
-                            <i class="bi bi-box-seam me-2"></i> <span>Product &amp; Service Catalog</span>
-                        </a>
+                        <div class="collapse tree-submenu" id="masterProjSubmenu">
+                            <a data-active-pages="brand-master.php" class="tree-link" href="brand-master.php">Brands</a>
+                            <a data-active-pages="product-catalog-master.php" class="tree-link" href="product-catalog-master.php">Product Catalog</a>
+                            <a data-active-pages="project-types-master.php" class="tree-link" href="project-types-master.php">Project Types</a>
+                            <a data-active-pages="milestone-templates.php" class="tree-link" href="milestone-templates.php">Milestone Templates</a>
+                            <a data-active-pages="ticket-categories.php" class="tree-link" href="ticket-categories.php">Ticket Categories</a>
+                        </div>
                     </div>
 
-                    <!-- 11. System Settings Panel Section -->
+                    <!-- 11. System Settings -->
                     <div class="panel-section" data-panel="Settings">
-                        <div class="nav-label">System Settings</div>
+                        <div class="nav-label">Settings</div>
 
-                        <a data-active-pages="settings.php" class="nav-link-custom fw-semibold mb-2" href="settings.php" style="color:var(--primary, #16a34a); background:rgba(22, 163, 74, 0.08); border-radius:8px;">
-                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview Hub</span>
+                        <a data-active-pages="settings.php" class="nav-link-custom" href="settings.php">
+                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
                         </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Organization &amp; Geo Setup</div>
                         <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
                             <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
                         </a>
-                        <a data-active-pages="country.php" class="nav-link-custom" href="country.php">
-                            <i class="bi bi-globe-americas me-2"></i> <span>Countries</span>
+                        <a data-active-pages="role.php,permission-modules.php" class="nav-link-custom" href="role.php">
+                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access</span>
                         </a>
-                        <a data-active-pages="state.php" class="nav-link-custom" href="state.php">
-                            <i class="bi bi-map me-2"></i> <span>States &amp; Provinces</span>
-                        </a>
-                        <a data-active-pages="district.php" class="nav-link-custom" href="district.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Districts &amp; Cities</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Security &amp; Access Control</div>
-                        <a data-active-pages="role.php" class="nav-link-custom" href="role.php">
-                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Permissions</span>
-                        </a>
-                        <a data-active-pages="permission-modules.php" class="nav-link-custom" href="permission-modules.php">
-                            <i class="bi bi-key me-2"></i> <span>Permission Modules</span>
-                        </a>
-
-                        <div class="px-2 pt-2 pb-1 text-uppercase text-muted fw-bold" style="font-size:10px; letter-spacing:0.5px;">Finance &amp; SLA Policies</div>
                         <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
                             <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
                         </a>
                         <a data-active-pages="sla-policies.php,sla-policies-severity.php" class="nav-link-custom" href="sla-policies.php">
-                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies &amp; Severity</span>
+                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies</span>
                         </a>
+
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#settingsGeoSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-globe-americas me-2"></i> <span>Locations</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
+                        </a>
+                        <div class="collapse tree-submenu" id="settingsGeoSubmenu">
+                            <a data-active-pages="country.php" class="tree-link" href="country.php">Countries</a>
+                            <a data-active-pages="state.php" class="tree-link" href="state.php">States</a>
+                            <a data-active-pages="district.php" class="tree-link" href="district.php">Districts</a>
+                        </div>
                     </div>
                 </div>
             </div>
