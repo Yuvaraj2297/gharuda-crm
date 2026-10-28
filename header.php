@@ -836,6 +836,7 @@
                     <div class="small text-muted mb-2">Convert won deals into Customer Accounts with unified 360&deg; ledger, contacts, and files.</div>
                     <div class="d-flex flex-wrap gap-1">
                         <a href="customer-dashboard.php" class="badge bg-white text-dark border text-decoration-none">360 Dashboard</a>
+                        <a href="customer-new.php" class="badge bg-white text-dark border text-decoration-none">+ New Customer</a>
                         <a href="customers.php" class="badge bg-white text-dark border text-decoration-none">Customers Directory</a>
                         <a href="contacts.php" class="badge bg-white text-dark border text-decoration-none">Contacts</a>
                     </div>
@@ -1052,8 +1053,11 @@
                         <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php">
                             <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg;</span>
                         </a>
-                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php">
+                        <a data-active-pages="customers.php,customer-view.php,customer-import.php" class="nav-link-custom" href="customers.php">
                             <i class="bi bi-person-vcard me-2"></i> <span>Customers List</span>
+                        </a>
+                        <a data-active-pages="customer-new.php" class="nav-link-custom" href="customer-new.php">
+                            <i class="bi bi-building-add me-2"></i> <span>New Customer</span>
                         </a>
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php">
                             <i class="bi bi-people me-2"></i> <span>Contacts</span>
