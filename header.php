@@ -890,51 +890,61 @@
                 <!-- 1. CRM: Leads, Deals, Quotes, Contracts & Omnichannel -->
                 <button data-rail-flag="isLeadActive" type="button" class="rail-btn" data-panel-target="CRM" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Leads &amp; Sales Pipeline" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-kanban"></i>
+                    <span class="rail-label">CRM</span>
                 </button>
 
                 <!-- 2. Meetings, Appointments, Callbacks & MOM -->
                 <button data-rail-flag="isApptMomActive" type="button" class="rail-btn" data-panel-target="Appointments" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Meetings &amp; MOM" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-calendar2-week"></i>
+                    <span class="rail-label">MOM</span>
                 </button>
 
                 <!-- 3. Customers 360 & Contacts -->
                 <button data-rail-flag="isCustomersActive" type="button" class="rail-btn" data-panel-target="Customers" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Customers &amp; 360&deg;" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-person-vcard"></i>
+                    <span class="rail-label">CUS</span>
                 </button>
 
                 <!-- 4. Project Delivery & Tasks -->
                 <button data-rail-flag="isProjectMgmtActive" type="button" class="rail-btn" data-panel-target="Project Management" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Projects &amp; Tasks" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-briefcase-fill"></i>
+                    <span class="rail-label">PRJ</span>
                 </button>
 
                 <!-- 5. Billing, GST Invoicing, Payments & Field Expenses -->
                 <button data-rail-flag="isExpenseActive" type="button" class="rail-btn" data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Billing &amp; Invoicing" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-receipt"></i>
+                    <span class="rail-label">INV</span>
                 </button>
 
                 <!-- 6. Petty Cash Management -->
                 <button data-rail-flag="isPettyCashActive" type="button" class="rail-btn" data-panel-target="PettyCash" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Petty Cash" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-safe"></i>
+                    <span class="rail-label">CSH</span>
                 </button>
 
                 <!-- 7. Customer Support & SLA Helpdesk -->
                 <button data-rail-flag="isSupportActive" type="button" class="rail-btn" data-panel-target="Support" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Support &amp; SLA" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-headset"></i>
+                    <span class="rail-label">SUP</span>
                 </button>
 
                 <!-- 8. Sales Targets & Quotas -->
                 <button data-rail-flag="isTargetActive" type="button" class="rail-btn" data-panel-target="Target" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Sales Targets" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-bullseye"></i>
+                    <span class="rail-label">TGT</span>
                 </button>
 
                 <!-- 9. Sales Team & Field Force -->
                 <button data-rail-flag="isStaffActive" type="button" class="rail-btn" data-panel-target="Staff" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Sales Team &amp; Field Force" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-people-fill"></i>
+                    <span class="rail-label">STF</span>
                 </button>
 
                 <!-- 10. Master Data Configuration -->
                 <button data-rail-flag="isMasterActive" type="button" class="rail-btn" data-panel-target="Master" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Master Data" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-database"></i>
+                    <span class="rail-label">MST</span>
                 </button>
             </div>
 
@@ -942,6 +952,7 @@
             <div class="icon-rail-bottom">
                 <button data-rail-flag="isSettingsActive" type="button" class="rail-btn" data-panel-target="Settings" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="System Settings" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-gear"></i>
+                    <span class="rail-label">SET</span>
                 </button>
             </div>
         </aside>
