@@ -81,6 +81,58 @@
                         </div>
                     </td>
                 </tr>
+                <tr data-id="5">
+                    <td>5</td>
+                    <td class="fw-medium">IND-EPC</td>
+                    <td class="fw-medium">Solar, CCTV, Biometrics &amp; Automation (Hybrid EPC)</td>
+                    <td class="fw-medium">Site surveys, hardware stock dispatch, installation projects &amp; AMC</td>
+                    <td><span class="status-pill status-approved">Enable</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm edit btn-edit" data-id="5" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                            <button type="button" class="btn btn-sm danger btn-delete" data-id="5" title="Delete"><i class="mdi mdi-delete"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-id="6">
+                    <td>6</td>
+                    <td class="fw-medium">IND-TRD</td>
+                    <td class="fw-medium">Wholesale, Trading &amp; Distribution</td>
+                    <td class="fw-medium">Dealer sales orders, warehouse inventory, vendor POs &amp; brand targets</td>
+                    <td><span class="status-pill status-approved">Enable</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm edit btn-edit" data-id="6" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                            <button type="button" class="btn btn-sm danger btn-delete" data-id="6" title="Delete"><i class="mdi mdi-delete"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-id="7">
+                    <td>7</td>
+                    <td class="fw-medium">IND-CON</td>
+                    <td class="fw-medium">Real Estate, Construction &amp; Interiors</td>
+                    <td class="fw-medium">Site visits, MOMs, BoQ estimates, milestone projects &amp; petty cash</td>
+                    <td><span class="status-pill status-approved">Enable</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm edit btn-edit" data-id="7" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                            <button type="button" class="btn btn-sm danger btn-delete" data-id="7" title="Delete"><i class="mdi mdi-delete"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-id="8">
+                    <td>8</td>
+                    <td class="fw-medium">IND-SRV</td>
+                    <td class="fw-medium">B2B Consulting &amp; Service Agencies</td>
+                    <td class="fw-medium">Tele-calling follow-ups, callbacks, retainer contracts &amp; GST billing</td>
+                    <td><span class="status-pill status-approved">Enable</span></td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm edit btn-edit" data-id="8" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                            <button type="button" class="btn btn-sm danger btn-delete" data-id="8" title="Delete"><i class="mdi mdi-delete"></i></button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

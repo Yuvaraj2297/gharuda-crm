@@ -69,6 +69,144 @@
         </div>
     </div>
 
+    <!-- Business Type & Multi-Industry CRM/ERP Mode Selector -->
+    <div class="card border-0 shadow-sm rounded-3 p-4 mb-4 bg-white">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3 pb-2 border-bottom">
+            <div>
+                <h5 class="fw-bold text-dark mb-1"><i class="bi bi-Shop-window text-success me-2"></i>Company Business Type &amp; Industry Workflow Mode</h5>
+                <span class="text-muted small">Configure which business model your organization operates so CRM &amp; ERP workflows adapt automatically</span>
+            </div>
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold" id="activeBizModeBadge">
+                <i class="bi bi-check-circle-fill me-1"></i>Active: Hybrid Multi-Industry ERP (All 6 Business Types Enabled)
+            </span>
+        </div>
+
+        <div class="row g-3" id="bizTypeCards">
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-light-subtle position-relative biz-mode-card border-success" data-mode="Hybrid Multi-Industry ERP (All Modules)" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-success text-white">1. All-in-One Hybrid</span>
+                        <a href="lead.php" class="small fw-bold text-decoration-none">Test Flow &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">Solar, CCTV, Biometrics &amp; Automation</h6>
+                    <p class="text-muted small mb-2">Combines On-Site Surveys, Hardware Stock Dispatch, Vendor POs, Site Installation Projects &amp; Warranty RMA Tickets.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-white text-dark border">Inventory &amp; PO</span>
+                        <span class="badge bg-white text-dark border">Installation Projects</span>
+                        <span class="badge bg-white text-dark border">AMC &amp; RMA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-white position-relative biz-mode-card" data-mode="IT, Software &amp; Digital Agency" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle">2. Software &amp; IT</span>
+                        <a href="projects-list.php" class="small fw-bold text-decoration-none">Open Projects &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">IT, SaaS &amp; Software Companies</h6>
+                    <p class="text-muted small mb-2">Leads &rarr; Online Demo (Meet/Zoom) &rarr; SAC Proposals &rarr; Agile Projects &amp; Kanban Tasks &rarr; Cloud SLA &amp; Bug Helpdesk.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-secondary border">Online Demos</span>
+                        <span class="badge bg-light text-secondary border">Projects &amp; Tasks</span>
+                        <span class="badge bg-light text-secondary border">Bug / API SLA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-white position-relative biz-mode-card" data-mode="Manufacturing, Trading &amp; Distribution" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-warning-subtle text-dark border border-warning-subtle">3. Manufacturing &amp; Trading</span>
+                        <a href="inventory.php" class="small fw-bold text-decoration-none">Open Inventory &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">Manufacturing, Wholesale &amp; Dealers</h6>
+                    <p class="text-muted small mb-2">IndiaMART/Dealer Leads &rarr; HSN Quotes &rarr; Sales Orders (SO) &rarr; Warehouse Stock &amp; Vendor POs &rarr; Brand Sales Targets.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-secondary border">Sales Orders</span>
+                        <span class="badge bg-light text-secondary border">Stock &amp; Vendor PO</span>
+                        <span class="badge bg-light text-secondary border">Brand Targets</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-white position-relative biz-mode-card" data-mode="Real Estate, Construction &amp; Interiors" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-info-subtle text-info border border-info-subtle">4. Construction &amp; Interiors</span>
+                        <a href="mom.php" class="small fw-bold text-decoration-none">Site MOMs &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">Real Estate, Builders &amp; Interiors</h6>
+                    <p class="text-muted small mb-2">Site Visit Scheduling &amp; MOM &rarr; BoQ Estimates &rarr; Stage-wise Project Milestones &rarr; Petty Cash &amp; Site Expenses.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-secondary border">Site Visits &amp; MOM</span>
+                        <span class="badge bg-light text-secondary border">Milestone Billing</span>
+                        <span class="badge bg-light text-secondary border">Petty Cash</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-white position-relative biz-mode-card" data-mode="B2B Services, Consulting &amp; Healthcare" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-secondary-subtle text-secondary border">5. B2B Services &amp; Clinics</span>
+                        <a href="follow-up-list.php" class="small fw-bold text-decoration-none">Follow-Ups &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">Consulting, Agencies &amp; Healthcare</h6>
+                    <p class="text-muted small mb-2">Daily Tele-calling Follow-Ups &amp; Callbacks &rarr; Client Appointments &rarr; Annual Retainer Contracts &rarr; GST Billing.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-secondary border">Follow-Up List</span>
+                        <span class="badge bg-light text-secondary border">Callbacks</span>
+                        <span class="badge bg-light text-secondary border">Retainer Contracts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded-3 p-3 h-100 bg-white position-relative biz-mode-card" data-mode="Field Sales &amp; FMCG Distribution" onclick="selectBusinessMode(this)" role="button">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle">6. Field Force &amp; Retail</span>
+                        <a href="staff-visiting-location-report.php" class="small fw-bold text-decoration-none">GPS Map &rarr;</a>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-1">Field Sales &amp; Territory Distribution</h6>
+                    <p class="text-muted small mb-2">Lead Map View &rarr; Field Executive GPS Visit Tracking &rarr; Travel Expense Claims &rarr; Executive Revenue Quotas.</p>
+                    <div class="d-flex flex-wrap gap-1">
+                        <span class="badge bg-light text-secondary border">Staff GPS Map</span>
+                        <span class="badge bg-light text-secondary border">Field Expenses</span>
+                        <span class="badge bg-light text-secondary border">Sales Targets</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function selectBusinessMode(cardEl) {
+        document.querySelectorAll('.biz-mode-card').forEach(function(c) {
+            c.classList.remove('border-success', 'bg-light-subtle');
+            c.classList.add('bg-white');
+        });
+        cardEl.classList.remove('bg-white');
+        cardEl.classList.add('border-success', 'bg-light-subtle');
+        var modeName = cardEl.getAttribute('data-mode');
+        localStorage.setItem('gh_business_mode', modeName);
+        var badge = document.getElementById('activeBizModeBadge');
+        if (badge) {
+            badge.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>Active: ' + modeName;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var savedMode = localStorage.getItem('gh_business_mode');
+        if (savedMode) {
+            document.querySelectorAll('.biz-mode-card').forEach(function(c) {
+                if (c.getAttribute('data-mode') === savedMode) {
+                    selectBusinessMode(c);
+                }
+            });
+        }
+    });
+    </script>
+
     <!-- Category Filter Tabs -->
     <div class="d-flex align-items-center gap-2 mb-4 overflow-auto pb-2" id="categoryTabs">
         <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 cat-btn active" data-filter="all">All Settings</button>
