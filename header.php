@@ -975,18 +975,6 @@
                         <a data-active-pages="dashboard.php,index.php" class="nav-link-custom" href="dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Executive Overview</span>
                         </a>
-                        <a class="nav-link-custom" href="lead-dashboard.php">
-                            <i class="bi bi-graph-up-arrow me-2"></i> <span>Sales &amp; Lead KPIs</span>
-                        </a>
-                        <a class="nav-link-custom" href="customer-dashboard.php">
-                            <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg; KPIs</span>
-                        </a>
-                        <a class="nav-link-custom" href="project-dashboard.php">
-                            <i class="bi bi-briefcase me-2"></i> <span>Project Delivery KPIs</span>
-                        </a>
-                        <a class="nav-link-custom" href="ticket-dashboard.php">
-                            <i class="bi bi-headset me-2"></i> <span>Support SLA KPIs</span>
-                        </a>
                     </div>
 
                     <!-- 02. Leads & Sales -->
@@ -1060,9 +1048,6 @@
                         <a data-active-pages="mom.php" class="nav-link-custom" href="mom.php">
                             <i class="bi bi-journal-text me-2"></i> <span>Minutes of Meeting (MOM)</span>
                         </a>
-                        <a data-active-pages="summary-report.php" class="nav-link-custom" href="summary-report.php">
-                            <i class="bi bi-bar-chart-line me-2"></i> <span>Meeting Summary Report</span>
-                        </a>
                     </div>
 
                     <!-- 05. Projects & Tasks -->
@@ -1076,12 +1061,6 @@
                         </a>
                         <a data-active-pages="project-create.php" class="nav-link-custom" href="project-create.php">
                             <i class="bi bi-plus-square me-2"></i> <span>Create Project</span>
-                        </a>
-                        <a data-active-pages="projects-report.php" class="nav-link-custom" href="projects-report.php">
-                            <i class="bi bi-file-earmark-bar-graph me-2"></i> <span>Projects Report</span>
-                        </a>
-                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
-                            <i class="bi bi-calendar2-range me-2"></i> <span>Daily Task Report</span>
                         </a>
                         <a data-active-pages="task-overview.php" class="nav-link-custom" href="task-overview.php">
                             <i class="bi bi-kanban me-2"></i> <span>Tasks Kanban</span>
@@ -1102,9 +1081,6 @@
                         <div class="nav-label">06. Inventory &amp; Procurement</div>
                         <a data-active-pages="inventory.php" class="nav-link-custom" href="inventory.php">
                             <i class="bi bi-boxes me-2"></i> <span>Inventory &amp; Stock</span>
-                        </a>
-                        <a data-active-pages="product-catalog-master.php" class="nav-link-custom" href="product-catalog-master.php">
-                            <i class="bi bi-box-seam me-2"></i> <span>Product SKU Catalog</span>
                         </a>
                         <a data-active-pages="purchase-orders.php" class="nav-link-custom" href="purchase-orders.php">
                             <i class="bi bi-cart-check me-2"></i> <span>Purchase Orders</span>
@@ -1132,9 +1108,6 @@
                         <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
                             <i class="bi bi-safe me-2"></i> <span>Petty Cash</span>
                         </a>
-                        <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Petty Cash Report</span>
-                        </a>
                     </div>
 
                     <!-- 08. Support & Helpdesk -->
@@ -1148,9 +1121,6 @@
                         </a>
                         <a data-active-pages="support-create-ticket.php" class="nav-link-custom" href="support-create-ticket.php">
                             <i class="bi bi-plus-circle me-2"></i> <span>Create Support Ticket</span>
-                        </a>
-                        <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
-                            <i class="bi bi-file-earmark-bar-graph me-2"></i> <span>SLA Reports</span>
                         </a>
                     </div>
 
@@ -1176,9 +1146,6 @@
                         </a>
                         <a data-active-pages="staff-create.php" class="nav-link-custom" href="staff-create.php">
                             <i class="bi bi-person-plus me-2"></i> <span>Create Staff</span>
-                        </a>
-                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Visiting Reports</span>
                         </a>
                         <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
                             <i class="bi bi-pin-map me-2"></i> <span>Staff Location Map</span>

@@ -302,7 +302,7 @@
                 'lead-stage.php', 'lead-stages-master.php', 'lead-sources-master.php', 'lead-status-master.php',
                 'brand-master.php', 'product-catalog-master.php', 'visit-activity-types.php', 'customer-categories.php',
                 'industry-verticals.php', 'payment-terms-master.php', 'meeting-types-master.php', 'meeting-outcomes-master.php',
-                'sales-target-slabs.php', 'project-types-master.php', 'milestone-templates.php', 'ticket-categories.php',
+                'project-types-master.php', 'milestone-templates.php', 'ticket-categories.php',
                 'group-master.php', 'appointment-types.php'
             ];
             var settingsPages = [
@@ -329,18 +329,18 @@
             var leadCorePages = ['lead.php', 'lead-map.php', 'follow-up-list.php', 'manage-leads.php', 'lead-filter.php'];
             var dealPages = ['deals.php', 'quotations.php', 'quotation-create.php', 'sales-orders.php', 'sales-order-create.php', 'contracts.php'];
             var commPages = ['mailbox.php', 'sms-chat.php', 'whatsapp-chat.php'];
-            var leadReportPages = ['employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'brandwise-report.php'];
-            var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
-            var projectCorePages = [' projects-list.php', 'projects-list.php', 'projects-report.php', 'projectwise-daily-task-report.php', 'project-create.php'];
+            var leadReportPages = ['employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'brandwise-report.php', 'projects-report.php', 'projectwise-daily-task-report.php', 'summary-report.php', 'petty-cash-report.php', 'ticket-reports.php', 'staff-visting-report.php'];
+            var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php'];
+            var projectCorePages = ['projects-list.php', 'project-create.php'];
             var taskCorePages = ['tasks-list.php', 'task-create.php', 'task-overview.php', 'score-card.php'];
-            var staffPages = ['staff.php', 'staff-create.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'employee-revenue-report.php', 'employee-lead-report.php'];
+            var staffPages = ['staff.php', 'staff-create.php', 'staff-visiting-location-report.php'];
             var customerPages = ['customers.php', 'customer-view.php', 'customer-new.php', 'customer-import.php', 'customer-dashboard.php', 'contacts.php'];
-            var inventoryPages = ['inventory.php', 'purchase-orders.php', 'purchase-order-create.php', 'vendors.php', 'product-catalog-master.php', 'commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
+            var inventoryPages = ['inventory.php', 'purchase-orders.php', 'purchase-order-create.php', 'vendors.php', 'commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
-            var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'ticket-reports.php', 'my-tickets.php'];
-            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php', 'petty-cash-report.php'];
-            var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php', 'petty-cash-report.php'];
-            var apptPages = ['appointments.php', 'appointment-schedule.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
+            var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'my-tickets.php'];
+            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php'];
+            var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php'];
+            var apptPages = ['appointments.php', 'appointment-schedule.php', 'past-meeting.php', 'callbacks.php'];
 
             var F = {};
             F.isMasterActive = has(masterPages);
