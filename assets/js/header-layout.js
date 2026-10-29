@@ -366,11 +366,11 @@
             F.isCustSelfActive = has(custSelfPages);
             F.isCustAdminActive = has(custAdminPages);
             F.isTicketActive = F.isTicketEmpActive || F.isTicketAdminActive || F.isCustSelfActive || F.isCustAdminActive;
-            F.isLeadCoreActive = has(leadCorePages);
+            F.isLeadCoreActive = has(leadCorePages) || cur === 'lead-dashboard.php';
             F.isDealActive = has(dealPages);
             F.isCommActive = has(commPages);
             F.isLeadReportActive = has(leadReportPages);
-            F.isLeadActive = cur === 'lead-dashboard.php' || F.isLeadCoreActive || F.isDealActive || F.isCommActive || F.isLeadReportActive;
+            F.isLeadActive = F.isLeadCoreActive || F.isDealActive;
             F.isApptMomActive = has(apptMomPages);
             F.isApptActive = has(apptPages);
             F.isTargetActive = cur === 'target.php' || cur === 'brand-target.php' || cur === 'sales-target-slabs.php';
