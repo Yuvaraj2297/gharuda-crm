@@ -913,4 +913,36 @@
             });
         });
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        try {
+            var savedProjects = JSON.parse(localStorage.getItem('gh_new_projects') || '[]');
+            var tbody = document.getElementById('projectsTableBody');
+            if (tbody && savedProjects.length > 0) {
+                savedProjects.forEach(function (p) {
+                    var initial = (p.name || 'P').charAt(0).toUpperCase();
+                    var tr = document.createElement('tr');
+                    tr.setAttribute('data-status', 'in-progress');
+                    tr.setAttribute('data-customer', p.customer || 'Client');
+                    tr.innerHTML =
+                        '<td class="fw-bold text-primary">NEW</td>' +
+                        '<td><a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">' +
+                        '<span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">' + initial + '</span>' +
+                        '<span>' + (p.name || 'New Project').replace(/</g, '&lt;') + '</span></a></td>' +
+                        '<td class="fw-semibold text-dark">' + (p.customer || 'Client').replace(/</g, '&lt;') + '</td>' +
+                        '<td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">' + (p.device || 'Web') + '</span></td>' +
+                        '<td class="text-center"><span class="badge bg-light border text-secondary fw-semibold">0%</span></td>' +
+                        '<td class="fw-semibold text-secondary">' + (p.startDate || '29-10-2026') + '</td>' +
+                        '<td class="fw-semibold text-secondary">' + (p.deadline || '15-11-2026') + '</td>' +
+                        '<td><span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2"><i class="bi bi-check2-circle me-1"></i>Active Delivery</span></td>' +
+                        '<td><div class="d-flex align-items-center gap-1"><span class="badge bg-primary-subtle text-primary rounded-circle p-2">PM</span></div></td>' +
+                        '<td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">' + (p.status || 'In Progress') + '</span></td>' +
+                        '<td class="text-center"><div class="btn-group btn-group-sm" role="group">' +
+                        '<a href="project-dashboard.php" class="btn btn-light border text-primary" title="View Project"><i class="bi bi-eye"></i></a>' +
+                        '<a href="task-create.php" class="btn btn-light border text-success" title="Assign Tasks"><i class="bi bi-plus-circle"></i></a>' +
+                        '</div></td>';
+                    tbody.insertBefore(tr, tbody.firstChild);
+                });
+            }
+        } catch (err) {}
+    });
 </script>

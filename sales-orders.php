@@ -19,6 +19,9 @@
             <a href="quotations.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
                 <i class="bi bi-file-earmark-text"></i><span>Quotations</span>
             </a>
+            <a href="projects-list.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
+                <i class="bi bi-briefcase"></i><span>Delivery Projects</span>
+            </a>
             <a href="inventory.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
                 <i class="bi bi-boxes"></i><span>Inventory Stock</span>
             </a>
@@ -136,6 +139,9 @@
                                 <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2 fw-semibold btn-dispatch-so" data-so="SO-2026-104" data-client="Power Spares Engineering" data-items="Gharuda Cloud CRM + 10 Biometric Terminals">
                                     <i class="bi bi-truck me-1"></i>Dispatch
                                 </button>
+                                <a href="project-create.php?so=SO-2026-104&amp;client=Power+Spares+Engineering&amp;project=Gharuda+Cloud+CRM+%26+Biometric+Setup&amp;amount=590000" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Service / Installation Project">
+                                    <i class="bi bi-briefcase me-1"></i>+ Project
+                                </a>
                                 <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-success btn-sm py-0 px-2 fw-semibold" title="Convert SO to Tax Invoice">
                                     <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
                                 </a>
@@ -165,6 +171,9 @@
                                 <a href="purchase-order-create.php?sku=SKU-SV-105&amp;item=Dell+PowerEdge+R250+ERP+Appliance&amp;vendor=Ingram+Micro+India+Pvt+Ltd&amp;qty=2&amp;rate=115000" class="btn btn-warning btn-sm py-0 px-2 fw-semibold" title="Raise Vendor PO for Backorder">
                                     <i class="bi bi-cart-plus me-1"></i>Raise PO
                                 </a>
+                                <a href="project-create.php?so=SO-2026-103&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Dell+PowerEdge+R250+Server+Deployment&amp;amount=389400" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Server Deployment Project">
+                                    <i class="bi bi-briefcase me-1"></i>+ Project
+                                </a>
                                 <a href="invoice-create.php?quote=QT-2026-081&amp;client=Hindustan+Hydraulics+Pvt+Ltd&amp;amount=389400" class="btn btn-outline-success btn-sm py-0 px-2" title="Proforma / Tax Invoice">
                                     <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
                                 </a>
@@ -191,10 +200,12 @@
                         <td data-so-status-cell><span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-2 py-1">Dispatched</span></td>
                         <td class="text-end pe-3">
                             <div class="d-inline-flex align-items-center gap-1">
-                                <a href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060" class="btn btn-success btn-sm py-0 px-2 fw-semibold">
-                                    <i class="bi bi-file-earmark-ruled me-1"></i>Generate Invoice
+                                <a href="project-create.php?so=SO-2026-102&amp;client=Zen+Publications&amp;project=Barcode+%26+POS+Rollout&amp;amount=138060" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Installation Project">
+                                    <i class="bi bi-briefcase me-1"></i>+ Project
                                 </a>
-                                <a href="projects-list.php" class="btn btn-outline-primary btn-sm py-0 px-2" title="Launch Installation Project"><i class="bi bi-briefcase"></i></a>
+                                <a href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060" class="btn btn-success btn-sm py-0 px-2 fw-semibold">
+                                    <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -268,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<td data-so-status-cell><span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">' + (s.status || 'Confirmed') + '</span></td>' +
                 '<td class="text-end pe-3"><div class="d-inline-flex align-items-center gap-1">' +
                 '<button type="button" class="btn btn-outline-primary btn-sm py-0 px-2 fw-semibold btn-dispatch-so" data-so="' + s.soNo + '" data-client="' + s.client + '" data-items="' + s.summary + '"><i class="bi bi-truck me-1"></i>Dispatch</button>' +
+                '<a href="project-create.php?so=' + encodeURIComponent(s.soNo) + '&client=' + encodeURIComponent(s.client) + '&project=' + encodeURIComponent(s.summary) + '&amount=' + encodeURIComponent(s.rawTotal || 150000) + '" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold"><i class="bi bi-briefcase me-1"></i>+ Project</a>' +
                 '<a href="invoice-create.php?quote=' + encodeURIComponent(s.soNo) + '&client=' + encodeURIComponent(s.client) + '&amount=' + encodeURIComponent(s.rawTotal || 150000) + '" class="btn btn-success btn-sm py-0 px-2 fw-semibold"><i class="bi bi-file-earmark-ruled me-1"></i>Invoice</a>' +
                 '</div></td>';
             tbody.insertBefore(tr, tbody.firstChild);

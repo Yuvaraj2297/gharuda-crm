@@ -488,6 +488,19 @@
             document.getElementById('projDescription').value = text.length > 0 ? quill.root.innerHTML : '';
         }
 
+        try {
+            var savedProjects = JSON.parse(localStorage.getItem('gh_new_projects') || '[]');
+            savedProjects.unshift({
+                name: name,
+                customer: customer,
+                device: document.getElementById('projDevice').value || 'Web',
+                status: document.getElementById('projStatus').value || 'In Progress',
+                rate: document.getElementById('projTotalRate').value || '0',
+                startDate: '29-10-2026',
+                deadline: '15-11-2026'
+            });
+            localStorage.setItem('gh_new_projects', JSON.stringify(savedProjects.slice(0, 20)));
+        } catch (err) {}
         alert('Project "' + name + '" created successfully!');
         window.location.href = 'projects-list.php';
     }
@@ -511,4 +524,52 @@
     });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var params = new URLSearchParams(window.location.search);
+    var qProject = params.get('project') || '';
+    var qClient = params.get('client') || '';
+    var qAmount = params.get('amount') || '';
+    var qSo = params.get('so') || '';
+
+    if (qProject && document.getElementById('projName')) {
+        document.getElementById('projName').value = qProject;
+    }
+    if (qAmount && document.getElementById('projTotalRate')) {
+        document.getElementById('projTotalRate').value = qAmount;
+    }
+    if (qClient && document.getElementById('projCustomer')) {
+        var custSel = document.getElementById('projCustomer');
+        var foundOpt = false;
+        for (var i = 0; i < custSel.options.length; i++) {
+            if (custSel.options[i].value.toLowerCase() === qClient.toLowerCase()) {
+                custSel.value = custSel.options[i].value;
+                foundOpt = true;
+                break;
+            }
+        }
+        if (!foundOpt) {
+            var newOpt = document.createElement('option');
+            newOpt.value = qClient;
+            newOpt.textContent = qClient;
+            newOpt.selected = true;
+            custSel.appendChild(newOpt);
+        }
+        setTimeout(function () {
+            if (typeof jQuery !== 'undefined') {
+                jQuery(custSel).val(custSel.value).trigger('change');
+            }
+        }, 150);
+    }
+    if (qProject || qClient || qSo) {
+        var formCard = document.querySelector('#createProjectMainForm');
+        if (formCard) {
+            var banner = document.createElement('div');
+            banner.className = 'alert alert-success d-flex align-items-center justify-content-between m-3 mb-0 py-2 px-3 rounded-3 border-0 shadow-sm';
+            banner.innerHTML = '<div><i class="bi bi-check-circle-fill me-2"></i><strong>Delivery Hand-off Active:</strong> Pre-filled from ' + (qSo ? 'Sales Order <b>' + qSo.replace(/</g, '&lt;') + '</b>' : 'Won Deal') + ' for <b>' + (qClient || 'Client').replace(/</g, '&lt;') + '</b>.</div><span class="badge bg-success text-white">Sales &rarr; Project</span>';
+            formCard.insertBefore(banner, formCard.firstChild);
+        }
+    }
+});
+</script>
 <?php include 'footer.php'; ?>

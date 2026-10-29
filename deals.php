@@ -380,15 +380,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var clientEl = card.querySelector('.bi-building') ? card.querySelector('.bi-building').parentElement : null;
         var clientName = clientEl ? clientEl.textContent.trim() : 'Client';
+        var titleEl = card.querySelector('h6.fw-bold');
+        var dealTitle = titleEl ? titleEl.textContent.trim() : 'Enterprise Project';
         var encClient = encodeURIComponent(clientName);
+        var encTitle = encodeURIComponent(dealTitle);
 
         if (!card.querySelector('.deal-quick-actions')) {
             var actBar = document.createElement('div');
             actBar.className = 'deal-quick-actions d-flex align-items-center justify-content-between gap-1 flex-wrap mt-2 pt-2 border-top';
             actBar.innerHTML =
                 '<a href="quotation-create.php?client=' + encClient + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Create Quotation"><i class="bi bi-file-earmark-text text-primary me-1"></i>Quote</a>' +
-                '<a href="customer-new.php?company=' + encClient + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Onboard Customer"><i class="bi bi-building-add text-success me-1"></i>Onboard</a>' +
-                '<a href="invoice-create.php?client=' + encClient + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Create Tax Invoice"><i class="bi bi-receipt text-dark me-1"></i>Invoice</a>';
+                '<a href="sales-order-create.php?client=' + encClient + '&amount=' + val + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Create Sales Order (Inventory)"><i class="bi bi-bag-check text-success me-1"></i>SO</a>' +
+                '<a href="project-create.php?client=' + encClient + '&project=' + encTitle + '&amount=' + val + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Launch Delivery Project"><i class="bi bi-briefcase text-dark me-1"></i>+ Project</a>';
             card.appendChild(actBar);
         }
 
