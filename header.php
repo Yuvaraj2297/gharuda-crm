@@ -141,7 +141,6 @@
 
         /* ================= ATTRACTIVE TREE SUBMENU DESIGN ================= */
 
-        /* Arrow icon rotation animation */
         .org-toggle-btn .toggle-icon {
             transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.75rem;
@@ -163,19 +162,16 @@
             color: var(--primary);
         }
 
-        /* Tree Structure Vertical Line Box */
         .tree-submenu {
             position: relative;
             margin-left: 18px !important;
             padding-left: 0 !important;
             border-left: 1.5px dashed var(--primary);
-            /* Dashed Line */
             margin-top: 4px;
             margin-bottom: 6px;
             margin-right: 6px;
         }
 
-        /* Submenu Link Styling */
         .tree-submenu .tree-link {
             position: relative;
             display: flex;
@@ -194,19 +190,6 @@
             transition: all 0.2s ease;
         }
 
-        /* Connector Horizontal Line */
-        .tree-submenu .tree-link::before {
-            /* content: '';
-            position: absolute;
-            left: -5px;
-            top: 50%;
-            width: 0;
-            height: 1.5px;
-            background-color: var(--primary);
-            transition: width 0.2s ease; */
-        }
-
-        /* Hover Effect */
         .tree-submenu .tree-link:hover {
             background-color: var(--border-soft);
             font-weight: 600;
@@ -217,7 +200,6 @@
             width: 10px;
         }
 
-        /* Active Link State with Horizontal Line Connection */
         .tree-submenu .tree-link.active {
             background: var(--primary-light);
             color: var(--primary-dark);
@@ -354,7 +336,6 @@
             border-top: 1px solid #f0f2f5;
         }
 
-        /* leave item: hover reveal approve / reject icons */
         .notif-hover-actions {
             display: none;
             align-items: center;
@@ -588,10 +569,10 @@
                         </span>
                         <div>
                             <div class="fw-bold" style="font-size:14px;line-height:1.2;">Quick Create Center</div>
-                            <div style="font-size:11.5px;color:rgba(255,255,255,0.75);">Instant 1-click record creation across CRM modules</div>
+                            <div style="font-size:11.5px;color:rgba(255,255,255,0.75);">Instant 1-click record creation across CRM &amp; ERP modules</div>
                         </div>
                     </div>
-                    <span class="badge rounded-pill" style="background:rgba(255,255,255,0.18);font-size:11px;">15 Actions</span>
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,0.18);font-size:11px;">16 Actions</span>
                 </div>
                 <div class="qc-mega-body">
                     <div class="qc-sec-label"><i class="bi bi-kanban text-success"></i> Sales, Pipeline &amp; Meetings</div>
@@ -640,7 +621,7 @@
                         </a>
                     </div>
 
-                    <div class="qc-sec-label"><i class="bi bi-briefcase text-primary"></i> Clients, Projects &amp; Billing</div>
+                    <div class="qc-sec-label"><i class="bi bi-briefcase text-primary"></i> Clients, Inventory, PO &amp; Billing</div>
                     <div class="qc-grid mb-0">
                         <a href="customer-new.php" class="qc-card-item">
                             <span class="qc-ico" style="background:#dcfce7;color:#15803d;"><i class="bi bi-building-add"></i></span>
@@ -649,11 +630,18 @@
                                 <div class="qc-item-sub">Onboard B2B / B2C client</div>
                             </div>
                         </a>
-                        <a href="contacts.php" class="qc-card-item">
-                            <span class="qc-ico" style="background:#e0e7ff;color:#4338ca;"><i class="bi bi-person-badge-fill"></i></span>
+                        <a href="purchase-order-create.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#fef3c7;color:#b45309;"><i class="bi bi-cart-plus-fill"></i></span>
                             <div class="min-w-0">
-                                <div class="qc-item-title">Add Client Contact</div>
-                                <div class="qc-item-sub">Save key decision maker</div>
+                                <div class="qc-item-title">Raise Purchase Order</div>
+                                <div class="qc-item-sub">Order vendor stock / GRN</div>
+                            </div>
+                        </a>
+                        <a href="inventory.php" class="qc-card-item">
+                            <span class="qc-ico" style="background:#e0e7ff;color:#4338ca;"><i class="bi bi-boxes"></i></span>
+                            <div class="min-w-0">
+                                <div class="qc-item-title">Inventory &amp; Stock</div>
+                                <div class="qc-item-sub">Manage SKUs &amp; warehouses</div>
                             </div>
                         </a>
                         <a href="project-create.php" class="qc-card-item">
@@ -661,13 +649,6 @@
                             <div class="min-w-0">
                                 <div class="qc-item-title">Create New Project</div>
                                 <div class="qc-item-sub">Launch project milestones</div>
-                            </div>
-                        </a>
-                        <a href="task-create.php" class="qc-card-item">
-                            <span class="qc-ico" style="background:#ccfbf1;color:#0f766e;"><i class="bi bi-check2-square"></i></span>
-                            <div class="min-w-0">
-                                <div class="qc-item-title">Assign New Task</div>
-                                <div class="qc-item-sub">Delegate team deliverable</div>
                             </div>
                         </a>
                         <a href="invoice-create.php" class="qc-card-item">
@@ -689,9 +670,10 @@
                 <div class="qc-mega-foot">
                     <span class="text-muted fw-semibold" style="font-size:11px;">More Actions:</span>
                     <div class="d-flex align-items-center gap-1.5 flex-wrap">
-                        <a href="expense-create.php" class="qc-foot-link"><i class="bi bi-receipt me-1 text-warning"></i>Field Expense</a>
-                        <a href="petty-cash-create.php" class="qc-foot-link"><i class="bi bi-safe me-1 text-primary"></i>Petty Cash Voucher</a>
-                        <a href="staff-create.php" class="qc-foot-link"><i class="bi bi-person-plus me-1 text-success"></i>Add Staff</a>
+                        <a href="sales-order-create.php" class="qc-foot-link"><i class="bi bi-bag-check me-1 text-primary"></i>New Sales Order (SO)</a>
+                        <a href="vendors.php" class="qc-foot-link"><i class="bi bi-building-gear me-1 text-success"></i>Vendors &amp; Suppliers</a>
+                        <a href="purchase-orders.php" class="qc-foot-link"><i class="bi bi-cart-check me-1 text-warning"></i>PO &amp; GRN Ledger</a>
+                        <a href="expense-create.php" class="qc-foot-link"><i class="bi bi-receipt me-1 text-danger"></i>Field Expense</a>
                     </div>
                 </div>
             </div>
@@ -734,7 +716,7 @@
                 <div class="notif-oc-icon"><i class="bi bi-bell"></i></div>
                 <div class="min-w-0">
                     <div class="notif-oc-title" id="bellNotifOffcanvasLabel">Notifications</div>
-                    <div class="notif-oc-sub">Lead & Client Alerts</div>
+                    <div class="notif-oc-sub">Lead &amp; Client Alerts</div>
                 </div>
                 <span class="notif-count-pill ms-2">3 new</span>
             </div>
@@ -847,15 +829,16 @@
                 </div>
                 <div class="p-2.5 rounded-3 border bg-light-subtle">
                     <div class="d-flex align-items-center justify-content-between mb-1">
-                        <span class="badge bg-secondary-subtle text-secondary fw-bold">Stage 5 &middot; Project Delivery</span>
-                        <a href="projects-list.php" class="small fw-bold text-decoration-none">Projects &rarr;</a>
+                        <span class="badge bg-secondary-subtle text-secondary fw-bold">Stage 5 &middot; Inventory, PO &amp; Delivery</span>
+                        <a href="inventory.php" class="small fw-bold text-decoration-none">Inventory &amp; PO &rarr;</a>
                     </div>
-                    <div class="small text-muted mb-2">Deliver client projects, milestones, daily tasks, and track team KPI scorecards.</div>
+                    <div class="small text-muted mb-2">Manage warehouse stock, raise vendor Purchase Orders (PO), receive GRN, and deliver projects.</div>
                     <div class="d-flex flex-wrap gap-1">
-                        <a href="project-dashboard.php" class="badge bg-white text-dark border text-decoration-none">Project Dashboard</a>
+                        <a href="inventory.php" class="badge bg-white text-dark border text-decoration-none">Inventory &amp; Stock</a>
+                        <a href="sales-orders.php" class="badge bg-white text-dark border text-decoration-none">Sales Orders (SO)</a>
+                        <a href="purchase-orders.php" class="badge bg-white text-dark border text-decoration-none">Purchase Orders (PO)</a>
+                        <a href="vendors.php" class="badge bg-white text-dark border text-decoration-none">Vendors &amp; Suppliers</a>
                         <a href="projects-list.php" class="badge bg-white text-dark border text-decoration-none">Projects List</a>
-                        <a href="task-overview.php" class="badge bg-white text-dark border text-decoration-none">Tasks Kanban</a>
-                        <a href="score-card.php" class="badge bg-white text-dark border text-decoration-none">Score Card</a>
                     </div>
                 </div>
                 <div class="p-2.5 rounded-3 border bg-light-subtle">
@@ -916,15 +899,15 @@
                     <span class="rail-label">PRJ</span>
                 </button>
 
-                <!-- 5. Billing, GST Invoicing, Payments & Field Expenses -->
-                <button data-rail-flag="isExpenseActive" type="button" class="rail-btn" data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Billing &amp; Invoicing" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-receipt"></i>
+                <!-- 5. Inventory, Stock & Purchase Orders -->
+                <button data-rail-flag="isInventoryActive" type="button" class="rail-btn" data-panel-target="Inventory" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Inventory &amp; Purchase Orders" data-bs-custom-class="custom-tooltip">
+                    <i class="bi bi-boxes"></i>
                     <span class="rail-label">INV</span>
                 </button>
 
-                <!-- 6. Petty Cash Management -->
-                <button data-rail-flag="isPettyCashActive" type="button" class="rail-btn" data-panel-target="PettyCash" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Petty Cash" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-safe"></i>
+                <!-- 6. Billing, GST Invoicing, Payments & Petty Cash -->
+                <button data-rail-flag="isExpenseActive" type="button" class="rail-btn" data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Billing, Finance &amp; Petty Cash" data-bs-custom-class="custom-tooltip">
+                    <i class="bi bi-receipt"></i>
                     <span class="rail-label">CSH</span>
                 </button>
 
@@ -999,6 +982,7 @@
                         <div data-show-flag="isDealActive" class="collapse tree-submenu" id="dealsSubmenu">
                             <a data-active-pages="deals.php" class="tree-link" href="deals.php">Deals Pipeline</a>
                             <a data-active-pages="quotations.php,quotation-create.php" class="tree-link" href="quotations.php">Quotations</a>
+                            <a data-active-pages="sales-orders.php,sales-order-create.php" class="tree-link" href="sales-orders.php">Sales Orders (SO)</a>
                             <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
                         </div>
 
@@ -1100,7 +1084,30 @@
                         </div>
                     </div>
 
-                    <!-- 5. Billing & Finance -->
+                    <!-- 5. Inventory & Purchase Orders (INV) -->
+                    <div class="panel-section" data-panel="Inventory">
+                        <div class="nav-label">Inventory &amp; Procurement</div>
+                        <a data-active-pages="inventory.php" class="nav-link-custom" href="inventory.php">
+                            <i class="bi bi-boxes me-2"></i> <span>Inventory &amp; Stock</span>
+                        </a>
+                        <a data-active-pages="sales-orders.php,sales-order-create.php" class="nav-link-custom" href="sales-orders.php">
+                            <i class="bi bi-bag-check me-2"></i> <span>Sales Orders (SO)</span>
+                        </a>
+                        <a data-active-pages="purchase-orders.php" class="nav-link-custom" href="purchase-orders.php">
+                            <i class="bi bi-cart-check me-2"></i> <span>Purchase Orders (PO)</span>
+                        </a>
+                        <a data-active-pages="purchase-order-create.php" class="nav-link-custom" href="purchase-order-create.php">
+                            <i class="bi bi-bag-plus me-2"></i> <span>Raise Purchase Order</span>
+                        </a>
+                        <a data-active-pages="vendors.php" class="nav-link-custom" href="vendors.php">
+                            <i class="bi bi-building-gear me-2"></i> <span>Vendors &amp; Suppliers</span>
+                        </a>
+                        <a data-active-pages="product-catalog-master.php" class="nav-link-custom" href="product-catalog-master.php">
+                            <i class="bi bi-box-seam me-2"></i> <span>Product SKU Catalog</span>
+                        </a>
+                    </div>
+
+                    <!-- 6. Billing, Finance & Petty Cash (CSH) -->
                     <div class="panel-section" data-panel="Expenses">
                         <div class="nav-label">Billing &amp; Finance</div>
                         <a data-active-pages="invoices.php,invoice-create.php" class="nav-link-custom" href="invoices.php">
@@ -1112,11 +1119,6 @@
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom" href="expenses.php">
                             <i class="bi bi-receipt me-2"></i> <span>Field Expenses</span>
                         </a>
-                    </div>
-
-                    <!-- 6. Petty Cash -->
-                    <div class="panel-section" data-panel="PettyCash">
-                        <div class="nav-label">Petty Cash</div>
                         <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
                             <i class="bi bi-safe me-2"></i> <span>Petty Cash List</span>
                         </a>

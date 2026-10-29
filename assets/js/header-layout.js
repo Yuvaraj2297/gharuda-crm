@@ -51,6 +51,10 @@
                     { cat: 'Deals & Proposals', title: 'CRM Cloud Migration Pack (₹5,00,000)', sub: 'Deal Stage: Discovery / Qualified', url: 'deals.php', icon: 'bi-currency-rupee text-success' },
                     { cat: 'Deals & Proposals', title: 'Quote #QT-2026-084 · ₹5,90,000', sub: 'Power Spares Engineering · Accepted', url: 'quotations.php', icon: 'bi-file-earmark-text text-primary' },
                     { cat: 'Deals & Proposals', title: 'Contract #CTR-2026-001 · Annual AMC', sub: 'Active SLA Agreement · ₹12,50,000', url: 'contracts.php', icon: 'bi-pen text-info' },
+                    { cat: 'Inventory & Procurement', title: 'Inventory & Stock Control (48 SKUs)', sub: '5 Low-Stock Reorder Alerts · 3 Warehouses', url: 'inventory.php', icon: 'bi-boxes text-primary' },
+                    { cat: 'Inventory & Procurement', title: 'Sales Orders (SO) & Dispatch Ledger', sub: '19 Confirmed Orders · ₹44.2L Order-to-Cash', url: 'sales-orders.php', icon: 'bi-bag-check text-info' },
+                    { cat: 'Inventory & Procurement', title: 'Purchase Orders (PO) & GRN Queue', sub: '4 Open POs · ₹24.6L Procurement', url: 'purchase-orders.php', icon: 'bi-cart-check text-success' },
+                    { cat: 'Inventory & Procurement', title: 'Vendors & Suppliers Directory (14)', sub: 'GSTIN Verified Suppliers · Net 30/45 Terms', url: 'vendors.php', icon: 'bi-building-gear text-warning' },
                     { cat: 'Billing & Projects', title: 'Invoice #INV-2026-088 · ₹2,50,000', sub: 'Zen Publications · Partially Paid', url: 'invoices.php', icon: 'bi-file-earmark-ruled text-warning' },
                     { cat: 'Billing & Projects', title: 'Solar Panel Installation Project', sub: 'Active Delivery · 75% Completed', url: 'projects-list.php', icon: 'bi-briefcase text-primary' },
                     { cat: 'Helpdesk & SLA', title: 'Support Tickets & SLA Queue', sub: 'Customer Helpdesk & Escalations', url: 'support-tickets.php', icon: 'bi-headset text-danger' }
@@ -323,7 +327,7 @@
             var custSelfPages = ['customer-dashboard.php', 'customer-create-ticket.php', 'customer-my-tickets.php'];
             var custAdminPages = ['cticket-admin.php'];
             var leadCorePages = ['lead.php', 'lead-map.php', 'follow-up-list.php', 'manage-leads.php', 'lead-filter.php'];
-            var dealPages = ['deals.php', 'quotations.php', 'quotation-create.php', 'contracts.php'];
+            var dealPages = ['deals.php', 'quotations.php', 'quotation-create.php', 'sales-orders.php', 'sales-order-create.php', 'contracts.php'];
             var commPages = ['mailbox.php', 'sms-chat.php', 'whatsapp-chat.php'];
             var leadReportPages = ['employee-revenue-report.php', 'employee-lead-report.php', 'lead-source-report.php', 'brandwise-report.php'];
             var apptMomPages = ['appointments.php', 'appointment-schedule.php', 'mom.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
@@ -331,10 +335,10 @@
             var taskCorePages = ['tasks-list.php', 'task-create.php', 'task-overview.php', 'score-card.php'];
             var staffPages = ['staff.php', 'staff-create.php', 'staff-visting-report.php', 'staff-visiting-location-report.php', 'employee-revenue-report.php', 'employee-lead-report.php'];
             var customerPages = ['customers.php', 'customer-view.php', 'customer-new.php', 'customer-import.php', 'customer-dashboard.php', 'contacts.php'];
-            var inventoryPages = ['commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
+            var inventoryPages = ['inventory.php', 'purchase-orders.php', 'purchase-order-create.php', 'vendors.php', 'product-catalog-master.php', 'commodity-list.php', 'inventry-receive-voucher.php', 'inventry-deliver-voucher.php', 'internal-deliver-note.php', 'loss-adjustment.php', 'warehouse.php', 'inventory-history.php', 'stock-summary-report.php', 'inventory-settings.php'];
             var manufacturingPages = ['manufacturing-dashboard.php', 'manufacturing-order.php', 'product-management.php', 'product-variant.php'];
             var supportPages = ['support-tickets.php', 'support-create-ticket.php', 'ticket-dashboard.php', 'ticket-reports.php', 'my-tickets.php'];
-            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'contracts.php'];
+            var expensePages = ['expenses.php', 'expense-create.php', 'invoices.php', 'invoice-create.php', 'payments.php', 'petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php', 'petty-cash-report.php'];
             var pettyCashPages = ['petty-cash.php', 'petty-cash-list.php', 'petty-cash-create.php', 'petty-cash-report.php'];
             var apptPages = ['appointments.php', 'appointment-schedule.php', 'past-meeting.php', 'callbacks.php', 'summary-report.php', 'appointment-types.php'];
 

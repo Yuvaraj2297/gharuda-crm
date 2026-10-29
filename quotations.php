@@ -19,6 +19,9 @@
             <a href="deals.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
                 <i class="bi bi-kanban"></i><span>Deals Pipeline</span>
             </a>
+            <a href="sales-orders.php" class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
+                <i class="bi bi-bag-check"></i><span>Sales Orders (SO)</span>
+            </a>
             <a href="contracts.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
                 <i class="bi bi-pen"></i><span>SLA Contracts</span>
             </a>
@@ -119,6 +122,7 @@
                         <td><span class="badge bg-success-subtle text-success border border-success-subtle">Accepted</span></td>
                         <td>
                             <div class="d-flex align-items-center gap-1 flex-nowrap">
+                                <a href="sales-order-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-sm btn-outline-primary py-1 px-2 fw-semibold" title="Convert to Sales Order"><i class="bi bi-bag-check me-1"></i>Sales Order</a>
                                 <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
                                 <a href="contracts.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
                                 <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
