@@ -90,9 +90,7 @@
                     <small class="text-muted">Track GST receivables, collect payments, and open Customer 360&deg; accounts</small>
                 </div>
             </div>
-            <a href="invoice-create.php" class="btn btn-primary btn-sm fw-semibold">
-                <i class="bi bi-plus-lg me-1"></i>New Tax Invoice
-            </a>
+            <span class="badge bg-light text-secondary border px-2.5 py-1.5">GST 18% Compliant</span>
         </div>
 
         <div class="table-responsive table-modern-wrap overflow-auto column-border">

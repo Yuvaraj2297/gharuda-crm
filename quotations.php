@@ -87,9 +87,15 @@
                     <small class="text-muted">Convert accepted quotes into Tax Invoices, SLA Contracts, or Delivery Projects in 1 click</small>
                 </div>
             </div>
-            <a href="quotation-create.php" class="btn btn-primary btn-sm fw-semibold">
-                <i class="bi bi-plus-lg me-1"></i>New Quote
-            </a>
+            <div class="d-flex align-items-center gap-2">
+                <select class="form-select form-select-sm" id="quoteStatusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Sent / Pending">Sent / Pending</option>
+                    <option value="In Negotiation">In Negotiation</option>
+                    <option value="Issued">Issued</option>
+                </select>
+            </div>
         </div>
 
         <div class="table-responsive table-modern-wrap overflow-auto column-border">
@@ -123,10 +129,10 @@
                         <td>
                             <div class="d-flex align-items-center gap-1 flex-nowrap">
                                 <a href="sales-order-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-sm btn-outline-primary py-1 px-2 fw-semibold" title="Convert to Sales Order"><i class="bi bi-bag-check me-1"></i>Sales Order</a>
-                                <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="project-create.php?so=QT-2026-084&amp;client=Power+Spares+Engineering&amp;project=CRM+Enterprise+%26+Biometric+Rollout&amp;amount=590000" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>
                                 <a href="contracts.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
-                                <a href="customer-view.php?id=1&amp;name=Power+Spares+Engineering" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                                <a href="quotation-create.php?clone=QT-2026-084&amp;client=Power+Spares+Engineering&amp;item=Cloud+CRM+Enterprise+License+%26+Biometric+Pack&amp;price=500000" class="btn btn-sm btn-light border text-info px-2 py-1" title="Duplicate / Re-Quote"><i class="bi bi-copy"></i></a>
                                 <button type="button" class="btn btn-sm btn-light border px-2 py-1" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
@@ -145,10 +151,11 @@
                         <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle">Sent / Pending</span></td>
                         <td>
                             <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="invoice-create.php?quote=QT-2026-089&amp;client=Zen+Publications" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="sales-order-create.php?quote=QT-2026-089&amp;client=Zen+Publications&amp;amount=890000" class="btn btn-sm btn-outline-primary py-1 px-2 fw-semibold" title="Convert to Sales Order"><i class="bi bi-bag-check me-1"></i>Sales Order</a>
+                                <a href="invoice-create.php?quote=QT-2026-089&amp;client=Zen+Publications&amp;amount=890000" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="project-create.php?so=QT-2026-089&amp;client=Zen+Publications&amp;project=Digital+Journal+Publishing+Engine&amp;amount=890000" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>
                                 <a href="contracts.php?quote=QT-2026-089&amp;client=Zen+Publications" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
-                                <a href="customer-view.php?id=2&amp;name=Zen+Publications" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                                <a href="quotation-create.php?clone=QT-2026-089&amp;client=Zen+Publications&amp;item=Digital+Journal+Publishing+Engine&amp;price=754237" class="btn btn-sm btn-light border text-info px-2 py-1" title="Duplicate / Re-Quote"><i class="bi bi-copy"></i></a>
                                 <button type="button" class="btn btn-sm btn-light border px-2 py-1" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
@@ -167,10 +174,11 @@
                         <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">In Negotiation</span></td>
                         <td>
                             <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="invoice-create.php?quote=QT-2026-092&amp;client=Hindustan+Hydraulics" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="sales-order-create.php?quote=QT-2026-092&amp;client=Hindustan+Hydraulics&amp;amount=1200000" class="btn btn-sm btn-outline-primary py-1 px-2 fw-semibold" title="Convert to Sales Order"><i class="bi bi-bag-check me-1"></i>Sales Order</a>
+                                <a href="invoice-create.php?quote=QT-2026-092&amp;client=Hindustan+Hydraulics&amp;amount=1200000" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>
+                                <a href="project-create.php?so=QT-2026-092&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Annual+AMC+%26+Enterprise+SLA&amp;amount=1200000" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>
                                 <a href="contracts.php?quote=QT-2026-092&amp;client=Hindustan+Hydraulics" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA Contract"><i class="bi bi-pen"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
-                                <a href="customer-view.php?id=3&amp;name=Hindustan+Hydraulics" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                                <a href="quotation-create.php?clone=QT-2026-092&amp;client=Hindustan+Hydraulics&amp;item=Annual+AMC+%26+Enterprise+SLA&amp;price=1016949" class="btn btn-sm btn-light border text-info px-2 py-1" title="Duplicate / Re-Quote"><i class="bi bi-copy"></i></a>
                                 <button type="button" class="btn btn-sm btn-light border px-2 py-1" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
@@ -186,13 +194,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var tbody = document.getElementById('quotationsTbody');
     try {
         var list = JSON.parse(localStorage.getItem('gh_new_quotes') || '[]');
+        var seenQuotes = {};
+        Array.from(tbody ? tbody.querySelectorAll('tr') : []).forEach(function(r) {
+            var code = (r.cells[0] ? r.cells[0].textContent.trim().replace('#', '') : '');
+            if (code) seenQuotes[code] = true;
+        });
+
         list.forEach(function(q) {
-            if (!tbody) return;
+            if (!tbody || !q.qNum) return;
+            var cleanQ = String(q.qNum).replace('#', '').trim();
+            if (seenQuotes[cleanQ]) return; // Prevent duplicate rows
+            seenQuotes[cleanQ] = true;
+
             var encCust = encodeURIComponent(q.cust || 'Client');
-            var encQ = encodeURIComponent(q.qNum || 'QT-2026');
+            var encQ = encodeURIComponent(cleanQ);
+            var rawAmt = Number(String(q.grand || '').replace(/[^0-9]/g, '')) || 150000;
+            var rawSub = Number(String(q.sub || '').replace(/[^0-9]/g, '')) || 125000;
             var tr = document.createElement('tr');
             tr.innerHTML =
-                '<td class="fw-bold text-primary">#' + q.qNum + '</td>' +
+                '<td class="fw-bold text-primary">#' + cleanQ + '</td>' +
                 '<td><a href="customer-view.php?id=1&name=' + encCust + '" class="fw-bold text-dark text-decoration-none">' + q.cust + '</a><div class="text-muted small">Newly Issued Proposal</div></td>' +
                 '<td>' + q.issue + '</td>' +
                 '<td>' + q.valid + '</td>' +
@@ -201,15 +221,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 '<td class="fw-bold text-dark">' + q.grand + '</td>' +
                 '<td><span class="badge bg-success-subtle text-success border border-success-subtle">Issued</span></td>' +
                 '<td><div class="d-flex align-items-center gap-1 flex-nowrap">' +
-                    '<a href="invoice-create.php?quote=' + encQ + '&client=' + encCust + '" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>' +
+                    '<a href="sales-order-create.php?quote=' + encQ + '&client=' + encCust + '&amount=' + rawAmt + '" class="btn btn-sm btn-outline-primary py-1 px-2 fw-semibold" title="Convert to Sales Order"><i class="bi bi-bag-check me-1"></i>Sales Order</a>' +
+                    '<a href="invoice-create.php?quote=' + encQ + '&client=' + encCust + '&amount=' + rawAmt + '" class="btn btn-sm btn-outline-success py-1 px-2 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-receipt me-1"></i>Invoice</a>' +
+                    '<a href="project-create.php?so=' + encQ + '&client=' + encCust + '&project=' + encodeURIComponent((q.item || 'Delivery Project')) + '&amount=' + rawAmt + '" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>' +
                     '<a href="contracts.php?quote=' + encQ + '&client=' + encCust + '" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA Contract"><i class="bi bi-pen"></i></a>' +
-                    '<a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>' +
-                    '<a href="customer-view.php?id=1&name=' + encCust + '" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>' +
+                    '<a href="quotation-create.php?clone=' + encQ + '&client=' + encCust + '&item=' + encodeURIComponent((q.item || 'Proposal Scope')) + '&price=' + rawSub + '" class="btn btn-sm btn-light border text-info px-2 py-1" title="Duplicate / Re-Quote"><i class="bi bi-copy"></i></a>' +
                     '<button type="button" class="btn btn-sm btn-light border px-2 py-1" title="Print Quotation" onclick="window.print();"><i class="bi bi-printer"></i></button>' +
                 '</div></td>';
             tbody.insertBefore(tr, tbody.firstChild);
         });
     } catch (e) {}
+
+    var statusFilter = document.getElementById('quoteStatusFilter');
+    if (statusFilter && tbody) {
+        statusFilter.addEventListener('change', function() {
+            var val = statusFilter.value.toLowerCase();
+            Array.from(tbody.querySelectorAll('tr')).forEach(function(r) {
+                var stText = r.cells[7] ? r.cells[7].textContent.trim().toLowerCase() : '';
+                r.style.display = (!val || stText.indexOf(val) !== -1) ? '' : 'none';
+            });
+        });
+    }
 });
 </script>
 

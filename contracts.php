@@ -104,9 +104,6 @@ $preClient = isset($_GET['client']) ? htmlspecialchars($_GET['client']) : (isset
                     <option value="Negotiation">In Negotiation</option>
                     <option value="Expired">Expired</option>
                 </select>
-                <button type="button" class="btn btn-primary btn-sm text-nowrap" data-bs-toggle="modal" data-bs-target="#newContractModal">
-                    <i class="bi bi-plus-lg me-1"></i>New Agreement
-                </button>
             </div>
         </div>
 

@@ -1,6 +1,8 @@
 <?php
 include 'header.php';
 $preClient = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : (isset($_GET['client']) ? htmlspecialchars($_GET['client']) : '');
+$preClone  = isset($_GET['clone']) ? htmlspecialchars($_GET['clone']) : '';
+$preSku    = isset($_GET['sku']) ? htmlspecialchars($_GET['sku']) : '';
 ?>
 
 <main class="container-fluid px-0">
@@ -8,7 +10,12 @@ $preClient = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : (i
     <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
         <div>
             <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                <h1 class="font-display fw-bold mb-0 page-title">Create Quotation / Estimate</h1>
+                <h1 class="font-display fw-bold mb-0 page-title"><?php echo $preClone ? 'Duplicate / Re-Quote Proposal' : 'Create Quotation / Estimate'; ?></h1>
+                <?php if ($preClone): ?>
+                    <span class="badge rounded-pill bg-info-subtle text-info border border-info-subtle px-3 py-2 fw-semibold">
+                        <i class="bi bi-copy me-1"></i>Cloned from #<?php echo $preClone; ?>
+                    </span>
+                <?php endif; ?>
                 <?php if ($preClient): ?>
                     <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold">
                         <i class="bi bi-building-check me-1"></i>Client: <?php echo $preClient; ?>
@@ -192,6 +199,9 @@ $preClient = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : (i
             <!-- Multi-Action Submit Bar -->
             <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 pt-3 border-top">
                 <a href="quotations.php" class="btn btn-outline-secondary">Cancel</a>
+                <button type="button" class="btn btn-outline-primary fw-semibold" onclick="submitQuotation('so')">
+                    <i class="bi bi-bag-check me-1"></i>Save &amp; Convert to Sales Order
+                </button>
                 <button type="button" class="btn btn-outline-success fw-semibold" onclick="submitQuotation('invoice')">
                     <i class="bi bi-receipt me-1"></i>Save &amp; Convert to Tax Invoice
                 </button>
@@ -223,6 +233,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     } catch (e) {}
+
+    // Load custom SKUs from Product Catalog Master (gh_new_skus)
+    try {
+        var catSel = document.getElementById('catalogQuickSelect');
+        var skus = JSON.parse(localStorage.getItem('gh_new_skus') || '[]');
+        skus.forEach(function(s) {
+            if (!catSel || !s.name) return;
+            var opt = document.createElement('option');
+            opt.value = s.name + '|' + (s.price || s.rate || 25000) + '|' + (s.gst || 18);
+            opt.textContent = (s.sku || 'SKU') + ' · ' + s.name + ' (₹' + Number(s.price || s.rate || 25000).toLocaleString('en-IN') + ')';
+            catSel.appendChild(opt);
+        });
+    } catch (e) {}
+
+    // Pre-fill item / price if passed via ?item=...&price=... (from Catalog Quote or Duplicate Quote)
+    var params = new URLSearchParams(window.location.search);
+    var pItem = params.get('item');
+    var pPrice = params.get('price');
+    if (pItem) {
+        var tbody = document.getElementById('quoteItemsTbody');
+        if (tbody) {
+            tbody.innerHTML = '';
+            addQuoteRow(pItem, Number(pPrice) || 150000, 18);
+        }
+    }
+
     calculateQuoteTotal();
 });
 
@@ -291,22 +327,33 @@ function submitQuotation(nextMode) {
         form.reportValidity();
         return;
     }
-    var qNum = document.getElementById('qNumber').value.replace('#', '');
+    var qNum = document.getElementById('qNumber').value.replace('#', '').trim();
     var issue = document.getElementById('qIssueDate').value;
     var valid = document.getElementById('qValidDate').value;
     var sub = document.getElementById('quoteSubtotal').textContent;
     var tax = document.getElementById('quoteTax').textContent;
     var grand = document.getElementById('quoteGrandTotal').textContent;
+    var rawGrand = Number(String(grand || '').replace(/[^0-9]/g, '')) || 150000;
+    var firstItemEl = document.querySelector('#quoteItemsTbody .item-desc');
+    var firstItem = firstItemEl ? firstItemEl.value.trim() : 'Enterprise Solution';
 
     try {
         var list = JSON.parse(localStorage.getItem('gh_new_quotes') || '[]');
-        list.unshift({ qNum: qNum, cust: cust, issue: issue, valid: valid, sub: sub, tax: tax, grand: grand });
+        // Remove any existing quote with the same qNum to prevent duplicates
+        list = list.filter(function(item) {
+            return String(item.qNum || '').replace('#', '').trim() !== qNum;
+        });
+        list.unshift({ qNum: qNum, cust: cust, issue: issue, valid: valid, sub: sub, tax: tax, grand: grand, item: firstItem });
         localStorage.setItem('gh_new_quotes', JSON.stringify(list.slice(0, 20)));
     } catch (e) {}
 
     var encCust = encodeURIComponent(cust);
+    if (nextMode === 'so') {
+        window.location.href = 'sales-order-create.php?quote=' + encodeURIComponent(qNum) + '&client=' + encCust + '&amount=' + rawGrand;
+        return;
+    }
     if (nextMode === 'invoice') {
-        window.location.href = 'invoice-create.php?quote=' + encodeURIComponent(qNum) + '&client=' + encCust;
+        window.location.href = 'invoice-create.php?quote=' + encodeURIComponent(qNum) + '&client=' + encCust + '&amount=' + rawGrand;
         return;
     }
     if (nextMode === 'contract') {
