@@ -789,6 +789,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body p-3">
+            <div class="d-flex gap-2 mb-3">
+                <a href="Gharuda-ERP-Visual-Diagram.xlsx" download="Gharuda-ERP-Visual-Diagram.xlsx" class="btn btn-success btn-sm flex-grow-1 d-inline-flex align-items-center justify-content-center gap-1 fw-bold"><i class="bi bi-file-earmark-excel"></i><span>Download ERP Blueprint (.xls)</span></a>
+                <a href="Gharuda-ERP-Visual-Diagram.csv" download="Gharuda-ERP-Visual-Diagram.csv" class="btn btn-outline-success btn-sm d-inline-flex align-items-center justify-content-center gap-1 fw-semibold"><i class="bi bi-filetype-csv"></i><span>CSV</span></a>
+            </div>
             <div class="d-flex flex-column gap-2">
                 <div class="p-2.5 rounded-3 border bg-light-subtle">
                     <div class="d-flex align-items-center justify-content-between mb-1">
