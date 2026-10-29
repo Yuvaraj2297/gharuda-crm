@@ -477,7 +477,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="1"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="1"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="1"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="1"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="1"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="1"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="1"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="1"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="2">
                     <td><span class="fw-semibold">4</span></td>
@@ -502,7 +502,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="2"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="2"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="2"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="2"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="2"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="2"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="2"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="2"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="3">
                     <td><span class="fw-semibold">3</span></td>
@@ -527,7 +527,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="3"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="3"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="4">
                     <td><span class="fw-semibold">2</span></td>
@@ -552,7 +552,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="4"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="4"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="5">
                     <td><span class="fw-semibold">1</span></td>
@@ -577,7 +577,7 @@
                     <td>Builders</td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="5"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="5"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 </tbody>
             </table>
@@ -1436,7 +1436,7 @@
                             <a href="appointments.php" class="btn btn-sm btn-outline-primary" style="border-radius:8px;font-size:12px;font-weight:600;" title="Schedule Meeting / Demo"><i class="bi bi-calendar2-event me-1"></i>Book Meeting</a>
                             <a href="quotation-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-outline-info" style="border-radius:8px;font-size:12px;font-weight:600;" title="Create Quotation"><i class="bi bi-file-earmark-text me-1"></i>Create Quote</a>
                             <a href="deals.php" class="btn btn-sm btn-outline-dark" style="border-radius:8px;font-size:12px;font-weight:600;" title="Add to Deals Pipeline"><i class="bi bi-currency-rupee me-1"></i>Deal</a>
-                            <button type="button" class="btn btn-sm ap-green-btn" id="ldConvertCustomerBtn" onclick="(function(){var c=document.getElementById('ldInfoCompany')?document.getElementById('ldInfoCompany').textContent.trim():'';var n=document.getElementById('ldInfoName')?document.getElementById('ldInfoName').textContent.trim():'';var p=document.getElementById('ldInfoPhone')?document.getElementById('ldInfoPhone').textContent.trim():'';var e=document.getElementById('ldInfoEmail')?document.getElementById('ldInfoEmail').textContent.trim():'';window.location.href='customer-new.php?from_lead=LD-187&company='+encodeURIComponent(c)+'&contact='+encodeURIComponent(n)+'&phone='+encodeURIComponent(p)+'&email='+encodeURIComponent(e);})()"><i class="bi bi-person-check me-1"></i>Convert to customer</button>
+                            <button type="button" class="btn btn-sm ap-green-btn" id="ldConvertCustomerBtn" onclick="(function(){var lid=document.getElementById('ldNumber')?document.getElementById('ldNumber').textContent.trim():'LD-187';var c=document.getElementById('ldInfoCompany')?document.getElementById('ldInfoCompany').textContent.trim():'';var n=document.getElementById('ldInfoName')?document.getElementById('ldInfoName').textContent.trim():'';var p=document.getElementById('ldInfoPhone')?document.getElementById('ldInfoPhone').textContent.trim():'';var e=document.getElementById('ldInfoEmail')?document.getElementById('ldInfoEmail').textContent.trim():'';window.location.href='customer-new.php?from_lead=LD-'+encodeURIComponent(lid)+'&company='+encodeURIComponent(c)+'&contact='+encodeURIComponent(n)+'&phone='+encodeURIComponent(p)+'&email='+encodeURIComponent(e);})()"><i class="bi bi-person-check me-1"></i>Convert to customer</button>
                             <button type="button" class="btn btn-sm ap-gray-btn" id="ldEditLeadBtn" title="Edit"><i class="bi bi-pencil-square"></i></button>
                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded-8-fs12"><i class="bi bi-printer"></i></button> -->
                             <div class="dropdown">
@@ -7977,4 +7977,91 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    function extractRowLead(tr) {
+        if (!tr) return null;
+        var cells = tr.querySelectorAll('td');
+        var leadNo = cells[0] ? cells[0].textContent.trim() : tr.getAttribute('data-id');
+        var name = cells[1] ? cells[1].textContent.trim() : '';
+        var company = cells[2] ? cells[2].textContent.trim() : '';
+        var enq = cells[3] ? cells[3].textContent.trim() : ('ENQ-0' + leadNo);
+        var phone = cells[9] ? cells[9].textContent.trim() : '';
+        var valTxt = cells[11] ? cells[11].textContent.trim() : '₹0.00';
+        var assigned = cells[13] ? cells[13].textContent.trim() : 'Unassigned';
+        var statusBtn = tr.querySelector('.lead-status-btn');
+        var status = statusBtn ? statusBtn.textContent.trim() : 'Lead';
+        var source = cells[16] ? cells[16].textContent.trim() : 'Direct';
+        if (company === '—') company = name;
+        if (phone === '—') phone = '';
+        if (enq === '—') enq = 'LD-' + leadNo;
+        var emailSlug = (name || 'contact').toLowerCase().replace(/[^a-z0-9]/g, '.') + '@' + (company || 'client').toLowerCase().replace(/[^a-z0-9]/g, '') + '.com';
+        return {
+            id: tr.getAttribute('data-id'),
+            lead_no: leadNo,
+            enq_code: enq,
+            name: name,
+            company: company,
+            phone: phone,
+            email: emailSlug,
+            value: valTxt,
+            assigned: assigned,
+            status: status,
+            source: source
+        };
+    }
+
+    function redirectConvertLead(rec) {
+        if (!rec) return;
+        window.location.href = 'customer-new.php?from_lead=' + encodeURIComponent(rec.enq_code || ('LD-' + rec.lead_no)) +
+            '&company=' + encodeURIComponent(rec.company || rec.name || '') +
+            '&contact=' + encodeURIComponent(rec.name || '') +
+            '&phone=' + encodeURIComponent(rec.phone || '') +
+            '&email=' + encodeURIComponent(rec.email || '');
+    }
+
+    function syncLeadModalFromRow(tr) {
+        var rec = extractRowLead(tr);
+        if (!rec) return;
+        var setTxt = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
+        setTxt('ldNumber', rec.lead_no);
+        setTxt('ldName', rec.name);
+        setTxt('ldCompanySubtitle', rec.company + ' · Lead Overview & Interaction History');
+        setTxt('ldInfoName', rec.name);
+        setTxt('ldInfoCompany', rec.company);
+        setTxt('ldInfoValue', rec.value);
+        setTxt('ldInfoStatus', rec.status);
+        setTxt('ldInfoSource', rec.source);
+        setTxt('ldInfoAssigned', rec.assigned);
+        var phEl = document.getElementById('ldInfoPhone');
+        if (phEl) phEl.innerHTML = rec.phone ? ('<a href="tel:' + rec.phone + '">' + rec.phone + '</a>') : '—';
+        var emEl = document.getElementById('ldInfoEmail');
+        if (emEl) emEl.innerHTML = '<a href="mailto:' + rec.email + '">' + rec.email + '</a>';
+    }
+
+    var tbody = document.getElementById('leadsTbody');
+    if (tbody) {
+        tbody.addEventListener('click', function (e) {
+            var convBtn = e.target.closest('.lead-act-btn[data-act="convert"]');
+            if (convBtn) {
+                e.stopPropagation();
+                redirectConvertLead(extractRowLead(convBtn.closest('tr[data-id]')));
+                return;
+            }
+            var stItem = e.target.closest('.lead-status-item[data-val="Customer"]');
+            if (stItem) {
+                var trSt = stItem.closest('tr[data-id]');
+                setTimeout(function () {
+                    redirectConvertLead(extractRowLead(trSt));
+                }, 150);
+                return;
+            }
+            var tr = e.target.closest('tr[data-id]');
+            if (tr) {
+                syncLeadModalFromRow(tr);
+            }
+        }, true);
+    }
+});
+</script>
 <?php include 'footer.php'; ?>

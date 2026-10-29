@@ -697,6 +697,12 @@ function submitNewCustomer(nextMode) {
             created: todayStr
         });
         localStorage.setItem('gh_new_customers', JSON.stringify(list.slice(0, 20)));
+        var fromLeadParam = <?php echo json_encode($fromLead); ?>;
+        if (fromLeadParam) {
+            var convLeads = JSON.parse(localStorage.getItem('gh_converted_leads') || '[]');
+            if (convLeads.indexOf(fromLeadParam) === -1) convLeads.push(fromLeadParam);
+            localStorage.setItem('gh_converted_leads', JSON.stringify(convLeads));
+        }
     } catch (e) {}
 
     // Prepend directly into the Recently Onboarded table on page
