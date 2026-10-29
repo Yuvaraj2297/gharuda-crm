@@ -1016,17 +1016,11 @@
                         <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php">
                             <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg;</span>
                         </a>
-                        <a data-active-pages="customers.php,customer-view.php" class="nav-link-custom" href="customers.php">
+                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php">
                             <i class="bi bi-person-vcard me-2"></i> <span>Customers List</span>
-                        </a>
-                        <a data-active-pages="customer-new.php" class="nav-link-custom" href="customer-new.php">
-                            <i class="bi bi-building-add me-2"></i> <span>New Customer</span>
                         </a>
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php">
                             <i class="bi bi-people me-2"></i> <span>Contacts</span>
-                        </a>
-                        <a data-active-pages="customer-import.php" class="nav-link-custom" href="customer-import.php">
-                            <i class="bi bi-upload me-2"></i> <span>Customer Import</span>
                         </a>
                     </div>
 
@@ -1056,20 +1050,14 @@
                         <a data-active-pages="project-dashboard.php" class="nav-link-custom" href="project-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Project Dashboard</span>
                         </a>
-                        <a data-active-pages="projects-list.php" class="nav-link-custom" href="projects-list.php">
+                        <a data-active-pages="projects-list.php,project-create.php" class="nav-link-custom" href="projects-list.php">
                             <i class="bi bi-briefcase me-2"></i> <span>Projects List</span>
-                        </a>
-                        <a data-active-pages="project-create.php" class="nav-link-custom" href="project-create.php">
-                            <i class="bi bi-plus-square me-2"></i> <span>Create Project</span>
                         </a>
                         <a data-active-pages="task-overview.php" class="nav-link-custom" href="task-overview.php">
                             <i class="bi bi-kanban me-2"></i> <span>Tasks Kanban</span>
                         </a>
-                        <a data-active-pages="tasks-list.php" class="nav-link-custom" href="tasks-list.php">
+                        <a data-active-pages="tasks-list.php,task-create.php" class="nav-link-custom" href="tasks-list.php">
                             <i class="bi bi-check2-square me-2"></i> <span>Tasks List</span>
-                        </a>
-                        <a data-active-pages="task-create.php" class="nav-link-custom" href="task-create.php">
-                            <i class="bi bi-plus-circle me-2"></i> <span>Create Task</span>
                         </a>
                         <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
                             <i class="bi bi-award me-2"></i> <span>Score Card</span>
@@ -1082,11 +1070,8 @@
                         <a data-active-pages="inventory.php" class="nav-link-custom" href="inventory.php">
                             <i class="bi bi-boxes me-2"></i> <span>Inventory &amp; Stock</span>
                         </a>
-                        <a data-active-pages="purchase-orders.php" class="nav-link-custom" href="purchase-orders.php">
+                        <a data-active-pages="purchase-orders.php,purchase-order-create.php" class="nav-link-custom" href="purchase-orders.php">
                             <i class="bi bi-cart-check me-2"></i> <span>Purchase Orders</span>
-                        </a>
-                        <a data-active-pages="purchase-order-create.php" class="nav-link-custom" href="purchase-order-create.php">
-                            <i class="bi bi-bag-plus me-2"></i> <span>Raise Purchase Order</span>
                         </a>
                         <a data-active-pages="vendors.php" class="nav-link-custom" href="vendors.php">
                             <i class="bi bi-building-gear me-2"></i> <span>Vendors &amp; Suppliers</span>
@@ -1116,11 +1101,8 @@
                         <a data-active-pages="ticket-dashboard.php" class="nav-link-custom" href="ticket-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span>
                         </a>
-                        <a data-active-pages="support-tickets.php" class="nav-link-custom" href="support-tickets.php">
+                        <a data-active-pages="support-tickets.php,support-create-ticket.php" class="nav-link-custom" href="support-tickets.php">
                             <i class="bi bi-headset me-2"></i> <span>Support Tickets</span>
-                        </a>
-                        <a data-active-pages="support-create-ticket.php" class="nav-link-custom" href="support-create-ticket.php">
-                            <i class="bi bi-plus-circle me-2"></i> <span>Create Support Ticket</span>
                         </a>
                     </div>
 
@@ -1141,11 +1123,8 @@
                     <!-- 10. Staff & Field Force -->
                     <div class="panel-section" data-panel="Staff">
                         <div class="nav-label">10. Staff &amp; Field Force</div>
-                        <a data-active-pages="staff.php" class="nav-link-custom" href="staff.php">
+                        <a data-active-pages="staff.php,staff-create.php" class="nav-link-custom" href="staff.php">
                             <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
-                        </a>
-                        <a data-active-pages="staff-create.php" class="nav-link-custom" href="staff-create.php">
-                            <i class="bi bi-person-plus me-2"></i> <span>Create Staff</span>
                         </a>
                         <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
                             <i class="bi bi-pin-map me-2"></i> <span>Staff Location Map</span>
