@@ -720,9 +720,10 @@ function submitNewCustomer(nextMode) {
             '<td><div class="d-flex align-items-center gap-1 flex-nowrap">' +
                 '<a href="customer-view.php?id=1&name=' + encoded + '" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360° Profile"><i class="bi bi-person-vcard"></i></a>' +
                 '<a href="quotation-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>' +
+                '<a href="sales-order-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Create Sales Order (Hardware Stock)"><i class="bi bi-bag-check"></i></a>' +
                 '<a href="invoice-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>' +
-                '<a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>' +
-                '<a href="contracts.php" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA / AMC Contract"><i class="bi bi-pen"></i></a>' +
+                '<a href="project-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>' +
+                '<a href="contracts.php?client=' + encoded + '" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Create SLA / AMC Contract"><i class="bi bi-pen"></i></a>' +
             '</div></td>';
         tbody.insertBefore(tr, tbody.firstChild);
     }

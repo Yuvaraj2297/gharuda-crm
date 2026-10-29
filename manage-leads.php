@@ -1748,6 +1748,19 @@ document.addEventListener('DOMContentLoaded', function () {
         tbody.querySelectorAll('tr[data-id]').forEach(function (tr) {
             var actWrap = tr.querySelector('td:last-child .d-flex');
             if (actWrap && !actWrap.querySelector('.ml-convert-btn')) {
+                var qBtn = document.createElement('button');
+                qBtn.type = 'button';
+                qBtn.className = 'btn btn-sm btn-outline-primary py-0 px-1 ml-quote-btn';
+                qBtn.title = 'Create Quotation';
+                qBtn.innerHTML = '<i class="bi bi-file-earmark-text"></i>';
+                qBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var name = tr.getAttribute('data-name') || '';
+                    var company = tr.getAttribute('data-company') || name;
+                    window.location.href = 'quotation-create.php?client=' + encodeURIComponent(company || name);
+                });
+                actWrap.insertBefore(qBtn, actWrap.children[1] || null);
+
                 var btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'btn btn-sm btn-outline-success py-0 px-1 ml-convert-btn';

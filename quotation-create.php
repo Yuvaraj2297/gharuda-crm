@@ -84,10 +84,18 @@ $preSku    = isset($_GET['sku']) ? htmlspecialchars($_GET['sku']) : '';
                 <div class="d-flex align-items-center gap-2 flex-wrap">
                     <select class="form-select form-select-sm" id="catalogQuickSelect" onchange="addCatalogSku(this)">
                         <option value="">+ Quick Add from Product Catalog (INV)...</option>
-                        <option value="Cloud CRM Enterprise License (Annual)|250000|18">SKU-001 · Cloud CRM Enterprise License (₹2,50,000)</option>
-                        <option value="Annual AMC & 24/7 Priority SLA Pack|120000|18">SKU-002 · Annual AMC &amp; Priority SLA (₹1,20,000)</option>
-                        <option value="WhatsApp Business API & Chatbot Integration|45000|18">SKU-003 · WhatsApp API Integration (₹45,000)</option>
-                        <option value="Mobile Field Force & Geo-Attendance Module|85000|18">SKU-004 · Mobile Field Force Module (₹85,000)</option>
+                        <optgroup label="Software Licenses &amp; Cloud Services">
+                            <option value="Cloud CRM Enterprise License (Annual)|250000|18">SKU-001 · Cloud CRM Enterprise License (₹2,50,000)</option>
+                            <option value="Annual AMC &amp; 24/7 Priority SLA Pack|120000|18">SKU-002 · Annual AMC &amp; Priority SLA (₹1,20,000)</option>
+                            <option value="WhatsApp Business API &amp; Chatbot Integration|45000|18">SKU-003 · WhatsApp API Integration (₹45,000)</option>
+                            <option value="Mobile Field Force &amp; Geo-Attendance Module|85000|18">SKU-004 · Mobile Field Force Module (₹85,000)</option>
+                        </optgroup>
+                        <optgroup label="Hardware, Devices &amp; Physical Stock">
+                            <option value="Biometric Attendance Terminal Pro|14500|18">SKU-HW-102 · Biometric Attendance Terminal Pro (₹14,500)</option>
+                            <option value="Industrial Barcode &amp; POS Scanner Kit|7800|18">SKU-HW-103 · Industrial Barcode &amp; POS Scanner Kit (₹7,800)</option>
+                            <option value="Dell PowerEdge R250 ERP Server Appliance|115000|18">SKU-SV-105 · Dell PowerEdge R250 Server Appliance (₹1,15,000)</option>
+                            <option value="Smart Access Control 8-Port Kit|28500|18">SKU-HW-106 · Smart Access Control 8-Port Kit (₹28,500)</option>
+                        </optgroup>
                     </select>
                     <button type="button" class="btn btn-outline-primary btn-sm text-nowrap fw-semibold" onclick="addQuoteRow()">
                         <i class="bi bi-plus-lg me-1"></i>Add Blank Row

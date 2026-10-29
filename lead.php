@@ -515,7 +515,7 @@
                     <td><span class="text-nowrap">30-Sep-2026</span></td>
                     <td><span class="text-nowrap">2 days ago</span></td>
                     <td><a href="tel:9840012345" class="text-decoration-none fw-semibold">9840012345</a></td>
-                    <td>ERP Software License</td>
+                    <td><span class="badge bg-info-subtle text-info border border-info-subtle me-1">SW</span> ERP Software License</td>
                     <td><span class="fw-bold text-success">₹85,000.00</span></td>
                     <td><span class="lead-tag-pill">Hot Lead</span> <span class="lead-tag-pill">Follow-up</span></td>
                     <td>Divya A.</td>
@@ -527,7 +527,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="3"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="3"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="3"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="3"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="4">
                     <td><span class="fw-semibold">2</span></td>
@@ -540,7 +540,7 @@
                     <td><span class="text-nowrap">12-Sep-2026</span></td>
                     <td><span class="text-nowrap">5 days ago</span></td>
                     <td><a href="tel:9884456789" class="text-decoration-none fw-semibold">9884456789</a></td>
-                    <td>HRMS Annual Subscription</td>
+                    <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle me-1">HW</span> Biometric Attendance Terminals (10 Units)</td>
                     <td><span class="fw-bold text-success">₹141,629.00</span></td>
                     <td><span class="lead-tag-pill">Won</span></td>
                     <td>Karthik R.</td>
@@ -552,7 +552,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="4"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="4"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="4"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="4"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="5">
                     <td><span class="fw-semibold">1</span></td>
@@ -565,7 +565,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="text-nowrap">Today</span></td>
                     <td><a href="tel:9500123456" class="text-decoration-none fw-semibold">9500123456</a></td>
-                    <td>Payroll Add-on Module</td>
+                    <td><span class="badge bg-info-subtle text-info border border-info-subtle me-1">SW</span> Payroll Add-on Module</td>
                     <td><span class="fw-bold text-success">₹23,629.00</span></td>
                     <td><span class="lead-tag-pill">Warm Lead</span></td>
                     <td>Divya A.</td>
@@ -577,7 +577,7 @@
                     <td>Builders</td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="5"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="5"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="5"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="5"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 </tbody>
             </table>
@@ -921,6 +921,12 @@
                                     <option>Attendance Module</option>
                                     <option>Recruitment Module</option>
                                     <option>Custom Development</option>
+                                    <optgroup label="Hardware, Biometrics &amp; IoT">
+                                        <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                        <option value="Industrial Barcode &amp; POS Scanner Kit">Industrial Barcode &amp; POS Scanner Kit</option>
+                                        <option value="Dell PowerEdge Server Appliance">Dell PowerEdge Server Appliance</option>
+                                        <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                    </optgroup>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-6">
@@ -3482,6 +3488,12 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                     <option>HRMS Subscription</option>
                                     <option>Payroll Module</option>
                                     <option>Custom Development</option>
+                                    <optgroup label="Hardware, Biometrics &amp; IoT">
+                                        <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                        <option value="Industrial Barcode &amp; POS Scanner Kit">Industrial Barcode &amp; POS Scanner Kit</option>
+                                        <option value="Dell PowerEdge Server Appliance">Dell PowerEdge Server Appliance</option>
+                                        <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                    </optgroup>
                                     <option>Consulting Hours</option>
                                 </select>
                                 <button type="button" class="btn btn-primary" id="npAddItemBtn" title="Add item"><i class="bi bi-plus-lg"></i></button>
@@ -3660,6 +3672,12 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                     <option>HRMS Subscription</option>
                                     <option>Payroll Module</option>
                                     <option>Custom Development</option>
+                                    <optgroup label="Hardware, Biometrics &amp; IoT">
+                                        <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                        <option value="Industrial Barcode &amp; POS Scanner Kit">Industrial Barcode &amp; POS Scanner Kit</option>
+                                        <option value="Dell PowerEdge Server Appliance">Dell PowerEdge Server Appliance</option>
+                                        <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                    </optgroup>
                                     <option>Consulting Hours</option>
                                 </select>
                                 <button type="button" class="btn btn-primary" title="Add item"><i class="bi bi-plus-lg"></i></button>
@@ -3858,6 +3876,12 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                     <option>HRMS Subscription</option>
                                     <option>Payroll Module</option>
                                     <option>Custom Development</option>
+                                    <optgroup label="Hardware, Biometrics &amp; IoT">
+                                        <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                        <option value="Industrial Barcode &amp; POS Scanner Kit">Industrial Barcode &amp; POS Scanner Kit</option>
+                                        <option value="Dell PowerEdge Server Appliance">Dell PowerEdge Server Appliance</option>
+                                        <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                    </optgroup>
                                     <option>Consulting Hours</option>
                                 </select>
                                 <button type="button" class="btn btn-primary" title="Add item"><i class="bi bi-plus-lg"></i></button>
@@ -7987,6 +8011,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var company = cells[2] ? cells[2].textContent.trim() : '';
         var enq = cells[3] ? cells[3].textContent.trim() : ('ENQ-0' + leadNo);
         var phone = cells[9] ? cells[9].textContent.trim() : '';
+        var product = cells[10] ? cells[10].textContent.trim() : '';
+        if (product === '—') product = '';
         var valTxt = cells[11] ? cells[11].textContent.trim() : '₹0.00';
         var assigned = cells[13] ? cells[13].textContent.trim() : 'Unassigned';
         var statusBtn = tr.querySelector('.lead-status-btn');
@@ -8005,10 +8031,19 @@ document.addEventListener('DOMContentLoaded', function () {
             phone: phone,
             email: emailSlug,
             value: valTxt,
+            product: product,
             assigned: assigned,
             status: status,
             source: source
         };
+    }
+
+    function redirectQuoteLead(rec) {
+        if (!rec) return;
+        var rawVal = Number(String(rec.value || '').replace(/[^0-9]/g, '')) || 50000;
+        window.location.href = 'quotation-create.php?client=' + encodeURIComponent(rec.company || rec.name || '') +
+            '&item=' + encodeURIComponent(rec.product || 'Solution Package') +
+            '&price=' + encodeURIComponent(rawVal);
     }
 
     function redirectConvertLead(rec) {
@@ -8042,6 +8077,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var tbody = document.getElementById('leadsTbody');
     if (tbody) {
         tbody.addEventListener('click', function (e) {
+            var qBtn = e.target.closest('.lead-act-btn[data-act="quote"]');
+            if (qBtn) {
+                e.stopPropagation();
+                redirectQuoteLead(extractRowLead(qBtn.closest('tr[data-id]')));
+                return;
+            }
             var convBtn = e.target.closest('.lead-act-btn[data-act="convert"]');
             if (convBtn) {
                 e.stopPropagation();
