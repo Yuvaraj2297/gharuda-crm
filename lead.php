@@ -477,7 +477,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="1"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="1"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="1"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="1"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="1"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="1"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="1"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="1"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="2">
                     <td><span class="fw-semibold">4</span></td>
@@ -502,7 +502,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="2"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="2"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="2"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="2"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="2"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="2"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="2"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="2"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="3">
                     <td><span class="fw-semibold">3</span></td>
@@ -527,7 +527,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="3"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="3"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="3"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="4">
                     <td><span class="fw-semibold">2</span></td>
@@ -552,7 +552,7 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="4"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="4"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="4"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 <tr data-id="5">
                     <td><span class="fw-semibold">1</span></td>
@@ -577,7 +577,7 @@
                     <td>Builders</td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="5"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="btn btn-sm btn-outline-primary py-0 px-1 lead-act-btn" title="Create Quotation" data-act="quote" data-id="5"><i class="bi bi-file-earmark-text"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-sm btn-outline-success py-0 px-1 lead-act-btn" title="Convert to Customer" data-act="convert" data-id="5"><i class="bi bi-person-check-fill"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
+                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
                 </tr>
                 </tbody>
             </table>
@@ -1441,8 +1441,8 @@
                             <a href="whatsapp-chat.php" class="btn btn-sm btn-outline-success" style="border-radius:8px;font-size:12px;font-weight:600;" title="WhatsApp Lead"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
                             <a href="appointments.php" class="btn btn-sm btn-outline-primary" style="border-radius:8px;font-size:12px;font-weight:600;" title="Schedule Meeting / Demo"><i class="bi bi-calendar2-event me-1"></i>Book Meeting</a>
                             <a href="quotation-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-outline-info" style="border-radius:8px;font-size:12px;font-weight:600;" title="Create Quotation"><i class="bi bi-file-earmark-text me-1"></i>Create Quote</a>
-                            <a href="deals.php" class="btn btn-sm btn-outline-dark" style="border-radius:8px;font-size:12px;font-weight:600;" title="Add to Deals Pipeline"><i class="bi bi-currency-rupee me-1"></i>Deal</a>
-                            <button type="button" class="btn btn-sm ap-green-btn" id="ldConvertCustomerBtn" onclick="(function(){var lid=document.getElementById('ldNumber')?document.getElementById('ldNumber').textContent.trim():'LD-187';var c=document.getElementById('ldInfoCompany')?document.getElementById('ldInfoCompany').textContent.trim():'';var n=document.getElementById('ldInfoName')?document.getElementById('ldInfoName').textContent.trim():'';var p=document.getElementById('ldInfoPhone')?document.getElementById('ldInfoPhone').textContent.trim():'';var e=document.getElementById('ldInfoEmail')?document.getElementById('ldInfoEmail').textContent.trim():'';window.location.href='customer-new.php?from_lead=LD-'+encodeURIComponent(lid)+'&company='+encodeURIComponent(c)+'&contact='+encodeURIComponent(n)+'&phone='+encodeURIComponent(p)+'&email='+encodeURIComponent(e);})()"><i class="bi bi-person-check me-1"></i>Convert to customer</button>
+
+                            <a href="deals.php" class="btn btn-sm ap-green-btn" title="Qualify Lead to Deal Pipeline"><i class="bi bi-kanban me-1"></i>Qualify to Deal</a>
                             <button type="button" class="btn btn-sm ap-gray-btn" id="ldEditLeadBtn" title="Edit"><i class="bi bi-pencil-square"></i></button>
                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded-8-fs12"><i class="bi bi-printer"></i></button> -->
                             <div class="dropdown">
@@ -8088,6 +8088,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.stopPropagation();
                 redirectConvertLead(extractRowLead(convBtn.closest('tr[data-id]')));
                 return;
+            }
+            var stAny = e.target.closest('.lead-status-item');
+            if (stAny) {
+                var sVal = stAny.getAttribute('data-val');
+                var trSt = stAny.closest('tr[data-id]');
+                var recSt = extractRowLead(trSt);
+                if (sVal === 'Qualified' && recSt) {
+                    setTimeout(function () { window.location.href = 'deals.php?from_lead=' + encodeURIComponent(recSt.enq_code) + '&company=' + encodeURIComponent(recSt.company); }, 150);
+                    return;
+                }
+                if (sVal === 'Quotation' && recSt) {
+                    setTimeout(function () { redirectQuoteLead(recSt); }, 150);
+                    return;
+                }
             }
             var stItem = e.target.closest('.lead-status-item[data-val="Customer"]');
             if (stItem) {

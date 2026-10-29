@@ -1729,57 +1729,36 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    function convertManageLead(tr) {
-        if (!tr) return;
-        var id = tr.getAttribute('data-id') || '172';
-        var name = tr.getAttribute('data-name') || '';
-        var company = tr.getAttribute('data-company') || name;
-        var phone = tr.getAttribute('data-phone') || '';
-        var email = tr.getAttribute('data-email') || '';
-        window.location.href = 'customer-new.php?from_lead=LD-' + encodeURIComponent(id) +
-            '&company=' + encodeURIComponent(company) +
-            '&contact=' + encodeURIComponent(name) +
-            '&phone=' + encodeURIComponent(phone) +
-            '&email=' + encodeURIComponent(email);
-    }
-
+    /* Clean Stage-Driven Lead Progression via existing Status Dropdown (Zero duplicate row buttons) */
     var tbody = document.getElementById('manageLeadsTbody');
     if (tbody) {
-        tbody.querySelectorAll('tr[data-id]').forEach(function (tr) {
-            var actWrap = tr.querySelector('td:last-child .d-flex');
-            if (actWrap && !actWrap.querySelector('.ml-convert-btn')) {
-                var qBtn = document.createElement('button');
-                qBtn.type = 'button';
-                qBtn.className = 'btn btn-sm btn-outline-primary py-0 px-1 ml-quote-btn';
-                qBtn.title = 'Create Quotation';
-                qBtn.innerHTML = '<i class="bi bi-file-earmark-text"></i>';
-                qBtn.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    var name = tr.getAttribute('data-name') || '';
-                    var company = tr.getAttribute('data-company') || name;
-                    window.location.href = 'quotation-create.php?client=' + encodeURIComponent(company || name);
-                });
-                actWrap.insertBefore(qBtn, actWrap.children[1] || null);
-
-                var btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'btn btn-sm btn-outline-success py-0 px-1 ml-convert-btn';
-                btn.title = 'Convert to Customer';
-                btn.innerHTML = '<i class="bi bi-person-check-fill"></i>';
-                btn.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    convertManageLead(tr);
-                });
-                actWrap.insertBefore(btn, actWrap.children[1] || null);
-            }
-        });
-
         tbody.addEventListener('click', function (e) {
-            var stItem = e.target.closest('.ml-status-item[data-val="Customer"]');
-            if (stItem) {
-                var tr = stItem.closest('tr[data-id]');
+            var stItem = e.target.closest('.ml-status-item');
+            if (!stItem) return;
+            var val = stItem.getAttribute('data-val');
+            var tr = stItem.closest('tr[data-id]');
+            if (!tr) return;
+            var id = tr.getAttribute('data-id') || '172';
+            var name = tr.getAttribute('data-name') || '';
+            var company = tr.getAttribute('data-company') || name;
+            var phone = tr.getAttribute('data-phone') || '';
+            var email = tr.getAttribute('data-email') || '';
+
+            if (val === 'Qualified') {
                 setTimeout(function () {
-                    convertManageLead(tr);
+                    window.location.href = 'deals.php?from_lead=LD-' + encodeURIComponent(id) + '&company=' + encodeURIComponent(company);
+                }, 150);
+            } else if (val === 'Quotation') {
+                setTimeout(function () {
+                    window.location.href = 'quotation-create.php?client=' + encodeURIComponent(company || name);
+                }, 150);
+            } else if (val === 'Customer') {
+                setTimeout(function () {
+                    window.location.href = 'customer-new.php?from_lead=LD-' + encodeURIComponent(id) +
+                        '&company=' + encodeURIComponent(company) +
+                        '&contact=' + encodeURIComponent(name) +
+                        '&phone=' + encodeURIComponent(phone) +
+                        '&email=' + encodeURIComponent(email);
                 }, 150);
             }
         }, true);
@@ -1787,20 +1766,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var mlViewHeader = document.querySelector('#mlViewLeadModal .modal-header');
     var mlViewTitle = document.getElementById('mlViewTitle');
-    if (mlViewHeader && mlViewTitle && !document.getElementById('mlModalConvertBtn')) {
-        var cBtn = document.createElement('button');
-        cBtn.type = 'button';
-        cBtn.id = 'mlModalConvertBtn';
-        cBtn.className = 'btn btn-success btn-sm fw-semibold ms-auto me-2';
-        cBtn.innerHTML = '<i class="bi bi-person-check-fill me-1"></i>Convert to Customer';
-        cBtn.addEventListener('click', function () {
-            var m = (mlViewTitle.textContent || '').match(/#(\d+)/);
-            var id = m ? m[1] : '172';
-            var tr = document.querySelector('#manageLeadsTbody tr[data-id="' + id + '"]');
-            if (tr) convertManageLead(tr);
-            else window.location.href = 'customer-new.php?from_lead=LD-' + encodeURIComponent(id);
-        });
-        mlViewHeader.insertBefore(cBtn, mlViewHeader.querySelector('.btn-close'));
+    if (mlViewHeader && mlViewTitle && !document.getElementById('mlModalDealBtn')) {
+        var dBtn = document.createElement('a');
+        dBtn.id = 'mlModalDealBtn';
+        dBtn.href = 'deals.php';
+        dBtn.className = 'btn btn-primary btn-sm fw-semibold ms-auto me-2';
+        dBtn.innerHTML = '<i class="bi bi-kanban me-1"></i>Qualify to Deal';
+        mlViewHeader.insertBefore(dBtn, mlViewHeader.querySelector('.btn-close'));
     }
 });
 </script>
