@@ -18,6 +18,7 @@
         <div class="d-flex align-items-center gap-2">
             <a href="callbacks.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
             <a href="past-meeting.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
+            <a href="mom.php" class="btn btn-sm btn-success fw-semibold"><i class="bi bi-journal-text me-1"></i>Minutes of Meeting (MOM)</a>
             <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
         </div>
     </div>
@@ -71,6 +72,13 @@
             <a href="callbacks.php?new=1" class="btn btn-outline-primary btn-sm" id="apmCallbackBtn">
                 <i class="bi bi-telephone-forward me-1"></i>Callback
             </a>
+
+            <button type="button" class="btn btn-outline-success btn-sm fw-semibold" onclick="openQuickApptPreset('SW')">
+                <i class="bi bi-camera-video me-1"></i>+ Schedule SW Demo
+            </button>
+            <button type="button" class="btn btn-outline-warning text-dark btn-sm fw-semibold" onclick="openQuickApptPreset('HW')">
+                <i class="bi bi-geo-alt me-1"></i>+ Schedule HW Site Survey
+            </button>
 
             <!-- Date Range Filter -->
             <div class="date-picker date-range-picker ms-auto" style="min-width:240px;max-width:260px;">
@@ -867,6 +875,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><i class="bi bi-calendar-plus"></i>New appointment</h5>
+                <div class="d-flex align-items-center gap-1 ms-auto me-2">
+                    <button type="button" class="btn btn-xs btn-outline-success py-1 px-2 small fw-semibold" onclick="openQuickApptPreset('SW')"><i class="bi bi-camera-video me-1"></i>Fill SW Demo</button>
+                    <button type="button" class="btn btn-xs btn-outline-warning text-dark py-1 px-2 small fw-semibold" onclick="openQuickApptPreset('HW')"><i class="bi bi-geo-alt me-1"></i>Fill HW Site Survey</button>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -968,6 +980,13 @@
                     <div class="col-md-6">
                         <label class="form-label">Appointment Type</label>
                         <select class="form-select select2" id="apmCtType">
+                            <option value="">Non selected</option>
+                            <option value="SW - Online Product Demo (Meet/Zoom)" data-color="#16a34a">SW - Online Product Demo (Meet/Zoom)</option>
+                            <option value="SW - Sprint & Scope Gathering" data-color="#2563eb">SW - Sprint &amp; Scope Gathering</option>
+                            <option value="SW - Online Debug / Support Call" data-color="#06b6d4">SW - Online Debug / Support Call</option>
+                            <option value="HW - On-site Site Survey & Cabling" data-color="#d97706">HW - On-site Site Survey &amp; Cabling</option>
+                            <option value="HW - Device Installation & Setup" data-color="#0d9488">HW - Device Installation &amp; Setup</option>
+                            <option value="HW - On-Site RMA / AMC Service Visit" data-color="#dc2626">HW - On-Site RMA / AMC Service Visit</option>
                             <option value="">Non selected</option>
                             <option value="SD - Online Demo" data-color="#16a34a">SD - Online Demo</option>
                             <option value="SD - Direct Visit - lead" data-color="#0d9488">SD - Direct Visit - lead
@@ -2258,6 +2277,102 @@
                 });
             }
         });
+            /* Prepend dynamically scheduled appointments & handle SW/HW presets */
+            function prependApptRow(appt) {
+                var tbody = document.getElementById('apmAppointmentsTbody');
+                if (!tbody) return;
+                var tr = document.createElement('tr');
+                tr.setAttribute('data-id', appt.id);
+                tr.setAttribute('data-status', 'Scheduled');
+                tr.setAttribute('data-source', appt.source || 'Lead');
+                var badgeCls = (appt.div === 'HW') ? 'bg-warning-subtle text-dark border border-warning-subtle' : 'bg-success-subtle text-success border border-success-subtle';
+                tr.innerHTML =
+                    '<td><span class="badge ' + badgeCls + '">' + (appt.div || 'SW') + '</span></td>' +
+                    '<td><a href="mom.php" class="apm-subject-link fw-bold text-primary">' + appt.subject + '</a><span class="apm-approved-tag ms-1">Approved</span></td>' +
+                    '<td><span class="apm-date-chip">' + appt.datetime + '</span></td>' +
+                    '<td><span class="apm-initiated"><span class="apm-avatar av-violet">' + (appt.attendee ? appt.attendee.charAt(0) : 'H') + '</span>' + (appt.attendee || 'Harish D.') + '</span></td>' +
+                    '<td>' + appt.desc + ' <span class="badge bg-light text-secondary border ms-1">' + (appt.location || 'Online') + '</span></td>' +
+                    '<td><span class="apm-status-cell"><span class="apm-status st-scheduled" data-status="Scheduled">SCHEDULED</span></span></td>' +
+                    '<td>' + (appt.type || 'Client Meeting') + '</td>' +
+                    '<td><span class="apm-cal-note text-success fw-semibold"><i class="bi bi-check2-circle me-1"></i>Synced to CRM Calendar</span></td>' +
+                    '<td><div class="d-flex align-items-center gap-1">' +
+                        '<a href="mom.php" class="btn btn-xs btn-success py-0 px-2 small fw-semibold" title="Record Minutes of Meeting"><i class="bi bi-journal-text me-1"></i>MOM</a>' +
+                        '<a href="quotation-create.php" class="btn btn-xs btn-outline-primary py-0 px-2 small fw-semibold" title="Create Quotation">+ Quote</a>' +
+                    '</div></td>';
+                tbody.insertBefore(tr, tbody.firstChild);
+            }
+
+            try {
+                var savedAppts = JSON.parse(localStorage.getItem('gh_scheduled_appts') || '[]');
+                savedAppts.forEach(function(a) { prependApptRow(a); });
+            } catch (err) {}
+
+            var ctSubmitBtn = document.getElementById('apmCtSubmit');
+            if (ctSubmitBtn) {
+                ctSubmitBtn.addEventListener('click', function() {
+                    var subj = document.getElementById('apmCtSubject').value.trim();
+                    if (!subj) return;
+                    var tp = document.getElementById('apmCtType').value || 'SW - Online Product Demo (Meet/Zoom)';
+                    var dt = (document.getElementById('apmCtDateTime').value || '30-10-2026') + ' ' + (document.getElementById('apmCtTime').value || '11:30 AM');
+                    var newAppt = {
+                        id: Date.now(),
+                        div: tp.indexOf('HW') === 0 ? 'HW' : 'SW',
+                        subject: subj,
+                        datetime: dt,
+                        attendee: document.getElementById('apmCtAttendees').value || 'Harish D.',
+                        desc: document.getElementById('apmCtDesc').value.trim() || 'Scheduled client session',
+                        location: document.getElementById('apmCtLocation').value.trim() || 'Online / Client Site',
+                        type: tp
+                    };
+                    prependApptRow(newAppt);
+                    try {
+                        var list = JSON.parse(localStorage.getItem('gh_scheduled_appts') || '[]');
+                        list.push(newAppt);
+                        localStorage.setItem('gh_scheduled_appts', JSON.stringify(list));
+                    } catch (err) {}
+                });
+            }
+
+            window.openQuickApptPreset = function(type, customSubj, customClient) {
+                var cModal = document.getElementById('apmContactModal');
+                if (type === 'HW') {
+                    document.getElementById('apmCtSubject').value = customSubj || 'HW Factory Site Survey — Biometric & CCTV Cabling (Power Spares)';
+                    document.getElementById('apmCtDesc').value = 'On-site technical inspection for biometric terminal mounting, power backup, and CAT6 cabling layout' + (customClient ? (' for ' + customClient) : '.');
+                    document.getElementById('apmCtDateTime').value = '30-10-2026';
+                    document.getElementById('apmCtTime').value = '03:00 PM';
+                    document.getElementById('apmCtLocation').value = 'Ambattur Industrial Estate, Unit 4, Chennai';
+                    if (window.jQuery) {
+                        jQuery('#apmCtRelated').val('Lead').trigger('change');
+                        jQuery('#apmCtAttendees').val('Divya A.').trigger('change');
+                        jQuery('#apmCtType').val('HW - On-site Site Survey & Cabling').trigger('change');
+                    }
+                } else {
+                    document.getElementById('apmCtSubject').value = customSubj || 'SW Live Product Demo — Gharuda Cloud ERP & Payroll (Zen Publications)';
+                    document.getElementById('apmCtDesc').value = 'Online Google Meet screen-share product walkthrough, API integration architecture, and sprint scope discussion' + (customClient ? (' for ' + customClient) : '.');
+                    document.getElementById('apmCtDateTime').value = '30-10-2026';
+                    document.getElementById('apmCtTime').value = '11:30 AM';
+                    document.getElementById('apmCtLocation').value = 'Google Meet (meet.google.com/ghr-erp-demo)';
+                    if (window.jQuery) {
+                        jQuery('#apmCtRelated').val('Lead').trigger('change');
+                        jQuery('#apmCtAttendees').val('Harish D.').trigger('change');
+                        jQuery('#apmCtType').val('SW - Online Product Demo (Meet/Zoom)').trigger('change');
+                    }
+                }
+                if (cModal && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(cModal).show();
+                }
+            };
+
+            /* Auto-open if redirected from Support Ticket (Visit / Call button) */
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('from_ticket')) {
+                var tType = urlParams.get('type') || 'SW';
+                var tSubj = urlParams.get('subject') || '';
+                var tClient = urlParams.get('client') || '';
+                setTimeout(function() {
+                    window.openQuickApptPreset(tType, tSubj, tClient);
+                }, 300);
+            }
     })();
 </script>
 

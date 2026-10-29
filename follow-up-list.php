@@ -363,6 +363,7 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                         <th>Sourcer</th>
                         <th>Status</th>
                         <th>Call Status</th>
+                        <th>CRM Action</th>
                     </tr>
                 </thead>
                 <tbody id="fulTbody">
@@ -568,6 +569,23 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                         title: 'Call Status',
                         sortable: true,
                         render: callChip
+                    },
+                    {
+                        field: null,
+                        title: 'CRM Action',
+                        sortable: false,
+                        render: function(v, row) {
+                            var isHw = /Solar|CCTV|Inverter|Biometric/i.test(row.product);
+                            var mType = isHw ? 'HW' : 'SW';
+                            var doneBtn = row.call !== 'Completed'
+                                ? '<button type="button" class="btn btn-sm btn-success py-0 px-2 fw-semibold" onclick="window.markFulDone(' + row.id + ')" title="Mark Follow-Up Completed"><i class="bi bi-check2"></i> Done</button>'
+                                : '<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-check2-all"></i> Logged</span>';
+                            return '<div class="d-flex align-items-center gap-1">' +
+                                   doneBtn +
+                                   '<a href="appointments.php?from_ticket=' + row.id + '&type=' + mType + '&subject=' + encodeURIComponent(mType + ' Follow-Up Meeting: ' + row.product) + '&client=' + encodeURIComponent(row.company) + '" class="btn btn-sm btn-outline-primary py-0 px-2 fw-semibold" title="Schedule Demo / Site Visit"><i class="bi bi-calendar2-plus"></i> Meet</a>' +
+                                   '<a href="quotation-create.php?client=' + encodeURIComponent(row.company) + '&item=' + encodeURIComponent(row.product) + '&price=' + encodeURIComponent(row.value) + '" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-semibold" title="Send Quotation">+ Quote</a>' +
+                                   '</div>';
+                        }
                     }
                 ]
             });
@@ -660,6 +678,14 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
             state.statuses = null;
             renderAll();
         });
+
+        window.markFulDone = function(id) {
+            var item = fulData.find(function(r) { return r.id === id; });
+            if (item) {
+                item.call = 'Completed';
+                renderAll();
+            }
+        };
 
         /* ---------- Init ---------- */
         renderAll();

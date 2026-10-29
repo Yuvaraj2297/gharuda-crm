@@ -34,6 +34,12 @@ include 'header.php';
                     <a href="past-meeting.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
                         <i class="bi bi-calendar-check me-1"></i>Past Meetings
                     </a>
+                    <a href="quotation-create.php" class="btn btn-outline-success btn-sm rounded-pill px-3 fw-semibold">
+                        <i class="bi bi-file-earmark-text me-1"></i>+ Send Quote
+                    </a>
+                    <a href="task-create.php" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold">
+                        <i class="bi bi-check2-square me-1"></i>+ Action Task
+                    </a>
                     <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" id="momNewBtn">
                         <i class="bi bi-plus-lg me-1"></i>New MOM
                     </button>

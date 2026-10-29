@@ -944,5 +944,26 @@
                 });
             }
         } catch (err) {}
+
+        /* Inject + Task and + Milestone Invoice handoff buttons on all project rows */
+        document.querySelectorAll('#projectsTableBody tr').forEach(function(row) {
+            var cust = row.getAttribute('data-customer') || 'Client';
+            var btnGroup = row.querySelector('.btn-group');
+            if (btnGroup && !btnGroup.querySelector('.prj-invoice-btn')) {
+                var taskLink = document.createElement('a');
+                taskLink.href = 'task-create.php';
+                taskLink.className = 'btn btn-light border text-success fw-semibold';
+                taskLink.title = 'Add Project Task';
+                taskLink.innerHTML = '<i class="bi bi-check2-square"></i>';
+                btnGroup.appendChild(taskLink);
+
+                var invLink = document.createElement('a');
+                invLink.href = 'invoice-create.php?client=' + encodeURIComponent(cust);
+                invLink.className = 'btn btn-light border text-primary fw-semibold prj-invoice-btn';
+                invLink.title = 'Raise Milestone Tax Invoice';
+                invLink.innerHTML = '<i class="bi bi-receipt"></i>';
+                btnGroup.appendChild(invLink);
+            }
+        });
     });
 </script>

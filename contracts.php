@@ -144,6 +144,7 @@ $preClient = isset($_GET['client']) ? htmlspecialchars($_GET['client']) : (isset
                                 <button type="button" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="View Agreement" onclick="viewContract('CTR-2026-001', 'Enterprise ERP & Cloud Maintenance', 'Power Spares Engineering', '₹12,50,000', 'Annual AMC', '01-Jan-2026', '31-Dec-2026', 'Active')"><i class="bi bi-eye"></i></button>
                                 <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>
                                 <a href="invoice-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-light border text-success px-2 py-1" title="Generate Tax Invoice"><i class="bi bi-receipt"></i></a>
+                                <a href="support-create-ticket.php" class="btn btn-sm btn-outline-danger px-2 py-1 fw-semibold" title="Raise SLA Support Ticket"><i class="bi bi-headset me-1"></i>SLA Ticket</a>
                                 <a href="customer-view.php?id=1&amp;name=Power+Spares+Engineering" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>
                             </div>
                         </td>
@@ -169,6 +170,8 @@ $preClient = isset($_GET['client']) ? htmlspecialchars($_GET['client']) : (isset
                                 <button type="button" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="View Agreement" onclick="viewContract('CTR-2026-002', 'Publishing CRM Portal Customization', 'Zen Publications', '₹8,40,000', 'Software SLA', '15-Feb-2026', '14-Nov-2026', 'Expiring Soon')"><i class="bi bi-eye"></i></button>
                                 <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>
                                 <a href="invoice-create.php?client=Zen+Publications" class="btn btn-sm btn-light border text-success px-2 py-1" title="Generate Tax Invoice"><i class="bi bi-receipt"></i></a>
+                                <a href="quotation-create.php?client=Zen+Publications&amp;item=Annual+Software+SLA+Renewal&amp;price=840000" class="btn btn-sm btn-warning text-dark px-2 py-1 fw-semibold" title="Send AMC Renewal Quote"><i class="bi bi-arrow-repeat me-1"></i>Renew</a>
+                                <a href="support-create-ticket.php" class="btn btn-sm btn-outline-danger px-2 py-1" title="Raise SLA Support Ticket"><i class="bi bi-headset"></i></a>
                                 <a href="customer-view.php?id=2&amp;name=Zen+Publications" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360°"><i class="bi bi-person-vcard"></i></a>
                             </div>
                         </td>
