@@ -529,368 +529,404 @@
 
 <!-- ===== New Lead Modal ===== -->
 <div class="modal fade" id="newLeadModal" tabindex="-1" aria-hidden="true">
-
     <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <form id="newLeadForm" class="modal-content border-0">
-            <div class="modal-header bg-white border-bottom p-3 d-flex justify-content-between align-items-center">
+            <!-- Modal Header -->
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;"><i class="bi bi-person-plus-fill"></i></div>
+                    <span class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:42px;height:42px;">
+                        <i class="bi bi-person-plus-fill fs-5"></i>
+                    </span>
                     <div>
-                        <h5 class="modal-title mb-0">New Lead</h5>
-                        <div class="small text-muted"><i class="bi bi-lightning-charge me-1"></i>Capture every lead detail in one flow</div>
+                        <h5 class="modal-title fw-bold text-dark mb-0 fs-5">Create New Lead</h5>
+                        <div class="small text-muted"><i class="bi bi-lightning-charge text-warning me-1"></i>Capture prospect details, classification, commercial scope, and key stakeholders</div>
                     </div>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <!-- Modal Body -->
             <div class="modal-body p-4 bg-light-subtle">
-                    <div class="nl-body">
+                <div class="nl-body" style="max-width: 1400px; margin: 0 auto;">
 
-                    <!-- Section: Classification -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="row g-3">
-                        <div class="col-lg-3 col-md-6">
-                            <label class="form-label">Status <span class="text-danger">*</span></label>
-                            <div class="d-flex gap-2">
-                                <div class="flex-grow-1">
-                                    <select class="form-select select2 nl-select" id="nl_status" data-placeholder="Select status">
+                    <!-- 1. Lead Classification & Ownership -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
+                            <i class="bi bi-funnel text-primary fs-5"></i>
+                            <h6 class="fw-bold text-dark m-0">1. Classification &amp; Assignment</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Status <span class="text-danger">*</span></label>
+                                    <div class="d-flex gap-2">
+                                        <div class="flex-grow-1">
+                                            <select class="form-select select2 nl-select rounded-2" id="nl_status" data-placeholder="Select status">
+                                                <option value=""></option>
+                                                <option selected>Lead</option>
+                                                <option>Quotation</option>
+                                                <option>Followup</option>
+                                                <option>Qualified</option>
+                                                <option>Negotiation</option>
+                                                <option>Won</option>
+                                                <option>Lost</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-primary nl-add-btn rounded-2" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Source <span class="text-danger">*</span></label>
+                                    <div class="d-flex gap-2">
+                                        <div class="flex-grow-1">
+                                            <select class="form-select select2 nl-select rounded-2" id="nl_source" data-placeholder="Select source">
+                                                <option value=""></option>
+                                                <option selected>Direct</option>
+                                                <option>IndiaMart</option>
+                                                <option>Website</option>
+                                                <option>Facebook Ads</option>
+                                                <option>Google Ads</option>
+                                                <option>Referral</option>
+                                                <option>Walk-in</option>
+                                                <option>Cold Call</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-primary nl-add-btn rounded-2" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Assigned Sales Owner <span class="text-danger">*</span></label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_assigned" data-placeholder="Select person">
                                         <option value=""></option>
-                                        <option>Lead</option>
-                                        <option>Quotation</option>
-                                        <option>Followup</option>
-                                        <option>Qualified</option>
-                                        <option>Negotiation</option>
-                                        <option>Won</option>
-                                        <option>Lost</option>
+                                        <option selected>GHARUDA SOFTWARE</option>
+                                        <option>Harish D.</option>
+                                        <option>Divya A.</option>
+                                        <option>Karthik R.</option>
+                                        <option>Priya S.</option>
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-outline-primary nl-add-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <label class="form-label">Source *</label>
-                            <div class="d-flex gap-2">
-                                <div class="flex-grow-1">
-                                    <select class="form-select select2 nl-select" id="nl_source" data-placeholder="Select source">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Sourcer / Lead Gen Agent</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_sourcer" data-placeholder="Select sourcer">
                                         <option value=""></option>
-                                        <option>IndiaMart</option>
-                                        <option>Website</option>
+                                        <option selected>GHARUDA SOFTWARE</option>
+                                        <option>Harish D.</option>
+                                        <option>Website Form</option>
                                         <option>Facebook Ads</option>
-                                        <option>Google Ads</option>
                                         <option>Referral</option>
-                                        <option>Walk-in</option>
-                                        <option>Cold Call</option>
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-outline-primary nl-add-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Lead Qualification</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_qualification" data-placeholder="Select qualification">
+                                        <option value=""></option>
+                                        <option selected>Sales Qualified Lead (SQL)</option>
+                                        <option>Marketing Qualified Lead (MQL)</option>
+                                        <option>Unqualified Lead</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1"><i class="bi bi-tag me-1"></i>Tags / Labels</label>
+                                    <div class="nl-tags-wrap rounded-2 bg-light-subtle" id="nlTagsWrap">
+                                        <div class="nl-tags-chips" id="nlTagsChips"></div>
+                                        <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Type and press Enter to add tag...">
+                                    </div>
+                                    <input type="hidden" id="nl_tags" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <label class="form-label">Assigned <span class="text-danger">*</span></label>
-                            <select class="form-select select2 nl-select" id="nl_assigned" data-placeholder="Select person">
-                                <option value=""></option>
-                                <option selected>GHARUDA SOFTWARE</option>
-                                <option>Harish D.</option>
-                                <option>Divya A.</option>
-                                <option>Karthik R.</option>
-                                <option>Priya S.</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <label class="form-label">Sourcer</label>
-                            <select class="form-select select2 nl-select" id="nl_sourcer" data-placeholder="Select sourcer">
-                                <option value=""></option>
-                                <option selected>GHARUDA SOFTWARE</option>
-                                <option>Harish D.</option>
-                                <option>Website Form</option>
-                                <option>Facebook Ads</option>
-                                <option>Referral</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <label class="form-label">Lead Qualification</label>
-                            <select class="form-select select2 nl-select" id="nl_qualification" data-placeholder="Select qualification">
-                                <option value=""></option>
-                                <option>Sales Qualified Lead</option>
-                                <option>Marketing Qualified Lead</option>
-                                <option>Unqualified Lead</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label"><i class="bi bi-tag me-1"></i>Tags</label>
-                            <div class="nl-tags-wrap" id="nlTagsWrap">
-                                <div class="nl-tags-chips" id="nlTagsChips"></div>
-                                <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Type and press Enter to add tag...">
-                            </div>
-                            <input type="hidden" id="nl_tags" value="">
-                        </div>
                         </div>
                     </div>
 
-                    <!-- Section: Contact Details -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="row g-3">
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Company <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="nl_company" required placeholder="Company name">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="nl_name" required placeholder="Full name">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Position</label>
-                                <input type="text" class="form-control" id="nl_position" placeholder="e.g. Manager">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="nl_email" placeholder="email@example.com">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="nl_phone" placeholder="10-digit mobile number">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Website</label>
-                                <input type="url" class="form-control" id="nl_website" placeholder="https://example.com">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Address</label>
-                                <textarea class="form-control min-h-0" id="nl_address" rows="2" placeholder="Full address"></textarea>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control min-h-0" id="nl_description" rows="2" placeholder="Any additional notes..."></textarea>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Date Contacted</label>
-                                <input type="date" class="form-control" id="nl_date_contacted">
-                            </div>
-                            <!-- <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Profession <span class="text-danger">*</span></label>
-                                <select class="form-select select2 nl-select" id="nl_profession" data-placeholder="Select profession">
-                                    <option value=""></option>
-                                    <option>Architect</option>
-                                    <option>Builders</option>
-                                    <option>Contractor</option>
-                                    <option>Consultant</option>
-                                    <option>Dealer</option>
-                                    <option>Distributor</option>
-                                    <option>Engineer</option>
-                                    <option>Interior Designer</option>
-                                    <option>Other</option>
-                                </select>
-                            </div> -->
-                            <div class="col-12">
-                                <div class="d-flex flex-wrap gap-4 pt-1">
-                                    <div class="form-check mb-0">
-                                        <input class="form-check-input" type="checkbox" id="nl_public">
-                                        <label class="form-check-label" for="nl_public">Public</label>
-                                    </div>
-                                    <div class="form-check mb-0">
-                                        <input class="form-check-input" type="checkbox" id="nl_contacted_today">
-                                        <label class="form-check-label" for="nl_contacted_today">Contacted Today</label>
+                    <!-- 2. Primary Contact & Company Details -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
+                            <i class="bi bi-person-lines-fill text-primary fs-5"></i>
+                            <h6 class="fw-bold text-dark m-0">2. Primary Contact &amp; Company Details</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Company / Organization <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control rounded-2" id="nl_company" required placeholder="Company legal name">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Contact Person Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control rounded-2" id="nl_name" required placeholder="Primary contact full name">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Position / Designation</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_position" placeholder="e.g. Managing Director">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Email Address</label>
+                                    <input type="email" class="form-control rounded-2" id="nl_email" placeholder="contact@company.com">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Phone / WhatsApp Number</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_phone" placeholder="10-digit mobile number">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Website URL</label>
+                                    <input type="url" class="form-control rounded-2" id="nl_website" placeholder="https://example.com">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Date Contacted</label>
+                                    <input type="date" class="form-control rounded-2" id="nl_date_contacted">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Full Street Address</label>
+                                    <textarea class="form-control rounded-2" id="nl_address" rows="1" placeholder="Office / Site address"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Initial Requirement Notes</label>
+                                    <textarea class="form-control rounded-2" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex flex-wrap gap-4 pt-1">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="nl_public">
+                                            <label class="form-check-label text-dark small" for="nl_public">Public Lead (Visible to entire sales team)</label>
+                                        </div>
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="nl_contacted_today">
+                                            <label class="form-check-label text-dark small" for="nl_contacted_today">Mark as Contacted Today</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section: Company Profile — GST, Turnover, Employee Size, Customer Type -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="row g-3">
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Company GST</label>
-                                <input type="text" class="form-control text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Turnover</label>
-                                <input type="text" class="form-control" id="nl_turnover" placeholder="e.g. ₹5 Cr – ₹10 Cr">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Employee Size</label>
-                                <input type="text" class="form-control" id="nl_emp_size" placeholder="e.g. 51 – 200">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Customer Type</label>
-                                <select class="form-select select2 nl-select" id="nl_cust_type" data-placeholder="Select type">
-                                    <option value=""></option>
-                                    <option>Reseller</option>
-                                    <option>Direct Customer</option>
-                                </select>
-                            </div>
+                    <!-- 3. Company Profile & Compliance -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
+                            <i class="bi bi-building-check text-primary fs-5"></i>
+                            <h6 class="fw-bold text-dark m-0">3. Company Profile &amp; Financial Compliance</h6>
                         </div>
-                    </div>
-
-                    <!-- Section: Location & Product -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="row g-3">
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Country</label>
-                                <select class="form-select select2 nl-select" id="nl_country" data-placeholder="Select country">
-                                    <option value=""></option>
-                                    <option selected>India</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>UAE</option>
-                                    <option>Singapore</option>
-                                    <option>Australia</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">State</label>
-                                <select class="form-select select2 nl-select" id="nl_state" data-placeholder="Select state">
-                                    <option value=""></option>
-                                    <option>Tamil Nadu</option>
-                                    <option>Karnataka</option>
-                                    <option>Maharashtra</option>
-                                    <option>Delhi</option>
-                                    <option>Kerala</option>
-                                    <option>Telangana</option>
-                                    <option>Gujarat</option>
-                                    <option>Rajasthan</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">City</label>
-                                <select class="form-select select2 nl-select" id="nl_city" data-placeholder="Select city">
-                                    <option value=""></option>
-                                    <option>Chennai</option>
-                                    <option>Bangalore</option>
-                                    <option>Mumbai</option>
-                                    <option>Delhi</option>
-                                    <option>Hyderabad</option>
-                                    <option>Kochi</option>
-                                    <option>Pune</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Area</label>
-                                <input type="text" class="form-control" id="nl_area" placeholder="e.g. T. Nagar">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Zip Code</label>
-                                <input type="text" class="form-control" id="nl_zip" placeholder="e.g. 600001">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Latitude (Google Maps)</label>
-                                <input type="text" class="form-control" id="nl_lat" placeholder="e.g. 13.0827">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Longitude (Google Maps)</label>
-                                <input type="text" class="form-control" id="nl_lng" placeholder="e.g. 80.2707">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section: Deal Info -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="row g-3">
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Lead value</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control rounded-start-0" id="nl_value" placeholder="0.00" step="0.01">
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Company GST Number</label>
+                                    <input type="text" class="form-control rounded-2 text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Annual Turnover</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_turnover" placeholder="e.g. ₹5 Cr – ₹10 Cr">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Employee Size</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_emp_size" placeholder="e.g. 51 – 200 Employees">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Customer / Partnership Type</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_cust_type" data-placeholder="Select type">
+                                        <option value=""></option>
+                                        <option selected>Direct Customer</option>
+                                        <option>Reseller / Partner</option>
+                                        <option>System Integrator</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Product</label>
-                                <select class="form-select select2 nl-select" id="nl_product" data-placeholder="Choose product">
-                                    <option value=""></option>
-                                    <option>HRMS Subscription</option>
-                                    <option>Payroll Module</option>
-                                    <option>Attendance Module</option>
-                                    <option>Recruitment Module</option>
-                                    <option>Custom Development</option>
-                                    <optgroup label="Hardware, Biometrics &amp; IoT">
-                                        <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
-                                        <option value="Industrial Barcode &amp; POS Scanner Kit">Industrial Barcode &amp; POS Scanner Kit</option>
-                                        <option value="Dell PowerEdge Server Appliance">Dell PowerEdge Server Appliance</option>
-                                        <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Closure Date</label>
-                                <input type="date" class="form-control" id="nl_closure_date">
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <label class="form-label">Enquiry Code</label>
-                                <input type="text" class="form-control nl-auto-chip" id="nl_enquiry_code" value="ENQ-0171" readonly>
+                        </div>
+                    </div>
+
+                    <!-- 4. Location & Geography -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
+                            <i class="bi bi-geo-alt text-primary fs-5"></i>
+                            <h6 class="fw-bold text-dark m-0">4. Location &amp; Geography</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Country</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_country" data-placeholder="Select country">
+                                        <option value=""></option>
+                                        <option selected>India</option>
+                                        <option>United States</option>
+                                        <option>United Kingdom</option>
+                                        <option>UAE</option>
+                                        <option>Singapore</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">State</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_state" data-placeholder="Select state">
+                                        <option value=""></option>
+                                        <option selected>Tamil Nadu</option>
+                                        <option>Karnataka</option>
+                                        <option>Maharashtra</option>
+                                        <option>Delhi</option>
+                                        <option>Kerala</option>
+                                        <option>Telangana</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">City</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_city" data-placeholder="Select city">
+                                        <option value=""></option>
+                                        <option selected>Chennai</option>
+                                        <option>Bangalore</option>
+                                        <option>Mumbai</option>
+                                        <option>Hyderabad</option>
+                                        <option>Coimbatore</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Area / Locality</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_area" placeholder="e.g. Anna Nagar, Guindy">
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Zip Code</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_zip" placeholder="e.g. 600001">
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Latitude (Google Maps)</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_lat" placeholder="e.g. 13.0827">
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Longitude (Google Maps)</label>
+                                    <input type="text" class="form-control rounded-2" id="nl_lng" placeholder="e.g. 80.2707">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section: Items & Point of Contact -->
-                    <div class="card border shadow-sm p-4 mb-4 bg-white">
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Items</label>
-                            <div class="table-responsive">
-                                <table class="table table-bordered mb-0 fs-13">
-                                    <thead>
-                                        <tr class="table-light">
-                                            <th>Item Code</th>
-                                            <th>Item Name</th>
-                                            <th>Qty</th>
-                                            <th class="col-w-50"></th>
+                    <!-- 5. Commercial Value & Estimation -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
+                            <i class="bi bi-currency-rupee text-primary fs-5"></i>
+                            <h6 class="fw-bold text-dark m-0">5. Commercial Estimation &amp; Timeline</h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Expected Lead Value</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light text-muted">₹</span>
+                                        <input type="number" class="form-control rounded-end-2" id="nl_value" placeholder="0.00" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Primary Product / Solution</label>
+                                    <select class="form-select select2 nl-select rounded-2" id="nl_product" data-placeholder="Choose product">
+                                        <option value=""></option>
+                                        <option selected>HRMS Subscription &amp; Licenses</option>
+                                        <option>Payroll Module Add-on</option>
+                                        <option>Biometric Attendance System</option>
+                                        <option>Custom ERP Development</option>
+                                        <optgroup label="Hardware &amp; IoT Solutions">
+                                            <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                            <option value="Industrial Barcode &amp; POS Kit">Industrial Barcode &amp; POS Kit</option>
+                                            <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Target Closure Date</label>
+                                    <input type="date" class="form-control rounded-2" id="nl_closure_date">
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <label class="form-label fw-semibold text-dark small mb-1">Enquiry Reference Code</label>
+                                    <input type="text" class="form-control rounded-2 bg-light text-muted fw-semibold" id="nl_enquiry_code" value="ENQ-0171" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Enquired Items & Key Points of Contact -->
+                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
+                        <!-- Items Header -->
+                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-box-seam text-primary fs-5"></i>
+                                <h6 class="fw-bold text-dark m-0">6. Enquired Products &amp; Items</h6>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
+                                <i class="bi bi-plus-lg"></i><span>Add Item</span>
+                            </button>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Items Table -->
+                            <div class="table-responsive border rounded-2 mb-4">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 25%;">Item Code</th>
+                                            <th style="width: 50%;">Item Name / Specification</th>
+                                            <th style="width: 15%;" class="text-center">Quantity</th>
+                                            <th style="width: 10%;" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="nlItemBody">
                                         <tr>
-                                            <td><input type="text" class="form-control form-control-sm" placeholder="Code"></td>
-                                            <td><input type="text" class="form-control form-control-sm" placeholder="Name"></td>
-                                            <td><input type="number" class="form-control form-control-sm" placeholder="0" min="1"></td>
-                                            <td class="align-middle"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item"><i class="bi bi-trash"></i></button></td>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
+                                            <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="nlAddItem"><i class="bi bi-plus-lg me-1"></i>Add Item</button>
-                        </div>
 
-                        <div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <label class="form-label fw-bold mb-0">Point of Contact:</label>
-                                <button type="button" class="btn btn-sm btn-primary" id="nlAddPoc"><i class="bi bi-plus-lg me-1"></i>Add More</button>
-                            </div>
-                            <div id="nlPocList">
-                                <div class="row g-2 mb-2 nl-poc-row">
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control form-control-sm" placeholder="Name">
+                            <!-- Points of Contact Subsection -->
+                            <div class="pt-3 border-top">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-people text-primary fs-5"></i>
+                                        <h6 class="fw-bold text-dark m-0">Additional Points of Contact (POC)</h6>
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control form-control-sm" placeholder="Phone No.">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="email" class="form-control form-control-sm" placeholder="Email">
-                                    </div>
-                                    <div class="col-md-2 align-self-center">
-                                        <button type="button" class="btn btn-sm btn-danger nl-remove-poc"><i class="bi bi-trash me-1"></i>Remove</button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddPoc">
+                                        <i class="bi bi-person-plus"></i><span>Add Contact</span>
+                                    </button>
+                                </div>
+                                <div id="nlPocList" class="d-flex flex-column gap-2">
+                                    <div class="row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No.">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position">
+                                        </div>
+                                        <div class="col-md-1 text-center">
+                                            <button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    </div><!-- /nl-body -->
+                </div><!-- /nl-body -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-3 text-muted small">
+                    <span><i class="bi bi-shield-check text-success me-1"></i>All fields marked with <span class="text-danger fw-bold">*</span> are required</span>
+                    <span class="d-none d-md-inline text-muted">&bull;</span>
+                    <span class="d-none d-md-inline"><i class="bi bi-lightning-charge text-primary me-1"></i>Enquiry code auto-generated</span>
                 </div>
-                <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <div class="d-flex align-items-center gap-3 text-muted small">
-                        <span><i class="bi bi-shield-check text-success me-1"></i>All fields marked with <span class="text-danger fw-bold">*</span> are required</span>
-                        <span class="d-none d-md-inline text-muted">&bull;</span>
-                        <span class="d-none d-md-inline"><i class="bi bi-lightning-charge text-primary me-1"></i>Enquiry code auto-generated</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">
-                            <i class="bi bi-x-lg me-1"></i>Close
-                        </button>
-                        <button type="button" class="btn btn-outline-danger px-3" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
-                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
-                        </button>
-                        <button type="submit" class="btn btn-primary px-4 fw-semibold shadow-sm">
-                            <i class="bi bi-check-lg me-1"></i>Submit Lead
-                        </button>
-                    </div>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1"></i>Close
+                    </button>
+                    <button type="button" class="btn btn-outline-danger px-3" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4 fw-semibold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i>Submit Lead
+                    </button>
                 </div>
+            </div>
         </form>
     </div>
 </div>

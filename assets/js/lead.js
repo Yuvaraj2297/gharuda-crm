@@ -988,10 +988,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nlAddItem && nlItemBody) {
             nlAddItem.addEventListener('click', function() {
                 var tr = document.createElement('tr');
-                tr.innerHTML = '<td><input type="text" class="form-control form-control-sm" placeholder="Code"></td>' +
-                    '<td><input type="text" class="form-control form-control-sm" placeholder="Name"></td>' +
-                    '<td><input type="number" class="form-control form-control-sm" placeholder="0" min="1"></td>' +
-                    '<td><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item"><i class="bi bi-trash"></i></button></td>';
+                tr.innerHTML =
+                    '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>' +
+                    '<td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>' +
+                    '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button></td>';
                 nlItemBody.appendChild(tr);
             });
             nlItemBody.addEventListener('click', function(e) {
@@ -1006,11 +1007,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (nlAddPoc && nlPocList) {
             nlAddPoc.addEventListener('click', function() {
                 var row = document.createElement('div');
-                row.className = 'row g-2 mb-2 nl-poc-row';
-                row.innerHTML = '<div class="col-md-4"><input type="text" class="form-control form-control-sm" placeholder="Name"></div>' +
-                    '<div class="col-md-3"><input type="text" class="form-control form-control-sm" placeholder="Phone No."></div>' +
-                    '<div class="col-md-3"><input type="email" class="form-control form-control-sm" placeholder="Email"></div>' +
-                    '<div class="col-md-2"><button type="button" class="btn btn-sm btn-danger nl-remove-poc"><i class="bi bi-trash me-1"></i>Remove</button></div>';
+                row.className = 'row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0';
+                row.innerHTML =
+                    '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name"></div>' +
+                    '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No."></div>' +
+                    '<div class="col-md-3"><input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address"></div>' +
+                    '<div class="col-md-2"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position"></div>' +
+                    '<div class="col-md-1 text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button></div>';
                 nlPocList.appendChild(row);
             });
             nlPocList.addEventListener('click', function(e) {
