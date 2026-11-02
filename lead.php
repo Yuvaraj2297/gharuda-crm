@@ -119,6 +119,132 @@
     max-width: 1440px;
     margin: 0 auto;
 }
+
+/* =========================================================================
+   TABLE DESIGN POLISH: STATUS DROPDOWN & ACTION BUTTONS
+   ========================================================================= */
+.lead-status-dd {
+    display: inline-block;
+}
+.lead-status-btn {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+.lead-status-btn:hover {
+    background: #fff;
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.lead-status-btn.lead-sel-lead {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #15803d;
+}
+.lead-status-menu {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    font-size: 12.5px;
+    min-width: 170px;
+    z-index: 1060;
+}
+.lead-status-item {
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-weight: 500;
+    color: #334155;
+    transition: background 0.12s;
+}
+.lead-status-item:hover, .lead-status-item.active {
+    background: #f0fdf4;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* Table Row Action Buttons - 30px x 30px balanced icons */
+.lead-act-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+.lead-act-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.lead-act-btn.appt {
+    border-color: #cbd5e1;
+    color: #0284c7;
+    background: #f0f9ff;
+}
+.lead-act-btn.appt:hover {
+    background: #0284c7;
+    color: #fff;
+    border-color: #0284c7;
+}
+.lead-act-btn.view {
+    color: #0d9488;
+    background: #f0fdfa;
+    border-color: #ccfbf1;
+}
+.lead-act-btn.view:hover {
+    background: #0d9488;
+    color: #fff;
+    border-color: #0d9488;
+}
+.lead-act-btn.edit {
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
+}
+.lead-act-btn.edit:hover {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+.lead-act-btn.del {
+    color: #dc2626;
+    background: #fef2f2;
+    border-color: #fee2e2;
+}
+.lead-act-btn.del:hover {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+}
+.lead-act-btn.mail {
+    color: #7c3aed;
+    background: #faf5ff;
+    border-color: #f3e8ff;
+}
+.lead-act-btn.mail:hover {
+    background: #7c3aed;
+    color: #fff;
+    border-color: #7c3aed;
+}
+
 </style>
 
 
