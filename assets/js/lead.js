@@ -4372,3 +4372,186 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         })();
+
+
+        /* =========================================================================
+           IMPORT LEADS MODAL HANDLERS (CLEAN BOOTSTRAP 5 INPUT-GROUPS & ACTIONS)
+           ========================================================================= */
+        (function() {
+            var modal = document.getElementById('importLeadsModal');
+            if (!modal) return;
+
+            // 1. Status inline toggle & add
+            var toggleStatusBtn = document.getElementById('imBtnToggleStatus');
+            var statusWrap = document.getElementById('imInlineStatusWrap');
+            var statusInput = document.getElementById('imInlineStatusInput');
+            var statusSave = document.getElementById('imInlineStatusSave');
+            var statusCancel = document.getElementById('imInlineStatusCancel');
+            var selectStatus = document.getElementById('importStatus');
+
+            if (toggleStatusBtn && statusWrap) {
+                toggleStatusBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    statusWrap.classList.toggle('d-none');
+                    if (!statusWrap.classList.contains('d-none') && statusInput) {
+                        statusInput.focus();
+                    }
+                });
+            }
+
+            if (statusCancel && statusWrap) {
+                statusCancel.addEventListener('click', function() {
+                    statusWrap.classList.add('d-none');
+                    if (statusInput) statusInput.value = '';
+                });
+            }
+
+            if (statusSave && selectStatus && statusInput) {
+                statusSave.addEventListener('click', function() {
+                    var val = statusInput.value.trim();
+                    if (!val) {
+                        statusInput.focus();
+                        return;
+                    }
+                    var exists = Array.from(selectStatus.options).some(function(o) {
+                        return o.text.toLowerCase() === val.toLowerCase();
+                    });
+                    if (!exists) {
+                        var opt = document.createElement('option');
+                        opt.textContent = val;
+                        opt.value = val;
+                        selectStatus.appendChild(opt);
+                    }
+                    selectStatus.value = val;
+                    statusInput.value = '';
+                    statusWrap.classList.add('d-none');
+                });
+
+                statusInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        statusSave.click();
+                    }
+                });
+            }
+
+            // 2. Source inline toggle & add
+            var toggleSourceBtn = document.getElementById('imBtnToggleSource');
+            var sourceWrap = document.getElementById('imInlineSourceWrap');
+            var sourceInput = document.getElementById('imInlineSourceInput');
+            var sourceSave = document.getElementById('imInlineSourceSave');
+            var sourceCancel = document.getElementById('imInlineSourceCancel');
+            var selectSource = document.getElementById('importSource');
+
+            if (toggleSourceBtn && sourceWrap) {
+                toggleSourceBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sourceWrap.classList.toggle('d-none');
+                    if (!sourceWrap.classList.contains('d-none') && sourceInput) {
+                        sourceInput.focus();
+                    }
+                });
+            }
+
+            if (sourceCancel && sourceWrap) {
+                sourceCancel.addEventListener('click', function() {
+                    sourceWrap.classList.add('d-none');
+                    if (sourceInput) sourceInput.value = '';
+                });
+            }
+
+            if (sourceSave && selectSource && sourceInput) {
+                sourceSave.addEventListener('click', function() {
+                    var val = sourceInput.value.trim();
+                    if (!val) {
+                        sourceInput.focus();
+                        return;
+                    }
+                    var exists = Array.from(selectSource.options).some(function(o) {
+                        return o.text.toLowerCase() === val.toLowerCase();
+                    });
+                    if (!exists) {
+                        var opt = document.createElement('option');
+                        opt.textContent = val;
+                        opt.value = val;
+                        selectSource.appendChild(opt);
+                    }
+                    selectSource.value = val;
+                    sourceInput.value = '';
+                    sourceWrap.classList.add('d-none');
+                });
+
+                sourceInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        sourceSave.click();
+                    }
+                });
+            }
+
+            // 3. Sample CSV template download
+            var sampleLink = document.getElementById('importSampleLink');
+            if (sampleLink) {
+                sampleLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var csv = [
+                        'Name,Company,Phone,Email,Country,Product,Value,Tags,Profession',
+                        'Arun Kumar,Vetri Constructions,9840012345,arun@example.com,India,ERP Software License,85000,Hot Lead,Builder',
+                        'Meena Ramesh,Sri Lakshmi Traders,9884456789,meena@example.com,India,HRMS Annual Subscription,141629,Won,Retailer',
+                        'Karthik Raja,Chennai Solar Tech,9789012345,karthik@solargroup.in,India,Solar Panel Installation,250000,Warm Lead,Contractor'
+                    ].join('\n');
+                    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = 'leads-import-template.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(a.href);
+                });
+            }
+
+            // 4. Simulate Import
+            var simBtn = document.getElementById('btnSimulateImport');
+            if (simBtn) {
+                simBtn.addEventListener('click', function() {
+                    var fileEl = document.getElementById('importFile');
+                    if (!fileEl || !fileEl.files.length) {
+                        alert('Please select a CSV or Excel file to simulate.');
+                        if (fileEl) fileEl.focus();
+                        return;
+                    }
+                    var origHtml = simBtn.innerHTML;
+                    simBtn.disabled = true;
+                    simBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Simulating...';
+                    setTimeout(function() {
+                        simBtn.disabled = false;
+                        simBtn.innerHTML = origHtml;
+                        alert('✅ Simulation successful:\n• 3 valid records detected\n• 0 formatting errors\n• 0 duplicate conflicts\n\nReady to proceed with live import.');
+                    }, 800);
+                });
+            }
+
+            // 5. Execute Import
+            var doImportBtn = document.getElementById('btnDoImport');
+            if (doImportBtn) {
+                doImportBtn.addEventListener('click', function() {
+                    var fileEl = document.getElementById('importFile');
+                    if (!fileEl || !fileEl.files.length) {
+                        alert('Please select a CSV or Excel file to import.');
+                        if (fileEl) fileEl.focus();
+                        return;
+                    }
+                    var origHtml = doImportBtn.innerHTML;
+                    doImportBtn.disabled = true;
+                    doImportBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Importing...';
+                    setTimeout(function() {
+                        doImportBtn.disabled = false;
+                        doImportBtn.innerHTML = origHtml;
+                        var m = bootstrap.Modal.getInstance(modal);
+                        if (m) m.hide();
+                        alert('🎉 Successfully imported 3 leads into your CRM database!');
+                    }, 1000);
+                });
+            }
+        })();

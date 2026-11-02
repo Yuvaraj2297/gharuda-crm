@@ -1130,45 +1130,68 @@
     </div>
 </div>
 
-<!-- ===== Import Leads Modal ===== -->
+<!-- ===== Import Leads Modal (Bootstrap 5 Best-Practice) ===== -->
 <div class="modal fade" id="importLeadsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header">
-                <h5 class="fw-bold mb-0"><i class="bi bi-upload me-2 text-primary"></i>Import Leads</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <!-- Modal Header -->
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary" style="width:38px;height:38px;">
+                        <i class="bi bi-file-earmark-arrow-up fs-5"></i>
+                    </span>
+                    <div>
+                        <h5 class="modal-title fw-bold m-0 fs-5 text-dark">Import Leads</h5>
+                        <small class="text-muted">Bulk import prospects from CSV or Excel spreadsheet</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+            <!-- Modal Body -->
+            <div class="modal-body p-4 bg-light-subtle">
+                <!-- Choose CSV File -->
                 <div class="mb-3">
-                    <label>Choose CSV File <span class="req">*</span></label>
-                    <input type="file" class="form-control" id="importFile" accept=".csv,.xlsx,.xls">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label for="importFile" class="form-label fw-semibold text-dark small mb-0">Choose CSV File <span class="text-danger">*</span></label>
+                        <a href="#" class="small text-primary text-decoration-none fw-semibold" id="importSampleLink">
+                            <i class="bi bi-download me-1"></i>Download Template (.csv)
+                        </a>
+                    </div>
+                    <input type="file" class="form-control rounded-2" id="importFile" accept=".csv,.xlsx,.xls">
+                    <div class="form-text small text-muted">Supports CSV / Excel format with UTF-8 encoding.</div>
                 </div>
+
+                <!-- Status (fallback) -->
                 <div class="mb-3">
-                    <label>Status (fallback) <span class="req">*</span></label>
+                    <label for="importStatus" class="form-label fw-semibold text-dark small mb-1">Status (fallback) <span class="text-danger">*</span></label>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="importStatus">
+                        <select class="form-select rounded-2" id="importStatus">
                             <option selected>Lead</option>
                             <option>Quotation</option>
                             <option>Followup</option>
                             <option>Qualified</option>
-                            <option>DIRECT</option>
-                            <option>New Enquiry</option>
-                            <option>New</option>
+                            <option>Negotiation</option>
                             <option>Customer</option>
                             <option>Waiting for Response</option>
                         </select>
-                        <button type="button" class="btn btn-outline-primary im-inline-add" data-im-target="importStatus" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                        <button type="button" class="btn btn-outline-primary rounded-2 px-3 fw-semibold" id="imBtnToggleStatus" title="Add custom status">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
                     </div>
-                    <div class="im-inline-wrap" id="imInlineStatus">
-                        <input type="text" class="form-control form-control-sm" placeholder="New status name">
-                        <button type="button" class="im-inline-add im-inline-save im-inline-primary"><i class="bi bi-check-lg"></i></button>
+                    <!-- Inline Add Status Input Group (hidden by default) -->
+                    <div class="input-group input-group-sm mt-2 d-none" id="imInlineStatusWrap">
+                        <input type="text" class="form-control" id="imInlineStatusInput" placeholder="Enter new status name...">
+                        <button type="button" class="btn btn-success fw-semibold" id="imInlineStatusSave"><i class="bi bi-check-lg me-1"></i>Add</button>
+                        <button type="button" class="btn btn-outline-secondary" id="imInlineStatusCancel"><i class="bi bi-x-lg"></i></button>
                     </div>
                 </div>
+
+                <!-- Source (fallback) -->
                 <div class="mb-3">
-                    <label>Source (fallback) <span class="req">*</span></label>
+                    <label for="importSource" class="form-label fw-semibold text-dark small mb-1">Source (fallback) <span class="text-danger">*</span></label>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="importSource">
+                        <select class="form-select rounded-2" id="importSource">
                             <option selected>Indiamart</option>
                             <option>Direct</option>
                             <option>Website Form</option>
@@ -1179,17 +1202,23 @@
                             <option>Walk-in</option>
                             <option>Cold Call</option>
                         </select>
-                        <button type="button" class="btn btn-outline-primary im-inline-add" data-im-target="importSource" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                        <button type="button" class="btn btn-outline-primary rounded-2 px-3 fw-semibold" id="imBtnToggleSource" title="Add custom source">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
                     </div>
-                    <div class="im-inline-wrap" id="imInlineSource">
-                        <input type="text" class="form-control form-control-sm" placeholder="New source name">
-                        <button type="button" class="im-inline-add im-inline-save im-inline-primary"><i class="bi bi-check-lg"></i></button>
+                    <!-- Inline Add Source Input Group (hidden by default) -->
+                    <div class="input-group input-group-sm mt-2 d-none" id="imInlineSourceWrap">
+                        <input type="text" class="form-control" id="imInlineSourceInput" placeholder="Enter new source name...">
+                        <button type="button" class="btn btn-success fw-semibold" id="imInlineSourceSave"><i class="bi bi-check-lg me-1"></i>Add</button>
+                        <button type="button" class="btn btn-outline-secondary" id="imInlineSourceCancel"><i class="bi bi-x-lg"></i></button>
                     </div>
                 </div>
+
+                <!-- Responsible Assignee -->
                 <div class="mb-3">
-                    <label>Responsible (Assignee)</label>
-                    <select class="form-select" id="importAssignee">
-                        <option value="" selected>Non selected</option>
+                    <label for="importAssignee" class="form-label fw-semibold text-dark small mb-1">Responsible (Assignee)</label>
+                    <select class="form-select rounded-2" id="importAssignee">
+                        <option value="" selected>None (Unassigned)</option>
                         <option>GHRAUDA SOFTWARE</option>
                         <option>Harish D.</option>
                         <option>Divya A.</option>
@@ -1197,98 +1226,30 @@
                         <option>Priya S.</option>
                     </select>
                 </div>
-                <a href="#" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 mb-3" id="importSampleLink"><i class="bi bi-download"></i>Download sample</a>
-                <div class="modal-footer bg-light border-top p-3 d-flex justify-content-end gap-2 mt-3">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-primary" id="btnSimulateImport"><i class="bi bi-play-fill me-1"></i>Simulate Import</button>
-                    <button type="button" class="btn btn-primary" id="btnDoImport"><i class="bi bi-upload me-1"></i>Import</button>
+
+                <!-- Import Policy Checkboxes -->
+                <div class="p-3 bg-white border rounded-2 mb-2">
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" id="imOptDedupe" checked>
+                        <label class="form-check-label small text-dark" for="imOptDedupe">
+                            Skip duplicate records (matched by Email or Phone)
+                        </label>
+                    </div>
                 </div>
             </div>
-            <script>
-                (function() {
-                    var modal = document.getElementById('importLeadsModal');
-                    if (!modal) return;
-                    /* + button -> inline add row for status/source */
-                    modal.querySelectorAll('.im-inline-add[data-im-target]').forEach(function(btn) {
-                        btn.addEventListener('click', function() {
-                            var wrap = btn.closest('.im-field').querySelector('.im-inline-wrap');
-                            if (wrap) {
-                                wrap.classList.toggle('show');
-                                var inp = wrap.querySelector('input');
-                                if (inp && wrap.classList.contains('show')) inp.focus();
-                            }
-                        });
-                    });
-                    /* inline save -> append option to sibling select */
-                    modal.querySelectorAll('.im-inline-save').forEach(function(saveBtn) {
-                        saveBtn.addEventListener('click', function() {
-                            var wrap = saveBtn.closest('.im-inline-wrap');
-                            var inp = wrap.querySelector('input');
-                            var val = inp.value.trim();
-                            if (!val) return;
-                            var selId = wrap.id === 'imInlineStatus' ? 'importStatus' : 'importSource';
-                            var sel = document.getElementById(selId);
-                            var exists = Array.from(sel.options).some(function(o) {
-                                return o.text.toLowerCase() === val.toLowerCase();
-                            });
-                            if (!exists) {
-                                var opt = document.createElement('option');
-                                opt.textContent = val;
-                                sel.appendChild(opt);
-                            }
-                            sel.value = Array.from(sel.options).find(function(o) {
-                                return o.text.toLowerCase() === val.toLowerCase();
-                            }).value || val;
-                            inp.value = '';
-                            wrap.classList.remove('show');
-                        });
-                    });
-                    /* Enter key in inline input triggers save */
-                    modal.querySelectorAll('.im-inline-wrap input').forEach(function(inp) {
-                        inp.addEventListener('keydown', function(e) {
-                            if (e.key === 'Enter') {
-                                e.preventDefault();
-                                inp.closest('.im-inline-wrap').querySelector('.im-inline-save').click();
-                            }
-                        });
-                    });
-                    /* Download sample CSV (demo blob) */
-                    var sampleLink = document.getElementById('importSampleLink');
-                    if (sampleLink) sampleLink.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        var csv = 'Name,Company,Phone,Email,Country,Product,Value,Tags,Profession\n' +
-                            'Arun Kumar,Vetri Constructions,9840012345,arun@example.com,India,ERP Software License,85000,Hot Lead,Builder\n' +
-                            'Meena Ramesh,Sri Lakshmi Traders,9884456789,meena@example.com,India,HRMS Annual Subscription,141629,Won,Retailer';
-                        var blob = new Blob([csv], {
-                            type: 'text/csv'
-                        });
-                        var a = document.createElement('a');
-                        a.href = URL.createObjectURL(blob);
-                        a.download = 'leads-sample-template.csv';
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(a.href);
-                    });
-                    /* Simulate Import (demo) */
-                    var simBtn = document.getElementById('btnSimulateImport');
-                    if (simBtn) simBtn.addEventListener('click', function() {
-                        var fileEl = document.getElementById('importFile');
-                        if (!fileEl || !fileEl.files.length) {
-                            alert('Please choose a CSV file first.');
-                            return;
-                        }
-                        var original = simBtn.innerHTML;
-                        simBtn.disabled = true;
-                        simBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Simulating...';
-                        setTimeout(function() {
-                            simBtn.disabled = false;
-                            simBtn.innerHTML = original;
-                            alert('\u2705 Simulation complete: 2 leads will be imported (0 errors, 0 duplicates).');
-                        }, 900);
-                    });
-                })();
-            </script>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline-primary fw-semibold" id="btnSimulateImport">
+                        <i class="bi bi-play-fill me-1"></i>Simulate Import
+                    </button>
+                    <button type="button" class="btn btn-success px-4 fw-semibold shadow-sm" id="btnDoImport">
+                        <i class="bi bi-cloud-arrow-up-fill me-1"></i>Import Leads
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
