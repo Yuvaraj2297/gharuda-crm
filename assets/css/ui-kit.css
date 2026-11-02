@@ -9,13 +9,31 @@
          Use plain Bootstrap 5 markup and this file keeps it consistent.
    ========================================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Global Font: Inter + sans-serif fallbacks across all CRM controls & text */
+body, html,
+h1, h2, h3, h4, h5, h6,
+.page-title, .page-subtitle, .breadcrumb-text,
+.card-title, .modal-title, .offcanvas-title,
+.form-label, .col-form-label, label,
+.form-control, .form-select, input, select, textarea,
+.btn, .badge, .table, th, td,
+.dropdown-menu, .dropdown-item,
+.select2-container, .select2-dropdown, .select2-results__option {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
 :root {
     --ui-font-size: .845rem;           /* 13.5px – body text in controls  */
     --ui-label-size: .8125rem;         /* 13px   – form labels            */
     --ui-control-h: 40px;              /* standard input / select height  */
     --ui-control-h-sm: 32px;
     --ui-control-h-lg: 46px;
-    --ui-control-radius: 10px;
+    --ui-control-radius: 6px;
+    --ui-btn-radius: 6px;
+    --ui-dropdown-radius: 6px;
+    --ui-control-radius-sm: 4px;
     --ui-control-bg: var(--input-bg, #f4f7f6);
     --ui-control-border: #e2e8ec;
     --ui-control-border-hover: #cfd8de;
