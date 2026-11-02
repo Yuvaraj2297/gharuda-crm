@@ -45,7 +45,7 @@
                         <th>Delivery Date</th>
                         <th class="text-end">Order Total (GST)</th>
                         <th>Fulfillment Status</th>
-                        <th class="text-end pe-4">ERP Actions (Dispatch / Bill)</th>
+                        <th class="text-end pe-4" style="min-width: 100px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="soTableBody">
@@ -68,16 +68,50 @@
                         <td class="text-end fw-bold text-dark">&#8377;5,90,000</td>
                         <td data-so-status-cell><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11">Confirmed</span></td>
                         <td class="text-end pe-4">
-                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
-                                <button type="button" class="btn btn-sm btn-outline-primary py-1 px-2 font-11 fw-semibold btn-dispatch-so" data-so="SO-2026-104" data-client="Power Spares Engineering" data-items="Gharuda Cloud CRM + 10 Biometric Terminals" title="Create Delivery Challan &amp; Dispatch">
-                                    <i class="bi bi-truck me-1"></i>Dispatch
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
                                 </button>
-                                <a href="project-create.php?so=SO-2026-104&amp;client=Power+Spares+Engineering&amp;project=Gharuda+Cloud+CRM+%26+Biometric+Setup&amp;amount=590000" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Service / Installation Project">
-                                    <i class="bi bi-briefcase me-1"></i>+ Project
-                                </a>
-                                <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Convert SO to Tax Invoice">
-                                    <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
-                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Order Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 btn-dispatch-so" href="javascript:void(0)" data-so="SO-2026-104" data-client="Power Spares Engineering" data-items="Gharuda Cloud CRM + 10 Biometric Terminals">
+                                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-truck"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Dispatch &amp; Challan</div>
+                                                <div class="text-muted" style="font-size: 10px;">Create DC &amp; dispatch stock</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Convert to Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue GST billing invoice</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php?so=SO-2026-104&amp;client=Power+Spares+Engineering&amp;project=Gharuda+Cloud+CRM+%26+Biometric+Setup&amp;amount=590000">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Delivery Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Schedule installation &amp; rollout</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-muted" href="javascript:void(0)" onclick="window.print()">
+                                            <span class="action-icon-pill bg-light text-secondary border"><i class="bi bi-printer"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Print Order Details</div>
+                                                <div class="text-muted" style="font-size: 10px;">Download or print summary</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -100,16 +134,50 @@
                         <td class="text-end fw-bold text-dark">&#8377;3,89,400</td>
                         <td data-so-status-cell><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2.5 py-1 font-11">Backorder</span></td>
                         <td class="text-end pe-4">
-                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
-                                <a href="purchase-order-create.php?sku=SKU-SV-105&amp;item=Dell+PowerEdge+R250+ERP+Appliance&amp;vendor=Ingram+Micro+India+Pvt+Ltd&amp;qty=2&amp;rate=115000" class="btn btn-sm btn-warning text-dark py-1 px-2 font-11 fw-semibold" title="Raise Vendor PO for Backorder">
-                                    <i class="bi bi-cart-plus me-1"></i>Raise PO
-                                </a>
-                                <a href="project-create.php?so=SO-2026-103&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Dell+PowerEdge+R250+Server+Deployment&amp;amount=389400" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Server Deployment Project">
-                                    <i class="bi bi-briefcase me-1"></i>+ Project
-                                </a>
-                                <a href="invoice-create.php?quote=QT-2026-081&amp;client=Hindustan+Hydraulics+Pvt+Ltd&amp;amount=389400" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Proforma / Tax Invoice">
-                                    <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
-                                </a>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Order Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="purchase-order-create.php?sku=SKU-SV-105&amp;item=Dell+PowerEdge+R250+ERP+Appliance&amp;vendor=Ingram+Micro+India+Pvt+Ltd&amp;qty=2&amp;rate=115000">
+                                            <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-cart-plus"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Raise Vendor PO</div>
+                                                <div class="text-muted" style="font-size: 10px;">Procure backordered SKUs</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?quote=QT-2026-081&amp;client=Hindustan+Hydraulics+Pvt+Ltd&amp;amount=389400">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Proforma / Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue advance proforma invoice</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php?so=SO-2026-103&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Dell+PowerEdge+R250+Server+Deployment&amp;amount=389400">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Deployment Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Configure server &amp; rack setup</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-muted" href="javascript:void(0)" onclick="window.print()">
+                                            <span class="action-icon-pill bg-light text-secondary border"><i class="bi bi-printer"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Print Order Details</div>
+                                                <div class="text-muted" style="font-size: 10px;">Download or print summary</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -132,14 +200,41 @@
                         <td class="text-end fw-bold text-dark">&#8377;1,38,060</td>
                         <td data-so-status-cell><span class="badge bg-success text-white border border-success rounded-pill px-2.5 py-1 font-11">Dispatched</span></td>
                         <td class="text-end pe-4">
-                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
-                                <a href="project-create.php?so=SO-2026-102&amp;client=Zen+Publications&amp;project=Barcode+%26+POS+Rollout&amp;amount=138060" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Installation Project">
-                                    <i class="bi bi-briefcase me-1"></i>+ Project
-                                </a>
-                                <a href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="View / Create Tax Invoice">
-                                    <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
-                                </a>
-                                <button type="button" class="btn btn-sm btn-light border py-1 px-2 font-11 text-muted" title="Print Delivery Challan" onclick="window.print();"><i class="bi bi-printer"></i></button>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Order Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">View / Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Check completed tax invoice</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php?so=SO-2026-102&amp;client=Zen+Publications&amp;project=Barcode+%26+POS+Rollout&amp;amount=138060">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Installation Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Track ongoing rollout status</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-muted" href="javascript:void(0)" onclick="window.print()">
+                                            <span class="action-icon-pill bg-light text-secondary border"><i class="bi bi-printer"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Print Delivery Challan</div>
+                                                <div class="text-muted" style="font-size: 10px;">Print DC #DC-2026-209</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -303,11 +398,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<td class="small fw-semibold text-dark">' + (s.deliveryDate || '05-Nov-2026') + '</td>' +
                 '<td class="text-end fw-bold text-dark">' + (s.total || '₹0') + '</td>' +
                 '<td data-so-status-cell><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11">' + (s.status || 'Confirmed') + '</span></td>' +
-                '<td class="text-end pe-4"><div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">' +
-                    '<button type="button" class="btn btn-sm btn-outline-primary py-1 px-2 font-11 fw-semibold btn-dispatch-so" data-so="' + cleanSo + '" data-client="' + (s.client || '') + '" data-items="' + (s.summary || '') + '"><i class="bi bi-truck me-1"></i>Dispatch</button>' +
-                    '<a href="project-create.php?so=' + encSo + '&client=' + encClient + '&project=' + encodeURIComponent(s.summary || '') + '&amount=' + rawAmt + '" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Delivery Project"><i class="bi bi-briefcase me-1"></i>+ Project</a>' +
-                    '<a href="invoice-create.php?quote=' + encSo + '&client=' + encClient + '&amount=' + rawAmt + '" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-file-earmark-ruled me-1"></i>Invoice</a>' +
-                '</div></td>';
+                '<td class="text-end pe-4">' +
+                    '<div class="dropdown">' +
+                        '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">' +
+                            '<span>Actions</span>' +
+                        '</button>' +
+                        '<ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">' +
+                            '<li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Order Actions</li>' +
+                            '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 btn-dispatch-so" href="javascript:void(0)" data-so="' + cleanSo + '" data-client="' + (s.client || '') + '" data-items="' + (s.summary || '') + '"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-truck"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Dispatch &amp; Challan</div><div class="text-muted" style="font-size: 10px;">Create DC &amp; dispatch stock</div></div></a></li>' +
+                            '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?quote=' + encSo + '&client=' + encClient + '&amount=' + rawAmt + '"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Convert to Invoice</div><div class="text-muted" style="font-size: 10px;">Issue GST billing invoice</div></div></a></li>' +
+                            '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php?so=' + encSo + '&client=' + encClient + '&project=' + encodeURIComponent(s.summary || '') + '&amount=' + rawAmt + '"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Delivery Project</div><div class="text-muted" style="font-size: 10px;">Schedule installation &amp; rollout</div></div></a></li>' +
+                            '<li><hr class="dropdown-divider my-1"></li>' +
+                            '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-muted" href="javascript:void(0)" onclick="window.print()"><span class="action-icon-pill bg-light text-secondary border"><i class="bi bi-printer"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Print Order Details</div><div class="text-muted" style="font-size: 10px;">Download or print summary</div></div></a></li>' +
+                        '</ul>' +
+                    '</div>' +
+                '</td>';
             tbody.insertBefore(tr, tbody.firstChild);
         });
     } catch (e) {}
@@ -333,7 +438,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         var dispBtn = activeSoRow.querySelector('.btn-dispatch-so');
         if (dispBtn) {
-            dispBtn.remove();
+            var li = dispBtn.closest('li');
+            if (li) li.remove();
         }
         var modalEl = document.getElementById('dispatchOrderModal');
         if (window.bootstrap && bootstrap.Modal.getInstance(modalEl)) {
