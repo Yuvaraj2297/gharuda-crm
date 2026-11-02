@@ -1,118 +1,69 @@
 <?php include 'header.php'; ?>
+<link rel="stylesheet" href="./assets/css/lead.css">
 <link rel="stylesheet" href="./assets/css/date-picker.css">
 
-<main class="customers-page">
-    <!-- Page Header & Breadcrumb -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
-        <div class="overflow-auto">
-            <h1 class="font-display fw-bold mb-1 page-title">Customers</h1>
-            <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap overflow-auto breadcrumb-text">
-                <i class="bi bi-people fs-6"></i><span>CRM</span><i class="bi bi-chevron-right"></i><span class="fw-bold text-dark">Customers</span>
-            </nav>
-        </div>
-
-        <!-- Top Action Buttons (Bootstrap 5 Utilities) -->
-        <div class="d-flex flex-wrap align-items-center gap-2">
-            <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#cvNewCustomerModal">
-                <i class="bi bi-plus-lg"></i><span>Quick New Customer</span>
-            </button>
-            <a href="customer-new.php" class="btn btn-outline-primary d-inline-flex align-items-center gap-2 fw-semibold">
-                <i class="bi bi-building-add"></i><span>Full Customer Onboarding</span>
-            </a>
-            <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2 fw-semibold" data-bs-toggle="offcanvas" data-bs-target="#custImportOffcanvas" aria-controls="custImportOffcanvas">
-                <i class="bi bi-upload"></i><span>Import Customers</span>
-            </button>
-            <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#contactsModal">
-                <i class="bi bi-person"></i><span>Contacts</span>
-            </button>
-            <button type="button" class="btn btn-outline-primary d-inline-flex align-items-center gap-2 fw-semibold" id="custFormSync">
-                <i class="bi bi-arrow-repeat"></i><span>Form Sync</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Customers Summary Strip (Bootstrap 5 Grid + Utilities) -->
-    <div class="card-custom mb-3 p-3 p-md-4">
-        <div class="d-flex align-items-center gap-2 fw-bold text-dark mb-3">
-            <i class="bi bi-file-earmark-text text-primary fs-5"></i>
-            <span>Customers Summary</span>
-        </div>
-        <div class="row g-3" id="custSummary">
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item active d-flex align-items-baseline gap-2 p-2 rounded-3 bg-light border border-success-subtle" role="button" data-filter="all">
-                    <span class="fs-5 fw-bold text-dark num" id="sumTotal">7</span>
-                    <span class="small fw-semibold text-dark text-decoration-underline lbl">Total Customers</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item d-flex align-items-baseline gap-2 p-2 rounded-3 bg-success-subtle border border-success-subtle" role="button" data-filter="active">
-                    <span class="fs-5 fw-bold text-success num" id="sumActive">5</span>
-                    <span class="small fw-semibold text-success lbl">Active Customers</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item d-flex align-items-baseline gap-2 p-2 rounded-3 bg-danger-subtle border border-danger-subtle" role="button" data-filter="inactive">
-                    <span class="fs-5 fw-bold text-danger num" id="sumInactive">2</span>
-                    <span class="small fw-semibold text-danger lbl">Inactive Customers</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item d-flex align-items-baseline gap-2 p-2 rounded-3 bg-light border">
-                    <span class="fs-5 fw-bold text-success num">30</span>
-                    <span class="small fw-semibold text-secondary lbl">Active Contacts</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item d-flex align-items-baseline gap-2 p-2 rounded-3 bg-light border">
-                    <span class="fs-5 fw-bold text-danger num">0</span>
-                    <span class="small fw-semibold text-secondary lbl">Inactive Contacts</span>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-xl-2">
-                <div class="cust-summary-item d-flex align-items-baseline gap-2 p-2 rounded-3 bg-light border">
-                    <span class="fs-5 fw-bold text-dark num">0</span>
-                    <span class="small fw-semibold text-secondary lbl">Logged In Today</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Customers Directory Card -->
-    <div class="card-custom p-0" id="customersTableWrap">
-        <div class="card-head d-flex align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
-            <div class="d-flex align-items-center gap-3">
-                <div class="icon-chip">
-                    <i class="bi bi-people"></i>
-                </div>
-                <div>
-                    <h3 class="card-title mb-0">Customers Directory</h3>
-                    <small class="text-muted">Manage B2B &amp; B2C accounts, primary contacts, GST billing, and 360&deg; lifecycle</small>
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-2">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle fw-semibold" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-check2-square me-1"></i>Bulk actions
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border">
-                        <li><button type="button" class="dropdown-item small fw-semibold" data-bulk="activate"><i class="bi bi-toggle-on text-success me-2"></i>Mark active</button></li>
-                        <li><button type="button" class="dropdown-item small fw-semibold" data-bulk="deactivate"><i class="bi bi-toggle-off text-secondary me-2"></i>Mark inactive</button></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><button type="button" class="dropdown-item small fw-semibold text-danger" data-bulk="delete"><i class="bi bi-trash me-2"></i>Delete selected</button></li>
-                    </ul>
-                </div>
-                <a href="customer-new.php" class="btn btn-outline-primary btn-sm" title="Full Customer Onboarding">
-                    <i class="bi bi-building-add"></i>
-                </a>
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#cvNewCustomerModal" title="Quick Add Customer">
-                    <i class="mdi mdi-plus"></i>
+<main class="container-fluid px-0 customers-page">
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+            <h1 class="font-display fw-bold mb-0 page-title">Customers</h1>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Customer View Switcher">
+                <button type="button" class="btn btn-outline-secondary active font-12 fw-semibold px-2.5" id="viewDirectoryBtn" onclick="switchCustomerView('directory')">
+                    <i class="bi bi-list-ul me-1"></i>Directory List
+                </button>
+                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" id="viewAnalyticsBtn" onclick="switchCustomerView('analytics')">
+                    <i class="bi bi-pie-chart me-1"></i>360° Analytics
                 </button>
             </div>
         </div>
 
-        <!-- Table (toolbar auto-created by datatable class) -->
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="customersTable" data-table-name="Customers">
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" id="btnCustomerFilterTrigger" data-bs-toggle="offcanvas" data-bs-target="#customerFilterOffcanvas" aria-controls="customerFilterOffcanvas" title="Filter Customers">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="filterCountBadge">0</span>
+            </button>
+            <div class="dropdown" id="bulkActionsDropdownWrap">
+                <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle fw-semibold font-12 py-1 px-2.5" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-check2-square me-1"></i>Bulk actions
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Bulk Selection</li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1.5" data-bulk="activate"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-toggle-on"></i></span><span>Mark Active</span></button></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1.5" data-bulk="deactivate"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-toggle-off"></i></span><span>Mark Inactive</span></button></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center gap-2 py-1.5 text-danger" data-bulk="delete"><span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span><span>Delete Selected</span></button></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3" data-bs-toggle="modal" data-bs-target="#cvNewCustomerModal">
+                <i class="bi bi-plus-lg"></i><span>New Customer</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden Summary Compatibility Store -->
+    <div class="d-none" id="custSummary">
+        <span id="sumTotal">7</span>
+        <span id="sumActive">5</span>
+        <span id="sumInactive">2</span>
+    </div>
+
+    <!-- Customers Directory Card -->
+    <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4" id="customersTableWrap">
+        <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom">
+            <div class="d-flex align-items-center gap-2">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-people text-primary me-2"></i>Customers Directory</h6>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="custCountBadge">7 Customers</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" id="exportCustomerCsvBtn">
+                    <i class="bi bi-download"></i><span>Export CSV</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="customersTable" data-table-name="Customers">
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="form-check-input" id="custCheckAll" aria-label="Select all"></th>
@@ -149,12 +100,50 @@
                         <td><span class="badge bg-success-subtle text-success border border-success-subtle">Enterprise</span></td>
                         <td class="text-neutral">16-09-2026 11:53:29</td>
                         <td><span class="badge bg-light text-dark border">Builders</span></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=GG+COMPANY" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=GG+COMPANY" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=GG+COMPANY" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=GG+COMPANY">
+                                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg; View</div>
+                                                <div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=GG+COMPANY">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=GG+COMPANY">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php">
+                                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Launch Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Initiate delivery work</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -178,12 +167,18 @@
                         <td></td>
                         <td class="text-neutral">04-09-2026 13:47:58</td>
                         <td><span class="badge bg-light text-dark border">Corporate</span></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=Test+Entry" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=Test+Entry" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=Test+Entry" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=Test+Entry"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Test+Entry"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Test+Entry"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -207,12 +202,18 @@
                         <td></td>
                         <td class="text-neutral">04-09-2026 13:46:13</td>
                         <td></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=New+Test" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=New+Test" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=New+Test" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=New+Test"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=New+Test"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=New+Test"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -236,12 +237,18 @@
                         <td></td>
                         <td class="text-neutral">04-09-2026 13:11:05</td>
                         <td></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=Test12" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=Test12" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=Test12" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=Test12"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Test12"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Test12"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -265,12 +272,18 @@
                         <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">Anand Mehta</span></td>
                         <td class="text-neutral">24-08-2026 17:41:35</td>
                         <td></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=SGI" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=SGI" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=SGI" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=SGI"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=SGI"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=SGI"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -294,12 +307,18 @@
                         <td></td>
                         <td class="text-neutral">12-08-2026 12:47:10</td>
                         <td></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=Bijlipay" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=Bijlipay" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=Bijlipay" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=Bijlipay"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Bijlipay"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Bijlipay"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -323,20 +342,400 @@
                         <td></td>
                         <td class="text-neutral">19-06-2026 15:05:20</td>
                         <td></td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="customer-view.php?id=1&amp;name=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Customer 360° View"><i class="bi bi-person-vcard"></i></a>
-                                <a href="quotation-create.php?client=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="invoice-create.php?client=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>
-                                <a href="project-create.php" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Project"><i class="bi bi-briefcase"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Customer Actions</li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Customer 360&deg; View</div><div class="text-muted" style="font-size: 10px;">Full workspace &amp; ledger</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=SUNGWOO+HITECH+INDIA+PRIVATE+LIMITED"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Tax Invoice</div><div class="text-muted" style="font-size: 10px;">Billing invoice with GST</div></div></a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Launch Project</div><div class="text-muted" style="font-size: 10px;">Initiate delivery work</div></div></a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <div class="card-footer bg-white border-top py-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="text-muted small" id="custTableSummary">Showing all customers</span>
+            <nav aria-label="Table pagination">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>
+
+
+    <!-- Customer 360° Analytics Table Card -->
+    <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4 d-none" id="customerAnalyticsWrap">
+        <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom">
+            <div class="d-flex align-items-center gap-2">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-pie-chart text-primary me-2"></i>Top Client Accounts &amp; Lifetime Metrics</h6>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="custAnalyticsCountBadge">3 Key Accounts</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" id="exportCustDashCsvBtn">
+                    <i class="bi bi-download"></i><span>Export CSV</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="custDashTable">
+                <thead class="table-light text-muted small text-uppercase font-11">
+                    <tr>
+                        <th class="ps-4">Account Name</th>
+                        <th>Category</th>
+                        <th>Industry</th>
+                        <th>Lifetime Value</th>
+                        <th>Active Projects</th>
+                        <th>Health Score</th>
+                        <th class="text-end pe-4" style="min-width: 100px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="custDashTbody">
+                    <tr data-category="Enterprise" data-health="Excellent">
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge rounded-circle bg-primary text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">PS</span>
+                                <div>
+                                    <a href="customer-view.php?id=1&amp;name=Power+Spares+Engineering" class="fw-bold text-dark text-decoration-none font-12">Power Spares Engineering</a>
+                                    <div class="text-muted small font-11">contact@powerspares.com</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11">Enterprise</span></td>
+                        <td class="small">Manufacturing</td>
+                        <td><strong class="text-dark">&#8377;12,50,000</strong></td>
+                        <td><a href="projects-list.php" class="badge bg-light text-dark border text-decoration-none font-11">2 Active</a></td>
+                        <td><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2.5 py-1 font-11">98% Excellent</span></td>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Account Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=1&amp;name=Power+Spares+Engineering">
+                                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg; View</div>
+                                                <div class="text-muted" style="font-size: 10px;">Full workspace &amp; communications</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Power+Spares+Engineering">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue proposal for client</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Power+Spares+Engineering">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct billing with GST</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php">
+                                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Launch Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Start delivery execution</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="support-create-ticket.php">
+                                            <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-headset"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Raise Support Ticket</div>
+                                                <div class="text-muted" style="font-size: 10px;">Create SLA helpdesk ticket</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-category="VIP Account" data-health="Excellent">
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">ZP</span>
+                                <div>
+                                    <a href="customer-view.php?id=2&amp;name=Zen+Publications" class="fw-bold text-dark text-decoration-none font-12">Zen Publications</a>
+                                    <div class="text-muted small font-11">editor@zenpub.in</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-2.5 py-1 font-11">VIP Account</span></td>
+                        <td class="small">Publishing &amp; Media</td>
+                        <td><strong class="text-dark">&#8377;8,90,000</strong></td>
+                        <td><a href="projects-list.php" class="badge bg-light text-dark border text-decoration-none font-11">1 Active</a></td>
+                        <td><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2.5 py-1 font-11">95% Excellent</span></td>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Account Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=2&amp;name=Zen+Publications">
+                                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg; View</div>
+                                                <div class="text-muted" style="font-size: 10px;">Full workspace &amp; communications</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Zen+Publications">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue proposal for client</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Zen+Publications">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct billing with GST</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php">
+                                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Launch Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Start delivery execution</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="support-create-ticket.php">
+                                            <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-headset"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Raise Support Ticket</div>
+                                                <div class="text-muted" style="font-size: 10px;">Create SLA helpdesk ticket</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-category="SME" data-health="Good">
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">HH</span>
+                                <div>
+                                    <a href="customer-view.php?id=3&amp;name=Hindustan+Hydraulics" class="fw-bold text-dark text-decoration-none font-12">Hindustan Hydraulics</a>
+                                    <div class="text-muted small font-11">info@hindustanhydraulics.com</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-secondary-subtle text-secondary border rounded-pill px-2.5 py-1 font-11">SME</span></td>
+                        <td class="small">Heavy Machinery</td>
+                        <td><strong class="text-dark">&#8377;6,20,000</strong></td>
+                        <td><a href="projects-list.php" class="badge bg-light text-dark border text-decoration-none font-11">1 Active</a></td>
+                        <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2.5 py-1 font-11">82% Good</span></td>
+                        <td class="text-end pe-4">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    <span>Actions</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end table-action-menu font-12 py-1">
+                                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Account Actions</li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-view.php?id=3&amp;name=Hindustan+Hydraulics">
+                                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg; View</div>
+                                                <div class="text-muted" style="font-size: 10px;">Full workspace &amp; communications</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php?client=Hindustan+Hydraulics">
+                                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Issue proposal for client</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="invoice-create.php?client=Hindustan+Hydraulics">
+                                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-receipt"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Create Tax Invoice</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct billing with GST</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="project-create.php">
+                                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-briefcase"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Launch Project</div>
+                                                <div class="text-muted" style="font-size: 10px;">Start delivery execution</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="support-create-ticket.php">
+                                            <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-headset"></i></span>
+                                            <div class="text-start">
+                                                <div class="fw-semibold text-dark font-12">Raise Support Ticket</div>
+                                                <div class="text-muted" style="font-size: 10px;">Create SLA helpdesk ticket</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <div class="card-footer bg-white border-top py-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="text-muted small" id="custAnalyticsSummaryText">Showing 3 key accounts</span>
+            <nav aria-label="Table pagination">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Next</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</main>
+
+<!-- ==================== OFFCANVAS SLIDER: CUSTOMER FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="customerFilterOffcanvas" aria-labelledby="customerFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="customerFilterTitle">Filter Customers</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Search Keyword -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Search Customer / Contact</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control" id="filterCustSearch" placeholder="Company, contact, email, phone...">
+            </div>
+        </div>
+
+        <!-- Status Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Account Status</label>
+            <select class="form-select form-select-sm" id="filterCustStatus">
+                <option value="">All Accounts</option>
+                <option value="1">Active Accounts Only</option>
+                <option value="0">Inactive Accounts Only</option>
+            </select>
+        </div>
+
+        <!-- Groups Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Customer Group</label>
+            <select class="form-select form-select-sm" id="filterCustGroup">
+                <option value="">All Groups</option>
+                <option value="Enterprise">Enterprise</option>
+                <option value="Anand Mehta">Anand Mehta</option>
+            </select>
+        </div>
+
+        <!-- Profession Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Profession / Segment</label>
+            <select class="form-select form-select-sm" id="filterCustProfession">
+                <option value="">All Professions</option>
+                <option value="Builders">Builders</option>
+                <option value="Corporate">Corporate</option>
+            </select>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 px-4 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm" id="resetCustFiltersBtn">
+            <i class="bi bi-arrow-clockwise me-1"></i>Reset Filters
+        </button>
+        <button type="button" class="btn btn-primary btn-sm px-4 fw-semibold" data-bs-dismiss="offcanvas">
+            Apply
+        </button>
+    </div>
+</div>
+
+
+
+<!-- ==================== OFFCANVAS SLIDER: CUSTOMER ANALYTICS FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="custDashFilterOffcanvas" aria-labelledby="custDashFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="custDashFilterTitle">Filter 360° Accounts</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Search Keyword -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Search Account / Industry</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control" id="filterCustDashSearch" placeholder="Company, email, industry...">
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Customer Category</label>
+            <select class="form-select form-select-sm" id="filterCustDashCategory">
+                <option value="">All Categories</option>
+                <option value="Enterprise">Enterprise</option>
+                <option value="VIP Account">VIP Account</option>
+                <option value="SME">SME</option>
+            </select>
+        </div>
+
+        <!-- Health Score Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Health Score</label>
+            <select class="form-select form-select-sm" id="filterCustDashHealth">
+                <option value="">All Health Scores</option>
+                <option value="Excellent">Excellent (&gt;90%)</option>
+                <option value="Good">Good (75-90%)</option>
+            </select>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 px-4 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm px-3" id="resetCustDashFilterBtn">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm px-3" data-bs-dismiss="offcanvas">Apply Filters</button>
+    </div>
+</div>
 
 <!-- Quick New Customer Modal (Pure Bootstrap 5 Utility Classes) -->
 <div class="modal fade" id="cvNewCustomerModal" tabindex="-1" aria-labelledby="cvNewCustomerLabel" aria-hidden="true">
@@ -665,7 +1064,6 @@
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
 
 <script>
     /* Global Bootstrap 5 Toast Helper */
@@ -1176,7 +1574,256 @@
             });
         });
 
+        // Universal Filter Engine (Offcanvas Slider)
+        function applyCustFilters() {
+            var q = (document.getElementById('filterCustSearch') ? document.getElementById('filterCustSearch').value : '').toLowerCase().trim();
+            var st = (document.getElementById('filterCustStatus') ? document.getElementById('filterCustStatus').value : '').trim();
+            var grp = (document.getElementById('filterCustGroup') ? document.getElementById('filterCustGroup').value : '').toLowerCase().trim();
+            var prof = (document.getElementById('filterCustProfession') ? document.getElementById('filterCustProfession').value : '').toLowerCase().trim();
+
+            var activeCount = 0;
+            if (q) activeCount++;
+            if (st !== '') activeCount++;
+            if (grp) activeCount++;
+            if (prof) activeCount++;
+
+            var badge = document.getElementById('filterCountBadge');
+            if (badge) {
+                badge.textContent = activeCount;
+                badge.classList.toggle('d-none', activeCount === 0);
+            }
+
+            var visibleCount = 0;
+            liveRows().forEach(function(r) {
+                var text = r.textContent.toLowerCase();
+                var rowActive = r.dataset.active || '';
+
+                var matchQ = !q || text.indexOf(q) !== -1;
+                var matchSt = (st === '') || (rowActive === st);
+                var matchGrp = !grp || text.indexOf(grp) !== -1;
+                var matchProf = !prof || text.indexOf(prof) !== -1;
+
+                var show = matchQ && matchSt && matchGrp && matchProf;
+                r.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            var countBadge = document.getElementById('custCountBadge');
+            if (countBadge) countBadge.textContent = visibleCount + ' Customers';
+
+            var summaryText = document.getElementById('custTableSummary');
+            if (summaryText) summaryText.textContent = 'Showing ' + visibleCount + ' of ' + liveRows().length + ' customers';
+        }
+
+        var searchInput = document.getElementById('filterCustSearch');
+        if (searchInput) searchInput.addEventListener('input', applyCustFilters);
+
+        var statusSelect = document.getElementById('filterCustStatus');
+        if (statusSelect) statusSelect.addEventListener('change', applyCustFilters);
+
+        var groupSelect = document.getElementById('filterCustGroup');
+        if (groupSelect) groupSelect.addEventListener('change', applyCustFilters);
+
+        var profSelect = document.getElementById('filterCustProfession');
+        if (profSelect) profSelect.addEventListener('change', applyCustFilters);
+
+        var resetBtn = document.getElementById('resetCustFiltersBtn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function() {
+                if (searchInput) searchInput.value = '';
+                if (statusSelect) statusSelect.value = '';
+                if (groupSelect) groupSelect.value = '';
+                if (profSelect) profSelect.value = '';
+                applyCustFilters();
+            });
+        }
+
+        // Export CSV
+        var exportBtn = document.getElementById('exportCustomerCsvBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', function() {
+                var rows = [
+                    ['S.No', 'Company', 'Primary Contact', 'Primary Email', 'Phone', 'Active', 'Groups', 'Date Created', 'Profession']
+                ];
+                liveRows().forEach(function(r) {
+                    if (r.style.display === 'none') return;
+                    var cells = r.querySelectorAll('td');
+                    if (cells.length >= 10) {
+                        rows.push([
+                            cells[1].textContent.trim(),
+                            cells[2].textContent.trim(),
+                            cells[3].textContent.trim(),
+                            cells[4].textContent.trim(),
+                            cells[5].textContent.trim(),
+                            r.dataset.active === '1' ? 'Active' : 'Inactive',
+                            cells[7].textContent.trim(),
+                            cells[8].textContent.trim(),
+                            cells[9].textContent.trim()
+                        ]);
+                    }
+                });
+                var csvContent = 'data:text/csv;charset=utf-8,' + rows.map(function(e) {
+                    return e.map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+                }).join('\n');
+                var encodedUri = encodeURI(csvContent);
+                var link = document.createElement('a');
+                link.setAttribute('href', encodedUri);
+                link.setAttribute('download', 'customers_export_' + new Date().toISOString().slice(0, 10) + '.csv');
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            });
+        }
+
         updateSummary();
         refreshTable();
+        applyCustFilters();
     });
+
+    // ==================== VIEW SWITCHER (DIRECTORY vs 360° ANALYTICS) ====================
+    window.switchCustomerView = function(view) {
+        var dirCard = document.getElementById('customersTableWrap');
+        var anaCard = document.getElementById('customerAnalyticsWrap');
+        var btnDir = document.getElementById('viewDirectoryBtn');
+        var btnAna = document.getElementById('viewAnalyticsBtn');
+        var bulkWrap = document.getElementById('bulkActionsDropdownWrap');
+        var filterBtn = document.getElementById('btnCustomerFilterTrigger');
+
+        if (view === 'analytics') {
+            if (dirCard) dirCard.classList.add('d-none');
+            if (anaCard) anaCard.classList.remove('d-none');
+            if (btnDir) btnDir.classList.remove('active');
+            if (btnAna) btnAna.classList.add('active');
+            if (bulkWrap) bulkWrap.classList.add('d-none');
+            if (filterBtn) {
+                filterBtn.setAttribute('data-bs-target', '#custDashFilterOffcanvas');
+                filterBtn.setAttribute('aria-controls', 'custDashFilterOffcanvas');
+                updateAnalyticsFilterBadge();
+            }
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '?view=analytics');
+            }
+        } else {
+            if (dirCard) dirCard.classList.remove('d-none');
+            if (anaCard) anaCard.classList.add('d-none');
+            if (btnDir) btnDir.classList.add('active');
+            if (btnAna) btnAna.classList.remove('active');
+            if (bulkWrap) bulkWrap.classList.remove('d-none');
+            if (filterBtn) {
+                filterBtn.setAttribute('data-bs-target', '#customerFilterOffcanvas');
+                filterBtn.setAttribute('aria-controls', 'customerFilterOffcanvas');
+                // restore directory filter badge
+                var badge = document.getElementById('filterCountBadge');
+                if (badge && window.lastDirFilterCount !== undefined) {
+                    badge.textContent = window.lastDirFilterCount;
+                    badge.classList.toggle('d-none', window.lastDirFilterCount === 0);
+                }
+            }
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', 'customers.php');
+            }
+        }
+    };
+
+    function updateAnalyticsFilterBadge() {
+        var q = (document.getElementById('filterCustDashSearch') ? document.getElementById('filterCustDashSearch').value : '').toLowerCase().trim();
+        var cat = (document.getElementById('filterCustDashCategory') ? document.getElementById('filterCustDashCategory').value : '').trim();
+        var hlt = (document.getElementById('filterCustDashHealth') ? document.getElementById('filterCustDashHealth').value : '').trim();
+        var count = 0;
+        if (q) count++;
+        if (cat) count++;
+        if (hlt) count++;
+        var badge = document.getElementById('filterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            badge.classList.toggle('d-none', count === 0);
+        }
+    }
+
+    function applyCustDashFilters() {
+        var q = (document.getElementById('filterCustDashSearch') ? document.getElementById('filterCustDashSearch').value : '').toLowerCase().trim();
+        var cat = (document.getElementById('filterCustDashCategory') ? document.getElementById('filterCustDashCategory').value : '').trim();
+        var hlt = (document.getElementById('filterCustDashHealth') ? document.getElementById('filterCustDashHealth').value : '').trim();
+
+        updateAnalyticsFilterBadge();
+
+        var rows = document.querySelectorAll('#custDashTbody tr');
+        var visibleCount = 0;
+        rows.forEach(function(r) {
+            var text = r.textContent.toLowerCase();
+            var rowCat = r.getAttribute('data-category') || '';
+            var rowHlt = r.getAttribute('data-health') || '';
+
+            var matchQ = !q || text.indexOf(q) !== -1;
+            var matchCat = !cat || rowCat === cat;
+            var matchHlt = !hlt || rowHlt === hlt;
+
+            var show = matchQ && matchCat && matchHlt;
+            r.style.display = show ? '' : 'none';
+            if (show) visibleCount++;
+        });
+
+        var badge = document.getElementById('custAnalyticsCountBadge');
+        if (badge) badge.textContent = visibleCount + ' Key Accounts';
+        var summary = document.getElementById('custAnalyticsSummaryText');
+        if (summary) summary.textContent = 'Showing ' + visibleCount + ' of ' + rows.length + ' key accounts';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Search & selects for analytics
+        var aSearch = document.getElementById('filterCustDashSearch');
+        if (aSearch) aSearch.addEventListener('input', applyCustDashFilters);
+        var aCat = document.getElementById('filterCustDashCategory');
+        if (aCat) aCat.addEventListener('change', applyCustDashFilters);
+        var aHlt = document.getElementById('filterCustDashHealth');
+        if (aHlt) aHlt.addEventListener('change', applyCustDashFilters);
+        var aReset = document.getElementById('resetCustDashFilterBtn');
+        if (aReset) {
+            aReset.addEventListener('click', function() {
+                if (aSearch) aSearch.value = '';
+                if (aCat) aCat.value = '';
+                if (aHlt) aHlt.value = '';
+                applyCustDashFilters();
+            });
+        }
+
+        // Export Analytics CSV
+        var aExport = document.getElementById('exportCustDashCsvBtn');
+        if (aExport) {
+            aExport.addEventListener('click', function() {
+                var rows = [['Account Name', 'Category', 'Industry', 'Lifetime Value', 'Active Projects', 'Health Score']];
+                document.querySelectorAll('#custDashTbody tr').forEach(function(r) {
+                    if (r.style.display === 'none') return;
+                    var c = r.querySelectorAll('td');
+                    if (c.length >= 6) {
+                        rows.push([
+                            c[0].textContent.replace(/\s+/g, ' ').trim(),
+                            c[1].textContent.trim(),
+                            c[2].textContent.trim(),
+                            c[3].textContent.trim(),
+                            c[4].textContent.trim(),
+                            c[5].textContent.trim()
+                        ]);
+                    }
+                });
+                var csv = 'data:text/csv;charset=utf-8,' + rows.map(function(e) {
+                    return e.map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+                }).join('\n');
+                var link = document.createElement('a');
+                link.setAttribute('href', encodeURI(csv));
+                link.setAttribute('download', 'customer_analytics_export_' + new Date().toISOString().slice(0, 10) + '.csv');
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            });
+        }
+
+        // Check URL param for ?view=analytics or #analytics
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('view') === 'analytics' || window.location.hash === '#analytics') {
+            switchCustomerView('analytics');
+        }
+    });
+
 </script>
+<?php include 'footer.php'; ?>

@@ -275,9 +275,10 @@
 
 
 <script>
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  (function() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 
-  tooltipTriggerList.forEach(function(el) {
+    tooltipTriggerList.forEach(function(el) {
     const tooltipClasses = ['no-tooltip-arrow'];
     const customClass = el.getAttribute('data-bs-custom-class');
     if (customClass) tooltipClasses.push(customClass);
@@ -300,6 +301,7 @@
       tooltip.hide();
     });
   });
+  })();
 </script>
 
 

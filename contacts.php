@@ -1,132 +1,60 @@
 <?php include 'header.php'; ?>
+<link rel="stylesheet" href="./assets/css/lead.css">
 
 <main class="container-fluid px-0">
-    <!-- Page Header -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
+    <!-- Page Header (Single-row clean header) -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
         <div>
-            <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                <h1 class="font-display fw-bold mb-0 page-title">Contacts Directory</h1>
-                <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold">30 Active Contacts</span>
-            </div>
-            <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap breadcrumb-text">
-                <i class="bi bi-people fs-6"></i>
-                <a href="customers.php" class="text-decoration-none text-muted">Customers</a>
-                <i class="bi bi-chevron-right small"></i>
-                <span class="fw-bold text-dark">Global Contacts Directory</span>
-            </nav>
+            <h1 class="font-display fw-bold mb-0 page-title">Contacts Directory</h1>
         </div>
         <div class="d-flex align-items-center flex-wrap gap-2">
-            <a href="customer-dashboard.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-pie-chart"></i><span>Customer 360&deg;</span>
-            </a>
-            <a href="customers.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-building"></i><span>Customers List</span>
-            </a>
-            <a href="customer-new.php" class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-building-add"></i><span>Onboard Account</span>
-            </a>
-            <a href="Gharuda-ERP-Visual-Diagram.xlsx" download="Gharuda-ERP-Visual-Diagram.xlsx" class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-file-earmark-excel"></i><span>Download Excel</span>
-            </a>
-            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold" data-bs-toggle="modal" data-bs-target="#newContactModal">
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#contactFilterOffcanvas" aria-controls="contactFilterOffcanvas" title="Filter Contacts">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="contactFilterCountBadge">0</span>
+            </button>
+            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3" data-bs-toggle="modal" data-bs-target="#newContactModal">
                 <i class="bi bi-person-plus"></i><span>New Contact</span>
             </button>
         </div>
     </div>
 
-    <!-- Contact KPI Cards (Bootstrap 5 Utilities) -->
-    <div class="row g-3 mb-4">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Total Client Contacts</span>
-                    <span class="p-2 rounded-3 bg-primary-subtle text-primary"><i class="bi bi-people-fill"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">30 Contacts</h3>
-                <span class="text-muted small">Across 7 Active Accounts</span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Primary Decision Makers</span>
-                    <span class="p-2 rounded-3 bg-success-subtle text-success"><i class="bi bi-star-fill"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">8 Contacts</h3>
-                <span class="text-success small fw-semibold"><i class="bi bi-shield-check me-1"></i>Sign-off Authority</span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Mobile &amp; Email Verified</span>
-                    <span class="p-2 rounded-3 bg-info-subtle text-info"><i class="bi bi-patch-check-fill"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">28 Contacts</h3>
-                <span class="text-muted small">93.3% Reachability</span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Portal Access Active</span>
-                    <span class="p-2 rounded-3 bg-warning-subtle text-warning"><i class="bi bi-person-check-fill"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">24 Enabled</h3>
-                <span class="text-muted small">Support &amp; Invoices</span>
-            </div>
-        </div>
-    </div>
-
     <!-- Contacts Directory Table Card -->
-    <div class="card-custom p-0 overflow-hidden mb-4">
-        <div class="card-head d-flex align-items-center justify-content-between flex-wrap gap-2 border-bottom p-3 mb-0">
-            <div class="d-flex align-items-center gap-3">
-                <div class="icon-chip">
-                    <i class="bi bi-person-badge"></i>
-                </div>
-                <div>
-                    <h3 class="card-title mb-0">All Contacts Registry</h3>
-                    <small class="text-muted">Key stakeholders, procurement heads &amp; finance SPOCs</small>
-                </div>
+    <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4">
+        <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom">
+            <div class="d-flex align-items-center gap-2">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-person-badge text-primary me-2"></i>All Contacts Registry</h6>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="contactsCountBadge">4 Contacts</span>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <select class="form-select form-select-sm select2" id="contactCompanyFilter">
-                    <option value="">All Companies</option>
-                    <option value="Power Spares Engineering">Power Spares Engineering</option>
-                    <option value="Zen Publications">Zen Publications</option>
-                    <option value="Hindustan Hydraulics">Hindustan Hydraulics</option>
-                    <option value="Gharuda Software">Gharuda Software</option>
-                    <option value="GG COMPANY">GG COMPANY</option>
-                </select>
-                <button type="button" class="btn btn-primary btn-sm text-nowrap" data-bs-toggle="modal" data-bs-target="#newContactModal">
-                    <i class="bi bi-plus-lg me-1"></i>Add Contact
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" id="exportContactsCsvBtn" onclick="exportContactsCSV()">
+                    <i class="bi bi-download"></i><span>Export CSV</span>
                 </button>
             </div>
         </div>
 
-        <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable mb-0" id="globalContactsTable" data-table-name="Contacts_Directory">
-                <thead>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 font-13" id="globalContactsTable">
+                <thead class="table-light text-muted small text-uppercase font-11">
                     <tr>
-                        <th>Contact Name</th>
+                        <th class="ps-4">Contact Name</th>
                         <th>Company / Account</th>
                         <th>Email</th>
                         <th>Role / Position</th>
                         <th>Phone</th>
                         <th>Active</th>
                         <th>Last Login</th>
-                        <th>CRM Action</th>
+                        <th class="text-end pe-4" style="min-width: 100px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="globalContactsBody">
-                    <tr>
-                        <td>
+                    <tr data-company="Power Spares Engineering" data-role="Managing Director" data-status="active">
+                        <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center">MS</span>
+                                <span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">MS</span>
                                 <div>
-                                    <div class="fw-bold text-dark">MOHAN S</div>
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle">Primary SPOC</span>
+                                    <div class="fw-bold text-dark font-13">MOHAN S</div>
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle font-11">Primary SPOC</span>
                                 </div>
                             </div>
                         </td>
@@ -144,22 +72,60 @@
                             </div>
                         </td>
                         <td class="text-muted small">16-09-2026 11:53</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="whatsapp-chat.php" class="btn btn-sm btn-light border text-success px-2 py-1" title="WhatsApp Contact"><i class="bi bi-whatsapp"></i></a>
-                                <a href="mailto:kaviyarasu@ghratechnology.com" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Send Email"><i class="bi bi-envelope"></i></a>
-                                <a href="quotation-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="customer-view.php?id=1&amp;name=Power+Spares+Engineering" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown text-end">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="whatsapp-chat.php">
+                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="mailto:kaviyarasu@ghratechnology.com">
+                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Send Email</div>
+                                                <div class="text-muted" style="font-size: 10px;">Compose message</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="quotation-create.php?client=Power+Spares+Engineering">
+                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item" href="customer-view.php?id=1&amp;name=Power+Spares+Engineering">
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg;</div>
+                                                <div class="text-muted" style="font-size: 10px;">View full client profile</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr data-company="Zen Publications" data-role="Project Manager" data-status="active">
+                        <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-primary text-white p-2 d-inline-flex align-items-center justify-content-center">KM</span>
+                                <span class="badge rounded-circle bg-primary text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">KM</span>
                                 <div>
-                                    <div class="fw-bold text-dark">Kaviyarasu M</div>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Decision Maker</span>
+                                    <div class="fw-bold text-dark font-13">Kaviyarasu M</div>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Decision Maker</span>
                                 </div>
                             </div>
                         </td>
@@ -177,22 +143,60 @@
                             </div>
                         </td>
                         <td class="text-muted small">14-09-2026 10:20</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="whatsapp-chat.php" class="btn btn-sm btn-light border text-success px-2 py-1" title="WhatsApp Contact"><i class="bi bi-whatsapp"></i></a>
-                                <a href="mailto:kaviyarasu@gmail.com" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Send Email"><i class="bi bi-envelope"></i></a>
-                                <a href="quotation-create.php?client=Zen+Publications" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="customer-view.php?id=2&amp;name=Zen+Publications" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown text-end">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="whatsapp-chat.php">
+                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="mailto:kaviyarasu@gmail.com">
+                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Send Email</div>
+                                                <div class="text-muted" style="font-size: 10px;">Compose message</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="quotation-create.php?client=Zen+Publications">
+                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item" href="customer-view.php?id=2&amp;name=Zen+Publications">
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg;</div>
+                                                <div class="text-muted" style="font-size: 10px;">View full client profile</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr data-company="Hindustan Hydraulics" data-role="Operations Head" data-status="active">
+                        <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-info text-white p-2 d-inline-flex align-items-center justify-content-center">SB</span>
+                                <span class="badge rounded-circle bg-info text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">SB</span>
                                 <div>
-                                    <div class="fw-bold text-dark">Suresh Babu</div>
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle">Operations</span>
+                                    <div class="fw-bold text-dark font-13">Suresh Babu</div>
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle font-11">Operations</span>
                                 </div>
                             </div>
                         </td>
@@ -210,22 +214,60 @@
                             </div>
                         </td>
                         <td class="text-muted small">12-09-2026 15:45</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="whatsapp-chat.php" class="btn btn-sm btn-light border text-success px-2 py-1" title="WhatsApp Contact"><i class="bi bi-whatsapp"></i></a>
-                                <a href="mailto:suresh@hindustanhydraulics.com" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Send Email"><i class="bi bi-envelope"></i></a>
-                                <a href="quotation-create.php?client=Hindustan+Hydraulics" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="customer-view.php?id=3&amp;name=Hindustan+Hydraulics" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown text-end">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="whatsapp-chat.php">
+                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="mailto:suresh@hindustanhydraulics.com">
+                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Send Email</div>
+                                                <div class="text-muted" style="font-size: 10px;">Compose message</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="quotation-create.php?client=Hindustan+Hydraulics">
+                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item" href="customer-view.php?id=3&amp;name=Hindustan+Hydraulics">
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg;</div>
+                                                <div class="text-muted" style="font-size: 10px;">View full client profile</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr data-company="GG COMPANY" data-role="Finance & Accounts" data-status="active">
+                        <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center">PS</span>
+                                <span class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">PS</span>
                                 <div>
-                                    <div class="fw-bold text-dark">Priya S</div>
-                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Finance SPOC</span>
+                                    <div class="fw-bold text-dark font-13">Priya S</div>
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle font-11">Finance SPOC</span>
                                 </div>
                             </div>
                         </td>
@@ -243,20 +285,129 @@
                             </div>
                         </td>
                         <td class="text-muted small">09-09-2026 09:12</td>
-                        <td>
-                            <div class="d-flex align-items-center gap-1 flex-nowrap">
-                                <a href="whatsapp-chat.php" class="btn btn-sm btn-light border text-success px-2 py-1" title="WhatsApp Contact"><i class="bi bi-whatsapp"></i></a>
-                                <a href="mailto:priya@ggcompany.com" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Send Email"><i class="bi bi-envelope"></i></a>
-                                <a href="quotation-create.php?client=GG+COMPANY" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create Quotation"><i class="bi bi-file-earmark-text"></i></a>
-                                <a href="customer-view.php?id=5&amp;name=GG+COMPANY" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360°"><i class="bi bi-person-vcard"></i></a>
+                        <td class="text-end pe-4">
+                            <div class="dropdown text-end">
+                                <button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="whatsapp-chat.php">
+                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
+                                                <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="mailto:priya@ggcompany.com">
+                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Send Email</div>
+                                                <div class="text-muted" style="font-size: 10px;">Compose message</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="quotation-create.php?client=GG+COMPANY">
+                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                                <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider my-1"></li>
+                                    <li>
+                                        <a class="dropdown-item" href="customer-view.php?id=5&amp;name=GG+COMPANY">
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div>
+                                            <div>
+                                                <div class="fw-semibold text-dark font-12">Customer 360&deg;</div>
+                                                <div class="text-muted" style="font-size: 10px;">View full client profile</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- Table Footer / Pagination -->
+        <div class="p-3 border-top bg-light bg-opacity-25 d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="text-muted font-12" id="contactsTableSummary">Showing 4 of 4 active contacts</span>
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
     </div>
 </main>
+
+<!-- Filter Offcanvas Slider Drawer -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="contactFilterOffcanvas" aria-labelledby="contactFilterOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title font-16 fw-bold" id="contactFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary me-2"></i>Filter Contacts
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form id="contactFilterForm">
+            <!-- Search Keyword -->
+            <div class="mb-3">
+                <label class="form-label font-12 fw-semibold text-muted text-uppercase mb-1">Search Keyword</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control" id="filterContactSearch" placeholder="Name, email, phone...">
+                </div>
+            </div>
+
+            <!-- Customer Company -->
+            <div class="mb-3">
+                <label class="form-label font-12 fw-semibold text-muted text-uppercase mb-1">Company / Account</label>
+                <select class="form-select" id="filterContactCompany">
+                    <option value="">All Companies</option>
+                    <option value="Power Spares Engineering">Power Spares Engineering</option>
+                    <option value="Zen Publications">Zen Publications</option>
+                    <option value="Hindustan Hydraulics">Hindustan Hydraulics</option>
+                    <option value="Gharuda Software">Gharuda Software</option>
+                    <option value="GG COMPANY">GG COMPANY</option>
+                </select>
+            </div>
+
+            <!-- Role / Position -->
+            <div class="mb-3">
+                <label class="form-label font-12 fw-semibold text-muted text-uppercase mb-1">Role / Position</label>
+                <select class="form-select" id="filterContactRole">
+                    <option value="">All Roles</option>
+                    <option value="Managing Director">Managing Director</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Operations Head">Operations Head</option>
+                    <option value="Finance & Accounts">Finance &amp; Accounts</option>
+                </select>
+            </div>
+
+            <!-- Active Status -->
+            <div class="mb-3">
+                <label class="form-label font-12 fw-semibold text-muted text-uppercase mb-1">Status</label>
+                <select class="form-select" id="filterContactStatus">
+                    <option value="">All Statuses</option>
+                    <option value="active">Active Only</option>
+                    <option value="inactive">Inactive Only</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 bg-light d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary w-50 font-13" onclick="clearContactFilters()">Reset</button>
+        <button type="button" class="btn btn-primary w-50 font-13" onclick="applyContactFilters()">Apply Filters</button>
+    </div>
+</div>
 
 <!-- Modal: New Contact (Pure Bootstrap 5 Utilities) -->
 <div class="modal fade" id="newContactModal" tabindex="-1" aria-labelledby="newContactModalLabel" aria-hidden="true">
@@ -328,10 +479,14 @@ function saveGlobalContact() {
 
     var tbody = document.getElementById('globalContactsBody');
     var tr = document.createElement('tr');
+    tr.setAttribute('data-company', company);
+    tr.setAttribute('data-role', role);
+    tr.setAttribute('data-status', 'active');
+
     tr.innerHTML =
-        '<td><div class="d-flex align-items-center gap-2">' +
-            '<span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center">' + initials + '</span>' +
-            '<div><div class="fw-bold text-dark">' + name + '</div><span class="badge bg-success-subtle text-success border border-success-subtle">Verified SPOC</span></div>' +
+        '<td class="ps-4"><div class="d-flex align-items-center gap-2">' +
+            '<span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">' + initials + '</span>' +
+            '<div><div class="fw-bold text-dark font-13">' + name + '</div><span class="badge bg-success-subtle text-success border border-success-subtle font-11">Verified SPOC</span></div>' +
         '</div></td>' +
         '<td><a href="customer-view.php?id=1&name=' + encComp + '" class="text-dark fw-semibold text-decoration-none"><i class="bi bi-building me-1 text-muted"></i>' + company + '</a></td>' +
         '<td><a href="mailto:' + email + '" class="text-secondary text-decoration-none">' + email + '</a></td>' +
@@ -339,35 +494,120 @@ function saveGlobalContact() {
         '<td><a href="tel:' + phone.replace(/\s+/g, '') + '" class="text-dark text-decoration-none">' + phone + '</a></td>' +
         '<td><div class="form-check form-switch mb-0"><input class="form-check-input" type="checkbox" role="switch" checked></div></td>' +
         '<td class="text-muted small">Just now</td>' +
-        '<td><div class="d-flex align-items-center gap-1 flex-nowrap">' +
-            '<a href="whatsapp-chat.php" class="btn btn-sm btn-light border text-success px-2 py-1" title="WhatsApp Contact"><i class="bi bi-whatsapp"></i></a>' +
-            '<a href="mailto:' + email + '" class="btn btn-sm btn-light border text-secondary px-2 py-1" title="Send Email"><i class="bi bi-envelope"></i></a>' +
-            '<a href="quotation-create.php?client=' + encComp + '" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create Quotation"><i class="bi bi-file-earmark-text"></i></a>' +
-            '<a href="customer-view.php?id=1&name=' + encComp + '" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360°"><i class="bi bi-person-vcard"></i></a>' +
-        '</div></td>';
+        '<td class="text-end pe-4">' +
+            '<div class="dropdown text-end">' +
+                '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">' +
+                    'Actions' +
+                '</button>' +
+                '<ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">' +
+                    '<li><a class="dropdown-item" href="whatsapp-chat.php"><div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div><div><div class="fw-semibold text-dark font-12">WhatsApp Chat</div><div class="text-muted" style="font-size: 10px;">Direct messaging</div></div></a></li>' +
+                    '<li><a class="dropdown-item" href="mailto:' + email + '"><div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div><div><div class="fw-semibold text-dark font-12">Send Email</div><div class="text-muted" style="font-size: 10px;">Compose message</div></div></a></li>' +
+                    '<li><a class="dropdown-item" href="quotation-create.php?client=' + encComp + '"><div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div><div><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Generate proposal</div></div></a></li>' +
+                    '<li><hr class="dropdown-divider my-1"></li>' +
+                    '<li><a class="dropdown-item" href="customer-view.php?id=1&name=' + encComp + '"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div><div><div class="fw-semibold text-dark font-12">Customer 360&deg;</div><div class="text-muted" style="font-size: 10px;">View full client profile</div></div></a></li>' +
+                '</ul>' +
+            '</div>' +
+        '</td>';
     tbody.prepend(tr);
 
     var modalEl = document.getElementById('newContactModal');
     var modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
-    var tbl = document.getElementById('globalContactsTable');
-    if (tbl && tbl.autoTable && typeof tbl.autoTable.refresh === 'function') tbl.autoTable.refresh();
+    document.getElementById('newContactForm').reset();
+    updateContactsCount();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var compEl = document.getElementById('contactCompanyFilter');
-    function filterContacts() {
-        var comp = (compEl ? compEl.value : '').toLowerCase().trim();
-        document.querySelectorAll('#globalContactsTable tbody tr').forEach(function (tr) {
-            var text = tr.textContent.toLowerCase();
-            tr.style.display = (!comp || text.indexOf(comp) !== -1) ? '' : 'none';
-        });
+function updateContactsCount() {
+    var rows = document.querySelectorAll('#globalContactsBody tr');
+    var visible = 0;
+    rows.forEach(function(r) {
+        if (r.style.display !== 'none') visible++;
+    });
+    var badge = document.getElementById('contactsCountBadge');
+    var summary = document.getElementById('contactsTableSummary');
+    if (badge) badge.textContent = visible + ' Contacts';
+    if (summary) summary.textContent = 'Showing ' + visible + ' of ' + rows.length + ' active contacts';
+}
+
+function applyContactFilters() {
+    var search = (document.getElementById('filterContactSearch').value || '').toLowerCase().trim();
+    var company = (document.getElementById('filterContactCompany').value || '').trim();
+    var role = (document.getElementById('filterContactRole').value || '').trim();
+    var status = (document.getElementById('filterContactStatus').value || '').trim();
+
+    var activeCount = 0;
+    if (search) activeCount++;
+    if (company) activeCount++;
+    if (role) activeCount++;
+    if (status) activeCount++;
+
+    var badge = document.getElementById('contactFilterCountBadge');
+    if (badge) {
+        if (activeCount > 0) {
+            badge.textContent = activeCount;
+            badge.classList.remove('d-none');
+        } else {
+            badge.classList.add('d-none');
+        }
     }
-    if (compEl) {
-        compEl.addEventListener('change', filterContacts);
-        if (window.jQuery) jQuery(compEl).on('change', filterContacts);
-    }
-});
+
+    var rows = document.querySelectorAll('#globalContactsBody tr');
+    rows.forEach(function(tr) {
+        var text = tr.textContent.toLowerCase();
+        var rowComp = tr.getAttribute('data-company') || '';
+        var rowRole = tr.getAttribute('data-role') || '';
+        var rowStatus = tr.getAttribute('data-status') || '';
+
+        var matchSearch = !search || text.indexOf(search) !== -1;
+        var matchCompany = !company || rowComp === company;
+        var matchRole = !role || rowRole === role;
+        var matchStatus = !status || rowStatus === status;
+
+        if (matchSearch && matchCompany && matchRole && matchStatus) {
+            tr.style.display = '';
+        } else {
+            tr.style.display = 'none';
+        }
+    });
+
+    updateContactsCount();
+
+    var offcanvasEl = document.getElementById('contactFilterOffcanvas');
+    var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+    if (offcanvas) offcanvas.hide();
+}
+
+function clearContactFilters() {
+    document.getElementById('contactFilterForm').reset();
+    applyContactFilters();
+}
+
+function exportContactsCSV() {
+    var rows = document.querySelectorAll('#globalContactsTable tr');
+    var csv = [];
+    rows.forEach(function(row) {
+        if (row.style.display === 'none') return;
+        var cols = row.querySelectorAll('th, td');
+        var rowData = [];
+        // Extract first 7 columns (exclude actions)
+        for (var i = 0; i < Math.min(cols.length - 1, 7); i++) {
+            var text = cols[i].innerText.replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""').trim();
+            rowData.push('"' + text + '"');
+        }
+        if (rowData.length > 0) {
+            csv.push(rowData.join(','));
+        }
+    });
+
+    var csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv.join('\n'));
+    var link = document.createElement('a');
+    link.setAttribute('href', csvContent);
+    var dateStr = new Date().toISOString().split('T')[0];
+    link.setAttribute('download', 'contacts_export_' + dateStr + '.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 </script>
 
 <?php include 'footer.php'; ?>

@@ -972,11 +972,8 @@
                             <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
                         </div>
                         <div class="nav-label">Customers &amp; Contacts</div>
-                        <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php">
-                            <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg;</span>
-                        </a>
-                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php" class="nav-link-custom" href="customers.php">
-                            <i class="bi bi-person-vcard me-2"></i> <span>Customers List</span>
+                        <a data-active-pages="customers.php,customer-view.php,customer-new.php,customer-import.php,customer-dashboard.php" class="nav-link-custom" href="customers.php">
+                            <i class="bi bi-building me-2"></i> <span>Customers</span>
                         </a>
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php">
                             <i class="bi bi-people me-2"></i> <span>Contacts</span>
