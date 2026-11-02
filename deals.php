@@ -369,6 +369,99 @@
     </div>
 </div>
 
+<!-- Modal: Strict Deal Won Verification Gate -->
+<div class="modal fade" id="dealWonVerificationModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow rounded-4">
+            <div class="modal-header bg-success-subtle border-bottom py-3">
+                <h5 class="modal-title fw-bold text-success d-flex align-items-center gap-2">
+                    <i class="bi bi-trophy-fill"></i> Deal Won Governance Gate
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="p-3 bg-light rounded-3 mb-3 border">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="text-muted small">Account:</span>
+                        <strong class="text-dark" id="wonClientName">-</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted small">Deal Value:</span>
+                        <strong class="text-success fs-5" id="wonDealAmount">₹0</strong>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-dark">Commercial Verification <span class="text-danger">*</span></label>
+                    <div class="form-check p-2 bg-white rounded border">
+                        <input class="form-check-input ms-0 me-2" type="checkbox" id="wonQuoteAttached" checked>
+                        <label class="form-check-label small fw-semibold" for="wonQuoteAttached">
+                            Valid approved quotation or signed SLA contract confirmed
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-dark">Next Automated ERP Action</label>
+                    <select class="form-select" id="wonNextActionSelect">
+                        <option value="so" selected>1. Create Sales Order (SO) &amp; Reserve Inventory</option>
+                        <option value="invoice">2. Direct Tax Invoice (Services / Cloud Licensing)</option>
+                        <option value="stay">3. Mark Won Only (Hold for Client Purchase Order)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer bg-light py-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success btn-sm fw-bold px-3" onclick="confirmDealWonAction()">
+                    <i class="bi bi-check2-circle me-1"></i>Confirm &amp; Close Won
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Strict Deal Lost Reason Capture -->
+<div class="modal fade" id="dealLostReasonModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow rounded-4">
+            <div class="modal-header bg-danger-subtle border-bottom py-3">
+                <h5 class="modal-title fw-bold text-danger d-flex align-items-center gap-2">
+                    <i class="bi bi-x-circle-fill"></i> Closed Lost Reason Required
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="small text-muted mb-3">Enterprise CRM governance requires recording a root-cause for losing <strong id="lostClientName">-</strong>.</p>
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-dark">Loss Reason Category <span class="text-danger">*</span></label>
+                    <select class="form-select" id="lostReasonSelect" required>
+                        <option value="">-- Choose Reason --</option>
+                        <option value="pricing">Competitor Won on Lower Price</option>
+                        <option value="features">Product Features / Technical Gap</option>
+                        <option value="budget">Client Budget Cut / Delayed Indefinitely</option>
+                        <option value="timing">Decision Postponed (Recycle to Lead Nurture)</option>
+                        <option value="unresponsive">Client Non-responsive / Contact Left</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-dark">Winning Competitor (Optional)</label>
+                    <input type="text" class="form-control form-control-sm" id="lostCompetitorInput" placeholder="e.g. Competitor X / Internal Build">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label fw-bold small text-dark">Loss Retrospective Notes</label>
+                    <textarea class="form-control form-control-sm" rows="2" placeholder="Key takeaways for product & sales management..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer bg-light py-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger btn-sm fw-bold px-3" onclick="confirmDealLostAction()">
+                    <i class="bi bi-check2 me-1"></i>Record Loss &amp; Close Deal
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var colBodies = document.querySelectorAll('.deal-col-body');
@@ -427,18 +520,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         card.addEventListener('dragstart', function (e) {
             draggedCard = card;
+            draggedSourceCol = card.parentElement;
             card.classList.add('opacity-50');
             e.dataTransfer.effectAllowed = 'move';
         });
         card.addEventListener('dragend', function () {
             card.classList.remove('opacity-50');
             draggedCard = null;
+            draggedSourceCol = null;
             colBodies.forEach(function (cb) { cb.classList.remove('bg-success-subtle'); });
             updateColumnTotals();
         });
     }
 
-    colBodies.forEach(function (colBody) {
+    var pendingDropCard = null;
+    var pendingTargetCol = null;
+
+    colBodies.forEach(function (colBody, colIndex) {
         Array.prototype.slice.call(colBody.children).forEach(enhanceCard);
         colBody.addEventListener('dragover', function (e) {
             e.preventDefault();
@@ -451,12 +549,75 @@ document.addEventListener('DOMContentLoaded', function () {
         colBody.addEventListener('drop', function (e) {
             e.preventDefault();
             colBody.classList.remove('bg-success-subtle');
-            if (draggedCard) {
-                colBody.appendChild(draggedCard);
-                updateColumnTotals();
+            if (!draggedCard) return;
+
+            // STAGE GOVERNANCE GATEWAY:
+            // Column 4 is Closed Won (index 4)
+            if (colIndex === 4) {
+                pendingDropCard = draggedCard;
+                pendingTargetCol = colBody;
+                var clientName = draggedCard.querySelector('.bi-building') ? draggedCard.querySelector('.bi-building').parentElement.textContent.trim() : 'Client';
+                var dealVal = draggedCard.getAttribute('data-val') || '0';
+                document.getElementById('wonClientName').textContent = clientName;
+                document.getElementById('wonDealAmount').textContent = formatRupees(dealVal);
+                var wonModal = new bootstrap.Modal(document.getElementById('dealWonVerificationModal'));
+                wonModal.show();
+                return;
             }
+
+            // Column 5 is Closed Lost (index 5)
+            if (colIndex === 5) {
+                pendingDropCard = draggedCard;
+                pendingTargetCol = colBody;
+                var clientNameLost = draggedCard.querySelector('.bi-building') ? draggedCard.querySelector('.bi-building').parentElement.textContent.trim() : 'Client';
+                document.getElementById('lostClientName').textContent = clientNameLost;
+                var lostModal = new bootstrap.Modal(document.getElementById('dealLostReasonModal'));
+                lostModal.show();
+                return;
+            }
+
+            colBody.appendChild(draggedCard);
+            updateColumnTotals();
         });
     });
+
+    window.confirmDealWonAction = function () {
+        if (!pendingDropCard || !pendingTargetCol) return;
+        var quoteCheck = document.getElementById('wonQuoteAttached');
+        if (quoteCheck && !quoteCheck.checked) {
+            alert('Cannot mark as Won without verifying an approved Quotation or Commercial Contract.');
+            return;
+        }
+        var nextAction = document.getElementById('wonNextActionSelect').value;
+        pendingTargetCol.appendChild(pendingDropCard);
+        updateColumnTotals();
+
+        var client = pendingDropCard.querySelector('.bi-building') ? pendingDropCard.querySelector('.bi-building').parentElement.textContent.trim() : 'Client';
+        var val = pendingDropCard.getAttribute('data-val') || '0';
+        bootstrap.Modal.getInstance(document.getElementById('dealWonVerificationModal')).hide();
+
+        if (nextAction === 'so') {
+            window.location.href = 'sales-order-create.php?client=' + encodeURIComponent(client) + '&amount=' + val;
+        } else if (nextAction === 'invoice') {
+            window.location.href = 'invoice-create.php?client=' + encodeURIComponent(client) + '&amount=' + val;
+        }
+        pendingDropCard = null;
+        pendingTargetCol = null;
+    };
+
+    window.confirmDealLostAction = function () {
+        if (!pendingDropCard || !pendingTargetCol) return;
+        var reason = document.getElementById('lostReasonSelect').value;
+        if (!reason) {
+            alert('Please select a mandatory Loss Reason before closing this deal as Lost.');
+            return;
+        }
+        pendingTargetCol.appendChild(pendingDropCard);
+        updateColumnTotals();
+        bootstrap.Modal.getInstance(document.getElementById('dealLostReasonModal')).hide();
+        pendingDropCard = null;
+        pendingTargetCol = null;
+    };
 
     var saveBtn = document.getElementById('saveNewDealBtn');
     if (saveBtn) {

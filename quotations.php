@@ -90,10 +90,14 @@
             <div class="d-flex align-items-center gap-2">
                 <select class="form-select form-select-sm" id="quoteStatusFilter">
                     <option value="">All Statuses</option>
-                    <option value="Accepted">Accepted</option>
-                    <option value="Sent / Pending">Sent / Pending</option>
+                    <option value="Draft">Draft</option>
+                    <option value="Approval Pending">Approval Pending (>10% Discount)</option>
+                    <option value="Approved">Approved by Manager</option>
+                    <option value="Sent">Sent to Client</option>
+                    <option value="Accepted">Accepted by Client</option>
                     <option value="In Negotiation">In Negotiation</option>
-                    <option value="Issued">Issued</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Expired">Expired</option>
                 </select>
             </div>
         </div>
