@@ -1436,9 +1436,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (addFileBtn && fileList) {
                 addFileBtn.addEventListener('click', function() {
                     var row = document.createElement('div');
-                    row.className = 'ce-attach-row mt-2';
+                    row.className = 'input-group';
                     row.innerHTML = '<input type="file" class="form-control" multiple>' +
-                        '<button type="button" class="ce-add-file" style="background:#dc2626;" title="Remove"><i class="bi bi-x-lg"></i></button>';
+                        '<button type="button" class="btn btn-outline-danger d-inline-flex align-items-center gap-1" title="Remove"><i class="bi bi-trash"></i><span>Remove</span></button>';
                     row.querySelector('button').addEventListener('click', function() {
                         row.remove();
                     });

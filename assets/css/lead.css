@@ -630,3 +630,29 @@
 .lda-text {
     color: #475569;
 }
+
+
+/* ===== Compose Email Modal (#ldComposeEmailModal) ===== */
+#ldComposeEmailModal {
+    z-index: 1075 !important;
+}
+#ldComposeEmailModal .modal-dialog {
+    max-width: 720px;
+    margin: 1.75rem auto;
+}
+#ldComposeEmailModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.22) !important;
+}
+#ldComposeEmailModal .ce-quill-wrap .ql-toolbar {
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 8px 12px;
+}
+#ldComposeEmailModal .ce-quill-wrap .ql-container {
+    border: none;
+    font-size: 14px;
+    font-family: inherit;
+    min-height: 160px;
+}
