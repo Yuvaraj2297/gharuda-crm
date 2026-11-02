@@ -1035,11 +1035,8 @@
                         <a data-active-pages="projects-list.php,project-create.php" class="nav-link-custom" href="projects-list.php">
                             <i class="bi bi-briefcase me-2"></i> <span>Projects List</span>
                         </a>
-                        <a data-active-pages="task-overview.php" class="nav-link-custom" href="task-overview.php">
-                            <i class="bi bi-kanban me-2"></i> <span>Tasks Kanban</span>
-                        </a>
-                        <a data-active-pages="tasks-list.php,task-create.php" class="nav-link-custom" href="tasks-list.php">
-                            <i class="bi bi-check2-square me-2"></i> <span>Tasks List</span>
+                        <a data-active-pages="tasks-list.php,task-create.php,task-overview.php" class="nav-link-custom" href="tasks-list.php">
+                            <i class="bi bi-check2-square me-2"></i> <span>Tasks</span>
                         </a>
                         <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
                             <i class="bi bi-award me-2"></i> <span>Score Card</span>
