@@ -1,69 +1,34 @@
 <?php
 /**
- * Simple audit script to compare PHP files in the project with entries in config/menu.php.
- * It reports:
- *   1. Files that exist on disk but are NOT referenced in the menu.
- *   2. Menu entries that point to non‑existent files.
+ * Sidebar audit: compares links in header.php's side panel with real .php pages.
+ *   php tools/menu_audit.php
  */
+$root = dirname(__DIR__);
+$html = file_get_contents($root . '/header.php');
 
-$projectRoot = __DIR__ . '/..'; // project base folder
+// Only the sliding side panel (the real menu)
+$start = strpos($html, 'id="sidePanel"');
+$end   = strpos($html, 'sb-backdrop');
+$panel = substr($html, $start, $end - $start);
 
-// 1. Gather all PHP filenames (relative to project root)
-$phpFiles = [];
-$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($projectRoot));
-foreach ($iterator as $file) {
-    if ($file->isFile() && strtolower($file->getExtension()) === 'php') {
-        $phpFiles[] = $file->getFilename(); // use just basename for comparison
-    }
-}
-$phpFiles = array_unique($phpFiles);
+preg_match_all('/<a[^>]+href="([^"#]+\.php)"/i', $panel, $m);
+$links = $m[1];
+$counts = array_count_values($links);
 
-// 2. Load menu configuration and flatten all URLs
-$menu = include $projectRoot . '/config/menu.php';
-$menuUrls = [];
-$flatten = function(array $items) use (&$flatten, &$menuUrls) {
-    foreach ($items as $item) {
-        if (isset($item['url'])) {
-            // keep only .php targets (ignore anchors like #leadsSubmenu)
-            if (preg_match('/\.php$/', $item['url'])) {
-                $menuUrls[] = basename($item['url']);
-            }
-        }
-        if (!empty($item['children'])) {
-            $flatten($item['children']);
-        }
-    }
-};
-$flatten($menu);
-$menuUrls = array_unique($menuUrls);
+$pages = [];
+foreach (glob($root . '/*.php') as $f) { $pages[] = basename($f); }
 
-// 3. Compute differences
-$missingInMenu = array_diff($phpFiles, $menuUrls); // files on disk not referenced
-$missingFiles = array_diff($menuUrls, $phpFiles); // menu entries pointing to non‑existent files
+$ignore = ['header.php','footer.php','index.php','login.php'];
 
-// 4. Output report
-echo "=== CRM Navigation Audit Report ===\n\n";
+$broken   = array_values(array_filter(array_unique($links), fn($l) => !in_array($l, $pages)));
+$orphans  = array_values(array_diff($pages, array_unique($links), $ignore));
+$dupes    = array_keys(array_filter($counts, fn($c) => $c > 1));
 
-echo "Total PHP files found: " . count($phpFiles) . "\n";
-echo "Total menu URLs: " . count($menuUrls) . "\n\n";
-
-if ($missingInMenu) {
-    echo "Files NOT present in menu (" . count($missingInMenu) . "):\n";
-    foreach ($missingInMenu as $f) {
-        echo "  - $f\n";
-    }
-    echo "\n";
-} else {
-    echo "All PHP files are referenced in the menu.\n\n";
-}
-
-if ($missingFiles) {
-    echo "Menu entries pointing to missing files (" . count($missingFiles) . "):\n";
-    foreach ($missingFiles as $f) {
-        echo "  - $f\n";
-    }
-    echo "\n";
-} else {
-    echo "All menu entries point to existing files.\n\n";
-}
-?>
+echo "Menu links: " . count($links) . " (unique " . count($counts) . ")\n";
+echo "Pages on disk: " . count($pages) . "\n\n";
+echo "BROKEN LINKS (menu -> missing file): " . count($broken) . "\n";
+foreach ($broken as $b) echo "  - $b\n";
+echo "\nDUPLICATE LINKS: " . count($dupes) . "\n";
+foreach ($dupes as $d) echo "  - $d\n";
+echo "\nPAGES NOT IN MENU (orphans): " . count($orphans) . "\n";
+foreach ($orphans as $o) echo "  - $o\n";

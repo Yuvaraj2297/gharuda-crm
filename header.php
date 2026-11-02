@@ -1248,17 +1248,11 @@
                         <a data-active-pages="role.php" class="nav-link-custom" href="role.php">
                             <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access</span>
                         </a>
-                        <a data-active-pages="permission-modules.php" class="nav-link-custom" href="permission-modules.php">
-                            <i class="bi bi-key me-2"></i> <span>Permission Modules</span>
-                        </a>
                         <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
                             <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
                         </a>
                         <a data-active-pages="sla-policies.php" class="nav-link-custom" href="sla-policies.php">
                             <i class="bi bi-shield-check me-2"></i> <span>SLA Policies</span>
-                        </a>
-                        <a data-active-pages="sla-policies-severity.php" class="nav-link-custom" href="sla-policies-severity.php">
-                            <i class="bi bi-sliders me-2"></i> <span>SLA Severity Setup</span>
                         </a>
 
                         <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
