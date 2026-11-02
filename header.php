@@ -744,18 +744,10 @@
                     </div>
                     <span class="bell-notif-time" style="white-space:nowrap;">1 hour ago</span>
                 </a>
-                <a href="manage-leads.php" class="bell-notif-item">
-                    <img src="./assets/img/profile-3.jpg" class="bell-notif-avatar" alt="">
-                    <div class="bell-notif-info">
-                        <div class="bell-notif-name">Olivia Brown</div>
-                        <div class="bell-notif-text">New inbound Indiamart lead assigned</div>
-                    </div>
-                    <span class="bell-notif-time" style="white-space:nowrap;">3 hours ago</span>
-                </a>
             </div>
         </div>
         <div class="notif-oc-footer">
-            <a href="manage-leads.php" class="btn btn-primary w-100" style="font-size:13px;font-weight:700;border-radius:10px;">
+            <a href="lead.php" class="btn btn-primary w-100" style="font-size:13px;font-weight:700;border-radius:10px;">
                 <i class="bi bi-box-arrow-in-right me-1"></i> View All Leads
             </a>
         </div>
@@ -788,7 +780,6 @@
                     <div class="d-flex flex-wrap gap-1">
                         <a href="lead-dashboard.php" class="badge bg-white text-dark border text-decoration-none">Lead Dashboard</a>
                         <a href="lead.php" class="badge bg-white text-dark border text-decoration-none">All Leads</a>
-                        <a href="manage-leads.php" class="badge bg-white text-dark border text-decoration-none">Manage Leads</a>
                     </div>
                 </div>
                 <div class="p-2.5 rounded-3 border bg-light-subtle">
@@ -962,12 +953,10 @@
                             <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
                         </a>
                         <div data-show-flag="isLeadCoreActive" class="collapse show tree-submenu" id="leadsSubmenu">
-                            <a data-active-pages="lead-dashboard.php" class="tree-link" href="lead-dashboard.php">Lead Dashboard</a>
-                            <a data-active-pages="lead.php" class="tree-link" href="lead.php">All Leads</a>
-                            <a data-active-pages="manage-leads.php" class="tree-link" href="manage-leads.php">Manage Leads</a>
-                            <a data-active-pages="follow-up-list.php" class="tree-link" href="follow-up-list.php">Follow-Up List</a>
-                            <a data-active-pages="lead-map.php" class="tree-link" href="lead-map.php">Lead Map View</a>
-                            <a data-active-pages="lead-filter.php" class="tree-link" href="lead-filter.php">Search &amp; Filter</a>
+                            <a data-active-pages="lead-dashboard.php" class="tree-link" href="lead-dashboard.php">Dashboard</a>
+                            <a data-active-pages="lead.php,manage-leads.php,lead-filter.php" class="tree-link" href="lead.php">Leads</a>
+                            <a data-active-pages="follow-up-list.php" class="tree-link" href="follow-up-list.php">Follow-Ups</a>
+                            <a data-active-pages="lead-map.php" class="tree-link" href="lead-map.php">Map View</a>
                         </div>
 
                         <!-- SALES Group -->
