@@ -321,7 +321,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 col-lg-4 col-xl-3 setting-card-col" data-keywords="sales target slab quota incentive bonus achievement revenue">
-                    <a href="sales-target-slabs.php" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none text-dark h-100 setting-card transition-hover">
+                    <a href="target.php?tab=slabs" class="card border-0 shadow-sm rounded-3 p-3 text-decoration-none text-dark h-100 setting-card transition-hover">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <span class="p-2 rounded-3 text-success" style="background: rgba(22, 163, 74, 0.1);"><i class="bi bi-bar-chart-steps fs-5"></i></span>
                             <span class="badge bg-light text-secondary border">Targets</span>

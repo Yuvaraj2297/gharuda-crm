@@ -979,14 +979,8 @@
                             <i class="bi bi-people me-2"></i> <span>Contacts</span>
                         </a>
                         <div class="nav-label">Sales Targets</div>
-                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php">
-                            <i class="bi bi-bullseye me-2"></i> <span>Target Overview</span>
-                        </a>
-                        <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php">
-                            <i class="bi bi-tags me-2"></i> <span>Brand Targets</span>
-                        </a>
-                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
+                        <a data-active-pages="target.php,brand-target.php,sales-target-slabs.php" class="nav-link-custom" href="target.php">
+                            <i class="bi bi-bullseye me-2"></i> <span>Sales Targets</span>
                         </a>
                     </div>
 
