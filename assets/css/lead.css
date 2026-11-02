@@ -1,0 +1,632 @@
+/* Scoped interactive styling for lead page components */
+.ld-tab-panel:not(.active), .ap-panel:not(.active) { display: none !important; }
+.ld-nav { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.5rem 0.75rem; border: none; background: transparent; border-radius: 0.375rem; color: #495057; font-size: 0.875rem; text-align: left; transition: all 0.15s ease-in-out; }
+.ld-nav:hover { background-color: #f8f9fa; color: #0d6efd; }
+.ld-nav.active { background-color: #e7f1ff !important; color: #0d6efd !important; font-weight: 600; }
+.ld-nav .badge { margin-left: auto; font-size: 0.75rem; }
+.ld-pipe-step { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.35rem 0.75rem; border-radius: 50rem; font-size: 0.8125rem; font-weight: 500; }
+.ld-pipe-step.done { background-color: #d1e7dd; color: #0f5132; }
+.ld-pipe-step.current { background-color: #cfe2ff; color: #084298; font-weight: 600; }
+.ld-pipe-step.pending { background-color: #f8f9fa; color: #6c757d; border: 1px dashed #ced4da; }
+.ap-green-btn { background-color: #198754; color: #fff; border: 1px solid #198754; }
+.ap-green-btn:hover { background-color: #157347; color: #fff; }
+.ap-gray-btn { background-color: #f8f9fa; color: #212529; border: 1px solid #dee2e6; }
+.ap-gray-btn:hover { background-color: #e9ecef; }
+.ap-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; border: 1px solid #dee2e6; background: #fff; color: #495057; cursor: pointer; }
+.ap-icon-btn:hover { background-color: #f8f9fa; color: #0d6efd; }
+.ap-dtab { padding: 0.35rem 0.85rem; border: 1px solid #dee2e6; background: #fff; border-radius: 0.375rem; color: #495057; font-size: 0.875rem; font-weight: 500; cursor: pointer; }
+.ap-dtab:hover { background-color: #f8f9fa; }
+.ap-dtab.active { background-color: #0d6efd !important; border-color: #0d6efd !important; color: #fff !important; }
+.ld-prop-status { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 50rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+.ld-prop-status.draft { background-color: #e2e3e5; color: #41464b; }
+.ld-prop-status.accepted { background-color: #d1e7dd; color: #0f5132; }
+.ld-prop-status.sent { background-color: #cff4fc; color: #055160; }
+.ld-prop-status.rejected { background-color: #f8d7da; color: #842029; }
+.apv-sign-canvas-wrap { position: relative; border: 1px dashed #ced4da; border-radius: 6px; background: #fafafa; height: 160px; }
+.apv-sign-canvas-wrap canvas { width: 100%; height: 100%; }
+.apv-sign-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #adb5bd; pointer-events: none; font-size: 0.875rem; }
+.af-drop, .at2-drop, .tk-drop { border: 2px dashed #ced4da; border-radius: 8px; padding: 1.5rem; text-align: center; background: #f8f9fa; cursor: pointer; transition: border-color .15s; }
+.af-drop:hover, .at2-drop:hover, .tk-drop:hover { border-color: #0d6efd; background: #f1f7ff; }
+.nl-tags-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; padding: 0.375rem 0.75rem; border: 1px solid #ced4da; border-radius: 0.375rem; background: #fff; min-height: 38px; }
+.nl-tags-chips { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.nl-tag-chip { display: inline-flex; align-items: center; gap: 0.25rem; background: #e9ecef; color: #495057; border-radius: 50rem; padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 500; }
+.nl-tag-x { cursor: pointer; opacity: 0.6; } .nl-tag-x:hover { opacity: 1; }
+.nl-tags-input { border: none; outline: none; background: transparent; flex-grow: 1; min-width: 120px; font-size: 0.875rem; padding: 0; }
+
+/* ===== New Lead Modal: Frozen Header & Footer with Independent Inner Scroll ===== */
+#newLeadModal {
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+#newLeadModal .modal-dialog,
+#newLeadModal .modal-dialog.modal-fullscreen {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#newLeadModal .modal-content,
+#newLeadModal form#newLeadForm {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+#newLeadModal .modal-header {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1055 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+#newLeadModal .modal-body {
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 1.5rem !important;
+    background-color: #f8fafc !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Custom sleek scrollbar for New Lead modal body */
+#newLeadModal .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+#newLeadModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+#newLeadModal .modal-footer {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 1055 !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08) !important;
+    padding: 0.85rem 1.5rem !important;
+}
+
+#newLeadModal .nl-body {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* =========================================================================
+   TABLE DESIGN POLISH: STATUS DROPDOWN & ACTION BUTTONS
+   ========================================================================= */
+.lead-status-dd {
+    display: inline-block;
+}
+.lead-status-btn {
+    border: 1px solid #cbd5e1;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 12px;
+    border-radius: 50rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.lead-status-btn:hover {
+    background: #ffffff;
+    border-color: #93c5fd;
+    color: #1e40af;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+.lead-status-btn.lead-sel-lead {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #15803d;
+}
+.lead-status-btn.lead-sel-lead:hover {
+    background: #ffffff;
+    border-color: #86efac;
+    color: #166534;
+}
+.lead-status-menu {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    font-size: 12.5px;
+    min-width: 170px;
+    z-index: 1060;
+}
+.lead-status-item {
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-weight: 500;
+    color: #334155;
+    transition: background 0.12s;
+}
+.lead-status-item:hover, .lead-status-item.active {
+    background: #f0fdf4;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* Table Row Action Buttons - 30px x 30px balanced icons */
+.lead-act-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+.lead-act-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.lead-act-btn.appt {
+    border-color: #cbd5e1;
+    color: #0284c7;
+    background: #f0f9ff;
+}
+.lead-act-btn.appt:hover {
+    background: #0284c7;
+    color: #fff;
+    border-color: #0284c7;
+}
+.lead-act-btn.view {
+    color: #0d9488;
+    background: #f0fdfa;
+    border-color: #ccfbf1;
+}
+.lead-act-btn.view:hover {
+    background: #0d9488;
+    color: #fff;
+    border-color: #0d9488;
+}
+.lead-act-btn.edit {
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
+}
+.lead-act-btn.edit:hover {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+.lead-act-btn.del {
+    color: #dc2626;
+    background: #fef2f2;
+    border-color: #fee2e2;
+}
+.lead-act-btn.del:hover {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+}
+.lead-act-btn.mail {
+    color: #7c3aed;
+    background: #faf5ff;
+    border-color: #f3e8ff;
+}
+.lead-act-btn.mail:hover {
+    background: #7c3aed;
+    color: #fff;
+    border-color: #7c3aed;
+}
+
+
+/* =========================================================================
+   ATTACHMENTS TAB POLISHED ENTERPRISE DESIGN
+   ========================================================================= */
+.at-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.at-drop-zone {
+    border: 2px dashed #93c5fd;
+    background: #f0f7ff;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    color: #1e40af;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.at-drop-zone i {
+    font-size: 2.25rem;
+    color: #3b82f6;
+    margin-bottom: 0.25rem;
+}
+.at-drop-zone small {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.at-drop-zone:hover {
+    background: #e0f2fe;
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+}
+.at-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.at-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.at-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+.at-meta {
+    font-size: 0.8rem;
+    color: #475569;
+    line-height: 1.4;
+    min-width: 150px;
+}
+.at-meta .lbl {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 0.03em;
+}
+.at-file {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex: 1;
+    min-width: 0;
+}
+.at-file i {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+.at-file a {
+    text-decoration: none;
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.at-file a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+.at-file a .mime {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 400;
+}
+.at-del {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #fee2e2;
+    background: #fff5f5;
+    color: #ef4444;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+.at-del:hover {
+    background: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+    transform: scale(1.05);
+}
+
+
+/* =========================================================================
+   NOTES & ACTIVITY LOG TABS: CLEAN BOOTSTRAP 5 REUSABLE COMPONENT DESIGN
+   ========================================================================= */
+
+/* --- Common Feed / Composer Wrappers --- */
+.ldn-wrap, .lda-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+}
+
+/* Card Composer Box */
+.ldn-composer, .lda-composer {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.ldn-input, .lda-input {
+    width: 100%;
+    min-height: 85px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #1e293b;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    resize: vertical;
+    transition: all 0.15s ease;
+    outline: none;
+    font-family: inherit;
+}
+.ldn-input:focus, .lda-input:focus {
+    background-color: #ffffff;
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
+}
+
+/* Radio Choice Chips */
+.ldn-radios, .lda-radios {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.85rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.ldn-radios label, .lda-radios label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    background: #f1f5f9;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.15s ease;
+}
+.ldn-radios label:hover, .lda-radios label:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+.ldn-radios input[type="radio"], .lda-radios input[type="radio"] {
+    accent-color: #16a34a;
+    cursor: pointer;
+}
+
+/* Action Buttons */
+.ldn-actions, .lda-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+#ldNoteAdd, #ldaSubmit {
+    background-color: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+#ldNoteAdd:hover, #ldaSubmit:hover {
+    background-color: #15803d;
+    border-color: #15803d;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(22, 163, 74, 0.2);
+}
+
+/* --- Notes List & Cards --- */
+.ldn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+.ldn-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: all 0.15s ease;
+}
+.ldn-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+.ldn-avatar {
+    width: 38px;
+    height: 38px;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.ldn-body {
+    flex: 1;
+    min-width: 0;
+}
+.ldn-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.15rem;
+}
+.ldn-date {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.45rem;
+}
+.ldn-text {
+    font-size: 0.875rem;
+    color: #334155;
+    line-height: 1.5;
+    background: #f8fafc;
+    padding: 0.6rem 0.85rem;
+    border-radius: 6px;
+    border: 1px solid #f1f5f9;
+}
+.ldn-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+.ldn-icons .ed, .ldn-icons .dl {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.825rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+.ldn-icons .ed {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #dbeafe;
+}
+.ldn-icons .ed:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+.ldn-icons .dl {
+    background: #fef2f2;
+    color: #dc2626;
+    border-color: #fee2e2;
+}
+.ldn-icons .dl:hover {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+/* --- Activity Log Feed --- */
+.lda-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.lda-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.85rem 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    border-left: 3px solid #16a34a;
+}
+.lda-date {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.lda-ago {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+.lda-who {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.875rem;
+}
+.lda-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f0fdf4;
+    color: #16a34a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bbf7d0;
+}
+.lda-name {
+    font-weight: 700;
+    color: #0f172a;
+}
+.lda-text {
+    color: #475569;
+}
