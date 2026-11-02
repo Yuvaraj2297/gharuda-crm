@@ -2138,6 +2138,128 @@
     </div>
 </div>
 
+<!-- ===== Edit Lead Modal (In-place) ===== -->
+<div class="modal fade" id="ldEditLeadModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary" style="width:36px;height:36px;">
+                        <i class="bi bi-pencil-square"></i>
+                    </span>
+                    <h5 class="modal-title fw-bold m-0 fs-5 text-dark">Edit Lead Information</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <!-- Contact & Company -->
+                <div class="card border shadow-sm p-3 mb-3 bg-white rounded-3">
+                    <h6 class="fw-bold text-dark border-bottom pb-2 mb-3 fs-6">Contact &amp; Company</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="edLeadName" class="form-label fw-semibold text-dark small mb-1">Lead Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control rounded-2" id="edLeadName" placeholder="Full name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadCompany" class="form-label fw-semibold text-dark small mb-1">Company</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadCompany" placeholder="Company name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadPosition" class="form-label fw-semibold text-dark small mb-1">Position / Designation</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadPosition" placeholder="Managing Director...">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadPhone" class="form-label fw-semibold text-dark small mb-1">Phone Number <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control rounded-2" id="edLeadPhone" placeholder="Mobile / WhatsApp">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadEmail" class="form-label fw-semibold text-dark small mb-1">Email Address</label>
+                            <input type="email" class="form-control rounded-2" id="edLeadEmail" placeholder="email@example.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadWebsite" class="form-label fw-semibold text-dark small mb-1">Website</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadWebsite" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commercial & Lead Assignment -->
+                <div class="card border shadow-sm p-3 mb-3 bg-white rounded-3">
+                    <h6 class="fw-bold text-dark border-bottom pb-2 mb-3 fs-6">Commercial &amp; Assignment</h6>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="edLeadValue" class="form-label fw-semibold text-dark small mb-1">Lead Value (₹)</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadValue" placeholder="e.g. 141,629.00">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="edLeadStatus" class="form-label fw-semibold text-dark small mb-1">Status <span class="text-danger">*</span></label>
+                            <select class="form-select rounded-2" id="edLeadStatus">
+                                <option value="Lead">Lead</option>
+                                <option value="Quotation">Quotation</option>
+                                <option value="Followup">Followup</option>
+                                <option value="Qualified">Qualified</option>
+                                <option value="Negotiation">Negotiation</option>
+                                <option value="Customer">Customer</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="edLeadSource" class="form-label fw-semibold text-dark small mb-1">Source</label>
+                            <select class="form-select rounded-2" id="edLeadSource">
+                                <option value="Direct">Direct</option>
+                                <option value="IndiaMart">IndiaMart</option>
+                                <option value="Website">Website</option>
+                                <option value="Referral">Referral</option>
+                                <option value="Exhibition">Exhibition</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadAssigned" class="form-label fw-semibold text-dark small mb-1">Assigned Sales Owner</label>
+                            <select class="form-select rounded-2" id="edLeadAssigned">
+                                <option value="Unassigned">Unassigned</option>
+                                <option value="Karthik R.">Karthik R.</option>
+                                <option value="Divya A.">Divya A.</option>
+                                <option value="Harish D.">Harish D.</option>
+                                <option value="Suresh Babu">Suresh Babu</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="edLeadTags" class="form-label fw-semibold text-dark small mb-1">Tags</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadTags" placeholder="Warm Lead, Follow-up...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location & Address -->
+                <div class="card border shadow-sm p-3 bg-white rounded-3">
+                    <h6 class="fw-bold text-dark border-bottom pb-2 mb-3 fs-6">Location &amp; Address</h6>
+                    <div class="mb-3">
+                        <label for="edLeadAddress" class="form-label fw-semibold text-dark small mb-1">Street Address</label>
+                        <textarea class="form-control rounded-2" id="edLeadAddress" rows="2" placeholder="Full address"></textarea>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="edLeadCity" class="form-label fw-semibold text-dark small mb-1">City</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadCity" placeholder="Chennai">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="edLeadState" class="form-label fw-semibold text-dark small mb-1">State</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadState" placeholder="Tamil Nadu">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="edLeadZip" class="form-label fw-semibold text-dark small mb-1">Zip Code</label>
+                            <input type="text" class="form-control rounded-2" id="edLeadZip" placeholder="600100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary px-4 fw-semibold" id="edSaveLeadBtn"><i class="bi bi-check-lg me-1"></i>Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ===== Update Lifecycle Stage Modal (Business Rules & Purpose) ===== -->
 <div class="modal fade" id="ldStageModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

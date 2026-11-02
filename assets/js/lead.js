@@ -1336,7 +1336,7 @@ document.addEventListener('DOMContentLoaded', function() {
        (1075/1085/1090) open panna backdrop parent modal ku keezha pogum.
        shown event la last backdrop ah modal z-index - 1 ku bump panrom. */
         (function() {
-            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'ldStageModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
+            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'ldStageModal', 'ldEditLeadModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
             stackedModals.forEach(function(id) {
                 var el = document.getElementById(id);
                 if (!el) return;
@@ -1698,14 +1698,157 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        /* ---- Lead detail edit (pencil) button -> newLeadModal mela open (leadDetailModal hide aagadhu) ---- */
+        /* ---- Lead detail edit (pencil) button -> Open ldEditLeadModal with current lead pre-filled ---- */
         var ldEditLeadBtn = document.getElementById('ldEditLeadBtn');
         if (ldEditLeadBtn) {
-            ldEditLeadBtn.addEventListener('click', function() {
-                var newLeadM = document.getElementById('newLeadModal');
-                if (newLeadM && typeof bootstrap !== 'undefined') {
-                    bootstrap.Modal.getOrCreateInstance(newLeadM).show();
+            ldEditLeadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // 1. Pre-fill form from current lead detail values
+                var nameEl = document.getElementById('ldInfoName') || document.getElementById('ldName');
+                var companyEl = document.getElementById('ldInfoCompany');
+                var positionEl = document.getElementById('ldInfoPosition');
+                var phoneEl = document.getElementById('ldInfoPhone');
+                var emailEl = document.getElementById('ldInfoEmail');
+                var valueEl = document.getElementById('ldInfoValue');
+                var addressEl = document.getElementById('ldInfoAddress');
+                var statusEl = document.getElementById('ldInfoStatus');
+                var sourceEl = document.getElementById('ldInfoSource');
+                var assignedEl = document.getElementById('ldInfoAssigned');
+                var tagsEl = document.getElementById('ldInfoTags');
+
+                if (document.getElementById('edLeadName')) {
+                    document.getElementById('edLeadName').value = nameEl ? nameEl.textContent.trim() : '';
                 }
+                if (document.getElementById('edLeadCompany')) {
+                    document.getElementById('edLeadCompany').value = companyEl ? companyEl.textContent.trim() : '';
+                }
+                if (document.getElementById('edLeadPosition')) {
+                    document.getElementById('edLeadPosition').value = positionEl ? positionEl.textContent.trim() : '';
+                }
+                if (document.getElementById('edLeadPhone')) {
+                    document.getElementById('edLeadPhone').value = phoneEl ? phoneEl.textContent.trim().replace(/[^0-9+]/g, '') : '';
+                }
+                if (document.getElementById('edLeadEmail')) {
+                    document.getElementById('edLeadEmail').value = emailEl ? emailEl.textContent.trim() : '';
+                }
+                if (document.getElementById('edLeadValue')) {
+                    document.getElementById('edLeadValue').value = valueEl ? valueEl.textContent.trim().replace(/[^0-9.]/g, '') : '';
+                }
+                if (document.getElementById('edLeadAddress')) {
+                    document.getElementById('edLeadAddress').value = addressEl ? addressEl.textContent.trim() : '';
+                }
+                if (document.getElementById('edLeadStatus') && statusEl) {
+                    var stVal = statusEl.textContent.trim();
+                    for (var opt of document.getElementById('edLeadStatus').options) {
+                        if (opt.value.toLowerCase() === stVal.toLowerCase()) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+                if (document.getElementById('edLeadSource') && sourceEl) {
+                    var srcVal = sourceEl.textContent.trim();
+                    for (var opt of document.getElementById('edLeadSource').options) {
+                        if (opt.value.toLowerCase() === srcVal.toLowerCase()) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+                if (document.getElementById('edLeadAssigned') && assignedEl) {
+                    var asVal = assignedEl.textContent.trim();
+                    for (var opt of document.getElementById('edLeadAssigned').options) {
+                        if (opt.value.toLowerCase() === asVal.toLowerCase()) {
+                            opt.selected = true;
+                            break;
+                        }
+                    }
+                }
+                if (document.getElementById('edLeadTags')) {
+                    document.getElementById('edLeadTags').value = tagsEl ? tagsEl.textContent.trim() : '';
+                }
+
+                // 2. Open the modal
+                var editModal = document.getElementById('ldEditLeadModal');
+                if (editModal && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(editModal).show();
+                }
+            });
+        }
+
+        // Save button handler for ldEditLeadModal
+        var edSaveLeadBtn = document.getElementById('edSaveLeadBtn');
+        if (edSaveLeadBtn) {
+            edSaveLeadBtn.addEventListener('click', function() {
+                var newName = (document.getElementById('edLeadName') ? document.getElementById('edLeadName').value.trim() : '') || 'Lead';
+                var newCompany = document.getElementById('edLeadCompany') ? document.getElementById('edLeadCompany').value.trim() : '';
+                var newPos = document.getElementById('edLeadPosition') ? document.getElementById('edLeadPosition').value.trim() : '';
+                var newPhone = document.getElementById('edLeadPhone') ? document.getElementById('edLeadPhone').value.trim() : '';
+                var newEmail = document.getElementById('edLeadEmail') ? document.getElementById('edLeadEmail').value.trim() : '';
+                var newVal = document.getElementById('edLeadValue') ? document.getElementById('edLeadValue').value.trim() : '0.00';
+                var newAddress = document.getElementById('edLeadAddress') ? document.getElementById('edLeadAddress').value.trim() : '';
+                var newStatus = document.getElementById('edLeadStatus') ? document.getElementById('edLeadStatus').value : 'Lead';
+                var newSource = document.getElementById('edLeadSource') ? document.getElementById('edLeadSource').value : 'Direct';
+                var newAssigned = document.getElementById('edLeadAssigned') ? document.getElementById('edLeadAssigned').value : 'Unassigned';
+                var newTags = document.getElementById('edLeadTags') ? document.getElementById('edLeadTags').value.trim() : '';
+
+                // Update Overview Header
+                var topName = document.getElementById('ldName');
+                if (topName) topName.textContent = newName;
+
+                var topSubtitle = document.getElementById('ldCompanySubtitle');
+                if (topSubtitle) {
+                    topSubtitle.textContent = (newCompany ? newCompany + ' · ' : '') + 'Lead Overview & Interaction History';
+                }
+
+                // Update Info Cards
+                var nEl = document.getElementById('ldInfoName'); if (nEl) nEl.textContent = newName;
+                var cEl = document.getElementById('ldInfoCompany'); if (cEl) cEl.textContent = newCompany || '—';
+                var pEl = document.getElementById('ldInfoPosition'); if (pEl) pEl.textContent = newPos || '—';
+                var phEl = document.getElementById('ldInfoPhone');
+                if (phEl) phEl.innerHTML = newPhone ? '<a href="tel:' + newPhone.replace(/[^0-9+]/g, '') + '">' + newPhone + '</a>' : '—';
+                var emEl = document.getElementById('ldInfoEmail');
+                if (emEl) emEl.innerHTML = newEmail ? '<a href="mailto:' + newEmail + '">' + newEmail + '</a>' : '—';
+                var vEl = document.getElementById('ldInfoValue'); if (vEl) vEl.textContent = '₹' + newVal;
+                var adEl = document.getElementById('ldInfoAddress'); if (adEl) adEl.textContent = newAddress || '—';
+                var stEl = document.getElementById('ldInfoStatus'); if (stEl) stEl.textContent = newStatus;
+                var scEl = document.getElementById('ldInfoSource'); if (scEl) scEl.textContent = newSource;
+                var asEl = document.getElementById('ldInfoAssigned'); if (asEl) asEl.textContent = newAssigned;
+                var tgEl = document.getElementById('ldInfoTags');
+                if (tgEl) tgEl.innerHTML = newTags ? '<span class="lead-tag-pill">' + newTags + '</span>' : '—';
+
+                // Log Activity
+                var ldaFeed = document.getElementById('ldaFeed');
+                if (ldaFeed) {
+                    var d = new Date();
+                    var pad = function(n) { return String(n).padStart(2, '0'); };
+                    var dtStr = pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+                    var item = document.createElement('div');
+                    item.className = 'card border shadow-sm p-3 bg-white rounded-3 lda-item mb-2';
+                    item.innerHTML =
+                        '<div class="d-flex align-items-center justify-content-between mb-2">' +
+                            '<div class="d-flex align-items-center gap-2">' +
+                                '<span class="rounded-circle bg-primary-subtle text-primary fw-bold d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:34px;height:34px;font-size:12px;">GHR</span>' +
+                                '<span class="fw-bold text-dark small">GHARUDA SOFTWARE</span>' +
+                                '<span class="badge bg-info-subtle text-info border ms-1 small">Lead Profile Updated</span>' +
+                            '</div>' +
+                            '<div class="lda-date small text-muted">' +
+                                '<span>' + dtStr + '</span>' +
+                                '<span class="badge bg-light text-secondary border ms-2">just now</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="text-secondary small ps-5">Updated lead contact & company info for <strong>' + newName + '</strong> (' + (newCompany || 'No Company') + ')</div>';
+                    ldaFeed.insertBefore(item, ldaFeed.firstChild);
+                }
+
+                // Hide edit modal
+                var editModal = document.getElementById('ldEditLeadModal');
+                if (editModal && typeof bootstrap !== 'undefined') {
+                    var m = bootstrap.Modal.getInstance(editModal);
+                    if (m) m.hide();
+                }
+                alert('Lead details updated successfully!');
             });
         }
 

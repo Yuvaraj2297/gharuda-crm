@@ -723,3 +723,14 @@
     border-radius: 12px;
     box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25) !important;
 }
+#ldEditLeadModal {
+    z-index: 1080 !important;
+}
+#ldEditLeadModal .modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+#ldEditLeadModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28) !important;
+}
