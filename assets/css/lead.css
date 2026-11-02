@@ -1,4 +1,13 @@
 /* Scoped interactive styling for lead page components */
+/* ===== Reusable Pipeline & Kanban Board Utilities ===== */
+.kanban-board-scroll { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 1rem; padding-bottom: 1rem; scroll-behavior: smooth; }
+.kanban-col { width: 290px; min-width: 290px; flex-shrink: 0; }
+.deal-k-card { cursor: grab; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.deal-k-card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08) !important; }
+.deal-k-card:active { cursor: grabbing; }
+.deal-col-dropzone { min-height: 480px; }
+.deal-col-dropzone.drag-hover { background-color: #ecfeff !important; border: 2px dashed #06b6d4 !important; }
+
 /* ===== Top-Level Lead View Tabs (Dashboard vs Lead Table Data) ===== */
 #leadMainTabs {
     background-color: #ffffff;
