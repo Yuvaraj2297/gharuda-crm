@@ -1,110 +1,43 @@
 <?php include 'header.php'; ?>
+<link rel="stylesheet" href="./assets/css/lead.css">
 
 <main class="container-fluid px-0">
-    <!-- Page Header -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
         <div>
-            <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                <h1 class="font-display fw-bold mb-0 page-title">Sales Orders (SO) &amp; Dispatch Ledger</h1>
-                <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold">₹44.2 Lakh Confirmed Orders</span>
-            </div>
-            <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap breadcrumb-text">
-                <i class="bi bi-bag-check fs-6"></i>
-                <a href="quotations.php" class="text-decoration-none text-muted">CRM &amp; Quotations</a>
-                <i class="bi bi-chevron-right small"></i>
-                <span class="fw-bold text-dark">Sales Orders (Order-to-Cash)</span>
-            </nav>
+            <h1 class="font-display fw-bold mb-0 page-title">Sales Orders &amp; Dispatch</h1>
         </div>
         <div class="d-flex align-items-center flex-wrap gap-2">
-            <a href="quotations.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-file-earmark-text"></i><span>Quotations</span>
-            </a>
-            <a href="projects-list.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-briefcase"></i><span>Delivery Projects</span>
-            </a>
-            <a href="inventory.php" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-boxes"></i><span>Inventory Stock</span>
-            </a>
-            <a href="invoices.php" class="btn btn-outline-success btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
-                <i class="bi bi-file-earmark-ruled"></i><span>Tax Invoices</span>
-            </a>
-            <a href="sales-order-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#soFilterOffcanvas" aria-controls="soFilterOffcanvas" title="Filter Sales Orders">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="filterCountBadge">0</span>
+            </button>
+            <a href="sales-order-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3">
                 <i class="bi bi-plus-lg"></i><span>New Sales Order</span>
             </a>
         </div>
     </div>
 
-    <!-- KPI Cards (100% Bootstrap 5 Utilities) -->
-    <div class="row g-3 mb-4">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Confirmed Sales Orders</span>
-                    <span class="p-2 rounded-3 bg-primary-subtle text-primary"><i class="bi bi-bag-check-fill"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">₹44,20,000</h3>
-                <span class="text-success small fw-semibold"><i class="bi bi-arrow-up"></i> 19 Orders Confirmed</span>
+    <!-- Sales Orders Directory Table Card -->
+    <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4">
+        <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom">
+            <div class="d-flex align-items-center gap-2">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-bag-check text-primary me-2"></i>Sales Orders Directory</h6>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="soCountBadge">3 Orders</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" id="exportSoCsvBtn">
+                    <i class="bi bi-download"></i><span>Export CSV</span>
+                </button>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Ready for Dispatch</span>
-                    <span class="p-2 rounded-3 bg-info-subtle text-info"><i class="bi bi-box-seam"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-dark">5 Orders</h3>
-                <span class="text-muted small">Stock Reserved in Warehouse</span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Backordered (Needs PO)</span>
-                    <span class="p-2 rounded-3 bg-warning-subtle text-warning"><i class="bi bi-exclamation-triangle"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-warning">2 Orders</h3>
-                <a href="purchase-order-create.php" class="small fw-bold text-primary text-decoration-none">Raise Backorder PO &rarr;</a>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-custom p-3 h-100">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small fw-semibold">Dispatched &amp; Invoiced</span>
-                    <span class="p-2 rounded-3 bg-success-subtle text-success"><i class="bi bi-truck"></i></span>
-                </div>
-                <h3 class="fw-bold mb-1 text-success">12 Completed</h3>
-                <a href="invoices.php" class="small fw-bold text-success text-decoration-none">Synced with Billing &rarr;</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Filter & Search Bar -->
-    <div class="card-custom p-3 mb-3">
-        <div class="row g-2 align-items-center justify-content-between">
-            <div class="col-12 col-lg-auto">
-                <div class="d-flex flex-wrap gap-1">
-                    <button type="button" class="btn btn-sm btn-primary fw-semibold so-filter-btn" data-filter="all">All Sales Orders</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary fw-semibold so-filter-btn" data-filter="Confirmed">Confirmed (Ready)</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary fw-semibold so-filter-btn" data-filter="Dispatched">Dispatched</button>
-                    <button type="button" class="btn btn-sm btn-outline-warning fw-semibold so-filter-btn" data-filter="Backorder">Backorder (Needs PO)</button>
-                </div>
-            </div>
-            <div class="col-12 col-lg-auto">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" class="form-control" id="soSearchInput" placeholder="Search SO #, client, quote...">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sales Orders Table -->
-    <div class="card-custom p-0 overflow-hidden mb-4">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0" id="salesOrdersTable">
-                <thead class="table-light">
+                <thead class="table-light text-muted small text-uppercase font-11">
                     <tr>
-                        <th class="ps-3">SO Number</th>
+                        <th class="ps-4">SO Number</th>
                         <th>Customer Account</th>
                         <th>Source Quote / Client PO</th>
                         <th>Items &amp; SKU Summary</th>
@@ -112,108 +45,182 @@
                         <th>Delivery Date</th>
                         <th class="text-end">Order Total (GST)</th>
                         <th>Fulfillment Status</th>
-                        <th class="text-end pe-3">ERP Actions (Dispatch / Bill)</th>
+                        <th class="text-end pe-4">ERP Actions (Dispatch / Bill)</th>
                     </tr>
                 </thead>
                 <tbody id="soTableBody">
-                    <tr data-status="Confirmed">
-                        <td class="ps-3 fw-bold text-primary">SO-2026-104</td>
+                    <tr data-status="Confirmed" data-warehouse="Chennai HQ">
+                        <td class="ps-4 fw-bold text-primary font-12">SO-2026-104</td>
                         <td>
                             <div class="fw-bold text-dark">Power Spares Engineering</div>
-                            <div class="small text-muted">Chennai HQ &middot; GSTIN Verified</div>
+                            <div class="small text-muted font-11">Chennai HQ &middot; GSTIN Verified</div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">QT-2026-084</span>
-                            <div class="small text-muted mt-1">Client PO: PSE/PO/419</div>
+                            <span class="badge bg-light text-dark border font-11">QT-2026-084</span>
+                            <div class="small text-muted mt-0.5 font-11">Client PO: PSE/PO/419</div>
                         </td>
                         <td>
-                            <div class="fw-semibold text-dark">Gharuda Cloud CRM + 10 Biometric Terminals</div>
-                            <div class="small text-success"><i class="bi bi-check2-circle me-1"></i>Stock Reserved</div>
+                            <div class="fw-semibold text-dark font-12">Gharuda Cloud CRM + 10 Biometric Terminals</div>
+                            <div class="small text-success font-11"><i class="bi bi-check2-circle me-1"></i>Stock Reserved</div>
                         </td>
                         <td class="small text-muted">26-10-2026</td>
                         <td class="small fw-semibold text-dark">02-11-2026</td>
-                        <td class="text-end fw-bold text-dark">₹5,90,000</td>
-                        <td data-so-status-cell><span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">Confirmed</span></td>
-                        <td class="text-end pe-3">
-                            <div class="d-inline-flex align-items-center gap-1">
-                                <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2 fw-semibold btn-dispatch-so" data-so="SO-2026-104" data-client="Power Spares Engineering" data-items="Gharuda Cloud CRM + 10 Biometric Terminals">
+                        <td class="text-end fw-bold text-dark">&#8377;5,90,000</td>
+                        <td data-so-status-cell><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11">Confirmed</span></td>
+                        <td class="text-end pe-4">
+                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
+                                <button type="button" class="btn btn-sm btn-outline-primary py-1 px-2 font-11 fw-semibold btn-dispatch-so" data-so="SO-2026-104" data-client="Power Spares Engineering" data-items="Gharuda Cloud CRM + 10 Biometric Terminals" title="Create Delivery Challan &amp; Dispatch">
                                     <i class="bi bi-truck me-1"></i>Dispatch
                                 </button>
-                                <a href="project-create.php?so=SO-2026-104&amp;client=Power+Spares+Engineering&amp;project=Gharuda+Cloud+CRM+%26+Biometric+Setup&amp;amount=590000" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Service / Installation Project">
+                                <a href="project-create.php?so=SO-2026-104&amp;client=Power+Spares+Engineering&amp;project=Gharuda+Cloud+CRM+%26+Biometric+Setup&amp;amount=590000" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Service / Installation Project">
                                     <i class="bi bi-briefcase me-1"></i>+ Project
                                 </a>
-                                <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-success btn-sm py-0 px-2 fw-semibold" title="Convert SO to Tax Invoice">
+                                <a href="invoice-create.php?quote=QT-2026-084&amp;client=Power+Spares+Engineering&amp;amount=590000" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Convert SO to Tax Invoice">
                                     <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr data-status="Backorder">
-                        <td class="ps-3 fw-bold text-primary">SO-2026-103</td>
+                    <tr data-status="Backorder" data-warehouse="Coimbatore">
+                        <td class="ps-4 fw-bold text-primary font-12">SO-2026-103</td>
                         <td>
                             <div class="fw-bold text-dark">Hindustan Hydraulics Pvt Ltd</div>
-                            <div class="small text-muted">Coimbatore &middot; Enterprise SLA</div>
+                            <div class="small text-muted font-11">Coimbatore &middot; Enterprise SLA</div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">QT-2026-081</span>
-                            <div class="small text-muted mt-1">Client PO: HH/2026/882</div>
+                            <span class="badge bg-light text-dark border font-11">QT-2026-081</span>
+                            <div class="small text-muted mt-0.5 font-11">Client PO: HH/2026/882</div>
                         </td>
                         <td>
-                            <div class="fw-semibold text-dark">Dell PowerEdge R250 ERP Appliance (2 Units)</div>
-                            <div class="small text-danger"><i class="bi bi-exclamation-circle me-1"></i>SKU-SV-105 Out of Stock</div>
+                            <div class="fw-semibold text-dark font-12">Dell PowerEdge R250 ERP Appliance (2 Units)</div>
+                            <div class="small text-danger font-11"><i class="bi bi-exclamation-circle me-1"></i>SKU-SV-105 Out of Stock</div>
                         </td>
                         <td class="small text-muted">23-10-2026</td>
                         <td class="small fw-semibold text-dark">04-11-2026</td>
-                        <td class="text-end fw-bold text-dark">₹3,89,400</td>
-                        <td data-so-status-cell><span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle px-2 py-1">Backorder</span></td>
-                        <td class="text-end pe-3">
-                            <div class="d-inline-flex align-items-center gap-1">
-                                <a href="purchase-order-create.php?sku=SKU-SV-105&amp;item=Dell+PowerEdge+R250+ERP+Appliance&amp;vendor=Ingram+Micro+India+Pvt+Ltd&amp;qty=2&amp;rate=115000" class="btn btn-warning btn-sm py-0 px-2 fw-semibold" title="Raise Vendor PO for Backorder">
+                        <td class="text-end fw-bold text-dark">&#8377;3,89,400</td>
+                        <td data-so-status-cell><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2.5 py-1 font-11">Backorder</span></td>
+                        <td class="text-end pe-4">
+                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
+                                <a href="purchase-order-create.php?sku=SKU-SV-105&amp;item=Dell+PowerEdge+R250+ERP+Appliance&amp;vendor=Ingram+Micro+India+Pvt+Ltd&amp;qty=2&amp;rate=115000" class="btn btn-sm btn-warning text-dark py-1 px-2 font-11 fw-semibold" title="Raise Vendor PO for Backorder">
                                     <i class="bi bi-cart-plus me-1"></i>Raise PO
                                 </a>
-                                <a href="project-create.php?so=SO-2026-103&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Dell+PowerEdge+R250+Server+Deployment&amp;amount=389400" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Server Deployment Project">
+                                <a href="project-create.php?so=SO-2026-103&amp;client=Hindustan+Hydraulics+%26+Pneumatics&amp;project=Dell+PowerEdge+R250+Server+Deployment&amp;amount=389400" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Server Deployment Project">
                                     <i class="bi bi-briefcase me-1"></i>+ Project
                                 </a>
-                                <a href="invoice-create.php?quote=QT-2026-081&amp;client=Hindustan+Hydraulics+Pvt+Ltd&amp;amount=389400" class="btn btn-outline-success btn-sm py-0 px-2" title="Proforma / Tax Invoice">
+                                <a href="invoice-create.php?quote=QT-2026-081&amp;client=Hindustan+Hydraulics+Pvt+Ltd&amp;amount=389400" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Proforma / Tax Invoice">
                                     <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr data-status="Dispatched">
-                        <td class="ps-3 fw-bold text-primary">SO-2026-102</td>
+                    <tr data-status="Dispatched" data-warehouse="Bengaluru Hub">
+                        <td class="ps-4 fw-bold text-primary font-12">SO-2026-102</td>
                         <td>
                             <div class="fw-bold text-dark">Zen Publications</div>
-                            <div class="small text-muted">Bengaluru &middot; Corporate Account</div>
+                            <div class="small text-muted font-11">Bengaluru &middot; Corporate Account</div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">QT-2026-079</span>
-                            <div class="small text-muted mt-1">Client PO: ZP-PO-114</div>
+                            <span class="badge bg-light text-dark border font-11">QT-2026-079</span>
+                            <div class="small text-muted mt-0.5 font-11">Client PO: ZP-PO-114</div>
                         </td>
                         <td>
-                            <div class="fw-semibold text-dark">Industrial Barcode &amp; POS Scanner Kit (15 Units)</div>
-                            <div class="small text-muted">Challan #DC-2026-209 &middot; BlueDart AWB #884120</div>
+                            <div class="fw-semibold text-dark font-12">Industrial Barcode &amp; POS Scanner Kit (15 Units)</div>
+                            <div class="small text-muted font-11">Challan #DC-2026-209 &middot; BlueDart AWB #884120</div>
                         </td>
                         <td class="small text-muted">16-10-2026</td>
                         <td class="small fw-semibold text-success">20-10-2026</td>
-                        <td class="text-end fw-bold text-dark">₹1,38,060</td>
-                        <td data-so-status-cell><span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-2 py-1">Dispatched</span></td>
-                        <td class="text-end pe-3">
-                            <div class="d-inline-flex align-items-center gap-1">
-                                <a href="project-create.php?so=SO-2026-102&amp;client=Zen+Publications&amp;project=Barcode+%26+POS+Rollout&amp;amount=138060" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold" title="Launch Installation Project">
+                        <td class="text-end fw-bold text-dark">&#8377;1,38,060</td>
+                        <td data-so-status-cell><span class="badge bg-success text-white border border-success rounded-pill px-2.5 py-1 font-11">Dispatched</span></td>
+                        <td class="text-end pe-4">
+                            <div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">
+                                <a href="project-create.php?so=SO-2026-102&amp;client=Zen+Publications&amp;project=Barcode+%26+POS+Rollout&amp;amount=138060" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Installation Project">
                                     <i class="bi bi-briefcase me-1"></i>+ Project
                                 </a>
-                                <a href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060" class="btn btn-success btn-sm py-0 px-2 fw-semibold">
+                                <a href="invoice-create.php?quote=QT-2026-079&amp;client=Zen+Publications&amp;amount=138060" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="View / Create Tax Invoice">
                                     <i class="bi bi-file-earmark-ruled me-1"></i>Invoice
                                 </a>
+                                <button type="button" class="btn btn-sm btn-light border py-1 px-2 font-11 text-muted" title="Print Delivery Challan" onclick="window.print();"><i class="bi bi-printer"></i></button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <div class="card-footer bg-white border-top py-3 px-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <span class="text-muted small" id="soSummaryText">Showing all sales orders</span>
+            <nav aria-label="Table pagination">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Next</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </main>
+
+<!-- ==================== OFFCANVAS SLIDER: SALES ORDERS FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="soFilterOffcanvas" aria-labelledby="soFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="soFilterTitle">Filter Sales Orders</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Search Keyword -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Search Orders / Account</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control" id="filterSoSearch" placeholder="SO #, client, quote, item...">
+            </div>
+        </div>
+
+        <!-- Fulfillment Status Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Fulfillment Status</label>
+            <select class="form-select form-select-sm" id="filterSoStatus">
+                <option value="">All Fulfillment Statuses</option>
+                <option value="Confirmed">Confirmed (Stock Reserved)</option>
+                <option value="Backorder">Backorder (Needs PO)</option>
+                <option value="Dispatched">Dispatched &amp; Delivered</option>
+            </select>
+        </div>
+
+        <!-- Warehouse Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Fulfillment Warehouse</label>
+            <select class="form-select form-select-sm" id="filterSoWarehouse">
+                <option value="">All Warehouses</option>
+                <option value="Chennai HQ">Chennai HQ Warehouse</option>
+                <option value="Bengaluru Hub">Bengaluru Tech Hub</option>
+                <option value="Coimbatore">Coimbatore Depot</option>
+            </select>
+        </div>
+
+        <!-- Period Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Order Timeline</label>
+            <select class="form-select form-select-sm" id="filterSoPeriod">
+                <option value="all">All Timelines</option>
+                <option value="this-month">This Month</option>
+                <option value="this-quarter" selected>This Quarter (Q1 2026)</option>
+                <option value="this-year">Full Year 2026</option>
+            </select>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 px-4 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm" id="resetSoFiltersBtn">
+            <i class="bi bi-arrow-clockwise me-1"></i>Reset Filters
+        </button>
+        <button type="button" class="btn btn-primary btn-sm px-4 fw-semibold" data-bs-dismiss="offcanvas">
+            Apply
+        </button>
+    </div>
+</div>
 
 <!-- Dispatch / Delivery Challan Modal -->
 <div class="modal fade" id="dispatchOrderModal" tabindex="-1" aria-hidden="true">
@@ -238,6 +245,7 @@
                         <select class="form-select form-select-sm" id="dcWarehouse">
                             <option value="Chennai HQ">Chennai HQ Warehouse</option>
                             <option value="Bengaluru Hub">Bengaluru Tech Hub</option>
+                            <option value="Coimbatore">Coimbatore Depot</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -258,34 +266,53 @@
     </div>
 </div>
 
+<!-- ==================== JAVASCRIPT: SALES ORDERS ENGINE ==================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var tbody = document.getElementById('soTableBody');
     var activeSoRow = null;
 
+    // Restore new orders generated from CRM localStorage if any
     try {
         var savedSos = JSON.parse(localStorage.getItem('gh_new_sales_orders') || '[]');
+        var seenSos = {};
+        Array.from(tbody ? tbody.querySelectorAll('tr') : []).forEach(function(r) {
+            var code = (r.cells[0] ? r.cells[0].textContent.trim() : '');
+            if (code) seenSos[code] = true;
+        });
+
         savedSos.forEach(function (s) {
+            if (!tbody || !s.soNo) return;
+            var cleanSo = String(s.soNo).trim();
+            if (seenSos[cleanSo]) return;
+            seenSos[cleanSo] = true;
+
+            var encClient = encodeURIComponent(s.client || 'Client');
+            var encSo = encodeURIComponent(cleanSo);
+            var rawAmt = Number(String(s.total || s.rawTotal || '').replace(/[^0-9]/g, '')) || 150000;
+
             var tr = document.createElement('tr');
             tr.setAttribute('data-status', s.status || 'Confirmed');
+            tr.setAttribute('data-warehouse', s.warehouse || 'Chennai HQ');
             tr.innerHTML =
-                '<td class="ps-3 fw-bold text-primary">' + s.soNo + '</td>' +
-                '<td><div class="fw-bold text-dark">' + s.client + '</div><div class="small text-muted">' + (s.warehouse || 'Chennai HQ') + '</div></td>' +
-                '<td><span class="badge bg-light text-dark border">' + (s.quoteRef || 'Direct SO') + '</span><div class="small text-muted mt-1">Client PO: ' + (s.clientPo || 'PO-CLIENT') + '</div></td>' +
-                '<td><div class="fw-semibold text-dark">' + s.summary + '</div><div class="small text-success"><i class="bi bi-check2-circle me-1"></i>Stock Reserved</div></td>' +
-                '<td class="small text-muted">' + (s.orderDate || '29-10-2026') + '</td>' +
-                '<td class="small fw-semibold text-dark">' + (s.deliveryDate || '05-11-2026') + '</td>' +
-                '<td class="text-end fw-bold text-dark">' + s.total + '</td>' +
-                '<td data-so-status-cell><span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">' + (s.status || 'Confirmed') + '</span></td>' +
-                '<td class="text-end pe-3"><div class="d-inline-flex align-items-center gap-1">' +
-                '<button type="button" class="btn btn-outline-primary btn-sm py-0 px-2 fw-semibold btn-dispatch-so" data-so="' + s.soNo + '" data-client="' + s.client + '" data-items="' + s.summary + '"><i class="bi bi-truck me-1"></i>Dispatch</button>' +
-                '<a href="project-create.php?so=' + encodeURIComponent(s.soNo) + '&client=' + encodeURIComponent(s.client) + '&project=' + encodeURIComponent(s.summary) + '&amount=' + encodeURIComponent(s.rawTotal || 150000) + '" class="btn btn-outline-dark btn-sm py-0 px-2 fw-semibold"><i class="bi bi-briefcase me-1"></i>+ Project</a>' +
-                '<a href="invoice-create.php?quote=' + encodeURIComponent(s.soNo) + '&client=' + encodeURIComponent(s.client) + '&amount=' + encodeURIComponent(s.rawTotal || 150000) + '" class="btn btn-success btn-sm py-0 px-2 fw-semibold"><i class="bi bi-file-earmark-ruled me-1"></i>Invoice</a>' +
+                '<td class="ps-4 fw-bold text-primary font-12">' + cleanSo + '</td>' +
+                '<td><div class="fw-bold text-dark">' + s.client + '</div><div class="small text-muted font-11">' + (s.warehouse || 'Chennai HQ') + '</div></td>' +
+                '<td><span class="badge bg-light text-dark border font-11">' + (s.quoteRef || 'Direct SO') + '</span><div class="small text-muted mt-0.5 font-11">Client PO: ' + (s.clientPo || 'PO-CLIENT') + '</div></td>' +
+                '<td><div class="fw-semibold text-dark font-12">' + s.summary + '</div><div class="small text-success font-11"><i class="bi bi-check2-circle me-1"></i>Stock Reserved</div></td>' +
+                '<td class="small text-muted">' + (s.orderDate || 'Today') + '</td>' +
+                '<td class="small fw-semibold text-dark">' + (s.deliveryDate || '05-Nov-2026') + '</td>' +
+                '<td class="text-end fw-bold text-dark">' + (s.total || '₹0') + '</td>' +
+                '<td data-so-status-cell><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11">' + (s.status || 'Confirmed') + '</span></td>' +
+                '<td class="text-end pe-4"><div class="d-flex align-items-center justify-content-end gap-1 flex-nowrap">' +
+                    '<button type="button" class="btn btn-sm btn-outline-primary py-1 px-2 font-11 fw-semibold btn-dispatch-so" data-so="' + cleanSo + '" data-client="' + (s.client || '') + '" data-items="' + (s.summary || '') + '"><i class="bi bi-truck me-1"></i>Dispatch</button>' +
+                    '<a href="project-create.php?so=' + encSo + '&client=' + encClient + '&project=' + encodeURIComponent(s.summary || '') + '&amount=' + rawAmt + '" class="btn btn-sm btn-light border py-1 px-2 font-11 text-dark" title="Launch Delivery Project"><i class="bi bi-briefcase me-1"></i>+ Project</a>' +
+                    '<a href="invoice-create.php?quote=' + encSo + '&client=' + encClient + '&amount=' + rawAmt + '" class="btn btn-sm btn-outline-success py-1 px-2 font-11 fw-semibold" title="Convert to Tax Invoice"><i class="bi bi-file-earmark-ruled me-1"></i>Invoice</a>' +
                 '</div></td>';
             tbody.insertBefore(tr, tbody.firstChild);
         });
     } catch (e) {}
 
+    // Dispatch modal triggers
     document.addEventListener('click', function (e) {
         var btn = e.target.closest('.btn-dispatch-so');
         if (!btn) return;
@@ -302,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function () {
         activeSoRow.setAttribute('data-status', 'Dispatched');
         var stCell = activeSoRow.querySelector('[data-so-status-cell]');
         if (stCell) {
-            stCell.innerHTML = '<span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-2 py-1">Dispatched</span>';
+            stCell.innerHTML = '<span class="badge bg-success text-white border border-success rounded-pill px-2.5 py-1 font-11">Dispatched</span>';
         }
         var dispBtn = activeSoRow.querySelector('.btn-dispatch-so');
         if (dispBtn) {
@@ -312,37 +339,106 @@ document.addEventListener('DOMContentLoaded', function () {
         if (window.bootstrap && bootstrap.Modal.getInstance(modalEl)) {
             bootstrap.Modal.getInstance(modalEl).hide();
         }
+        applySoFilters();
     });
 
-    // Filter & Search
-    var curFilter = 'all';
-    function applySoFilter() {
-        var q = (document.getElementById('soSearchInput').value || '').toLowerCase();
-        Array.prototype.forEach.call(tbody.querySelectorAll('tr'), function (tr) {
-            var st = tr.getAttribute('data-status') || '';
-            var text = tr.textContent.toLowerCase();
-            var matchSt = (curFilter === 'all') || (st === curFilter);
+    // Universal Filter Engine (Offcanvas Slider)
+    function applySoFilters() {
+        var q = (document.getElementById('filterSoSearch') ? document.getElementById('filterSoSearch').value : '').toLowerCase().trim();
+        var st = (document.getElementById('filterSoStatus') ? document.getElementById('filterSoStatus').value : '').toLowerCase();
+        var wh = (document.getElementById('filterSoWarehouse') ? document.getElementById('filterSoWarehouse').value : '').toLowerCase();
+
+        var activeCount = 0;
+        if (q) activeCount++;
+        if (st) activeCount++;
+        if (wh) activeCount++;
+
+        var badge = document.getElementById('filterCountBadge');
+        if (badge) {
+            badge.textContent = activeCount;
+            badge.classList.toggle('d-none', activeCount === 0);
+        }
+
+        var visibleCount = 0;
+        Array.from(tbody ? tbody.querySelectorAll('tr') : []).forEach(function(r) {
+            var text = r.textContent.toLowerCase();
+            var statusText = (r.getAttribute('data-status') || '').toLowerCase();
+            var warehouseText = (r.getAttribute('data-warehouse') || '').toLowerCase();
+
             var matchQ = !q || text.indexOf(q) !== -1;
-            tr.classList.toggle('d-none', !(matchSt && matchQ));
+            var matchSt = !st || statusText.indexOf(st) !== -1;
+            var matchWh = !wh || warehouseText.indexOf(wh) !== -1;
+
+            var show = matchQ && matchSt && matchWh;
+            r.style.display = show ? '' : 'none';
+            if (show) visibleCount++;
+        });
+
+        var countBadge = document.getElementById('soCountBadge');
+        if (countBadge) countBadge.textContent = visibleCount + ' Orders';
+
+        var summaryText = document.getElementById('soSummaryText');
+        if (summaryText) summaryText.textContent = 'Showing ' + visibleCount + ' of ' + (tbody ? tbody.children.length : 0) + ' sales orders';
+    }
+
+    var searchInput = document.getElementById('filterSoSearch');
+    if (searchInput) searchInput.addEventListener('input', applySoFilters);
+
+    var statusSelect = document.getElementById('filterSoStatus');
+    if (statusSelect) statusSelect.addEventListener('change', applySoFilters);
+
+    var whSelect = document.getElementById('filterSoWarehouse');
+    if (whSelect) whSelect.addEventListener('change', applySoFilters);
+
+    var resetBtn = document.getElementById('resetSoFiltersBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            if (searchInput) searchInput.value = '';
+            if (statusSelect) statusSelect.value = '';
+            if (whSelect) whSelect.value = '';
+            applySoFilters();
         });
     }
 
-    Array.prototype.forEach.call(document.querySelectorAll('.so-filter-btn'), function (btn) {
-        btn.addEventListener('click', function () {
-            Array.prototype.forEach.call(document.querySelectorAll('.so-filter-btn'), function (b) {
-                b.classList.remove('btn-primary');
-                b.classList.add('btn-outline-secondary');
+    // Real-time Export CSV
+    var exportBtn = document.getElementById('exportSoCsvBtn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            var rows = [
+                ['SO Number', 'Customer Account', 'Source Quote / PO', 'Items Summary', 'Order Date', 'Delivery Date', 'Order Total', 'Fulfillment Status']
+            ];
+            Array.from(tbody ? tbody.querySelectorAll('tr') : []).forEach(function(r) {
+                if (r.style.display === 'none') return;
+                var cells = r.querySelectorAll('td');
+                if (cells.length >= 8) {
+                    rows.push([
+                        cells[0].textContent.trim(),
+                        cells[1].querySelector('.fw-bold') ? cells[1].querySelector('.fw-bold').textContent.trim() : cells[1].textContent.trim(),
+                        cells[2].textContent.replace(/\s+/g, ' ').trim(),
+                        cells[3].querySelector('.fw-semibold') ? cells[3].querySelector('.fw-semibold').textContent.trim() : cells[3].textContent.trim(),
+                        cells[4].textContent.trim(),
+                        cells[5].textContent.trim(),
+                        cells[6].textContent.trim(),
+                        cells[7].textContent.trim()
+                    ]);
+                }
             });
-            btn.classList.remove('btn-outline-secondary', 'btn-outline-warning');
-            btn.classList.add('btn-primary');
-            curFilter = btn.getAttribute('data-filter');
-            applySoFilter();
+            var csvContent = 'data:text/csv;charset=utf-8,' + rows.map(function(e) {
+                return e.map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+            }).join('\n');
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'sales_orders_export_' + new Date().toISOString().slice(0, 10) + '.csv');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
         });
-    });
+    }
 
-    document.getElementById('soSearchInput').addEventListener('input', applySoFilter);
+    // Initial update
+    applySoFilters();
 });
 </script>
 
 <?php include 'footer.php'; ?>
-

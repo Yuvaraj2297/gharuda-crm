@@ -3,75 +3,27 @@
 
 <main class="container-fluid px-0">
     <!-- Page Header & Action Bar -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
         <div>
-            <h1 class="font-display fw-bold mb-1 page-title">Deals &amp; Opportunities</h1>
-            <nav class="d-flex align-items-center gap-2 text-neutral text-nowrap breadcrumb-text">
-                <i class="bi bi-briefcase fs-6 text-primary"></i>
-                <a href="lead.php" class="text-decoration-none text-muted">CRM</a>
-                <i class="bi bi-chevron-right small text-muted"></i>
-                <span class="fw-bold text-dark">Deals &amp; Sales Pipeline</span>
-            </nav>
+            <h1 class="font-display fw-bold mb-0 page-title">Deals &amp; Opportunities</h1>
         </div>
         <div class="d-flex align-items-center flex-wrap gap-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#dealFilterOffcanvas" aria-controls="dealFilterOffcanvas" title="Filter Pipeline Deals">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="filterCountBadge">0</span>
+            </button>
+            <div class="btn-group btn-group-sm" role="group" id="dealViewToggle">
+                <button type="button" class="btn btn-outline-primary active px-3 fw-semibold" id="btnViewKanban" title="Kanban Pipeline Board">
+                    <i class="bi bi-kanban me-1.5"></i>Kanban
+                </button>
+                <button type="button" class="btn btn-outline-primary px-3 fw-semibold" id="btnViewTable" title="Deals Table List">
+                    <i class="bi bi-table me-1.5"></i>Table List
+                </button>
+            </div>
             <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold px-3" data-bs-toggle="modal" data-bs-target="#newDealModal">
                 <i class="bi bi-plus-lg"></i><span>New Deal</span>
             </button>
-        </div>
-    </div>
-
-    <!-- Filter & View Switcher Bar -->
-    <div class="card border shadow-sm py-2.5 px-3 mb-3 rounded-3 bg-white">
-        <div class="row g-2 align-items-center">
-            <!-- Search Keyword -->
-            <div class="col-12 col-md-4 col-lg-3">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" class="form-control border-start-0" id="filterDealSearch" placeholder="Search deal, client, product...">
-                </div>
-            </div>
-            <!-- Filter by Sales Rep -->
-            <div class="col-6 col-md-3 col-lg-2">
-                <select class="form-select form-select-sm" id="filterDealRep">
-                    <option value="">All Sales Reps</option>
-                    <option value="Harish">Harish D.</option>
-                    <option value="Divya">Divya A.</option>
-                    <option value="Karthik">Karthik R.</option>
-                    <option value="Priya">Priya S.</option>
-                </select>
-            </div>
-            <!-- Filter by Brand -->
-            <div class="col-6 col-md-3 col-lg-2">
-                <select class="form-select form-select-sm" id="filterDealBrand">
-                    <option value="">All Brands</option>
-                    <option value="Gharuda Software">Gharuda Software</option>
-                    <option value="PhDAssistance">PhDAssistance</option>
-                    <option value="GEOCare">GEO Care</option>
-                    <option value="Zen Publications">Zen Publications</option>
-                </select>
-            </div>
-            <!-- Filter by Period -->
-            <div class="col-6 col-md-2 col-lg-2">
-                <select class="form-select form-select-sm" id="filterDealPeriod">
-                    <option value="this-quarter">This Quarter</option>
-                    <option value="this-month">This Month</option>
-                    <option value="this-year">Full Year 2026</option>
-                </select>
-            </div>
-            <!-- View Mode Switcher -->
-            <div class="col-12 col-md-auto ms-auto d-flex align-items-center justify-content-end gap-2">
-                <div class="btn-group btn-group-sm" role="group" id="dealViewToggle">
-                    <button type="button" class="btn btn-outline-primary active px-3 fw-semibold" id="btnViewKanban" title="Kanban Pipeline Board">
-                        <i class="bi bi-kanban me-1.5"></i>Kanban
-                    </button>
-                    <button type="button" class="btn btn-outline-primary px-3 fw-semibold" id="btnViewTable" title="Deals Table List">
-                        <i class="bi bi-table me-1.5"></i>Table List
-                    </button>
-                </div>
-                <button type="button" class="btn btn-outline-secondary btn-sm" id="resetDealFiltersBtn" title="Reset Filters">
-                    <i class="bi bi-arrow-clockwise"></i>
-                </button>
-            </div>
         </div>
     </div>
 
@@ -345,6 +297,85 @@
         </div>
     </div>
 </main>
+
+<!-- ==================== OFFCANVAS SLIDER: DEALS FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="dealFilterOffcanvas" aria-labelledby="dealFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="dealFilterTitle">Filter Pipeline Deals</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Search Keyword -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Search Deals / Clients</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control" id="filterDealSearch" placeholder="Type deal title, account...">
+            </div>
+        </div>
+
+        <!-- Pipeline Stage -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Pipeline Stage</label>
+            <select class="form-select form-select-sm" id="filterDealStage">
+                <option value="">All Stages</option>
+                <option value="Discovery">1. Discovery (20%)</option>
+                <option value="Demo &amp; Eval">2. Demo &amp; Eval (40%)</option>
+                <option value="Proposal Sent">3. Proposal Sent (60%)</option>
+                <option value="Negotiation">4. Negotiation (80%)</option>
+                <option value="Closed Won">5. Closed Won (100%)</option>
+                <option value="Closed Lost">6. Closed Lost (0%)</option>
+            </select>
+        </div>
+
+        <!-- Sales Rep -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Sales Representative</label>
+            <select class="form-select form-select-sm" id="filterDealRep">
+                <option value="">All Sales Reps</option>
+                <option value="Harish">Harish D.</option>
+                <option value="Divya">Divya A.</option>
+                <option value="Karthik">Karthik R.</option>
+                <option value="Priya">Priya S.</option>
+                <option value="Ramesh">Ramesh V.</option>
+            </select>
+        </div>
+
+        <!-- Brand / Portfolio -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Brand / Portfolio</label>
+            <select class="form-select form-select-sm" id="filterDealBrand">
+                <option value="">All Brands</option>
+                <option value="Gharuda Software">Gharuda Software</option>
+                <option value="PhDAssistance">PhDAssistance</option>
+                <option value="GEOCare">GEO Care</option>
+                <option value="Zen Publications">Zen Publications</option>
+            </select>
+        </div>
+
+        <!-- Closing Timeline / Period -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Expected Close Period</label>
+            <select class="form-select form-select-sm" id="filterDealPeriod">
+                <option value="all">All Timelines</option>
+                <option value="this-month">This Month (Mar 2026)</option>
+                <option value="this-quarter" selected>This Quarter (Q1 2026)</option>
+                <option value="this-year">Full Year 2026</option>
+            </select>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 px-4 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm" id="resetDealFiltersBtn">
+            <i class="bi bi-arrow-clockwise me-1"></i>Reset Filters
+        </button>
+        <button type="button" class="btn btn-primary btn-sm px-4 fw-semibold" data-bs-dismiss="offcanvas">
+            Apply
+        </button>
+    </div>
+</div>
 
 <!-- ==================== MODAL: CREATE NEW DEAL ==================== -->
 <div class="modal fade" id="newDealModal" tabindex="-1" aria-hidden="true">
@@ -1105,23 +1136,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Universal Filter Engine
+    // Universal Filter Engine (Offcanvas Slider)
     function applyFilters() {
         var q = (document.getElementById('filterDealSearch') ? document.getElementById('filterDealSearch').value : '').toLowerCase().trim();
+        var stage = (document.getElementById('filterDealStage') ? document.getElementById('filterDealStage').value : '').toLowerCase();
         var rep = (document.getElementById('filterDealRep') ? document.getElementById('filterDealRep').value : '').toLowerCase();
         var brand = (document.getElementById('filterDealBrand') ? document.getElementById('filterDealBrand').value : '').toLowerCase();
+
+        // Update active filter badge on header button
+        var activeCount = 0;
+        if (q) activeCount++;
+        if (stage) activeCount++;
+        if (rep) activeCount++;
+        if (brand) activeCount++;
+
+        var countBadge = document.getElementById('filterCountBadge');
+        if (countBadge) {
+            countBadge.textContent = activeCount;
+            countBadge.classList.toggle('d-none', activeCount === 0);
+        }
 
         document.querySelectorAll('.deal-k-card').forEach(function (card) {
             var title = (card.getAttribute('data-title') || '').toLowerCase();
             var client = (card.getAttribute('data-client') || '').toLowerCase();
+            var cardStage = (card.getAttribute('data-stage') || '').toLowerCase();
             var cardRep = (card.getAttribute('data-rep') || '').toLowerCase();
             var cardBrand = (card.getAttribute('data-brand') || '').toLowerCase();
 
             var matchSearch = !q || title.includes(q) || client.includes(q);
+            var matchStage = !stage || cardStage.includes(stage);
             var matchRep = !rep || cardRep.includes(rep);
             var matchBrand = !brand || cardBrand.includes(brand);
 
-            card.classList.toggle('d-none', !(matchSearch && matchRep && matchBrand));
+            card.classList.toggle('d-none', !(matchSearch && matchStage && matchRep && matchBrand));
         });
 
         updateMetrics();
@@ -1129,6 +1176,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var searchInput = document.getElementById('filterDealSearch');
     if (searchInput) searchInput.addEventListener('input', applyFilters);
+
+    var stageSelect = document.getElementById('filterDealStage');
+    if (stageSelect) stageSelect.addEventListener('change', applyFilters);
 
     var repSelect = document.getElementById('filterDealRep');
     if (repSelect) repSelect.addEventListener('change', applyFilters);
@@ -1140,6 +1190,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (resetBtn) {
         resetBtn.addEventListener('click', function () {
             if (searchInput) searchInput.value = '';
+            if (stageSelect) stageSelect.value = '';
             if (repSelect) repSelect.value = '';
             if (brandSelect) brandSelect.value = '';
             applyFilters();
