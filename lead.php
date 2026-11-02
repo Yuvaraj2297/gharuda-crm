@@ -23,14 +23,48 @@
     </div>
 </div>
 
-<!-- ===== Page view tabs ===== -->
-<div class="d-flex gap-2 mb-3 border-bottom pb-2" id="lpTabs">
-    <button type="button" class="btn btn-sm btn-primary lp-tab active" data-tab="leads"><i class="bi bi-table me-1"></i>All Leads</button>
-    <button type="button" class="btn btn-sm btn-outline-primary lp-tab" data-tab="stats"><i class="bi bi-grid-3x3-gap-fill me-1"></i>Activity Stats</button>
+<!-- ===== Main View Tabs: Dashboard & Lead Table Data ===== -->
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+    <ul class="nav nav-pills gap-2 bg-white p-1.5 border rounded-3 shadow-sm" id="leadMainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2" 
+                    id="tabDashboardBtn" 
+                    data-bs-toggle="pill" 
+                    data-bs-target="#tabContentDashboard" 
+                    type="button" 
+                    role="tab" 
+                    aria-controls="tabContentDashboard" 
+                    aria-selected="true">
+                <i class="bi bi-speedometer2 fs-6"></i>
+                <span>Dashboard</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2" 
+                    id="tabLeadsTableBtn" 
+                    data-bs-toggle="pill" 
+                    data-bs-target="#tabContentLeadsTable" 
+                    type="button" 
+                    role="tab" 
+                    aria-controls="tabContentLeadsTable" 
+                    aria-selected="false">
+                <i class="bi bi-table fs-6"></i>
+                <span>Lead Table Data</span>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2 py-0.5 ms-1" id="leadTableCountBadge">10</span>
+            </button>
+        </li>
+    </ul>
+
+    <div class="d-none d-md-flex align-items-center gap-2 text-muted small">
+        <span class="badge bg-light text-secondary border px-2.5 py-1.5 rounded-2">
+            <i class="bi bi-arrow-repeat text-success me-1"></i>Real-time Sync
+        </span>
+    </div>
 </div>
 
-<!-- ===== PANEL: Activity Stats ===== -->
-<div class="lp-panel" id="lpPanel-stats">
+<div class="tab-content" id="leadMainTabsContent">
+    <!-- ===== TAB 1: Dashboard Overview ===== -->
+    <div class="tab-pane fade show active" id="tabContentDashboard" role="tabpanel" aria-labelledby="tabDashboardBtn">
 
     <!-- ===== Activity / Pipeline Stats — source-report style group cards ===== -->
     <div class="row g-3">
@@ -186,12 +220,11 @@
                 </div>
             </div>
         </div>
-</div>
+    </div><!-- /.row.g-3 -->
+</div><!-- /#tabContentDashboard -->
 
-</div><!-- /lpPanel-stats -->
-
-<!-- ===== PANEL: All Leads ===== -->
-<div class="lp-panel active" id="lpPanel-leads">
+<!-- ===== TAB 2: Lead Table Data ===== -->
+<div class="tab-pane fade" id="tabContentLeadsTable" role="tabpanel" aria-labelledby="tabLeadsTableBtn">
 
     <!-- ===== Filters card ===== -->
     <div class="card-custom mb-3 filters-card d-flex flex-column">
@@ -464,33 +497,49 @@
         </div>
     </div>
 
-</div><!-- /lpPanel-leads -->
+</div><!-- /#tabContentLeadsTable -->
+</div><!-- /#leadMainTabsContent -->
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        /* ---- Page view tabs: All Leads / Activity Stats ---- */
-        var lpTabs = document.querySelectorAll('#lpTabs .lp-tab');
-        lpTabs.forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                lpTabs.forEach(function(t) {
-                    t.classList.remove('active', 'btn-primary');
-                    t.classList.add('btn-outline-primary');
-                });
-                tab.classList.add('active', 'btn-primary');
-                tab.classList.remove('btn-outline-primary');
-                document.querySelectorAll('.lp-panel').forEach(function(p) {
-                    p.classList.remove('active');
-                });
-                var panel = document.getElementById('lpPanel-' + tab.dataset.tab);
-                if (panel) panel.classList.add('active');
-                /* re-measure responsive tables inside the shown panel */
-                window.dispatchEvent(new Event('resize'));
-            });
-        });
+        /* ---- Bootstrap 5 Lead View Tabs (Dashboard & Lead Table Data) ---- */
+        var tabDashboardBtn = document.getElementById('tabDashboardBtn');
+        var tabLeadsTableBtn = document.getElementById('tabLeadsTableBtn');
 
-        /* ---- Activity Stats group cards: ovvoru period cell um clickable ----
-           fu-link (Follow Up) cells → follow-up-list.php page redirect (range+type params)
-           matha group cells → demo toast */
+        // Restore active tab from URL hash or localStorage
+        var hash = window.location.hash;
+        var savedTab = localStorage.getItem('lead_active_view_tab');
+        if (hash === '#table' || hash === '#leads' || (savedTab === 'table' && hash !== '#dashboard')) {
+            if (tabLeadsTableBtn && window.bootstrap && bootstrap.Tab) {
+                var bsTab = bootstrap.Tab.getOrCreateInstance(tabLeadsTableBtn);
+                bsTab.show();
+            }
+        } else if (hash === '#dashboard' || savedTab === 'dashboard') {
+            if (tabDashboardBtn && window.bootstrap && bootstrap.Tab) {
+                var bsTabDash = bootstrap.Tab.getOrCreateInstance(tabDashboardBtn);
+                bsTabDash.show();
+            }
+        }
+
+        // Persist tab state and recalculate table layout on view switch
+        if (tabLeadsTableBtn) {
+            tabLeadsTableBtn.addEventListener('shown.bs.tab', function() {
+                localStorage.setItem('lead_active_view_tab', 'table');
+                window.dispatchEvent(new Event('resize'));
+                if (window.jQuery && $.fn && $.fn.DataTable) {
+                    try {
+                        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().responsive.recalc();
+                    } catch(e) {}
+                }
+            });
+        }
+        if (tabDashboardBtn) {
+            tabDashboardBtn.addEventListener('shown.bs.tab', function() {
+                localStorage.setItem('lead_active_view_tab', 'dashboard');
+            });
+        }
+
+        /* ---- Activity Stats group cards: clicking cells ---- */
         var statsToastTimer = null;
         function showStatsToast(msg) {
             var old = document.getElementById('astToast');
@@ -507,7 +556,8 @@
                 setTimeout(function() { t.remove(); }, 250);
             }, 2600);
         }
-        document.querySelectorAll('#lpPanel-stats .ast-open').forEach(function(cell) {
+
+        document.querySelectorAll('#tabContentDashboard .ast-open').forEach(function(cell) {
             cell.addEventListener('click', function() {
                 var group = cell.getAttribute('data-group') || '';
                 var period = cell.getAttribute('data-period') || '';
@@ -519,8 +569,12 @@
                     var fuType = label.indexOf('Completed') !== -1 ? 'completed' : 'actual';
                     window.location.href = 'follow-up-list.php?range=' + encodeURIComponent(range) + '&type=' + fuType;
                 } else {
-                    /* Matha group cells: group+period filter panni lead list kaatum (demo toast) */
-                    showStatsToast('📋 ' + label + ' leads list open aagudhu… (' + range + ')');
+                    /* Matha group cells: Switch to Lead Table Data tab and notify user */
+                    if (tabLeadsTableBtn && window.bootstrap && bootstrap.Tab) {
+                        var bsTab = bootstrap.Tab.getOrCreateInstance(tabLeadsTableBtn);
+                        bsTab.show();
+                    }
+                    showStatsToast('🔍 ' + label + ' leads list (' + range + ')');
                 }
             });
         });
