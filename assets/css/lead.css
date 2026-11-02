@@ -656,3 +656,31 @@
     font-family: inherit;
     min-height: 160px;
 }
+
+
+/* In-place action modals stacked on top of leadDetailModal (1055) */
+#ldBookMeetingModal,
+#ldWhatsAppModal,
+#ldQualifyDealModal {
+    z-index: 1075 !important;
+}
+#ldBookMeetingModal .modal-dialog,
+#ldWhatsAppModal .modal-dialog,
+#ldQualifyDealModal .modal-dialog {
+    max-width: 580px;
+    margin: 1.75rem auto;
+}
+#ldBookMeetingModal .modal-content,
+#ldWhatsAppModal .modal-content,
+#ldQualifyDealModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25) !important;
+}
+.ld-pipe-step.cursor-pointer {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ld-pipe-step.cursor-pointer:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}

@@ -1336,7 +1336,7 @@ document.addEventListener('DOMContentLoaded', function() {
        (1075/1085/1090) open panna backdrop parent modal ku keezha pogum.
        shown event la last backdrop ah modal z-index - 1 ku bump panrom. */
         (function() {
-            var stackedModals = ['ldComposeEmailModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
+            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
             stackedModals.forEach(function(id) {
                 var el = document.getElementById(id);
                 if (!el) return;
@@ -3856,3 +3856,288 @@ document.addEventListener('DOMContentLoaded', function () {
         }, true);
     }
 });
+
+        /* =========================================================================
+           IN-PLACE ACTIONS & PIPELINE INTERACTION (NO PAGE NAVIGATION)
+           ========================================================================= */
+        (function() {
+            function showModal(id) {
+                var el = document.getElementById(id);
+                if (el && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(el).show();
+                }
+            }
+
+            function hideModal(id) {
+                var el = document.getElementById(id);
+                if (el && typeof bootstrap !== 'undefined') {
+                    var m = bootstrap.Modal.getInstance(el);
+                    if (m) m.hide();
+                }
+            }
+
+            function switchTab(panelId) {
+                var ldRail = document.querySelector('#leadDetailModal .ld-rail');
+                if (ldRail) {
+                    ldRail.querySelectorAll('.ld-nav').forEach(function(b) {
+                        b.classList.remove('active');
+                        if (b.getAttribute('data-panel') === panelId) b.classList.add('active');
+                    });
+                }
+                document.querySelectorAll('#leadDetailModal .ld-tab-panel').forEach(function(p) {
+                    p.classList.remove('active');
+                });
+                var target = document.getElementById(panelId);
+                if (target) target.classList.add('active');
+            }
+
+            function logLeadActivity(text) {
+                var ldaFeed = document.getElementById('ldaFeed');
+                if (!ldaFeed) return;
+                var d = new Date();
+                var pad = function(n) { return String(n).padStart(2, '0'); };
+                var dtStr = pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear() + ' ' +
+                    pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+
+                var item = document.createElement('div');
+                item.className = 'card border shadow-sm p-3 bg-white rounded-3 lda-item mb-2';
+                item.innerHTML =
+                    '<div class="d-flex align-items-center justify-content-between mb-2">' +
+                        '<div class="d-flex align-items-center gap-2">' +
+                            '<span class="rounded-circle bg-primary-subtle text-primary fw-bold d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:34px;height:34px;font-size:12px;">GHR</span>' +
+                            '<span class="fw-bold text-dark small">GHARUDA SOFTWARE</span>' +
+                            '<span class="badge bg-primary-subtle text-primary border ms-1 small">In-place Action</span>' +
+                        '</div>' +
+                        '<div class="lda-date small text-muted">' +
+                            '<span>' + dtStr + '</span>' +
+                            '<span class="badge bg-light text-secondary border ms-2">just now</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="text-secondary small ps-5">' + text + '</div>';
+                ldaFeed.insertBefore(item, ldaFeed.firstChild);
+            }
+
+            // 1. WhatsApp Action
+            var waBtn = document.getElementById('ldWhatsAppBtn');
+            if (waBtn) {
+                waBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var phoneEl = document.getElementById('ldInfoPhone');
+                    if (phoneEl) {
+                        var pTxt = phoneEl.textContent.trim().replace(/[^0-9+]/g, '');
+                        if (pTxt && document.getElementById('ldWaPhone')) {
+                            document.getElementById('ldWaPhone').value = pTxt;
+                        }
+                    }
+                    showModal('ldWhatsAppModal');
+                });
+            }
+
+            var waTpl = document.getElementById('ldWaTemplate');
+            var waMsg = document.getElementById('ldWaMessage');
+            if (waTpl && waMsg) {
+                waTpl.addEventListener('change', function() {
+                    var leadName = document.getElementById('ldName') ? document.getElementById('ldName').textContent.trim() : 'Customer';
+                    var val = waTpl.value;
+                    if (val === 'followup') {
+                        waMsg.value = 'Hello ' + leadName + ', following up on your recent enquiry with GHARUDA CRM. Are you available for a quick 5-minute call today?';
+                    } else if (val === 'quote') {
+                        waMsg.value = 'Dear ' + leadName + ', your requested quotation has been prepared. Would you like me to share the PDF details with you here?';
+                    } else if (val === 'meeting') {
+                        waMsg.value = 'Hi ' + leadName + ', confirming our scheduled product demo / meeting. Please let us know if this time works well for your team.';
+                    }
+                });
+            }
+
+            var waSend = document.getElementById('ldWaSendBtn');
+            if (waSend) {
+                waSend.addEventListener('click', function() {
+                    var phone = (document.getElementById('ldWaPhone') ? document.getElementById('ldWaPhone').value : '').replace(/[^0-9]/g, '');
+                    var msg = waMsg ? waMsg.value.trim() : '';
+                    if (!phone) {
+                        alert('Please enter a valid phone number.');
+                        return;
+                    }
+                    var url = 'https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(msg);
+                    window.open(url, '_blank');
+                    logLeadActivity('Sent WhatsApp message to ' + phone + ': "' + msg.substring(0, 80) + '..."');
+                    hideModal('ldWhatsAppModal');
+                });
+            }
+
+            var waLog = document.getElementById('ldWaLogBtn');
+            if (waLog) {
+                waLog.addEventListener('click', function() {
+                    var msg = waMsg ? waMsg.value.trim() : '';
+                    logLeadActivity('Logged WhatsApp conversation notes: "' + msg + '"');
+                    hideModal('ldWhatsAppModal');
+                });
+            }
+
+            // 2. Book Meeting Action
+            var bmBtn = document.getElementById('ldBookMeetingBtn');
+            if (bmBtn) {
+                bmBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var bmDate = document.getElementById('bmDate');
+                    if (bmDate && !bmDate.value) {
+                        var d = new Date();
+                        var pad = function(n) { return String(n).padStart(2, '0'); };
+                        bmDate.value = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+                    }
+                    showModal('ldBookMeetingModal');
+                });
+            }
+
+            var bmGoTab = document.getElementById('bmGoToTabBtn');
+            if (bmGoTab) {
+                bmGoTab.addEventListener('click', function() {
+                    hideModal('ldBookMeetingModal');
+                    switchTab('ldPanelAppointments');
+                });
+            }
+
+            var bmSave = document.getElementById('bmSaveBtn');
+            if (bmSave) {
+                bmSave.addEventListener('click', function() {
+                    var subj = document.getElementById('bmSubject') ? document.getElementById('bmSubject').value.trim() : '';
+                    var dt = document.getElementById('bmDate') ? document.getElementById('bmDate').value : '';
+                    var tm = document.getElementById('bmTime') ? document.getElementById('bmTime').value : '11:00';
+                    var tp = document.getElementById('bmType') ? document.getElementById('bmType').value : 'Online Demo';
+                    var att = document.getElementById('bmAttendees') ? document.getElementById('bmAttendees').value : 'GHARUDA Team';
+                    var desc = document.getElementById('bmDescription') ? document.getElementById('bmDescription').value.trim() : '';
+
+                    if (!subj) {
+                        alert('Meeting subject is required.');
+                        return;
+                    }
+
+                    var apptTbody = document.getElementById('apApptTbody');
+                    if (apptTbody) {
+                        var tr = document.createElement('tr');
+                        tr.innerHTML =
+                            '<td>' + (apptTbody.children.length + 1) + '</td>' +
+                            '<td><a href="#" class="lead-name-link">' + subj + '</a></td>' +
+                            '<td>' + dt + ' ' + tm + '</td>' +
+                            '<td>GHRAUDA SOFTWARE</td>' +
+                            '<td>' + att + '</td>' +
+                            '<td>' + tp + '</td>' +
+                            '<td>' + (desc || 'Scheduled via in-place action') + '</td>' +
+                            '<td><span class="ld-prop-status sent">Scheduled</span></td>';
+                        apptTbody.insertBefore(tr, apptTbody.firstChild);
+                    }
+
+                    logLeadActivity('Scheduled appointment: "' + subj + '" on ' + dt + ' at ' + tm + ' (' + tp + ')');
+                    hideModal('ldBookMeetingModal');
+                    alert('Appointment successfully scheduled!');
+                });
+            }
+
+            // 3. Create Quote Action
+            var cqBtn = document.getElementById('ldCreateQuoteBtn');
+            if (cqBtn) {
+                cqBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Open newProposalModal directly in-place without page redirect
+                    var npModal = document.getElementById('newProposalModal');
+                    if (npModal) {
+                        showModal('newProposalModal');
+                    } else {
+                        switchTab('ldPanelProposals');
+                    }
+                });
+            }
+
+            // 4. Qualify to Deal Action
+            var qdBtn = document.getElementById('ldQualifyDealBtn');
+            if (qdBtn) {
+                qdBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var leadVal = document.getElementById('ldInfoValue');
+                    if (leadVal && document.getElementById('qdValue')) {
+                        document.getElementById('qdValue').value = leadVal.textContent.replace(/[^0-9.]/g, '') || '141629.00';
+                    }
+                    var qdClose = document.getElementById('qdCloseDate');
+                    if (qdClose && !qdClose.value) {
+                        var d = new Date();
+                        d.setDate(d.getDate() + 14);
+                        var pad = function(n) { return String(n).padStart(2, '0'); };
+                        qdClose.value = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+                    }
+                    showModal('ldQualifyDealModal');
+                });
+            }
+
+            var qdSave = document.getElementById('qdSaveBtn');
+            if (qdSave) {
+                qdSave.addEventListener('click', function() {
+                    var title = document.getElementById('qdDealName') ? document.getElementById('qdDealName').value : 'Deal';
+                    var val = document.getElementById('qdValue') ? document.getElementById('qdValue').value : '0';
+
+                    // Update pipeline step in Profile tab to Qualified
+                    var pipeBar = document.getElementById('ldPipelineBar');
+                    if (pipeBar) {
+                        pipeBar.querySelectorAll('.ld-pipe-step').forEach(function(s) {
+                            s.classList.remove('current', 'pending', 'done');
+                        });
+                        var steps = pipeBar.querySelectorAll('.ld-pipe-step');
+                        if (steps[0]) steps[0].classList.add('done');
+                        if (steps[1]) steps[1].classList.add('done');
+                        if (steps[2]) steps[2].classList.add('current');
+                        if (steps[3]) steps[3].classList.add('pending');
+                    }
+
+                    // Update General Information status
+                    var stBadge = document.getElementById('ldInfoStatus');
+                    if (stBadge) {
+                        stBadge.textContent = 'Qualified';
+                        stBadge.className = 'status-badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill';
+                    }
+
+                    logLeadActivity('Lead qualified to Deal Pipeline: "' + title + '" (Val: ₹' + val + ')');
+                    hideModal('ldQualifyDealModal');
+                    alert('Deal qualified successfully and added to sales pipeline!');
+                });
+            }
+
+            // 5. Interactive Pipeline Steps
+            var pipeBar = document.getElementById('ldPipelineBar');
+            if (pipeBar) {
+                pipeBar.addEventListener('click', function(e) {
+                    var step = e.target.closest('.ld-pipe-step');
+                    if (!step) return;
+                    var stage = step.getAttribute('data-stage');
+                    var pct = parseInt(step.getAttribute('data-pct') || '50', 10);
+                    var steps = Array.from(pipeBar.querySelectorAll('.ld-pipe-step'));
+                    var idx = steps.indexOf(step);
+
+                    steps.forEach(function(s, i) {
+                        s.classList.remove('done', 'current', 'pending');
+                        if (i < idx) {
+                            s.classList.add('done');
+                        } else if (i === idx) {
+                            s.classList.add('current');
+                        } else {
+                            s.classList.add('pending');
+                        }
+                    });
+
+                    var ring = document.getElementById('ldStageRing');
+                    var ringPct = document.getElementById('ldStagePct');
+                    if (ring) {
+                        ring.style.setProperty('--pct', pct);
+                        if (pct === 100) {
+                            ring.style.setProperty('--ring-color', '#10b981');
+                        } else if (pct >= 60) {
+                            ring.style.setProperty('--ring-color', '#2563eb');
+                        } else {
+                            ring.style.setProperty('--ring-color', '#f59e0b');
+                        }
+                    }
+                    if (ringPct) ringPct.textContent = pct + '%';
+
+                    var stageName = step.textContent.trim();
+                    logLeadActivity('Updated pipeline stage to "' + stageName + '" (' + pct + '%)');
+                });
+            }
+        })();

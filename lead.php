@@ -1301,39 +1301,31 @@
 
                 <!-- ===== Profile Tab Panel ===== -->
                 <div class="ld-tab-panel active" id="ldPanelProfile">
-                    <div class="ld-pipeline card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center gap-2 flex-wrap">
-                        <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Qualified</span>
-                        <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Quote</span>
-                        <span class="ld-pipe-step current">Negotiation</span>
-                        <span class="ld-pipe-step pending">Closed Won</span>
-                        <div class="ld-pipe-ring">
-                            <div class="stage-ring stage-ring-lead"><span>65%</span></div>
+                    <div class="ld-pipeline card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center gap-2 flex-wrap" id="ldPipelineBar">
+                        <span class="ld-pipe-step done cursor-pointer" data-stage="qualified" data-pct="25" title="Click to set Qualified"><i class="bi bi-check-circle-fill"></i> Qualified</span>
+                        <span class="ld-pipe-step done cursor-pointer" data-stage="quote" data-pct="50" title="Click to set Quote"><i class="bi bi-check-circle-fill"></i> Quote</span>
+                        <span class="ld-pipe-step current cursor-pointer" data-stage="negotiation" data-pct="65" title="Click to set Negotiation"><i class="bi bi-dot"></i> Negotiation</span>
+                        <span class="ld-pipe-step pending cursor-pointer" data-stage="won" data-pct="100" title="Click to set Closed Won"><i class="bi bi-trophy"></i> Closed Won</span>
+                        <div class="ld-pipe-ring ms-auto">
+                            <div class="stage-ring stage-ring-lead" id="ldStageRing" style="--pct:65;--ring-color:#2563eb;"><span id="ldStagePct">65%</span></div>
                         </div>
                     </div>
                 <div class="ld-contact-bar card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
                     <span class="ld-act-dot" id="ldContactDot"></span>
                     <span class="ld-act-avatar d-none" id="ldContactAvatar">KO</span>
                     <span id="ldContactText"><b>GHRAUDA SOFTWARE</b> &middot; Created new proposal &nbsp;<a href="#">New Proposal</a> &nbsp; PRQ-147</span>
-                        <div class="ld-contact-actions d-flex align-items-center gap-1.5 flex-wrap">
-                            <a href="whatsapp-chat.php" class="btn btn-sm btn-outline-success" style="border-radius:8px;font-size:12px;font-weight:600;" title="WhatsApp Lead"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
-                            <a href="appointments.php" class="btn btn-sm btn-outline-primary" style="border-radius:8px;font-size:12px;font-weight:600;" title="Schedule Meeting / Demo"><i class="bi bi-calendar2-event me-1"></i>Book Meeting</a>
-                            <a href="quotation-create.php?client=Power+Spares+Engineering" class="btn btn-sm btn-outline-info" style="border-radius:8px;font-size:12px;font-weight:600;" title="Create Quotation"><i class="bi bi-file-earmark-text me-1"></i>Create Quote</a>
-
-                            <a href="deals.php" class="btn btn-sm ap-green-btn" title="Qualify Lead to Deal Pipeline"><i class="bi bi-kanban me-1"></i>Qualify to Deal</a>
-                            <button type="button" class="btn btn-sm ap-gray-btn" id="ldEditLeadBtn" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded-8-fs12"><i class="bi bi-printer"></i></button> -->
+                        <div class="ld-contact-actions d-flex align-items-center gap-2 flex-wrap">
+                            <button type="button" class="btn btn-sm btn-outline-success fw-semibold" id="ldWhatsAppBtn" style="border-radius:8px;font-size:12px;" title="WhatsApp Quick Message"><i class="bi bi-whatsapp me-1"></i>WhatsApp</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary fw-semibold" id="ldBookMeetingBtn" style="border-radius:8px;font-size:12px;" title="Book Meeting / Demo"><i class="bi bi-calendar2-event me-1"></i>Book Meeting</button>
+                            <button type="button" class="btn btn-sm btn-outline-info fw-semibold" id="ldCreateQuoteBtn" style="border-radius:8px;font-size:12px;" title="Create Quotation"><i class="bi bi-file-earmark-text me-1"></i>Create Quote</button>
+                            <button type="button" class="btn btn-sm ap-green-btn fw-semibold" id="ldQualifyDealBtn" style="border-radius:8px;font-size:12px;" title="Qualify to Deal Pipeline"><i class="bi bi-kanban me-1"></i>Qualify to Deal</button>
+                            <button type="button" class="btn btn-sm ap-gray-btn" id="ldEditLeadBtn" title="Edit Lead"><i class="bi bi-pencil-square"></i></button>
                             <div class="dropdown">
                                 <button type="button" class="btn btn-sm ap-gray-btn" data-bs-toggle="dropdown" aria-expanded="false">More <i class="bi bi-chevron-down fs-10"></i></button>
-                                <ul class="dropdown-menu dropdown-menu-end ld-more-menu">
-                                    <li>
-                                        <a class="dropdown-item ld-more-item" href="#"><i class="bi bi-arrow-counterclockwise me-2"></i>Mark as lost</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item ld-more-item" href="#"><i class="bi bi-x-lg me-2"></i>Mark as junk</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item ld-more-item ld-more-danger" href="#"><i class="bi bi-x-lg me-2"></i>Delete Lead</a>
-                                    </li>
+                                <ul class="dropdown-menu dropdown-menu-end ld-more-menu shadow-sm border">
+                                    <li><a class="dropdown-item ld-more-item" href="#" id="ldActionMarkLost"><i class="bi bi-arrow-counterclockwise me-2 text-warning"></i>Mark as lost</a></li>
+                                    <li><a class="dropdown-item ld-more-item" href="#" id="ldActionMarkJunk"><i class="bi bi-trash3 me-2 text-secondary"></i>Mark as junk</a></li>
+                                    <li><a class="dropdown-item ld-more-item ld-more-danger text-danger" href="#" id="ldActionDelete"><i class="bi bi-x-circle me-2"></i>Delete Lead</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -2035,6 +2027,178 @@
     </div>
 </div>
 
+
+<!-- ===== Book Meeting Modal (In-place) ===== -->
+<div class="modal fade" id="ldBookMeetingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary" style="width:36px;height:36px;">
+                        <i class="bi bi-calendar2-event"></i>
+                    </span>
+                    <h5 class="modal-title fw-bold m-0 fs-5 text-dark">Book Meeting / Demo</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="mb-3">
+                    <label for="bmSubject" class="form-label fw-semibold text-dark small mb-1">Meeting Title / Subject <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="bmSubject" value="Product Demo & Quotation Discussion">
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label for="bmDate" class="form-label fw-semibold text-dark small mb-1">Date <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control rounded-2" id="bmDate">
+                    </div>
+                    <div class="col-6">
+                        <label for="bmTime" class="form-label fw-semibold text-dark small mb-1">Time <span class="text-danger">*</span></label>
+                        <input type="time" class="form-control rounded-2" id="bmTime" value="11:00">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="bmType" class="form-label fw-semibold text-dark small mb-1">Meeting Type</label>
+                    <select class="form-select rounded-2" id="bmType">
+                        <option selected>Online Demo - Customer</option>
+                        <option>Direct Visit - Lead Office</option>
+                        <option>Customer Visit - GHARUDA</option>
+                        <option>Phone / Consultation Call</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="bmAttendees" class="form-label fw-semibold text-dark small mb-1">Attendees / Staff</label>
+                    <input type="text" class="form-control rounded-2" id="bmAttendees" value="GHRAUDA SOFTWARE, Client Team">
+                </div>
+                <div class="mb-3">
+                    <label for="bmDescription" class="form-label fw-semibold text-dark small mb-1">Description / Notes</label>
+                    <textarea class="form-control rounded-2" id="bmDescription" rows="2" placeholder="Agenda or topics to discuss..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="bmGoToTabBtn"><i class="bi bi-calendar2-check me-1"></i>View All Appointments</button>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary px-3 fw-semibold" id="bmSaveBtn"><i class="bi bi-check-lg me-1"></i>Schedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== WhatsApp Chat Modal (In-place) ===== -->
+<div class="modal fade" id="ldWhatsAppModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success" style="width:36px;height:36px;">
+                        <i class="bi bi-whatsapp"></i>
+                    </span>
+                    <h5 class="modal-title fw-bold m-0 fs-5 text-dark">WhatsApp Quick Message</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-dark small mb-1">Recipient Phone</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted"><i class="bi bi-telephone"></i></span>
+                        <input type="text" class="form-control" id="ldWaPhone" value="+91 98844 56789" placeholder="+91...">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-dark small mb-1">Quick Template</label>
+                    <select class="form-select rounded-2" id="ldWaTemplate">
+                        <option value="custom">Custom Message...</option>
+                        <option value="followup" selected>Follow-up: Checking in regarding your enquiry</option>
+                        <option value="quote">Quotation: Your quotation is ready for review</option>
+                        <option value="meeting">Appointment: Confirming our scheduled meeting</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="ldWaMessage" class="form-label fw-semibold text-dark small mb-1">Message Text</label>
+                    <textarea class="form-control rounded-2" id="ldWaMessage" rows="4" placeholder="Type WhatsApp message here...">Hello, following up on your recent enquiry with GHARUDA. Please let us know if you have any questions.</textarea>
+                </div>
+            </div>
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="ldWaLogBtn" title="Log to Activity without opening WhatsApp"><i class="bi bi-journal-plus me-1"></i>Log to Activity</button>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success px-3 fw-semibold d-inline-flex align-items-center gap-1" id="ldWaSendBtn"><i class="bi bi-whatsapp"></i><span>Open WhatsApp</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Qualify Lead to Deal Modal (In-place) ===== -->
+<div class="modal fade" id="ldQualifyDealModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success" style="width:36px;height:36px;">
+                        <i class="bi bi-kanban"></i>
+                    </span>
+                    <h5 class="modal-title fw-bold m-0 fs-5 text-dark">Qualify Lead to Deal</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="alert alert-success d-flex align-items-center gap-2 py-2 px-3 small mb-3 border-0 rounded-2">
+                    <i class="bi bi-check-circle-fill fs-5"></i>
+                    <div>This lead has met qualification criteria and will enter the sales pipeline.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="qdDealName" class="form-label fw-semibold text-dark small mb-1">Deal Title <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="qdDealName" value="Meena Ramesh - Sri Lakshmi Traders Deal">
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label for="qdPipeline" class="form-label fw-semibold text-dark small mb-1">Pipeline</label>
+                        <select class="form-select rounded-2" id="qdPipeline">
+                            <option selected>Standard Sales Pipeline</option>
+                            <option>Enterprise ERP Pipeline</option>
+                            <option>Hardware Installation</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="qdStage" class="form-label fw-semibold text-dark small mb-1">Initial Stage</label>
+                        <select class="form-select rounded-2" id="qdStage">
+                            <option value="10">1. Discovery / Requirement (10%)</option>
+                            <option value="35">2. Demo / Presentation (35%)</option>
+                            <option value="65" selected>3. Proposal / Negotiation (65%)</option>
+                            <option value="85">4. Final Quotation Sent (85%)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label for="qdValue" class="form-label fw-semibold text-dark small mb-1">Expected Deal Value (₹)</label>
+                        <input type="text" class="form-control rounded-2" id="qdValue" value="141,629.00">
+                    </div>
+                    <div class="col-6">
+                        <label for="qdCloseDate" class="form-label fw-semibold text-dark small mb-1">Expected Close Date</label>
+                        <input type="date" class="form-control rounded-2" id="qdCloseDate">
+                    </div>
+                </div>
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="qdUpdateLeadStatus" checked>
+                    <label class="form-check-label small text-dark" for="qdUpdateLeadStatus">
+                        Update lead status to <strong>Qualified</strong> and log activity
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-between">
+                <a href="deals.php" target="_blank" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-up-right me-1"></i>Open Pipeline in Tab</a>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success px-4 fw-semibold" id="qdSaveBtn"><i class="bi bi-check-lg me-1"></i>Qualify &amp; Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- ===== Sync Data Modal ===== -->
 <div class="modal fade" id="syncDataModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
