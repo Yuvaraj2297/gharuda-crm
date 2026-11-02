@@ -885,81 +885,52 @@
                 </button>
 
                 <!-- 02. Leads & Sales -->
-                <button data-rail-flag="isLeadActive" type="button" class="rail-btn" data-panel-target="CRM" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="02. Leads &amp; Sales" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isLeadActive" type="button" class="rail-btn" data-panel-target="CRM" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="02. Leads, Customers &amp; Sales" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-kanban"></i>
                     <span class="rail-label">CRM</span>
                 </button>
 
-                <!-- 03. Customers & Contacts -->
-                <button data-rail-flag="isCustomersActive" type="button" class="rail-btn" data-panel-target="Customers" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="03. Customers &amp; Contacts" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-person-vcard"></i>
-                    <span class="rail-label">CUS</span>
-                </button>
-
                 <!-- 04. Meetings & Activities -->
-                <button data-rail-flag="isApptMomActive" type="button" class="rail-btn" data-panel-target="Appointments" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="04. Meetings &amp; Activities" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isApptMomActive" type="button" class="rail-btn" data-panel-target="Appointments" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="03. Meetings &amp; Activities" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-calendar2-week"></i>
                     <span class="rail-label">MOM</span>
                 </button>
 
                 <!-- 05. Projects & Tasks -->
-                <button data-rail-flag="isProjectMgmtActive" type="button" class="rail-btn" data-panel-target="Project Management" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="05. Projects &amp; Tasks" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isProjectMgmtActive" type="button" class="rail-btn" data-panel-target="Project Management" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="04. Projects &amp; Tasks" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-briefcase-fill"></i>
                     <span class="rail-label">PRJ</span>
                 </button>
 
-                <!-- 06. Inventory & Procurement -->
-                <button data-rail-flag="isInventoryActive" type="button" class="rail-btn" data-panel-target="Inventory" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="06. Inventory &amp; Procurement" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-boxes"></i>
-                    <span class="rail-label">INV</span>
-                </button>
-
                 <!-- 07. Billing & Finance -->
-                <button data-rail-flag="isExpenseActive" type="button" class="rail-btn" data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="07. Billing &amp; Finance" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isExpenseActive" type="button" class="rail-btn" data-panel-target="Expenses" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="05. Inventory &amp; Finance" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-receipt"></i>
                     <span class="rail-label">FIN</span>
                 </button>
 
                 <!-- 08. Support & Helpdesk -->
-                <button data-rail-flag="isSupportActive" type="button" class="rail-btn" data-panel-target="Support" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="08. Support &amp; Helpdesk" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isSupportActive" type="button" class="rail-btn" data-panel-target="Support" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="06. Support &amp; Communication" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-headset"></i>
                     <span class="rail-label">SUP</span>
                 </button>
 
-                <!-- 09. Sales Targets -->
-                <button data-rail-flag="isTargetActive" type="button" class="rail-btn" data-panel-target="Target" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="09. Sales Targets" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-bullseye"></i>
-                    <span class="rail-label">TGT</span>
-                </button>
-
                 <!-- 10. Staff & Field Force -->
-                <button data-rail-flag="isStaffActive" type="button" class="rail-btn" data-panel-target="Staff" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="10. Staff &amp; Field Force" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isStaffActive" type="button" class="rail-btn" data-panel-target="Staff" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="07. Staff &amp; Field Force" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-people-fill"></i>
                     <span class="rail-label">STF</span>
                 </button>
 
-                <!-- 11. Communications -->
-                <button data-rail-flag="isCommActive" type="button" class="rail-btn" data-panel-target="Communications" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="11. Communications" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-chat-dots"></i>
-                    <span class="rail-label">COM</span>
-                </button>
-
                 <!-- 12. Reports & Analytics -->
-                <button data-rail-flag="isLeadReportActive" type="button" class="rail-btn" data-panel-target="Reports" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="12. Reports &amp; Analytics" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isLeadReportActive" type="button" class="rail-btn" data-panel-target="Reports" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="08. Reports &amp; Analytics" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-graph-up-arrow"></i>
                     <span class="rail-label">RPT</span>
                 </button>
 
-                <!-- 13. Master Data -->
-                <button data-rail-flag="isMasterActive" type="button" class="rail-btn" data-panel-target="Master" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="13. Master Data" data-bs-custom-class="custom-tooltip">
-                    <i class="bi bi-database"></i>
-                    <span class="rail-label">MST</span>
-                </button>
             </div>
 
             <!-- 14. Administration & Settings -->
             <div class="icon-rail-bottom">
-                <button data-rail-flag="isSettingsActive" type="button" class="rail-btn" data-panel-target="Settings" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="14. Administration &amp; Settings" data-bs-custom-class="custom-tooltip">
+                <button data-rail-flag="isSettingsActive" type="button" class="rail-btn" data-panel-target="Settings" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="09. Administration &amp; Masters" data-bs-custom-class="custom-tooltip">
                     <i class="bi bi-gear"></i>
                     <span class="rail-label">SET</span>
                 </button>
@@ -982,7 +953,7 @@
 
                     <!-- 02. Leads & Sales -->
                     <div class="panel-section" data-panel="CRM">
-                        <div class="nav-label">02. Leads &amp; Sales</div>
+                        <div class="nav-label">02. Leads, Customers &amp; Sales</div>
 
                         <!-- LEADS Group -->
                         <a data-toggle-flag="isLeadCoreActive" class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between"
@@ -1011,11 +982,7 @@
                             <a data-active-pages="sales-orders.php,sales-order-create.php" class="tree-link" href="sales-orders.php">Sales Orders</a>
                             <a data-active-pages="contracts.php" class="tree-link" href="contracts.php">Contracts &amp; SLAs</a>
                         </div>
-                    </div>
-
-                    <!-- 03. Customers & Contacts -->
-                    <div class="panel-section" data-panel="Customers">
-                        <div class="nav-label">03. Customers &amp; Contacts</div>
+                        <div class="nav-label">Customers &amp; Contacts</div>
                         <a data-active-pages="customer-dashboard.php" class="nav-link-custom" href="customer-dashboard.php">
                             <i class="bi bi-pie-chart me-2"></i> <span>Customer 360&deg;</span>
                         </a>
@@ -1025,11 +992,23 @@
                         <a data-active-pages="contacts.php" class="nav-link-custom" href="contacts.php">
                             <i class="bi bi-people me-2"></i> <span>Contacts</span>
                         </a>
+                        <div class="nav-label">Sales Targets</div>
+                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php">
+                            <i class="bi bi-bullseye me-2"></i> <span>Target Overview</span>
+                        </a>
+                        <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php">
+                            <i class="bi bi-tags me-2"></i> <span>Brand Targets</span>
+                        </a>
+                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
+                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
+                        </a>
                     </div>
+
+                    <!-- 03. Customers & Contacts -->
 
                     <!-- 04. Meetings & Activities -->
                     <div class="panel-section" data-panel="Appointments">
-                        <div class="nav-label">04. Meetings &amp; Activities</div>
+                        <div class="nav-label">03. Meetings &amp; Activities</div>
                         <a data-active-pages="appointments.php" class="nav-link-custom" href="appointments.php">
                             <i class="bi bi-calendar2-week me-2"></i> <span>Appointments</span>
                         </a>
@@ -1049,7 +1028,7 @@
 
                     <!-- 05. Projects & Tasks -->
                     <div class="panel-section" data-panel="Project Management">
-                        <div class="nav-label">05. Projects &amp; Tasks</div>
+                        <div class="nav-label">04. Projects &amp; Tasks</div>
                         <a data-active-pages="project-dashboard.php" class="nav-link-custom" href="project-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Project Dashboard</span>
                         </a>
@@ -1065,11 +1044,19 @@
                         <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
                             <i class="bi bi-award me-2"></i> <span>Score Card</span>
                         </a>
+                        <a data-active-pages="projects-report.php" class="nav-link-custom" href="projects-report.php">
+                            <i class="bi bi-briefcase me-2"></i> <span>Project Reports</span>
+                        </a>
+                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
+                            <i class="bi bi-calendar2-check me-2"></i> <span>Daily Task Report</span>
+                        </a>
                     </div>
 
                     <!-- 06. Inventory & Procurement -->
-                    <div class="panel-section" data-panel="Inventory">
-                        <div class="nav-label">06. Inventory &amp; Procurement</div>
+
+                    <!-- 07. Billing & Finance -->
+                    <div class="panel-section" data-panel="Expenses">
+                        <div class="nav-label">05. Inventory &amp; Procurement</div>
                         <a data-active-pages="inventory.php" class="nav-link-custom" href="inventory.php">
                             <i class="bi bi-boxes me-2"></i> <span>Inventory &amp; Stock</span>
                         </a>
@@ -1079,11 +1066,7 @@
                         <a data-active-pages="vendors.php" class="nav-link-custom" href="vendors.php">
                             <i class="bi bi-building-gear me-2"></i> <span>Vendors &amp; Suppliers</span>
                         </a>
-                    </div>
-
-                    <!-- 07. Billing & Finance -->
-                    <div class="panel-section" data-panel="Expenses">
-                        <div class="nav-label">07. Billing &amp; Finance</div>
+                        <div class="nav-label">Billing &amp; Finance</div>
                         <a data-active-pages="invoices.php,invoice-create.php" class="nav-link-custom" href="invoices.php">
                             <i class="bi bi-file-earmark-ruled me-2"></i> <span>Invoices</span>
                         </a>
@@ -1096,47 +1079,21 @@
                         <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
                             <i class="bi bi-safe me-2"></i> <span>Petty Cash</span>
                         </a>
+                        <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
+                            <i class="bi bi-safe me-2"></i> <span>Petty Cash Report</span>
+                        </a>
                     </div>
 
                     <!-- 08. Support & Helpdesk -->
                     <div class="panel-section" data-panel="Support">
-                        <div class="nav-label">08. Support &amp; Helpdesk</div>
+                        <div class="nav-label">06. Support &amp; Communication</div>
                         <a data-active-pages="ticket-dashboard.php" class="nav-link-custom" href="ticket-dashboard.php">
                             <i class="bi bi-speedometer2 me-2"></i> <span>Support Dashboard</span>
                         </a>
                         <a data-active-pages="support-tickets.php,support-create-ticket.php" class="nav-link-custom" href="support-tickets.php">
                             <i class="bi bi-headset me-2"></i> <span>Support Tickets</span>
                         </a>
-                    </div>
-
-                    <!-- 09. Sales Targets -->
-                    <div class="panel-section" data-panel="Target">
-                        <div class="nav-label">09. Sales Targets</div>
-                        <a data-active-pages="target.php" class="nav-link-custom" href="target.php">
-                            <i class="bi bi-bullseye me-2"></i> <span>Target Overview</span>
-                        </a>
-                        <a data-active-pages="brand-target.php" class="nav-link-custom" href="brand-target.php">
-                            <i class="bi bi-tags me-2"></i> <span>Brand Targets</span>
-                        </a>
-                        <a data-active-pages="sales-target-slabs.php" class="nav-link-custom" href="sales-target-slabs.php">
-                            <i class="bi bi-bar-chart-steps me-2"></i> <span>Sales Target Slabs</span>
-                        </a>
-                    </div>
-
-                    <!-- 10. Staff & Field Force -->
-                    <div class="panel-section" data-panel="Staff">
-                        <div class="nav-label">10. Staff &amp; Field Force</div>
-                        <a data-active-pages="staff.php,staff-create.php" class="nav-link-custom" href="staff.php">
-                            <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
-                        </a>
-                        <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Staff Location Map</span>
-                        </a>
-                    </div>
-
-                    <!-- 11. Communications -->
-                    <div class="panel-section" data-panel="Communications">
-                        <div class="nav-label">11. Communications</div>
+                        <div class="nav-label">Communications</div>
                         <a data-active-pages="whatsapp-chat.php" class="nav-link-custom" href="whatsapp-chat.php">
                             <i class="bi bi-whatsapp me-2"></i> <span>WhatsApp Chat</span>
                         </a>
@@ -1146,11 +1103,32 @@
                         <a data-active-pages="sms-chat.php" class="nav-link-custom" href="sms-chat.php">
                             <i class="bi bi-chat-left-text me-2"></i> <span>SMS Center</span>
                         </a>
+                        <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
+                            <i class="bi bi-headset me-2"></i> <span>Support SLA Reports</span>
+                        </a>
                     </div>
+
+                    <!-- 09. Sales Targets -->
+
+                    <!-- 10. Staff & Field Force -->
+                    <div class="panel-section" data-panel="Staff">
+                        <div class="nav-label">07. Staff &amp; Field Force</div>
+                        <a data-active-pages="staff.php,staff-create.php" class="nav-link-custom" href="staff.php">
+                            <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
+                        </a>
+                        <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
+                            <i class="bi bi-pin-map me-2"></i> <span>Staff Location Map</span>
+                        </a>
+                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Staff Visiting Reports</span>
+                        </a>
+                    </div>
+
+                    <!-- 11. Communications -->
 
                     <!-- 12. Reports & Analytics -->
                     <div class="panel-section" data-panel="Reports">
-                        <div class="nav-label">12. Reports &amp; Analytics</div>
+                        <div class="nav-label">08. Reports &amp; Analytics</div>
                         <a data-active-pages="employee-revenue-report.php" class="nav-link-custom" href="employee-revenue-report.php">
                             <i class="bi bi-currency-rupee me-2"></i> <span>Revenue Report</span>
                         </a>
@@ -1163,29 +1141,44 @@
                         <a data-active-pages="brandwise-report.php" class="nav-link-custom" href="brandwise-report.php">
                             <i class="bi bi-tags me-2"></i> <span>Brandwise Sales Report</span>
                         </a>
-                        <a data-active-pages="projects-report.php" class="nav-link-custom" href="projects-report.php">
-                            <i class="bi bi-briefcase me-2"></i> <span>Project Reports</span>
-                        </a>
-                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
-                            <i class="bi bi-calendar2-check me-2"></i> <span>Daily Task Report</span>
-                        </a>
                         <a data-active-pages="summary-report.php" class="nav-link-custom" href="summary-report.php">
                             <i class="bi bi-journal-check me-2"></i> <span>Meeting Summary Report</span>
-                        </a>
-                        <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
-                            <i class="bi bi-safe me-2"></i> <span>Petty Cash Report</span>
-                        </a>
-                        <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
-                            <i class="bi bi-headset me-2"></i> <span>Support SLA Reports</span>
-                        </a>
-                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Staff Visiting Reports</span>
                         </a>
                     </div>
 
                     <!-- 13. Master Data -->
-                    <div class="panel-section" data-panel="Master">
-                        <div class="nav-label">13. Master Data</div>
+
+                    <!-- 14. Administration & Settings -->
+                    <div class="panel-section" data-panel="Settings">
+                        <div class="nav-label">09. Administration &amp; Masters</div>
+
+                        <a data-active-pages="settings.php" class="nav-link-custom" href="settings.php">
+                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
+                        </a>
+                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
+                        </a>
+                        <a data-active-pages="role.php" class="nav-link-custom" href="role.php">
+                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access</span>
+                        </a>
+                        <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
+                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
+                        </a>
+                        <a data-active-pages="sla-policies.php" class="nav-link-custom" href="sla-policies.php">
+                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies</span>
+                        </a>
+
+                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
+                            data-bs-toggle="collapse" href="#settingsGeoSubmenu" role="button" aria-expanded="false">
+                            <span><i class="bi bi-globe-americas me-2"></i> <span>Locations</span></span>
+                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
+                        </a>
+                        <div class="collapse tree-submenu" id="settingsGeoSubmenu">
+                            <a data-active-pages="country.php" class="tree-link" href="country.php">Countries</a>
+                            <a data-active-pages="state.php" class="tree-link" href="state.php">States</a>
+                            <a data-active-pages="district.php" class="tree-link" href="district.php">Districts</a>
+                        </div>
+                        <div class="nav-label">Master Data</div>
 
                         <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
                             data-bs-toggle="collapse" href="#masterLeadSubmenu" role="button" aria-expanded="false">
@@ -1232,38 +1225,6 @@
                             <a data-active-pages="project-types-master.php" class="tree-link" href="project-types-master.php">Project Types</a>
                             <a data-active-pages="milestone-templates.php" class="tree-link" href="milestone-templates.php">Milestone Templates</a>
                             <a data-active-pages="ticket-categories.php" class="tree-link" href="ticket-categories.php">Ticket Categories</a>
-                        </div>
-                    </div>
-
-                    <!-- 14. Administration & Settings -->
-                    <div class="panel-section" data-panel="Settings">
-                        <div class="nav-label">14. Administration &amp; Settings</div>
-
-                        <a data-active-pages="settings.php" class="nav-link-custom" href="settings.php">
-                            <i class="bi bi-grid-fill me-2"></i> <span>Settings Overview</span>
-                        </a>
-                        <a data-active-pages="branch.php" class="nav-link-custom" href="branch.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Branch Setup</span>
-                        </a>
-                        <a data-active-pages="role.php" class="nav-link-custom" href="role.php">
-                            <i class="bi bi-shield-lock me-2"></i> <span>Roles &amp; Access</span>
-                        </a>
-                        <a data-active-pages="currency-master.php" class="nav-link-custom" href="currency-master.php">
-                            <i class="bi bi-currency-exchange me-2"></i> <span>Currency Setup</span>
-                        </a>
-                        <a data-active-pages="sla-policies.php" class="nav-link-custom" href="sla-policies.php">
-                            <i class="bi bi-shield-check me-2"></i> <span>SLA Policies</span>
-                        </a>
-
-                        <a class="nav-link-custom org-toggle-btn d-flex align-items-center justify-content-between collapsed"
-                            data-bs-toggle="collapse" href="#settingsGeoSubmenu" role="button" aria-expanded="false">
-                            <span><i class="bi bi-globe-americas me-2"></i> <span>Locations</span></span>
-                            <i class="bi bi-chevron-down toggle-icon ms-auto"></i>
-                        </a>
-                        <div class="collapse tree-submenu" id="settingsGeoSubmenu">
-                            <a data-active-pages="country.php" class="tree-link" href="country.php">Countries</a>
-                            <a data-active-pages="state.php" class="tree-link" href="state.php">States</a>
-                            <a data-active-pages="district.php" class="tree-link" href="district.php">Districts</a>
                         </div>
                     </div>
                 </div>
