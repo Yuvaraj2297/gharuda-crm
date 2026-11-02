@@ -1336,7 +1336,7 @@ document.addEventListener('DOMContentLoaded', function() {
        (1075/1085/1090) open panna backdrop parent modal ku keezha pogum.
        shown event la last backdrop ah modal z-index - 1 ku bump panrom. */
         (function() {
-            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
+            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'ldStageModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
             stackedModals.forEach(function(id) {
                 var el = document.getElementById(id);
                 if (!el) return;
@@ -4100,44 +4100,129 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            // 5. Interactive Pipeline Steps
+            // 5. Purpose-Driven Stage Management (Replaces arbitrary clicking)
+            var stageModalEl = document.getElementById('ldStageModal');
+            var stageSelect = document.getElementById('ldSmStageSelect');
+            var wonBox = document.getElementById('ldSmWonBox');
+            var lostBox = document.getElementById('ldSmLostBox');
+            var updateStageBtn = document.getElementById('ldUpdateStageBtn');
+            var stageSaveBtn = document.getElementById('ldSmSaveBtn');
+
+            function openStageModal(selectedStage) {
+                if (stageSelect && selectedStage) {
+                    stageSelect.value = selectedStage;
+                }
+                syncStageBoxes();
+                showModal('ldStageModal');
+            }
+
+            function syncStageBoxes() {
+                if (!stageSelect) return;
+                var val = stageSelect.value;
+                if (wonBox) wonBox.classList.toggle('d-none', val !== 'won');
+                if (lostBox) lostBox.classList.toggle('d-none', val !== 'lost');
+            }
+
+            if (stageSelect) {
+                stageSelect.addEventListener('change', syncStageBoxes);
+            }
+
+            if (updateStageBtn) {
+                updateStageBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openStageModal();
+                });
+            }
+
+            // Clicking any step on the pipeline bar opens stage manager for that milestone
             var pipeBar = document.getElementById('ldPipelineBar');
             if (pipeBar) {
                 pipeBar.addEventListener('click', function(e) {
                     var step = e.target.closest('.ld-pipe-step');
                     if (!step) return;
-                    var stage = step.getAttribute('data-stage');
-                    var pct = parseInt(step.getAttribute('data-pct') || '50', 10);
-                    var steps = Array.from(pipeBar.querySelectorAll('.ld-pipe-step'));
-                    var idx = steps.indexOf(step);
+                    e.preventDefault();
+                    var st = step.getAttribute('data-stage') || 'negotiation';
+                    openStageModal(st);
+                });
+            }
 
-                    steps.forEach(function(s, i) {
-                        s.classList.remove('done', 'current', 'pending');
-                        if (i < idx) {
-                            s.classList.add('done');
-                        } else if (i === idx) {
-                            s.classList.add('current');
+            if (stageSaveBtn) {
+                stageSaveBtn.addEventListener('click', function() {
+                    var val = stageSelect ? stageSelect.value : 'negotiation';
+                    var opt = stageSelect ? stageSelect.options[stageSelect.selectedIndex] : null;
+                    var pct = opt ? parseInt(opt.getAttribute('data-pct') || '65', 10) : 65;
+                    var notes = document.getElementById('ldSmNotes') ? document.getElementById('ldSmNotes').value.trim() : '';
+
+                    // Validate Closed Lost
+                    if (val === 'lost') {
+                        var reason = document.getElementById('ldSmLostReason') ? document.getElementById('ldSmLostReason').value : '';
+                        if (!reason) {
+                            alert('Please select a reason for Closed Lost.');
+                            return;
+                        }
+                        notes = 'Closed Lost: ' + reason + (notes ? ' - ' + notes : '');
+                    }
+
+                    // Validate Closed Won
+                    if (val === 'won') {
+                        var wonQuote = document.getElementById('ldSmWonQuote') ? document.getElementById('ldSmWonQuote').value.trim() : '';
+                        var wonVal = document.getElementById('ldSmWonValue') ? document.getElementById('ldSmWonValue').value.trim() : '';
+                        notes = 'Closed Won: Accepted quote #' + wonQuote + ' (Val: ₹' + wonVal + ')' + (notes ? ' - ' + notes : '');
+                    }
+
+                    // Update Pipeline Steps visually
+                    var stepOrder = ['qualified', 'quote', 'negotiation', 'won'];
+                    var curIdx = stepOrder.indexOf(val);
+                    if (curIdx === -1 && val === 'lost') curIdx = -1;
+
+                    var stepsMap = {
+                        'qualified': document.getElementById('stepQualified'),
+                        'quote': document.getElementById('stepQuote'),
+                        'negotiation': document.getElementById('stepNegotiation'),
+                        'won': document.getElementById('stepClosure')
+                    };
+
+                    stepOrder.forEach(function(sName, i) {
+                        var el = stepsMap[sName];
+                        if (!el) return;
+                        el.className = 'ld-pipe-step cursor-pointer';
+                        if (val === 'lost') {
+                            el.classList.add('pending');
+                            el.innerHTML = '<i class="bi bi-circle"></i> ' + el.textContent.trim();
+                        } else if (i < curIdx) {
+                            el.classList.add('done');
+                            el.innerHTML = '<i class="bi bi-check-circle-fill"></i> ' + sName.charAt(0).toUpperCase() + sName.slice(1);
+                        } else if (i === curIdx) {
+                            el.classList.add('current');
+                            el.innerHTML = '<i class="bi bi-arrow-right-circle-fill"></i> ' + sName.charAt(0).toUpperCase() + sName.slice(1);
                         } else {
-                            s.classList.add('pending');
+                            el.classList.add('pending');
+                            el.innerHTML = '<i class="bi bi-circle"></i> ' + sName.charAt(0).toUpperCase() + sName.slice(1);
                         }
                     });
 
+                    // Update progress ring
                     var ring = document.getElementById('ldStageRing');
                     var ringPct = document.getElementById('ldStagePct');
                     if (ring) {
                         ring.style.setProperty('--pct', pct);
-                        if (pct === 100) {
-                            ring.style.setProperty('--ring-color', '#10b981');
-                        } else if (pct >= 60) {
-                            ring.style.setProperty('--ring-color', '#2563eb');
-                        } else {
-                            ring.style.setProperty('--ring-color', '#f59e0b');
-                        }
+                        if (pct === 100) ring.style.setProperty('--ring-color', '#10b981');
+                        else if (pct >= 60) ring.style.setProperty('--ring-color', '#2563eb');
+                        else if (pct === 0) ring.style.setProperty('--ring-color', '#ef4444');
+                        else ring.style.setProperty('--ring-color', '#f59e0b');
                     }
                     if (ringPct) ringPct.textContent = pct + '%';
 
-                    var stageName = step.textContent.trim();
-                    logLeadActivity('Updated pipeline stage to "' + stageName + '" (' + pct + '%)');
+                    // Update General Information status
+                    var stBadge = document.getElementById('ldInfoStatus');
+                    if (stBadge) {
+                        var labelText = val === 'won' ? 'Customer (Won)' : (val === 'lost' ? 'Lost' : opt.text.split(' - ')[0]);
+                        stBadge.textContent = labelText;
+                    }
+
+                    logLeadActivity('Lifecycle stage updated to ' + (opt ? opt.text : val) + '. ' + notes);
+                    hideModal('ldStageModal');
+                    alert('Stage updated successfully!');
                 });
             }
         })();

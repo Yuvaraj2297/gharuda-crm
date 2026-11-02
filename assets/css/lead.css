@@ -684,3 +684,42 @@
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
+
+/* Progress Ring Visual Styling */
+.stage-ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: conic-gradient(var(--ring-color, #2563eb) calc(var(--pct, 0) * 1%), #e2e8f0 0);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+.stage-ring::before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #ffffff;
+    position: absolute;
+}
+.stage-ring span {
+    position: relative;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1e293b;
+    z-index: 1;
+}
+#ldStageModal {
+    z-index: 1075 !important;
+}
+#ldStageModal .modal-dialog {
+    max-width: 560px;
+    margin: 1.75rem auto;
+}
+#ldStageModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25) !important;
+}

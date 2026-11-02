@@ -1301,13 +1301,20 @@
 
                 <!-- ===== Profile Tab Panel ===== -->
                 <div class="ld-tab-panel active" id="ldPanelProfile">
-                    <div class="ld-pipeline card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center gap-2 flex-wrap" id="ldPipelineBar">
-                        <span class="ld-pipe-step done cursor-pointer" data-stage="qualified" data-pct="25" title="Click to set Qualified"><i class="bi bi-check-circle-fill"></i> Qualified</span>
-                        <span class="ld-pipe-step done cursor-pointer" data-stage="quote" data-pct="50" title="Click to set Quote"><i class="bi bi-check-circle-fill"></i> Quote</span>
-                        <span class="ld-pipe-step current cursor-pointer" data-stage="negotiation" data-pct="65" title="Click to set Negotiation"><i class="bi bi-dot"></i> Negotiation</span>
-                        <span class="ld-pipe-step pending cursor-pointer" data-stage="won" data-pct="100" title="Click to set Closed Won"><i class="bi bi-trophy"></i> Closed Won</span>
-                        <div class="ld-pipe-ring ms-auto">
-                            <div class="stage-ring stage-ring-lead" id="ldStageRing" style="--pct:65;--ring-color:#2563eb;"><span id="ldStagePct">65%</span></div>
+                    <div class="ld-pipeline card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2" id="ldPipelineBar">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="ld-pipe-step done cursor-pointer" id="stepQualified" data-stage="qualified" data-pct="25" title="Stage 1: Lead Qualified (Click to manage)"><i class="bi bi-check-circle-fill"></i> Qualified</span>
+                            <span class="ld-pipe-step done cursor-pointer" id="stepQuote" data-stage="quote" data-pct="50" title="Stage 2: Quotation Sent (Click to manage)"><i class="bi bi-check-circle-fill"></i> Quote</span>
+                            <span class="ld-pipe-step current cursor-pointer" id="stepNegotiation" data-stage="negotiation" data-pct="65" title="Stage 3: Commercial Negotiation (Click to manage)"><i class="bi bi-arrow-right-circle-fill"></i> Negotiation</span>
+                            <span class="ld-pipe-step pending cursor-pointer" id="stepClosure" data-stage="won" data-pct="100" title="Stage 4: Deal Closure (Click to manage)"><i class="bi bi-circle"></i> Closed Won</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 ms-auto">
+                            <button type="button" class="btn btn-sm btn-outline-primary fw-semibold px-2.5 py-1" id="ldUpdateStageBtn" title="Update Lifecycle Stage with Business Rules">
+                                <i class="bi bi-sliders me-1"></i>Change Stage
+                            </button>
+                            <div class="ld-pipe-ring d-flex align-items-center">
+                                <div class="stage-ring stage-ring-lead" id="ldStageRing" style="--pct:65;--ring-color:#2563eb;"><span id="ldStagePct">65%</span></div>
+                            </div>
                         </div>
                     </div>
                 <div class="ld-contact-bar card border shadow-sm p-3 mb-3 bg-white d-flex flex-row align-items-center justify-content-between flex-wrap gap-2">
@@ -2126,6 +2133,74 @@
                     <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success px-3 fw-semibold d-inline-flex align-items-center gap-1" id="ldWaSendBtn"><i class="bi bi-whatsapp"></i><span>Open WhatsApp</span></button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Update Lifecycle Stage Modal (Business Rules & Purpose) ===== -->
+<div class="modal fade" id="ldStageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
+            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary" style="width:36px;height:36px;">
+                        <i class="bi bi-bezier2"></i>
+                    </span>
+                    <h5 class="modal-title fw-bold m-0 fs-5 text-dark">Lead Lifecycle Stage</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="mb-3">
+                    <label for="ldSmStageSelect" class="form-label fw-semibold text-dark small mb-1">Select Stage to Advance</label>
+                    <select class="form-select rounded-2" id="ldSmStageSelect">
+                        <option value="qualified" data-pct="25">1. Qualified (25%) - Verified requirements &amp; budget</option>
+                        <option value="quote" data-pct="50">2. Quote (50%) - Quotation drafted or sent to customer</option>
+                        <option value="negotiation" data-pct="65" selected>3. Negotiation (65%) - Discussion on commercial terms &amp; demos</option>
+                        <option value="won" data-pct="100">4. Closed Won (100%) - Final acceptance &amp; deal agreement</option>
+                        <option value="lost" data-pct="0">5. Closed Lost (0%) - Deal discontinued</option>
+                    </select>
+                </div>
+
+                <!-- Closed Won Verification Box -->
+                <div id="ldSmWonBox" class="p-3 bg-white border rounded-2 mb-3 d-none">
+                    <div class="fw-semibold text-success small mb-1"><i class="bi bi-shield-check me-1"></i>Closed Won Verification Gate</div>
+                    <div class="small text-muted mb-2">Requires authorized user sign-off and accepted quotation.</div>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted mb-1">Accepted Quotation / Order #</label>
+                        <input type="text" class="form-control form-control-sm" id="ldSmWonQuote" value="PRQ-147" placeholder="e.g. PRQ-147">
+                    </div>
+                    <div>
+                        <label class="form-label small text-muted mb-1">Final Agreed Value (₹)</label>
+                        <input type="text" class="form-control form-control-sm" id="ldSmWonValue" value="141,629.00">
+                    </div>
+                </div>
+
+                <!-- Closed Lost Reason Box -->
+                <div id="ldSmLostBox" class="p-3 bg-white border rounded-2 mb-3 d-none">
+                    <div class="fw-semibold text-danger small mb-1"><i class="bi bi-exclamation-triangle-fill me-1"></i>Closed Lost Reason Required</div>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted mb-1">Lost Reason <span class="text-danger">*</span></label>
+                        <select class="form-select form-select-sm" id="ldSmLostReason">
+                            <option value="">Select reason...</option>
+                            <option value="Pricing too high / budget constraints">Pricing too high / budget constraints</option>
+                            <option value="Competitor selected">Competitor selected</option>
+                            <option value="Project postponed / cancelled">Project postponed / cancelled</option>
+                            <option value="Product feature gap">Product feature gap</option>
+                            <option value="No response / ghosted">No response / ghosted</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ldSmNotes" class="form-label fw-semibold text-dark small mb-1">Milestone Notes / Activity Summary</label>
+                    <textarea class="form-control rounded-2" id="ldSmNotes" rows="2" placeholder="Describe the outcome or milestone details..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer bg-white border-top py-3 px-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary px-4 fw-semibold" id="ldSmSaveBtn"><i class="bi bi-check-lg me-1"></i>Update Stage</button>
             </div>
         </div>
     </div>
