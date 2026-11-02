@@ -252,10 +252,10 @@
             <div class="card border shadow-sm rounded-3 bg-light h-100">
                 <div class="card-header bg-white border-bottom p-3 d-flex align-items-center justify-content-between">
                     <div>
-                        <h6 class="fw-bold text-dark mb-0">5. Closed Won</h6>
+                        <h6 class="fw-bold text-success mb-0"><i class="bi bi-trophy me-1"></i>5. Closed Won</h6>
                         <span class="text-muted small">₹7,50,000 &middot; 1 deal</span>
                     </div>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle">100%</span>
+                    <span class="badge bg-success text-white border border-success">100%</span>
                 </div>
                 <div class="card-body p-2 d-flex flex-column gap-2 deal-col-body">
                     <div class="card border border-success shadow-sm p-3 rounded-3 bg-white" role="button">
@@ -268,6 +268,34 @@
                         <div class="d-flex align-items-center justify-content-between pt-2 border-top small text-muted">
                             <span><i class="bi bi-calendar3 me-1"></i>Won: Today</span>
                             <span class="badge rounded-circle bg-success text-white p-1 px-2">H</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 6: Closed Lost (0%) -->
+        <div class="col-12 col-md-6 col-xl">
+            <div class="card border shadow-sm rounded-3 bg-light h-100">
+                <div class="card-header bg-white border-bottom p-3 d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="fw-bold text-danger mb-0"><i class="bi bi-x-circle me-1"></i>6. Closed Lost</h6>
+                        <span class="text-muted small">₹4,20,000 &middot; 1 deal</span>
+                    </div>
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">0%</span>
+                </div>
+                <div class="card-body p-2 d-flex flex-column gap-2 deal-col-body">
+                    <div class="card border border-danger-subtle shadow-sm p-3 rounded-3 bg-white opacity-75" role="button">
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <span class="badge bg-danger text-white small"><i class="bi bi-x"></i> Lost</span>
+                            <span class="fw-bold text-muted text-decoration-line-through">₹4,20,000</span>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1">Legacy ERP Integration</h6>
+                        <span class="text-muted small d-block mb-1"><i class="bi bi-building me-1"></i>Kalyan Steels</span>
+                        <span class="badge bg-light text-danger border border-danger-subtle small mb-2"><i class="bi bi-info-circle me-1"></i>Budget Constraint</span>
+                        <div class="d-flex align-items-center justify-content-between pt-2 border-top small text-muted">
+                            <span><i class="bi bi-calendar3 me-1"></i>Lost: 28-Feb</span>
+                            <span class="badge rounded-circle bg-secondary text-white p-1 px-2">R</span>
                         </div>
                     </div>
                 </div>
@@ -319,6 +347,7 @@
                                 <option value="3">3. Proposal Sent</option>
                                 <option value="4">4. Negotiation</option>
                                 <option value="5">5. Closed Won</option>
+                                <option value="6">6. Closed Lost</option>
                             </select>
                         </div>
                         <div class="col-6">
@@ -391,6 +420,7 @@ document.addEventListener('DOMContentLoaded', function () {
             actBar.innerHTML =
                 '<a href="quotation-create.php?client=' + encClient + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Create Quotation"><i class="bi bi-file-earmark-text text-primary me-1"></i>Quote</a>' +
                 '<a href="sales-order-create.php?client=' + encClient + '&amount=' + val + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Create Sales Order (Inventory)"><i class="bi bi-bag-check text-success me-1"></i>SO</a>' +
+                '<a href="invoice-create.php?client=' + encClient + '&amount=' + val + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Direct Tax Invoice"><i class="bi bi-receipt text-success me-1"></i>Invoice</a>' +
                 '<a href="project-create.php?client=' + encClient + '&project=' + encTitle + '&amount=' + val + '" class="btn btn-sm btn-light border py-0 px-2 small" title="Launch Delivery Project"><i class="bi bi-briefcase text-dark me-1"></i>+ Project</a>';
             card.appendChild(actBar);
         }

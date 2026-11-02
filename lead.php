@@ -1428,7 +1428,7 @@
                         <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Qualified</span>
                         <span class="ld-pipe-step done"><i class="bi bi-check-circle-fill"></i> Quote</span>
                         <span class="ld-pipe-step current">Negotiation</span>
-                        <span class="ld-pipe-step pending">Closure</span>
+                        <span class="ld-pipe-step pending">Closed Won</span>
                         <div class="ld-pipe-ring">
                             <div class="stage-ring stage-ring-lead"><span>65%</span></div>
                         </div>
