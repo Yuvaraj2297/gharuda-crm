@@ -1,134 +1,118 @@
 <?php include 'header.php'; ?>
 
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
+<link rel="stylesheet" href="./assets/css/lead.css">
 
 <div class="container-fluid px-0">
 
-    <!-- Title row -->
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-        <div class="d-flex align-items-center gap-3">
-            <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
-                <i class="bi bi-calendar2-week"></i>
-            </div>
-            <div>
-                <h4 class="fw-bold text-dark mb-0">Appointments</h4>
-                <span class="text-muted small">Schedule, manage, and track customer meetings and internal sessions</span>
-            </div>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-            <a href="callbacks.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
-            <a href="past-meeting.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
-            <a href="mom.php" class="btn btn-sm btn-success fw-semibold"><i class="bi bi-journal-text me-1"></i>Minutes of Meeting (MOM)</a>
-            <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
-        </div>
-    </div>
-
-    <!-- Today hero -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-primary-subtle bg-opacity-25">
-        <div class="card-body p-3 p-md-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
-            <div class="d-flex align-items-center gap-3">
-                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:44px;height:44px;font-size:20px;">
-                    <i class="bi bi-bell"></i>
-                </div>
-                <div>
-                    <h5 class="fw-bold text-dark mb-1" id="apmTodayMsg">You have 2 appointments for today</h5>
-                    <span class="text-secondary small" id="apmTodaySub">Today · 1 upcoming · 2 pending approval</span>
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-3 flex-wrap">
-                <div class="bg-white rounded-3 p-2 px-3 shadow-sm border border-light" id="apmNextWrap" role="button" title="Next upcoming appointment">
-                    <span class="badge bg-secondary-subtle text-secondary me-2">Next up</span>
-                    <span class="fw-semibold text-dark me-2" id="apmNextTitle">Callback — Ravi Shankar</span>
-                    <span class="badge bg-light text-dark font-monospace border" id="apmNextDate">26-09-2026 10:30 AM</span>
-                </div>
-                <span class="badge bg-white text-dark border shadow-sm p-2 px-3 font-monospace" id="apmTodayChip">17-10-2026</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Action row & Filters -->
-    <div class="card border-0 shadow-sm rounded-3 mb-3 p-3">
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-            <!-- Create dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmNewDropBtn">
-                    <i class="bi bi-plus-lg me-1"></i>Create
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+            <h1 class="font-display fw-bold mb-0 page-title">Appointments</h1>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Appointment view" id="apmViewTabs">
+                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5 active" data-view="all" onclick="switchApmView('all')">
+                    <i class="bi bi-calendar2-week me-1"></i>All Appointments
                 </button>
-                <ul class="dropdown-menu shadow border-0" id="apmCreateMenu">
+                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" data-view="schedule" onclick="switchApmView('schedule')">
+                    <i class="bi bi-camera-video me-1"></i>Meeting Schedule
+                </button>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Filter Button triggering Offcanvas Drawer -->
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#appointmentFilterOffcanvas" aria-controls="appointmentFilterOffcanvas" title="Filter Appointments">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="apmFilterCountBadge">0</span>
+            </button>
+
+            <!-- Unified Primary Appointment Booking Action Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmMainCreateBtn">
+                    <i class="bi bi-plus-lg"></i><span>Book Appointment</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 table-action-menu" style="min-width: 270px;">
+                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Select Meeting Type</h6></li>
                     <li>
-                        <button type="button" class="dropdown-item py-2 d-flex align-items-center gap-2" data-create-type="contact">
-                            <i class="bi bi-person-lines-fill text-primary"></i>Contact, Lead, External
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmContactModal">
+                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-lines-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Client / Lead Meeting</div>
+                                <div class="text-muted font-11">Customer, prospect or external meeting</div>
+                            </div>
                         </button>
                     </li>
                     <li>
-                        <button type="button" class="dropdown-item py-2 d-flex align-items-center gap-2" data-create-type="staff">
-                            <i class="bi bi-people-fill text-success"></i>Staff Meeting
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmStaffModal">
+                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-people-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Internal Staff Meeting</div>
+                                <div class="text-muted font-11">Sync up with team &amp; department</div>
+                            </div>
                         </button>
+                    </li>
+                    <li><hr class="dropdown-divider my-1.5"></li>
+                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Quick Presets &amp; Follow-Up</h6></li>
+                    <li>
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('SW')">
+                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-camera-video"></i></div>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Schedule SW Demo</div>
+                                <div class="text-muted font-11">Product software walkthrough</div>
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('HW')">
+                            <div class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-geo-alt"></i></div>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Schedule HW Site Survey</div>
+                                <div class="text-muted font-11">Hardware &amp; site feasibility visit</div>
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="callbacks.php?new=1" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
+                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-telephone-forward"></i></div>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Log Callback Request</div>
+                                <div class="text-muted font-11">Schedule customer phone callback</div>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Callback button -->
-            <a href="callbacks.php?new=1" class="btn btn-outline-primary btn-sm" id="apmCallbackBtn">
-                <i class="bi bi-telephone-forward me-1"></i>Callback
-            </a>
-
-            <button type="button" class="btn btn-outline-success btn-sm fw-semibold" onclick="openQuickApptPreset('SW')">
-                <i class="bi bi-camera-video me-1"></i>+ Schedule SW Demo
-            </button>
-            <button type="button" class="btn btn-outline-warning text-dark btn-sm fw-semibold" onclick="openQuickApptPreset('HW')">
-                <i class="bi bi-geo-alt me-1"></i>+ Schedule HW Site Survey
-            </button>
-
-            <!-- Date Range Filter -->
-            <div class="date-picker date-range-picker ms-auto" style="min-width:240px;max-width:260px;">
-                <input type="text" class="date-input form-control form-control-sm" id="apmDateRangeFilter" placeholder="DD-MM-YYYY to DD-MM-YYYY" autocomplete="off">
-            </div>
-
-            <!-- Filter dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmFilterBtn" title="Filter by status">
-                    <i class="bi bi-funnel me-1"></i>Filter
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0" id="apmFilterMenu" style="max-height: 280px; overflow-y: auto;">
-                    <li><button type="button" class="dropdown-item apm-list-item active" data-status-filter="">All</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Approved">Approved</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Pending Approval">Pending Approval</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Cancelled">Cancelled</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Finished">Finished</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Upcoming">Upcoming</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Missed">Missed</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Internal">Internal</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="External">External</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Recurring">Recurring</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Lead">Lead</button></li>
-                    <li><button type="button" class="dropdown-item apm-list-item" data-status-filter="Internal Staff">Internal Staff</button></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Summary chips (click to filter the table) -->
-        <div class="d-flex flex-wrap gap-2 pt-3 mt-3 border-top" id="apmSummaryRow">
-            <button type="button" class="btn btn-sm btn-outline-primary active apm-chip" data-summary="all">
-                Total <span class="badge bg-primary text-white ms-1" data-count="total">15</span>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-primary apm-chip" data-summary="upcoming">
-                Upcoming <span class="badge bg-primary text-white ms-1" data-count="upcoming">1</span>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-warning apm-chip" data-summary="pending">
-                Pending approval <span class="badge bg-warning text-dark ms-1" data-count="pending">2</span>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-danger apm-chip" data-summary="cancelled">
-                Cancelled <span class="badge bg-danger text-white ms-1" data-count="cancelled">1</span>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary apm-chip" data-summary="missed">
-                Missed <span class="badge bg-secondary text-white ms-1" data-count="missed">4</span>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-success apm-chip" data-summary="finished">
-                Finished <span class="badge bg-success text-white ms-1" data-count="finished">7</span>
-            </button>
         </div>
     </div>
+
+    <div id="apmAllView">
+        <!-- Hidden Compatibility Store for Legacy IDs -->
+        <div class="d-none" aria-hidden="true">
+            <span id="apmTodayMsg"></span>
+            <span id="apmTodaySub"></span>
+            <div id="apmNextWrap"><span id="apmNextTitle"></span><span id="apmNextDate"></span></div>
+            <span id="apmTodayChip"></span>
+            <button id="apmNewDropBtn"></button>
+            <ul id="apmCreateMenu">
+                <li><button data-create-type="contact"></button></li>
+                <li><button data-create-type="staff"></button></li>
+            </ul>
+            <a href="callbacks.php?new=1" id="apmCallbackBtn"></a>
+            <input type="text" id="apmDateRangeFilter">
+            <button id="apmFilterBtn"></button>
+            <ul id="apmFilterMenu">
+                <li><button class="dropdown-item apm-list-item" data-status-filter=""></button></li>
+            </ul>
+            <div id="apmSummaryRow">
+                <button class="apm-chip" data-summary="all"><span data-count="total">15</span></button>
+                <button class="apm-chip" data-summary="upcoming"><span data-count="upcoming">1</span></button>
+                <button class="apm-chip" data-summary="pending"><span data-count="pending">2</span></button>
+                <button class="apm-chip" data-summary="cancelled"><span data-count="cancelled">1</span></button>
+                <button class="apm-chip" data-summary="missed"><span data-count="missed">4</span></button>
+                <button class="apm-chip" data-summary="finished"><span data-count="finished">7</span></button>
+            </div>
+        </div>
 
     <!-- Table (toolbar auto-created by master-table.js) -->
     <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
@@ -706,10 +690,7 @@
                     </table>
                 </div>
                 <!-- Footer (showing + pagination auto-created by master-table.js) -->
-
             </div>
-        </div>
-    </div>
 
     <!-- ===== Below: agenda + meetings report (side by side — pure Bootstrap 5) ===== -->
     <div class="row g-3">
@@ -864,12 +845,194 @@
                 </div>
             </div>
         </div>
+    </div><!-- End row g-3 -->
+    </div><!-- End #apmAllView -->
 
-    </div>
+    <!-- ==================== Meeting Schedule View (Integrated from appointment-schedule.php) ==================== -->
+    <div id="apmScheduleView" class="d-none">
+        <!-- Meeting Schedule Table Card -->
+        <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4">
+            <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <h6 class="fw-bold text-dark mb-0"><i class="bi bi-camera-video text-primary me-2"></i>Video &amp; Remote Meeting Schedule</h6>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="msCountBadge">12 Meetings</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" onclick="exportMeetingScheduleCSV()">
+                        <i class="bi bi-download"></i><span>Export CSV</span>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" onclick="openQuickApptPreset('SW')">
+                        <i class="bi bi-plus-lg"></i><span>Schedule Video Demo</span>
+                    </button>
+                </div>
+            </div>
 
-</div>
+            <!-- Filter bar inside card -->
+            <div class="p-3 bg-light bg-opacity-50 border-bottom">
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                            <input type="text" class="form-control" id="msSearch" placeholder="Search customer, staff, remark...">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                        <select class="form-select form-select-sm" id="msTypeFilter">
+                            <option value="">All Types (Customer / Lead)</option>
+                            <option value="Customer">Customer</option>
+                            <option value="Lead">Lead</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-sm-6">
+                        <select class="form-select form-select-sm" id="msStatusFilter">
+                            <option value="">All Statuses</option>
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Missed">Missed</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="d-flex align-items-center gap-1">
+                            <input type="date" class="form-control form-control-sm" id="msFromDate" title="From Date">
+                            <span class="text-muted small">to</span>
+                            <input type="date" class="form-control form-control-sm" id="msToDate" title="To Date">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12 text-end">
+                        <button type="button" class="btn btn-sm btn-outline-secondary w-100" onclick="clearMsFilters()">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 font-13" id="msTable">
+                    <thead class="table-light text-muted small text-uppercase font-11">
+                        <tr>
+                            <th class="ps-4" style="width: 60px;">S.No</th>
+                            <th style="min-width: 170px;">Customer / Lead</th>
+                            <th style="min-width: 170px;">Customer Email</th>
+                            <th style="min-width: 140px;">Staff SPOC</th>
+                            <th style="width: 110px;">Type</th>
+                            <th style="min-width: 200px;">Zoom / Video Meeting</th>
+                            <th style="width: 110px;">Status</th>
+                            <th style="min-width: 220px;">Remark</th>
+                            <th class="text-end pe-4" style="width: 90px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="msTbody">
+                        <!-- Populated dynamically via Javascript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-3 border-top bg-light bg-opacity-25 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <span class="text-muted font-12" id="msTableSummary">Showing 12 of 12 meetings</span>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- End #apmScheduleView -->
+</div><!-- End .container-fluid -->
 
 <!-- ===== New Appointment Modal (Contact / Lead / External) ===== -->
+<!-- ==================== OFFCANVAS SLIDER: APPOINTMENTS FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="appointmentFilterOffcanvas" aria-labelledby="appointmentFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="appointmentFilterTitle">Filter Appointments</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Quick Preset Status Chips -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1.5">Quick Status</label>
+            <div class="d-flex flex-wrap gap-1.5" id="drawerQuickChips">
+                <button type="button" class="btn btn-xs btn-outline-secondary active apm-drawer-chip" data-val="all">All (15)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary apm-drawer-chip" data-val="upcoming">Upcoming (1)</button>
+                <button type="button" class="btn btn-xs btn-outline-warning text-dark apm-drawer-chip" data-val="pending">Pending (2)</button>
+                <button type="button" class="btn btn-xs btn-outline-success apm-drawer-chip" data-val="finished">Finished (7)</button>
+                <button type="button" class="btn btn-xs btn-outline-secondary apm-drawer-chip" data-val="missed">Missed (4)</button>
+                <button type="button" class="btn btn-xs btn-outline-danger apm-drawer-chip" data-val="cancelled">Cancelled (1)</button>
+            </div>
+        </div>
+
+        <!-- Status Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Appointment Status</label>
+            <select class="form-select form-select-sm" id="drawerFilterStatus">
+                <option value="">All Statuses</option>
+                <option value="Approved">Approved</option>
+                <option value="Pending Approval">Pending Approval</option>
+                <option value="Scheduled">Scheduled / Upcoming</option>
+                <option value="Finished">Finished</option>
+                <option value="Missed">Missed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+
+        <!-- Source / Type -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Source / Audience</label>
+            <select class="form-select form-select-sm" id="drawerFilterSource">
+                <option value="">All Sources</option>
+                <option value="Lead">Lead</option>
+                <option value="External">External Contact</option>
+                <option value="Internal">Internal Staff</option>
+            </select>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Date Range</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
+                <input type="text" class="form-control" id="drawerDateRange" placeholder="DD-MM-YYYY to DD-MM-YYYY" autocomplete="off">
+            </div>
+            <div class="form-text text-muted font-11">Filter by appointment date range</div>
+        </div>
+
+        <!-- Quick Links / Shortcuts -->
+        <div class="pt-2 border-top">
+            <label class="form-label fw-semibold small text-dark mb-2">Related Activity Views</label>
+            <div class="d-flex flex-column gap-1.5">
+                <a href="callbacks.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-forward text-primary"></i><span>Callbacks List</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="past-meeting.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-calendar-check text-success"></i><span>Past Meetings</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="mom.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-journal-text text-primary"></i><span>Minutes of Meeting (MOM)</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="summary-report.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-warning"></i><span>Summary Report</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm fw-semibold px-3" onclick="resetAppointmentFilters()">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+        </button>
+        <button type="button" class="btn btn-primary btn-sm fw-semibold px-4" data-bs-dismiss="offcanvas" onclick="applyAppointmentDrawerFilters()">
+            <i class="bi bi-check-lg me-1"></i>Apply Filters
+        </button>
+    </div>
+</div>
+
+
 <div class="modal fade apm-modal" id="apmContactModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -1983,6 +2146,7 @@
         var statusFilterVal = '';
         var dateRangeFrom = '';
         var dateRangeTo = '';
+        var drawerSourceVal = '';
 
         /* External filter matcher used automatically by auto-master-table.js */
         window.attendanceRowMatches = function (tr) {
@@ -2010,6 +2174,7 @@
                     if (statusFilterVal === 'Lead' && src !== 'Lead') return false;
                     if (statusFilterVal !== 'Approved' && statusFilterVal !== 'Upcoming' && statusFilterVal !== 'Internal' && statusFilterVal !== 'External' && statusFilterVal !== 'Lead' && st !== statusFilterVal) return false;
                 }
+                if (drawerSourceVal && src !== drawerSourceVal) return false;
                 return true;
             }
             return true;
@@ -2021,6 +2186,82 @@
                 tableEl.autoTable.render();
             }
         }
+
+        
+        /* Appointment Filter Drawer Handlers */
+        window.applyAppointmentDrawerFilters = function() {
+            var quickChip = document.querySelector('.apm-drawer-chip.active');
+            var quickVal = quickChip ? (quickChip.getAttribute('data-val') || 'all') : 'all';
+            summaryFilter = quickVal;
+
+            var statusSel = document.getElementById('drawerFilterStatus');
+            statusFilterVal = statusSel ? statusSel.value : '';
+
+            var srcSel = document.getElementById('drawerFilterSource');
+            drawerSourceVal = srcSel ? srcSel.value : '';
+
+            var dateRangeEl = document.getElementById('drawerDateRange');
+            if (dateRangeEl) {
+                var val = dateRangeEl.value.trim();
+                var parts = val.split(' to ');
+                function toISO(dStr) {
+                    if (!dStr) return '';
+                    var p = dStr.trim().split('-');
+                    if (p.length === 3 && p[2].length === 4) return p[2] + '-' + p[1] + '-' + p[0];
+                    return '';
+                }
+                if (parts.length === 2) {
+                    dateRangeFrom = toISO(parts[0]);
+                    dateRangeTo = toISO(parts[1]);
+                } else if (parts.length === 1 && parts[0] && parts[0].length === 10) {
+                    dateRangeFrom = toISO(parts[0]);
+                    dateRangeTo = toISO(parts[0]);
+                } else {
+                    dateRangeFrom = '';
+                    dateRangeTo = '';
+                }
+            }
+
+            var count = 0;
+            if (quickVal !== 'all') count++;
+            if (statusFilterVal !== '') count++;
+            if (drawerSourceVal !== '') count++;
+            if (dateRangeFrom !== '' || dateRangeTo !== '') count++;
+
+            var badge = document.getElementById('apmFilterCountBadge');
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle('d-none', count === 0);
+            }
+
+            refreshTable();
+        };
+
+        window.resetAppointmentFilters = function() {
+            var chips = document.querySelectorAll('.apm-drawer-chip');
+            chips.forEach(function(c) { c.classList.remove('active'); });
+            var allChip = document.querySelector('.apm-drawer-chip[data-val="all"]');
+            if (allChip) allChip.classList.add('active');
+            summaryFilter = 'all';
+
+            if (document.getElementById('drawerFilterStatus')) document.getElementById('drawerFilterStatus').value = '';
+            statusFilterVal = '';
+
+            if (document.getElementById('drawerFilterSource')) document.getElementById('drawerFilterSource').value = '';
+            drawerSourceVal = '';
+
+            if (document.getElementById('drawerDateRange')) document.getElementById('drawerDateRange').value = '';
+            dateRangeFrom = '';
+            dateRangeTo = '';
+
+            var badge = document.getElementById('apmFilterCountBadge');
+            if (badge) {
+                badge.textContent = '0';
+                badge.classList.add('d-none');
+            }
+
+            refreshTable();
+        };
 
         document.addEventListener('DOMContentLoaded', function () {
             var tableEl = document.getElementById('apmAppointmentsTable');
@@ -2180,6 +2421,14 @@
                 rangeInput.addEventListener('input', parseRange);
                 rangeInput.addEventListener('change', parseRange);
             }
+
+                        document.querySelectorAll('.apm-drawer-chip').forEach(function(chip) {
+                chip.addEventListener('click', function() {
+                    document.querySelectorAll('.apm-drawer-chip').forEach(function(c) { c.classList.remove('active'); });
+                    chip.classList.add('active');
+                    applyAppointmentDrawerFilters();
+                });
+            });
 
             /* Summary Chips Filtering */
             document.querySelectorAll('.apm-chip').forEach(function (chip) {
@@ -2373,6 +2622,145 @@
                     window.openQuickApptPreset(tType, tSubj, tClient);
                 }, 300);
             }
+    
+        /* ==================== APPOINTMENT VIEW SWITCHER & MEETING SCHEDULE ==================== */
+        var scheduleMeetings = [
+            { id: 1, customerName: 'Ravi Shankar', customerEmail: 'ravi.shankar@gmail.com', staffName: 'GHARUDA SOFTWARE', cl: 'Customer', zoom: 'https://zoom.us/j/98123456789', status: 'Scheduled', remark: 'Product demo for new enquiry' },
+            { id: 2, customerName: 'Meena Ramesh', customerEmail: 'meena.ramesh@yahoo.com', staffName: 'Harish D.', cl: 'Lead', zoom: 'https://zoom.us/j/87291034567', status: 'Scheduled', remark: 'Quotation discussion — solar package' },
+            { id: 3, customerName: 'Arun Kumar', customerEmail: 'arun.kumar@outlook.com', staffName: 'Divya A.', cl: 'Lead', zoom: 'https://zoom.us/j/76543210987', status: 'Completed', remark: 'Requirements collected, proposal pending' },
+            { id: 4, customerName: 'Priya Sundar', customerEmail: 'priya.sundar@gmail.com', staffName: 'GHARUDA SOFTWARE', cl: 'Customer', zoom: 'https://zoom.us/j/65098765432', status: 'Cancelled', remark: 'Customer not available, reschedule needed' },
+            { id: 5, customerName: 'Suresh Babu', customerEmail: 'suresh.babu@gmail.com', staffName: 'Priya S.', cl: 'Lead', zoom: 'https://zoom.us/j/54321098765', status: 'Scheduled', remark: 'Follow-up meeting for pending payment' },
+            { id: 6, customerName: 'Lakshmi Pharma', customerEmail: 'info@lakshmipharma.in', staffName: 'Harish D.', cl: 'Customer', zoom: 'https://zoom.us/j/43219876543', status: 'Completed', remark: 'Annual maintenance contract reviewed' },
+            { id: 7, customerName: 'Karthik Raja', customerEmail: 'karthik.raja@gmail.com', staffName: 'Divya A.', cl: 'Lead', zoom: 'https://zoom.us/j/32109876543', status: 'Missed', remark: 'Staff on leave — meeting not held' },
+            { id: 8, customerName: 'Vasanth Auto Works', customerEmail: 'vasanth.auto@gmail.com', staffName: 'Priya S.', cl: 'Customer', zoom: 'https://zoom.us/j/21098765432', status: 'Scheduled', remark: 'Site discussion with engineer' },
+            { id: 9, customerName: 'Kaveri Textiles', customerEmail: 'sales@kaveritex.in', staffName: 'GHARUDA SOFTWARE', cl: 'Lead', zoom: '', status: 'Scheduled', remark: 'Zoom link to be shared' },
+            { id: 10, customerName: 'Balaji Electricals', customerEmail: 'balaji.elec@gmail.com', staffName: 'Harish D.', cl: 'Customer', zoom: 'https://zoom.us/j/10987654321', status: 'Completed', remark: 'Order confirmed for 5 inverters' },
+            { id: 11, customerName: 'Sakthi Hardware', customerEmail: 'sakthi.hw@gmail.com', staffName: 'Divya A.', cl: 'Lead', zoom: 'https://zoom.us/j/19876543210', status: 'Cancelled', remark: 'Budget concern — customer paused' },
+            { id: 12, customerName: 'Ambal Foods', customerEmail: 'contact@ambalfoods.in', staffName: 'Priya S.', cl: 'Customer', zoom: 'https://zoom.us/j/28765432109', status: 'Missed', remark: 'Network issue at customer side' }
+        ];
+
+        window.switchApmView = function(view) {
+            var allView = document.getElementById('apmAllView');
+            var schView = document.getElementById('apmScheduleView');
+            var tabs = document.querySelectorAll('#apmViewTabs button');
+
+            tabs.forEach(function(btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-view') === view);
+            });
+
+            if (view === 'schedule') {
+                if (allView) allView.classList.add('d-none');
+                if (schView) schView.classList.remove('d-none');
+                renderMeetingSchedule();
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', '?view=schedule');
+                }
+            } else {
+                if (allView) allView.classList.remove('d-none');
+                if (schView) schView.classList.add('d-none');
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', 'appointments.php');
+                }
+            }
+        };
+
+        function renderMeetingSchedule() {
+            var tbody = document.getElementById('msTbody');
+            if (!tbody) return;
+
+            var q = (document.getElementById('msSearch') ? document.getElementById('msSearch').value : '').toLowerCase().trim();
+            var typeVal = (document.getElementById('msTypeFilter') ? document.getElementById('msTypeFilter').value : '').trim();
+            var statusVal = (document.getElementById('msStatusFilter') ? document.getElementById('msStatusFilter').value : '').trim();
+
+            var filtered = scheduleMeetings.filter(function(m) {
+                var matchQ = !q || (m.customerName + ' ' + m.customerEmail + ' ' + m.staffName + ' ' + m.remark).toLowerCase().indexOf(q) !== -1;
+                var matchType = !typeVal || m.cl === typeVal;
+                var matchStatus = !statusVal || m.status === statusVal;
+                return matchQ && matchType && matchStatus;
+            });
+
+            var html = '';
+            filtered.forEach(function(m, idx) {
+                var statusCls = m.status === 'Scheduled' ? 'bg-primary-subtle text-primary border-primary-subtle' :
+                                m.status === 'Completed' ? 'bg-success-subtle text-success border-success-subtle' :
+                                m.status === 'Cancelled' ? 'bg-danger-subtle text-danger border-danger-subtle' : 'bg-warning-subtle text-warning border-warning-subtle';
+
+                var typeBadge = m.cl === 'Customer' ? '<span class="badge bg-purple-subtle text-purple border" style="background:#ede9fe;color:#6d28d9;"><i class="bi bi-person-check me-1"></i>Customer</span>' :
+                                                      '<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-person-plus me-1"></i>Lead</span>';
+
+                var zoomBtn = m.zoom ? '<a href="' + m.zoom + '" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 py-0.5 px-2 font-12 fw-semibold"><i class="bi bi-camera-video-fill text-primary"></i>Join Zoom</a>' :
+                                       '<span class="text-muted font-11"><i class="bi bi-dash me-1"></i>Not generated</span>';
+
+                html += '<tr>' +
+                    '<td class="ps-4 fw-semibold text-muted">' + (idx + 1) + '</td>' +
+                    '<td><span class="fw-bold text-dark font-13">' + m.customerName + '</span></td>' +
+                    '<td><a href="mailto:' + m.customerEmail + '" class="text-muted text-decoration-none font-12"><i class="bi bi-envelope me-1"></i>' + m.customerEmail + '</a></td>' +
+                    '<td><span class="badge bg-light text-dark border font-11">' + m.staffName + '</span></td>' +
+                    '<td>' + typeBadge + '</td>' +
+                    '<td>' + zoomBtn + '</td>' +
+                    '<td><span class="badge border font-11 ' + statusCls + '">' + m.status + '</span></td>' +
+                    '<td><span class="text-muted font-12">' + m.remark + '</span></td>' +
+                    '<td class="text-end pe-4">' +
+                        '<div class="dropdown text-end">' +
+                            '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">Actions</button>' +
+                            '<ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">' +
+                                (m.zoom ? '<li><a class="dropdown-item" href="' + m.zoom + '" target="_blank"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-camera-video"></i></div><div><div class="fw-semibold text-dark font-12">Join Meeting</div><div class="text-muted" style="font-size:10px;">Launch video room</div></div></a></li>' : '') +
+                                (m.zoom ? '<li><a class="dropdown-item" href="javascript:void(0)" onclick="navigator.clipboard.writeText(\'' + m.zoom + '\'); alert(\'Zoom link copied!\');"><div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-clipboard-check"></i></div><div><div class="fw-semibold text-dark font-12">Copy Link</div><div class="text-muted" style="font-size:10px;">Copy URL to clipboard</div></div></a></li>' : '') +
+                                '<li><a class="dropdown-item" href="javascript:void(0)" onclick="openQuickApptPreset(\'SW\', \'Demo for ' + m.customerName + '\', \'' + m.customerName + '\')"><div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-calendar-event"></i></div><div><div class="fw-semibold text-dark font-12">Reschedule</div><div class="text-muted" style="font-size:10px;">Change time / date</div></div></a></li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            });
+
+            tbody.innerHTML = html || '<tr><td colspan="9" class="text-center py-4 text-muted">No meetings matching the selected filters</td></tr>';
+            var countEl = document.getElementById('msCountBadge');
+            var sumEl = document.getElementById('msTableSummary');
+            if (countEl) countEl.textContent = filtered.length + ' Meetings';
+            if (sumEl) sumEl.textContent = 'Showing ' + filtered.length + ' of ' + scheduleMeetings.length + ' meetings';
+        }
+
+        window.clearMsFilters = function() {
+            if (document.getElementById('msSearch')) document.getElementById('msSearch').value = '';
+            if (document.getElementById('msTypeFilter')) document.getElementById('msTypeFilter').value = '';
+            if (document.getElementById('msStatusFilter')) document.getElementById('msStatusFilter').value = '';
+            if (document.getElementById('msFromDate')) document.getElementById('msFromDate').value = '';
+            if (document.getElementById('msToDate')) document.getElementById('msToDate').value = '';
+            renderMeetingSchedule();
+        };
+
+        window.exportMeetingScheduleCSV = function() {
+            var rows = [['S.No', 'Customer / Lead', 'Email', 'Staff SPOC', 'Type', 'Zoom Meeting Link', 'Status', 'Remark']];
+            scheduleMeetings.forEach(function(m, i) {
+                rows.push([i + 1, m.customerName, m.customerEmail, m.staffName, m.cl, m.zoom || 'N/A', m.status, m.remark]);
+            });
+            var csv = 'data:text/csv;charset=utf-8,' + rows.map(function(e) {
+                return e.map(function(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+            }).join('\n');
+            var link = document.createElement('a');
+            link.setAttribute('href', encodeURI(csv));
+            link.setAttribute('download', 'meeting_schedule_' + new Date().toISOString().slice(0, 10) + '.csv');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        };
+
+        // Wire event listeners on search/filters
+        document.addEventListener('DOMContentLoaded', function() {
+            var search = document.getElementById('msSearch');
+            if (search) search.addEventListener('input', renderMeetingSchedule);
+            var tf = document.getElementById('msTypeFilter');
+            if (tf) tf.addEventListener('change', renderMeetingSchedule);
+            var sf = document.getElementById('msStatusFilter');
+            if (sf) sf.addEventListener('change', renderMeetingSchedule);
+
+            // Check URL param ?view=schedule or #schedule
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('view') === 'schedule' || window.location.hash === '#schedule') {
+                switchApmView('schedule');
+            }
+        });
+
     })();
 </script>
 
