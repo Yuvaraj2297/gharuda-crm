@@ -15,6 +15,12 @@
                 <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" data-view="schedule" onclick="switchApmView('schedule')">
                     <i class="bi bi-camera-video me-1"></i>Meeting Schedule
                 </button>
+                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" data-view="callbacks" onclick="switchApmView('callbacks')">
+                    <i class="bi bi-telephone-inbound me-1"></i>Callbacks
+                </button>
+                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" data-view="past" onclick="switchApmView('past')">
+                    <i class="bi bi-clock-history me-1"></i>Past Meetings
+                </button>
             </div>
         </div>
 
@@ -72,13 +78,13 @@
                         </button>
                     </li>
                     <li>
-                        <a href="callbacks.php?new=1" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="switchApmView('callbacks'); setTimeout(function(){ var b = document.getElementById('cb5NewBtn'); if(b) b.click(); }, 150);">
                             <span class="rounded-2 bg-secondary-subtle text-secondary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-telephone-forward"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Log Callback Request</div>
                                 <div class="text-muted font-11">Schedule customer phone callback</div>
                             </div>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -938,9 +944,269 @@
             </div>
         </div>
     </div><!-- End #apmScheduleView -->
+    <!-- ==================== Callbacks View (Consolidated) ==================== -->
+    <div id="apmCallbacksView" class="d-none">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4" id="cb5TableWrap">
+            <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <h6 class="fw-bold text-dark mb-0"><i class="bi bi-telephone-inbound text-primary me-2"></i>Client Callbacks</h6>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="cb5TotalCountBadge">32 Callbacks</span>
+                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2.5 py-1 font-12" title="Overdue follow-ups">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i>3 Overdue
+                    </span>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <div class="d-flex align-items-center gap-1 flex-wrap me-2">
+                        <button type="button" class="btn btn-xs btn-outline-secondary active cb5-quick-btn py-1 px-2.5 font-11 fw-semibold" data-quick="reset">All (32)</button>
+                        <button type="button" class="btn btn-xs btn-outline-primary cb5-quick-btn py-1 px-2.5 font-11 fw-semibold" data-quick="upcoming">Upcoming (8)</button>
+                        <button type="button" class="btn btn-xs btn-outline-warning text-dark cb5-quick-btn py-1 px-2.5 font-11 fw-semibold" data-quick="postponed">Postponed (5)</button>
+                        <button type="button" class="btn btn-xs btn-outline-danger cb5-quick-btn py-1 px-2.5 font-11 fw-semibold" data-quick="datePassed">Overdue (3)</button>
+                        <button type="button" class="btn btn-xs btn-outline-success cb5-quick-btn py-1 px-2.5 font-11 fw-semibold" data-quick="complete">Complete (16)</button>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3" id="cb5NewBtn">
+                        <i class="bi bi-plus-lg"></i><span>New Callback</span>
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive table-modern-wrap">
+                <table class="table table-modern table-hover align-middle mb-0 datatable" id="cb5Table" data-table-name="Callbacks">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:60px;">S.No</th>
+                            <th style="min-width:200px;">Full Name</th>
+                            <th style="width:130px;">Phone</th>
+                            <th style="width:140px;">Status</th>
+                            <th style="width:170px;">Timezone</th>
+                            <th style="width:150px;">Available from</th>
+                            <th style="width:90px;">To</th>
+                            <th style="width:130px;">Date requested</th>
+                            <th style="width:140px;">Assignees</th>
+                            <th style="width:100px;">Priority</th>
+                            <th style="width:120px;" data-no-sort data-no-export>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cb5Tbody">
+                        <tr data-id="1" data-status="Upcoming" data-source="Contact" data-assignee="Harish D." data-tz="Asia/Kolkata (GMT+5:30)">
+                            <td>1</td>
+                            <td><div class="d-flex align-items-center gap-2"><span class="badge rounded-circle bg-primary-subtle text-primary fw-bold p-0 d-inline-flex align-items-center justify-content-center" style="width:28px;height:28px;">R</span><div><span class="fw-bold text-dark">Ravi Shankar</span><div class="text-muted font-11">Contact · Quotation follow-up</div></div></div></td>
+                            <td><a href="tel:9838472910" class="text-decoration-none fw-semibold">9838472910</a></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">Upcoming</span></td>
+                            <td><span class="text-muted small">Asia/Kolkata (GMT+5:30)</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">10:00 AM</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">11:00 AM</span></td>
+                            <td><span class="text-muted small">27-09-2026</span></td>
+                            <td><span class="fw-medium text-dark">Harish D.</span></td>
+                            <td><span class="badge bg-danger text-white">High</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="tel:9838472910" class="btn btn-outline-success btn-xs" title="Call"><i class="bi bi-telephone"></i></a>
+                                    <button type="button" class="btn btn-outline-secondary btn-xs" onclick="alert('Callback details: Ravi Shankar - 9838472910')" title="Details"><i class="bi bi-eye"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="2" data-status="Upcoming" data-source="Lead" data-assignee="Divya A." data-tz="Asia/Kolkata (GMT+5:30)">
+                            <td>2</td>
+                            <td><div class="d-flex align-items-center gap-2"><span class="badge rounded-circle bg-success-subtle text-success fw-bold p-0 d-inline-flex align-items-center justify-content-center" style="width:28px;height:28px;">M</span><div><span class="fw-bold text-dark">Meena Ramesh</span><div class="text-muted font-11">Lead · Solar panel enquiry</div></div></div></td>
+                            <td><a href="tel:9840123456" class="text-decoration-none fw-semibold">9840123456</a></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">Upcoming</span></td>
+                            <td><span class="text-muted small">Asia/Kolkata (GMT+5:30)</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">02:30 PM</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">03:30 PM</span></td>
+                            <td><span class="text-muted small">28-09-2026</span></td>
+                            <td><span class="fw-medium text-dark">Divya A.</span></td>
+                            <td><span class="badge bg-warning text-dark">Medium</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="tel:9840123456" class="btn btn-outline-success btn-xs" title="Call"><i class="bi bi-telephone"></i></a>
+                                    <button type="button" class="btn btn-outline-secondary btn-xs" onclick="alert('Callback details: Meena Ramesh - 9840123456')" title="Details"><i class="bi bi-eye"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="3" data-status="Postponed" data-source="External" data-assignee="Priya S." data-tz="Asia/Kolkata (GMT+5:30)">
+                            <td>3</td>
+                            <td><div class="d-flex align-items-center gap-2"><span class="badge rounded-circle bg-warning-subtle text-warning fw-bold p-0 d-inline-flex align-items-center justify-content-center" style="width:28px;height:28px;">A</span><div><span class="fw-bold text-dark">Arun Kumar</span><div class="text-muted font-11">External · Proposal requested</div></div></div></td>
+                            <td><a href="tel:9841234567" class="text-decoration-none fw-semibold">9841234567</a></td>
+                            <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle">Postponed</span></td>
+                            <td><span class="text-muted small">Asia/Kolkata (GMT+5:30)</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">11:30 AM</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">12:30 PM</span></td>
+                            <td><span class="text-muted small">29-09-2026</span></td>
+                            <td><span class="fw-medium text-dark">Priya S.</span></td>
+                            <td><span class="badge bg-secondary text-white">Low</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="tel:9841234567" class="btn btn-outline-success btn-xs" title="Call"><i class="bi bi-telephone"></i></a>
+                                    <button type="button" class="btn btn-outline-secondary btn-xs" onclick="alert('Callback details: Arun Kumar - 9841234567')" title="Details"><i class="bi bi-eye"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="4" data-status="Complete" data-source="Customer" data-assignee="Harish D." data-tz="Asia/Kolkata (GMT+5:30)">
+                            <td>4</td>
+                            <td><div class="d-flex align-items-center gap-2"><span class="badge rounded-circle bg-info-subtle text-info fw-bold p-0 d-inline-flex align-items-center justify-content-center" style="width:28px;height:28px;">L</span><div><span class="fw-bold text-dark">Lakshmi Pharma</span><div class="text-muted font-11">Customer · AMC renewal reviewed</div></div></div></td>
+                            <td><a href="tel:9884023456" class="text-decoration-none fw-semibold">9884023456</a></td>
+                            <td><span class="badge bg-success-subtle text-success border border-success-subtle">Complete</span></td>
+                            <td><span class="text-muted small">Asia/Kolkata (GMT+5:30)</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">11:00 AM</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">11:30 AM</span></td>
+                            <td><span class="text-muted small">27-09-2026</span></td>
+                            <td><span class="fw-medium text-dark">Harish D.</span></td>
+                            <td><span class="badge bg-primary text-white">Normal</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="tel:9884023456" class="btn btn-outline-success btn-xs" title="Call"><i class="bi bi-telephone"></i></a>
+                                    <button type="button" class="btn btn-outline-secondary btn-xs" onclick="alert('Callback details: Lakshmi Pharma - 9884023456')" title="Details"><i class="bi bi-eye"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Past Meetings View (Consolidated) ==================== -->
+    <div id="apmPastView" class="d-none">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4" id="pm5TableWrap">
+            <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <h6 class="fw-bold text-dark mb-0"><i class="bi bi-calendar2-check text-success me-2"></i>Concluded Meetings History</h6>
+                    <span class="badge bg-success-subtle text-success rounded-pill px-2.5 py-1 font-12" id="pmTotalCountBadge">7 Meetings</span>
+                </div>
+                <div class="d-flex align-items-center gap-1 flex-wrap" id="pmQuickPills">
+                    <button type="button" class="btn btn-xs btn-outline-secondary active pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="">All (7)</button>
+                    <button type="button" class="btn btn-xs btn-outline-primary pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="External">External (3)</button>
+                    <button type="button" class="btn btn-xs btn-outline-info text-dark pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="Lead">Lead (3)</button>
+                    <button type="button" class="btn btn-xs btn-outline-secondary pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="Internal">Internal (1)</button>
+                </div>
+            </div>
+            <div class="table-responsive table-modern-wrap">
+                <table class="table table-hover align-middle mb-0 datatable" id="pm5Table" data-table-name="Past Meetings">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:60px;">S.No</th>
+                            <th style="min-width:220px;">Subject</th>
+                            <th style="min-width:170px;">Appointment Date</th>
+                            <th style="width:170px;">Initiated by</th>
+                            <th style="min-width:300px;">Description</th>
+                            <th style="width:100px;">Source</th>
+                            <th style="min-width:180px;">Added to Calendars</th>
+                            <th style="width:140px;" data-no-sort data-no-export>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pm5Tbody">
+                        <tr data-id="27" data-status="Finished" data-source="External" data-date="2026-09-27">
+                            <td>1</td>
+                            <td><span class="fw-bold text-dark">Callback — Lakshmi Pharma</span> <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">Finished</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">27-09-2026 11:00 AM</span></td>
+                            <td><span class="fw-medium text-dark">Priya S.</span></td>
+                            <td><span class="text-secondary small">AMC renewal follow-up call</span></td>
+                            <td><span class="badge bg-secondary-subtle text-secondary border">External</span></td>
+                            <td><span class="text-muted small"><i class="bi bi-google text-primary me-1"></i>Added to Google Calendar.</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Viewing meeting for Lakshmi Pharma')"><i class="bi bi-eye"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Feedback requested')"><i class="bi bi-chat-left-text"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="25" data-status="Finished" data-source="Lead" data-date="2026-09-26">
+                            <td>2</td>
+                            <td><span class="fw-bold text-dark">Callback — Ravi Shankar</span> <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">Finished</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">26-09-2026 10:30 AM</span></td>
+                            <td><span class="fw-medium text-dark">Harish D.</span></td>
+                            <td><span class="text-secondary small">Customer asked to call back about solar package</span></td>
+                            <td><span class="badge bg-secondary-subtle text-secondary border">Lead</span></td>
+                            <td><span class="text-muted small">Not added to any calendar yet.</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Viewing meeting for Ravi Shankar')"><i class="bi bi-eye"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Feedback requested')"><i class="bi bi-chat-left-text"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr data-id="24" data-status="Finished" data-source="Internal" data-date="2026-07-13">
+                            <td>3</td>
+                            <td><span class="fw-bold text-dark">Test Appointment</span> <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">Finished</span></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">13-07-2026 10:00 AM</span></td>
+                            <td><span class="fw-medium text-dark">GHARUDA SOFTWARE</span></td>
+                            <td><span class="text-secondary small">Internal system test</span></td>
+                            <td><span class="badge bg-secondary-subtle text-secondary border">Internal</span></td>
+                            <td><span class="text-muted small"><i class="bi bi-google text-primary me-1"></i>Added to Google Calendar.</span></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Viewing internal test appointment')"><i class="bi bi-eye"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div><!-- End .container-fluid -->
 
 <!-- ===== New Appointment Modal (Contact / Lead / External) ===== -->
+
+<!-- Modal: New / Edit Callback (Consolidated) -->
+<div class="modal fade" id="cb5Modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom py-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width:36px;height:36px;font-size:18px;">
+                        <i class="bi bi-telephone-forward-fill"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark mb-0"><span id="cb5ModalTitle">New Callback</span></h5>
+                        <span class="text-muted small">Schedule or update a customer callback request</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <input type="hidden" id="cb5EditId" value="">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmName">Full Name <span class="text-danger me-1">*</span></label>
+                        <input type="text" class="form-control" id="cb5NmName" placeholder="Ex: Ravi Shankar" autocomplete="off">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPhone">Phone <span class="text-danger me-1">*</span></label>
+                        <input type="text" class="form-control" id="cb5NmPhone" placeholder="Ex: 9840123456" autocomplete="off">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmTz">Timezone</label>
+                        <select class="form-select select2" id="cb5NmTz">
+                            <option value="Asia/Kolkata (GMT+5:30)" selected>Asia/Kolkata (GMT+5:30)</option>
+                            <option value="Asia/Colombo (GMT+5:30)">Asia/Colombo (GMT+5:30)</option>
+                            <option value="Asia/Dubai (GMT+4:00)">Asia/Dubai (GMT+4:00)</option>
+                            <option value="Asia/Singapore (GMT+8:00)">Asia/Singapore (GMT+8:00)</option>
+                            <option value="Europe/London (GMT+0:00)">Europe/London (GMT+0:00)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmPriority">Priority</label>
+                        <select class="form-select select2" id="cb5NmPriority">
+                            <option value="High">High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold text-secondary small" for="cb5NmNote">Follow-up Note</label>
+                        <textarea class="form-control" id="cb5NmNote" rows="2" placeholder="Discussion summary / reason for callback..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top bg-light py-2 px-4">
+                <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm px-4" id="cb5SaveBtn" data-bs-dismiss="modal" onclick="alert('Callback scheduled successfully!');">Schedule Callback</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ==================== OFFCANVAS SLIDER: APPOINTMENTS FILTER DRAWER ==================== -->
 <div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="appointmentFilterOffcanvas" aria-labelledby="appointmentFilterTitle" style="width: 360px;">
     <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
@@ -2642,25 +2908,26 @@
         window.switchApmView = function(view) {
             var allView = document.getElementById('apmAllView');
             var schView = document.getElementById('apmScheduleView');
+            var cbView = document.getElementById('apmCallbacksView');
+            var pastView = document.getElementById('apmPastView');
             var tabs = document.querySelectorAll('#apmViewTabs button');
 
             tabs.forEach(function(btn) {
                 btn.classList.toggle('active', btn.getAttribute('data-view') === view);
             });
 
+            if (allView) allView.classList.toggle('d-none', view !== 'all');
+            if (schView) schView.classList.toggle('d-none', view !== 'schedule');
+            if (cbView) cbView.classList.toggle('d-none', view !== 'callbacks');
+            if (pastView) pastView.classList.toggle('d-none', view !== 'past');
+
             if (view === 'schedule') {
-                if (allView) allView.classList.add('d-none');
-                if (schView) schView.classList.remove('d-none');
                 renderMeetingSchedule();
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState(null, '', '?view=schedule');
-                }
-            } else {
-                if (allView) allView.classList.remove('d-none');
-                if (schView) schView.classList.add('d-none');
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState(null, '', 'appointments.php');
-                }
+            }
+
+            if (window.history && window.history.replaceState) {
+                var newUrl = view === 'all' ? 'appointments.php' : ('appointments.php?view=' + view);
+                window.history.replaceState(null, '', newUrl);
             }
         };
 
@@ -2754,11 +3021,63 @@
             var sf = document.getElementById('msStatusFilter');
             if (sf) sf.addEventListener('change', renderMeetingSchedule);
 
-            // Check URL param ?view=schedule or #schedule
+            // Check URL param ?view=schedule|callbacks|past or hash
             var params = new URLSearchParams(window.location.search);
-            if (params.get('view') === 'schedule' || window.location.hash === '#schedule') {
-                switchApmView('schedule');
+            var vParam = params.get('view');
+            if (vParam && ['all', 'schedule', 'callbacks', 'past'].indexOf(vParam) !== -1) {
+                switchApmView(vParam);
+            } else if (window.location.hash) {
+                var hashV = window.location.hash.replace('#', '');
+                if (['all', 'schedule', 'callbacks', 'past'].indexOf(hashV) !== -1) {
+                    switchApmView(hashV);
+                }
             }
+
+            var cbModalEl = document.getElementById('cb5Modal');
+            var cbNewBtn = document.getElementById('cb5NewBtn');
+            if (cbNewBtn && cbModalEl) {
+                cbNewBtn.addEventListener('click', function() {
+                    bootstrap.Modal.getOrCreateInstance(cbModalEl).show();
+                });
+            }
+            if (params.get('new') === '1') {
+                switchApmView('callbacks');
+                if (cbNewBtn) setTimeout(function(){ cbNewBtn.click(); }, 150);
+            }
+
+            // Quick source pills inside Past Meetings
+            document.querySelectorAll('.pm-quick-pill').forEach(function(pill) {
+                pill.addEventListener('click', function() {
+                    document.querySelectorAll('.pm-quick-pill').forEach(function(p){ p.classList.remove('active'); });
+                    pill.classList.add('active');
+                    var src = pill.getAttribute('data-source') || '';
+                    var rows = document.querySelectorAll('#pm5Tbody tr');
+                    var matched = 0;
+                    rows.forEach(function(tr){
+                        var ok = !src || tr.getAttribute('data-source') === src;
+                        tr.style.display = ok ? '' : 'none';
+                        if (ok) matched++;
+                    });
+                    var b = document.getElementById('pmTotalCountBadge');
+                    if (b) b.textContent = matched + ' Meetings';
+                });
+            });
+
+            // Quick status filter inside Callbacks
+            document.querySelectorAll('.cb5-quick-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.cb5-quick-btn').forEach(function(b){ b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    var q = btn.getAttribute('data-quick');
+                    var stMap = { 'upcoming': 'Upcoming', 'postponed': 'Postponed', 'datePassed': 'Upcoming', 'complete': 'Complete' };
+                    var targetSt = stMap[q] || '';
+                    var rows = document.querySelectorAll('#cb5Tbody tr');
+                    rows.forEach(function(tr){
+                        var st = tr.getAttribute('data-status') || '';
+                        tr.style.display = (!targetSt || st === targetSt) ? '' : 'none';
+                    });
+                });
+            });
         });
 
     })();
