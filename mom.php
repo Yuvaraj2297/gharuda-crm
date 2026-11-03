@@ -32,44 +32,10 @@ include 'header.php';
                 <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="momFilterCountBadge">0</span>
             </button>
 
-            <!-- Unified Primary Action Dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="momMainActionBtn">
-                    <i class="bi bi-plus-lg"></i><span>Record MOM</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3" style="min-width: 250px;">
-                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">MOM Actions</h6></li>
-                    <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" id="momNewBtn">
-                            <span class="rounded-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-journal-plus"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">New MOM Entry</div>
-                                <div class="text-muted font-11">Record minutes, attendees &amp; change requests</div>
-                            </div>
-                        </button>
-                    </li>
-                    <li><hr class="dropdown-divider my-1.5"></li>
-                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Follow-up Documents</h6></li>
-                    <li>
-                        <a href="quotation-create.php" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
-                            <span class="rounded-2 bg-success-subtle text-success d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-file-earmark-text"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
-                                <div class="text-muted font-11">Generate quote based on MOM scope</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="task-create.php" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
-                            <span class="rounded-2 bg-warning-subtle text-warning d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-check2-square"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Create Action Task</div>
-                                <div class="text-muted font-11">Assign deliverables to internal staff</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <!-- Direct Primary Action: New MOM -->
+            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" id="momNewBtn">
+                <i class="bi bi-plus-lg"></i><span>New MOM</span>
+            </button>
         </div>
     </div>
 
@@ -154,7 +120,7 @@ include 'header.php';
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0" id="momTable" data-table-name="Minutes of Meeting">
+            <table class="table table-hover align-middle mb-0 font-13" id="momTable" data-table-name="Minutes of Meeting">
                 <thead class="table-light text-uppercase text-secondary small fw-bold">
                     <tr>
                         <th style="width: 45px;" class="text-center">#</th>
@@ -499,14 +465,22 @@ include 'header.php';
 
         <!-- Quick Links / Shortcuts -->
         <div class="pt-2 border-top">
-            <label class="form-label fw-semibold small text-dark mb-2">Related Activity Views</label>
+            <label class="form-label fw-semibold small text-dark mb-2">Related Actions &amp; Views</label>
             <div class="d-flex flex-column gap-1.5">
+                <a href="quotation-create.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-file-earmark-text text-success"></i><span>Create Quotation</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="task-create.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-check2-square text-warning"></i><span>Create Action Task</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
                 <a href="appointments.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
                     <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-calendar2-week text-primary"></i><span>Appointments &amp; Meetings</span></span>
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
                 <a href="summary-report.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
-                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-warning"></i><span>Summary Report</span></span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-info"></i><span>Summary Report</span></span>
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
             </div>

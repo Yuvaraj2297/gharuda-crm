@@ -32,58 +32,25 @@
                 <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="apmFilterCountBadge">0</span>
             </button>
 
-            <!-- Unified Primary Appointment Booking Action Dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmMainCreateBtn">
+            <!-- Primary Action: 1-Click Book Appointment (Split for Staff Meeting) -->
+            <div class="btn-group shadow-sm" id="apmMainCreateGroup">
+                <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3" data-bs-toggle="modal" data-bs-target="#apmContactModal" id="apmMainCreateBtn">
                     <i class="bi bi-plus-lg"></i><span>Book Appointment</span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3" style="min-width: 270px;">
-                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Select Meeting Type</h6></li>
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split px-2" data-bs-toggle="dropdown" aria-expanded="false" title="Other meeting options">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border p-1.5 rounded-3" style="min-width: 210px;">
                     <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmContactModal">
-                            <span class="rounded-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-person-lines-fill"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Client / Lead Meeting</div>
-                                <div class="text-muted font-11">Customer, prospect or external meeting</div>
-                            </div>
+                        <button type="button" class="dropdown-item rounded-2 py-2 px-2.5 d-flex align-items-center gap-2 fw-semibold text-dark font-12" data-bs-toggle="modal" data-bs-target="#apmContactModal">
+                            <i class="bi bi-person-lines-fill text-primary fs-6"></i>
+                            <span>Client / Lead Meeting</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmStaffModal">
-                            <span class="rounded-2 bg-success-subtle text-success d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-people-fill"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Internal Staff Meeting</div>
-                                <div class="text-muted font-11">Sync up with team &amp; department</div>
-                            </div>
-                        </button>
-                    </li>
-                    <li><hr class="dropdown-divider my-1.5"></li>
-                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Quick Presets &amp; Follow-Up</h6></li>
-                    <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('SW')">
-                            <span class="rounded-2 bg-info-subtle text-info d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-camera-video"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Schedule SW Demo</div>
-                                <div class="text-muted font-11">Product software walkthrough</div>
-                            </div>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('HW')">
-                            <span class="rounded-2 bg-warning-subtle text-warning d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-geo-alt"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Schedule HW Site Survey</div>
-                                <div class="text-muted font-11">Hardware &amp; site feasibility visit</div>
-                            </div>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="switchApmView('callbacks'); setTimeout(function(){ var b = document.getElementById('cb5NewBtn'); if(b) b.click(); }, 150);">
-                            <span class="rounded-2 bg-secondary-subtle text-secondary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-telephone-forward"></i></span>
-                            <div>
-                                <div class="fw-semibold text-dark font-12">Log Callback Request</div>
-                                <div class="text-muted font-11">Schedule customer phone callback</div>
-                            </div>
+                        <button type="button" class="dropdown-item rounded-2 py-2 px-2.5 d-flex align-items-center gap-2 fw-semibold text-dark font-12" data-bs-toggle="modal" data-bs-target="#apmStaffModal">
+                            <i class="bi bi-people-fill text-success fs-6"></i>
+                            <span>Internal Staff Meeting</span>
                         </button>
                     </li>
                 </ul>
@@ -145,11 +112,11 @@
                                 <td><span class="apm-date-chip">27-09-2026 11:00 AM</span></td>
                                 <td><span class="apm-initiated" title="Priya S."><span
                                             class="apm-avatar av-amber">P</span>Priya S.</span></td>
-                                <td>AMC renewal follow-up call</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="AMC renewal follow-up call">AMC renewal follow-up call</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>External</td>
-                                <td><span class="apm-cal-note">Added to Google Calendar.</span></td>
+                                <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11"><i class="bi bi-google me-1"></i>Google Cal</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="27"
@@ -182,12 +149,12 @@
                                 <td><span class="apm-date-chip">28-09-2026 03:00 PM</span></td>
                                 <td><span class="apm-initiated" title="Divya A."><span
                                             class="apm-avatar av-grey">D</span>Divya A.</span></td>
-                                <td>Reschedule requested for quotation discussion</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Reschedule requested for quotation discussion">Reschedule requested for quotation discussion</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-pending apm-status-pill"
                                             data-status="Pending Approval" role="button" title="Change status">PENDING
                                             APPROVAL ▾</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="26"
@@ -221,11 +188,11 @@
                                 <td><span class="apm-date-chip">26-09-2026 10:30 AM</span></td>
                                 <td><span class="apm-initiated" title="Harish D."><span
                                             class="apm-avatar av-violet">H</span>Harish D.</span></td>
-                                <td>Customer asked to call back about solar package</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Customer asked to call back about solar package">Customer asked to call back about solar package</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-scheduled"
                                             data-status="Scheduled">SCHEDULED</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="25"
@@ -259,11 +226,11 @@
                                 <td><span class="apm-date-chip">13-07-2026 10:00 AM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>Testing</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Testing">Testing</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>Internal</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="24"
@@ -292,11 +259,11 @@
                                 <td><span class="apm-date-chip">06-12-2026 06:00 PM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>test</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="test">test</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>Internal</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="23"
@@ -326,12 +293,12 @@
                                 <td><span class="apm-date-chip">06-10-2026 09:00 AM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>TESTING</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="TESTING">TESTING</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-missed apm-status-pill"
                                             data-status="Missed" role="button" title="Change status">MISSED
                                             ▾</span></span></td>
                                 <td>Internal</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="22"
@@ -361,11 +328,11 @@
                                 <td><span class="apm-date-chip">06-10-2026 11:30 AM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>Testing 12345 678910</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Testing 12345 678910">Testing 12345 678910</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>Internal</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="19"
@@ -395,12 +362,12 @@
                                 <td><span class="apm-date-chip">06-10-2026 09:00 AM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>sss</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="sss">sss</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-missed apm-status-pill"
                                             data-status="Missed" role="button" title="Change status">MISSED
                                             ▾</span></span></td>
                                 <td>Internal</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="18"
@@ -430,12 +397,12 @@
                                 <td><span class="apm-date-chip">11-05-2026 05:00 PM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>test</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="test">test</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-missed apm-status-pill"
                                             data-status="Missed" role="button" title="Change status">MISSED
                                             ▾</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="17"
@@ -468,12 +435,12 @@
                                 <td><span class="apm-date-chip">27-04-2026 09:00 AM</span></td>
                                 <td><span class="apm-initiated" title="Priya S."><span
                                             class="apm-avatar av-amber">P</span>Priya S.</span></td>
-                                <td>Test</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Test">Test</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-pending apm-status-pill"
                                             data-status="Pending Approval" role="button" title="Change status">PENDING
                                             APPROVAL ▾</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="15"
@@ -507,11 +474,11 @@
                                 <td><span class="apm-date-chip">30-04-2026 09:00 AM</span></td>
                                 <td><span class="apm-initiated" title="Priya S."><span
                                             class="apm-avatar av-amber">P</span>Priya S.</span></td>
-                                <td>Testing</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Testing">Testing</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="14"
@@ -545,12 +512,12 @@
                                 <td><span class="apm-date-chip">25-04-2026 09:00 AM</span></td>
                                 <td><span class="apm-initiated" title="GHRAUDA SOFTWARE"><span
                                             class="apm-avatar av-violet">G</span>GHRAUDA SOFTWARE</span></td>
-                                <td>Test</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="Test">Test</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-missed apm-status-pill"
                                             data-status="Missed" role="button" title="Change status">MISSED
                                             ▾</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="13"
@@ -584,12 +551,12 @@
                                 <td><span class="apm-date-chip">03-01-2026 03:24 PM</span></td>
                                 <td><span class="apm-initiated" title="Divya A."><span
                                             class="apm-avatar av-grey">D</span>Divya A.</span></td>
-                                <td>mnbvcxz</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="mnbvcxz">mnbvcxz</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-cancelled apm-status-pill"
                                             data-status="Cancelled" role="button" title="Change status">CANCELLED
                                             ▾</span></span></td>
                                 <td>External</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="11"
@@ -623,11 +590,11 @@
                                 <td><span class="apm-date-chip">02-01-2026 06:45 PM</span></td>
                                 <td><span class="apm-initiated" title="Divya A."><span
                                             class="apm-avatar av-grey">D</span>Divya A.</span></td>
-                                <td>tester</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="tester">tester</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>External</td>
-                                <td><span class="apm-cal-note">Added to Google Calendar.</span></td>
+                                <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11"><i class="bi bi-google me-1"></i>Google Cal</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="10"
@@ -661,11 +628,11 @@
                                 <td><span class="apm-date-chip">25-10-2025 08:00 PM</span></td>
                                 <td><span class="apm-initiated" title="Divya A."><span
                                             class="apm-avatar av-grey">D</span>Divya A.</span></td>
-                                <td>testt attendance urgently</td>
+                                <td><div class="text-truncate" style="max-width: 200px;" title="testt attendance urgently">testt attendance urgently</div></td>
                                 <td><span class="apm-status-cell"><span class="apm-status st-finished"
                                             data-status="Finished">FINISHED</span></span></td>
                                 <td>Lead</td>
-                                <td><span class="apm-cal-note">Not added to any calendar yet.</span></td>
+                                <td><span class="text-muted small">&mdash;</span></td>
                                 <td>
                                     <div class="apm-actions-group">
                                         <button type="button" class="apm-act-btn act-view apm-view-btn" data-id="1"
@@ -1291,6 +1258,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- Scope Switcher -->
+                <div class="d-flex align-items-center justify-content-between p-2.5 mb-3 rounded-3 bg-light border">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-calendar-event text-primary fs-5"></i>
+                        <div>
+                            <div class="fw-bold text-dark font-13 mb-0">Client / Lead Meeting</div>
+                            <div class="text-muted font-11">External customer or prospect session</div>
+                        </div>
+                    </div>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-primary active fw-semibold font-11">Client Meeting</button>
+                        <button type="button" class="btn btn-outline-secondary fw-semibold font-11" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#apmStaffModal">Staff Meeting</button>
+                    </div>
+                </div>
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Subject <span class="text-danger">*</span></label>
@@ -1506,6 +1487,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- Scope Switcher -->
+                <div class="d-flex align-items-center justify-content-between p-2.5 mb-3 rounded-3 bg-light border">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-people-fill text-success fs-5"></i>
+                        <div>
+                            <div class="fw-bold text-dark font-13 mb-0">Internal Staff Appointment</div>
+                            <div class="text-muted font-11">Team &amp; departmental sync-up</div>
+                        </div>
+                    </div>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-outline-secondary fw-semibold font-11" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#apmContactModal">Client Meeting</button>
+                        <button type="button" class="btn btn-success active fw-semibold font-11">Staff Meeting</button>
+                    </div>
+                </div>
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Subject <span class="text-danger">*</span></label>

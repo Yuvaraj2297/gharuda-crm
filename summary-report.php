@@ -2,78 +2,97 @@
 
 <div class="container-fluid px-0">
 
-    <!-- Title row -->
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-        <div class="d-flex align-items-center gap-3">
-            <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-2.5">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
                 <i class="bi bi-bar-chart-line"></i>
             </div>
             <div>
-                <h4 class="fw-bold text-dark mb-0">Summary Report</h4>
-                <span class="text-muted small">Appointment metrics and trend distribution across staff and status</span>
+                <h1 class="font-display fw-bold mb-0 page-title">Summary Report</h1>
+                <span class="text-muted font-11">Appointment metrics, team performance and trend distribution across staff and statuses</span>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
-            <a href="appointments.php" class="btn btn-sm btn-outline-success"><i class="bi bi-calendar2-week me-1"></i>Appointments</a>
-            <a href="callbacks.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
-            <a href="past-meeting.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-calendar-check me-1"></i>Past Meeting</a>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Filter Button triggering Offcanvas Drawer -->
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#summaryFilterOffcanvas" aria-controls="summaryFilterOffcanvas" title="Filter Summary Metrics">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="sr5FilterCountBadge">0</span>
+            </button>
+
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" id="sr5ResetBtn" title="Reset all filters">
+                <i class="bi bi-arrow-counterclockwise"></i>
+                <span>Reset</span>
+            </button>
         </div>
     </div>
 
-    <!-- Filter strip -->
-    <div class="card border-0 shadow-sm rounded-3 mb-3">
-        <div class="card-header bg-white border-bottom py-3 d-flex align-items-center justify-content-between">
-            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-funnel-fill text-primary me-2"></i>Filters</h6>
-            <button type="button" class="btn btn-sm btn-outline-secondary" id="sr5ResetBtn">
-                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
-            </button>
+    <!-- Offcanvas Filter Drawer -->
+    <div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="summaryFilterOffcanvas" aria-labelledby="summaryFilterTitle" style="width: 360px;">
+        <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+            <div class="d-flex align-items-center gap-2">
+                <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+                <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="summaryFilterTitle">Filter Summary Metrics</h5>
+            </div>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="card-body p-3">
-            <div class="row g-3">
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5AttendedBy">Attended By</label>
-                    <select class="form-select select2" id="sr5AttendedBy">
-                        <option value="">All Staff</option>
-                        <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
-                        <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
-                        <option value="Harish D.">Harish D.</option>
-                        <option value="Divya A.">Divya A.</option>
-                        <option value="Priya S.">Priya S.</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5InitiatedBy">Initiated By</label>
-                    <select class="form-select select2" id="sr5InitiatedBy">
-                        <option value="">All Staff</option>
-                        <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
-                        <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
-                        <option value="Harish D.">Harish D.</option>
-                        <option value="Divya A.">Divya A.</option>
-                        <option value="Priya S.">Priya S.</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5Period">Period</label>
-                    <select class="form-select select2" id="sr5Period">
-                        <option value="date" selected>Period By Date</option>
-                        <option value="week">Period By Week</option>
-                        <option value="month">Period By Month</option>
-                        <option value="year">Period By Year</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5Status">Status</label>
-                    <select class="form-select select2" id="sr5Status">
-                        <option value="">All Statuses</option>
-                        <option value="Finished" data-color="#16a34a">Finished</option>
-                        <option value="Pending" data-color="#f59e0b">Pending</option>
-                        <option value="Cancelled" data-color="#ef4444">Cancelled</option>
-                        <option value="Missed" data-color="#64748b">Missed</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5Month">Month</label>
-                    <select class="form-select select2" id="sr5Month">
+        <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+            <!-- Attended By -->
+            <div>
+                <label class="form-label fw-semibold small text-dark mb-1" for="sr5AttendedBy">Attended By</label>
+                <select class="form-select form-select-sm select2" id="sr5AttendedBy">
+                    <option value="">All Staff</option>
+                    <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
+                    <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
+                    <option value="Harish D.">Harish D.</option>
+                    <option value="Divya A.">Divya A.</option>
+                    <option value="Priya S.">Priya S.</option>
+                </select>
+            </div>
+
+            <!-- Initiated By -->
+            <div>
+                <label class="form-label fw-semibold small text-dark mb-1" for="sr5InitiatedBy">Initiated By</label>
+                <select class="form-select form-select-sm select2" id="sr5InitiatedBy">
+                    <option value="">All Staff</option>
+                    <option value="GHARUDA SOFTWARE">GHARUDA SOFTWARE</option>
+                    <option value="gharuda SOFTWARE">gharuda SOFTWARE</option>
+                    <option value="Harish D.">Harish D.</option>
+                    <option value="Divya A.">Divya A.</option>
+                    <option value="Priya S.">Priya S.</option>
+                </select>
+            </div>
+
+            <!-- Period -->
+            <div>
+                <label class="form-label fw-semibold small text-dark mb-1" for="sr5Period">Reporting Period</label>
+                <select class="form-select form-select-sm select2" id="sr5Period">
+                    <option value="date" selected>Period By Date</option>
+                    <option value="week">Period By Week</option>
+                    <option value="month">Period By Month</option>
+                    <option value="year">Period By Year</option>
+                </select>
+            </div>
+
+            <!-- Status -->
+            <div>
+                <label class="form-label fw-semibold small text-dark mb-1" for="sr5Status">Appointment Status</label>
+                <select class="form-select form-select-sm select2" id="sr5Status">
+                    <option value="">All Statuses</option>
+                    <option value="Finished">Finished</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Missed">Missed</option>
+                </select>
+            </div>
+
+            <!-- Month & Year -->
+            <div class="row g-2">
+                <div class="col-6">
+                    <label class="form-label fw-semibold small text-dark mb-1" for="sr5Month">Month</label>
+                    <select class="form-select form-select-sm select2" id="sr5Month">
                         <option value="1">January</option>
                         <option value="2">February</option>
                         <option value="3">March</option>
@@ -88,15 +107,38 @@
                         <option value="12">December</option>
                     </select>
                 </div>
-                <div class="col-md-4 col-lg-2 sr5-fld">
-                    <label class="form-label fw-semibold small text-secondary" for="sr5Year">Year</label>
-                    <select class="form-select select2" id="sr5Year">
+                <div class="col-6">
+                    <label class="form-label fw-semibold small text-dark mb-1" for="sr5Year">Year</label>
+                    <select class="form-select form-select-sm select2" id="sr5Year">
                         <option value="2026" selected>2026</option>
                         <option value="2025">2025</option>
                         <option value="2024">2024</option>
                     </select>
                 </div>
             </div>
+
+            <!-- Quick Links / Shortcuts -->
+            <div class="pt-2 border-top">
+                <label class="form-label fw-semibold small text-dark mb-2">Related Activity Views</label>
+                <div class="d-flex flex-column gap-1.5">
+                    <a href="appointments.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-calendar2-week text-primary"></i><span>Appointments &amp; Meetings</span></span>
+                        <i class="bi bi-chevron-right font-11 text-muted"></i>
+                    </a>
+                    <a href="mom.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                        <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-journal-text text-success"></i><span>Minutes of Meeting (MOM)</span></span>
+                        <i class="bi bi-chevron-right font-11 text-muted"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="offcanvas-footer border-top p-3 bg-light d-flex align-items-center justify-content-between">
+            <button type="button" class="btn btn-outline-secondary btn-sm fw-semibold px-3" onclick="document.getElementById('sr5ResetBtn').click()">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+            <button type="button" class="btn btn-primary btn-sm fw-semibold px-4" data-bs-dismiss="offcanvas">
+                <i class="bi bi-check-lg me-1"></i>Apply Filters
+            </button>
         </div>
     </div>
 
@@ -474,7 +516,27 @@
 
         var chartLoaded = false;
 
+        function updateFilterBadge() {
+            var badge = document.getElementById('sr5FilterCountBadge');
+            if (!badge) return;
+            var count = 0;
+            if (attendedSel && attendedSel.value) count++;
+            if (initiatedSel && initiatedSel.value) count++;
+            if (periodSel && periodSel.value !== 'date') count++;
+            if (statusSel && statusSel.value) count++;
+            if (monthSel && monthSel.value !== String(CUR_MONTH)) count++;
+            if (yearSel && yearSel.value !== String(CUR_YEAR)) count++;
+
+            if (count > 0) {
+                badge.textContent = count;
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
+        }
+
         function renderAll() {
+            updateFilterBadge();
             var f = currentFilters();
 
             setFieldDisabled(monthSel, f.period === 'month' || f.period === 'year');
