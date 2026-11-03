@@ -2,29 +2,49 @@
 
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
 
-<div class="container-fluid px-0">
-
-    <!-- Title row -->
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+<div class="container-fluid px-0">    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
         <div class="d-flex align-items-center gap-3">
             <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:42px;height:42px;font-size:20px;">
                 <i class="bi bi-calendar-check"></i>
             </div>
             <div>
-                <h4 class="fw-bold text-dark mb-0">Past Meetings</h4>
-                <span class="text-muted small">View and manage concluded and historic appointments</span>
+                <h1 class="font-display fw-bold mb-0 page-title">Past Meetings</h1>
+                <p class="text-secondary small mb-0">View and manage concluded and historic appointments</p>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
-            <a href="appointments.php" class="btn btn-sm btn-outline-success"><i class="bi bi-calendar2-week me-1"></i>Appointments</a>
-            <a href="callbacks.php" class="btn btn-sm btn-outline-primary"><i class="bi bi-telephone-forward me-1"></i>Callbacks</a>
-            <a href="summary-report.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Summary Report</a>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Filter Button triggering Offcanvas Drawer -->
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#pastMeetingFilterOffcanvas" aria-controls="pastMeetingFilterOffcanvas" title="Filter Past Meetings">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="pmFilterCountBadge">0</span>
+            </button>
+
+            <!-- Quick Action: Book Appointment -->
+            <a href="appointments.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm">
+                <i class="bi bi-calendar-plus"></i><span>Book Appointment</span>
+            </a>
         </div>
     </div>
 
-    <!-- Table (toolbar + export + column visibility + pagination auto-created by datatable class via auto-master-table.js) -->
-    <div class="card border-0 shadow-sm rounded-3 overflow-hidden" id="pm5TableWrap">
-        <div class="table-responsive">
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4" id="pm5TableWrap">
+        <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-calendar2-check text-success me-2"></i>Concluded Meetings History</h6>
+                <span class="badge bg-success-subtle text-success rounded-pill px-2.5 py-1 font-12" id="pmTotalCountBadge">7 Meetings</span>
+            </div>
+            <!-- Quick source filter pills -->
+            <div class="d-flex align-items-center gap-1 flex-wrap" id="pmQuickPills">
+                <button type="button" class="btn btn-xs btn-outline-secondary active pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="">All (7)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="External">External (3)</button>
+                <button type="button" class="btn btn-xs btn-outline-info text-dark pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="Lead">Lead (3)</button>
+                <button type="button" class="btn btn-xs btn-outline-secondary pm-quick-pill py-1 px-2.5 font-11 fw-semibold" data-source="Internal">Internal (1)</button>
+            </div>
+        </div>
+        <div class="table-responsive table-modern-wrap">
             <table class="table table-hover align-middle mb-0 datatable" id="pm5Table" data-table-name="Past Meetings">
                 <thead class="table-light">
                     <tr>
@@ -411,6 +431,74 @@
 </div>
 
 <!-- ===== Meeting Overview (fullscreen view — pure Bootstrap 5) ===== -->
+<!-- ==================== OFFCANVAS SLIDER: PAST MEETINGS FILTER DRAWER ==================== -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="pastMeetingFilterOffcanvas" aria-labelledby="pastMeetingFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="pastMeetingFilterTitle">Filter Past Meetings</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3.5">
+        <!-- Source Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Source / Audience</label>
+            <select class="form-select form-select-sm" id="pmFilterSource">
+                <option value="">All Sources</option>
+                <option value="External">External Contact</option>
+                <option value="Lead">Lead</option>
+                <option value="Internal">Internal</option>
+            </select>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Date Range</label>
+            <div class="row g-2">
+                <div class="col-6">
+                    <input type="date" class="form-control form-control-sm" id="pmFilterFrom" title="From Date">
+                </div>
+                <div class="col-6">
+                    <input type="date" class="form-control form-control-sm" id="pmFilterTo" title="To Date">
+                </div>
+            </div>
+            <div class="form-text text-muted font-11">Filter by meeting date</div>
+        </div>
+
+        <!-- Related Activity Views -->
+        <div class="pt-2 border-top">
+            <label class="form-label fw-semibold small text-dark mb-2">Related Activity Views</label>
+            <div class="d-flex flex-column gap-1.5">
+                <a href="appointments.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-calendar2-week text-primary"></i><span>All Appointments</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="callbacks.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-telephone-forward text-primary"></i><span>Callbacks List</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="mom.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-journal-text text-primary"></i><span>Minutes of Meeting (MOM)</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="summary-report.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-warning"></i><span>Summary Report</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm fw-semibold px-3" onclick="resetPastMeetingFilters()">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+        </button>
+        <button type="button" class="btn btn-primary btn-sm fw-semibold px-4" data-bs-dismiss="offcanvas" onclick="applyPastMeetingFilters()">
+            <i class="bi bi-check-lg me-1"></i>Apply Filters
+        </button>
+    </div>
+</div>
+
 <div class="modal fade" id="pm5ViewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content bg-light">
@@ -649,8 +737,76 @@
     (function () {
         'use strict';
 
+        
+        /* Past Meeting Filter Handlers */
+        window.applyPastMeetingFilters = function() {
+            var srcVal = document.getElementById('pmFilterSource') ? document.getElementById('pmFilterSource').value : '';
+            var fromVal = document.getElementById('pmFilterFrom') ? document.getElementById('pmFilterFrom').value : '';
+            var toVal = document.getElementById('pmFilterTo') ? document.getElementById('pmFilterTo').value : '';
+
+            var rows = document.querySelectorAll('#pm5Tbody tr');
+            var matched = 0;
+            rows.forEach(function(tr) {
+                var rSrc = tr.getAttribute('data-source') || '';
+                var rDate = tr.getAttribute('data-date') || '';
+                var ok = true;
+
+                if (srcVal && rSrc !== srcVal) ok = false;
+                if (fromVal && rDate && rDate < fromVal) ok = false;
+                if (toVal && rDate && rDate > toVal) ok = false;
+
+                tr.style.display = ok ? '' : 'none';
+                if (ok) matched++;
+            });
+
+            var countBadge = document.getElementById('pmTotalCountBadge');
+            if (countBadge) countBadge.textContent = matched + ' Meetings';
+
+            var activeCount = 0;
+            if (srcVal) activeCount++;
+            if (fromVal || toVal) activeCount++;
+
+            var badge = document.getElementById('pmFilterCountBadge');
+            if (badge) {
+                badge.textContent = activeCount;
+                badge.classList.toggle('d-none', activeCount === 0);
+            }
+        };
+
+        window.resetPastMeetingFilters = function() {
+            if (document.getElementById('pmFilterSource')) document.getElementById('pmFilterSource').value = '';
+            if (document.getElementById('pmFilterFrom')) document.getElementById('pmFilterFrom').value = '';
+            if (document.getElementById('pmFilterTo')) document.getElementById('pmFilterTo').value = '';
+
+            document.querySelectorAll('.pm-quick-pill').forEach(function(p) { p.classList.remove('active'); });
+            var allPill = document.querySelector('.pm-quick-pill[data-source=""]');
+            if (allPill) allPill.classList.add('active');
+
+            var rows = document.querySelectorAll('#pm5Tbody tr');
+            rows.forEach(function(tr) { tr.style.display = ''; });
+
+            var countBadge = document.getElementById('pmTotalCountBadge');
+            if (countBadge) countBadge.textContent = rows.length + ' Meetings';
+
+            var badge = document.getElementById('pmFilterCountBadge');
+            if (badge) {
+                badge.textContent = '0';
+                badge.classList.add('d-none');
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function () {
             var tableEl = document.getElementById('pm5Table');
+            document.querySelectorAll('.pm-quick-pill').forEach(function(pill) {
+                pill.addEventListener('click', function() {
+                    document.querySelectorAll('.pm-quick-pill').forEach(function(p) { p.classList.remove('active'); });
+                    pill.classList.add('active');
+                    var s = pill.getAttribute('data-source') || '';
+                    if (document.getElementById('pmFilterSource')) document.getElementById('pmFilterSource').value = s;
+                    applyPastMeetingFilters();
+                });
+            });
+
             if (window.AutoMasterTable && tableEl && !tableEl.autoTable) {
                 window.AutoMasterTable.init(tableEl);
             }
