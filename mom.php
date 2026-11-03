@@ -12,124 +12,117 @@ include 'header.php';
 
 <div class="container-fluid px-0">
 
-    <!-- Title Row & Quick Nav -->
-    <div class="card border-0 shadow-sm rounded-4 mb-4 bg-white">
-        <div class="card-body p-4">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-                <div>
-                    <div class="d-flex align-items-center gap-2 mb-1">
-                        <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-1 rounded-pill">Appointments &amp; MOM</span>
-                        <span class="badge bg-success-subtle text-success fw-semibold px-3 py-1 rounded-pill">Pure Bootstrap</span>
-                    </div>
-                    <h1 class="h3 fw-bold text-dark mb-1">Minutes of Meeting (MOM)</h1>
-                    <p class="text-secondary small mb-0">Record, organize, review customer meetings and generate verified PDF minutes.</p>
-                </div>
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">
-                        <i class="bi bi-calendar3 me-1 text-primary"></i>Date: <span id="momToday" class="fw-bold">17-10-2026</span>
-                    </span>
-                    <a href="appointments.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                        <i class="bi bi-calendar2-week me-1"></i>Appointments
-                    </a>
-                    <a href="past-meeting.php" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                        <i class="bi bi-calendar-check me-1"></i>Past Meetings
-                    </a>
-                    <a href="quotation-create.php" class="btn btn-outline-success btn-sm rounded-pill px-3 fw-semibold">
-                        <i class="bi bi-file-earmark-text me-1"></i>+ Send Quote
-                    </a>
-                    <a href="task-create.php" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold">
-                        <i class="bi bi-check2-square me-1"></i>+ Action Task
-                    </a>
-                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3" id="momNewBtn">
-                        <i class="bi bi-plus-lg me-1"></i>New MOM
-                    </button>
-                </div>
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-2.5">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                <i class="bi bi-journal-text"></i>
+            </div>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Minutes of Meeting (MOM)</h1>
+                <span class="text-muted font-11">Document and review customer meetings, track change requests &amp; generate verified PDF minutes</span>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Filter Button triggering Offcanvas Drawer -->
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#momFilterOffcanvas" aria-controls="momFilterOffcanvas" title="Filter Minutes of Meeting">
+                <i class="bi bi-funnel"></i>
+                <span>Filters</span>
+                <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="momFilterCountBadge">0</span>
+            </button>
+
+            <!-- Unified Primary Action Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="momMainActionBtn">
+                    <i class="bi bi-plus-lg"></i><span>Record MOM</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3" style="min-width: 250px;">
+                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">MOM Actions</h6></li>
+                    <li>
+                        <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" id="momNewBtn">
+                            <span class="rounded-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-journal-plus"></i></span>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">New MOM Entry</div>
+                                <div class="text-muted font-11">Record minutes, attendees &amp; change requests</div>
+                            </div>
+                        </button>
+                    </li>
+                    <li><hr class="dropdown-divider my-1.5"></li>
+                    <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Follow-up Documents</h6></li>
+                    <li>
+                        <a href="quotation-create.php" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
+                            <span class="rounded-2 bg-success-subtle text-success d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-file-earmark-text"></i></span>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                                <div class="text-muted font-11">Generate quote based on MOM scope</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="task-create.php" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
+                            <span class="rounded-2 bg-warning-subtle text-warning d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-check2-square"></i></span>
+                            <div>
+                                <div class="fw-semibold text-dark font-12">Create Action Task</div>
+                                <div class="text-muted font-11">Assign deliverables to internal staff</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- Pending MOM Strip (Finished Appointments Requiring MOM) -->
-    <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white" id="momPendingStrip">
-        <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-1 fw-semibold">
-                    <i class="bi bi-hourglass-split me-1"></i>Pending MOMs (<span id="momPendingCount">2</span>)
-                </span>
-                <span class="text-secondary small">Finished appointments awaiting minutes documentation</span>
-            </div>
-        </div>
-        <div class="card-body p-3">
-            <div class="d-flex gap-3 overflow-auto pb-1" id="momPendingRow">
-                <!-- Appt 1 -->
-                <div class="border rounded-3 p-3 bg-light-subtle d-flex justify-content-between align-items-center gap-3 flex-shrink-0" style="min-width: 320px;">
-                    <div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="small text-secondary"><i class="bi bi-clock me-1"></i>13-07-2026 10:00</span>
-                            <span class="badge rounded-pill bg-primary-subtle text-primary small">DEV - Online</span>
-                        </div>
-                        <div class="fw-bold text-dark small mb-1">Test Appointment</div>
-                        <div class="text-secondary small"><i class="bi bi-building me-1"></i>Raja Enterprises</div>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3 text-nowrap" data-pendingid="501">
-                        <i class="bi bi-plus-lg me-1"></i>Create
-                    </button>
-                </div>
-
-                <!-- Appt 2 -->
-                <div class="border rounded-3 p-3 bg-light-subtle d-flex justify-content-between align-items-center gap-3 flex-shrink-0" style="min-width: 320px;">
-                    <div>
-                        <div class="d-flex align-items-center gap-2 mb-1">
-                            <span class="small text-secondary"><i class="bi bi-clock me-1"></i>21-07-2026 15:30</span>
-                            <span class="badge rounded-pill bg-info-subtle text-info small">Onsite</span>
-                        </div>
-                        <div class="fw-bold text-dark small mb-1">Site Survey Discussion</div>
-                        <div class="text-secondary small"><i class="bi bi-building me-1"></i>GODREJ</div>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-sm rounded-pill px-3 text-nowrap" data-pendingid="502">
-                        <i class="bi bi-plus-lg me-1"></i>Create
-                    </button>
-                </div>
-            </div>
-        </div>
+    <!-- Hidden Compatibility Store for Legacy IDs & Scripts -->
+    <div class="d-none" aria-hidden="true">
+        <span id="momToday"></span>
+        <span id="momPendingCount">2</span>
+        <span id="momStatTotal">5</span>
+        <span id="momStatPending">2</span>
+        <span id="momStatCR">3</span>
     </div>
 
-    <!-- Stat Metric Cards -->
-    <div class="row g-3 mb-4">
-        <div class="col-xl-4 col-md-6">
-            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
-                <div class="card-body p-3 d-flex align-items-center gap-3">
-                    <div class="bg-success-subtle text-success rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-journal-check fs-4"></i>
+    <!-- Pending MOM Collapsible Drawer Store -->
+    <div class="collapse mb-3" id="momPendingCollapse">
+        <div class="card border border-warning-subtle shadow-sm rounded-3 bg-warning-subtle bg-opacity-25">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <span class="badge bg-warning text-dark font-11 fw-bold"><i class="bi bi-hourglass-split me-1"></i>Action Required</span>
+                        <span class="fw-bold text-dark font-13">Pending MOM Documentation (<span id="momPendingHeaderCount">2</span>)</span>
+                        <span class="text-muted font-11 d-none d-md-inline">— Finished appointments awaiting minutes</span>
                     </div>
-                    <div>
-                        <div class="h4 fw-bold mb-0 text-dark" id="momStatTotal">5</div>
-                        <div class="text-secondary small fw-medium">Total Minutes Recorded</div>
-                    </div>
+                    <button type="button" class="btn-close font-11" data-bs-toggle="collapse" data-bs-target="#momPendingCollapse" aria-label="Close"></button>
                 </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
-                <div class="card-body p-3 d-flex align-items-center gap-3">
-                    <div class="bg-warning-subtle text-warning-emphasis rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-hourglass-split fs-4"></i>
+                <div class="d-flex gap-2.5 overflow-auto pb-1" id="momPendingRow">
+                    <!-- Appt 1 -->
+                    <div class="border rounded-3 p-2.5 bg-white d-flex justify-content-between align-items-center gap-3 flex-shrink-0 shadow-sm" style="min-width: 300px;">
+                        <div>
+                            <div class="d-flex align-items-center gap-1.5 mb-1">
+                                <span class="badge bg-light text-muted border font-10"><i class="bi bi-clock me-1"></i>13-07-2026 10:00</span>
+                                <span class="badge bg-primary-subtle text-primary font-10">DEV - Online</span>
+                            </div>
+                            <div class="fw-semibold text-dark font-12 mb-0.5">Test Appointment</div>
+                            <div class="text-muted font-11"><i class="bi bi-building me-1"></i>Raja Enterprises</div>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-xs py-1 px-2.5 rounded-pill text-nowrap fw-semibold font-11" data-pendingid="501">
+                            <i class="bi bi-plus-lg me-1"></i>Create
+                        </button>
                     </div>
-                    <div>
-                        <div class="h4 fw-bold mb-0 text-dark" id="momStatPending">2</div>
-                        <div class="text-secondary small fw-medium">Pending Documentation</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="card border-0 shadow-sm rounded-3 h-100 bg-white">
-                <div class="card-body p-3 d-flex align-items-center gap-3">
-                    <div class="bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-arrow-repeat fs-4"></i>
-                    </div>
-                    <div>
-                        <div class="h4 fw-bold mb-0 text-dark" id="momStatCR">3</div>
-                        <div class="text-secondary small fw-medium">Open Change Requests</div>
+
+                    <!-- Appt 2 -->
+                    <div class="border rounded-3 p-2.5 bg-white d-flex justify-content-between align-items-center gap-3 flex-shrink-0 shadow-sm" style="min-width: 300px;">
+                        <div>
+                            <div class="d-flex align-items-center gap-1.5 mb-1">
+                                <span class="badge bg-light text-muted border font-10"><i class="bi bi-clock me-1"></i>21-07-2026 15:30</span>
+                                <span class="badge bg-info-subtle text-info font-10">Onsite</span>
+                            </div>
+                            <div class="fw-semibold text-dark font-12 mb-0.5">Site Survey Discussion</div>
+                            <div class="text-muted font-11"><i class="bi bi-building me-1"></i>GODREJ</div>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-xs py-1 px-2.5 rounded-pill text-nowrap fw-semibold font-11" data-pendingid="502">
+                            <i class="bi bi-plus-lg me-1"></i>Create
+                        </button>
                     </div>
                 </div>
             </div>
@@ -138,18 +131,24 @@ include 'header.php';
 
     <!-- MOM List Table -->
     <div class="card border-0 shadow-sm rounded-3 mb-4 bg-white" id="momTableWrap">
-        <div class="card-header bg-white py-3 border-bottom d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-            <div>
-                <h6 class="fw-bold text-dark mb-0">Minutes of Meeting Directory</h6>
-                <small class="text-secondary">Historical logs, attendee sign-offs, and downloadable PDF minutes</small>
+        <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-journal-text text-primary me-2"></i>Minutes of Meeting Directory</h6>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="momStatTotalBadge">5 Recorded</span>
+                <button type="button" class="btn btn-xs btn-outline-warning text-dark border border-warning-subtle rounded-pill px-2.5 py-1 font-11 fw-semibold" data-bs-toggle="collapse" data-bs-target="#momPendingCollapse" aria-expanded="false" title="Click to view pending items">
+                    <i class="bi bi-hourglass-split me-1 text-warning"></i><span id="momStatPendingBadge">2 Pending Documentation</span> <i class="bi bi-chevron-down font-10 ms-0.5"></i>
+                </button>
+                <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-2.5 py-1 font-11" title="3 Open Change Requests">
+                    <i class="bi bi-arrow-repeat me-1"></i><span id="momStatCRBadge">3 Open CRs</span>
+                </span>
             </div>
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
                 <div class="input-group input-group-sm" style="max-width: 220px;">
-                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" class="form-control border-start-0" placeholder="Search MOM...">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control border-start-0" id="momTableSearch" placeholder="Search MOM...">
                 </div>
-                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.print()">
-                    <i class="bi bi-printer me-1"></i> Print
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.print()" title="Print Directory">
+                    <i class="bi bi-printer me-1"></i>Print
                 </button>
             </div>
         </div>
@@ -410,6 +409,119 @@ include 'header.php';
 <!-- =========================================================================
      NEW / EDIT MOM FULLSCREEN MODAL
      ========================================================================= -->
+<!-- =========================================================================
+     OFFCANVAS FILTER DRAWER: MINUTES OF MEETING
+     ========================================================================= -->
+<div class="offcanvas offcanvas-end border-start shadow-lg" tabindex="-1" id="momFilterOffcanvas" aria-labelledby="momFilterTitle" style="width: 360px;">
+    <div class="offcanvas-header border-bottom py-3 px-4 bg-light">
+        <div class="d-flex align-items-center gap-2">
+            <span class="p-1.5 rounded-2 bg-primary-subtle text-primary d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+            <h5 class="offcanvas-title fw-bold text-dark fs-6 mb-0" id="momFilterTitle">Filter Minutes of Meeting</h5>
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column gap-3">
+        <!-- Quick Status Chips -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1.5">Quick Filters</label>
+            <div class="d-flex flex-wrap gap-1.5" id="momDrawerChips">
+                <button type="button" class="btn btn-xs btn-outline-secondary active mom-drawer-chip" data-quick="all">All (5)</button>
+                <button type="button" class="btn btn-xs btn-outline-warning text-dark mom-drawer-chip" data-quick="pending">Pending (2)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary mom-drawer-chip" data-quick="cr">Has CR (3)</button>
+                <button type="button" class="btn btn-xs btn-outline-success mom-drawer-chip" data-quick="done">Done (4)</button>
+            </div>
+        </div>
+
+        <!-- Keyword search -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Search Keyword</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control" id="momDrawerSearch" placeholder="Customer, project, subject...">
+            </div>
+        </div>
+
+        <!-- Customer Name -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Customer</label>
+            <select class="form-select form-select-sm" id="momDrawerCust">
+                <option value="">All Customers</option>
+                <option>GODREJ</option>
+                <option>Raja Enterprises</option>
+                <option>GHARUDA soft</option>
+                <option>Abcd c</option>
+                <option>GHARUDA Software Technology</option>
+            </select>
+        </div>
+
+        <!-- Project Name -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Project</label>
+            <select class="form-select form-select-sm" id="momDrawerProj">
+                <option value="">All Projects</option>
+                <option>GHARUDA book</option>
+                <option>Check and Charge</option>
+                <option>Construction project</option>
+                <option>GHARUDA Electrical Project</option>
+            </select>
+        </div>
+
+        <!-- Initiated By -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Initiated By (SPOC)</label>
+            <select class="form-select form-select-sm" id="momDrawerInit">
+                <option value="">All Staff SPOCs</option>
+                <option>Madhu S</option>
+                <option>ram krishnan</option>
+                <option>gharuda SOFTWARE</option>
+            </select>
+        </div>
+
+        <!-- Change Request Status -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Change Request Status</label>
+            <select class="form-select form-select-sm" id="momDrawerCrStatus">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending CRs</option>
+                <option value="done">Completed CRs</option>
+                <option value="none">No Change Requests</option>
+            </select>
+        </div>
+
+        <!-- Date Range -->
+        <div>
+            <label class="form-label fw-semibold small text-dark mb-1">Date Range</label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
+                <input type="text" class="form-control" id="momDrawerDate" placeholder="DD-MM-YYYY to DD-MM-YYYY" autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Quick Links / Shortcuts -->
+        <div class="pt-2 border-top">
+            <label class="form-label fw-semibold small text-dark mb-2">Related Activity Views</label>
+            <div class="d-flex flex-column gap-1.5">
+                <a href="appointments.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-calendar2-week text-primary"></i><span>Appointments &amp; Meetings</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+                <a href="summary-report.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-warning"></i><span>Summary Report</span></span>
+                    <i class="bi bi-chevron-right font-11 text-muted"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 bg-light d-flex align-items-center justify-content-between">
+        <button type="button" class="btn btn-outline-secondary btn-sm fw-semibold px-3" onclick="resetMomFilters()">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+        </button>
+        <button type="button" class="btn btn-primary btn-sm fw-semibold px-4" data-bs-dismiss="offcanvas" onclick="applyMomFilters()">
+            <i class="bi bi-check-lg me-1"></i>Apply Filters
+        </button>
+    </div>
+</div>
+
 <div class="modal fade" id="momNewModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -1334,6 +1446,125 @@ include 'header.php';
 
             pdfMake.createPdf(docDef).open();
         }
+
+        /* ---------- Offcanvas & Table Filtering ---------- */
+        var activeMomQuick = 'all';
+
+        function updateMomBadge() {
+            var badge = document.getElementById('momFilterCountBadge');
+            if (!badge) return;
+            var count = 0;
+            if (activeMomQuick !== 'all') count++;
+            if (document.getElementById('momDrawerSearch') && document.getElementById('momDrawerSearch').value.trim()) count++;
+            if (document.getElementById('momDrawerCust') && document.getElementById('momDrawerCust').value) count++;
+            if (document.getElementById('momDrawerProj') && document.getElementById('momDrawerProj').value) count++;
+            if (document.getElementById('momDrawerInit') && document.getElementById('momDrawerInit').value) count++;
+            if (document.getElementById('momDrawerCrStatus') && document.getElementById('momDrawerCrStatus').value) count++;
+            if (document.getElementById('momDrawerDate') && document.getElementById('momDrawerDate').value.trim()) count++;
+
+            if (count > 0) {
+                badge.textContent = count;
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
+        }
+
+        window.applyMomFilters = function() {
+            var q = (document.getElementById('momTableSearch') ? document.getElementById('momTableSearch').value : '') ||
+                    (document.getElementById('momDrawerSearch') ? document.getElementById('momDrawerSearch').value : '');
+            q = q.toLowerCase().trim();
+            var custVal = (document.getElementById('momDrawerCust') ? document.getElementById('momDrawerCust').value : '').toLowerCase().trim();
+            var projVal = (document.getElementById('momDrawerProj') ? document.getElementById('momDrawerProj').value : '').toLowerCase().trim();
+            var initVal = (document.getElementById('momDrawerInit') ? document.getElementById('momDrawerInit').value : '').toLowerCase().trim();
+            var crVal = document.getElementById('momDrawerCrStatus') ? document.getElementById('momDrawerCrStatus').value : '';
+
+            var rows = document.querySelectorAll('#momTbody tr');
+            var visibleCount = 0;
+
+            rows.forEach(function(tr) {
+                var text = tr.textContent.toLowerCase();
+                var id = Number(tr.getAttribute('data-id'));
+                var rec = momData.filter(function(r) { return r.id === id; })[0];
+
+                var matchQ = !q || text.indexOf(q) !== -1;
+                var matchCust = !custVal || (rec && rec.customer.toLowerCase().indexOf(custVal) !== -1);
+                var matchProj = !projVal || (rec && rec.project.toLowerCase().indexOf(projVal) !== -1);
+                var matchInit = !initVal || (rec && rec.initiated.toLowerCase().indexOf(initVal) !== -1);
+                var matchCr = true;
+                if (crVal === 'pending') {
+                    matchCr = rec && rec.crs && rec.crs.some(function(c) { return c.status === 'Pending'; });
+                } else if (crVal === 'done') {
+                    matchCr = rec && rec.crs && rec.crs.some(function(c) { return c.status === 'Done'; });
+                } else if (crVal === 'none') {
+                    matchCr = !rec || !rec.crs || rec.crs.length === 0;
+                }
+
+                var matchQuick = true;
+                if (activeMomQuick === 'cr') {
+                    matchQuick = rec && rec.crs && rec.crs.length > 0;
+                } else if (activeMomQuick === 'pending') {
+                    // Show pending collapse
+                    var collapseEl = document.getElementById('momPendingCollapse');
+                    if (collapseEl && typeof bootstrap !== 'undefined') {
+                        bootstrap.Collapse.getOrCreateInstance(collapseEl).show();
+                    }
+                }
+
+                if (matchQ && matchCust && matchProj && matchInit && matchCr && matchQuick) {
+                    tr.style.display = '';
+                    visibleCount++;
+                } else {
+                    tr.style.display = 'none';
+                }
+            });
+
+            var totalBadge = document.getElementById('momStatTotalBadge');
+            if (totalBadge) totalBadge.textContent = visibleCount + ' Recorded';
+            updateMomBadge();
+        };
+
+        window.resetMomFilters = function() {
+            activeMomQuick = 'all';
+            document.querySelectorAll('.mom-drawer-chip').forEach(function(c) {
+                c.classList.toggle('active', c.getAttribute('data-quick') === 'all');
+            });
+            if (document.getElementById('momTableSearch')) document.getElementById('momTableSearch').value = '';
+            if (document.getElementById('momDrawerSearch')) document.getElementById('momDrawerSearch').value = '';
+            if (document.getElementById('momDrawerCust')) document.getElementById('momDrawerCust').value = '';
+            if (document.getElementById('momDrawerProj')) document.getElementById('momDrawerProj').value = '';
+            if (document.getElementById('momDrawerInit')) document.getElementById('momDrawerInit').value = '';
+            if (document.getElementById('momDrawerCrStatus')) document.getElementById('momDrawerCrStatus').value = '';
+            if (document.getElementById('momDrawerDate')) document.getElementById('momDrawerDate').value = '';
+            applyMomFilters();
+        };
+
+        // Live search on table search input
+        var tSearch = document.getElementById('momTableSearch');
+        if (tSearch) {
+            tSearch.addEventListener('input', function() {
+                if (document.getElementById('momDrawerSearch')) document.getElementById('momDrawerSearch').value = this.value;
+                applyMomFilters();
+            });
+        }
+        var dSearch = document.getElementById('momDrawerSearch');
+        if (dSearch) {
+            dSearch.addEventListener('input', function() {
+                if (document.getElementById('momTableSearch')) document.getElementById('momTableSearch').value = this.value;
+                applyMomFilters();
+            });
+        }
+
+        // Quick chip clicks in drawer
+        document.querySelectorAll('.mom-drawer-chip').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.mom-drawer-chip').forEach(function(c) { c.classList.remove('active'); });
+                this.classList.add('active');
+                activeMomQuick = this.getAttribute('data-quick');
+                applyMomFilters();
+            });
+        });
+
     })();
 </script>
 <?php include 'footer.php'; ?>

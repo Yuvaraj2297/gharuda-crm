@@ -858,58 +858,38 @@
         <!-- Meeting Schedule Table Card -->
         <div class="card border shadow-sm rounded-3 bg-white overflow-hidden mb-4">
             <div class="card-header bg-white py-3 px-4 d-flex align-items-center justify-content-between border-bottom flex-wrap gap-2">
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
                     <h6 class="fw-bold text-dark mb-0"><i class="bi bi-camera-video text-primary me-2"></i>Video &amp; Remote Meeting Schedule</h6>
                     <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 font-12" id="msCountBadge">12 Meetings</span>
                 </div>
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <div class="input-group input-group-sm" style="max-width: 220px;">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" id="msSearch" placeholder="Search customer, staff...">
+                    </div>
+                    <select class="form-select form-select-sm" id="msStatusFilter" style="width: auto;">
+                        <option value="">All Statuses</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Missed">Missed</option>
+                    </select>
+                    <select class="form-select form-select-sm" id="msTypeFilter" style="width: auto;">
+                        <option value="">All Types</option>
+                        <option value="Customer">Customer</option>
+                        <option value="Lead">Lead</option>
+                    </select>
+                    <input type="hidden" id="msFromDate">
+                    <input type="hidden" id="msToDate">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearMsFilters()" title="Reset filters">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" onclick="exportMeetingScheduleCSV()">
                         <i class="bi bi-download"></i><span>Export CSV</span>
                     </button>
                     <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold" onclick="openQuickApptPreset('SW')">
                         <i class="bi bi-plus-lg"></i><span>Schedule Video Demo</span>
                     </button>
-                </div>
-            </div>
-
-            <!-- Filter bar inside card -->
-            <div class="p-3 bg-light bg-opacity-50 border-bottom">
-                <div class="row g-2 align-items-center">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
-                            <input type="text" class="form-control" id="msSearch" placeholder="Search customer, staff, remark...">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <select class="form-select form-select-sm" id="msTypeFilter">
-                            <option value="">All Types (Customer / Lead)</option>
-                            <option value="Customer">Customer</option>
-                            <option value="Lead">Lead</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <select class="form-select form-select-sm" id="msStatusFilter">
-                            <option value="">All Statuses</option>
-                            <option value="Scheduled">Scheduled</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Cancelled">Cancelled</option>
-                            <option value="Missed">Missed</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
-                            <input type="date" class="form-control form-control-sm" id="msFromDate" title="From Date" aria-label="From Date">
-                            <span class="input-group-text bg-white text-muted px-1.5 font-11">to</span>
-                            <input type="date" class="form-control form-control-sm" id="msToDate" title="To Date" aria-label="To Date">
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-12 text-end">
-                        <button type="button" class="btn btn-sm btn-outline-secondary w-100" onclick="clearMsFilters()">
-                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -2906,6 +2886,9 @@
         ];
 
         window.switchApmView = function(view) {
+            // Dismiss and remove any lingering tooltips from previous view
+            document.querySelectorAll('.tooltip').forEach(function(t) { t.remove(); });
+
             var allView = document.getElementById('apmAllView');
             var schView = document.getElementById('apmScheduleView');
             var cbView = document.getElementById('apmCallbacksView');
