@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+include 'header.php';
+$currentView = isset($_GET['view']) && $_GET['view'] === 'daily-report' ? 'daily-report' : 'tasks';
+?>
 
 
 <style>
@@ -28,18 +31,35 @@
                     </span>
                     <span class="d-none" id="tkOverdueCount2">0</span>
                 </div>
-                <span class="text-muted font-11">Manage and track all project deliverables and assignees</span>
+                <span class="text-muted font-11">Manage deliverables, team assignments &amp; daily activity</span>
             </div>
+        </div>
+
+        <!-- CENTER: View Switcher (All Tasks vs Daily Report) -->
+        <div class="btn-group btn-group-sm p-1 bg-light rounded-pill border" role="group" id="tasksViewSwitcher">
+            <button type="button" class="btn btn-sm rounded-pill px-3 py-1 fw-semibold <?= $currentView === 'tasks' ? 'btn-primary' : 'text-secondary' ?>" id="viewTabTasks" onclick="switchTaskView('tasks')">
+                <i class="bi bi-list-task me-1"></i> All Tasks
+            </button>
+            <button type="button" class="btn btn-sm rounded-pill px-3 py-1 fw-semibold <?= $currentView === 'daily-report' ? 'btn-primary' : 'text-secondary' ?>" id="viewTabDailyReport" onclick="switchTaskView('daily-report')">
+                <i class="bi bi-calendar2-check me-1"></i> Daily Task Report
+            </button>
         </div>
         
         <!-- RIGHT: Filters + Actions -->
         <div class="d-flex align-items-center flex-wrap gap-2">
-            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#tasksFilterOffcanvas" aria-controls="tasksFilterOffcanvas">
+            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#tasksFilterOffcanvas" aria-controls="tasksFilterOffcanvas" id="btnTasksFilter" <?= $currentView === 'daily-report' ? 'style="display:none;"' : '' ?>>
                 <i class="bi bi-funnel"></i><span>Filters</span>
                 <span class="badge bg-primary rounded-pill d-none" id="tasksFilterCountBadge">0</span>
             </button>
-            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="collapse" data-bs-target="#tasksSummaryCollapse">
+            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#dailyTaskFilterOffcanvas" aria-controls="dailyTaskFilterOffcanvas" id="btnDailyFilter" <?= $currentView !== 'daily-report' ? 'style="display:none;"' : '' ?>>
+                <i class="bi bi-funnel"></i><span>Filters</span>
+                <span class="badge bg-primary rounded-pill d-none" id="dailyTaskFilterCountBadge">0</span>
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="collapse" data-bs-target="#tasksSummaryCollapse" id="btnTasksSummary" <?= $currentView === 'daily-report' ? 'style="display:none;"' : '' ?>>
                 <i class="bi bi-bar-chart"></i><span>Summary</span>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="window.print()">
+                <i class="bi bi-printer"></i><span>Print</span>
             </button>
             <a href="task-overview.php" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1">
                 <i class="bi bi-grid-3x3-gap"></i><span>Overview</span>
@@ -50,7 +70,9 @@
         </div>
     </div>
 
-    <!-- Tasks Summary Collapsible Drawer -->
+    <!-- VIEW 1: TASKS LIST -->
+    <div id="viewTasksContainer" <?= $currentView === 'daily-report' ? 'style="display:none;"' : '' ?>>
+<!-- Tasks Summary Collapsible Drawer -->
     <div class="collapse mb-3" id="tasksSummaryCollapse">
         <div class="card border-0 shadow-sm rounded-3 p-3 bg-white">
             <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">
@@ -93,6 +115,35 @@
         </div>
     </div>
 
+
+
+    </div>
+    <!-- END VIEW 1: TASKS LIST -->
+
+    <!-- VIEW 2: DAILY TASK REPORT -->
+    <div id="viewDailyReportContainer" <?= $currentView !== 'daily-report' ? 'style="display:none;"' : '' ?>>
+        <!-- Table Section Card matching employees-report.php -->
+        <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3 bg-white card-custom">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 font-13 master-table column-border" id="dailyTaskReportTable">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllCheckbox" class="form-check-input" onclick="toggleSelectAllRows(this)"></th>
+                            <th>PROJECT NAME</th>
+                            <th>TASK COUNT</th>
+                            <th>WORKING STATUS</th>
+                            <th>MEMBERS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dailyTaskReportBody">
+                        <!-- Dynamic MasterTable Render -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- END VIEW 2: DAILY TASK REPORT -->
 
 <!-- Tasks Filter Offcanvas -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="tasksFilterOffcanvas" aria-labelledby="tasksFilterOffcanvasLabel" style="width: 360px;">
@@ -144,6 +195,62 @@
         <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" id="tkClearBtn">Clear</button>
         <button type="button" class="btn btn-primary btn-sm flex-fill" id="tkSearchBtn">Apply Filters</button>
     </div>
+
+
+<!-- Daily Task Report Filter Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="dailyTaskFilterOffcanvas" aria-labelledby="dailyTaskFilterOffcanvasLabel" style="width: 360px;">
+    <div class="offcanvas-header border-bottom">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="dailyTaskFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Daily Task Report
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="GET" action="" id="dailyReportFilterForm" onsubmit="event.preventDefault(); applyReportFilters();">
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportDate">Report Date</label>
+                <input type="date" id="reportDate" class="form-control form-control-sm" value="<?= date('Y-m-d') ?>" onchange="updateDailyTaskFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportProjects">Projects</label>
+                <select id="reportProjects" class="form-select form-select-sm select2" onchange="updateDailyTaskFilterBadge()">
+                    <option value="">All Projects</option>
+                    <option value="Test Project">Test Project</option>
+                    <option value="NEW TEST">NEW TEST</option>
+                    <option value="koka soft">koka soft</option>
+                    <option value="welcome">welcome</option>
+                    <option value="welcome123">welcome123</option>
+                    <option value="KOKA Electrical Work">KOKA Electrical Work</option>
+                    <option value="TEST PROJECT 2">TEST PROJECT 2</option>
+                    <option value="koka book">koka book</option>
+                    <option value="Tester">Tester</option>
+                    <option value="Factory Interior">Factory Interior</option>
+                    <option value="Construction project">Construction project</option>
+                    <option value="Solar panel">Solar panel</option>
+                    <option value="College Project">College Project</option>
+                    <option value="painting">painting</option>
+                    <option value="RSB Arch">RSB Arch</option>
+                    <option value="Check and Charge">Check and Charge</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportStatus">Working Status</label>
+                <select id="reportStatus" class="form-select form-select-sm select2" onchange="updateDailyTaskFilterBadge()">
+                    <option value="">All Working Status</option>
+                    <option value="Yes">Yes (Active Tasks)</option>
+                    <option value="No">No (Idle)</option>
+                </select>
+            </div>
+            <div class="d-none">
+                <button type="submit" id="dailyTaskHiddenSubmit"></button>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" onclick="resetDailyTaskFilters()">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill" onclick="document.getElementById('dailyTaskHiddenSubmit').click()">Apply Filters</button>
+    </div>
+</div>
 </div>
 
 </main>
@@ -203,6 +310,20 @@
 <?php include 'footer.php'; ?>
 
 <script>
+    window.updateTasksFilterBadge = function() {
+        var count = 0;
+        ['tkStaff', 'tkStatus', 'tkProject', 'tkQc', 'tkFrom', 'tkTo'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && el.value) count++;
+        });
+        var badge = document.getElementById('tasksFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) badge.classList.remove('d-none');
+            else badge.classList.add('d-none');
+        }
+    };
+
     (function() {
         'use strict';
 
@@ -658,6 +779,7 @@
             else badge.classList.add('d-none');
         }
     }
+    window.updateTasksFilterBadge = updateTasksFilterBadge;
 
     function resetFilters() {
         setTimeout(updateTasksFilterBadge, 50);
@@ -833,4 +955,188 @@
     })();
 </script>
 
-<script src="./assets/js/date-picker.js"></script>
+<script>
+    /* ---------------- View Switcher (All Tasks vs Daily Report) ---------------- */
+    function switchTaskView(view) {
+        var tasksContainer = document.getElementById('viewTasksContainer');
+        var dailyContainer = document.getElementById('viewDailyReportContainer');
+        var tabTasks = document.getElementById('viewTabTasks');
+        var tabDaily = document.getElementById('viewTabDailyReport');
+        var btnTasksFilter = document.getElementById('btnTasksFilter');
+        var btnDailyFilter = document.getElementById('btnDailyFilter');
+        var btnSummary = document.getElementById('btnTasksSummary');
+
+        if (view === 'daily-report') {
+            if (tasksContainer) tasksContainer.style.display = 'none';
+            if (dailyContainer) dailyContainer.style.display = 'block';
+            if (tabTasks) tabTasks.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold text-secondary';
+            if (tabDaily) tabDaily.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold btn-primary';
+            if (btnTasksFilter) btnTasksFilter.style.display = 'none';
+            if (btnDailyFilter) btnDailyFilter.style.display = '';
+            if (btnSummary) btnSummary.style.display = 'none';
+            if (typeof initDailyTaskTable === 'function' && !window.dailyTableInitialized) {
+                initDailyTaskTable();
+                window.dailyTableInitialized = true;
+            }
+            if (window.history && window.history.replaceState) {
+                history.replaceState(null, '', 'tasks-list.php?view=daily-report');
+            }
+        } else {
+            if (tasksContainer) tasksContainer.style.display = 'block';
+            if (dailyContainer) dailyContainer.style.display = 'none';
+            if (tabTasks) tabTasks.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold btn-primary';
+            if (tabDaily) tabDaily.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold text-secondary';
+            if (btnTasksFilter) btnTasksFilter.style.display = '';
+            if (btnDailyFilter) btnDailyFilter.style.display = 'none';
+            if (btnSummary) btnSummary.style.display = '';
+            if (window.history && window.history.replaceState) {
+                history.replaceState(null, '', 'tasks-list.php?view=tasks');
+            }
+        }
+    }
+    window.switchTaskView = switchTaskView;
+
+    // Auto initialize daily report table if view is daily-report on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('view') === 'daily-report' && typeof initDailyTaskTable === 'function') {
+            initDailyTaskTable();
+            window.dailyTableInitialized = true;
+        }
+    });
+
+    /* ---------------- Daily Task Report Script Logic ---------------- */
+    $(document).ready(function() {
+        if ($.fn.select2) {
+            $('.select2').select2({
+                width: '100%'
+            });
+        }
+    });
+
+    // Initial Report Data
+    var reportProjectsData = [
+        { id: 1, name: 'Test Project', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 2, name: 'NEW TEST', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 3, name: 'koka soft', tasks: 2, status: 'Yes', members: ['OK', 'AS'], membersStr: 'OK AS' },
+        { id: 4, name: 'welcome', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 5, name: 'welcome123', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 6, name: 'KOKA Electrical Work', tasks: 5, status: 'Yes', members: ['OK', 'AS', 'RM'], membersStr: 'OK AS RM' },
+        { id: 7, name: 'TEST PROJECT 2', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 8, name: 'koka book', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 9, name: 'Tester', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 10, name: 'Factory Interior', tasks: 3, status: 'Yes', members: ['SK', 'RM'], membersStr: 'SK RM' },
+        { id: 11, name: 'Construction project', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 12, name: 'Solar panel', tasks: 4, status: 'Yes', members: ['AS', 'SK'], membersStr: 'AS SK' },
+        { id: 13, name: 'College Project', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 14, name: 'painting', tasks: 2, status: 'Yes', members: ['OK'], membersStr: 'OK' },
+        { id: 15, name: 'RSB Arch', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 16, name: 'Check and Charge', tasks: 0, status: 'No', members: [], membersStr: '' },
+        { id: 17, name: 'Solar Panel Installation', tasks: 6, status: 'Yes', members: ['OK', 'AS', 'SK', 'RM'], membersStr: 'OK AS SK RM' }
+    ];
+
+    var dailyReportMasterTable = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initDailyTaskTable(reportProjectsData);
+    });
+
+    function initDailyTaskTable(dataArray) {
+        dailyReportMasterTable = MasterTable.init({
+            tableId: 'dailyTaskReportTable',
+            tbodyId: 'dailyTaskReportBody',
+            data: dataArray,
+            tableName: 'Projectwise Daily Activity',
+            primaryKey: 'id',
+            searchFields: ['name', 'status', 'membersStr'],
+            columns: [
+                { field: null, title: '<input type="checkbox" id="selectAllCheckbox" class="form-check-input" onclick="toggleSelectAllRows(this)">', sortable: false, render: function(val, row) {
+                    return '<input type="checkbox" class="form-check-input row-report-checkbox" data-id="' + row.id + '">';
+                }},
+                { field: 'name', title: 'PROJECT NAME', sortable: true, render: function(val, row) {
+                    return '<a href="project-dashboard.php?id=' + row.id + '&name=' + encodeURIComponent(val) + '" class="proj-link">' + escapeHtml(val) + '</a>';
+                }},
+                { field: 'tasks', title: 'TASK COUNT', sortable: true, render: function(val) {
+                    return '<span class="fw-bold ' + (val > 0 ? 'text-primary' : 'text-muted') + '">' + val + '</span>';
+                }},
+                { field: 'status', title: 'WORKING STATUS', sortable: true, render: function(val) {
+                    if (val === 'Yes') {
+                        return '<span class="status-pill" style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:999px;font-weight:700;font-size:11.5px;"><i class="bi bi-check-circle-fill me-1"></i>Yes</span>';
+                    } else {
+                        return '<span class="status-pill" style="background:#f1f5f9;color:#64748b;padding:4px 12px;border-radius:999px;font-weight:600;font-size:11.5px;">No</span>';
+                    }
+                }},
+                { field: 'members', title: 'MEMBERS', sortable: false, render: function(val) {
+                    if (Array.isArray(val) && val.length > 0) {
+                        var html = '<div class="member-avatar-stack">';
+                        var classMap = {'OK': 'avatar-ok', 'AS': 'avatar-as', 'SK': 'avatar-sk', 'RM': 'avatar-rm'};
+                        val.forEach(function(m) {
+                            var cls = classMap[m] || 'avatar-ok';
+                            html += '<div class="member-avatar ' + cls + '" data-bs-toggle="tooltip" title="Member ' + m + '">' + m + '</div>';
+                        });
+                        html += '</div>';
+                        return html;
+                    }
+                    return '<span class="text-muted small">-</span>';
+                }}
+            ]
+        });
+    }
+
+    function toggleSelectAllRows(masterCheckbox) {
+        var isChecked = masterCheckbox.checked;
+        var checkboxes = document.querySelectorAll('.row-report-checkbox');
+        checkboxes.forEach(function(cb) {
+            cb.checked = isChecked;
+        });
+    }
+
+    
+    function updateDailyTaskFilterBadge() {
+        var count = 0;
+        var proj = document.getElementById('reportProjects');
+        if (proj && proj.value && proj.value !== 'all') count++;
+        var status = document.getElementById('reportStatus');
+        if (status && status.value) count++;
+        var badge = document.getElementById('dailyTaskFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) badge.classList.remove('d-none');
+            else badge.classList.add('d-none');
+        }
+    }
+
+    function resetDailyTaskFilters() {
+        var proj = document.getElementById('reportProjects');
+        if (proj) {
+            proj.value = '';
+            if (window.$ && $(proj).data('select2')) $(proj).val('').trigger('change');
+        }
+        var status = document.getElementById('reportStatus');
+        if (status) {
+            status.value = '';
+            if (window.$ && $(status).data('select2')) $(status).val('').trigger('change');
+        }
+        updateDailyTaskFilterBadge();
+        dailyReportMasterTable.setData(reportProjectsData);
+    }
+
+    function applyReportFilters() {
+        updateDailyTaskFilterBadge();
+        var selectedProj = document.getElementById('reportProjects').value.toLowerCase();
+        var selectedStatus = document.getElementById('reportStatus').value;
+
+        var filtered = reportProjectsData.filter(function(item) {
+            var matchProj = (selectedProj === '' || selectedProj === 'all' || item.name.toLowerCase().includes(selectedProj));
+            var matchStatus = (selectedStatus === '' || item.status === selectedStatus);
+            return matchProj && matchStatus;
+        });
+
+        dailyReportMasterTable.setData(filtered);
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+</script>

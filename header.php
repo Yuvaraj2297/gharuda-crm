@@ -1003,14 +1003,11 @@
                         <a data-active-pages="projects-list.php,project-dashboard.php,projects-report.php,project-create.php" class="nav-link-custom" href="projects-list.php">
                             <i class="bi bi-briefcase me-2"></i> <span>Projects</span>
                         </a>
-                        <a data-active-pages="tasks-list.php,task-create.php,task-overview.php" class="nav-link-custom" href="tasks-list.php">
+                        <a data-active-pages="tasks-list.php,projectwise-daily-task-report.php,task-create.php,task-overview.php" class="nav-link-custom" href="tasks-list.php">
                             <i class="bi bi-check2-square me-2"></i> <span>Tasks</span>
                         </a>
                         <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
                             <i class="bi bi-award me-2"></i> <span>Score Card</span>
-                        </a>
-                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
-                            <i class="bi bi-calendar2-check me-2"></i> <span>Daily Task Report</span>
                         </a>
                     </div>
 
