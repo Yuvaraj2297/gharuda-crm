@@ -3,31 +3,23 @@
 
 
 
-<!-- Title & Action Bar -->
-<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-    <div class="d-flex align-items-center gap-3">
+<!-- Page Header & Action Bar in Single Row -->
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+    <!-- LEFT: Icon badge + Title -->
+    <div class="d-flex align-items-center gap-2.5">
+        <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+            <i class="bi bi-person-lines-fill"></i>
+        </div>
         <div>
-            <h1 class="font-display fw-bold mb-1 page-title page-title-lead">Lead Management</h1>
+            <h1 class="font-display fw-bold mb-0 page-title page-title-lead fs-4">Lead Management</h1>
+            <span class="text-muted font-11 d-none d-sm-inline">Manage and track all prospective client leads &amp; pipelines</span>
         </div>
     </div>
-    <div class="d-flex gap-2 flex-wrap">
-        <button type="button" class="btn btn-primary btn-new-lead" data-bs-toggle="modal" data-bs-target="#newLeadModal">
-            <i class="bi bi-plus-lg me-1"></i> New Lead
-        </button>
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#importLeadsModal">
-            <i class="bi bi-upload me-1"></i> Import Leads
-        </button>
-        <!-- <button type="button" class="btn btn-outline-secondary" id="formSyncBtn">
-            <i class="bi bi-arrow-repeat me-1"></i> Form Sync
-        </button> -->
-    </div>
-</div>
 
-<!-- ===== Main View Tabs: Dashboard & Lead Table Data ===== -->
-<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-    <ul class="nav nav-pills gap-2 bg-white p-1.5 border rounded-3 shadow-sm" id="leadMainTabs" role="tablist">
+    <!-- CENTER: Main View Tabs: Dashboard & Lead Table Data -->
+    <ul class="nav nav-pills gap-1 bg-light p-1 border rounded-pill" id="leadMainTabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2" 
+            <button class="nav-link active rounded-pill px-3 py-1 font-12 fw-semibold d-inline-flex align-items-center gap-1.5" 
                     id="tabDashboardBtn" 
                     data-bs-toggle="pill" 
                     data-bs-target="#tabContentDashboard" 
@@ -35,12 +27,12 @@
                     role="tab" 
                     aria-controls="tabContentDashboard" 
                     aria-selected="true">
-                <i class="bi bi-speedometer2 fs-6"></i>
+                <i class="bi bi-speedometer2"></i>
                 <span>Dashboard</span>
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2" 
+            <button class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold d-inline-flex align-items-center gap-1.5" 
                     id="tabLeadsTableBtn" 
                     data-bs-toggle="pill" 
                     data-bs-target="#tabContentLeadsTable" 
@@ -48,17 +40,25 @@
                     role="tab" 
                     aria-controls="tabContentLeadsTable" 
                     aria-selected="false">
-                <i class="bi bi-table fs-6"></i>
+                <i class="bi bi-table"></i>
                 <span>Lead Table Data</span>
-                <span class="badge bg-primary-subtle text-primary rounded-pill px-2 py-0.5 ms-1" id="leadTableCountBadge">10</span>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-1.5 py-0.5 ms-1" id="leadTableCountBadge">10</span>
             </button>
         </li>
     </ul>
 
-    <div class="d-none d-md-flex align-items-center gap-2 text-muted small">
-        <span class="badge bg-light text-secondary border px-2.5 py-1.5 rounded-2">
-            <i class="bi bi-arrow-repeat text-success me-1"></i>Real-time Sync
-        </span>
+    <!-- RIGHT: Actions in Single Row -->
+    <div class="d-flex align-items-center flex-wrap gap-2">
+        <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#leadFilterOffcanvas" aria-controls="leadFilterOffcanvas" id="leadOffcanvasFilterBtn">
+            <i class="bi bi-funnel"></i><span>Filters</span>
+            <span class="badge bg-primary rounded-pill d-none" id="leadFilterCountBadge">0</span>
+        </button>
+        <button type="button" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#importLeadsModal">
+            <i class="bi bi-upload"></i><span>Import Leads</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm btn-new-lead d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#newLeadModal">
+            <i class="bi bi-plus-lg"></i><span>New Lead</span>
+        </button>
     </div>
 </div>
 
@@ -225,111 +225,6 @@
 
 <!-- ===== TAB 2: Lead Table Data ===== -->
 <div class="tab-pane fade" id="tabContentLeadsTable" role="tabpanel" aria-labelledby="tabLeadsTableBtn">
-
-    <!-- ===== Filters card ===== -->
-    <div class="card-custom mb-3 filters-card d-flex flex-column">
-        <button type="button" class="filters-toggle-btn ms-auto" id="leadFilterToggle">
-            <i class="bi bi-funnel"></i>
-            <span>Filter by</span>
-            <i class="bi bi-chevron-down chevron"></i>
-        </button>
-        <div class="filters-collapse" id="leadFilterCollapse">
-            <div class="row g-3">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Staff Members</label>
-                    <select class="form-select select2" id="filterStaff" data-label="Assigned">
-                        <option value="">Assigned</option>
-                        <option>Harish D.</option>
-                        <option>Divya A.</option>
-                        <option>Karthik R.</option>
-                        <option>Priya S.</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Sourcer</label>
-                    <select class="form-select select2" id="filterSourcer" data-label="Sourcer">
-                        <option value="">Sourcer</option>
-                        <option>Harish D.</option>
-                        <option>Website Form</option>
-                        <option>Facebook Ads</option>
-                        <option>Referral</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Lead Status</label>
-                    <select class="form-select select2" id="filterStatus" multiple data-label="Status">
-                        <option selected>Lead</option>
-                        <option selected>Quotation</option>
-                        <option selected>Followup</option>
-                        <option selected>Qualified</option>
-                        <option selected>DIRECT</option>
-                        <option>Negotiation</option>
-                        <option>Won</option>
-                        <option>Lost</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Lead Score</label>
-                    <select class="form-select select2" id="filterSource" data-label="Source">
-                        <option value="">Source</option>
-                        <option>Website</option>
-                        <option>Facebook Ads</option>
-                        <option>Google Ads</option>
-                        <option>Referral</option>
-                        <option>Walk-in</option>
-                        <option>Cold Call</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">From date</label>
-                    <input type="date" class="form-control" id="filterFromDate">
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">To date</label>
-                    <input type="date" class="form-control" id="filterToDate">
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Lead Type</label>
-                    <select class="form-select select2" id="filterType" data-label="Lead Type">
-                        <option value="">Additional Filters</option>
-                        <option>Hot Lead</option>
-                        <option>Warm Lead</option>
-                        <option>Cold Lead</option>
-                        <option>Repeat Customer</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Closure Date Period</label>
-                    <select class="form-select select2" id="filterClosurePeriod" data-label="Closure Period">
-                        <option>All Time</option>
-                        <option>This Week</option>
-                        <option>This Month</option>
-                        <option>This Quarter</option>
-                        <option>This Year</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label class="form-label">Last Contact</label>
-                    <select class="form-select select2" id="filterLastContact" data-label="Last Contact">
-                        <option>All Time</option>
-                        <option>Today</option>
-                        <option>This Week</option>
-                        <option>This Month</option>
-                        <option>This Quarter</option>
-                        <option>This Year</option>
-                    </select>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 align-self-end">
-                    <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-reject flex-fill text-nowrap" id="clearLeadFilters">Clear Filters</button>
-                        <button type="button" class="btn btn-primary flex-fill text-nowrap" id="applyLeadFilters">
-                            <i class="bi bi-funnel"></i> Apply
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Active filters bar -->
     <div class="active-filters-bar" id="leadActiveFilters"></div>
@@ -501,6 +396,50 @@
 </div><!-- /#leadMainTabsContent -->
 
 <script>
+
+    window.updateLeadFilterBadge = function() {
+        var count = 0;
+        ['filterStaff', 'filterSourcer', 'filterSource', 'filterFromDate', 'filterToDate', 'filterType'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && el.value) count++;
+        });
+        var statusEl = document.getElementById('filterStatus');
+        if (statusEl && statusEl.selectedOptions && statusEl.selectedOptions.length < 8) {
+            count++;
+        }
+        var cp = document.getElementById('filterClosurePeriod');
+        if (cp && cp.value && cp.value !== 'All Time') count++;
+        var lc = document.getElementById('filterLastContact');
+        if (lc && lc.value && lc.value !== 'All Time') count++;
+
+        var badge = document.getElementById('leadFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) badge.classList.remove('d-none');
+            else badge.classList.add('d-none');
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var applyBtn = document.getElementById('applyLeadFilters');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', function() {
+                var oc = document.getElementById('leadFilterOffcanvas');
+                if (oc && window.bootstrap && bootstrap.Offcanvas) {
+                    var inst = bootstrap.Offcanvas.getInstance(oc);
+                    if (inst) inst.hide();
+                }
+                if (typeof updateLeadFilterBadge === 'function') updateLeadFilterBadge();
+            });
+        }
+        var clearBtn = document.getElementById('clearLeadFilters');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                if (typeof updateLeadFilterBadge === 'function') setTimeout(updateLeadFilterBadge, 50);
+            });
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         /* ---- Bootstrap 5 Lead View Tabs (Dashboard & Lead Table Data) ---- */
         var tabDashboardBtn = document.getElementById('tabDashboardBtn');
@@ -4650,4 +4589,109 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
 
 <script src="./assets/js/tabel.js"></script>
 <script src="./assets/js/lead.js"></script>
+
+<!-- Lead Filter Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="leadFilterOffcanvas" aria-labelledby="leadFilterOffcanvasLabel" style="width: 380px;">
+    <div class="offcanvas-header border-bottom">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="leadFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Leads
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" id="leadFilterCollapse">
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Staff Members</label>
+            <select class="form-select select2 form-select-sm" id="filterStaff" data-label="Assigned" onchange="updateLeadFilterBadge()">
+                <option value="">Assigned</option>
+                <option>Harish D.</option>
+                <option>Divya A.</option>
+                <option>Karthik R.</option>
+                <option>Priya S.</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Sourcer</label>
+            <select class="form-select select2 form-select-sm" id="filterSourcer" data-label="Sourcer" onchange="updateLeadFilterBadge()">
+                <option value="">Sourcer</option>
+                <option>Harish D.</option>
+                <option>Website Form</option>
+                <option>Facebook Ads</option>
+                <option>Referral</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Lead Status</label>
+            <select class="form-select select2 form-select-sm" id="filterStatus" multiple data-label="Status" onchange="updateLeadFilterBadge()">
+                <option selected>Lead</option>
+                <option selected>Quotation</option>
+                <option selected>Followup</option>
+                <option selected>Qualified</option>
+                <option selected>DIRECT</option>
+                <option>Negotiation</option>
+                <option>Won</option>
+                <option>Lost</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Lead Score / Source</label>
+            <select class="form-select select2 form-select-sm" id="filterSource" data-label="Source" onchange="updateLeadFilterBadge()">
+                <option value="">Source</option>
+                <option>Website</option>
+                <option>Facebook Ads</option>
+                <option>Google Ads</option>
+                <option>Referral</option>
+                <option>Walk-in</option>
+                <option>Cold Call</option>
+            </select>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label text-muted small fw-bold mb-1">From date</label>
+                <input type="date" class="form-control form-control-sm" id="filterFromDate" onchange="updateLeadFilterBadge()">
+            </div>
+            <div class="col-6">
+                <label class="form-label text-muted small fw-bold mb-1">To date</label>
+                <input type="date" class="form-control form-control-sm" id="filterToDate" onchange="updateLeadFilterBadge()">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Lead Type</label>
+            <select class="form-select select2 form-select-sm" id="filterType" data-label="Lead Type" onchange="updateLeadFilterBadge()">
+                <option value="">Additional Filters</option>
+                <option>Hot Lead</option>
+                <option>Warm Lead</option>
+                <option>Cold Lead</option>
+                <option>Repeat Customer</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Closure Date Period</label>
+            <select class="form-select select2 form-select-sm" id="filterClosurePeriod" data-label="Closure Period" onchange="updateLeadFilterBadge()">
+                <option>All Time</option>
+                <option>This Week</option>
+                <option>This Month</option>
+                <option>This Quarter</option>
+                <option>This Year</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Last Contact</label>
+            <select class="form-select select2 form-select-sm" id="filterLastContact" data-label="Last Contact" onchange="updateLeadFilterBadge()">
+                <option>All Time</option>
+                <option>Today</option>
+                <option>This Week</option>
+                <option>This Month</option>
+                <option>This Quarter</option>
+                <option>This Year</option>
+            </select>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill text-nowrap" id="clearLeadFilters">Clear Filters</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill text-nowrap" id="applyLeadFilters">
+            <i class="bi bi-funnel"></i> Apply Filters
+        </button>
+    </div>
+</div>
+
 <?php include 'footer.php'; ?>
