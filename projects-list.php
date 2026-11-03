@@ -1,94 +1,37 @@
 <?php include 'header.php'; ?>
-<link rel="stylesheet" href="./assets/css/date-picker.css">
+
 
 <main class="projects-wrapper pb-5">
     <div class="container-fluid px-3 px-md-4">
-        <!-- Title row (Gharuda CRM Standard Flow) -->
-        <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-            <div class="d-flex align-items-center gap-3">
+        <!-- Page Header & Action Bar -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+            <!-- LEFT: Icon badge + Title + Subtitle -->
+            <div class="d-flex align-items-center gap-2.5">
+                <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                    <i class="bi bi-briefcase"></i>
+                </div>
                 <div>
-                    <h1 class="font-display fw-bold mb-1 fs-3 text-dark">Projects Directory</h1>
+                    <h1 class="font-display fw-bold mb-0 page-title">Projects Directory</h1>
+                    <span class="text-muted font-11">Manage and track all client &amp; internal projects</span>
                 </div>
             </div>
             
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                <a href="project-create.php" class="btn btn-primary d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2 rounded-2 shadow-sm">
-                    <i class="bi bi-plus-circle-fill"></i> Create Project
+            <!-- RIGHT: Actions -->
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#projListFilterOffcanvas" aria-controls="projListFilterOffcanvas">
+                    <i class="bi bi-funnel"></i><span>Filters</span>
+                    <span class="badge bg-primary rounded-pill d-none" id="projListFilterCountBadge">0</span>
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="toggleSummaryOverview()" id="btnSummaryToggle">
+                    <i class="bi bi-pie-chart"></i><span>Lifecycle Summary</span>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                    <i class="bi bi-lightning-charge"></i><span>Quick Add</span>
+                </button>
+                <a href="project-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
+                    <i class="bi bi-plus-lg"></i><span>New Project</span>
                 </a>
-                <button type="button" class="btn btn-outline-secondary bg-white px-3 py-2 fw-semibold rounded-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#newProjectModal">
-                    <i class="bi bi-lightning-charge-fill me-1 text-success"></i> Quick Add
-                </button>
-                <button class="btn btn-outline-secondary bg-white text-secondary px-3 py-2 rounded-2 shadow-sm" id="toggleFilterBtn" data-bs-toggle="tooltip" title="Toggle Search Filters">
-                    <i class="bi bi-funnel-fill"></i>
-                </button>
-                <button class="btn btn-outline-secondary bg-white text-secondary px-3 py-2 rounded-2 shadow-sm" onclick="reloadTableData()" data-bs-toggle="tooltip" title="Refresh Table Data">
-                    <i class="bi bi-arrow-clockwise"></i>
-                </button>
             </div>
-        </div>
-
-        <!-- Filter Form Section -->
-        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white" id="filterCardSection">
-            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
-                <i class="bi bi-sliders text-success me-2"></i> Advanced Project Filters
-            </div>
-            <form id="projectFilterForm" onsubmit="return false;">
-                <div class="row g-3 align-items-end">
-                    <div class="col-lg-4 col-md-6">
-                        <label class="form-label text-muted small fw-bold mb-1">Staff Member / Client</label>
-                        <select class="form-select select2" id="filterStaff" data-placeholder="All Staff / Customers">
-                            <option value="">All Staff / Customers</option>
-                            <option value="GHARUDA">GHARUDA</option>
-                            <option value="Asif">Asif</option>
-                            <option value="Sundar Arumugam">Sundar Arumugam</option>
-                            <option value="Hindustan Hydraulics & Pneumatics">Hindustan Hydraulics & Pneumatics</option>
-                            <option value="GHARUDA soft">GHARUDA soft</option>
-                            <option value="Power Spares Engineering">Power Spares Engineering</option>
-                            <option value="Prabhu photos">Prabhu photos</option>
-                            <option value="Zen Publications">Zen Publications</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <label class="form-label text-muted small fw-bold mb-1">From Start Date</label>
-                        <div class="date-picker">
-                            <input type="text" class="date-input form-control" id="filterFromDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <label class="form-label text-muted small fw-bold mb-1">To Deadline Date</label>
-                        <div class="date-picker">
-                            <input type="text" class="date-input form-control" id="filterToDate" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6">
-                        <button class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 rounded-2 shadow-sm fw-semibold" onclick="applyProjectFilters()">
-                            <i class="bi bi-search"></i> Apply Filter
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Quick Action Filter Pills -->
-        <div class="d-flex align-items-center gap-2 flex-wrap mb-3" id="quickFilterPills">
-            <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('deadline_today')">
-                <i class="bi bi-clock-history me-1"></i> Today's Deadline
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('upcoming')">
-                <i class="bi bi-calendar-event me-1"></i> Upcoming Projects
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('today')">
-                <i class="bi bi-calendar-check me-1"></i> Today's Projects
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickPill('overdue')">
-                <i class="bi bi-exclamation-triangle me-1"></i> Overdue Projects
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 fw-semibold" onclick="resetProjectFilters()">
-                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3 py-1 fw-semibold" onclick="toggleSummaryOverview()">
-                <i class="bi bi-bar-chart-line me-1"></i> Summary Overview
-            </button>
         </div>
 
         <!-- Projects KPI Metrics & Activity Overview Card -->
@@ -175,7 +118,7 @@
         <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3 bg-white" id="projectsTableWrap">
             <!-- Table (toolbar + export + column visibility + live search + show entries + pagination auto-created by datatable class via auto-master-table.js) -->
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0 datatable" id="projectsListTable" data-table-name="Projects">
+                <table class="table table-hover align-middle mb-0 datatable font-13" id="projectsListTable" data-table-name="Projects">
                     <thead class="table-light">
                         <tr>
                             <th class="text-nowrap" style="width: 50px;">S.No</th>
@@ -572,6 +515,57 @@
             </div>
         </div>
     </div>
+
+<!-- Projects Filter Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="projListFilterOffcanvas" aria-labelledby="projListFilterOffcanvasLabel" style="width: 360px;">
+    <div class="offcanvas-header border-bottom">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="projListFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Projects
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form id="projectFilterForm" onsubmit="return false;">
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1">Staff Member / Client</label>
+                <select class="form-select select2" id="filterStaff" data-placeholder="All Staff / Customers" onchange="updateProjListFilterBadge()">
+                    <option value="">All Staff / Customers</option>
+                    <option value="GHARUDA">GHARUDA</option>
+                    <option value="Asif">Asif</option>
+                    <option value="Sundar Arumugam">Sundar Arumugam</option>
+                    <option value="Hindustan Hydraulics & Pneumatics">Hindustan Hydraulics & Pneumatics</option>
+                    <option value="GHARUDA soft">GHARUDA soft</option>
+                    <option value="Power Spares Engineering">Power Spares Engineering</option>
+                    <option value="Prabhu photos">Prabhu photos</option>
+                    <option value="Zen Publications">Zen Publications</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1">From Start Date</label>
+                <input type="date" class="form-control form-control-sm" id="filterFromDate" onchange="updateProjListFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1">To Deadline Date</label>
+                <input type="date" class="form-control form-control-sm" id="filterToDate" onchange="updateProjListFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1">Quick Filter</label>
+                <select class="form-select form-select-sm" id="filterQuickStatus" onchange="filterByQuickPill(this.value); updateProjListFilterBadge();">
+                    <option value="">All Projects</option>
+                    <option value="deadline_today">Today's Deadline</option>
+                    <option value="upcoming">Upcoming Projects</option>
+                    <option value="today">Today's Projects</option>
+                    <option value="overdue">Overdue Projects</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" onclick="resetProjectFilters()">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill" onclick="applyProjectFilters()">Apply Filters</button>
+    </div>
+</div>
+
 </main>
 
 <!-- MODAL: CREATE / EDIT PROJECT -->
@@ -813,11 +807,40 @@
         if (!s) return null;
         var p = s.trim().split('-');
         if (p.length === 3) {
-            var d = Number(p[0]), m = Number(p[1]), y = Number(p[2]);
-            if (y && m && d) return y * 10000 + m * 100 + d;
+            if (p[0].length === 4) {
+                // YYYY-MM-DD
+                var y = Number(p[0]), m = Number(p[1]), d = Number(p[2]);
+                if (y && m && d) return y * 10000 + m * 100 + d;
+            } else {
+                // DD-MM-YYYY
+                var d = Number(p[0]), m = Number(p[1]), y = Number(p[2]);
+                if (y && m && d) return y * 10000 + m * 100 + d;
+            }
         }
         return null;
     }
+
+    function updateProjListFilterBadge() {
+        var count = 0;
+        var staff = document.getElementById('filterStaff');
+        if (staff && staff.value) count++;
+        var fromDate = document.getElementById('filterFromDate');
+        if (fromDate && fromDate.value) count++;
+        var toDate = document.getElementById('filterToDate');
+        if (toDate && toDate.value) count++;
+        var quick = document.getElementById('filterQuickStatus');
+        if (quick && quick.value) count++;
+        var badge = document.getElementById('projListFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) {
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
+        }
+    }
+
 
     // Reset Filters
     function resetProjectFilters() {

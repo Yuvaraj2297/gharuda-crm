@@ -7,29 +7,36 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
 ?>
 
 <div class="container-fluid px-0">
-    <!-- Breadcrumb & Actions Header -->
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
-        <div>
-            <nav class="d-flex align-items-center gap-2 text-muted small mb-1">
-                <a href="projects-list.php" class="text-decoration-none text-muted hover-primary">Projects</a>
-                <i class="bi bi-chevron-right fs-10"></i>
-                <span class="text-dark fw-semibold"><?php echo $projectName; ?></span>
-            </nav>
-            <div class="d-flex align-items-center gap-3">
-                <h1 class="h3 fw-bold mb-0 text-dark"><?php echo $projectName; ?></h1>
-                <span class="badge bg-success-subtle text-success px-2.5 py-1 rounded-pill fw-semibold">In Progress</span>
-                <span class="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill">ID: #PRJ-<?php echo str_pad($projectId, 4, '0', STR_PAD_LEFT); ?></span>
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <!-- LEFT: Icon badge + Title + Subtitle -->
+        <div class="d-flex align-items-center gap-2.5">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                <i class="bi bi-speedometer2"></i>
+            </div>
+            <div>
+                <div class="d-flex align-items-center gap-2">
+                    <h1 class="font-display fw-bold mb-0 page-title"><?php echo $projectName; ?></h1>
+                    <span class="badge bg-success-subtle text-success px-2 py-0.5 rounded-pill font-11 fw-semibold">In Progress</span>
+                    <span class="badge bg-primary-subtle text-primary px-2 py-0.5 rounded-pill font-11">#PRJ-<?php echo str_pad($projectId, 4, '0', STR_PAD_LEFT); ?></span>
+                </div>
+                <div class="d-flex align-items-center gap-2 font-11 text-muted">
+                    <a href="projects-list.php" class="text-decoration-none text-muted"><i class="bi bi-folder me-1"></i>Projects</a>
+                    <span>&bull;</span>
+                    <span>Client: <strong class="text-dark"><?php echo $clientName; ?></strong></span>
+                </div>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
-            <a href="projects-list.php" class="btn btn-outline-secondary btn-sm">
-                <i class="bi bi-arrow-left me-1"></i>All Projects
+        <!-- RIGHT: Action buttons -->
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <a href="projects-list.php" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1">
+                <i class="bi bi-arrow-left"></i><span>All Projects</span>
             </a>
-            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newMilestoneModal">
-                <i class="bi bi-flag me-1"></i>Add Milestone
+            <button type="button" class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#newMilestoneModal">
+                <i class="bi bi-flag"></i><span>Add Milestone</span>
             </button>
-            <a href="task-create.php?project_id=<?php echo $projectId; ?>" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-lg me-1"></i>New Task
+            <a href="task-create.php?project_id=<?php echo $projectId; ?>" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
+                <i class="bi bi-plus-lg"></i><span>New Task</span>
             </a>
         </div>
     </div>

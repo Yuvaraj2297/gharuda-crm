@@ -1,102 +1,41 @@
 <?php include 'header.php'; ?>
 
 <!-- DataTables / DatePicker CSS if available, plus custom Gharuda styles -->
-<link rel="stylesheet" href="./assets/css/date-picker.css">
+
 <link rel="stylesheet" href="./assets/css/select2.css">
 
 <main class="projects-report-wrapper py-3 pb-5">
     <div class="container-fluid px-3 px-md-4">
         
-        <!-- Title row (Gharuda CRM Standard Flow) -->
-        <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-            <div class="d-flex align-items-center gap-3">
-                <div class="rounded-3 bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width:48px; height:48px; font-size:22px;">
-                    <i class="bi bi-file-earmark-bar-graph-fill"></i>
+        <!-- Page Header & Action Bar -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+            <!-- LEFT: Icon badge + Title + Subtitle -->
+            <div class="d-flex align-items-center gap-2.5">
+                <div class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                    <i class="bi bi-file-earmark-bar-graph"></i>
                 </div>
                 <div>
-                    <h1 class="font-display fw-bold mb-1 fs-3 text-dark">Projects Report</h1>
-                    <nav class="d-flex align-items-center gap-2 small text-secondary">
-                        <span>CRM</span>
-                        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
-                        <a href="projects-list.php" class="text-secondary text-decoration-none fw-medium">Projects</a>
-                        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
-                        <span class="fw-bold text-dark">Projects Report</span>
-                    </nav>
+                    <h1 class="font-display fw-bold mb-0 page-title">Projects Report</h1>
+                    <span class="text-muted font-11">Comprehensive project status, deadline &amp; deliverables overview</span>
                 </div>
             </div>
             
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                <button type="button" class="btn btn-outline-secondary bg-white px-3 py-2 fw-semibold rounded-2 shadow-sm" onclick="window.print()">
-                    <i class="bi bi-printer me-1"></i> Print Summary
+            <!-- RIGHT: Actions -->
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#projReportFilterOffcanvas" aria-controls="projReportFilterOffcanvas">
+                    <i class="bi bi-funnel"></i><span>Filters</span>
+                    <span class="badge bg-primary rounded-pill d-none" id="projReportFilterCountBadge">0</span>
                 </button>
-                <a href="project-create.php" class="btn btn-primary px-3 py-2 fw-semibold rounded-2 shadow-sm">
-                    <i class="bi bi-plus-circle me-1"></i> New Project
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="openDetailedOverviewModal()">
+                    <i class="bi bi-bar-chart-steps"></i><span>Overview</span>
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="window.print()">
+                    <i class="bi bi-printer"></i><span>Print</span>
+                </button>
+                <a href="project-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
+                    <i class="bi bi-plus-lg"></i><span>New Project</span>
                 </a>
             </div>
-        </div>
-
-        <!-- Filter Card ("Filter by") -->
-        <div class="card border-0 shadow-sm rounded-3 p-3 mb-3 bg-white" id="filterCard">
-            <div class="fw-bold fs-6 mb-3 text-dark d-flex align-items-center">
-                <i class="bi bi-funnel-fill text-success me-2"></i> Filter by
-            </div>
-            <form id="projectReportFilterForm" onsubmit="handleReportSearch(event)">
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold text-dark small mb-1">Staff Members</label>
-                        <select class="form-select select2" id="filterStaffMember">
-                            <option value="Assigned" selected>Assigned</option>
-                            <option value="All">All Staff Members</option>
-                            <option value="KOHA">KOHA</option>
-                            <option value="ST">ST</option>
-                            <option value="AD">AD</option>
-                            <option value="MK">MK</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <label class="form-label fw-bold text-dark small mb-1">From Date</label>
-                        <div class="date-picker">
-                            <input type="text" class="date-input form-control" id="filterFromDate" placeholder="Select date" autocomplete="off">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <label class="form-label fw-bold text-dark small mb-1">To Date</label>
-                        <div class="date-picker">
-                            <input type="text" class="date-input form-control" id="filterToDate" placeholder="Select date" autocomplete="off">
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 rounded-2 shadow-sm fw-semibold">
-                            <i class="bi bi-search"></i> Search
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Quick Filter Action Buttons Bar -->
-        <div class="d-flex align-items-center gap-2 flex-wrap mb-3" id="actionFilterBar">
-            <button type="button" class="btn btn-sm btn-outline-warning rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('today_deadline')">
-                <i class="bi bi-alarm me-1"></i> Today's Dead Line Project
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('upcoming')">
-                <i class="bi bi-calendar-event me-1"></i> Upcoming Project
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('today')">
-                <i class="bi bi-calendar-check me-1"></i> Today's Project
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 fw-semibold" onclick="filterByQuickTag('due_passed')">
-                <i class="bi bi-exclamation-triangle me-1"></i> Due Date Passed Project
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 fw-semibold" onclick="resetReportFilters()">
-                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3 py-1 fw-semibold" onclick="openDetailedOverviewModal()">
-                <i class="bi bi-bar-chart-steps me-1"></i> Detailed project overview
-            </button>
         </div>
 
         <!-- Projects Summary Section -->
@@ -157,7 +96,7 @@
 
             <!-- Table (toolbar + export + column visibility + search + show entries + pagination auto-created by datatable class via auto-master-table.js) -->
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0 datatable" id="projectReportTable" data-table-name="Projects Report">
+                <table class="table table-hover align-middle mb-0 datatable font-13" id="projectReportTable" data-table-name="Projects Report">
                     <thead class="table-light">
                         <tr>
                             <th rowspan="2" style="width:60px;">S.No</th>
@@ -667,6 +606,57 @@
         </div>
 
     </div>
+
+<!-- Projects Report Filter Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="projReportFilterOffcanvas" aria-labelledby="projReportFilterOffcanvasLabel" style="width: 360px;">
+    <div class="offcanvas-header border-bottom">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="projReportFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Report
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form id="projectReportFilterForm" onsubmit="handleReportSearch(event)">
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filterStaffMember">Staff Members</label>
+                <select class="form-select select2 form-select-sm" id="filterStaffMember" onchange="updateProjReportFilterBadge()">
+                    <option value="Assigned" selected>Assigned</option>
+                    <option value="All">All Staff Members</option>
+                    <option value="KOHA">KOHA</option>
+                    <option value="ST">ST</option>
+                    <option value="AD">AD</option>
+                    <option value="MK">MK</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filterFromDate">From Date</label>
+                <input type="date" class="form-control form-control-sm" id="filterFromDate" onchange="updateProjReportFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filterToDate">To Date</label>
+                <input type="date" class="form-control form-control-sm" id="filterToDate" onchange="updateProjReportFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1">Quick Action Filter</label>
+                <select class="form-select form-select-sm" id="filterQuickTagSelect" onchange="filterByQuickTag(this.value); updateProjReportFilterBadge();">
+                    <option value="">All Projects</option>
+                    <option value="today_deadline">Today's Deadline</option>
+                    <option value="upcoming">Upcoming Projects</option>
+                    <option value="today">Today's Projects</option>
+                    <option value="due_passed">Due Date Passed</option>
+                </select>
+            </div>
+            <div class="d-none">
+                <button type="submit" id="projReportHiddenSubmitBtn"></button>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" onclick="resetReportFilters()">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill" onclick="document.getElementById('projReportHiddenSubmitBtn').click()">Apply Filters</button>
+    </div>
+</div>
+
 </main>
 
 <!-- PROJECT MILESTONE OFFCANVAS DRAWER -->
@@ -1030,7 +1020,27 @@
         }
     }
 
+    
+    function updateProjReportFilterBadge() {
+        var count = 0;
+        var staff = document.getElementById('filterStaffMember');
+        if (staff && staff.value && staff.value !== 'Assigned' && staff.value !== 'All') count++;
+        var fromDate = document.getElementById('filterFromDate');
+        if (fromDate && fromDate.value) count++;
+        var toDate = document.getElementById('filterToDate');
+        if (toDate && toDate.value) count++;
+        var quick = document.getElementById('filterQuickTagSelect');
+        if (quick && quick.value) count++;
+        var badge = document.getElementById('projReportFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) badge.classList.remove('d-none');
+            else badge.classList.add('d-none');
+        }
+    }
+
     function handleReportSearch(e) {
+        updateProjReportFilterBadge();
         e.preventDefault();
         var staffEl = document.getElementById('filterStaffMember');
         var fromEl = document.getElementById('filterFromDate');
@@ -1077,6 +1087,7 @@
         fromDateVal = '';
         toDateVal = '';
         triggerTableFilter();
+        updateProjReportFilterBadge();
     }
 
     function openDetailedOverviewModal() {

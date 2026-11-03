@@ -1,350 +1,41 @@
 <?php include 'header.php'; ?>
 
-<link rel="stylesheet" href="./assets/css/date-picker.css">
+
 <link rel="stylesheet" href="./assets/css/select2.css">
 
-<style>
-    :root {
-        --gh-primary: #0284c7;
-        --gh-primary-hover: #0369a1;
-        --gh-primary-light: #e0f2fe;
-        --gh-success: #10b981;
-        --gh-warning: #f59e0b;
-        --gh-danger: #ef4444;
-        --gh-dark: #0f172a;
-        --gh-slate-700: #334155;
-        --gh-slate-500: #64748b;
-        --gh-border: #e2e8f0;
-        --gh-bg-card: #ffffff;
-        --gh-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-    }
 
-    .report-wrapper {
-        background-color: #f8fafc;
-        min-height: calc(100vh - 70px);
-        padding: 24px;
-        padding-bottom: 4rem;
-    }
 
-    /* Top Page Header */
-    .report-header-card {
-        background: #ffffff;
-        border: 1px solid var(--gh-border);
-        border-radius: 14px;
-        padding: 20px 24px;
-        margin-bottom: 20px;
-        box-shadow: var(--gh-shadow-sm);
-    }
+<div class="container-fluid px-3 px-md-4 py-3">
 
-    .report-title {
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: var(--gh-dark);
-        margin: 0;
-        letter-spacing: -0.02em;
-    }
-
-    /* Filters Card */
-    .report-filters-card {
-        background: #ffffff;
-        border: 1px solid var(--gh-border);
-        border-radius: 14px;
-        padding: 20px 24px;
-        margin-bottom: 24px;
-        box-shadow: var(--gh-shadow-sm);
-        overflow: visible !important;
-        position: relative;
-    }
-
-    .filter-label {
-        font-size: 12.5px;
-        font-weight: 700;
-        color: var(--gh-slate-500);
-        margin-bottom: 6px;
-        display: block;
-    }
-
-    .filter-control {
-        border-radius: 8px;
-        border: 1px solid #cbd5e1;
-        font-size: 13.5px;
-        padding: 8px 14px;
-        height: 40px;
-        width: 100%;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        background-color: #fff;
-    }
-
-    .filter-control:focus {
-        border-color: var(--gh-primary);
-        box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-        outline: none;
-    }
-
-    .btn-search-report {
-        background-color: #0284c7;
-        color: #fff;
-        font-weight: 700;
-        font-size: 13.5px;
-        padding: 8px 24px;
-        height: 40px;
-        border-radius: 8px;
-        border: none;
-        transition: background-color 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    .btn-search-report:hover {
-        background-color: #0369a1;
-        color: #fff;
-    }
-
-    /* Avatar Stack */
-    .member-avatar-stack {
-        display: flex;
-        align-items: center;
-    }
-
-    .member-avatar {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 11px;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #ffffff;
-        margin-left: -6px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .member-avatar:first-child {
-        margin-left: 0;
-    }
-
-    .avatar-ok { background-color: #f59e0b; }
-    .avatar-as { background-color: #8b5cf6; }
-    .avatar-sk { background-color: #0284c7; }
-    .avatar-rm { background-color: #10b981; }
-
-    .proj-link {
-        font-weight: 600;
-        color: #0284c7;
-        text-decoration: none;
-    }
-
-    .proj-link:hover {
-        color: #0369a1;
-        text-decoration: underline;
-    }
-
-    /* Master Table Container matching employees-report.php */
-    .card-custom {
-        background: #ffffff;
-        border: 1px solid var(--gh-border);
-        border-radius: 14px;
-        box-shadow: var(--gh-shadow-sm);
-        overflow: hidden;
-    }
-
-    /* Columns & Export Button Badges (Exact design from employees-report.php) */
-    .columns-btn {
-        background-color: #fef3c7 !important;
-        color: #d97706 !important;
-        border: 1px solid #fde68a !important;
-        font-weight: 700 !important;
-        font-size: 12.5px !important;
-        border-radius: 8px !important;
-        padding: 6px 14px !important;
-    }
-
-    .columns-btn:hover {
-        background-color: #fde68a !important;
-        color: #b45309 !important;
-    }
-
-    .export-btn-pdf {
-        background-color: #dcfce7 !important;
-        color: #15803d !important;
-        border: 1px solid #bbf7d0 !important;
-        font-weight: 700 !important;
-        font-size: 12.5px !important;
-        border-radius: 8px !important;
-        padding: 6px 14px !important;
-    }
-
-    /* Select2 Customization */
-    .select2-container--default .select2-selection--single {
-        height: 40px !important;
-        border-radius: 8px !important;
-        border: 1px solid #cbd5e1 !important;
-        padding: 5px 10px !important;
-        font-size: 13.5px !important;
-        font-weight: 500 !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 38px !important;
-        right: 10px !important;
-    }
-
-    .select2-container--default.select2-container--open .select2-selection--single,
-    .select2-container--default.select2-container--focus .select2-selection--single {
-        border-color: #10b981 !important;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18) !important;
-        outline: none !important;
-    }
-
-    .select2-dropdown {
-        border-radius: 12px !important;
-        border: 1px solid #cbd5e1 !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12) !important;
-        z-index: 99999 !important;
-    }
-
-    .select2-search__field {
-        border-radius: 8px !important;
-        border: 1.5px solid #cbd5e1 !important;
-        padding: 6px 12px !important;
-    }
-
-    /* Datepicker Overrides */
-    .date-picker {
-        position: relative !important;
-        width: 100%;
-        z-index: 1050;
-    }
-
-    .date-picker:focus-within {
-        z-index: 1060;
-    }
-
-    .calendar-dropdown {
-        position: absolute !important;
-        z-index: 999999 !important;
-        background: #ffffff !important;
-        border: 1px solid #e2e8f0 !important;
-        border-radius: 16px !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18) !important;
-        outline: none !important;
-    }
-
-    .calendar-header {
-        background: #16a34a !important;
-        border-radius: 14px 14px 0 0 !important;
-        padding: 10px 14px !important;
-    }
-
-    .calendar-header .custom-select {
-        background: rgba(255, 255, 255, 0.2) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        border-radius: 8px !important;
-    }
-
-    .calendar-header .month-input,
-    .calendar-header .year-input,
-    .calendar-header .select-arrow,
-    .calendar-header .nav-btn {
-        color: #ffffff !important;
-    }
-
-    .weekdays {
-        background: #f1f5f9 !important;
-        color: #334155 !important;
-        font-weight: 700 !important;
-    }
-
-    .days .day.selected {
-        border: 1.5px solid #10b981 !important;
-        color: #16a34a !important;
-        font-weight: 700 !important;
-        border-radius: 8px !important;
-        background: #f0fdf4 !important;
-    }
-
-    .days .day:hover {
-        background: #dcfce7 !important;
-        color: #15803d !important;
-        border-radius: 8px !important;
-    }
-
-    .today-btn {
-        color: #16a34a !important;
-        font-weight: 700 !important;
-    }
-</style>
-
-<div class="report-wrapper">
-    <!-- Top Header Card -->
-    <div class="report-header-card d-flex align-items-center justify-content-between">
-        <h4 class="report-title">Projectwise Daily Activity Report:</h4>
-        <div class="text-muted small">
-            <i class="bi bi-calendar3 me-1"></i> <?= date('F d, Y') ?>
+    <!-- Page Header & Action Bar -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <!-- LEFT: Icon badge + Title + Subtitle -->
+        <div class="d-flex align-items-center gap-2.5">
+            <div class="rounded-3 bg-secondary-subtle text-secondary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                <i class="bi bi-calendar2-check"></i>
+            </div>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Daily Task Report</h1>
+                <span class="text-muted font-11">Project-wise daily task activity, work status &amp; team allocation · <?= date('F d, Y') ?></span>
+            </div>
+        </div>
+        
+        <!-- RIGHT: Filters + Actions -->
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#dailyTaskFilterOffcanvas" aria-controls="dailyTaskFilterOffcanvas">
+                <i class="bi bi-funnel"></i><span>Filters</span>
+                <span class="badge bg-primary rounded-pill d-none" id="dailyTaskFilterCountBadge">0</span>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="window.print()">
+                <i class="bi bi-printer"></i><span>Print</span>
+            </button>
         </div>
     </div>
 
-    <!-- Filters Section -->
-    <div class="report-filters-card">
-        <form method="GET" action="" id="dailyReportFilterForm" onsubmit="event.preventDefault(); applyReportFilters();">
-            <div class="row g-3 align-items-end">
-                <div class="col-md-3">
-                    <label class="filter-label" for="reportDate">Date</label>
-                    <div class="date-picker">
-                        <input type="text" id="reportDate" class="date-input form-control filter-control" value="<?= date('d-m-Y') ?>" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label class="filter-label" for="reportProjects">Projects</label>
-                    <select id="reportProjects" class="form-select filter-control select2">
-                        <option value="">Non selected</option>
-                        <option value="all">All Projects</option>
-                        <option value="Test Project">Test Project</option>
-                        <option value="NEW TEST">NEW TEST</option>
-                        <option value="koka soft">koka soft</option>
-                        <option value="welcome">welcome</option>
-                        <option value="welcome123">welcome123</option>
-                        <option value="KOKA Electrical Work">KOKA Electrical Work</option>
-                        <option value="TEST PROJECT 2">TEST PROJECT 2</option>
-                        <option value="koka book">koka book</option>
-                        <option value="Tester">Tester</option>
-                        <option value="Factory Interior">Factory Interior</option>
-                        <option value="Construction project">Construction project</option>
-                        <option value="Solar panel">Solar panel</option>
-                        <option value="College Project">College Project</option>
-                        <option value="painting">painting</option>
-                        <option value="RSB Arch">RSB Arch</option>
-                        <option value="Check and Charge">Check and Charge</option>
-                        <option value="Solar Panel Installation">Solar Panel Installation</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label class="filter-label" for="reportStatus">Working Status</label>
-                    <select id="reportStatus" class="form-select filter-control select2">
-                        <option value="">Non selected</option>
-                        <option value="Yes">Yes (Working)</option>
-                        <option value="No">No (Not Working)</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-search-report w-100">
-                        <i class="bi bi-search"></i> Search
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
     <!-- Table Section Card matching employees-report.php -->
-    <div class="card-custom mb-4">
+    <div class="card border-0 shadow-sm rounded-3 p-0 overflow-hidden mb-3 bg-white card-custom">
         <div class="table-responsive">
-            <table class="table-modern master-table column-border" id="dailyTaskReportTable">
+            <table class="table table-hover align-middle mb-0 font-13 master-table column-border" id="dailyTaskReportTable">
                 <thead>
                     <tr>
                         <th>S.NO</th>
@@ -360,6 +51,62 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+
+<!-- Daily Task Report Filter Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="dailyTaskFilterOffcanvas" aria-labelledby="dailyTaskFilterOffcanvasLabel" style="width: 360px;">
+    <div class="offcanvas-header border-bottom">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="dailyTaskFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Daily Task Report
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="GET" action="" id="dailyReportFilterForm" onsubmit="event.preventDefault(); applyReportFilters();">
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportDate">Report Date</label>
+                <input type="date" id="reportDate" class="form-control form-control-sm" value="<?= date('Y-m-d') ?>" onchange="updateDailyTaskFilterBadge()">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportProjects">Projects</label>
+                <select id="reportProjects" class="form-select form-select-sm select2" onchange="updateDailyTaskFilterBadge()">
+                    <option value="">All Projects</option>
+                    <option value="Test Project">Test Project</option>
+                    <option value="NEW TEST">NEW TEST</option>
+                    <option value="koka soft">koka soft</option>
+                    <option value="welcome">welcome</option>
+                    <option value="welcome123">welcome123</option>
+                    <option value="KOKA Electrical Work">KOKA Electrical Work</option>
+                    <option value="TEST PROJECT 2">TEST PROJECT 2</option>
+                    <option value="koka book">koka book</option>
+                    <option value="Tester">Tester</option>
+                    <option value="Factory Interior">Factory Interior</option>
+                    <option value="Construction project">Construction project</option>
+                    <option value="Solar panel">Solar panel</option>
+                    <option value="College Project">College Project</option>
+                    <option value="painting">painting</option>
+                    <option value="RSB Arch">RSB Arch</option>
+                    <option value="Check and Charge">Check and Charge</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="reportStatus">Working Status</label>
+                <select id="reportStatus" class="form-select form-select-sm select2" onchange="updateDailyTaskFilterBadge()">
+                    <option value="">All Working Status</option>
+                    <option value="Yes">Yes (Active Tasks)</option>
+                    <option value="No">No (Idle)</option>
+                </select>
+            </div>
+            <div class="d-none">
+                <button type="submit" id="dailyTaskHiddenSubmit"></button>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" onclick="resetDailyTaskFilters()">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill" onclick="document.getElementById('dailyTaskHiddenSubmit').click()">Apply Filters</button>
     </div>
 </div>
 
@@ -455,7 +202,38 @@
         });
     }
 
+    
+    function updateDailyTaskFilterBadge() {
+        var count = 0;
+        var proj = document.getElementById('reportProjects');
+        if (proj && proj.value && proj.value !== 'all') count++;
+        var status = document.getElementById('reportStatus');
+        if (status && status.value) count++;
+        var badge = document.getElementById('dailyTaskFilterCountBadge');
+        if (badge) {
+            badge.textContent = count;
+            if (count > 0) badge.classList.remove('d-none');
+            else badge.classList.add('d-none');
+        }
+    }
+
+    function resetDailyTaskFilters() {
+        var proj = document.getElementById('reportProjects');
+        if (proj) {
+            proj.value = '';
+            if (window.$ && $(proj).data('select2')) $(proj).val('').trigger('change');
+        }
+        var status = document.getElementById('reportStatus');
+        if (status) {
+            status.value = '';
+            if (window.$ && $(status).data('select2')) $(status).val('').trigger('change');
+        }
+        updateDailyTaskFilterBadge();
+        dailyReportMasterTable.setData(reportProjectsData);
+    }
+
     function applyReportFilters() {
+        updateDailyTaskFilterBadge();
         var selectedProj = document.getElementById('reportProjects').value.toLowerCase();
         var selectedStatus = document.getElementById('reportStatus').value;
 
