@@ -893,10 +893,11 @@
                         </select>
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <div class="d-flex align-items-center gap-1">
-                            <input type="date" class="form-control form-control-sm" id="msFromDate" title="From Date">
-                            <span class="text-muted small">to</span>
-                            <input type="date" class="form-control form-control-sm" id="msToDate" title="To Date">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-calendar3 text-muted"></i></span>
+                            <input type="date" class="form-control form-control-sm" id="msFromDate" title="From Date" aria-label="From Date">
+                            <span class="input-group-text bg-white text-muted px-1.5 font-11">to</span>
+                            <input type="date" class="form-control form-control-sm" id="msToDate" title="To Date" aria-label="To Date">
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-12 text-end">
