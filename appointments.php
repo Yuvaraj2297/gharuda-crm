@@ -1,7 +1,6 @@
 <?php include 'header.php'; ?>
 
 <link rel="stylesheet" href="./assets/css/quill-editor.css">
-<link rel="stylesheet" href="./assets/css/lead.css">
 
 <div class="container-fluid px-0">
 
@@ -32,11 +31,11 @@
                 <button class="btn btn-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1.5 fw-semibold px-3 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="apmMainCreateBtn">
                     <i class="bi bi-plus-lg"></i><span>Book Appointment</span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 table-action-menu" style="min-width: 270px;">
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3" style="min-width: 270px;">
                     <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Select Meeting Type</h6></li>
                     <li>
                         <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmContactModal">
-                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-lines-fill"></i></div>
+                            <span class="rounded-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-person-lines-fill"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Client / Lead Meeting</div>
                                 <div class="text-muted font-11">Customer, prospect or external meeting</div>
@@ -45,7 +44,7 @@
                     </li>
                     <li>
                         <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" data-bs-toggle="modal" data-bs-target="#apmStaffModal">
-                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-people-fill"></i></div>
+                            <span class="rounded-2 bg-success-subtle text-success d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-people-fill"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Internal Staff Meeting</div>
                                 <div class="text-muted font-11">Sync up with team &amp; department</div>
@@ -56,7 +55,7 @@
                     <li><h6 class="dropdown-header text-uppercase font-10 fw-bold tracking-wider text-muted px-2 mb-1">Quick Presets &amp; Follow-Up</h6></li>
                     <li>
                         <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('SW')">
-                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-camera-video"></i></div>
+                            <span class="rounded-2 bg-info-subtle text-info d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-camera-video"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Schedule SW Demo</div>
                                 <div class="text-muted font-11">Product software walkthrough</div>
@@ -65,7 +64,7 @@
                     </li>
                     <li>
                         <button type="button" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5" onclick="openQuickApptPreset('HW')">
-                            <div class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-geo-alt"></i></div>
+                            <span class="rounded-2 bg-warning-subtle text-warning d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-geo-alt"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Schedule HW Site Survey</div>
                                 <div class="text-muted font-11">Hardware &amp; site feasibility visit</div>
@@ -74,7 +73,7 @@
                     </li>
                     <li>
                         <a href="callbacks.php?new=1" class="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2.5">
-                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-telephone-forward"></i></div>
+                            <span class="rounded-2 bg-secondary-subtle text-secondary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-telephone-forward"></i></span>
                             <div>
                                 <div class="fw-semibold text-dark font-12">Log Callback Request</div>
                                 <div class="text-muted font-11">Schedule customer phone callback</div>
@@ -2703,11 +2702,11 @@
                     '<td><span class="text-muted font-12">' + m.remark + '</span></td>' +
                     '<td class="text-end pe-4">' +
                         '<div class="dropdown text-end">' +
-                            '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">Actions</button>' +
-                            '<ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">' +
-                                (m.zoom ? '<li><a class="dropdown-item" href="' + m.zoom + '" target="_blank"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-camera-video"></i></div><div><div class="fw-semibold text-dark font-12">Join Meeting</div><div class="text-muted" style="font-size:10px;">Launch video room</div></div></a></li>' : '') +
-                                (m.zoom ? '<li><a class="dropdown-item" href="javascript:void(0)" onclick="navigator.clipboard.writeText(\'' + m.zoom + '\'); alert(\'Zoom link copied!\');"><div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-clipboard-check"></i></div><div><div class="fw-semibold text-dark font-12">Copy Link</div><div class="text-muted" style="font-size:10px;">Copy URL to clipboard</div></div></a></li>' : '') +
-                                '<li><a class="dropdown-item" href="javascript:void(0)" onclick="openQuickApptPreset(\'SW\', \'Demo for ' + m.customerName + '\', \'' + m.customerName + '\')"><div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-calendar-event"></i></div><div><div class="fw-semibold text-dark font-12">Reschedule</div><div class="text-muted" style="font-size:10px;">Change time / date</div></div></a></li>' +
+                            '<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">Actions</button>' +
+                            '<ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 p-2">' +
+                                (m.zoom ? '<li><a class="dropdown-item rounded-2 py-1.5 d-flex align-items-center gap-2" href="' + m.zoom + '" target="_blank"><span class="rounded-2 bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-camera-video"></i></span><div><div class="fw-semibold text-dark font-12">Join Meeting</div><div class="text-muted font-10">Launch video room</div></div></a></li>' : '') +
+                                (m.zoom ? '<li><a class="dropdown-item rounded-2 py-1.5 d-flex align-items-center gap-2" href="javascript:void(0)" onclick="navigator.clipboard.writeText(\'' + m.zoom + '\'); alert(\'Zoom link copied!\');"><span class="rounded-2 bg-info-subtle text-info d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-clipboard-check"></i></span><div><div class="fw-semibold text-dark font-12">Copy Link</div><div class="text-muted font-10">Copy URL to clipboard</div></div></a></li>' : '') +
+                                '<li><a class="dropdown-item rounded-2 py-1.5 d-flex align-items-center gap-2" href="javascript:void(0)" onclick="openQuickApptPreset(\'SW\', \'Demo for ' + m.customerName + '\', \'' + m.customerName + '\')"><span class="rounded-2 bg-success-subtle text-success d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width:28px;height:28px;font-size:13px;"><i class="bi bi-calendar-event"></i></span><div><div class="fw-semibold text-dark font-12">Reschedule</div><div class="text-muted font-10">Change time / date</div></div></a></li>' +
                             '</ul>' +
                         '</div>' +
                     '</td>' +
