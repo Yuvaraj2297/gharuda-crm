@@ -627,15 +627,21 @@
         }
 
         /* ---------------- Bindings ---------------- */
-        document.getElementById('tkSearchBtn').addEventListener('click', function() {
-            renderAll();
-            showToast(filteredTasks().length + ' tasks found');
-        });
+        var sBtn = document.getElementById('tkSearchBtn');
+        if (sBtn) {
+            sBtn.addEventListener('click', function() {
+                renderAll();
+                showToast(filteredTasks().length + ' tasks found');
+            });
+        }
 
-        document.getElementById('tkClearBtn').addEventListener('click', function() {
-            resetFilters();
-            showToast('Filters cleared');
-        });
+        var cBtn = document.getElementById('tkClearBtn');
+        if (cBtn) {
+            cBtn.addEventListener('click', function() {
+                resetFilters();
+                showToast('Filters cleared');
+            });
+        }
 
         
     function updateTasksFilterBadge() {

@@ -762,14 +762,15 @@
     }
 
     // Filter Toggle
-    document.getElementById('toggleFilterBtn').addEventListener('click', function() {
-        var card = document.getElementById('filterCardSection');
-        if (card.style.display === 'none') {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+    var toggleFilterBtn = document.getElementById('toggleFilterBtn');
+    if (toggleFilterBtn) {
+        toggleFilterBtn.addEventListener('click', function() {
+            var offcanvasEl = document.getElementById('projListFilterOffcanvas');
+            if (offcanvasEl && window.bootstrap) {
+                bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl).toggle();
+            }
+        });
+    }
 
     // Toggle Summary Overview Visibility
     function toggleSummaryOverview() {
