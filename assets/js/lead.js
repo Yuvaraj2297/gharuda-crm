@@ -618,12 +618,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     '<td>' + (item.profession || '<span class="lead-empty-val">—</span>') + '</td>' +
                     '<td><span class="fw-semibold">' + (item.lead_score || 0) + '</span></td>' +
                     '<td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="' + newId + '"><i class="bi bi-calendar2-week"></i></button></td>' +
-                    '<td><div class="d-flex align-items-center gap-1">' +
-                        '<button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="' + newId + '"><i class="bi bi-eye"></i></button>' +
-                        '<button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="' + newId + '"><i class="bi bi-pencil-square"></i></button>' +
-                        '<button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="' + newId + '"><i class="bi bi-trash"></i></button>' +
-                        '<button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="' + newId + '"><i class="bi bi-envelope"></i></button>' +
-                    '</div></td>';
+                    '<td class="text-end pe-3">' +
+                        '<div class="dropdown">' +
+                            '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">' +
+                                '<span>Actions</span>' +
+                            '</button>' +
+                            '<ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">' +
+                                '<li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="' + newId + '"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Lead 360° View</div><div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div></div></button></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="' + newId + '"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></button></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="' + newId + '"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Convert to Customer</div><div class="text-muted" style="font-size: 10px;">Promote lead to client</div></div></button></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="' + newId + '"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Edit Lead</div><div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div></div></button></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="' + newId + '"><span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Send Message</div><div class="text-muted" style="font-size: 10px;">Quill email compose</div></div></button></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="' + newId + '"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Book Appointment</div><div class="text-muted" style="font-size: 10px;">Schedule client meeting</div></div></button></li>' +
+                                '<li><hr class="dropdown-divider my-1"></li>' +
+                                '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="' + newId + '"><span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span><div class="text-start"><div class="fw-semibold text-danger font-12">Delete Lead</div><div class="text-muted" style="font-size: 10px;">Remove lead record</div></div></button></li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</td>';
 
                 var tbodyEl = document.getElementById('leadsTbody');
                 if (tbodyEl) tbodyEl.prepend(newTr);
@@ -634,54 +646,183 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
 
-        /* ---- Action buttons: view / edit / delete / send to email ---- */
-        var leadsActBody = document.getElementById('leadsTbody');
-        if (leadsActBody) {
-            leadsActBody.addEventListener('click', function(e) {
-                var btn = e.target.closest('.lead-act-btn');
-                if (!btn) return;
-                e.stopPropagation();
-                var act = btn.getAttribute('data-act');
-                var id = Number(btn.getAttribute('data-id'));
-                var rec = leadsTable ? leadsTable.getData().filter(function(r) {
-                    return Number(r.id) === id;
-                })[0] : null;
+        /* ---- Unified Enterprise Lead Action Handler (view / quote / convert / edit / mail / appt / del) ---- */
+        window.extractLeadInfo = function(tr, id) {
+            var rec = null;
+            if (typeof leadsTable !== 'undefined' && leadsTable && leadsTable.getData) {
+                var found = leadsTable.getData().filter(function(r) { return Number(r.id) === Number(id); });
+                if (found && found.length > 0) rec = Object.assign({}, found[0]);
+            }
+            if (!rec && typeof extractRowLead === 'function' && tr) {
+                rec = extractRowLead(tr);
+            }
+            if (!rec && tr) {
+                var cells = tr.querySelectorAll('td');
+                var leadNo = cells[0] ? cells[0].textContent.trim() : (id || '1');
+                var name = cells[1] ? cells[1].textContent.trim() : 'Lead';
+                var company = cells[2] ? cells[2].textContent.trim() : '';
+                var enq = cells[3] ? cells[3].textContent.trim() : ('ENQ-0' + leadNo);
+                var phone = cells[9] ? cells[9].textContent.trim() : '';
+                var product = cells[10] ? cells[10].textContent.trim() : '';
+                var valTxt = cells[11] ? cells[11].textContent.trim() : '₹0.00';
+                var assigned = cells[13] ? cells[13].textContent.trim() : 'Unassigned';
+                var statusBtn = tr.querySelector('.lead-status-btn');
+                var status = statusBtn ? statusBtn.textContent.trim() : 'Quotation';
+                var source = cells[16] ? cells[16].textContent.trim() : 'Direct';
+                if (company === '—') company = name;
+                if (phone === '—') phone = '';
+                var emailSlug = (name || 'contact').toLowerCase().replace(/[^a-z0-9]/g, '.') + '@' + (company || 'client').toLowerCase().replace(/[^a-z0-9]/g, '') + '.com';
+                rec = {
+                    id: id || tr.getAttribute('data-id'),
+                    lead_no: leadNo,
+                    enq_code: enq,
+                    name: name,
+                    company: company,
+                    phone: phone,
+                    email: emailSlug,
+                    value: valTxt,
+                    product: product,
+                    assigned: assigned,
+                    status: status,
+                    source: source
+                };
+            }
+            return rec;
+        };
 
-                if (act === 'view') {
-                    var detailModal = document.getElementById('leadDetailModal');
-                    if (detailModal && typeof bootstrap !== 'undefined') {
-                        bootstrap.Modal.getOrCreateInstance(detailModal).show();
-                    }
-                } else if (act === 'edit') {
-                    if (rec) {
-                        document.getElementById('nl_name').value = rec.name || '';
-                        document.getElementById('nl_company').value = (rec.company && rec.company !== '—') ? rec.company : '';
-                        document.getElementById('nl_phone').value = (rec.phone && rec.phone !== '—') ? rec.phone : '';
-                        document.getElementById('nl_value').value = rec.value || '';
-                    }
-                    var em = document.getElementById('newLeadModal');
-                    if (em && typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(em).show();
-                } else if (act === 'del') {
-                    if (confirm('Delete this lead?')) {
-                        if (leadsTable) leadsTable.deleteItem(id);
-                    }
-                } else if (act === 'mail') {
-                    /* Compose Email modal (image flow): ldSendEmailBtn handler moolama
-                       Quill lazy-init + SMTP/Templates/Attachment form open aagum,
-                       appuram lead details subject la pre-fill */
-                    var sendBtnEl = document.getElementById('ldSendEmailBtn');
-                    if (sendBtnEl) sendBtnEl.click();
-                    var subj = document.getElementById('ldCeSubject');
-                    if (subj && rec) subj.value = 'Lead #' + rec.lead_no + ' – ' + rec.name;
-                } else if (act === 'appt') {
-                    /* Appointment icon: new appointment modal (appointments.php oda apmContactModal copy) open aagum */
-                    var apmModalEl = document.getElementById('apmContactModal');
-                    if (apmModalEl && typeof bootstrap !== 'undefined') {
-                        bootstrap.Modal.getOrCreateInstance(apmModalEl).show();
+        window.handleLeadAction = function(act, id, tr, btn) {
+            if (!act) return;
+            var rec = window.extractLeadInfo(tr, id);
+
+            /* Auto-close dropdown cleanly */
+            if (btn) {
+                var dd = btn.closest('.dropdown');
+                if (dd && typeof bootstrap !== 'undefined') {
+                    var toggle = dd.querySelector('[data-bs-toggle="dropdown"]');
+                    if (toggle) {
+                        var inst = bootstrap.Dropdown.getInstance(toggle);
+                        if (inst) inst.hide();
                     }
                 }
-            });
-        }
+            }
+
+            if (act === 'view') {
+                if (tr && typeof syncLeadModalFromRow === 'function') {
+                    syncLeadModalFromRow(tr);
+                }
+                if (rec) {
+                    var setTxt = function (k, v) { var el = document.getElementById(k); if (el) el.textContent = v; };
+                    setTxt('ldNumber', rec.lead_no);
+                    setTxt('ldName', rec.name);
+                    setTxt('ldCompanySubtitle', (rec.company || rec.name) + ' · Lead Overview & Interaction History');
+                    setTxt('ldInfoName', rec.name);
+                    setTxt('ldInfoCompany', rec.company);
+                    setTxt('ldInfoValue', rec.value);
+                    setTxt('ldInfoStatus', rec.status);
+                    setTxt('ldInfoSource', rec.source);
+                    setTxt('ldInfoAssigned', rec.assigned);
+                    var phEl = document.getElementById('ldInfoPhone');
+                    if (phEl) phEl.innerHTML = rec.phone ? ('<a href="tel:' + rec.phone + '">' + rec.phone + '</a>') : '—';
+                    var emEl = document.getElementById('ldInfoEmail');
+                    if (emEl) emEl.innerHTML = '<a href="mailto:' + (rec.email || 'contact@example.com') + '">' + (rec.email || 'contact@example.com') + '</a>';
+                }
+                var detailModal = document.getElementById('leadDetailModal');
+                if (detailModal && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(detailModal).show();
+                }
+            } else if (act === 'quote') {
+                if (rec) {
+                    var rawVal = Number(String(rec.value || '').replace(/[^0-9]/g, '')) || 50000;
+                    window.location.href = 'quotation-create.php?client=' + encodeURIComponent(rec.company || rec.name || '') +
+                        '&item=' + encodeURIComponent(rec.product || 'Solution Package') +
+                        '&price=' + encodeURIComponent(rawVal);
+                }
+            } else if (act === 'convert') {
+                if (rec) {
+                    window.location.href = 'customer-new.php?from_lead=' + encodeURIComponent(rec.enq_code || ('LD-' + rec.lead_no)) +
+                        '&company=' + encodeURIComponent(rec.company || rec.name || '') +
+                        '&contact=' + encodeURIComponent(rec.name || '') +
+                        '&phone=' + encodeURIComponent(rec.phone || '') +
+                        '&email=' + encodeURIComponent(rec.email || '');
+                }
+            } else if (act === 'edit') {
+                if (rec) {
+                    var nlName = document.getElementById('nl_name');
+                    if (nlName) nlName.value = rec.name || '';
+                    var nlComp = document.getElementById('nl_company');
+                    if (nlComp) nlComp.value = (rec.company && rec.company !== '—') ? rec.company : '';
+                    var nlPh = document.getElementById('nl_phone');
+                    if (nlPh) nlPh.value = (rec.phone && rec.phone !== '—') ? rec.phone : '';
+                    var nlVal = document.getElementById('nl_value');
+                    if (nlVal) nlVal.value = rec.value ? String(rec.value).replace(/[^0-9.]/g, '') : '';
+                    var modalTitle = document.getElementById('newLeadModalLabel');
+                    if (modalTitle) modalTitle.textContent = 'Edit Lead – ' + rec.name;
+                }
+                var em = document.getElementById('newLeadModal');
+                if (em && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(em).show();
+                }
+            } else if (act === 'mail') {
+                var toEl = document.getElementById('ldCeTo');
+                if (toEl && rec) toEl.value = rec.email || (rec.phone ? (rec.phone + '@lead.com') : '');
+                var subj = document.getElementById('ldCeSubject');
+                if (subj && rec) subj.value = 'Lead #' + rec.lead_no + ' – ' + rec.name;
+                var sendBtnEl = document.getElementById('ldSendEmailBtn');
+                if (sendBtnEl) {
+                    sendBtnEl.click();
+                } else {
+                    var composeModal = document.getElementById('ldComposeEmailModal');
+                    if (composeModal && typeof bootstrap !== 'undefined') {
+                        bootstrap.Modal.getOrCreateInstance(composeModal).show();
+                    }
+                }
+            } else if (act === 'appt') {
+                if (rec) {
+                    var apmSubj = document.getElementById('apmCtSubject');
+                    if (apmSubj) apmSubj.value = 'Meeting with ' + rec.name + (rec.company ? ' (' + rec.company + ')' : '');
+                    var apmName = document.getElementById('apmRelExtName');
+                    if (apmName) apmName.value = rec.name || '';
+                    var apmPh = document.getElementById('apmRelExtPhone');
+                    if (apmPh) apmPh.value = rec.phone || '';
+                    var apmEm = document.getElementById('apmRelExtEmail');
+                    if (apmEm) apmEm.value = rec.email || '';
+                }
+                var apmModalEl = document.getElementById('apmContactModal');
+                if (apmModalEl && typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(apmModalEl).show();
+                }
+            } else if (act === 'del') {
+                var leadTitle = rec && rec.name ? rec.name : 'this lead';
+                if (confirm('Are you sure you want to delete lead "' + leadTitle + '"?')) {
+                    if (tr) {
+                        tr.style.transition = 'all 0.25s ease';
+                        tr.style.opacity = '0';
+                        setTimeout(function() {
+                            tr.remove();
+                            if (typeof leadsTable !== 'undefined' && leadsTable && leadsTable.deleteItem) {
+                                leadsTable.deleteItem(id);
+                            }
+                            var badge = document.getElementById('leadTableCountBadge');
+                            if (badge) {
+                                var count = document.querySelectorAll('#leadsTbody tr').length;
+                                badge.textContent = count;
+                            }
+                        }, 250);
+                    }
+                }
+            }
+        };
+
+        /* Delegated listener on table & document for all .lead-act-btn elements */
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.lead-act-btn');
+            if (!btn) return;
+            var act = btn.getAttribute('data-act');
+            var id = btn.getAttribute('data-id');
+            var tr = btn.closest('tr[data-id]');
+            if (!id && tr) id = tr.getAttribute('data-id');
+            window.handleLeadAction(act, id, tr, btn);
+        });
 
         /* ---- Status profile-dropdown item click -> update lead status ---- */
         var leadsStatusBody = document.getElementById('leadsTbody');
@@ -1031,7 +1172,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 var tr = e.target.closest('tr[data-id]');
                 if (!tr) return;
                 /* ignore checkbox, whatsapp, action buttons and status dropdown clicks */
-                if (e.target.closest('input[type=checkbox]') || e.target.closest('.whatsapp-quick-btn') || e.target.closest('.lead-act-btn') || e.target.closest('.lead-status-dd')) return;
+                /* Ignore interactive controls: buttons, dropdowns, actions, status, whatsapp, checkboxes */
+                if (
+                    e.target.closest('input, button, select, textarea') ||
+                    e.target.closest('.btn-table-action') ||
+                    e.target.closest('.lead-act-btn') ||
+                    e.target.closest('.lead-status-dd') ||
+                    e.target.closest('.lead-status-btn') ||
+                    e.target.closest('.lead-status-menu') ||
+                    e.target.closest('.whatsapp-quick-btn') ||
+                    e.target.closest('.dropdown') ||
+                    e.target.closest('.dropdown-menu') ||
+                    e.target.closest('.table-action-menu') ||
+                    e.target.closest('[data-bs-toggle="dropdown"]') ||
+                    e.target.closest('a:not(.lead-name-link)')
+                ) {
+                    return;
+                }
+
+                // Also ignore clicks inside the Action cell or appointment action cell
+                var cell = e.target.closest('td');
+                if (cell && (cell.querySelector('.btn-table-action, .lead-act-btn, .dropdown, input[type=checkbox]') || cell.classList.contains('text-end'))) {
+                    return;
+                }
+
+                if (typeof syncLeadModalFromRow === 'function') {
+                    syncLeadModalFromRow(tr);
+                }
 
                 var detailModal = document.getElementById('leadDetailModal');
                 if (detailModal && typeof bootstrap !== 'undefined') {
@@ -3939,6 +4106,10 @@ document.addEventListener('DOMContentLoaded', function () {
             '&email=' + encodeURIComponent(rec.email || '');
     }
 
+    window.extractRowLead = extractRowLead;
+    window.redirectQuoteLead = redirectQuoteLead;
+    window.redirectConvertLead = redirectConvertLead;
+
     function syncLeadModalFromRow(tr) {
         var rec = extractRowLead(tr);
         if (!rec) return;
@@ -3957,6 +4128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var emEl = document.getElementById('ldInfoEmail');
         if (emEl) emEl.innerHTML = '<a href="mailto:' + rec.email + '">' + rec.email + '</a>';
     }
+    window.syncLeadModalFromRow = syncLeadModalFromRow;
 
     var tbody = document.getElementById('leadsTbody');
     if (tbody) {
@@ -3993,6 +4165,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(function () {
                     redirectConvertLead(extractRowLead(trSt));
                 }, 150);
+                return;
+            }
+            if (e.target.closest('input, button, select, textarea, .btn-table-action, .lead-act-btn, .dropdown, .dropdown-menu, .whatsapp-quick-btn, .lead-status-dd')) {
                 return;
             }
             var tr = e.target.closest('tr[data-id]');

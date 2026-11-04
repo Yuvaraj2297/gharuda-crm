@@ -12,31 +12,105 @@
 .table-action-menu {
     border-radius: 0.75rem !important;
     border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
-    padding: 0.35rem !important;
-    min-width: 230px !important;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.16), 0 4px 6px -2px rgba(15, 23, 42, 0.05) !important;
+    padding: 6px !important;
+    min-width: 250px !important;
+    max-width: 280px !important;
     background-color: #ffffff !important;
+    z-index: 1060 !important;
 }
-.table-action-menu .dropdown-item {
-    border-radius: 0.5rem !important;
-    padding: 0.45rem 0.65rem !important;
-    transition: all 0.15s ease-in-out !important;
+
+/* Fix dropdown items (even when they carry .lead-act-btn class) */
+.table-action-menu .dropdown-item,
+.table-action-menu .lead-act-btn,
+.table-action-menu button.lead-act-btn {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 42px !important;
+    max-height: none !important;
+    padding: 6px 10px !important;
+    border: none !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    gap: 10px !important;
+    transform: none !important;
+    box-shadow: none !important;
+    color: #1e293b !important;
+    cursor: pointer !important;
+    margin: 1px 0 !important;
+    transition: background-color 0.15s ease-in-out !important;
 }
+
 .table-action-menu .dropdown-item:hover,
-.table-action-menu .dropdown-item:focus {
-    background-color: #f8fafc !important;
-    color: var(--bs-dark, #1e293b) !important;
+.table-action-menu .lead-act-btn:hover,
+.table-action-menu button.lead-act-btn:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
+
+.table-action-menu .dropdown-item:active,
+.table-action-menu .lead-act-btn:active,
+.table-action-menu button.lead-act-btn:active {
+    background-color: #e2e8f0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.table-action-menu .dropdown-item.text-danger:hover,
+.table-action-menu .lead-act-btn.text-danger:hover {
+    background-color: #fef2f2 !important;
+    color: #dc2626 !important;
+}
+
 .table-action-menu .action-icon-pill {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    flex-shrink: 0;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    flex-shrink: 0 !important;
 }
+
+.table-action-menu .text-start {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex: 1 1 auto !important;
+    line-height: 1.25 !important;
+}
+
+.table-action-menu .text-start .fw-semibold {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 1px !important;
+    color: #1e293b !important;
+}
+
+.table-action-menu .text-start .text-muted {
+    font-size: 10.5px !important;
+    line-height: 1.2 !important;
+    color: #64748b !important;
+}
+
+.table-action-menu .dropdown-divider {
+    margin: 4px 0 !important;
+    border-color: #f1f5f9 !important;
+    opacity: 1 !important;
+}
+
 .btn-table-action {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
@@ -50,6 +124,16 @@
     border-color: #cbd5e1;
     color: #0f172a;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Allow table card to show floating action dropdown without clipping */
+#tabContentLeadsTable .card-custom {
+    overflow: visible !important;
+}
+
+#tabContentLeadsTable .table-modern-wrap {
+    min-height: 420px;
+    padding-bottom: 50px;
 }
 
 /* ===== Top-Level Lead View Tabs (Dashboard vs Lead Table Data) ===== */
@@ -259,7 +343,7 @@
 }
 
 /* Table Row Action Buttons - 30px x 30px balanced icons */
-.lead-act-btn {
+.lead-act-btn:not(.dropdown-item) {
     width: 30px;
     height: 30px;
     padding: 0;

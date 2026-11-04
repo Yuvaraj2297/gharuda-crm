@@ -278,14 +278,87 @@
                     <td><span class="lead-tag-pill">tag1</span> <span class="lead-tag-pill">tag2</span></td>
                     <td>Unassigned</td>
                     <td><span class="lead-empty-val">—</span></td>
-                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
+                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
                     <td>Direct</td>
                     <td><span class="lead-link-text text-nowrap">21-03-2026 16:05:50</span></td>
                     <td><span class="lead-link-text text-nowrap">10-03-2026 12:54:36</span></td>
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="1"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="1"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="1"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="1"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="1"><i class="bi bi-envelope"></i></button></div></td>
+                    <td class="text-end pe-3">
+        <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+            <span>Actions</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="1">
+                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Lead 360° View</div>
+                        <div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="1">
+                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                        <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="1">
+                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Convert to Customer</div>
+                        <div class="text-muted" style="font-size: 10px;">Promote lead to client</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="1">
+                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Edit Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="1">
+                    <span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Send Message</div>
+                        <div class="text-muted" style="font-size: 10px;">Quill email compose</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="1">
+                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Book Appointment</div>
+                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                    </div>
+                </button>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="1">
+                    <span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-danger font-12">Delete Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Remove lead record</div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>
                 </tr>
                 <tr data-id="2">
                     <td><span class="fw-semibold">4</span></td>
@@ -303,14 +376,87 @@
                     <td><span class="lead-empty-val">—</span></td>
                     <td>Harish D.</td>
                     <td>Harish D.</td>
-                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn lead-sel-lead" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Lead <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item active" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
+                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn lead-sel-lead" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Lead <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item active" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
                     <td>Indiamart</td>
                     <td><span class="lead-link-text text-nowrap">02-03-2026 15:09:55</span></td>
                     <td><span class="lead-link-text text-nowrap">27-10-2025 10:26:19</span></td>
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="2"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="2"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="2"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="2"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="2"><i class="bi bi-envelope"></i></button></div></td>
+                    <td class="text-end pe-3">
+        <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+            <span>Actions</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="2">
+                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Lead 360° View</div>
+                        <div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="2">
+                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                        <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="2">
+                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Convert to Customer</div>
+                        <div class="text-muted" style="font-size: 10px;">Promote lead to client</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="2">
+                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Edit Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="2">
+                    <span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Send Message</div>
+                        <div class="text-muted" style="font-size: 10px;">Quill email compose</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="2">
+                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Book Appointment</div>
+                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                    </div>
+                </button>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="2">
+                    <span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-danger font-12">Delete Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Remove lead record</div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>
                 </tr>
                 <tr data-id="3">
                     <td><span class="fw-semibold">3</span></td>
@@ -328,14 +474,87 @@
                     <td><span class="lead-tag-pill">Hot Lead</span> <span class="lead-tag-pill">Follow-up</span></td>
                     <td>Divya A.</td>
                     <td>Website Form</td>
-                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
+                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
                     <td>Direct</td>
                     <td><span class="lead-link-text text-nowrap">27-04-2026 12:49:13</span></td>
                     <td><span class="lead-link-text text-nowrap">13-01-2026 12:53:55</span></td>
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="3"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="3"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="3"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="3"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="3"><i class="bi bi-envelope"></i></button></div></td>
+                    <td class="text-end pe-3">
+        <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+            <span>Actions</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="3">
+                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Lead 360° View</div>
+                        <div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="3">
+                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                        <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="3">
+                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Convert to Customer</div>
+                        <div class="text-muted" style="font-size: 10px;">Promote lead to client</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="3">
+                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Edit Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="3">
+                    <span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Send Message</div>
+                        <div class="text-muted" style="font-size: 10px;">Quill email compose</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="3">
+                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Book Appointment</div>
+                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                    </div>
+                </button>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="3">
+                    <span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-danger font-12">Delete Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Remove lead record</div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>
                 </tr>
                 <tr data-id="4">
                     <td><span class="fw-semibold">2</span></td>
@@ -353,14 +572,87 @@
                     <td><span class="lead-tag-pill">Won</span></td>
                     <td>Karthik R.</td>
                     <td>Referral</td>
-                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
+                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Quotation <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item active" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
                     <td>Direct</td>
                     <td><span class="lead-link-text text-nowrap">27-03-2026 10:37:58</span></td>
                     <td><span class="lead-link-text text-nowrap">27-03-2026 10:36:21</span></td>
                     <td><span class="lead-empty-val">—</span></td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="4"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="4"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="4"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="4"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="4"><i class="bi bi-envelope"></i></button></div></td>
+                    <td class="text-end pe-3">
+        <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+            <span>Actions</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="4">
+                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Lead 360° View</div>
+                        <div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="4">
+                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                        <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="4">
+                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Convert to Customer</div>
+                        <div class="text-muted" style="font-size: 10px;">Promote lead to client</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="4">
+                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Edit Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="4">
+                    <span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Send Message</div>
+                        <div class="text-muted" style="font-size: 10px;">Quill email compose</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="4">
+                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Book Appointment</div>
+                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                    </div>
+                </button>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="4">
+                    <span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-danger font-12">Delete Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Remove lead record</div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>
                 </tr>
                 <tr data-id="5">
                     <td><span class="fw-semibold">1</span></td>
@@ -378,14 +670,87 @@
                     <td><span class="lead-tag-pill">Warm Lead</span></td>
                     <td>Divya A.</td>
                     <td>Harish D.</td>
-                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn lead-sel-lead" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Lead <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item active" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
+                    <td><div class="dropdown lead-status-dd"><button type="button" class="lead-status-btn lead-sel-lead" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">Lead <i class="bi bi-chevron-down fs-10"></i></button><ul class="dropdown-menu lead-status-menu"><li><a class="dropdown-item lead-status-item active" href="#" data-val="Lead">Lead</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Quotation">Quotation</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Followup">Followup</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Qualified">Qualified</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="DIRECT">DIRECT</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New Enquiry">New Enquiry</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="New">New</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Customer">Customer</a></li><li><a class="dropdown-item lead-status-item" href="#" data-val="Waiting for Response">Waiting for Response</a></li></ul></div></td>
                     <td>Exhibition</td>
                     <td><span class="lead-link-text text-nowrap">25-04-2026 14:42:55</span></td>
                     <td><span class="lead-link-text text-nowrap">27-11-2025 15:45:21</span></td>
                     <td>Builders</td>
                     <td><span class="fw-semibold">0</span></td>
                     <td><button type="button" class="lead-act-btn appt" title="Appointments" data-act="appt" data-id="5"><i class="bi bi-calendar2-week"></i></button></td>
-                    <td><div class="d-flex align-items-center gap-1"><button type="button" class="lead-act-btn view" title="View" data-act="view" data-id="5"><i class="bi bi-eye"></i></button><button type="button" class="lead-act-btn edit" title="Edit" data-act="edit" data-id="5"><i class="bi bi-pencil-square"></i></button><button type="button" class="lead-act-btn del" title="Delete" data-act="del" data-id="5"><i class="bi bi-trash"></i></button><button type="button" class="lead-act-btn mail" title="Send to Email" data-act="mail" data-id="5"><i class="bi bi-envelope"></i></button></div></td>
+                    <td class="text-end pe-3">
+        <div class="dropdown">
+        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+            <span>Actions</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Lead Actions</li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="view" data-id="5">
+                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Lead 360° View</div>
+                        <div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="quote" data-id="5">
+                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Create Quotation</div>
+                        <div class="text-muted" style="font-size: 10px;">Issue GST proposal</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="convert" data-id="5">
+                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Convert to Customer</div>
+                        <div class="text-muted" style="font-size: 10px;">Promote lead to client</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="edit" data-id="5">
+                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-pencil"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Edit Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Update contact &amp; details</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="mail" data-id="5">
+                    <span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Send Message</div>
+                        <div class="text-muted" style="font-size: 10px;">Quill email compose</div>
+                    </div>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" data-act="appt" data-id="5">
+                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-dark font-12">Book Appointment</div>
+                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                    </div>
+                </button>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" data-act="del" data-id="5">
+                    <span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span>
+                    <div class="text-start">
+                        <div class="fw-semibold text-danger font-12">Delete Lead</div>
+                        <div class="text-muted" style="font-size: 10px;">Remove lead record</div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</td>
                 </tr>
                 </tbody>
             </table>
@@ -397,7 +762,19 @@
 
 <script>
 
-    window.updateLeadFilterBadge = function() {
+    
+    // Safe dropdown delegation for dynamic table rows with viewport boundary
+    document.addEventListener('click', function(e) {
+        var toggle = e.target.closest('.btn-table-action[data-bs-toggle="dropdown"]');
+        if (toggle && window.bootstrap && bootstrap.Dropdown) {
+            bootstrap.Dropdown.getOrCreateInstance(toggle, {
+                boundary: 'viewport',
+                popperConfig: { strategy: 'fixed' }
+            });
+        }
+    });
+
+window.updateLeadFilterBadge = function() {
         var count = 0;
         ['filterStaff', 'filterSourcer', 'filterSource', 'filterFromDate', 'filterToDate', 'filterType'].forEach(function(id) {
             var el = document.getElementById(id);
@@ -2880,7 +3257,7 @@
                                     <span class="ld-prop-status draft" id="apStatusChip">Draft</span>
                                     <button type="button" class="ap-icon-btn ms-auto" title="Edit" data-bs-toggle="modal" data-bs-target="#newProposalModal"><i class="bi bi-pencil-square"></i></button>
                                     <div class="dropdown ap-save-dd">
-                                        <button type="button" class="ap-icon-btn gap-2 px-2 w-auto" title="Save" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"><i class="bi bi-save"></i> <i class="bi bi-chevron-down fs-10"></i></button>
+                                        <button type="button" class="ap-icon-btn gap-2 px-2 w-auto" title="Save" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"><i class="bi bi-save"></i> <i class="bi bi-chevron-down fs-10"></i></button>
                                         <ul class="dropdown-menu dropdown-menu-end ap-save-menu">
                                             <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-file-earmark-pdf me-2"></i>View PDF</a></li>
                                             <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-box-arrow-up-right me-2"></i>View PDF in New Tab</a></li>
@@ -2890,7 +3267,7 @@
                                     </div>
                                     <button type="button" class="ap-icon-btn" id="apSendEmailBtn" title="Send via email"><i class="bi bi-envelope"></i></button>
                                     <div class="dropdown">
-                                        <button type="button" class="btn ap-gray-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}'>More</button>
+                                        <button type="button" class="btn ap-gray-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}'>More</button>
                                         <ul class="dropdown-menu dropdown-menu-end ap-save-menu">
                                             <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-eye me-2"></i>View Proposal</a></li>
                                             <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-paperclip me-2"></i>Attach File</a></li>
@@ -2908,7 +3285,7 @@
                                         </ul>
                                     </div>
                                     <div class="dropdown">
-                                        <button type="button" class="btn ap-green-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}'>Convert</button>
+                                        <button type="button" class="btn ap-green-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}'>Convert</button>
                                         <ul class="dropdown-menu dropdown-menu-end ap-save-menu">
                                             <li><a class="dropdown-item ap-save-item" href="#">Estimate</a></li>
                                             <li><a class="dropdown-item ap-save-item" href="#">Invoice</a></li>
@@ -3161,7 +3538,7 @@ GHRA SOFTWARE TECHNOLOGY PRIVATE LIMITED</textarea>
                                         <button type="button" class="ap-icon-btn" title="Download invoice"><i class="bi bi-download"></i></button>
                                         <button type="button" class="ap-icon-btn" title="Email invoice"><i class="bi bi-envelope"></i></button>
                                         <div class="dropdown">
-                                            <button type="button" class="btn ap-gray-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-popper-config='{"strategy":"fixed"}'>More</button>
+                                            <button type="button" class="btn ap-gray-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}'>More</button>
                                             <ul class="dropdown-menu dropdown-menu-end ap-save-menu">
                                                 <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-file-earmark-pdf me-2"></i>View PDF</a></li>
                                                 <li><a class="dropdown-item ap-save-item" href="#"><i class="bi bi-download me-2"></i>Download</a></li>
