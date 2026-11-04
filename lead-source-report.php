@@ -1,41 +1,45 @@
 <?php include 'header.php'; ?>
 
 <main class="container-fluid px-0">
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
-        <div class="overflow-auto">
-            <h1 class="font-display fw-bold mb-1 page-title">Lead Source Report</h1>
-        </div>
-    </div>
-
-    <!-- Filters -->
-    <form method="get" class="card border-0 shadow-sm rounded-3 p-3 mb-3 filters-card" autocomplete="off">
-        <div class="row g-3 align-items-end">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <label class="form-label" for="lsrFrom">From Date</label>
-                <div class="date-picker"><input type="text" class="date-input form-control" id="lsrFrom" name="from"
-                        value="17-10-2026" placeholder="Select date" autocomplete="off"></div>
+    <!-- Single-Row Enterprise Page Header -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3">
+            <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
+                <i class="bi bi-diagram-3 fs-5"></i>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <label class="form-label" for="lsrTo">To Date</label>
-                <div class="date-picker"><input type="text" class="date-input form-control" id="lsrTo" name="to"
-                        value="17-10-2026" placeholder="Select date" autocomplete="off"></div>
-            </div>
-            <div class="col-lg-3 col-md-4">
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-outline-secondary flex-fill" id="lsrClear">Clear</button>
-                    <button type="submit" class="btn btn-primary flex-fill"><i
-                            class="bi bi-search me-1"></i>Search</button>
-                </div>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Lead Source Report</h1>
+                <p class="text-muted font-12 mb-0">Inbound channel performance, source-wise stage distribution &amp; conversion metrics</p>
             </div>
         </div>
-    </form>
 
-    <!-- ===== View tabs ===== -->
-    <div class="lsr-tabs" id="lsrTabs">
-        <button type="button" class="lsr-tab active" data-tab="overview"><i
-                class="bi bi-speedometer2"></i>Overview</button>
-        <button type="button" class="lsr-tab" data-tab="sources"><i class="bi bi-grid-3x3-gap-fill"></i>All
-            Sources</button>
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- View Switcher Pills -->
+            <ul class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="lsrTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link active lsr-tab rounded-pill px-3 py-1 font-12 fw-semibold" data-tab="overview">
+                        <i class="bi bi-speedometer2 me-1"></i>Overview
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link lsr-tab rounded-pill px-3 py-1 font-12 fw-semibold" data-tab="sources">
+                        <i class="bi bi-grid-3x3-gap-fill me-1"></i>All Sources
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Offcanvas Filter Button -->
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" data-bs-toggle="offcanvas" data-bs-target="#lsrFilterOffcanvas">
+                <i class="bi bi-funnel text-primary"></i>
+                <span>Filters</span>
+                <span class="badge rounded-pill bg-primary text-white font-10 d-none" id="lsrFilterCountBadge">0</span>
+            </button>
+
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" onclick="window.print()">
+                <i class="bi bi-printer text-secondary"></i>
+                <span>Print</span>
+            </button>
+        </div>
     </div>
 
     <!-- ============ PANEL: Overview ============ -->
@@ -62,12 +66,6 @@
                         <small class="text-white-50">Avg / source</small>
                     </div>
                 </div>
-            </div>
-        </div>
-            <div class="lsr-hero-stats">
-                <div class="lsr-hero-chip"><b>17</b>Sources</div>
-                <div class="lsr-hero-chip"><b title="INDIAMART">INDIAMART</b>Top source</div>
-                <div class="lsr-hero-chip"><b>8.4</b>Avg / source</div>
             </div>
         </div>
 
@@ -1036,6 +1034,52 @@
             </div>
         </div>
     </div><!-- /lsrPanel-sources -->
+
+    <!-- Slide-Over Offcanvas Filter Drawer -->
+    <div class="offcanvas offcanvas-end border-0 shadow-lg" tabindex="-1" id="lsrFilterOffcanvas" aria-labelledby="lsrFilterOffcanvasLabel" style="width: 380px;">
+        <div class="offcanvas-header border-bottom bg-light py-3 px-4">
+            <div class="d-flex align-items-center gap-2">
+                <div class="icon-chip bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width:32px;height:32px;">
+                    <i class="bi bi-sliders"></i>
+                </div>
+                <div>
+                    <h6 class="offcanvas-title fw-bold mb-0 font-14" id="lsrFilterOffcanvasLabel">Filter Lead Source Report</h6>
+                    <span class="text-muted font-11">Filter by source name &amp; date range</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-4 py-3">
+            <form class="filters-card" autocomplete="off" onsubmit="return false;">
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="lsrSourceFilter">Lead Source</label>
+                    <input type="text" class="form-control font-13" id="lsrSourceFilter" placeholder="e.g., INDIAMART, DIRECT, GOOGLE...">
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="lsrFrom">From Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="lsrFrom" name="from" value="17-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="lsrTo">To Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="lsrTo" name="to" value="17-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="offcanvas-footer border-top bg-light p-3 d-flex gap-2">
+            <button type="button" class="btn btn-light border flex-fill fw-semibold font-13" id="lsrClear">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+            <button type="button" class="btn btn-primary flex-fill fw-semibold font-13" id="lsrApplyBtn" data-bs-dismiss="offcanvas">
+                <i class="bi bi-check2-circle me-1"></i>Apply Filters
+            </button>
+        </div>
+    </div>
 </main>
 
 <?php include 'footer.php'; ?>
@@ -1066,40 +1110,57 @@
         });
 
         // Filter search / clear client-side handling
-        var filterForm = document.querySelector(".filters-card");
+        var DEFAULT_DATE = "17-10-2026";
+        var sourceInput = document.getElementById("lsrSourceFilter");
         var fromInput = document.getElementById("lsrFrom");
         var toInput = document.getElementById("lsrTo");
-        var dateRangeLabel = document.querySelector(".lsr-date-range");
         var heroDateSub = document.querySelector(".lsr-hero-sub");
+        var applyBtn = document.getElementById("lsrApplyBtn");
+        var clearBtn = document.getElementById("lsrClear");
+        var badge = document.getElementById("lsrFilterCountBadge");
 
-        if (filterForm) {
-            filterForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                var fromVal = fromInput ? fromInput.value.trim() : "";
-                var toVal = toInput ? toInput.value.trim() : "";
-                var label = (fromVal && toVal && fromVal !== toVal) ? (fromVal + " to " + toVal) : (fromVal || toVal || "17-10-2026");
-                if (dateRangeLabel) {
-                    dateRangeLabel.innerHTML = '<i class="bi bi-calendar3 me-1"></i>Date: ' + label;
-                }
-                if (heroDateSub) {
-                    heroDateSub.innerHTML = '<i class="bi bi-calendar3 me-1"></i>' + label + ' · combined result';
+        function applyLsrFilter() {
+            var srcVal = sourceInput ? sourceInput.value.trim().toLowerCase() : "";
+            var fromVal = fromInput ? fromInput.value.trim() : "";
+            var toVal = toInput ? toInput.value.trim() : "";
+
+            var count = 0;
+            if (srcVal) count++;
+            if (fromVal && fromVal !== DEFAULT_DATE) count++;
+            if (toVal && toVal !== DEFAULT_DATE) count++;
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle("d-none", count === 0);
+            }
+
+            var label = (fromVal && toVal && fromVal !== toVal) ? (fromVal + " to " + toVal) : (fromVal || toVal || DEFAULT_DATE);
+            if (heroDateSub) {
+                heroDateSub.innerHTML = '<i class="bi bi-calendar3 me-1"></i>' + label + ' · combined result';
+            }
+
+            var sourceCards = document.querySelectorAll("#lsrPanel-sources .col-xl-4");
+            sourceCards.forEach(function (col) {
+                var titleEl = col.querySelector("h6");
+                var titleTxt = titleEl ? titleEl.textContent.toLowerCase() : "";
+                if (!srcVal || titleTxt.indexOf(srcVal) !== -1) {
+                    col.classList.remove("d-none");
+                } else {
+                    col.classList.add("d-none");
                 }
             });
         }
 
-        var clearBtn = document.getElementById("lsrClear");
+        if (applyBtn) {
+            applyBtn.addEventListener("click", applyLsrFilter);
+        }
+
         if (clearBtn) {
             clearBtn.addEventListener("click", function (e) {
                 e.preventDefault();
-                var today = "17-10-2026";
-                if (fromInput) fromInput.value = today;
-                if (toInput) toInput.value = today;
-                if (dateRangeLabel) {
-                    dateRangeLabel.innerHTML = '<i class="bi bi-calendar3 me-1"></i>Date: ' + today;
-                }
-                if (heroDateSub) {
-                    heroDateSub.innerHTML = '<i class="bi bi-calendar3 me-1"></i>' + today + ' · combined result';
-                }
+                if (sourceInput) sourceInput.value = "";
+                if (fromInput) fromInput.value = DEFAULT_DATE;
+                if (toInput) toInput.value = DEFAULT_DATE;
+                applyLsrFilter();
             });
         }
     });

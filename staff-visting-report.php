@@ -1,101 +1,88 @@
 <?php include 'header.php'; ?>
 
+<main class="svr-summary-page">
 
-<style>
-    /* Report switch tabs */
-    .report-switch-tabs {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-    }
-
-    .rstab {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        font-weight: 700;
-        color: #374151;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 9px 18px;
-        text-decoration: none;
-        transition: .15s;
-    }
-
-    .rstab i {
-        font-size: 14px;
-        color: #6b7280;
-    }
-
-    .rstab:hover {
-        border-color: #86efac;
-        color: #15803d;
-        text-decoration: none;
-    }
-
-    .rstab:hover i {
-        color: #15803d;
-    }
-
-    .rstab.active {
-        background: linear-gradient(135deg, #16a34a, #15803d);
-        border-color: transparent;
-        color: #fff;
-        box-shadow: 0 2px 6px rgba(22, 163, 74, .3);
-    }
-
-    .rstab.active i {
-        color: #fff;
-    }
-
-</style>
-
-<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
-    <h1 class="font-display fw-bold mb-1 page-title" id="pageTitle">Staff Visiting Reports</h1>
-</div>
-
-<!-- Report switch tabs -->
-<div class="report-switch-tabs">
-    <a class="rstab active" href="staff-visting-report.php"><i class="bi bi-signpost-split"></i>Staff Visiting Reports</a>
-    <a class="rstab" href="staff-visiting-location-report.php"><i class="bi bi-geo-alt"></i>Staff Visiting Location Report</a>
-</div>
-
-<div class="card-custom p-0" id="staffVisitWrap">
-
-    <!-- Filter -->
-    <form id="filterForm" class="p-3 pb-0" onsubmit="return false;">
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-lg-3 col-md-6">
-                <select class="form-select select2" id="filter_staff">
-                    <option value="all" selected>All Staff</option>
-                    <option value="ghrA0011">GHARUDA SOFTWARE</option>
-                    <option value="ghrA0012">ASHISH</option>
-                    <option value="1234">thilak ma</option>
-                    <option value="ghrA0014">KISHORE R</option>
-                    <option value="ghrA0015">Rokith R</option>
-                    <option value="ghrA0016">Prabhu S</option>
-                </select>
+    <!-- Single-Row Enterprise Page Header -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3">
+            <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
+                <i class="bi bi-signpost-split fs-5"></i>
             </div>
-            <div class="col-lg-2 col-md-3 col-6">
-                <input type="date" class="form-control" id="filter_from" value="2026-10-03">
-            </div>
-            <div class="col-lg-2 col-md-3 col-6">
-                <input type="date" class="form-control" id="filter_to" value="2026-10-17">
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-sm px-3" id="btnSearch">Search</button>
-                <button type="button" class="btn btn-danger btn-sm px-3" id="btnReset">Reset</button>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title" id="pageTitle">Staff Visiting Reports</h1>
+                <p class="text-muted font-12 mb-0">Daily field staff distance traveled (KM), route logs &amp; visiting activity summary</p>
             </div>
         </div>
-        <div class="text-danger small mb-3 d-none" id="dateError">From Date should not be greater than To Date</div>
-    </form>
 
-    <!-- Table (toolbar, columns, export, search, show entries & pagination are auto-created by the "datatable" class) -->
-    <div class="table-responsive table-modern-wrap overflow-auto column-border">
-        <table class="table-modern w-100 datatable" id="staffVisitTable" data-table-name="Staff Visiting Report">
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Quick Distance Filter Pills -->
+            <ul class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="svsKmTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link active rounded-pill px-3 py-1 font-12 fw-semibold" data-km="all">
+                        <i class="bi bi-layers me-1"></i>All Logs
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="active">
+                        <i class="bi bi-check2-circle me-1"></i>Active (&gt;0 km)
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="zero">
+                        <i class="bi bi-dash-circle me-1"></i>No Travel (0 km)
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Offcanvas Filter Button -->
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" data-bs-toggle="offcanvas" data-bs-target="#svsFilterOffcanvas">
+                <i class="bi bi-funnel text-primary"></i>
+                <span>Filters</span>
+                <span class="badge rounded-pill bg-primary text-white font-10 d-none" id="svsFilterCountBadge">0</span>
+            </button>
+
+            <!-- Header Actions Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-lightning-charge text-primary"></i>
+                    <span>Actions</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end table-action-menu shadow-lg border-0 p-2">
+                    <li>
+                        <a class="dropdown-item rounded-2 py-2" href="staff-visiting-location-report.php">
+                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-geo-alt"></i></span>
+                            <span>Location Audit Report</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item rounded-2 py-2" href="lead-map.php">
+                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-map"></i></span>
+                            <span>Field Staff Live Map</span>
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li>
+                        <button type="button" class="dropdown-item rounded-2 py-2" onclick="window.print()">
+                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-printer"></i></span>
+                            <span>Print Visiting Report</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Primary CTA -->
+            <a href="staff-visiting-location-report.php" class="btn btn-primary fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-sm">
+                <i class="bi bi-geo-alt"></i>
+                <span>Location Report</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card-custom p-0 mb-4" id="staffVisitWrap">
+
+        <!-- Table (toolbar, columns, export, search, show entries & pagination are auto-created by the "datatable" class) -->
+        <div class="table-responsive table-modern-wrap overflow-auto column-border">
+            <table class="table-modern w-100 datatable" id="staffVisitTable" data-table-name="Staff Visiting Report">
             <thead>
                 <tr>
                     <th class="text-center" style="width:70px;">S.No.</th>
@@ -651,29 +638,130 @@
 
 </div>
 
+    <!-- Slide-Over Offcanvas Filter Drawer -->
+    <div class="offcanvas offcanvas-end border-0 shadow-lg" tabindex="-1" id="svsFilterOffcanvas" aria-labelledby="svsFilterOffcanvasLabel" style="width: 380px;">
+        <div class="offcanvas-header border-bottom bg-light py-3 px-4">
+            <div class="d-flex align-items-center gap-2">
+                <div class="icon-chip bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width:32px;height:32px;">
+                    <i class="bi bi-sliders"></i>
+                </div>
+                <div>
+                    <h6 class="offcanvas-title fw-bold mb-0 font-14" id="svsFilterOffcanvasLabel">Filter Visiting Summary</h6>
+                    <span class="text-muted font-11">Narrow by field staff, distance &amp; date range</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-4 py-3">
+            <form id="filterForm" autocomplete="off" onsubmit="return false;">
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="filter_km">Travel Activity Filter</label>
+                    <select class="form-select font-13" id="filter_km">
+                        <option value="all">All Logs</option>
+                        <option value="active">Active Travel (&gt; 0 km)</option>
+                        <option value="zero">No Travel (0 km)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="filter_staff">Field Staff</label>
+                    <select class="form-select select2" id="filter_staff">
+                        <option value="all" selected>All Staff</option>
+                        <option value="ghrA0011">GHARUDA SOFTWARE</option>
+                        <option value="ghrA0012">ASHISH</option>
+                        <option value="1234">thilak ma</option>
+                        <option value="ghrA0014">KISHORE R</option>
+                        <option value="ghrA0015">Rokith R</option>
+                        <option value="ghrA0016">Prabhu S</option>
+                    </select>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="filter_from">From Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="filter_from" value="03-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="filter_to">To Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="filter_to" value="17-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-danger small mb-2 d-none" id="dateError">From Date should not be greater than To Date</div>
+            </form>
+        </div>
+        <div class="offcanvas-footer border-top bg-light p-3 d-flex gap-2">
+            <button type="button" class="btn btn-light border flex-fill fw-semibold font-13" id="btnReset">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+            <button type="button" class="btn btn-primary flex-fill fw-semibold font-13" id="btnSearch" data-bs-dismiss="offcanvas">
+                <i class="bi bi-check2-circle me-1"></i>Apply Filters
+            </button>
+        </div>
+    </div>
+</main>
+
 <script>
     (function() {
         'use strict';
 
-        var DEFAULT_FROM = '2026-10-03';
-        var DEFAULT_TO = '2026-10-17';
+        var DEFAULT_FROM = '03-10-2026';
+        var DEFAULT_TO = '17-10-2026';
 
         var tbody = document.getElementById('staffVisitTbody');
         var table = document.getElementById('staffVisitTable');
 
         // Keep a pristine copy of the static rows (taken before the datatable initialises)
         var allRows = Array.prototype.map.call(tbody.querySelectorAll('tr'), function(tr) {
+            var kmSpan = tr.querySelector('[data-sort]');
+            var kmVal = kmSpan ? parseFloat(kmSpan.getAttribute('data-sort') || '0') : 0;
             return {
                 staff: tr.getAttribute('data-staff'),
                 date: tr.getAttribute('data-date'),
+                km: kmVal,
                 html: tr.outerHTML
             };
         });
 
+        function dmyToISO(str) {
+            var v = (str || '').trim();
+            if (/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+            var m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(v);
+            return m ? (m[3] + '-' + m[2] + '-' + m[1]) : '';
+        }
+
+        function updateFilterBadge() {
+            var count = 0;
+            var kmVal = document.getElementById('filter_km').value;
+            var staffVal = document.getElementById('filter_staff').value;
+            var fromVal = document.getElementById('filter_from').value;
+            var toVal = document.getElementById('filter_to').value;
+
+            if (kmVal !== 'all') count++;
+            if (staffVal !== 'all') count++;
+            if (fromVal && fromVal !== DEFAULT_FROM) count++;
+            if (toVal && toVal !== DEFAULT_TO) count++;
+
+            var badge = document.getElementById('svsFilterCountBadge');
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle('d-none', count === 0);
+            }
+        }
+
+        function syncKmTabs(kmVal) {
+            var tabs = document.querySelectorAll('#svsKmTabs .nav-link');
+            Array.prototype.forEach.call(tabs, function(btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-km') === kmVal);
+            });
+        }
+
         function applyFilter() {
+            var kmFilter = document.getElementById('filter_km').value;
             var staffId = document.getElementById('filter_staff').value;
-            var from = document.getElementById('filter_from').value;
-            var to = document.getElementById('filter_to').value;
+            var from = dmyToISO(document.getElementById('filter_from').value);
+            var to = dmyToISO(document.getElementById('filter_to').value);
             var err = document.getElementById('dateError');
 
             if (from && to && from > to) {
@@ -682,7 +770,12 @@
             }
             err.classList.add('d-none');
 
+            syncKmTabs(kmFilter);
+            updateFilterBadge();
+
             var html = allRows.filter(function(r) {
+                if (kmFilter === 'active' && r.km <= 0) return false;
+                if (kmFilter === 'zero' && r.km > 0) return false;
                 if (staffId !== 'all' && r.staff !== staffId) return false;
                 if (from && r.date < from) return false;
                 if (to && r.date > to) return false;
@@ -695,9 +788,18 @@
             if (table && table.autoTable) table.autoTable.refresh(); // re-run search / sort / pagination / S.No
         }
 
+        var tabButtons = document.querySelectorAll('#svsKmTabs .nav-link');
+        Array.prototype.forEach.call(tabButtons, function(btn) {
+            btn.addEventListener('click', function() {
+                document.getElementById('filter_km').value = btn.getAttribute('data-km') || 'all';
+                applyFilter();
+            });
+        });
+
         document.getElementById('btnSearch').addEventListener('click', applyFilter);
 
         document.getElementById('btnReset').addEventListener('click', function() {
+            document.getElementById('filter_km').value = 'all';
             document.getElementById('filter_staff').value = 'all';
             if (window.jQuery) window.jQuery('#filter_staff').trigger('change'); // refresh select2
             document.getElementById('filter_from').value = DEFAULT_FROM;

@@ -153,23 +153,29 @@
     }
 </style>
 
-<!-- Top Title Area -->
-<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-    <div>
-        <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Ticket Reports</h1>
-        <nav class="d-flex align-items-center gap-2 text-neutral" style="font-size:13px;">
-            <i class="bi bi-life-preserver fs-6"></i>
-            <span>Helpdesk / Ticketing</span>
-            <i class="bi bi-chevron-right"></i>
-            <span class="fw-bold text-dark">Reports</span>
-        </nav>
+<!-- Single-Row Enterprise Page Header -->
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+    <div class="d-flex align-items-center gap-3">
+        <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
+            <i class="bi bi-headset fs-5"></i>
+        </div>
+        <div>
+            <h1 class="font-display fw-bold mb-0 page-title">Support SLA Reports</h1>
+            <p class="text-muted font-12 mb-0">Helpdesk SLA compliance, ticket resolution velocity, category &amp; priority breakdown</p>
+        </div>
     </div>
-    <div class="d-flex gap-2">
-        <button class="btn btn-outline-primary" type="button" id="trExportBtn">
-            <i class="bi bi-download me-1"></i> Export Report
+    <div class="d-flex align-items-center flex-wrap gap-2">
+        <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" onclick="window.print()">
+            <i class="bi bi-printer text-secondary"></i>
+            <span>Print</span>
         </button>
-        <a href="ticket-dashboard.php" class="btn btn-primary">
-            <i class="bi bi-speedometer2 me-1"></i> Ticket Dashboard
+        <button class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" type="button" id="trExportBtn">
+            <i class="bi bi-download text-primary"></i>
+            <span>Export Report</span>
+        </button>
+        <a href="ticket-dashboard.php" class="btn btn-primary fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-sm">
+            <i class="bi bi-speedometer2"></i>
+            <span>Ticket Dashboard</span>
         </a>
     </div>
 </div>

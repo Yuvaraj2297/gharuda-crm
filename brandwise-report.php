@@ -1,76 +1,45 @@
 <?php include 'header.php'; ?>
 
 <main class="container-fluid px-0">
-    <!-- Standard Page Header -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">Sales Performance Dashboard</h1>
-            <nav class="breadcrumb-text d-flex align-items-center gap-1">
-                <i class="bi bi-graph-up-arrow text-primary me-1"></i>
-                <span>Reports</span>
-                <i class="bi bi-chevron-right text-muted mx-1" style="font-size:10px;"></i>
-                <span class="text-dark fw-semibold">Brand-wise Analytics</span>
-                <span class="text-muted ms-2">&middot; 17-10-2026</span>
-            </nav>
-        </div>
-        <div class="page-actions">
-            <div class="btn-group btn-group-sm bg-light border p-1 rounded-pill" id="bwrRange" role="group">
-                <button type="button" class="btn btn-sm btn-outline-primary active rounded-pill px-3" data-range="today">Today</button>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-range="week">This Week</button>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-range="month">This Month</button>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3" data-range="year">This Year</button>
+    <!-- Single-Row Enterprise Page Header -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3">
+            <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
+                <i class="bi bi-tags fs-5"></i>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="bwrRefresh">
-                <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Brandwise Sales Report</h1>
+                <p class="text-muted font-12 mb-0">Brand-wise revenue trends, target progress, lead qualification &amp; geographical contribution</p>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Quick Period Pills -->
+            <div class="btn-group btn-group-sm bg-white border p-1 rounded-pill shadow-xs" id="bwrRange" role="group">
+                <button type="button" class="btn btn-sm btn-outline-primary active rounded-pill px-3 font-12 fw-semibold" data-range="today">Today</button>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 font-12 fw-semibold" data-range="week">This Week</button>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 font-12 fw-semibold" data-range="month">This Month</button>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3 font-12 fw-semibold" data-range="year">This Year</button>
+            </div>
+
+            <!-- Offcanvas Filter Button -->
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" data-bs-toggle="offcanvas" data-bs-target="#bwrFilterOffcanvas">
+                <i class="bi bi-funnel text-primary"></i>
+                <span>Filters</span>
+                <span class="badge rounded-pill bg-primary text-white font-10 d-none" id="bwrFilterCountBadge">0</span>
+            </button>
+
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" id="bwrRefresh">
+                <i class="bi bi-arrow-clockwise text-secondary"></i>
+                <span>Refresh</span>
+            </button>
+
+            <button type="button" class="btn btn-primary fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-sm" onclick="window.print()">
+                <i class="bi bi-printer"></i>
+                <span>Print</span>
             </button>
         </div>
     </div>
-
-    <!-- Filters Card -->
-    <form class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white" autocomplete="off">
-        <div class="row g-3 align-items-end">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <label class="form-label" for="bwrDate">Select Date</label>
-                <div class="date-picker">
-                    <input type="text" class="date-input form-control" id="bwrDate" placeholder="Select date" autocomplete="off">
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <label class="form-label" for="bwrBrand">Brand</label>
-                <select class="form-select select2" id="bwrBrand" data-placeholder="Choose Brand" data-allow-clear="true">
-                    <option></option>
-                    <option>PhD Assistance</option>
-                    <option>Thesis Writing</option>
-                    <option>Journal Support</option>
-                    <option>Publication</option>
-                </select>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <label class="form-label" for="bwrProduct">Product</label>
-                <select class="form-select select2" id="bwrProduct" data-placeholder="Choose Product" data-allow-clear="true">
-                    <option></option>
-                    <option>Thesis Writing</option>
-                    <option>Journal Publication</option>
-                    <option>PhD Assistance</option>
-                </select>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label" for="bwrSource">Lead Source</label>
-                <select class="form-select select2" id="bwrSource" data-placeholder="Choose Source" data-allow-clear="true">
-                    <option></option>
-                    <option>Indiamart</option>
-                    <option>Website</option>
-                    <option>Direct</option>
-                    <option>Google</option>
-                </select>
-            </div>
-            <div class="col-lg-1 col-md-4 col-sm-12">
-                <button type="button" class="btn btn-primary w-100">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
 
     <!-- KPI Summary Cards -->
     <div class="row g-3 mb-4">
@@ -472,6 +441,69 @@
             <div style="position: relative; height: 420px; width: 100%;">
                 <canvas id="bwrProductChart"></canvas>
             </div>
+        </div>
+    </div>
+
+    <!-- Slide-Over Offcanvas Filter Drawer -->
+    <div class="offcanvas offcanvas-end border-0 shadow-lg" tabindex="-1" id="bwrFilterOffcanvas" aria-labelledby="bwrFilterOffcanvasLabel" style="width: 380px;">
+        <div class="offcanvas-header border-bottom bg-light py-3 px-4">
+            <div class="d-flex align-items-center gap-2">
+                <div class="icon-chip bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width:32px;height:32px;">
+                    <i class="bi bi-sliders"></i>
+                </div>
+                <div>
+                    <h6 class="offcanvas-title fw-bold mb-0 font-14" id="bwrFilterOffcanvasLabel">Filter Brand Analytics</h6>
+                    <span class="text-muted font-11">Filter by brand, product, lead source &amp; date</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-4 py-3">
+            <form id="bwrFilterForm" autocomplete="off" onsubmit="return false;">
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="bwrDate">Select Date</label>
+                    <div class="date-picker">
+                        <input type="text" class="date-input form-control font-13" id="bwrDate" value="17-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="bwrBrand">Brand</label>
+                    <select class="form-select select2" id="bwrBrand" data-placeholder="All Brands" data-allow-clear="true">
+                        <option value="">All Brands</option>
+                        <option value="PhD Assistance">PhD Assistance</option>
+                        <option value="Thesis Writing">Thesis Writing</option>
+                        <option value="Journal Support">Journal Support</option>
+                        <option value="Publication">Publication</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="bwrProduct">Product</label>
+                    <select class="form-select select2" id="bwrProduct" data-placeholder="All Products" data-allow-clear="true">
+                        <option value="">All Products</option>
+                        <option value="Thesis Writing">Thesis Writing</option>
+                        <option value="Journal Publication">Journal Publication</option>
+                        <option value="PhD Assistance">PhD Assistance</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="bwrSource">Lead Source</label>
+                    <select class="form-select select2" id="bwrSource" data-placeholder="All Sources" data-allow-clear="true">
+                        <option value="">All Sources</option>
+                        <option value="Indiamart">Indiamart</option>
+                        <option value="Website">Website</option>
+                        <option value="Direct">Direct</option>
+                        <option value="Google">Google</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="offcanvas-footer border-top bg-light p-3 d-flex gap-2">
+            <button type="button" class="btn btn-light border flex-fill fw-semibold font-13" id="bwrResetBtn">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+            <button type="button" class="btn btn-primary flex-fill fw-semibold font-13" id="bwrApplyBtn" data-bs-dismiss="offcanvas">
+                <i class="bi bi-check2-circle me-1"></i>Apply Filters
+            </button>
         </div>
     </div>
 </main>
@@ -1008,6 +1040,42 @@
         if (refreshBtn) {
             refreshBtn.addEventListener('click', function() {
                 window.location.reload();
+            });
+        }
+
+        /* Offcanvas filter badge sync */
+        var DEFAULT_DATE = '17-10-2026';
+        var applyBtn = document.getElementById('bwrApplyBtn');
+        var resetBtn = document.getElementById('bwrResetBtn');
+        var badge = document.getElementById('bwrFilterCountBadge');
+
+        function updateBwrBadge() {
+            var d = (document.getElementById('bwrDate').value || '').trim();
+            var b = document.getElementById('bwrBrand').value;
+            var p = document.getElementById('bwrProduct').value;
+            var s = document.getElementById('bwrSource').value;
+            var cnt = 0;
+            if (d && d !== DEFAULT_DATE) cnt++;
+            if (b) cnt++;
+            if (p) cnt++;
+            if (s) cnt++;
+            if (badge) {
+                badge.textContent = cnt;
+                badge.classList.toggle('d-none', cnt === 0);
+            }
+        }
+
+        if (applyBtn) {
+            applyBtn.addEventListener('click', updateBwrBadge);
+        }
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function() {
+                document.getElementById('bwrDate').value = DEFAULT_DATE;
+                document.getElementById('bwrBrand').value = '';
+                document.getElementById('bwrProduct').value = '';
+                document.getElementById('bwrSource').value = '';
+                if (window.jQuery) window.jQuery('#bwrBrand, #bwrProduct, #bwrSource').trigger('change');
+                updateBwrBadge();
             });
         }
     });
