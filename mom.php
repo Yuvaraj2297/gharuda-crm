@@ -18,7 +18,7 @@ include 'header.php';
             <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
                 <i class="bi bi-journal-text"></i>
             </div>
-            <div>
+            <div class="ps-2">
                 <h1 class="font-display fw-bold mb-0 page-title">Minutes of Meeting (MOM)</h1>
                 <span class="text-muted font-11">Document and review customer meetings, track change requests &amp; generate verified PDF minutes</span>
             </div>
@@ -81,7 +81,7 @@ include 'header.php';
                         <div>
                             <div class="d-flex align-items-center gap-1.5 mb-1">
                                 <span class="badge bg-light text-muted border font-10"><i class="bi bi-clock me-1"></i>21-07-2026 15:30</span>
-                                <span class="badge bg-info-subtle text-info font-10">Onsite</span>
+                                <span class="badge bg-primary-subtle text-primary font-10">Onsite</span>
                             </div>
                             <div class="fw-semibold text-dark font-12 mb-0.5">Site Survey Discussion</div>
                             <div class="text-muted font-11"><i class="bi bi-building me-1"></i>GODREJ</div>
@@ -104,7 +104,7 @@ include 'header.php';
                 <button type="button" class="btn btn-xs btn-outline-warning text-dark border border-warning-subtle rounded-pill px-2.5 py-1 font-11 fw-semibold" data-bs-toggle="collapse" data-bs-target="#momPendingCollapse" aria-expanded="false" title="Click to view pending items">
                     <i class="bi bi-hourglass-split me-1 text-warning"></i><span id="momStatPendingBadge">2 Pending Documentation</span> <i class="bi bi-chevron-down font-10 ms-0.5"></i>
                 </button>
-                <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-2.5 py-1 font-11" title="3 Open Change Requests">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 font-11" title="3 Open Change Requests">
                     <i class="bi bi-arrow-repeat me-1"></i><span id="momStatCRBadge">3 Open CRs</span>
                 </span>
             </div>
@@ -143,7 +143,7 @@ include 'header.php';
                     <tr data-id="1">
                         <td class="text-center text-secondary small">1</td>
                         <td>
-                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="1">
+                            <a href="#" class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 text-decoration-none font-monospace" data-momdoc="1">
                                 MOM-20260610-005
                             </a>
                         </td>
@@ -152,16 +152,16 @@ include 'header.php';
                         <td><span class="fw-semibold text-dark small">GHARUDA Electrical Work Project</span></td>
                         <td class="text-secondary small">10-06-2026 09:00</td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Madhu S">MS</span>
                                 <span class="small text-dark">Madhu S</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="Akash Kumar">AK</span>
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ARUN KUMAR">AK</span>
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0ca308;" title="GHARUDA TESTER">GT</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Akash Kumar">AK</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="ARUN KUMAR">AK</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="GHARUDA TESTER">GT</span>
                             </div>
                         </td>
                         <td>
@@ -175,7 +175,7 @@ include 'header.php';
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="1"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="1"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-primary" title="View PDF" data-momact="pdf" data-id="1"><i class="bi bi-file-earmark-pdf"></i></button>
                                 <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="1"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
@@ -185,7 +185,7 @@ include 'header.php';
                     <tr data-id="2">
                         <td class="text-center text-secondary small">2</td>
                         <td>
-                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="2">
+                            <a href="#" class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 text-decoration-none font-monospace" data-momdoc="2">
                                 MOM-20260610-4C7A
                             </a>
                         </td>
@@ -194,14 +194,14 @@ include 'header.php';
                         <td><span class="fw-semibold text-dark small">Direct Visit</span></td>
                         <td class="text-secondary small">06-05-2026 09:00</td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#dc2626;" title="ram krishnan">RK</span>
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="ram krishnan">RK</span>
                                 <span class="small text-dark">ram krishnan</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0891b2;" title="Abarna Devi">AD</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Abarna Devi">AD</span>
                             </div>
                         </td>
                         <td>
@@ -215,7 +215,7 @@ include 'header.php';
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="2"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="2"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-primary" title="View PDF" data-momact="pdf" data-id="2"><i class="bi bi-file-earmark-pdf"></i></button>
                                 <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="2"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
@@ -225,7 +225,7 @@ include 'header.php';
                     <tr data-id="3">
                         <td class="text-center text-secondary small">3</td>
                         <td>
-                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="3">
+                            <a href="#" class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 text-decoration-none font-monospace" data-momdoc="3">
                                 MOMCP20260612-002
                             </a>
                         </td>
@@ -234,14 +234,14 @@ include 'header.php';
                         <td><span class="fw-semibold text-dark small">REG: Mag Tech security management</span></td>
                         <td class="text-secondary small">13-12-2025 14:00</td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="gharuda SOFTWARE">GS</span>
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="gharuda SOFTWARE">GS</span>
                                 <span class="small text-dark">gharuda SOFTWARE</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ASHISH">AS</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="ASHISH">AS</span>
                             </div>
                         </td>
                         <td>
@@ -250,7 +250,7 @@ include 'header.php';
                             </div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>mom_178...</span>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1 text-primary"></i>mom_178...</span>
                         </td>
                         <td>
                             <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis small">2 CRs Pending</span>
@@ -259,7 +259,7 @@ include 'header.php';
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="3"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="3"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-primary" title="View PDF" data-momact="pdf" data-id="3"><i class="bi bi-file-earmark-pdf"></i></button>
                                 <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="3"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
@@ -269,7 +269,7 @@ include 'header.php';
                     <tr data-id="4">
                         <td class="text-center text-secondary small">4</td>
                         <td>
-                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="4">
+                            <a href="#" class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 text-decoration-none font-monospace" data-momdoc="4">
                                 MOM-20260714-8F12
                             </a>
                         </td>
@@ -278,15 +278,15 @@ include 'header.php';
                         <td><span class="fw-semibold text-dark small">Test Appointment</span></td>
                         <td class="text-secondary small">14-07-2026 10:00</td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Madhu S">MS</span>
                                 <span class="small text-dark">Madhu S</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#7c3aed;" title="Akash Kumar">AK</span>
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#d97706;" title="Madhu S">MS</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Akash Kumar">AK</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Madhu S">MS</span>
                             </div>
                         </td>
                         <td>
@@ -295,16 +295,16 @@ include 'header.php';
                             </div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>notes_rev2.pdf</span>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1 text-primary"></i>notes_rev2.pdf</span>
                         </td>
                         <td>
-                            <span class="badge rounded-pill bg-success-subtle text-success small">1 CR Done</span>
+                            <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle small">1 CR Done</span>
                         </td>
                         <td class="text-secondary small">14-07-2026</td>
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="4"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="4"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-primary" title="View PDF" data-momact="pdf" data-id="4"><i class="bi bi-file-earmark-pdf"></i></button>
                                 <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="4"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
@@ -314,7 +314,7 @@ include 'header.php';
                     <tr data-id="5">
                         <td class="text-center text-secondary small">5</td>
                         <td>
-                            <a href="#" class="badge bg-light text-dark border px-2 py-1 text-decoration-none font-monospace" data-momdoc="5">
+                            <a href="#" class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 text-decoration-none font-monospace" data-momdoc="5">
                                 MOM-20260802-9A4B
                             </a>
                         </td>
@@ -323,15 +323,15 @@ include 'header.php';
                         <td><span class="fw-semibold text-dark small">Site Survey Discussion</span></td>
                         <td class="text-secondary small">02-08-2026 15:30</td>
                         <td>
-                            <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#dc2626;" title="ram krishnan">RK</span>
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="ram krishnan">RK</span>
                                 <span class="small text-dark">ram krishnan</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center gap-1">
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#2563eb;" title="ARUN KUMAR">AK</span>
-                                <span class="badge rounded-circle text-white p-2 d-inline-flex align-items-center justify-content-center" style="width:26px;height:26px;background:#0891b2;" title="Abarna Devi">AD</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="ARUN KUMAR">AK</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center justify-content-center fw-bold" style="width:26px;height:26px;font-size:10px;" title="Abarna Devi">AD</span>
                             </div>
                         </td>
                         <td>
@@ -340,7 +340,7 @@ include 'header.php';
                             </div>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1"></i>survey_ghr.pdf</span>
+                            <span class="badge bg-light text-dark border small"><i class="bi bi-paperclip me-1 text-primary"></i>survey_ghr.pdf</span>
                         </td>
                         <td>
                             <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis small">1 CR Pending</span>
@@ -349,7 +349,7 @@ include 'header.php';
                         <td class="text-center">
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-outline-secondary" title="Edit" data-momact="edit" data-id="5"><i class="bi bi-pencil-square"></i></button>
-                                <button type="button" class="btn btn-outline-success" title="View PDF" data-momact="pdf" data-id="5"><i class="bi bi-file-earmark-pdf"></i></button>
+                                <button type="button" class="btn btn-outline-primary" title="View PDF" data-momact="pdf" data-id="5"><i class="bi bi-file-earmark-pdf"></i></button>
                                 <button type="button" class="btn btn-outline-danger" title="Delete" data-momact="del" data-id="5"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
@@ -391,10 +391,10 @@ include 'header.php';
         <div>
             <label class="form-label fw-semibold small text-dark mb-1.5">Quick Filters</label>
             <div class="d-flex flex-wrap gap-1.5" id="momDrawerChips">
-                <button type="button" class="btn btn-xs btn-outline-secondary active mom-drawer-chip" data-quick="all">All (5)</button>
-                <button type="button" class="btn btn-xs btn-outline-warning text-dark mom-drawer-chip" data-quick="pending">Pending (2)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary active mom-drawer-chip" data-quick="all">All (5)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary mom-drawer-chip" data-quick="pending">Pending (2)</button>
                 <button type="button" class="btn btn-xs btn-outline-primary mom-drawer-chip" data-quick="cr">Has CR (3)</button>
-                <button type="button" class="btn btn-xs btn-outline-success mom-drawer-chip" data-quick="done">Done (4)</button>
+                <button type="button" class="btn btn-xs btn-outline-primary mom-drawer-chip" data-quick="done">Done (4)</button>
             </div>
         </div>
 
@@ -468,11 +468,11 @@ include 'header.php';
             <label class="form-label fw-semibold small text-dark mb-2">Related Actions &amp; Views</label>
             <div class="d-flex flex-column gap-1.5">
                 <a href="quotation-create.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
-                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-file-earmark-text text-success"></i><span>Create Quotation</span></span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-file-earmark-text text-primary"></i><span>Create Quotation</span></span>
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
                 <a href="task-create.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
-                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-check2-square text-warning"></i><span>Create Action Task</span></span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-check2-square text-primary"></i><span>Create Action Task</span></span>
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
                 <a href="appointments.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
@@ -480,7 +480,7 @@ include 'header.php';
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
                 <a href="summary-report.php" class="btn btn-sm btn-light border text-start d-flex align-items-center justify-content-between text-secondary py-2">
-                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-info"></i><span>Summary Report</span></span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="bi bi-bar-chart-line text-primary"></i><span>Summary Report</span></span>
                     <i class="bi bi-chevron-right font-11 text-muted"></i>
                 </a>
             </div>
