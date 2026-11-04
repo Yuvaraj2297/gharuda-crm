@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./assets/css/app.css">
     <link rel="stylesheet" href="./assets/css/select2.css">
     <link rel="stylesheet" href="./assets/css/date-picker.css">
-    <link rel="stylesheet" href="./assets/css/table.css?v=4">
+    <link rel="stylesheet" href="./assets/css/table.css?v=5">
     <link rel="stylesheet" href="./assets/css/ui-kit.css">
 
     <link rel="stylesheet" href="./assets/js/DataTables/datatables.min.css">
@@ -1035,11 +1035,8 @@
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom" href="expenses.php">
                             <i class="bi bi-receipt me-2"></i> <span>Field Expenses</span>
                         </a>
-                        <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
+                        <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php,petty-cash-report.php" class="nav-link-custom" href="petty-cash.php">
                             <i class="bi bi-safe me-2"></i> <span>Petty Cash</span>
-                        </a>
-                        <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
-                            <i class="bi bi-safe me-2"></i> <span>Petty Cash Report</span>
                         </a>
                     </div>
 

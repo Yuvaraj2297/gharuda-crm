@@ -1294,3 +1294,30 @@
 #expTable tbody tr {
     cursor: pointer;
 }
+
+/* Shared Petty Cash & Ledger Report Classes */
+.pc-split-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+.amount-credit {
+    color: #087a24;
+    font-weight: 700;
+}
+.amount-debit {
+    color: #dc2626;
+    font-weight: 700;
+}
+.amount-balance {
+    color: #0f172a;
+    font-weight: 800;
+}
+#pcTable tbody tr {
+    cursor: pointer;
+}
