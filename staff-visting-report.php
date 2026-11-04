@@ -4,74 +4,36 @@
 
     <!-- Single-Row Enterprise Page Header -->
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
-        <div class="d-flex align-items-center gap-3">
-            <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
-                <i class="bi bi-signpost-split fs-5"></i>
-            </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="icon-chip bg-primary-subtle text-primary">
+                <i class="bi bi-signpost-split"></i>
+            </span>
             <div>
                 <h1 class="font-display fw-bold mb-0 page-title" id="pageTitle">Staff Visiting Reports</h1>
-                <p class="text-muted font-12 mb-0">Daily field staff distance traveled (KM), route logs &amp; visiting activity summary</p>
+                <p class="text-muted font-12 mb-0">Daily field staff distance traveled (KM) &amp; visiting activity summary</p>
             </div>
         </div>
 
-        <div class="d-flex align-items-center flex-wrap gap-2">
-            <!-- Quick Distance Filter Pills -->
-            <ul class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="svsKmTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link active rounded-pill px-3 py-1 font-12 fw-semibold" data-km="all">
-                        <i class="bi bi-layers me-1"></i>All Logs
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="active">
-                        <i class="bi bi-check2-circle me-1"></i>Active (&gt;0 km)
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="zero">
-                        <i class="bi bi-dash-circle me-1"></i>No Travel (0 km)
-                    </button>
-                </li>
-            </ul>
+        <ul class="nav nav-pills gap-1 bg-light p-1 border rounded-pill" id="svsKmTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button type="button" class="nav-link active rounded-pill px-3 py-1 font-12 fw-semibold" data-km="all">All Logs</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="active">Active (&gt;0 km)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-km="zero">No Travel (0 km)</button>
+            </li>
+        </ul>
 
-            <!-- Offcanvas Filter Button -->
-            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" data-bs-toggle="offcanvas" data-bs-target="#svsFilterOffcanvas">
-                <i class="bi bi-funnel text-primary"></i>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1 fw-semibold" data-bs-toggle="offcanvas" data-bs-target="#svsFilterOffcanvas">
+                <i class="bi bi-funnel"></i>
                 <span>Filters</span>
-                <span class="badge rounded-pill bg-primary text-white font-10 d-none" id="svsFilterCountBadge">0</span>
+                <span class="badge rounded-pill bg-primary text-white d-none" id="svsFilterCountBadge">0</span>
             </button>
 
-            <!-- Header Actions Dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-lightning-charge text-primary"></i>
-                    <span>Actions</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end table-action-menu shadow-lg border-0 p-2">
-                    <li>
-                        <a class="dropdown-item rounded-2 py-2" href="staff-visiting-location-report.php">
-                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-geo-alt"></i></span>
-                            <span>Location Audit Report</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item rounded-2 py-2" href="lead-map.php">
-                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-map"></i></span>
-                            <span>Field Staff Live Map</span>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider my-1"></li>
-                    <li>
-                        <button type="button" class="dropdown-item rounded-2 py-2" onclick="window.print()">
-                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-printer"></i></span>
-                            <span>Print Visiting Report</span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Primary CTA -->
-            <a href="staff-visiting-location-report.php" class="btn btn-primary fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-sm">
+            <a href="staff-visiting-location-report.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 fw-semibold">
                 <i class="bi bi-geo-alt"></i>
                 <span>Location Report</span>
             </a>
@@ -85,10 +47,10 @@
             <table class="table-modern w-100 datatable" id="staffVisitTable" data-table-name="Staff Visiting Report">
             <thead>
                 <tr>
-                    <th class="text-center" style="width:70px;">S.No.</th>
-                    <th class="text-center">Staff Name</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center">Total KM</th>
+                    <th style="width:70px;">S.No.</th>
+                    <th>Staff Name</th>
+                    <th>Date</th>
+                    <th>Total KM</th>
                 </tr>
             </thead>
             <tbody id="staffVisitTbody">
