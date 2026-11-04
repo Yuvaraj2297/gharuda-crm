@@ -44,7 +44,7 @@ $todayFormatted = date('d-m-Y');
 
     <!-- Main Customer Onboarding Card -->
     <div class="card-custom p-3 p-md-4 mb-4">
-        <form id="customerNewForm" onsubmit="event.preventDefault(); submitNewCustomer('360');">
+        <form id="customerNewForm" onsubmit="event.preventDefault(); submitNewCustomer();">
 
             <!-- Section 1: Company & Tax Profile -->
             <div class="mb-4 pb-4 border-bottom">
@@ -352,65 +352,15 @@ $todayFormatted = date('d-m-Y');
             </div>
 
             <!-- Action Footer -->
-            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-3 border-top">
-                <a href="customers.php" class="btn btn-light border px-3 fw-semibold">Cancel</a>
-                <div class="d-flex align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary fw-semibold" onclick="submitNewCustomer('quote')">
-                        <i class="bi bi-file-earmark-text me-1"></i>Save &amp; Create Quotation
-                    </button>
-                    <button type="button" class="btn btn-outline-success fw-semibold" onclick="submitNewCustomer('invoice')">
-                        <i class="bi bi-receipt me-1"></i>Save &amp; Create Tax Invoice
-                    </button>
-                    <button type="submit" class="btn btn-primary px-4 fw-bold">
-                        <i class="bi bi-check2-circle me-1"></i>Save &amp; Onboard Customer
-                    </button>
-                </div>
+            <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top">
+                <a href="customers.php" class="btn btn-light border px-4 fw-semibold">Cancel</a>
+                <button type="submit" class="btn btn-primary px-4 fw-bold">
+                    <i class="bi bi-check2-circle me-1"></i>Save Customer
+                </button>
             </div>
         </form>
     </div>
-
-    
 </main>
-
-<!-- Modal: Customer Onboarded Next-Step CRM Hub -->
-<div class="modal fade" id="customerOnboardedModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
-            <div class="p-4 text-center bg-success bg-gradient text-white">
-                <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-white text-success p-3 mb-2 shadow-sm">
-                    <i class="bi bi-patch-check-fill fs-3"></i>
-                </div>
-                <h5 class="fw-bold mb-1" id="onboardedCompanyTitle">Customer Account Onboarded!</h5>
-                <p class="small mb-0 text-white-50">360&deg; Profile, Primary Contact, and GST Billing Ledger are now active.</p>
-            </div>
-            <div class="modal-body p-4">
-                <div class="small fw-bold text-uppercase text-muted mb-2">Next CRM Lifecycle Action</div>
-                <div class="d-grid gap-2">
-                    <a id="nextAct360" href="customer-view.php?id=1" class="btn btn-primary fw-bold py-2 d-flex align-items-center justify-content-between px-3">
-                        <span><i class="bi bi-person-vcard me-2"></i>Open Customer 360&deg; Profile</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                    <a id="nextActQuote" href="quotation-create.php" class="btn btn-outline-primary fw-semibold py-2 d-flex align-items-center justify-content-between px-3">
-                        <span><i class="bi bi-file-earmark-text me-2"></i>Create GST Quotation / Proposal</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                    <a id="nextActInvoice" href="invoice-create.php" class="btn btn-outline-success fw-semibold py-2 d-flex align-items-center justify-content-between px-3">
-                        <span><i class="bi bi-receipt me-2"></i>Generate Tax Invoice</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                    <a id="nextActProject" href="project-create.php" class="btn btn-outline-dark fw-semibold py-2 d-flex align-items-center justify-content-between px-3">
-                        <span><i class="bi bi-briefcase me-2"></i>Launch Client Delivery Project</span>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="modal-footer bg-light border-top py-2 px-4 d-flex justify-content-between">
-                <a href="customers.php" class="btn btn-sm btn-secondary">Go to Customers List</a>
-                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Stay on Page</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
 function handleGstinInput(el) {
@@ -434,7 +384,7 @@ function copyBillingToShipping() {
     }
 }
 
-function submitNewCustomer(nextMode) {
+function submitNewCustomer() {
     var compEl = document.getElementById('cnCompany');
     var contactEl = document.getElementById('cnContactName');
     var emailEl = document.getElementById('cnEmail');
@@ -447,7 +397,6 @@ function submitNewCustomer(nextMode) {
     }
 
     var company = compEl.value.trim();
-    var encoded = encodeURIComponent(company);
     var contact = contactEl.value.trim();
     var email = emailEl.value.trim();
     var phone = phoneEl.value.trim() || '+91 98400 00000';
@@ -478,27 +427,7 @@ function submitNewCustomer(nextMode) {
         }
     } catch (e) {}
 
-    if (nextMode === 'quote') {
-        window.location.href = 'quotation-create.php?client=' + encoded;
-        return;
-    }
-    if (nextMode === 'invoice') {
-        window.location.href = 'invoice-create.php?client=' + encoded;
-        return;
-    }
-    if (nextMode === 'project') {
-        window.location.href = 'project-create.php';
-        return;
-    }
-
-    document.getElementById('onboardedCompanyTitle').textContent = company + ' Onboarded!';
-    document.getElementById('nextAct360').href = 'customer-view.php?id=1&name=' + encoded;
-    document.getElementById('nextActQuote').href = 'quotation-create.php?client=' + encoded;
-    document.getElementById('nextActInvoice').href = 'invoice-create.php?client=' + encoded;
-
-    if (window.bootstrap && bootstrap.Modal) {
-        bootstrap.Modal.getOrCreateInstance(document.getElementById('customerOnboardedModal')).show();
-    }
+    window.location.href = 'customers.php';
 }
 </script>
 
