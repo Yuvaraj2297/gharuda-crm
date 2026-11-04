@@ -1,217 +1,111 @@
 <?php include 'header.php'; ?>
 
-
-<style>
-    /* Report switch tabs */
-    .report-switch-tabs {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-    }
-
-    .rstab {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        font-weight: 700;
-        color: #374151;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 9px 18px;
-        text-decoration: none;
-        transition: .15s;
-    }
-
-    .rstab i {
-        font-size: 14px;
-        color: #6b7280;
-    }
-
-    .rstab:hover {
-        border-color: #86efac;
-        color: #15803d;
-        text-decoration: none;
-    }
-
-    .rstab:hover i {
-        color: #15803d;
-    }
-
-    .rstab.active {
-        background: linear-gradient(135deg, #16a34a, #15803d);
-        border-color: transparent;
-        color: #fff;
-        box-shadow: 0 2px 6px rgba(22, 163, 74, .3);
-    }
-
-    .rstab.active i {
-        color: #fff;
-    }
-
-    .svr-page .table-modern thead th,
-    .svr-page .table-modern tbody td {
-        padding-left: 12px;
-        padding-right: 12px;
-        white-space: nowrap;
-        vertical-align: top;
-    }
-
-    .svr-page .table-modern thead th:nth-child(1) {
-        width: 60px;
-    }
-
-    /* long address columns wrap */
-    .svr-page .table-modern tbody td:nth-child(6),
-    .svr-page .table-modern tbody td:nth-child(7) {
-        white-space: normal;
-        min-width: 240px;
-        max-width: 300px;
-        color: var(--ink-500);
-        font-size: 12.5px;
-    }
-
-    .svr-page .svr-name {
-        font-weight: 700;
-        color: var(--ink-900);
-    }
-
-    .svr-page .svr-sub {
-        font-size: 11.5px;
-        color: var(--ink-500);
-        font-weight: 600;
-    }
-
-    .svr-page .svr-type {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        font-size: 11.5px;
-        font-weight: 800;
-    }
-
-    .svr-page .svr-type.lead {
-        color: #3564e0;
-        background: #eaf0fe;
-    }
-
-    .svr-page .svr-type.customer {
-        color: var(--primary-dark);
-        background: var(--primary-light);
-    }
-
-    .svr-page .svr-diff {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        font-size: 11.5px;
-        font-weight: 800;
-    }
-
-    .svr-page .svr-diff.ok {
-        color: var(--primary-dark);
-        background: var(--primary-light);
-    }
-
-    .svr-page .svr-diff.warn {
-        color: #a3670a;
-        background: var(--accent-amber-soft);
-    }
-
-    .svr-page .svr-diff.far {
-        color: #c0362c;
-        background: var(--accent-red-soft);
-    }
-</style>
-
 <main class="svr-page">
 
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3 overflow-auto">
-        <div class="overflow-auto">
-            <h1 class="font-display fw-bold mb-1 page-title">Staff Visiting Location Report</h1>
+    <!-- Single-Row Enterprise Page Header -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <div class="d-flex align-items-center gap-3">
+            <div class="icon-chip bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3" style="width:42px;height:42px;">
+                <i class="bi bi-geo-alt fs-5"></i>
+            </div>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Staff Visiting Location Report</h1>
+                <p class="text-muted font-12 mb-0">Audit field staff visit check-ins, GPS distance variance, lead/customer locations &amp; in/out timestamps</p>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <!-- Bootstrap 5 Nav-Pills Visit Type & Variance Filter Tabs -->
+            <ul class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="svrTypeTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link active rounded-pill px-3 py-1 font-12 fw-semibold" data-type="all">
+                        <i class="bi bi-layers me-1"></i>All Visits
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-type="lead">
+                        <i class="bi bi-person-plus me-1"></i>Lead Visits
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-type="customer">
+                        <i class="bi bi-building-check me-1"></i>Customer Visits
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-type="high_diff">
+                        <i class="bi bi-exclamation-triangle me-1"></i>High Variance (&gt;1 km)
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Offcanvas Filter Button -->
+            <button type="button" class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs" data-bs-toggle="offcanvas" data-bs-target="#svrFilterOffcanvas">
+                <i class="bi bi-funnel text-primary"></i>
+                <span>Filters</span>
+                <span class="badge rounded-pill bg-primary text-white font-10 d-none" id="svrFilterCountBadge">0</span>
+            </button>
+
+            <!-- Header Actions Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-light border bg-white fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-xs dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-lightning-charge text-primary"></i>
+                    <span>Actions</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end table-action-menu shadow-lg border-0 p-2">
+                    <li>
+                        <a class="dropdown-item rounded-2 py-2" href="staff-visting-report.php">
+                            <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-signpost-split"></i></span>
+                            <span>Staff Visiting Summary</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item rounded-2 py-2" href="lead-map.php">
+                            <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-map"></i></span>
+                            <span>Field Staff Live Map</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item rounded-2 py-2" href="appointments.php">
+                            <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-calendar2-check"></i></span>
+                            <span>Schedule Field Visit</span>
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li>
+                        <button type="button" class="dropdown-item rounded-2 py-2" onclick="window.print()">
+                            <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-printer"></i></span>
+                            <span>Print Location Audit</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Primary CTA -->
+            <a href="staff-visting-report.php" class="btn btn-primary fw-semibold font-13 px-3 py-2 d-inline-flex align-items-center gap-2 rounded-3 shadow-sm">
+                <i class="bi bi-signpost-split"></i>
+                <span>Visiting Summary</span>
+            </a>
         </div>
     </div>
 
-    <!-- Report switch tabs -->
-    <div class="report-switch-tabs" style="margin-bottom:12px;">
-        <a class="rstab" href="staff-visting-report.php"><i class="bi bi-signpost-split"></i>Staff Visiting Reports</a>
-        <a class="rstab active" href="staff-visiting-location-report.php"><i class="bi bi-geo-alt"></i>Staff Visiting Location Report</a>
-    </div>
-
-    <!-- Filters -->
-    <form id="svrFilterForm" class="card-custom mb-3 filters-card" autocomplete="off" onsubmit="return false;">
-        <div class="row g-3 align-items-end">
-            <div class="col-lg-3 col-md-6">
-                <label class="form-label" for="svrStaff">Staff</label>
-                <select class="form-select select2" id="svrStaff">
-                    <option value="0">All Staff</option>
-                    <option value="1">GHARUDA SOFTWARE</option>
-                    <option value="2">PREM KUMAR.R</option>
-                    <option value="3">Jude S</option>
-                    <option value="4">KISHORE R</option>
-                    <option value="5">Prabhu S</option>
-                </select>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <label class="form-label" for="svrBranch">Branch</label>
-                <select class="form-select select2" id="svrBranch">
-                    <option value="">All Branches</option>
-                    <option value="West Mogappair">West Mogappair</option>
-                    <option value="Ambattur">Ambattur</option>
-                    <option value="Anna Nagar">Anna Nagar</option>
-                    <option value="Velachery">Velachery</option>
-                </select>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label" for="svrFrom">From Date</label>
-                <div class="date-picker"><input type="text" class="date-input form-control" id="svrFrom" value="17-09-2026" placeholder="Select date" autocomplete="off"></div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6">
-                <label class="form-label" for="svrTo">To Date</label>
-                <div class="date-picker"><input type="text" class="date-input form-control" id="svrTo" value="17-10-2026" placeholder="Select date" autocomplete="off"></div>
-            </div>
-            <div class="col-lg-2 col-md-4">
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-reject flex-fill" id="svrReset">Reset</button>
-                    <button type="button" class="btn btn-primary flex-fill" id="svrSearch"><i class="bi bi-search me-1"></i>Search</button>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!-- Table (toolbar, columns, export, search, show entries & pagination are auto-created by the "datatable" class) -->
-    <div class="card-custom p-0">
-        <div class="card-head align-items-center justify-content-between border-light-subtle border-bottom mb-0 p-3">
-            <div class="d-flex align-items-center gap-3">
-                <div class="icon-chip">
-                    <i class="bi bi-geo-alt"></i>
-                </div>
-                <div>
-                    <h3 class="card-title mb-0">Lead Visits</h3>
-                </div>
-            </div>
-        </div>
-
+    <!-- Table Card -->
+    <div class="card-custom p-0 mb-4" style="overflow: visible;">
         <div class="table-responsive table-modern-wrap overflow-auto column-border">
-            <table class="table-modern w-100 datatable" id="svrTable" data-table-name="Lead Visits">
+            <table class="table-modern w-100 datatable" id="svrTable" data-table-name="Staff Visiting Location Report">
                 <thead>
                     <tr>
                         <th>S.No</th>
                         <th>Staff Name</th>
                         <th>Type</th>
-                        <th>Lead Name</th>
+                        <th>Lead / Customer</th>
                         <th>Date</th>
                         <th>Original Location</th>
                         <th>Current Checkin Location</th>
                         <th>Checkin Difference</th>
                         <th>In-Time</th>
                         <th>Out-Time</th>
+                        <th class="text-end pe-3" style="width: 110px;">Action</th>
                     </tr>
                 </thead>
                 <tbody id="svrTbody">
@@ -789,6 +683,169 @@
             </table>
         </div>
     </div>
+
+    <!-- Slide-Over Offcanvas Filter Drawer -->
+    <div class="offcanvas offcanvas-end border-0 shadow-lg" tabindex="-1" id="svrFilterOffcanvas" aria-labelledby="svrFilterOffcanvasLabel" style="width: 380px;">
+        <div class="offcanvas-header border-bottom bg-light py-3 px-4">
+            <div class="d-flex align-items-center gap-2">
+                <div class="icon-chip bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center" style="width:32px;height:32px;">
+                    <i class="bi bi-sliders"></i>
+                </div>
+                <div>
+                    <h6 class="offcanvas-title fw-bold mb-0 font-14" id="svrFilterOffcanvasLabel">Filter Location Visits</h6>
+                    <span class="text-muted font-11">Narrow by visit type, staff, branch &amp; date range</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-4 py-3">
+            <form id="svrFilterForm" autocomplete="off" onsubmit="return false;">
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrTypeFilter">Visit Category / Variance</label>
+                    <select class="form-select font-13" id="svrTypeFilter">
+                        <option value="all">All Visits</option>
+                        <option value="lead">Lead Visits Only</option>
+                        <option value="customer">Customer Visits Only</option>
+                        <option value="high_diff">High GPS Variance (&gt; 1.0 km)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrStaff">Field Staff</label>
+                    <select class="form-select select2" id="svrStaff">
+                        <option value="0">All Staff</option>
+                        <option value="1">GHARUDA SOFTWARE</option>
+                        <option value="2">PREM KUMAR.R</option>
+                        <option value="3">Jude S</option>
+                        <option value="4">KISHORE R</option>
+                        <option value="5">Prabhu S</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrBranch">Work Branch</label>
+                    <select class="form-select select2" id="svrBranch">
+                        <option value="">All Branches</option>
+                        <option value="West Mogappair">West Mogappair</option>
+                        <option value="Ambattur">Ambattur</option>
+                        <option value="Anna Nagar">Anna Nagar</option>
+                        <option value="Velachery">Velachery</option>
+                    </select>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrFrom">From Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="svrFrom" value="17-09-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrTo">To Date</label>
+                        <div class="date-picker">
+                            <input type="text" class="date-input form-control font-13" id="svrTo" value="17-10-2026" placeholder="DD-MM-YYYY" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label font-12 fw-semibold text-secondary mb-1" for="svrKeywordFilter">Keyword / Location Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control border-start-0 font-13" id="svrKeywordFilter" placeholder="Lead name, phone, street or pincode...">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="offcanvas-footer border-top bg-light p-3 d-flex gap-2">
+            <button type="button" class="btn btn-light border flex-fill fw-semibold font-13" id="svrReset">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+            <button type="button" class="btn btn-primary flex-fill fw-semibold font-13" id="svrSearch" data-bs-dismiss="offcanvas">
+                <i class="bi bi-check2-circle me-1"></i>Apply Filters
+            </button>
+        </div>
+    </div>
+
+    <!-- Visit 360° Location Audit Modal -->
+    <div class="modal fade" id="svrDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-light border-bottom py-3 px-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-chip bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width:42px;height:42px;">
+                            <i class="bi bi-geo-alt-fill fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <h5 class="modal-title fw-bold mb-0 font-16" id="svrModalLeadName">Visit Location Audit</h5>
+                                <span id="svrModalTypeBadge"></span>
+                                <span id="svrModalDiffBadge"></span>
+                            </div>
+                            <div class="text-muted font-12">
+                                <i class="bi bi-calendar3 me-1"></i><span id="svrModalDate">-</span>
+                                <span class="mx-2">&bull;</span>
+                                <i class="bi bi-clock-history me-1"></i>Duration: <strong class="text-dark" id="svrModalDuration">-</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 border bg-light-subtle h-100">
+                                <div class="text-uppercase text-muted fw-bold font-11 mb-2"><i class="bi bi-person-badge me-1 text-primary"></i>Field Staff Details</div>
+                                <div class="fw-bold text-dark font-14 mb-1" id="svrModalStaffName">-</div>
+                                <div class="text-secondary font-12 mb-1"><i class="bi bi-telephone me-1"></i><span id="svrModalStaffPhone">-</span></div>
+                                <div class="text-secondary font-12"><i class="bi bi-diagram-3 me-1"></i><span id="svrModalStaffBranch">-</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 border bg-light-subtle h-100">
+                                <div class="text-uppercase text-muted fw-bold font-11 mb-2"><i class="bi bi-building me-1 text-success"></i>Visited Lead / Customer</div>
+                                <div class="fw-bold text-dark font-14 mb-1" id="svrModalPartyName">-</div>
+                                <div class="text-secondary font-12 mb-1"><i class="bi bi-telephone me-1"></i><span id="svrModalPartyPhone">-</span></div>
+                                <div class="text-secondary font-12"><i class="bi bi-clock me-1"></i>In: <strong class="text-success" id="svrModalInTime">-</strong> &nbsp;|&nbsp; Out: <strong class="text-danger" id="svrModalOutTime">-</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 border h-100">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="text-uppercase text-muted fw-bold font-11"><i class="bi bi-pin-map-fill text-primary me-1"></i>Original Registered Location</span>
+                                    <a href="#" target="_blank" rel="noopener" id="svrModalOrigMapLink" class="font-11 fw-semibold text-primary text-decoration-none">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Map
+                                    </a>
+                                </div>
+                                <p class="font-13 text-dark mb-0" id="svrModalOrigAddr">-</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 border h-100">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="text-uppercase text-muted fw-bold font-11"><i class="bi bi-crosshair text-success me-1"></i>Actual GPS Check-in Location</span>
+                                    <a href="#" target="_blank" rel="noopener" id="svrModalCurrMapLink" class="font-11 fw-semibold text-success text-decoration-none">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Map
+                                    </a>
+                                </div>
+                                <p class="font-13 text-dark mb-0" id="svrModalCurrAddr">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-top py-2 px-4 justify-content-between">
+                    <a href="staff-visting-report.php" class="btn btn-light border fw-semibold font-13">
+                        <i class="bi bi-signpost-split me-1 text-primary"></i>Staff Visiting Summary
+                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="#" target="_blank" rel="noopener" id="svrModalDirectionsBtn" class="btn btn-outline-primary fw-semibold font-13">
+                            <i class="bi bi-compass me-1"></i>Compare Route on Google Maps
+                        </a>
+                        <button type="button" class="btn btn-secondary fw-semibold font-13" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script>
@@ -801,12 +858,43 @@
         var tbody = document.getElementById('svrTbody');
         var table = document.getElementById('svrTable');
 
+        // Inject unclipped Action dropdown column and metadata attributes before AutoMasterTable snapshots rows
+        Array.prototype.forEach.call(tbody.querySelectorAll('tr'), function(tr) {
+            var typeBadge = tr.querySelector('.svr-type');
+            var diffBadge = tr.querySelector('.svr-diff');
+            var vType = typeBadge && typeBadge.classList.contains('customer') ? 'customer' : 'lead';
+            var vDiff = diffBadge ? parseFloat(diffBadge.getAttribute('data-sort') || '0') : 0;
+
+            tr.setAttribute('data-type', vType);
+            tr.setAttribute('data-diff', String(vDiff));
+
+            var actionTd = document.createElement('td');
+            actionTd.className = 'text-end pe-3';
+            actionTd.innerHTML =
+                '<div class="dropdown d-inline-block">' +
+                    '<button class="btn btn-table-action dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">' +
+                        '<i class="bi bi-three-dots-vertical"></i> Actions' +
+                    '</button>' +
+                    '<ul class="dropdown-menu dropdown-menu-end table-action-menu shadow-lg border-0 p-2">' +
+                        '<li><button type="button" class="dropdown-item rounded-2 py-2 svr-act-view"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-eye"></i></span><span>Visit 360° Location Audit</span></button></li>' +
+                        '<li><button type="button" class="dropdown-item rounded-2 py-2 svr-act-map"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-compass"></i></span><span>Compare on Google Maps</span></button></li>' +
+                        '<li><a class="dropdown-item rounded-2 py-2" href="staff-visting-report.php"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-signpost-split"></i></span><span>Staff Visiting Summary</span></a></li>' +
+                        '<li><hr class="dropdown-divider my-1"></li>' +
+                        '<li><button type="button" class="dropdown-item rounded-2 py-2 text-danger svr-act-delete"><span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash3"></i></span><span>Remove Visit Log</span></button></li>' +
+                    '</ul>' +
+                '</div>';
+            tr.appendChild(actionTd);
+        });
+
         // Keep a pristine copy of the static rows (taken before the datatable initialises)
         var allRows = Array.prototype.map.call(tbody.querySelectorAll('tr'), function(tr) {
             return {
                 staff: tr.getAttribute('data-staff'),
                 branch: tr.getAttribute('data-branch'),
                 date: tr.getAttribute('data-date'), // yyyy-mm-dd
+                type: tr.getAttribute('data-type') || 'lead',
+                diff: parseFloat(tr.getAttribute('data-diff') || '0'),
+                text: (tr.textContent || '').toLowerCase(),
                 html: tr.outerHTML
             };
         });
@@ -822,11 +910,43 @@
             return p[2] + '-' + p[1] + '-' + p[0];
         }
 
+        function updateFilterBadge() {
+            var count = 0;
+            var typeVal = document.getElementById('svrTypeFilter').value;
+            var staffVal = document.getElementById('svrStaff').value;
+            var branchVal = document.getElementById('svrBranch').value;
+            var fromVal = document.getElementById('svrFrom').value;
+            var toVal = document.getElementById('svrTo').value;
+            var kwVal = (document.getElementById('svrKeywordFilter').value || '').trim();
+
+            if (typeVal !== 'all') count++;
+            if (staffVal !== '0') count++;
+            if (branchVal !== '') count++;
+            if (fromVal && fromVal !== DEFAULT_FROM) count++;
+            if (toVal && toVal !== DEFAULT_TO) count++;
+            if (kwVal !== '') count++;
+
+            var badge = document.getElementById('svrFilterCountBadge');
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle('d-none', count === 0);
+            }
+        }
+
+        function syncHeaderTabs(typeVal) {
+            var tabs = document.querySelectorAll('#svrTypeTabs .nav-link');
+            Array.prototype.forEach.call(tabs, function(btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-type') === typeVal);
+            });
+        }
+
         function applyFilter() {
+            var typeVal = document.getElementById('svrTypeFilter').value;
             var staff = document.getElementById('svrStaff').value;
             var branch = document.getElementById('svrBranch').value;
             var fromEl = document.getElementById('svrFrom');
             var toEl = document.getElementById('svrTo');
+            var kw = (document.getElementById('svrKeywordFilter').value || '').trim().toLowerCase();
             var from = dmyToISO(fromEl.value);
             var to = dmyToISO(toEl.value);
 
@@ -839,11 +959,18 @@
                 toEl.value = isoToDMY(to);
             }
 
+            syncHeaderTabs(typeVal);
+            updateFilterBadge();
+
             var html = allRows.filter(function(r) {
+                if (typeVal === 'lead' && r.type !== 'lead') return false;
+                if (typeVal === 'customer' && r.type !== 'customer') return false;
+                if (typeVal === 'high_diff' && r.diff < 1.0) return false;
                 if (staff !== '0' && r.staff !== staff) return false;
                 if (branch !== '' && r.branch !== branch) return false;
                 if (from && r.date < from) return false;
                 if (to && r.date > to) return false;
+                if (kw && r.text.indexOf(kw) === -1) return false;
                 return true;
             }).map(function(r) {
                 return r.html;
@@ -853,15 +980,152 @@
             if (table && table.autoTable) table.autoTable.refresh(); // re-run search / sort / pagination / S.No
         }
 
+        // Header Nav-Pills Click Sync
+        var tabButtons = document.querySelectorAll('#svrTypeTabs .nav-link');
+        Array.prototype.forEach.call(tabButtons, function(btn) {
+            btn.addEventListener('click', function() {
+                var t = btn.getAttribute('data-type') || 'all';
+                document.getElementById('svrTypeFilter').value = t;
+                applyFilter();
+            });
+        });
+
         document.getElementById('svrSearch').addEventListener('click', applyFilter);
 
         document.getElementById('svrReset').addEventListener('click', function() {
+            document.getElementById('svrTypeFilter').value = 'all';
             document.getElementById('svrStaff').value = '0';
             document.getElementById('svrBranch').value = '';
+            document.getElementById('svrKeywordFilter').value = '';
             if (window.jQuery) window.jQuery('#svrStaff, #svrBranch').trigger('change'); // refresh select2
             document.getElementById('svrFrom').value = DEFAULT_FROM;
             document.getElementById('svrTo').value = DEFAULT_TO;
             applyFilter();
+        });
+
+        // Parse 12-hour time string "02:35:45 pm" into minutes from midnight
+        function parseTimeMins(str) {
+            var m = /(\d{1,2}):(\d{2}):(\d{2})\s*(am|pm)/i.exec((str || '').trim());
+            if (!m) return null;
+            var hh = parseInt(m[1], 10);
+            var mm = parseInt(m[2], 10);
+            var ap = m[4].toLowerCase();
+            if (ap === 'pm' && hh < 12) hh += 12;
+            if (ap === 'am' && hh === 12) hh = 0;
+            return hh * 60 + mm;
+        }
+
+        function extractRowDetails(tr) {
+            var cells = tr.querySelectorAll('td');
+            if (cells.length < 10) return null;
+
+            var staffNameEl = cells[1].querySelector('.svr-name');
+            var staffSubs = cells[1].querySelectorAll('.svr-sub');
+            var partyNameEl = cells[3].querySelector('.svr-name');
+            var partySubEl = cells[3].querySelector('.svr-sub');
+
+            var origAddr = (cells[5].textContent || '').trim();
+            var currAddr = (cells[6].textContent || '').trim();
+            var inTime = (cells[8].textContent || '').trim();
+            var outTime = (cells[9].textContent || '').trim();
+
+            var inMins = parseTimeMins(inTime);
+            var outMins = parseTimeMins(outTime);
+            var durationStr = '-';
+            if (inMins !== null && outMins !== null && outMins >= inMins) {
+                durationStr = (outMins - inMins) + ' mins';
+            }
+
+            return {
+                staffName: staffNameEl ? staffNameEl.textContent.trim() : '-',
+                staffPhone: staffSubs[0] ? staffSubs[0].textContent.trim() : '-',
+                staffBranch: staffSubs[1] ? staffSubs[1].textContent.trim() : '-',
+                typeHtml: cells[2].innerHTML,
+                partyName: partyNameEl ? partyNameEl.textContent.trim() : '-',
+                partyPhone: partySubEl ? partySubEl.textContent.trim() : '-',
+                date: (cells[4].textContent || '').trim(),
+                origAddr: origAddr,
+                currAddr: currAddr,
+                diffHtml: cells[7].innerHTML,
+                inTime: inTime,
+                outTime: outTime,
+                duration: durationStr
+            };
+        }
+
+        function openVisit360Modal(tr) {
+            var info = extractRowDetails(tr);
+            if (!info) return;
+
+            document.getElementById('svrModalLeadName').textContent = info.partyName;
+            document.getElementById('svrModalTypeBadge').innerHTML = info.typeHtml;
+            document.getElementById('svrModalDiffBadge').innerHTML = info.diffHtml;
+            document.getElementById('svrModalDate').textContent = info.date;
+            document.getElementById('svrModalDuration').textContent = info.duration;
+
+            document.getElementById('svrModalStaffName').textContent = info.staffName;
+            document.getElementById('svrModalStaffPhone').textContent = info.staffPhone;
+            document.getElementById('svrModalStaffBranch').textContent = info.staffBranch;
+
+            document.getElementById('svrModalPartyName').textContent = info.partyName;
+            document.getElementById('svrModalPartyPhone').textContent = info.partyPhone;
+            document.getElementById('svrModalInTime').textContent = info.inTime;
+            document.getElementById('svrModalOutTime').textContent = info.outTime;
+
+            document.getElementById('svrModalOrigAddr').textContent = info.origAddr;
+            document.getElementById('svrModalCurrAddr').textContent = info.currAddr;
+
+            var origUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(info.origAddr);
+            var currUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(info.currAddr);
+            var dirUrl = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(info.origAddr) + '&destination=' + encodeURIComponent(info.currAddr);
+
+            document.getElementById('svrModalOrigMapLink').setAttribute('href', origUrl);
+            document.getElementById('svrModalCurrMapLink').setAttribute('href', currUrl);
+            document.getElementById('svrModalDirectionsBtn').setAttribute('href', dirUrl);
+
+            var modalEl = document.getElementById('svrDetailModal');
+            if (modalEl && window.bootstrap) {
+                window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+            }
+        }
+
+        // Row Click & Action Menu Delegation
+        tbody.addEventListener('click', function(e) {
+            var tr = e.target.closest('tr');
+            if (!tr) return;
+
+            var viewBtn = e.target.closest('.svr-act-view');
+            if (viewBtn) {
+                e.preventDefault();
+                openVisit360Modal(tr);
+                return;
+            }
+
+            var mapBtn = e.target.closest('.svr-act-map');
+            if (mapBtn) {
+                e.preventDefault();
+                var info = extractRowDetails(tr);
+                if (info) {
+                    var dirUrl = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(info.origAddr) + '&destination=' + encodeURIComponent(info.currAddr);
+                    window.open(dirUrl, '_blank', 'noopener');
+                }
+                return;
+            }
+
+            var delBtn = e.target.closest('.svr-act-delete');
+            if (delBtn) {
+                e.preventDefault();
+                tr.remove();
+                if (table && table.autoTable) table.autoTable.refresh();
+                return;
+            }
+
+            // Ignore clicks inside action dropdown or interactive controls
+            if (e.target.closest('.btn-table-action, .lead-act-btn, .dropdown, .dropdown-menu, a, button, input')) {
+                return;
+            }
+
+            openVisit360Modal(tr);
         });
     })();
 </script>

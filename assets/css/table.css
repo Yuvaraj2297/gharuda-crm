@@ -1255,12 +1255,14 @@
 .table-modern tbody tr[data-inv] {
     cursor: pointer;
 }
+
 .inv-num-link {
     font-weight: 700;
     color: var(--primary);
     text-decoration: none;
     cursor: pointer;
 }
+
 .inv-num-link:hover {
     text-decoration: underline;
 }
@@ -1268,12 +1270,14 @@
 .table-modern tbody tr[data-pay] {
     cursor: pointer;
 }
+
 .pay-num-link {
     font-weight: 700;
     color: var(--primary);
     text-decoration: none;
     cursor: pointer;
 }
+
 .pay-num-link:hover {
     text-decoration: underline;
 }
@@ -1288,9 +1292,25 @@
     font-weight: 700;
     border: 1px solid transparent;
 }
-.exp-pill-billed { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
-.exp-pill-cash   { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
-.exp-pill-bank   { background: #f0f9ff; color: #0284c7; border-color: #bae6fd; }
+
+.exp-pill-billed {
+    background: #f0fdf4;
+    color: #16a34a;
+    border-color: #bbf7d0;
+}
+
+.exp-pill-cash {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #bfdbfe;
+}
+
+.exp-pill-bank {
+    background: #f0f9ff;
+    color: #0284c7;
+    border-color: #bae6fd;
+}
+
 #expTable tbody tr {
     cursor: pointer;
 }
@@ -1306,18 +1326,92 @@
     color: #475569;
     border: 1px solid #cbd5e1;
 }
+
 .amount-credit {
     color: #087a24;
     font-weight: 700;
 }
+
 .amount-debit {
     color: #dc2626;
     font-weight: 700;
 }
+
 .amount-balance {
     color: #0f172a;
     font-weight: 800;
 }
+
 #pcTable tbody tr {
     cursor: pointer;
+}
+
+/* Shared Staff Visiting Location Report Classes */
+#svrTable tbody tr {
+    cursor: pointer;
+}
+
+#svrTable tbody td:nth-child(6),
+#svrTable tbody td:nth-child(7) {
+    white-space: normal;
+    min-width: 240px;
+    max-width: 300px;
+    color: var(--ink-500);
+    font-size: 12.5px;
+}
+
+.svr-name {
+    font-weight: 700;
+    color: var(--ink-900);
+}
+
+.svr-sub {
+    font-size: 11.5px;
+    color: var(--ink-500);
+    font-weight: 600;
+}
+
+.svr-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 800;
+}
+
+.svr-type.lead {
+    color: #3564e0;
+    background: #eaf0fe;
+}
+
+.svr-type.customer {
+    color: var(--primary-dark);
+    background: var(--primary-light);
+}
+
+.svr-diff {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 800;
+}
+
+.svr-diff.ok {
+    color: var(--primary-dark);
+    background: var(--primary-light);
+}
+
+.svr-diff.warn {
+    color: #a3670a;
+    background: var(--accent-amber-soft);
+}
+
+.svr-diff.far {
+    color: #c0362c;
+    background: var(--accent-red-soft);
 }

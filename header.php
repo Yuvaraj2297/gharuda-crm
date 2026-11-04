@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./assets/css/app.css">
     <link rel="stylesheet" href="./assets/css/select2.css">
     <link rel="stylesheet" href="./assets/css/date-picker.css">
-    <link rel="stylesheet" href="./assets/css/table.css?v=5">
+    <link rel="stylesheet" href="./assets/css/table.css?v=6">
     <link rel="stylesheet" href="./assets/css/ui-kit.css">
 
     <link rel="stylesheet" href="./assets/js/DataTables/datatables.min.css">
