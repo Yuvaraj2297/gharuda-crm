@@ -190,16 +190,16 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                 <span class="badge bg-primary rounded-pill d-none" id="fulFilterCountBadge">0</span>
             </button>
             <div class="dropdown">
-                <button type="button" class="btn btn-primary btn-sm dropdown-toggle font-12 fw-semibold d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle font-12 fw-semibold d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
                     <i class="bi bi-lightning-charge-fill"></i><span>Actions</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu" style="min-width: 230px;">
                     <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Quick Actions</li>
-                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="appointments.php"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div><div class="fw-semibold text-dark font-12">Book Appointment</div><div class="text-muted" style="font-size:10px;">Schedule demo / visit</div></div></a></li>
-                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="quotation-create.php"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size:10px;">Issue GST proposal</div></div></a></li>
-                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="customer-new.php"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span><div><div class="fw-semibold text-dark font-12">New Customer</div><div class="text-muted" style="font-size:10px;">Add customer record</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="appointments.php"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Book Appointment</div><div class="text-muted" style="font-size:10px;">Schedule demo / visit</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="quotation-create.php"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size:10px;">Issue GST proposal</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="customer-new.php"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">New Customer</div><div class="text-muted" style="font-size:10px;">Add customer record</div></div></a></li>
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="lead.php"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-lines-fill"></i></span><div><div class="fw-semibold text-dark font-12">Back to Leads</div><div class="text-muted" style="font-size:10px;">View all leads pipeline</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="lead.php"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-lines-fill"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Back to Leads</div><div class="text-muted" style="font-size:10px;">View all leads pipeline</div></div></a></li>
                 </ul>
             </div>
             <div class="ful-date-range ms-1 d-none d-md-inline-flex">
@@ -424,8 +424,6 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         </div>
     </div>
 </div>
-
-<?php include 'footer.php'; ?>
 
 </main>
 
@@ -897,7 +895,7 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
             });
         }
 
-        // Safe dropdown delegation with viewport boundary and fixed popper strategy
+        // Safe dropdown delegation in capture phase with viewport boundary and fixed popper strategy
         document.addEventListener('click', function(e) {
             var toggle = e.target.closest('.btn-table-action[data-bs-toggle="dropdown"]');
             if (toggle && window.bootstrap && bootstrap.Dropdown) {
@@ -906,7 +904,16 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                     popperConfig: { strategy: 'fixed' }
                 });
             }
-        });
+            var actItem = e.target.closest('.table-action-menu .dropdown-item');
+            if (actItem && window.bootstrap && bootstrap.Dropdown) {
+                var dd = actItem.closest('.dropdown');
+                var btn = dd ? dd.querySelector('[data-bs-toggle="dropdown"]') : null;
+                if (btn) {
+                    var inst = bootstrap.Dropdown.getInstance(btn);
+                    if (inst) inst.hide();
+                }
+            }
+        }, true);
 
         /* ---------- Init ---------- */
         renderAll();
