@@ -8,9 +8,9 @@
     <!-- LEFT: Icon badge + Title -->
     <div class="d-flex align-items-center gap-2.5">
         <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
-            <i class="bi bi-person-lines-fill"></i>
+            <i class="bi bi-person-lines-fill "></i>
         </div>
-        <div>
+        <div class="ps-2">
             <h1 class="font-display fw-bold mb-0 page-title page-title-lead fs-4">Lead Management</h1>
             <span class="text-muted font-11 d-none d-sm-inline">Manage and track all prospective client leads &amp; pipelines</span>
         </div>
@@ -27,7 +27,7 @@
                     role="tab" 
                     aria-controls="tabContentDashboard" 
                     aria-selected="true">
-                <i class="bi bi-speedometer2"></i>
+                <i class="bi bi-speedometer2 pe-2"></i>
                 <span>Dashboard</span>
             </button>
         </li>
@@ -40,7 +40,7 @@
                     role="tab" 
                     aria-controls="tabContentLeadsTable" 
                     aria-selected="false">
-                <i class="bi bi-table"></i>
+                <i class="bi bi-table pe-2"></i>
                 <span>Lead Table Data</span>
                 <span class="badge bg-primary-subtle text-primary rounded-pill px-1.5 py-0.5 ms-1" id="leadTableCountBadge">10</span>
             </button>
