@@ -478,26 +478,6 @@ function submitNewCustomer(nextMode) {
         }
     } catch (e) {}
 
-    var tbody = document.getElementById('recentOnboardedBody');
-    if (tbody) {
-        var tr = document.createElement('tr');
-        tr.innerHTML =
-            '<td class="fw-bold text-success">' + (document.getElementById('cnClientCode').value || 'CUS-NEW') + '</td>' +
-            '<td><a href="customer-view.php?id=1&name=' + encoded + '" class="fw-bold text-dark text-decoration-none">' + company + '</a><div class="small text-muted">' + email + '</div></td>' +
-            '<td><div class="fw-semibold text-dark">' + contact + '</div><div class="small text-muted">' + phone + '</div></td>' +
-            '<td><code class="text-dark fw-bold">' + gstin + '</code></td>' +
-            '<td><span class="badge bg-success-subtle text-success border border-success-subtle">' + group + '</span></td>' +
-            '<td>' + owner + '</td>' +
-            '<td>' + todayStr + '</td>' +
-            '<td><div class="d-flex align-items-center gap-1 flex-nowrap">' +
-                '<a href="customer-view.php?id=1&name=' + encoded + '" class="btn btn-sm btn-light border text-primary px-2 py-1" title="Open Customer 360° Profile"><i class="bi bi-person-vcard"></i></a>' +
-                '<a href="quotation-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-info px-2 py-1" title="Create GST Quotation"><i class="bi bi-file-earmark-text"></i></a>' +
-                '<a href="invoice-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-success px-2 py-1" title="Create Tax Invoice"><i class="bi bi-receipt"></i></a>' +
-                '<a href="project-create.php?client=' + encoded + '" class="btn btn-sm btn-light border text-dark px-2 py-1" title="Launch Delivery Project"><i class="bi bi-briefcase"></i></a>' +
-            '</div></td>';
-        tbody.insertBefore(tr, tbody.firstChild);
-    }
-
     if (nextMode === 'quote') {
         window.location.href = 'quotation-create.php?client=' + encoded;
         return;
