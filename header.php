@@ -1000,10 +1000,10 @@
                     <!-- 05. Projects & Tasks -->
                     <div class="panel-section" data-panel="Project Management">
                         <div class="nav-label">04. Projects &amp; Tasks</div>
-                        <a data-active-pages="projects-list.php,project-dashboard.php,projects-report.php,project-create.php" class="nav-link-custom" href="projects-list.php">
+                        <a data-active-pages="projects-list.php,project-dashboard.php,project-create.php" class="nav-link-custom" href="projects-list.php">
                             <i class="bi bi-briefcase me-2"></i> <span>Projects</span>
                         </a>
-                        <a data-active-pages="tasks-list.php,projectwise-daily-task-report.php,task-create.php,task-overview.php" class="nav-link-custom" href="tasks-list.php">
+                        <a data-active-pages="tasks-list.php,task-create.php,task-overview.php" class="nav-link-custom" href="tasks-list.php">
                             <i class="bi bi-check2-square me-2"></i> <span>Tasks</span>
                         </a>
                         <a data-active-pages="score-card.php" class="nav-link-custom" href="score-card.php">
@@ -1035,7 +1035,7 @@
                         <a data-active-pages="expenses.php,expense-create.php" class="nav-link-custom" href="expenses.php">
                             <i class="bi bi-receipt me-2"></i> <span>Field Expenses</span>
                         </a>
-                        <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php,petty-cash-report.php" class="nav-link-custom" href="petty-cash.php">
+                        <a data-active-pages="petty-cash.php,petty-cash-list.php,petty-cash-create.php" class="nav-link-custom" href="petty-cash.php">
                             <i class="bi bi-safe me-2"></i> <span>Petty Cash</span>
                         </a>
                     </div>
@@ -1059,9 +1059,6 @@
                         <a data-active-pages="sms-chat.php" class="nav-link-custom" href="sms-chat.php">
                             <i class="bi bi-chat-left-text me-2"></i> <span>SMS Center</span>
                         </a>
-                        <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
-                            <i class="bi bi-headset me-2"></i> <span>Support SLA Reports</span>
-                        </a>
                     </div>
 
                     <!-- 09. Sales Targets -->
@@ -1071,12 +1068,6 @@
                         <div class="nav-label">07. Staff &amp; Field Force</div>
                         <a data-active-pages="staff.php,staff-create.php" class="nav-link-custom" href="staff.php">
                             <i class="bi bi-people-fill me-2"></i> <span>Staff Directory</span>
-                        </a>
-                        <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
-                            <i class="bi bi-pin-map me-2"></i> <span>Staff Location Map</span>
-                        </a>
-                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
-                            <i class="bi bi-geo-alt me-2"></i> <span>Staff Visiting Reports</span>
                         </a>
                     </div>
 
@@ -1099,6 +1090,24 @@
                         </a>
                         <a data-active-pages="summary-report.php" class="nav-link-custom" href="summary-report.php">
                             <i class="bi bi-journal-check me-2"></i> <span>Meeting Summary Report</span>
+                        </a>
+                        <a data-active-pages="staff-visting-report.php" class="nav-link-custom" href="staff-visting-report.php">
+                            <i class="bi bi-signpost-split me-2"></i> <span>Staff Visiting Reports</span>
+                        </a>
+                        <a data-active-pages="staff-visiting-location-report.php" class="nav-link-custom" href="staff-visiting-location-report.php">
+                            <i class="bi bi-geo-alt me-2"></i> <span>Visiting Location Report</span>
+                        </a>
+                        <a data-active-pages="ticket-reports.php" class="nav-link-custom" href="ticket-reports.php">
+                            <i class="bi bi-headset me-2"></i> <span>Support SLA Reports</span>
+                        </a>
+                        <a data-active-pages="projects-report.php" class="nav-link-custom" href="projects-report.php">
+                            <i class="bi bi-briefcase me-2"></i> <span>Projects Report</span>
+                        </a>
+                        <a data-active-pages="projectwise-daily-task-report.php" class="nav-link-custom" href="projectwise-daily-task-report.php">
+                            <i class="bi bi-calendar2-check me-2"></i> <span>Daily Task Report</span>
+                        </a>
+                        <a data-active-pages="petty-cash-report.php" class="nav-link-custom" href="petty-cash-report.php">
+                            <i class="bi bi-safe2 me-2"></i> <span>Petty Cash Report</span>
                         </a>
                     </div>
 
