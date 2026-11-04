@@ -1,6 +1,4 @@
 <?php include 'header.php'; ?>
-<link rel="stylesheet" href="./assets/css/lead.css">
-
 <?php
 /* ---------------------------------------------------------------
    Follow Up List — lead.php Activity Stats "Follow Up" card click
@@ -12,152 +10,6 @@ if (!in_array($range, ['today', 'weekly', 'monthly', 'all'], true)) $range = 'to
 $type = isset($_GET['type']) ? $_GET['type'] : 'actual';
 if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
 ?>
-
-<style>
-    /* ===== Follow Up List page — scoped to .ful-page ===== */
-    .ful-page .ful-date-range {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ink-700);
-        white-space: nowrap;
-    }
-
-    .ful-page .ful-date-range i {
-        color: var(--primary);
-    }
-
-
-
-    /* ----- Actual / Completed toggle ----- */
-    .ful-page .ful-type-toggle {
-        display: inline-flex;
-        border: 1px solid #eef0f3;
-        border-radius: 10px;
-        overflow: hidden;
-        background: #fff;
-    }
-
-    .ful-page .ful-type-toggle button {
-        border: none;
-        background: transparent;
-        padding: 8px 16px;
-        font-size: 12px;
-        font-weight: 800;
-        color: var(--ink-500);
-        cursor: pointer;
-        transition: .15s;
-    }
-
-    .ful-page .ful-type-toggle button.active {
-        background: var(--primary-light);
-        color: var(--primary-dark);
-    }
-
-    .ful-page .ful-type-toggle button+button {
-        border-left: 1px solid #eef0f3;
-    }
-
-    /* ----- Total value chip ----- */
-    .ful-page .ful-total-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(135deg, #f0fbf3 0%, #ffffff 80%);
-        border: 1px solid rgba(22, 163, 74, .35);
-        border-radius: 12px;
-        padding: 8px 14px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--ink-700);
-        white-space: nowrap;
-    }
-
-    .ful-page .ful-total-chip b {
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--primary-dark);
-    }
-
-    /* ----- Status / call chips ----- */
-    .ful-page .ful-chip {
-        display: inline-block;
-        padding: 3px 10px;
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .ful-page .ful-chip.c-green { background: #dcfce7; color: #16a34a; }
-    .ful-page .ful-chip.c-blue  { background: #dbeafe; color: #2563eb; }
-    .ful-page .ful-chip.c-amber { background: #fef3c7; color: #d97706; }
-    .ful-page .ful-chip.c-violet{ background: #ede9fe; color: #7c3aed; }
-    .ful-page .ful-chip.c-red   { background: #fee2e2; color: #dc2626; }
-    .ful-page .ful-chip.c-gray  { background: #f1f5f9; color: #64748b; }
-
-    .ful-page .ful-name {
-        font-weight: 700;
-        color: var(--ink-900);
-        text-decoration: none;
-        cursor: default;
-    }
-
-    .ful-page .ful-name:hover {
-        /* color: var(--primary-dark); */
-        /* text-decoration: underline; */
-    }
-
-    .ful-page .ful-phone {
-        color: var(--ink-700);
-        text-decoration: none;
-        white-space: nowrap;
-    }
-
-    .ful-page .ful-phone:hover {
-        color: var(--primary-dark);
-    }
-
-    .ful-page .ful-val {
-        font-weight: 800;
-        color: var(--ink-900);
-        white-space: nowrap;
-    }
-
-        .ful-page .card-custom {
-        overflow: visible !important;
-    }
-
-    .ful-page .table-modern-wrap {
-        min-height: 440px;
-        padding-bottom: 50px;
-    }
-
-    .ful-page .ful-name {
-        cursor: pointer !important;
-        color: #0f172a !important;
-        font-weight: 700;
-        transition: color 0.15s ease;
-    }
-
-    .ful-page .ful-name:hover {
-        color: var(--primary) !important;
-        text-decoration: underline;
-    }
-
-    .ful-page .table-modern thead th,
-    .ful-page .table-modern tbody td {
-        white-space: nowrap;
-    }
-
-    .ful-page .ful-empty {
-        text-align: center;
-        padding: 34px 10px !important;
-        color: var(--ink-500);
-        font-weight: 600;
-    }
-
-
-</style>
 
 <main class="ful-page">
     <!-- Page Header & Action Bar in Single Row (lead.php style, no breadcrumb) -->
@@ -175,15 +27,15 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
 
         <!-- RIGHT: Actions in Single Row -->
         <div class="d-flex align-items-center flex-wrap gap-2">
-            <div class="ful-type-toggle" id="fulRangeToggle">
-                <button type="button" data-range="today">Today</button>
-                <button type="button" data-range="weekly">This Week</button>
-                <button type="button" data-range="monthly">This Month</button>
-                <button type="button" data-range="all">All</button>
+            <div class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="fulRangeToggle">
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="today">Today</button>
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="weekly">This Week</button>
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="monthly">This Month</button>
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="all">All</button>
             </div>
-            <div class="ful-type-toggle" id="fulTypeToggle">
-                <button type="button" data-type="actual">Actual</button>
-                <button type="button" data-type="completed">Completed</button>
+            <div class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="fulTypeToggle">
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="actual">Actual</button>
+                <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-="completed">Completed</button>
             </div>
             <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#fulFilterOffcanvas" aria-controls="fulFilterOffcanvas" id="fulOffcanvasFilterBtn">
                 <i class="bi bi-funnel"></i><span>Filters</span>

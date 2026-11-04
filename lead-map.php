@@ -1,62 +1,6 @@
 <?php include 'header.php'; ?>
-<!-- Lead & Enterprise Table Action Styles -->
-<link rel="stylesheet" href="./assets/css/lead.css">
 <!-- Leaflet (map) -->
 <link rel="stylesheet" href="./assets/css/leaflet.css">
-
-<style>
-    .lm-page .lm-date-range {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ink-700);
-        white-space: nowrap;
-    }
-    .lm-page .lm-date-range i {
-        color: var(--primary);
-    }
-    .lm-page .lm-type-toggle {
-        display: inline-flex;
-        border: 1px solid #eef0f3;
-        border-radius: 10px;
-        overflow: hidden;
-        background: #fff;
-    }
-    .lm-page .lm-type-toggle button {
-        border: none;
-        background: transparent;
-        padding: 7px 14px;
-        font-size: 12px;
-        font-weight: 800;
-        color: var(--ink-500);
-        cursor: pointer;
-        transition: .15s;
-    }
-    .lm-page .lm-type-toggle button.active {
-        background: var(--primary-light);
-        color: var(--primary-dark);
-    }
-    .lm-page .lm-type-toggle button + button {
-        border-left: 1px solid #eef0f3;
-    }
-    .lm-page .lm-staff-name {
-        font-weight: 700;
-        color: var(--ink-900);
-        text-decoration: none;
-        cursor: pointer;
-        transition: color 0.15s ease;
-    }
-    .lm-page .lm-staff-name:hover {
-        color: var(--primary) !important;
-        text-decoration: underline;
-    }
-    .lm-page #leadMapTable tbody tr {
-        cursor: pointer;
-    }
-    .lm-page .table-modern-wrap {
-        min-height: 420px;
-        padding-bottom: 50px;
-    }
-</style>
 
 <main class="lm-page py-3 pb-5">
     <div class="container-fluid px-3 px-md-4">
@@ -76,10 +20,10 @@
 
             <!-- RIGHT: Actions in Single Row -->
             <div class="d-flex align-items-center flex-wrap gap-2">
-                <div class="lm-type-toggle" id="lmStatusToggle">
-                    <button type="button" class="active" data-status="all">All Staff</button>
-                    <button type="button" data-status="online">Online</button>
-                    <button type="button" data-status="offline">Offline</button>
+                <div class="nav nav-pills gap-1 bg-white p-1 border rounded-pill shadow-xs" id="lmStatusToggle" role="tablist">
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold active" data-status="all">All Staff</button>
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-status="online">Online</button>
+                    <button type="button" class="nav-link rounded-pill px-3 py-1 font-12 fw-semibold" data-status="offline">Offline</button>
                 </div>
                 <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#lmFilterOffcanvas" aria-controls="lmFilterOffcanvas" id="lmOffcanvasFilterBtn">
                     <i class="bi bi-funnel"></i><span>Filters</span>
