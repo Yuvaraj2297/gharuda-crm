@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<link rel="stylesheet" href="./assets/css/lead.css">
 
 <?php
 /* ---------------------------------------------------------------
@@ -7,7 +8,7 @@
    GET params vechu pre-set aagum.
 ---------------------------------------------------------------- */
 $range = isset($_GET['range']) ? $_GET['range'] : 'today';
-if (!in_array($range, ['today', 'weekly', 'monthly'], true)) $range = 'today';
+if (!in_array($range, ['today', 'weekly', 'monthly', 'all'], true)) $range = 'today';
 $type = isset($_GET['type']) ? $_GET['type'] : 'actual';
 if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
 ?>
@@ -25,100 +26,7 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         color: var(--primary);
     }
 
-    /* ----- Range summary cards (matrix table oda improved version) ----- */
-    .ful-page .ful-card {
-        position: relative;
-        height: 100%;
-        overflow: hidden;
-        background: #fff;
-        border: 1px solid #eef0f3;
-        border-radius: 16px;
-        box-shadow: 0 2px 10px rgba(20, 20, 43, .04);
-        padding: 14px 16px;
-        cursor: pointer;
-        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
 
-    .ful-page .ful-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 24px rgba(20, 30, 20, .1);
-    }
-
-    .ful-page .ful-card.active {
-        border-color: rgba(22, 163, 74, .45);
-        box-shadow: 0 10px 26px rgba(22, 163, 74, .14), 0 0 0 3px rgba(22, 163, 74, .08);
-    }
-
-    .ful-page .ful-card::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--primary), #4ade80);
-        opacity: .35;
-        transition: opacity .18s ease;
-    }
-
-    .ful-page .ful-card.active::before {
-        opacity: 1;
-    }
-
-    .ful-page .ful-card-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-    }
-
-    .ful-page .ful-card-title {
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: .04em;
-        text-transform: uppercase;
-        color: var(--ink-500);
-    }
-
-    .ful-page .ful-card-ico {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        background: var(--primary-light);
-        color: var(--primary-dark);
-        flex: 0 0 auto;
-    }
-
-    .ful-page .ful-card-num {
-        font-size: 26px;
-        font-weight: 800;
-        color: var(--ink-900);
-        line-height: 1.1;
-        margin-top: 8px;
-    }
-
-    .ful-page .ful-card-sub {
-        font-size: 11.5px;
-        font-weight: 700;
-        color: var(--ink-500);
-        margin-top: 2px;
-    }
-
-    .ful-page .ful-card-sub b {
-        color: var(--primary-dark);
-    }
-
-    .ful-page .ful-card-sub.zero {
-        color: var(--ink-500);
-    }
-
-    .ful-page .ful-card-sub .ful-sub-danger {
-        color: #e5484d;
-    }
 
     /* ----- Actual / Completed toggle ----- */
     .ful-page .ful-type-toggle {
@@ -215,6 +123,27 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         white-space: nowrap;
     }
 
+        .ful-page .card-custom {
+        overflow: visible !important;
+    }
+
+    .ful-page .table-modern-wrap {
+        min-height: 440px;
+        padding-bottom: 50px;
+    }
+
+    .ful-page .ful-name {
+        cursor: pointer !important;
+        color: #0f172a !important;
+        font-weight: 700;
+        transition: color 0.15s ease;
+    }
+
+    .ful-page .ful-name:hover {
+        color: var(--primary) !important;
+        text-decoration: underline;
+    }
+
     .ful-page .table-modern thead th,
     .ful-page .table-modern tbody td {
         white-space: nowrap;
@@ -227,117 +156,64 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         font-weight: 600;
     }
 
-    @media (max-width: 768px) {
-        .ful-page .ful-card-num { font-size: 22px; }
-    }
+
 </style>
 
 <main class="ful-page">
-    <!-- Title row -->
-    <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3">
-        <div>
-            <h1 class="font-display fw-bold mb-1" style="font-size:1.7rem;">Follow Up List</h1>
-            <nav class="d-flex align-items-center gap-2 text-neutral" style="font-size:13px;">
-                <i class="bi bi-person-lines-fill fs-6"></i>
-                <span>CRM</span>
-                <i class="bi bi-chevron-right"></i>
-                <a href="lead.php" style="text-decoration:none;color:inherit;">Leads</a>
-                <i class="bi bi-chevron-right"></i>
-                <span class="fw-bold text-dark">Follow Up List</span>
-            </nav>
+    <!-- Page Header & Action Bar in Single Row (lead.php style, no breadcrumb) -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+        <!-- LEFT: Icon badge + Title -->
+        <div class="d-flex align-items-center gap-2.5">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:38px;height:38px;font-size:18px;">
+                <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="ps-2">
+                <h1 class="font-display fw-bold mb-0 page-title fs-4">Follow Up List</h1>
+                <span class="text-muted font-11 d-none d-sm-inline">Manage scheduled call reminders, customer touchpoints &amp; pipeline activities</span>
+            </div>
         </div>
-        <div class="d-flex align-items-center gap-2 flex-wrap">
+
+        <!-- RIGHT: Actions in Single Row -->
+        <div class="d-flex align-items-center flex-wrap gap-2">
+            <div class="ful-type-toggle" id="fulRangeToggle">
+                <button type="button" data-range="today">Today</button>
+                <button type="button" data-range="weekly">This Week</button>
+                <button type="button" data-range="monthly">This Month</button>
+                <button type="button" data-range="all">All</button>
+            </div>
             <div class="ful-type-toggle" id="fulTypeToggle">
                 <button type="button" data-type="actual">Actual</button>
                 <button type="button" data-type="completed">Completed</button>
             </div>
-            <div class="ful-date-range">
-                <i class="bi bi-calendar3 me-1"></i>Date: <span id="fulToday"></span>
+            <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#fulFilterOffcanvas" aria-controls="fulFilterOffcanvas" id="fulOffcanvasFilterBtn">
+                <i class="bi bi-funnel"></i><span>Filters</span>
+                <span class="badge bg-primary rounded-pill d-none" id="fulFilterCountBadge">0</span>
+            </button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle font-12 fw-semibold d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-lightning-charge-fill"></i><span>Actions</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu" style="min-width: 230px;">
+                    <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Quick Actions</li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="appointments.php"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div><div class="fw-semibold text-dark font-12">Book Appointment</div><div class="text-muted" style="font-size:10px;">Schedule demo / visit</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="quotation-create.php"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size:10px;">Issue GST proposal</div></div></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="customer-new.php"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span><div><div class="fw-semibold text-dark font-12">New Customer</div><div class="text-muted" style="font-size:10px;">Add customer record</div></div></a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-1.5" href="lead.php"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-lines-fill"></i></span><div><div class="fw-semibold text-dark font-12">Back to Leads</div><div class="text-muted" style="font-size:10px;">View all leads pipeline</div></div></a></li>
+                </ul>
+            </div>
+            <div class="ful-date-range ms-1 d-none d-md-inline-flex">
+                <i class="bi bi-calendar3 me-1"></i><span id="fulToday"></span>
             </div>
         </div>
     </div>
 
-    <!-- ===== Range summary cards (Activity / Closure matrix oda info, improved) ===== -->
-    <div class="row g-3 mb-3">
-        <div class="col-lg-4 col-md-6">
-            <div class="ful-card" data-range="today">
-                <div class="ful-card-top">
-                    <span class="ful-card-title">Today Follow Up</span>
-                    <span class="ful-card-ico"><i class="bi bi-sun"></i></span>
-                </div>
-                <div class="ful-card-num" id="fulCnt-today">0</div>
-                <div class="ful-card-sub">Completed: <b id="fulCntDone-today">0</b></div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="ful-card" data-range="weekly">
-                <div class="ful-card-top">
-                    <span class="ful-card-title">This Week</span>
-                    <span class="ful-card-ico"><i class="bi bi-calendar-week"></i></span>
-                </div>
-                <div class="ful-card-num" id="fulCnt-weekly">0</div>
-                <div class="ful-card-sub">Completed: <b id="fulCntDone-weekly">0</b></div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="ful-card" data-range="monthly">
-                <div class="ful-card-top">
-                    <span class="ful-card-title">This Month</span>
-                    <span class="ful-card-ico"><i class="bi bi-calendar3"></i></span>
-                </div>
-                <div class="ful-card-num" id="fulCnt-monthly">0</div>
-                <div class="ful-card-sub">Completed: <b id="fulCntDone-monthly">0</b></div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ===== Filters ===== -->
-    <form class="card-custom mb-3 filters-card" autocomplete="off" onsubmit="return false;">
-        <div class="row g-3 align-items-end">
-            <div class="col-lg-2 col-md-3 col-sm-6">
-                <label class="form-label" for="fulFrom">From Date</label>
-                <input type="date" class="form-control" id="fulFrom">
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-                <label class="form-label" for="fulTo">To Date</label>
-                <input type="date" class="form-control" id="fulTo">
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-6">
-                <label class="form-label" for="fulAssigned">Assigned</label>
-                <select class="form-select select2" id="fulAssigned">
-                    <option value="">Non selected</option>
-                    <option>GHARUDA SOFTWARE</option>
-                    <option>Harish D.</option>
-                    <option>Divya A.</option>
-                    <option>Karthik R.</option>
-                    <option>Priya S.</option>
-                </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <label class="form-label" for="fulStatus">Status</label>
-                <select class="form-select select2" id="fulStatus" multiple>
-                    <option selected>Lead</option>
-                    <option selected>Quotation</option>
-                    <option selected>Followup</option>
-                    <option selected>Qualified</option>
-                    <option selected>DIRECT</option>
-                    <option>New Enquiry</option>
-                    <option>New</option>
-                </select>
-            </div>
-            <div class="col-lg-3 col-md-12">
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-reject flex-fill text-nowrap" id="fulClear">Clear</button>
-                    <button type="button" class="btn btn-primary flex-fill text-nowrap" id="fulSubmit">
-                        <i class="bi bi-funnel me-1"></i>Submit
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
+
+
 
     <!-- ===== Table card (MasterTable flow — toolbar/footer/search/export auto) ===== -->
-    <div class="card-custom p-0 overflow-hidden">
+    <div class="card-custom p-0" style="overflow: visible;">
         <!-- Total value + count chip (MasterTable toolbar ku mela) -->
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 px-3 pt-3 pb-0">
             <div class="ful-total-chip">
@@ -363,7 +239,7 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                         <th>Sourcer</th>
                         <th>Status</th>
                         <th>Call Status</th>
-                        <th>CRM Action</th>
+                        <th class="text-end pe-3">Action</th>
                     </tr>
                 </thead>
                 <tbody id="fulTbody">
@@ -373,6 +249,184 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         </div>
         <!-- Footer (showing + pagination auto-created by master-table.js) -->
     </div>
+
+
+<!-- ===== Follow-Up Filter Offcanvas (lead.php style) ===== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="fulFilterOffcanvas" aria-labelledby="fulFilterOffcanvasLabel" style="width: 380px;">
+    <div class="offcanvas-header border-bottom py-3 px-3">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2 mb-0" id="fulFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Follow-Ups
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Staff Members / Assigned</label>
+            <select class="form-select select2 form-select-sm" id="fulAssigned" data-label="Assigned" onchange="window.updateFulBadge && window.updateFulBadge()">
+                <option value="">All Staff</option>
+                <option>GHARUDA SOFTWARE</option>
+                <option>Harish D.</option>
+                <option>Divya A.</option>
+                <option>Karthik R.</option>
+                <option>Priya S.</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Lead Status</label>
+            <select class="form-select select2 form-select-sm" id="fulStatus" multiple data-label="Status" onchange="window.updateFulBadge && window.updateFulBadge()">
+                <option selected>Lead</option>
+                <option selected>Quotation</option>
+                <option selected>Followup</option>
+                <option selected>Qualified</option>
+                <option selected>DIRECT</option>
+                <option>New Enquiry</option>
+                <option>New</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Call Status</label>
+            <select class="form-select select2 form-select-sm" id="fulCallStatus" onchange="window.updateFulBadge && window.updateFulBadge()">
+                <option value="">All Call Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Missed">Missed</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-muted small fw-bold mb-1">Product Scope</label>
+            <select class="form-select select2 form-select-sm" id="fulProduct" onchange="window.updateFulBadge && window.updateFulBadge()">
+                <option value="">All Products</option>
+                <option value="Solar">Solar Panel</option>
+                <option value="Inverter">Inverter</option>
+                <option value="CCTV">CCTV</option>
+                <option value="AMC">AMC Contract</option>
+                <option value="Automation">Home Automation</option>
+            </select>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <label class="form-label text-muted small fw-bold mb-1">From Date</label>
+                <input type="date" class="form-control form-control-sm" id="fulFrom" onchange="window.updateFulBadge && window.updateFulBadge()">
+            </div>
+            <div class="col-6">
+                <label class="form-label text-muted small fw-bold mb-1">To Date</label>
+                <input type="date" class="form-control form-control-sm" id="fulTo" onchange="window.updateFulBadge && window.updateFulBadge()">
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2 bg-light-subtle">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill text-nowrap" id="fulClear">Clear Filters</button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill text-nowrap" id="fulSubmit">
+            <i class="bi bi-funnel"></i> Apply Filters
+        </button>
+    </div>
+</div>
+
+<!-- ===== Lead 360 Detail Modal for Follow-Up List ===== -->
+<div class="modal fade" id="fulDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <!-- Modal Header -->
+            <div class="modal-header border-bottom py-3 px-4 bg-light-subtle d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:42px;height:42px;">
+                        <i class="bi bi-person-vcard fs-5"></i>
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h5 class="modal-title fw-bold text-dark mb-0 fs-5" id="fulModalName">Lead Details</h5>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill font-11 px-2.5 py-0.5" id="fulModalStatus">Followup</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill font-11 px-2.5 py-0.5" id="fulModalCall">Pending</span>
+                        </div>
+                        <div class="small text-muted" id="fulModalCompany">Lead Overview &amp; Follow-up Details</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-4 bg-white">
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Lead Value</span>
+                            <h6 class="fw-bold text-success mb-0 fs-6" id="fulModalValue">₹ 0.00</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Product Scope</span>
+                            <h6 class="fw-bold text-dark mb-0 fs-6 text-truncate" id="fulModalProduct">—</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Next Reminder</span>
+                            <h6 class="fw-bold text-primary mb-0 fs-6" id="fulModalReminder">—</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Closure Target</span>
+                            <h6 class="fw-bold text-dark mb-0 fs-6" id="fulModalClosure">—</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="card border border-light-subtle rounded-3 p-3 mb-4">
+                    <h6 class="fw-bold text-dark mb-3 font-13 text-uppercase" style="letter-spacing:0.5px;">
+                        <i class="bi bi-info-circle text-primary me-1.5"></i>Contact &amp; Assignment
+                    </h6>
+                    <div class="row g-3 font-13">
+                        <div class="col-sm-6">
+                            <div class="text-muted small">Phone Number</div>
+                            <div class="fw-semibold mt-0.5">
+                                <a href="#" id="fulModalPhoneLink" class="text-decoration-none text-dark"><i class="bi bi-telephone text-primary me-1"></i><span id="fulModalPhone">—</span></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-muted small">WhatsApp</div>
+                            <div class="fw-semibold mt-0.5">
+                                <a href="#" id="fulModalWaLink" target="_blank" class="text-decoration-none text-success"><i class="bi bi-whatsapp me-1"></i>Chat on WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-muted small">Assigned Staff</div>
+                            <div class="fw-semibold text-dark mt-0.5" id="fulModalAssigned">—</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-muted small">Sourcer Channel</div>
+                            <div class="fw-semibold text-dark mt-0.5" id="fulModalSourcer">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fast Actions -->
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+                    <span class="text-muted small fw-semibold">Quick Actions:</span>
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <a href="#" id="fulModalMeetBtn" class="btn btn-sm btn-outline-warning d-inline-flex align-items-center gap-1.5 fw-semibold font-12">
+                            <i class="bi bi-calendar2-week"></i> Schedule Meeting
+                        </a>
+                        <a href="#" id="fulModalQuoteBtn" class="btn btn-sm btn-outline-info d-inline-flex align-items-center gap-1.5 fw-semibold font-12">
+                            <i class="bi bi-file-earmark-text"></i> Create Quotation
+                        </a>
+                        <a href="#" id="fulModalConvertBtn" class="btn btn-sm btn-success d-inline-flex align-items-center gap-1.5 fw-semibold font-12">
+                            <i class="bi bi-person-check"></i> Convert Customer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light-subtle py-2.5 px-4 border-top">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include 'footer.php'; ?>
+
 </main>
 
 <?php include 'footer.php'; ?>
@@ -416,11 +470,13 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         /* ---------- State ---------- */
         var urlParams = new URLSearchParams(window.location.search);
         var state = {
-            range: ['today', 'weekly', 'monthly'].indexOf(urlParams.get('range')) !== -1 ? urlParams.get('range') : 'today',
+            range: ['today', 'weekly', 'monthly', 'all'].indexOf(urlParams.get('range')) !== -1 ? urlParams.get('range') : 'today',
             type: urlParams.get('type') === 'completed' ? 'completed' : 'actual',
             from: null,
             to: null,
             assigned: '',
+            callStatus: '',
+            product: '',
             statuses: null /* null = "all" (initial, select2 pre-selected list use pannum) */
         };
 
@@ -440,25 +496,17 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         }
 
         function inRange(d, range) {
+            if (range === 'all') return true;
             var w = rangeWindow(range);
             return d >= w.start && d <= w.end;
         }
 
-        /* ---------- Summary cards (matrix info — live counts) ---------- */
-        function renderSummary() {
-            ['today', 'weekly', 'monthly'].forEach(function(r) {
-                var actual = 0, done = 0;
-                fulData.forEach(function(row) {
-                    if (!inRange(row.reminder, r)) return;
-                    actual++;
-                    if (row.call === 'Completed') done++;
-                });
-                document.getElementById('fulCnt-' + r).textContent = actual;
-                var sub = document.getElementById('fulCntDone-' + r);
-                sub.textContent = done;
-            });
-            document.querySelectorAll('.ful-card').forEach(function(c) {
-                c.classList.toggle('active', c.getAttribute('data-range') === state.range);
+                /* ---------- Range Toggle sync ---------- */
+        var rangeToggle = document.getElementById('fulRangeToggle');
+        function syncRangeToggle() {
+            if (!rangeToggle) return;
+            rangeToggle.querySelectorAll('button').forEach(function(b) {
+                b.classList.toggle('active', b.getAttribute('data-range') === state.range);
             });
         }
 
@@ -471,6 +519,8 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                 if (state.from && row.reminder < midnight(new Date(state.from + 'T00:00:00'))) return false;
                 if (state.to && row.reminder > midnight(new Date(state.to + 'T00:00:00'))) return false;
                 if (state.assigned && row.assigned !== state.assigned) return false;
+                if (state.callStatus && row.call !== state.callStatus) return false;
+                if (state.product && (row.product || '').toLowerCase().indexOf(state.product.toLowerCase()) === -1) return false;
                 if (statuses && statuses.indexOf(row.status) === -1) return false;
                 return true;
             });
@@ -505,8 +555,8 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                         field: 'name',
                         title: 'Name',
                         sortable: true,
-                        render: function(v) {
-                            return '<a href="#" class="ful-name" onclick="return false;">' + v + '</a>';
+                        render: function(v, row) {
+                            return '<a href="#" class="ful-name" data-id="' + row.id + '">' + v + '</a>';
                         }
                     },
                     {
@@ -572,19 +622,34 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                     },
                     {
                         field: null,
-                        title: 'CRM Action',
+                        title: 'Action',
                         sortable: false,
                         render: function(v, row) {
-                            var isHw = /Solar|CCTV|Inverter|Biometric/i.test(row.product);
+                            var isHw = /Solar|CCTV|Inverter|Biometric/i.test(row.product || '');
                             var mType = isHw ? 'HW' : 'SW';
-                            var doneBtn = row.call !== 'Completed'
-                                ? '<button type="button" class="btn btn-sm btn-success py-0 px-2 fw-semibold" onclick="window.markFulDone(' + row.id + ')" title="Mark Follow-Up Completed"><i class="bi bi-check2"></i> Done</button>'
-                                : '<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-check2-all"></i> Logged</span>';
-                            return '<div class="d-flex align-items-center gap-1">' +
-                                   doneBtn +
-                                   '<a href="appointments.php?from_ticket=' + row.id + '&type=' + mType + '&subject=' + encodeURIComponent(mType + ' Follow-Up Meeting: ' + row.product) + '&client=' + encodeURIComponent(row.company) + '" class="btn btn-sm btn-outline-primary py-0 px-2 fw-semibold" title="Schedule Demo / Site Visit"><i class="bi bi-calendar2-plus"></i> Meet</a>' +
-                                   '<a href="quotation-create.php?client=' + encodeURIComponent(row.company) + '&item=' + encodeURIComponent(row.product) + '&price=' + encodeURIComponent(row.value) + '" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-semibold" title="Send Quotation">+ Quote</a>' +
-                                   '</div>';
+                            var isCompleted = row.call === 'Completed';
+
+                            var toggleDoneItem = !isCompleted
+                                ? '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" onclick="window.markFulDone(' + row.id + ')"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-check2-circle"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Mark Completed</div><div class="text-muted" style="font-size: 10px;">Log call &amp; finish follow-up</div></div></button></li>'
+                                : '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" onclick="window.markFulPending(' + row.id + ')"><span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-arrow-counterclockwise"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Mark as Pending</div><div class="text-muted" style="font-size: 10px;">Reopen follow-up status</div></div></button></li>';
+
+                            return '<div class="dropdown text-end pe-2">' +
+                                '<button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false">' +
+                                    '<span>Actions</span>' +
+                                '</button>' +
+                                '<ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">' +
+                                    '<li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Follow-Up Actions</li>' +
+                                    '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" onclick="window.viewFulModal(' + row.id + ')"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Lead 360° View</div><div class="text-muted" style="font-size: 10px;">Overview, timeline &amp; notes</div></div></button></li>' +
+                                    toggleDoneItem +
+                                    '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="quotation-create.php?client=' + encodeURIComponent(row.company || row.name) + '&item=' + encodeURIComponent(row.product || 'Solution') + '&price=' + encodeURIComponent(row.value || 0) + '"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Issue GST proposal</div></div></a></li>' +
+                                    '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="customer-new.php?company=' + encodeURIComponent(row.company || '') + '&contact=' + encodeURIComponent(row.name || '') + '&phone=' + encodeURIComponent(row.phone || '') + '"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-person-check"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Convert to Customer</div><div class="text-muted" style="font-size: 10px;">Promote lead to client</div></div></a></li>' +
+                                    '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="appointments.php?from_ticket=' + row.id + '&type=' + mType + '&subject=' + encodeURIComponent(mType + ' Follow-Up Meeting: ' + row.product) + '&client=' + encodeURIComponent(row.company) + '&phone=' + encodeURIComponent(row.phone) + '"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Book Appointment</div><div class="text-muted" style="font-size: 10px;">Schedule demo / site visit</div></div></a></li>' +
+                                    '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="https://wa.me/91' + String(row.phone || '').replace(/[^0-9]/g, '') + '" target="_blank"><span class="action-icon-pill bg-success-subtle text-success" style="background:#dcfce7;color:#16a34a;"><i class="bi bi-whatsapp"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">WhatsApp Chat</div><div class="text-muted" style="font-size: 10px;">Direct messaging</div></div></a></li>' +
+                                    '<li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="mailto:' + encodeURIComponent((row.name.toLowerCase().replace(/\s+/g, '') || 'client') + '@example.com') + '"><span class="action-icon-pill bg-purple-subtle text-purple" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-envelope"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Send Email</div><div class="text-muted" style="font-size: 10px;">Compose message</div></div></a></li>' +
+                                    '<li><hr class="dropdown-divider my-1"></li>' +
+                                    '<li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 text-danger lead-act-btn" onclick="window.deleteFul(' + row.id + ')"><span class="action-icon-pill bg-danger-subtle text-danger"><i class="bi bi-trash"></i></span><div class="text-start"><div class="fw-semibold text-danger font-12">Delete Follow-Up</div><div class="text-muted" style="font-size: 10px;">Remove record</div></div></button></li>' +
+                                '</ul>' +
+                            '</div>';
                         }
                     }
                 ]
@@ -619,7 +684,7 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         }
 
         function renderAll() {
-            renderSummary();
+            syncRangeToggle();
             syncTable();
             /* URL sync — refresh pannalum same state */
             var p = new URLSearchParams();
@@ -629,13 +694,17 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         }
 
         /* ---------- Wiring ---------- */
-        /* Range cards click */
-        document.querySelectorAll('.ful-card').forEach(function(card) {
-            card.addEventListener('click', function() {
-                state.range = card.getAttribute('data-range');
-                renderAll();
+        /* Range toggle click */
+        if (rangeToggle) {
+            rangeToggle.querySelectorAll('button').forEach(function(b) {
+                b.addEventListener('click', function() {
+                    state.range = b.getAttribute('data-range');
+                    syncRangeToggle();
+                    renderAll();
+                });
             });
-        });
+        }
+        syncRangeToggle();
 
         /* Actual / Completed toggle */
         var typeToggle = document.getElementById('fulTypeToggle');
@@ -653,14 +722,47 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
         });
         syncTypeToggle();
 
-        /* Submit -> apply form filters (search MasterTable toolbar la auto irukku) */
+        /* Filter badge updater */
+        window.updateFulBadge = function() {
+            var count = 0;
+            var fromVal = document.getElementById('fulFrom') ? document.getElementById('fulFrom').value : '';
+            var toVal = document.getElementById('fulTo') ? document.getElementById('fulTo').value : '';
+            var assVal = document.getElementById('fulAssigned') ? document.getElementById('fulAssigned').value : '';
+            var callVal = document.getElementById('fulCallStatus') ? document.getElementById('fulCallStatus').value : '';
+            var prodVal = document.getElementById('fulProduct') ? document.getElementById('fulProduct').value : '';
+            if (fromVal) count++;
+            if (toVal) count++;
+            if (assVal) count++;
+            if (callVal) count++;
+            if (prodVal) count++;
+            var sel = document.getElementById('fulStatus');
+            if (sel && sel.selectedOptions && sel.selectedOptions.length < 5) count++;
+
+            var badge = document.getElementById('fulFilterCountBadge');
+            if (badge) {
+                badge.textContent = count;
+                if (count > 0) badge.classList.remove('d-none');
+                else badge.classList.add('d-none');
+            }
+        };
+
+        /* Submit -> apply offcanvas filters and auto-close offcanvas */
         document.getElementById('fulSubmit').addEventListener('click', function() {
             state.from = document.getElementById('fulFrom').value || null;
             state.to = document.getElementById('fulTo').value || null;
             state.assigned = document.getElementById('fulAssigned').value || '';
+            state.callStatus = document.getElementById('fulCallStatus') ? document.getElementById('fulCallStatus').value : '';
+            state.product = document.getElementById('fulProduct') ? document.getElementById('fulProduct').value : '';
             var sel = document.getElementById('fulStatus');
             var picked = Array.from(sel.selectedOptions || []).map(function(o) { return o.text; });
             state.statuses = picked.length ? picked : [];
+            window.updateFulBadge();
+
+            var oc = document.getElementById('fulFilterOffcanvas');
+            if (oc && window.bootstrap && bootstrap.Offcanvas) {
+                var inst = bootstrap.Offcanvas.getInstance(oc);
+                if (inst) inst.hide();
+            }
             renderAll();
         });
 
@@ -669,13 +771,24 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
             document.getElementById('fulFrom').value = '';
             document.getElementById('fulTo').value = '';
             document.getElementById('fulAssigned').value = '';
+            if (document.getElementById('fulCallStatus')) document.getElementById('fulCallStatus').value = '';
+            if (document.getElementById('fulProduct')) document.getElementById('fulProduct').value = '';
             var sel = document.getElementById('fulStatus');
-            Array.from(sel.options || []).forEach(function(o) { o.selected = false; });
-            if (typeof $ !== 'undefined' && $.fn.select2) $(sel).val(null).trigger('change');
+            var defaultStatuses = ['Lead', 'Quotation', 'Followup', 'Qualified', 'DIRECT'];
+            Array.from(sel.options || []).forEach(function(o) { o.selected = defaultStatuses.indexOf(o.text) !== -1; });
+            if (typeof $ !== 'undefined' && $.fn.select2) {
+                $('#fulAssigned').val('').trigger('change');
+                $('#fulCallStatus').val('').trigger('change');
+                $('#fulProduct').val('').trigger('change');
+                $(sel).val(defaultStatuses).trigger('change');
+            }
             state.from = null;
             state.to = null;
             state.assigned = '';
+            state.callStatus = '';
+            state.product = '';
             state.statuses = null;
+            window.updateFulBadge();
             renderAll();
         });
 
@@ -686,6 +799,114 @@ if (!in_array($type, ['actual', 'completed'], true)) $type = 'actual';
                 renderAll();
             }
         };
+
+        window.markFulPending = function(id) {
+            var item = fulData.find(function(r) { return r.id === id; });
+            if (item) {
+                item.call = 'Pending';
+                renderAll();
+            }
+        };
+
+        window.deleteFul = function(id) {
+            var item = fulData.find(function(r) { return r.id === id; });
+            if (!item) return;
+            if (confirm('Are you sure you want to delete follow-up for "' + item.name + '"?')) {
+                fulData = fulData.filter(function(r) { return r.id !== id; });
+                renderAll();
+            }
+        };
+
+        window.viewFulModal = function(id) {
+            var item = fulData.find(function(r) { return r.id === id; });
+            if (!item) return;
+            var setTxt = function(elId, val) { var el = document.getElementById(elId); if (el) el.textContent = val; };
+            setTxt('fulModalName', item.name);
+            setTxt('fulModalCompany', (item.company || item.name) + ' · Lead Overview & Follow-up Details');
+            setTxt('fulModalPhone', item.phone || '—');
+            setTxt('fulModalValue', inrFmt(item.value));
+            setTxt('fulModalProduct', item.product || '—');
+            setTxt('fulModalStatus', item.status || 'Lead');
+            setTxt('fulModalCall', item.call || 'Pending');
+            setTxt('fulModalReminder', fmtDMY(item.reminder));
+            setTxt('fulModalClosure', fmtDMY(item.closure));
+            setTxt('fulModalAssigned', item.assigned || '—');
+            setTxt('fulModalSourcer', item.sourcer || '—');
+
+            var phLink = document.getElementById('fulModalPhoneLink');
+            if (phLink) phLink.href = 'tel:' + item.phone;
+            var waLink = document.getElementById('fulModalWaLink');
+            if (waLink) waLink.href = 'https://wa.me/91' + String(item.phone || '').replace(/[^0-9]/g, '');
+
+            var isHw = /Solar|CCTV|Inverter|Biometric/i.test(item.product || '');
+            var mType = isHw ? 'HW' : 'SW';
+
+            var qBtn = document.getElementById('fulModalQuoteBtn');
+            if (qBtn) qBtn.href = 'quotation-create.php?client=' + encodeURIComponent(item.company || item.name) + '&item=' + encodeURIComponent(item.product || 'Solution') + '&price=' + encodeURIComponent(item.value || 0);
+
+            var cBtn = document.getElementById('fulModalConvertBtn');
+            if (cBtn) cBtn.href = 'customer-new.php?company=' + encodeURIComponent(item.company || '') + '&contact=' + encodeURIComponent(item.name || '') + '&phone=' + encodeURIComponent(item.phone || '');
+
+            var mBtn = document.getElementById('fulModalMeetBtn');
+            if (mBtn) mBtn.href = 'appointments.php?from_ticket=' + item.id + '&type=' + mType + '&subject=' + encodeURIComponent(mType + ' Follow-Up Meeting: ' + item.product) + '&client=' + encodeURIComponent(item.company) + '&phone=' + encodeURIComponent(item.phone);
+
+            var modalEl = document.getElementById('fulDetailModal');
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                bootstrap.Modal.getOrCreateInstance(modalEl).show();
+            }
+        };
+
+        // Table click listener: opens detail modal on name or row click, while safely ignoring Actions button & dropdowns
+        var fulTableEl = document.getElementById('fulTable');
+        if (fulTableEl) {
+            fulTableEl.addEventListener('click', function(e) {
+                if (
+                    e.target.closest('input, button, select, textarea') ||
+                    e.target.closest('.btn-table-action') ||
+                    e.target.closest('.lead-act-btn') ||
+                    e.target.closest('.dropdown') ||
+                    e.target.closest('.dropdown-menu') ||
+                    e.target.closest('.table-action-menu') ||
+                    e.target.closest('[data-bs-toggle="dropdown"]') ||
+                    e.target.closest('a:not(.ful-name)')
+                ) {
+                    return;
+                }
+
+                var cell = e.target.closest('td');
+                if (cell && (cell.querySelector('.btn-table-action, .lead-act-btn, .dropdown') || cell.classList.contains('text-end'))) {
+                    return;
+                }
+
+                var nameLink = e.target.closest('.ful-name');
+                var tr = e.target.closest('tr');
+                if (nameLink || tr) {
+                    var idAttr = nameLink ? nameLink.getAttribute('data-id') : null;
+                    if (!idAttr && tr) {
+                        var idBtn = tr.querySelector('[onclick*="markFulDone"], [onclick*="viewFulModal"]');
+                        if (idBtn) {
+                            var m = idBtn.getAttribute('onclick').match(/\d+/);
+                            if (m) idAttr = m[0];
+                        }
+                    }
+                    if (idAttr) {
+                        e.preventDefault();
+                        window.viewFulModal(Number(idAttr));
+                    }
+                }
+            });
+        }
+
+        // Safe dropdown delegation with viewport boundary and fixed popper strategy
+        document.addEventListener('click', function(e) {
+            var toggle = e.target.closest('.btn-table-action[data-bs-toggle="dropdown"]');
+            if (toggle && window.bootstrap && bootstrap.Dropdown) {
+                bootstrap.Dropdown.getOrCreateInstance(toggle, {
+                    boundary: 'viewport',
+                    popperConfig: { strategy: 'fixed' }
+                });
+            }
+        });
 
         /* ---------- Init ---------- */
         renderAll();
