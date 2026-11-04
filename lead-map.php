@@ -1,41 +1,116 @@
 <?php include 'header.php'; ?>
+<!-- Lead & Enterprise Table Action Styles -->
+<link rel="stylesheet" href="./assets/css/lead.css">
 <!-- Leaflet (map) -->
 <link rel="stylesheet" href="./assets/css/leaflet.css">
 
-<main class="py-3 pb-5">
+<style>
+    .lm-page .lm-date-range {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink-700);
+        white-space: nowrap;
+    }
+    .lm-page .lm-date-range i {
+        color: var(--primary);
+    }
+    .lm-page .lm-type-toggle {
+        display: inline-flex;
+        border: 1px solid #eef0f3;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+    }
+    .lm-page .lm-type-toggle button {
+        border: none;
+        background: transparent;
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ink-500);
+        cursor: pointer;
+        transition: .15s;
+    }
+    .lm-page .lm-type-toggle button.active {
+        background: var(--primary-light);
+        color: var(--primary-dark);
+    }
+    .lm-page .lm-type-toggle button + button {
+        border-left: 1px solid #eef0f3;
+    }
+    .lm-page .lm-staff-name {
+        font-weight: 700;
+        color: var(--ink-900);
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.15s ease;
+    }
+    .lm-page .lm-staff-name:hover {
+        color: var(--primary) !important;
+        text-decoration: underline;
+    }
+    .lm-page #leadMapTable tbody tr {
+        cursor: pointer;
+    }
+    .lm-page .table-modern-wrap {
+        min-height: 420px;
+        padding-bottom: 50px;
+    }
+</style>
+
+<main class="lm-page py-3 pb-5">
     <div class="container-fluid px-3 px-md-4">
 
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <h1 class="font-display fw-bold mb-0 fs-3 text-dark d-flex align-items-center">
-                <i class="bi bi-geo-alt-fill text-primary me-2"></i> Staff Location Map
-            </h1>
+        <!-- Page Header & Action Bar in Single Row (lead.php & follow-up-list.php style, no breadcrumb) -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+            <!-- LEFT: Icon badge + Title -->
+            <div class="d-flex align-items-center gap-2.5">
+                <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:38px;height:38px;font-size:18px;">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <div>
+                    <h1 class="font-display fw-bold mb-0 page-title fs-4">Staff Location Map</h1>
+                    <span class="text-muted font-11 d-none d-sm-inline">Monitor real-time field staff routes, GPS check-ins, visit logs &amp; daily travel metrics</span>
+                </div>
+            </div>
+
+            <!-- RIGHT: Actions in Single Row -->
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                <div class="lm-type-toggle" id="lmStatusToggle">
+                    <button type="button" class="active" data-status="all">All Staff</button>
+                    <button type="button" data-status="online">Online</button>
+                    <button type="button" data-status="offline">Offline</button>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#lmFilterOffcanvas" aria-controls="lmFilterOffcanvas" id="lmOffcanvasFilterBtn">
+                    <i class="bi bi-funnel"></i><span>Filters</span>
+                    <span class="badge bg-primary rounded-pill d-none" id="lmFilterCountBadge">0</span>
+                </button>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle font-12 fw-semibold d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                        <i class="bi bi-lightning-charge-fill"></i><span>Actions</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu" style="min-width: 240px;">
+                        <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Quick Actions</li>
+                        <li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" id="lmJumpToMapBtn"><span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-map"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Live Route Map</div><div class="text-muted" style="font-size:10px;">Jump to GPS map &amp; timeline</div></div></button></li>
+                        <li><button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" id="lmRefreshMapBtn"><span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-arrow-clockwise"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Refresh Locations</div><div class="text-muted" style="font-size:10px;">Sync latest GPS pings</div></div></button></li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="appointments.php"><span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Schedule Field Visit</div><div class="text-muted" style="font-size:10px;">Assign client appointment</div></div></a></li>
+                        <li><hr class="dropdown-divider my-1"></li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5" href="lead.php"><span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-person-lines-fill"></i></span><div class="text-start"><div class="fw-semibold text-dark font-12">Back to Leads</div><div class="text-muted" style="font-size:10px;">View all leads pipeline</div></div></a></li>
+                    </ul>
+                </div>
+                <div class="lm-date-range ms-1 d-none d-md-inline-flex">
+                    <i class="bi bi-calendar3 me-1"></i><span id="lmHeaderDate"></span>
+                </div>
+            </div>
         </div>
 
         <div id="leadMapWrap">
 
-            <!-- Filter -->
-            <div class="card border-0 shadow-sm rounded-3 mb-3 bg-white">
-                <div class="card-body p-3">
-                    <form id="filterForm" onsubmit="return false;">
-                        <div class="row align-items-end g-3">
-                            <div class="col-md-4">
-                                <label class="form-label small fw-bold text-secondary mb-1" for="filter_date">Date Filter</label>
-                                <input type="text" class="date-input form-control form-control-sm" id="filter_date" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-primary btn-sm px-3 shadow-sm" id="btnSearch"><i class="bi bi-search me-1"></i>Search</button>
-                                <button type="button" class="btn btn-outline-secondary btn-sm px-3" id="btnReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
             <!-- Table (toolbar auto-created by datatable class) -->
-            <div class="card border-0 shadow-sm rounded-3 overflow-hidden bg-white mb-4">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0 datatable" id="leadMapTable" data-table-name="Staff Location">
-                        <thead class="table-light text-secondary small">
+            <div class="card-custom p-0 mb-4" style="overflow: visible;">
+                <div class="table-responsive table-modern-wrap overflow-auto column-border">
+                    <table class="table-modern w-100 mb-0 datatable" id="leadMapTable" data-table-name="Staff Location">
+                        <thead>
                             <tr>
                                 <th class="ps-3" style="width: 60px;">S.No</th>
                                 <th class="text-nowrap">Id</th>
@@ -48,164 +123,101 @@
                                 <th class="text-nowrap">Tot. Kms</th>
                                 <th class="text-nowrap">Battery</th>
                                 <th class="text-nowrap text-center">Status</th>
-                                <th class="text-nowrap text-end pe-3" style="width: 80px;">Action</th>
+                                <th class="text-nowrap text-end pe-3" style="width: 110px;">Action</th>
                             </tr>
                         </thead>
                         <tbody id="leadMapTbody" class="small">
-                            <tr data-id="GHRA0011">
-                                <td class="ps-3">1</td>
-                                <td class="fw-semibold">GHRA0011</td>
-                                <td class="fw-bold text-dark">GHRAUDA SOFTWARE</td>
-                                <td>09:02 AM</td>
-                                <td>Nungambakkam</td>
-                                <td>06:15 PM</td>
-                                <td>T. Nagar</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0011">5</button></td>
-                                <td>32.4 km</td>
-                                <td>78 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0011" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
+                            <?php
+                            $staffRows = [
+                                ['sno' => 1,  'id' => 'GHRA0011', 'name' => 'GHRAUDA SOFTWARE', 'login' => '09:02 AM', 'loginArea' => 'Nungambakkam', 'logout' => '06:15 PM', 'logoutArea' => 'T. Nagar',    'visits' => 5, 'kms' => '32.4 km', 'battery' => '78 %', 'online' => true],
+                                ['sno' => 2,  'id' => '1234',     'name' => 'thilak ma',        'login' => '09:30 AM', 'loginArea' => 'Anna Nagar',   'logout' => '05:45 PM', 'logoutArea' => 'Koyambedu',   'visits' => 3, 'kms' => '18.7 km', 'battery' => '54 %', 'online' => true],
+                                ['sno' => 3,  'id' => 'GHRA0012', 'name' => 'ARUN KUMAR',       'login' => '08:55 AM', 'loginArea' => 'Guindy',       'logout' => '06:00 PM', 'logoutArea' => 'Adyar',       'visits' => 6, 'kms' => '41.2 km', 'battery' => '66 %', 'online' => false],
+                                ['sno' => 4,  'id' => 'GHRA0013', 'name' => 'MOHAN RAJ',        'login' => '09:10 AM', 'loginArea' => 'Velachery',    'logout' => '05:30 PM', 'logoutArea' => 'Tambaram',    'visits' => 4, 'kms' => '27.9 km', 'battery' => '91 %', 'online' => true],
+                                ['sno' => 5,  'id' => 'GHRA0014', 'name' => 'PRIYA DHARSHINI',  'login' => '09:45 AM', 'loginArea' => 'Mylapore',     'logout' => '06:20 PM', 'logoutArea' => 'Egmore',      'visits' => 7, 'kms' => '35.0 km', 'battery' => '43 %', 'online' => false],
+                                ['sno' => 6,  'id' => 'GHRA0015', 'name' => 'SURESH BABU',      'login' => 'Nill',     'loginArea' => 'Nill',         'logout' => 'Nill',     'logoutArea' => 'Nill',        'visits' => 0, 'kms' => '0 km',    'battery' => '0 %',  'online' => false],
+                                ['sno' => 7,  'id' => 'GHRA0016', 'name' => 'DIVYA LAKSHMI',    'login' => '10:00 AM', 'loginArea' => 'Porur',        'logout' => '06:05 PM', 'logoutArea' => 'Vadapalani',  'visits' => 2, 'kms' => '14.3 km', 'battery' => '82 %', 'online' => true],
+                                ['sno' => 8,  'id' => 'GHRA0017', 'name' => 'KARTHIK RAJA',     'login' => '09:20 AM', 'loginArea' => 'Perambur',     'logout' => '05:50 PM', 'logoutArea' => 'Tondiarpet',  'visits' => 5, 'kms' => '29.6 km', 'battery' => '60 %', 'online' => true],
+                                ['sno' => 9,  'id' => 'GHRA0018', 'name' => 'NANDHINI S',       'login' => 'Nill',     'loginArea' => 'Nill',         'logout' => 'Nill',     'logoutArea' => 'Nill',        'visits' => 0, 'kms' => '0 km',    'battery' => '0 %',  'online' => false],
+                                ['sno' => 10, 'id' => 'GHRA0019', 'name' => 'VIGNESH R',        'login' => '09:05 AM', 'loginArea' => 'Ashok Nagar',  'logout' => '06:30 PM', 'logoutArea' => 'Saidapet',    'visits' => 6, 'kms' => '38.1 km', 'battery' => '37 %', 'online' => false],
+                                ['sno' => 11, 'id' => 'GHRA0020', 'name' => 'SANTHOSH M',       'login' => '09:40 AM', 'loginArea' => 'Kodambakkam',  'logout' => '05:55 PM', 'logoutArea' => 'Ambattur',    'visits' => 3, 'kms' => '21.5 km', 'battery' => '72 %', 'online' => true],
+                            ];
+                            foreach ($staffRows as $r):
+                                $sid = htmlspecialchars($r['id'], ENT_QUOTES, 'UTF-8');
+                                $sname = htmlspecialchars($r['name'], ENT_QUOTES, 'UTF-8');
+                                $visitBtnClass = $r['visits'] > 0 ? 'btn-outline-primary' : 'btn-outline-secondary';
+                                $statusBg = $r['online'] ? 'bg-success' : 'bg-danger';
+                                $statusTitle = $r['online'] ? 'Online' : 'Offline';
+                            ?>
+                            <tr data-id="<?php echo $sid; ?>" data-online="<?php echo $r['online'] ? 'online' : 'offline'; ?>" data-area="<?php echo htmlspecialchars($r['loginArea'] . ' ' . $r['logoutArea'], ENT_QUOTES, 'UTF-8'); ?>" data-visits="<?php echo (int)$r['visits']; ?>">
+                                <td class="ps-3"><?php echo (int)$r['sno']; ?></td>
+                                <td class="fw-semibold"><?php echo $sid; ?></td>
+                                <td><a href="#" class="lm-staff-name" data-id="<?php echo $sid; ?>"><?php echo $sname; ?></a></td>
+                                <td><?php echo htmlspecialchars($r['login']); ?></td>
+                                <td><?php echo htmlspecialchars($r['loginArea']); ?></td>
+                                <td><?php echo htmlspecialchars($r['logout']); ?></td>
+                                <td><?php echo htmlspecialchars($r['logoutArea']); ?></td>
+                                <td class="text-center"><button type="button" class="btn btn-sm <?php echo $visitBtnClass; ?> py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="<?php echo $sid; ?>"><?php echo (int)$r['visits']; ?></button></td>
+                                <td><?php echo htmlspecialchars($r['kms']); ?></td>
+                                <td><?php echo htmlspecialchars($r['battery']); ?></td>
+                                <td class="text-center"><span class="badge rounded-circle p-1 <?php echo $statusBg; ?> d-inline-block" style="width:10px;height:10px;" title="<?php echo $statusTitle; ?>"><span class="visually-hidden"><?php echo $statusTitle; ?></span></span></td>
+                                <td class="text-end pe-3">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-sm btn-table-action dropdown-toggle font-12 fw-semibold py-1 px-2.5 d-inline-flex align-items-center gap-1.5 rounded-2 shadow-xs" data-bs-toggle="dropdown" data-bs-boundary="viewport" data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false">
+                                            <span>Actions</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow border font-12 py-1 table-action-menu">
+                                            <li class="px-2.5 py-1 text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">Staff Location Actions</li>
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn btn-staff-360" data-id="<?php echo $sid; ?>">
+                                                    <span class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></span>
+                                                    <div class="text-start">
+                                                        <div class="fw-semibold text-dark font-12">Staff 360° Summary</div>
+                                                        <div class="text-muted" style="font-size: 10px;">Route overview, stats &amp; logs</div>
+                                                    </div>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn btn-view-map" data-id="<?php echo $sid; ?>">
+                                                    <span class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-geo-alt-fill"></i></span>
+                                                    <div class="text-start">
+                                                        <div class="fw-semibold text-dark font-12">View Route on Map</div>
+                                                        <div class="text-muted" style="font-size: 10px;">Focus GPS path &amp; timeline</div>
+                                                    </div>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="appointments.php?staff=<?php echo urlencode($r['name']); ?>">
+                                                    <span class="action-icon-pill bg-warning-subtle text-warning"><i class="bi bi-calendar2-week"></i></span>
+                                                    <div class="text-start">
+                                                        <div class="fw-semibold text-dark font-12">Assign Field Visit</div>
+                                                        <div class="text-muted" style="font-size: 10px;">Schedule client meeting</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="follow-up-list.php">
+                                                    <span class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-arrow-repeat"></i></span>
+                                                    <div class="text-start">
+                                                        <div class="fw-semibold text-dark font-12">View Follow-Ups</div>
+                                                        <div class="text-muted" style="font-size: 10px;">Check assigned call reminders</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider my-1"></li>
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center gap-2.5 py-1.5 lead-act-btn" href="lead.php">
+                                                    <span class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-person-lines-fill"></i></span>
+                                                    <div class="text-start">
+                                                        <div class="fw-semibold text-dark font-12">View Assigned Leads</div>
+                                                        <div class="text-muted" style="font-size: 10px;">Open pipeline records</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
-                            <tr data-id="1234">
-                                <td class="ps-3">2</td>
-                                <td class="fw-semibold">1234</td>
-                                <td class="fw-bold text-dark">thilak ma</td>
-                                <td>09:30 AM</td>
-                                <td>Anna Nagar</td>
-                                <td>05:45 PM</td>
-                                <td>Koyambedu</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="1234">3</button></td>
-                                <td>18.7 km</td>
-                                <td>54 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="1234" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0012">
-                                <td class="ps-3">3</td>
-                                <td class="fw-semibold">GHRA0012</td>
-                                <td class="fw-bold text-dark">ARUN KUMAR</td>
-                                <td>08:55 AM</td>
-                                <td>Guindy</td>
-                                <td>06:00 PM</td>
-                                <td>Adyar</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0012">6</button></td>
-                                <td>41.2 km</td>
-                                <td>66 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-danger d-inline-block" style="width:10px;height:10px;" title="Offline"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0012" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0013">
-                                <td class="ps-3">4</td>
-                                <td class="fw-semibold">GHRA0013</td>
-                                <td class="fw-bold text-dark">MOHAN RAJ</td>
-                                <td>09:10 AM</td>
-                                <td>Velachery</td>
-                                <td>05:30 PM</td>
-                                <td>Tambaram</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0013">4</button></td>
-                                <td>27.9 km</td>
-                                <td>91 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0013" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0014">
-                                <td class="ps-3">5</td>
-                                <td class="fw-semibold">GHRA0014</td>
-                                <td class="fw-bold text-dark">PRIYA DHARSHINI</td>
-                                <td>09:45 AM</td>
-                                <td>Mylapore</td>
-                                <td>06:20 PM</td>
-                                <td>Egmore</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0014">7</button></td>
-                                <td>35.0 km</td>
-                                <td>43 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-danger d-inline-block" style="width:10px;height:10px;" title="Offline"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0014" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0015">
-                                <td class="ps-3">6</td>
-                                <td class="fw-semibold">GHRA0015</td>
-                                <td class="fw-bold text-dark">SURESH BABU</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0015">0</button></td>
-                                <td>0 km</td>
-                                <td>0 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-danger d-inline-block" style="width:10px;height:10px;" title="Offline"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0015" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0016">
-                                <td class="ps-3">7</td>
-                                <td class="fw-semibold">GHRA0016</td>
-                                <td class="fw-bold text-dark">DIVYA LAKSHMI</td>
-                                <td>10:00 AM</td>
-                                <td>Porur</td>
-                                <td>06:05 PM</td>
-                                <td>Vadapalani</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0016">2</button></td>
-                                <td>14.3 km</td>
-                                <td>82 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0016" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0017">
-                                <td class="ps-3">8</td>
-                                <td class="fw-semibold">GHRA0017</td>
-                                <td class="fw-bold text-dark">KARTHIK RAJA</td>
-                                <td>09:20 AM</td>
-                                <td>Perambur</td>
-                                <td>05:50 PM</td>
-                                <td>Tondiarpet</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0017">5</button></td>
-                                <td>29.6 km</td>
-                                <td>60 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0017" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0018">
-                                <td class="ps-3">9</td>
-                                <td class="fw-semibold">GHRA0018</td>
-                                <td class="fw-bold text-dark">NANDHINI S</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td>Nill</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0018">0</button></td>
-                                <td>0 km</td>
-                                <td>0 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-danger d-inline-block" style="width:10px;height:10px;" title="Offline"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0018" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0019">
-                                <td class="ps-3">10</td>
-                                <td class="fw-semibold">GHRA0019</td>
-                                <td class="fw-bold text-dark">VIGNESH R</td>
-                                <td>09:05 AM</td>
-                                <td>Ashok Nagar</td>
-                                <td>06:30 PM</td>
-                                <td>Saidapet</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0019">6</button></td>
-                                <td>38.1 km</td>
-                                <td>37 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-danger d-inline-block" style="width:10px;height:10px;" title="Offline"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0019" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
-                            <tr data-id="GHRA0020">
-                                <td class="ps-3">11</td>
-                                <td class="fw-semibold">GHRA0020</td>
-                                <td class="fw-bold text-dark">SANTHOSH M</td>
-                                <td>09:40 AM</td>
-                                <td>Kodambakkam</td>
-                                <td>05:55 PM</td>
-                                <td>Ambattur</td>
-                                <td class="text-center"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill btn-view-map fw-bold" data-id="GHRA0020">3</button></td>
-                                <td>21.5 km</td>
-                                <td>72 %</td>
-                                <td class="text-center"><span class="badge rounded-circle p-1 bg-success d-inline-block" style="width:10px;height:10px;" title="Online"></span></td>
-                                <td class="text-end pe-3"><button type="button" class="btn btn-primary btn-sm rounded-circle d-inline-flex align-items-center justify-content-center btn-view-map" data-id="GHRA0020" title="View Map" style="width:32px;height:32px;"><i class="bi bi-eye-fill"></i></button></td>
-                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -233,111 +245,7 @@
                             </div>
                             <div class="p-3 overflow-auto flex-grow-1" style="max-height: 460px;">
                                 <div class="list-group list-group-flush gap-2" id="timelineList">
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm border-primary bg-primary-subtle" data-index="0" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-success d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-box-arrow-in-right" style="font-size:12px;"></i>
-                                                </span>
-                                                Login
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">09:02 AM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Nungambakkam</div>
-                                            <small class="text-muted" style="font-size:11px;">Battery 92%</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="1" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-primary d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-geo-alt-fill" style="font-size:12px;"></i>
-                                                </span>
-                                                Visit - Hona Traders
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">09:40 AM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Thousand Lights</div>
-                                            <small class="text-muted" style="font-size:11px;">Duration 25 min</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="2" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-primary d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-geo-alt-fill" style="font-size:12px;"></i>
-                                                </span>
-                                                Visit - Sri Vel Agencies
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">10:45 AM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Royapettah</div>
-                                            <small class="text-muted" style="font-size:11px;">Duration 30 min</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="3" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-warning text-dark d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-cup-hot-fill" style="font-size:12px;"></i>
-                                                </span>
-                                                Idle / Lunch Break
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">12:30 PM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Mylapore</div>
-                                            <small class="text-muted" style="font-size:11px;">Duration 45 min</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="4" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-primary d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-geo-alt-fill" style="font-size:12px;"></i>
-                                                </span>
-                                                Visit - Kumar Stores
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">02:10 PM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Teynampet</div>
-                                            <small class="text-muted" style="font-size:11px;">Duration 20 min</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="5" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-primary d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-geo-alt-fill" style="font-size:12px;"></i>
-                                                </span>
-                                                Visit - Balaji Motors
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">03:35 PM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> Guindy</div>
-                                            <small class="text-muted" style="font-size:11px;">Duration 35 min</small>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item list-group-item-action border rounded-3 p-2.5 tl-item shadow-sm bg-white" data-index="6" role="button">
-                                        <div class="d-flex align-items-center justify-content-between mb-1">
-                                            <span class="fw-bold text-dark small d-flex align-items-center gap-2">
-                                                <span class="badge rounded-circle p-1 text-white bg-danger d-inline-flex align-items-center justify-content-center" style="width:24px;height:24px;">
-                                                    <i class="bi bi-box-arrow-right" style="font-size:12px;"></i>
-                                                </span>
-                                                Logout
-                                            </span>
-                                            <span class="badge bg-light text-secondary border rounded-pill" style="font-size:10px;">06:15 PM</span>
-                                        </div>
-                                        <div class="small text-muted ps-4 ms-2">
-                                            <div><i class="bi bi-geo-alt text-secondary"></i> T. Nagar</div>
-                                            <small class="text-muted" style="font-size:11px;">Total 32.4 km travelled</small>
-                                        </div>
-                                    </div>
+                                    <!-- Populated dynamically by renderTimeline() -->
                                 </div>
                             </div>
                         </div>
@@ -350,10 +258,170 @@
     </div>
 </main>
 
+<!-- ===== Staff Location Filter Offcanvas (lead.php & follow-up-list.php style) ===== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="lmFilterOffcanvas" aria-labelledby="lmFilterOffcanvasLabel" style="width: 380px;">
+    <div class="offcanvas-header border-bottom py-3 px-3">
+        <h6 class="offcanvas-title fw-bold d-flex align-items-center gap-2 mb-0" id="lmFilterOffcanvasLabel">
+            <i class="bi bi-funnel text-primary"></i> Filter Staff Locations
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <form id="filterForm" onsubmit="return false;">
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filter_date">Tracking Date</label>
+                <input type="text" class="date-input form-control form-control-sm" id="filter_date" placeholder="DD-MM-YYYY" maxlength="10" autocomplete="off">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filter_staff">Staff Member</label>
+                <select class="form-select select2 form-select-sm" id="filter_staff">
+                    <option value="">All Staff Members</option>
+                    <option value="GHRA0011">GHRAUDA SOFTWARE (GHRA0011)</option>
+                    <option value="1234">thilak ma (1234)</option>
+                    <option value="GHRA0012">ARUN KUMAR (GHRA0012)</option>
+                    <option value="GHRA0013">MOHAN RAJ (GHRA0013)</option>
+                    <option value="GHRA0014">PRIYA DHARSHINI (GHRA0014)</option>
+                    <option value="GHRA0015">SURESH BABU (GHRA0015)</option>
+                    <option value="GHRA0016">DIVYA LAKSHMI (GHRA0016)</option>
+                    <option value="GHRA0017">KARTHIK RAJA (GHRA0017)</option>
+                    <option value="GHRA0018">NANDHINI S (GHRA0018)</option>
+                    <option value="GHRA0019">VIGNESH R (GHRA0019)</option>
+                    <option value="GHRA0020">SANTHOSH M (GHRA0020)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filter_status">Tracking Status</label>
+                <select class="form-select select2 form-select-sm" id="filter_status">
+                    <option value="">All Statuses</option>
+                    <option value="online">Online Only</option>
+                    <option value="offline">Offline Only</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filter_area">Area / Zone</label>
+                <select class="form-select select2 form-select-sm" id="filter_area">
+                    <option value="">All Zones</option>
+                    <option value="Nungambakkam">Nungambakkam</option>
+                    <option value="T. Nagar">T. Nagar</option>
+                    <option value="Anna Nagar">Anna Nagar</option>
+                    <option value="Guindy">Guindy</option>
+                    <option value="Velachery">Velachery</option>
+                    <option value="Mylapore">Mylapore</option>
+                    <option value="Porur">Porur</option>
+                    <option value="Perambur">Perambur</option>
+                    <option value="Ashok Nagar">Ashok Nagar</option>
+                    <option value="Kodambakkam">Kodambakkam</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small fw-bold mb-1" for="filter_min_visits">Minimum Visits</label>
+                <select class="form-select select2 form-select-sm" id="filter_min_visits">
+                    <option value="0">Any Visit Count</option>
+                    <option value="1">1+ Visits</option>
+                    <option value="3">3+ Visits</option>
+                    <option value="5">5+ Visits</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="offcanvas-footer border-top p-3 d-flex gap-2 bg-light-subtle">
+        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill" id="btnReset">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+        </button>
+        <button type="button" class="btn btn-primary btn-sm flex-fill" id="btnSearch">
+            <i class="bi bi-funnel me-1"></i> Apply Filters
+        </button>
+    </div>
+</div>
+
+<!-- ===== Staff 360° Location & Route Detail Modal ===== -->
+<div class="modal fade" id="lmDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header border-bottom py-3 px-4 bg-light-subtle d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:42px;height:42px;">
+                        <i class="bi bi-person-Check fs-5 bi-person-badge"></i>
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h5 class="modal-title fw-bold text-dark mb-0 fs-5" id="lmModalName">Staff Details</h5>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill font-11 px-2.5 py-0.5" id="lmModalId">GHRA0011</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill font-11 px-2.5 py-0.5" id="lmModalStatus">Online</span>
+                        </div>
+                        <div class="small text-muted" id="lmModalSubtitle">Daily Field Route &amp; Check-In Overview</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-white">
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Total Visits</span>
+                            <h6 class="fw-bold text-primary mb-0 fs-6" id="lmModalVisits">0 Visits</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Distance Travelled</span>
+                            <h6 class="fw-bold text-success mb-0 fs-6" id="lmModalKms">0 km</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Device Battery</span>
+                            <h6 class="fw-bold text-dark mb-0 fs-6" id="lmModalBattery">0 %</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="p-3 rounded-3 bg-light border border-light-subtle">
+                            <span class="text-muted d-block small mb-1 fw-semibold text-uppercase font-10">Tracking Date</span>
+                            <h6 class="fw-bold text-dark mb-0 fs-6" id="lmModalDate">--</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border border-light-subtle rounded-3 p-3 mb-4">
+                    <h6 class="fw-bold text-dark mb-3 font-13 text-uppercase" style="letter-spacing:0.5px;">
+                        <i class="bi bi-clock-history text-primary me-1.5"></i>Check-In &amp; Check-Out Summary
+                    </h6>
+                    <div class="row g-3 font-13">
+                        <div class="col-sm-6">
+                            <div class="text-muted small">Login Time &amp; Area</div>
+                            <div class="fw-semibold text-dark mt-0.5" id="lmModalLogin">—</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-muted small">Logout Time &amp; Area</div>
+                            <div class="fw-semibold text-dark mt-0.5" id="lmModalLogout">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+                    <span class="text-muted small fw-semibold">Quick Actions:</span>
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <button type="button" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1.5 fw-semibold font-12" id="lmModalFocusMapBtn">
+                            <i class="bi bi-geo-alt-fill"></i> Focus on Live Map
+                        </button>
+                        <a href="appointments.php" id="lmModalAssignVisitBtn" class="btn btn-sm btn-outline-warning d-inline-flex align-items-center gap-1.5 fw-semibold font-12">
+                            <i class="bi bi-calendar2-week"></i> Assign Field Visit
+                        </a>
+                        <a href="lead.php" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1.5 fw-semibold font-12">
+                            <i class="bi bi-person-lines-fill"></i> View Leads
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-light-subtle py-2.5 px-4 border-top">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Leaflet JS -->
 <script src="./assets/js/leaflet.js"></script>
-<!-- Date Picker JS -->
-<script src="./assets/js/date-picker.js"></script>
 <script>
     (function() {
         'use strict';
@@ -585,6 +653,12 @@
         // ---------- State ----------
         var map, layerGroup, markers = [];
         var selectedUser = users[0];
+        var filterState = {
+            status: 'all',
+            staffId: '',
+            area: '',
+            minVisits: 0
+        };
 
         // ---------- Helpers ----------
         function todayDMY() {
@@ -599,7 +673,6 @@
             var val = (el ? el.value : '').trim();
             return val || todayDMY();
         }
-
 
         // ---------- Map ----------
         function initMap() {
@@ -727,6 +800,8 @@
             var d = currentDate();
             var mapDateEl = document.getElementById('mapDate');
             if (mapDateEl) mapDateEl.textContent = d;
+            var hdrDateEl = document.getElementById('lmHeaderDate');
+            if (hdrDateEl) hdrDateEl.textContent = d;
             var nameEl = document.getElementById('mapUserName');
             if (nameEl) nameEl.textContent = user.name;
             var idEl = document.getElementById('mapUserId');
@@ -759,8 +834,116 @@
             renderTimeline(u);
         }
 
+        // ---------- Staff 360 Modal ----------
+        window.openStaff360Modal = function(id) {
+            var u = users.filter(function(x) {
+                return String(x.id).trim() === String(id).trim();
+            })[0];
+            if (!u) return;
+            selectedUser = u;
+            updateTitles(u);
+            renderMap(u);
+            renderTimeline(u);
+
+            var setTxt = function(elId, val) {
+                var el = document.getElementById(elId);
+                if (el) el.textContent = val;
+            };
+            setTxt('lmModalName', u.name);
+            setTxt('lmModalId', u.id);
+            setTxt('lmModalVisits', u.visits + (u.visits === 1 ? ' Visit' : ' Visits'));
+            setTxt('lmModalKms', u.kms + ' km');
+            setTxt('lmModalBattery', u.battery + ' %');
+            setTxt('lmModalDate', currentDate());
+            setTxt('lmModalLogin', u.login === 'Nill' ? 'Not Logged In' : (u.login + ' · ' + u.loginArea));
+            setTxt('lmModalLogout', u.logout === 'Nill' ? 'Not Logged Out' : (u.logout + ' · ' + u.logoutArea));
+
+            var stBadge = document.getElementById('lmModalStatus');
+            if (stBadge) {
+                stBadge.textContent = u.online ? 'Online' : 'Offline';
+                stBadge.className = u.online
+                    ? 'badge bg-success-subtle text-success border border-success-subtle rounded-pill font-11 px-2.5 py-0.5'
+                    : 'badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill font-11 px-2.5 py-0.5';
+            }
+
+            var assignBtn = document.getElementById('lmModalAssignVisitBtn');
+            if (assignBtn) assignBtn.href = 'appointments.php?staff=' + encodeURIComponent(u.name);
+
+            var modalEl = document.getElementById('lmDetailModal');
+            if (modalEl && window.bootstrap && bootstrap.Modal) {
+                bootstrap.Modal.getOrCreateInstance(modalEl).show();
+            }
+        };
+
+        // ---------- Filtering & Badge ----------
+        function updateFilterBadge() {
+            var count = 0;
+            var dateEl = document.getElementById('filter_date');
+            if (dateEl && dateEl.value && dateEl.value !== todayDMY()) count++;
+            if (filterState.staffId) count++;
+            if (filterState.status && filterState.status !== 'all') count++;
+            if (filterState.area) count++;
+            if (filterState.minVisits > 0) count++;
+
+            var badge = document.getElementById('lmFilterCountBadge');
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle('d-none', count === 0);
+            }
+        }
+
+        var allStaffTrs = [];
+        function applyTableFilters() {
+            var tbody = document.getElementById('leadMapTbody');
+            var tableEl = document.getElementById('leadMapTable');
+            if (!tbody) return;
+            if (!allStaffTrs.length) {
+                allStaffTrs = Array.from(tbody.querySelectorAll('tr[data-id]'));
+            }
+            var firstMatchedId = null;
+            var matchedRows = [];
+
+            allStaffTrs.forEach(function(tr) {
+                var id = tr.getAttribute('data-id') || '';
+                var onlineAttr = tr.getAttribute('data-online') || '';
+                var areaAttr = (tr.getAttribute('data-area') || '').toLowerCase();
+                var visitsAttr = parseInt(tr.getAttribute('data-visits') || '0', 10);
+
+                var match = true;
+                if (filterState.status !== 'all' && onlineAttr !== filterState.status) match = false;
+                if (filterState.staffId && id !== filterState.staffId) match = false;
+                if (filterState.area && areaAttr.indexOf(filterState.area.toLowerCase()) === -1) match = false;
+                if (filterState.minVisits > 0 && visitsAttr < filterState.minVisits) match = false;
+
+                if (match) {
+                    tr.style.display = '';
+                    matchedRows.push(tr);
+                    if (!firstMatchedId) firstMatchedId = id;
+                }
+            });
+
+            tbody.innerHTML = '';
+            matchedRows.forEach(function(tr) {
+                tbody.appendChild(tr);
+            });
+            if (tableEl && tableEl.autoTable && typeof tableEl.autoTable.render === 'function') {
+                tableEl.autoTable.render();
+            }
+
+            if (firstMatchedId) {
+                selectUser(firstMatchedId);
+            } else {
+                updateTitles(selectedUser);
+            }
+            updateFilterBadge();
+        }
+
         // ---------- Events ----------
         document.addEventListener('DOMContentLoaded', function() {
+            var tbodyInit = document.getElementById('leadMapTbody');
+            if (tbodyInit && !allStaffTrs.length) {
+                allStaffTrs = Array.from(tbodyInit.querySelectorAll('tr[data-id]'));
+            }
             var dateEl = document.getElementById('filter_date');
             if (dateEl && !dateEl.value) {
                 dateEl.value = todayDMY();
@@ -769,8 +952,82 @@
             initMap();
             selectUser(selectedUser.id);
 
-            // eye / visit button click delegation across pagination & search
+            // Capture-phase dropdown delegation with viewport boundary & fixed popper strategy
             document.addEventListener('click', function(e) {
+                var toggle = e.target.closest('.btn-table-action[data-bs-toggle="dropdown"]');
+                if (toggle && window.bootstrap && bootstrap.Dropdown) {
+                    bootstrap.Dropdown.getOrCreateInstance(toggle, {
+                        boundary: 'viewport',
+                        popperConfig: { strategy: 'fixed' }
+                    });
+                }
+                var actItem = e.target.closest('.table-action-menu .dropdown-item');
+                if (actItem && window.bootstrap && bootstrap.Dropdown) {
+                    var dd = actItem.closest('.dropdown');
+                    var btn = dd ? dd.querySelector('[data-bs-toggle="dropdown"]') : null;
+                    if (btn) {
+                        var inst = bootstrap.Dropdown.getInstance(btn);
+                        if (inst) inst.hide();
+                    }
+                }
+            }, true);
+
+            // Header Status Toggle (All | Online | Offline)
+            var statusToggle = document.getElementById('lmStatusToggle');
+            if (statusToggle) {
+                statusToggle.querySelectorAll('button').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        filterState.status = btn.getAttribute('data-status') || 'all';
+                        statusToggle.querySelectorAll('button').forEach(function(b) {
+                            b.classList.toggle('active', b === btn);
+                        });
+                        var selStatus = document.getElementById('filter_status');
+                        if (selStatus) {
+                            selStatus.value = filterState.status === 'all' ? '' : filterState.status;
+                            if (window.jQuery && jQuery.fn.select2) jQuery(selStatus).trigger('change.select2');
+                        }
+                        applyTableFilters();
+                    });
+                });
+            }
+
+            // Quick Actions header buttons
+            var jumpBtn = document.getElementById('lmJumpToMapBtn');
+            if (jumpBtn) {
+                jumpBtn.addEventListener('click', function() {
+                    scrollToMap();
+                });
+            }
+            var refreshBtn = document.getElementById('lmRefreshMapBtn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', function() {
+                    selectUser(selectedUser.id);
+                });
+            }
+
+            // Modal Focus Map button
+            var modalFocusBtn = document.getElementById('lmModalFocusMapBtn');
+            if (modalFocusBtn) {
+                modalFocusBtn.addEventListener('click', function() {
+                    var modalEl = document.getElementById('lmDetailModal');
+                    if (modalEl && window.bootstrap && bootstrap.Modal) {
+                        var inst = bootstrap.Modal.getInstance(modalEl);
+                        if (inst) inst.hide();
+                    }
+                    scrollToMap();
+                });
+            }
+
+            // Delegated click for .btn-view-map and .btn-staff-360
+            document.addEventListener('click', function(e) {
+                var staff360Btn = e.target.closest('.btn-staff-360');
+                if (staff360Btn) {
+                    e.preventDefault();
+                    var sid = staff360Btn.getAttribute('data-id');
+                    if (sid) window.openStaff360Modal(sid);
+                    return;
+                }
+
                 var btn = e.target.closest('.btn-view-map');
                 if (!btn) return;
                 e.preventDefault();
@@ -781,7 +1038,40 @@
                 }
             });
 
-            // timeline click -> focus marker
+            // Table Row Click -> opens Staff 360 Modal while safely ignoring Actions dropdown & interactive buttons
+            var tableEl = document.getElementById('leadMapTable');
+            if (tableEl) {
+                tableEl.addEventListener('click', function(e) {
+                    if (
+                        e.target.closest('input, button, select, textarea') ||
+                        e.target.closest('.btn-table-action') ||
+                        e.target.closest('.lead-act-btn') ||
+                        e.target.closest('.btn-view-map') ||
+                        e.target.closest('.dropdown') ||
+                        e.target.closest('.dropdown-menu') ||
+                        e.target.closest('.table-action-menu') ||
+                        e.target.closest('[data-bs-toggle="dropdown"]') ||
+                        e.target.closest('a:not(.lm-staff-name)')
+                    ) {
+                        return;
+                    }
+
+                    var cell = e.target.closest('td');
+                    if (cell && (cell.querySelector('.btn-table-action, .lead-act-btn, .dropdown') || cell.classList.contains('text-end'))) {
+                        return;
+                    }
+
+                    var nameLink = e.target.closest('.lm-staff-name');
+                    var tr = e.target.closest('tr[data-id]');
+                    var idAttr = nameLink ? nameLink.getAttribute('data-id') : (tr ? tr.getAttribute('data-id') : null);
+                    if (idAttr) {
+                        e.preventDefault();
+                        window.openStaff360Modal(idAttr);
+                    }
+                });
+            }
+
+            // Timeline click -> focus marker
             document.getElementById('timelineList').addEventListener('click', function(e) {
                 var li = e.target.closest('.tl-item');
                 if (!li) return;
@@ -800,13 +1090,63 @@
                 }
             });
 
+            // Offcanvas Apply Filters
             document.getElementById('btnSearch').addEventListener('click', function() {
-                selectUser(selectedUser.id);
+                var stEl = document.getElementById('filter_staff');
+                var statusEl = document.getElementById('filter_status');
+                var areaEl = document.getElementById('filter_area');
+                var mvEl = document.getElementById('filter_min_visits');
+
+                filterState.staffId = stEl ? stEl.value : '';
+                filterState.status = (statusEl && statusEl.value) ? statusEl.value : 'all';
+                filterState.area = areaEl ? areaEl.value : '';
+                filterState.minVisits = mvEl ? parseInt(mvEl.value || '0', 10) : 0;
+
+                if (statusToggle) {
+                    statusToggle.querySelectorAll('button').forEach(function(b) {
+                        b.classList.toggle('active', b.getAttribute('data-status') === filterState.status);
+                    });
+                }
+
+                applyTableFilters();
+
+                var oc = document.getElementById('lmFilterOffcanvas');
+                if (oc && window.bootstrap && bootstrap.Offcanvas) {
+                    var inst = bootstrap.Offcanvas.getInstance(oc);
+                    if (inst) inst.hide();
+                }
             });
 
+            // Offcanvas Reset Filters
             document.getElementById('btnReset').addEventListener('click', function() {
                 var dateEl = document.getElementById('filter_date');
                 if (dateEl) dateEl.value = todayDMY();
+
+                ['filter_staff', 'filter_status', 'filter_area'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) {
+                        el.value = '';
+                        if (window.jQuery && jQuery.fn.select2) jQuery(el).trigger('change.select2');
+                    }
+                });
+                var mvEl = document.getElementById('filter_min_visits');
+                if (mvEl) {
+                    mvEl.value = '0';
+                    if (window.jQuery && jQuery.fn.select2) jQuery(mvEl).trigger('change.select2');
+                }
+
+                filterState.status = 'all';
+                filterState.staffId = '';
+                filterState.area = '';
+                filterState.minVisits = 0;
+
+                if (statusToggle) {
+                    statusToggle.querySelectorAll('button').forEach(function(b) {
+                        b.classList.toggle('active', b.getAttribute('data-status') === 'all');
+                    });
+                }
+
+                applyTableFilters();
                 selectUser(users[0].id);
             });
         });
