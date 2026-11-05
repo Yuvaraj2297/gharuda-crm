@@ -899,6 +899,45 @@ window.updateLeadFilterBadge = function() {
 
 <!-- Inline Styles for Create Lead Modal (Guaranteed Zero-Cache Rendering) -->
 <style id="crmLeadModalInlineStyles">
+    /* Universal Modal Stacking & Visibility Polish (Guaranteed Zero-Cache) */
+    .modal-dialog-w460 { max-width: 460px !important; }
+    .modal-dialog-w470 { max-width: 470px !important; }
+    .modal-dialog-w620 { max-width: 620px !important; }
+    
+    .modal.show {
+        display: block !important;
+    }
+    .modal-backdrop.show {
+        opacity: 0.52 !important;
+    }
+    
+    /* Ensure all nested and child modals remain sharp and above backdrops */
+    #ldComposeEmailModal,
+    #ldBookMeetingModal,
+    #ldWhatsAppModal,
+    #ldQualifyDealModal,
+    #ldStageModal,
+    #ldEditLeadModal,
+    #setLeadReminderModal,
+    #newTaskModal,
+    #setProposalReminderModal,
+    #apAddTaskModal,
+    #apAddTemplateModal,
+    #syncDataModal,
+    #apSendEmailModal,
+    #apAttachFileModal,
+    #newEstimateModal,
+    #newInvoiceModal,
+    #apRecordPaymentModal,
+    #apPaymentViewModal,
+    #npAddItemModal,
+    #apProposalPreviewModal,
+    #apSignModal,
+    #nlAddOptionModal,
+    #importLeadsModal {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    }
+
     /* Refined Salutation prefix select: Sleek, compact & crisp */
     #newLeadModal .input-group > select.nl-salutation-select {
         max-width: 84px !important;

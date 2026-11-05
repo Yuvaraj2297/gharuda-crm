@@ -1822,21 +1822,89 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         })();
 
-        /* ---- Stacked modal backdrop z-index fix ----
-       Bootstrap appends backdrops at default z-index 1050; custom-z modals
-       (1075/1085/1090) open panna backdrop parent modal ku keezha pogum.
-       shown event la last backdrop ah modal z-index - 1 ku bump panrom. */
+        /* ---- Universal Stacked Modal & Backdrop Engine ----
+           Dynamically calculates stacking order for ANY modal opening on top of
+           fullscreen or standard modals. Ensures all modals, backdrops, and scroll
+           locks are 100% visible, correctly layered, and interactive without freezing. */
         (function() {
-            var stackedModals = ['ldComposeEmailModal', 'ldBookMeetingModal', 'ldWhatsAppModal', 'ldQualifyDealModal', 'ldStageModal', 'ldEditLeadModal', 'setLeadReminderModal', 'newTaskModal', 'setProposalReminderModal', 'apAddTaskModal', 'apAddTemplateModal', 'syncDataModal', 'apSendEmailModal', 'apAttachFileModal', 'newEstimateModal', 'newInvoiceModal', 'apRecordPaymentModal', 'apPaymentViewModal', 'newLeadModal', 'nlAddOptionModal', 'newProposalModal', 'npAddItemModal', 'apProposalPreviewModal', 'apSignModal'];
-            stackedModals.forEach(function(id) {
-                var el = document.getElementById(id);
-                if (!el) return;
-                el.addEventListener('shown.bs.modal', function() {
-                    var z = parseInt(getComputedStyle(el).zIndex, 10) || 1090;
-                    var backdrops = document.querySelectorAll('.modal-backdrop');
-                    var last = backdrops[backdrops.length - 1];
-                    if (last) last.style.zIndex = (z - 1);
+            var BASE_Z = 1050;
+
+            function getOpenModals(excludeEl) {
+                return Array.prototype.slice.call(document.querySelectorAll('.modal.show, .modal.showing')).filter(function(m) {
+                    return !excludeEl || m !== excludeEl;
                 });
+            }
+
+            // 1. When ANY modal starts opening: elevate immediately before animation
+            document.addEventListener('show.bs.modal', function(e) {
+                var modal = e.target;
+                if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+                modal.classList.add('showing');
+
+                var openModals = getOpenModals(modal);
+                var level = openModals.length; // 0 = first modal, 1 = second modal, 2 = third...
+                var modalZ = BASE_Z + (level * 25) + 10;     // 1060, 1085, 1110...
+                var backdropZ = BASE_Z + (level * 25) + 5;   // 1055, 1080, 1105...
+
+                modal.style.setProperty('z-index', modalZ, 'important');
+                modal.setAttribute('data-stack-level', level);
+
+                // Elevate newest backdrop immediately
+                setTimeout(function() {
+                    var backdrops = document.querySelectorAll('.modal-backdrop');
+                    if (backdrops.length > 0) {
+                        var lastBd = backdrops[backdrops.length - 1];
+                        lastBd.style.setProperty('z-index', backdropZ, 'important');
+                    }
+                }, 10);
+            });
+
+            // 2. When ANY modal finishes opening: guarantee layered order and scroll lock
+            document.addEventListener('shown.bs.modal', function(e) {
+                var modal = e.target;
+                if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+                modal.classList.remove('showing');
+
+                var openModals = Array.prototype.slice.call(document.querySelectorAll('.modal.show'));
+                openModals.forEach(function(m, idx) {
+                    var mZ = BASE_Z + (idx * 25) + 10;
+                    m.style.setProperty('z-index', mZ, 'important');
+                });
+
+                var backdrops = Array.prototype.slice.call(document.querySelectorAll('.modal-backdrop'));
+                backdrops.forEach(function(b, idx) {
+                    var bZ = BASE_Z + (idx * 25) + 5;
+                    b.style.setProperty('z-index', bZ, 'important');
+                });
+
+                // Keep body locked to modal view
+                document.body.classList.add('modal-open');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // 3. When ANY modal closes: preserve parent modal scrollbar & interactivity
+            document.addEventListener('hidden.bs.modal', function(e) {
+                var modal = e.target;
+                if (!modal || !modal.classList || !modal.classList.contains('modal')) return;
+                modal.classList.remove('showing');
+                modal.style.removeProperty('z-index');
+                modal.removeAttribute('data-stack-level');
+
+                var remainingModals = Array.prototype.slice.call(document.querySelectorAll('.modal.show'));
+                if (remainingModals.length > 0) {
+                    document.body.classList.add('modal-open');
+                    document.body.style.overflow = 'hidden';
+
+                    // Re-sync backdrops for remaining stack
+                    var backdrops = Array.prototype.slice.call(document.querySelectorAll('.modal-backdrop'));
+                    backdrops.forEach(function(b, idx) {
+                        b.style.setProperty('z-index', BASE_Z + (idx * 25) + 5, 'important');
+                    });
+
+                    // Ensure top modal remains interactive
+                    var topModal = remainingModals[remainingModals.length - 1];
+                    topModal.style.setProperty('z-index', BASE_Z + ((remainingModals.length - 1) * 25) + 10, 'important');
+                }
             });
         })();
 
