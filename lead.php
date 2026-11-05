@@ -1147,15 +1147,7 @@ window.updateLeadFilterBadge = function() {
                     <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11 ms-2">Standard Layout</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" id="nlFormResetBtnTop" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
-                        Reset
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold shadow-sm" style="background-color: var(--primary, #16a34a); border-color: var(--primary, #16a34a);">
-                        Save Lead
-                    </button>
+                    
                     <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
@@ -1492,28 +1484,6 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-10 crm-field-control">
                                     <textarea class="form-control" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row align-items-center crm-field-row">
-                                <span class="col-sm-2 col-form-label text-sm-end crm-field-label">
-                                    Lead Options<span class="crm-colon">:</span>
-                                </span>
-                                <div class="col-sm-10 crm-field-control">
-                                    <div class="d-flex flex-wrap gap-4 pt-1">
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_public">
-                                            <label class="form-check-label text-dark small fw-semibold" for="nl_public">Public Lead (Visible to team)</label>
-                                        </div>
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_contacted_today">
-                                            <label class="form-check-label text-dark small fw-semibold" for="nl_contacted_today">Mark as Contacted Today</label>
-                                        </div>
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_opt_out">
-                                            <label class="form-check-label text-dark small fw-semibold" for="nl_opt_out">Email Opt Out (GDPR / DND)</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
