@@ -1082,6 +1082,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).join('').toUpperCase().slice(0, 2);
                 var waPhone = phone.replace(/\D/g, '');
 
+                /* Collect Enquired Items from dynamic table */
+                var itemsList = [];
+                document.querySelectorAll('#nlItemBody tr').forEach(function(row) {
+                    var codeEl = row.querySelector('.nl-item-code') || row.querySelectorAll('input')[0];
+                    var nameEl = row.querySelector('.nl-item-name') || row.querySelectorAll('input')[1];
+                    var qtyEl = row.querySelector('.nl-item-qty') || row.querySelectorAll('input')[2];
+                    var code = codeEl ? codeEl.value.trim() : '';
+                    var name = nameEl ? nameEl.value.trim() : '';
+                    var qty = qtyEl ? (parseInt(qtyEl.value, 10) || 1) : 1;
+                    if (code || name) {
+                        itemsList.push({ code: code, name: name, qty: qty });
+                    }
+                });
+
+                /* Collect POC Contacts from dynamic table */
+                var pocList = [];
+                document.querySelectorAll('#nlPocList tr').forEach(function(row) {
+                    var inputs = row.querySelectorAll('input');
+                    if (inputs.length >= 3) {
+                        var pName = inputs[0] ? inputs[0].value.trim() : '';
+                        var pPhone = inputs[1] ? inputs[1].value.trim() : '';
+                        var pEmail = inputs[2] ? inputs[2].value.trim() : '';
+                        var pRole = inputs[3] ? inputs[3].value.trim() : '';
+                        if (pName || pPhone || pEmail) {
+                            pocList.push({ name: pName, phone: pPhone, email: pEmail, role: pRole });
+                        }
+                    }
+                });
+
                 if (leadsTable) {
                     var rowCount = leadsTable.getData().length;
                     leadsTable.addItem({
@@ -1120,7 +1149,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         turnover: (function(){ var el = document.getElementById('nl_turnover'); return el && el.value ? (el.tagName === 'SELECT' ? (el.value ? el.selectedOptions[0].text : null) : el.value.trim()) : null; })(),
                         emp_size: (function(){ var el = document.getElementById('nl_emp_size'); return el && el.value ? (el.tagName === 'SELECT' ? (el.value ? el.selectedOptions[0].text : null) : el.value.trim()) : null; })(),
                         customer_type: (function(){ var el = document.getElementById('nl_cust_type'); return el && el.value ? el.selectedOptions[0].text : null; })(),
-                        opt_out: document.getElementById('nl_opt_out') ? document.getElementById('nl_opt_out').checked : false
+                        opt_out: document.getElementById('nl_opt_out') ? document.getElementById('nl_opt_out').checked : false,
+                        items: itemsList,
+                        pocs: pocList
                     });
                 }
 
@@ -1137,22 +1168,130 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        /* ---- Add / Remove Item rows ---- */
+        /* ---- Master Catalog & Commercial Scope <-> Enquired Items 2-Way Sync ---- */
+        var CRM_PRODUCT_MAP = {
+            'HRMS Subscription & Licenses': { code: 'SKU-SW-005', name: 'HRMS Subscription & Licenses', price: 150000 },
+            'Payroll Module Add-on': { code: 'SKU-SW-007', name: 'Payroll Module Add-on', price: 35000 },
+            'Biometric Attendance System': { code: 'SKU-HW-102', name: 'Biometric Attendance System', price: 18500 },
+            'Custom ERP Development': { code: 'SKU-SW-010', name: 'Custom ERP Development', price: 250000 },
+            'Biometric Attendance Terminal Pro': { code: 'SKU-HW-102', name: 'Biometric Attendance Terminal Pro', price: 14500 },
+            'Industrial Barcode & POS Kit': { code: 'SKU-HW-103', name: 'Industrial Barcode & POS Kit', price: 7800 },
+            'Smart Access Control 8-Port Kit': { code: 'SKU-HW-106', name: 'Smart Access Control 8-Port Kit', price: 28500 },
+            'Cloud CRM Enterprise License': { code: 'SKU-SW-001', name: 'Cloud CRM Enterprise License', price: 250000 },
+            'WhatsApp Business API Suite': { code: 'SKU-SW-003', name: 'WhatsApp & Omnichannel API Suite', price: 45000 },
+            'Annual Maintenance Contract (AMC)': { code: 'SKU-SV-201', name: 'Annual Maintenance Contract (AMC)', price: 120000 }
+        };
+
+        var nlProductSelect = document.getElementById('nl_product');
         var nlItemBody = document.getElementById('nlItemBody');
         var nlAddItem = document.getElementById('nlAddItem');
+        var nlCatalogQuick = document.getElementById('nlCatalogQuickSelect');
+        var nlValueInput = document.getElementById('nl_value');
+
+        /* Sync Commercial Scope (Product/Scope) -> Primary Row in Enquired Products */
+        function syncProductToItems() {
+            if (!nlProductSelect || !nlItemBody) return;
+            var selectedVal = nlProductSelect.value || (nlProductSelect.selectedOptions[0] ? nlProductSelect.selectedOptions[0].text : '');
+            if (!selectedVal || selectedVal === '-None-') return;
+
+            var matched = CRM_PRODUCT_MAP[selectedVal];
+            var code = matched ? matched.code : 'SKU-GEN';
+            var name = matched ? matched.name : selectedVal;
+            var price = matched ? matched.price : null;
+
+            var firstRow = nlItemBody.querySelector('tr');
+            if (!firstRow) {
+                var tr = document.createElement('tr');
+                tr.className = 'nl-item-row';
+                tr.innerHTML =
+                    '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" value="' + code + '" placeholder="e.g. ITM-001"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-name" value="' + name + '" placeholder="Item name or description"></td>' +
+                    '<td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>' +
+                    '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button></td>';
+                nlItemBody.appendChild(tr);
+            } else {
+                var codeIn = firstRow.querySelector('.nl-item-code') || firstRow.querySelectorAll('input')[0];
+                var nameIn = firstRow.querySelector('.nl-item-name') || firstRow.querySelectorAll('input')[1];
+                var qtyIn = firstRow.querySelector('.nl-item-qty') || firstRow.querySelectorAll('input')[2];
+                if (codeIn) codeIn.value = code;
+                if (nameIn) nameIn.value = name;
+                if (qtyIn && (!qtyIn.value || qtyIn.value === '0')) qtyIn.value = '1';
+            }
+
+            /* Auto-suggest Expected Value in Section 2 if empty or previously auto-set */
+            if (price && nlValueInput && (!nlValueInput.value || parseFloat(nlValueInput.value) === 0 || nlValueInput.dataset.autoFilled === 'true')) {
+                nlValueInput.value = price;
+                nlValueInput.dataset.autoFilled = 'true';
+            }
+        }
+
+        if (nlProductSelect) {
+            nlProductSelect.addEventListener('change', syncProductToItems);
+        }
+
+        if (nlValueInput) {
+            nlValueInput.addEventListener('input', function() {
+                delete this.dataset.autoFilled;
+            });
+        }
+
+        /* Auto-fill Item Code & sync Price when item name picked from Master Catalog */
+        if (nlItemBody) {
+            nlItemBody.addEventListener('change', function(e) {
+                var nameIn = e.target.closest('.nl-item-name');
+                if (nameIn) {
+                    var val = nameIn.value.trim();
+                    var matched = CRM_PRODUCT_MAP[val];
+                    if (matched) {
+                        var row = nameIn.closest('tr');
+                        var codeIn = row ? row.querySelector('.nl-item-code') : null;
+                        var qtyIn = row ? row.querySelector('.nl-item-qty') : null;
+                        if (codeIn && (!codeIn.value || codeIn.value.startsWith('SKU-'))) {
+                            codeIn.value = matched.code;
+                        }
+                        if (qtyIn && (!qtyIn.value || qtyIn.value === '0')) {
+                            qtyIn.value = '1';
+                        }
+                        if (matched.price && nlValueInput && (!nlValueInput.value || parseFloat(nlValueInput.value) === 0 || nlValueInput.dataset.autoFilled === 'true')) {
+                            nlValueInput.value = matched.price;
+                            nlValueInput.dataset.autoFilled = 'true';
+                        }
+                        if (nlProductSelect && (!nlProductSelect.value || nlProductSelect.value === '')) {
+                            for (var i = 0; i < nlProductSelect.options.length; i++) {
+                                if (nlProductSelect.options[i].text.toLowerCase() === val.toLowerCase()) {
+                                    nlProductSelect.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        /* Add Blank Item Row */
         if (nlAddItem && nlItemBody) {
             nlAddItem.addEventListener('click', function() {
                 var tr = document.createElement('tr');
+                tr.className = 'nl-item-row';
                 tr.innerHTML =
-                    '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>' +
-                    '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>' +
-                    '<td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>' +
+                    '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" placeholder="e.g. ITM-001"></td>' +
+                    '<td><input type="text" list="catalogSkuList" class="form-control form-control-sm rounded-2 nl-item-name" placeholder="Item name or select SKU..."></td>' +
+                    '<td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>' +
                     '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button></td>';
                 nlItemBody.appendChild(tr);
             });
             nlItemBody.addEventListener('click', function(e) {
                 var btn = e.target.closest('.nl-remove-item');
-                if (btn) btn.closest('tr').remove();
+                if (btn) {
+                    var tr = btn.closest('tr');
+                    if (nlItemBody.querySelectorAll('tr').length > 1) {
+                        tr.remove();
+                    } else {
+                        /* Keep at least 1 clean row */
+                        tr.querySelectorAll('input').forEach(function(inp) { inp.value = ''; });
+                    }
+                }
             });
         }
 
@@ -4116,8 +4255,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function redirectQuoteLead(rec) {
         if (!rec) return;
         var rawVal = Number(String(rec.value || '').replace(/[^0-9]/g, '')) || 50000;
+        var itemName = (rec.items && rec.items.length > 0 && rec.items[0].name) ? rec.items[0].name : (rec.product || 'Solution Package');
+        var itemSku = (rec.items && rec.items.length > 0 && rec.items[0].code) ? rec.items[0].code : '';
         window.location.href = 'quotation-create.php?client=' + encodeURIComponent(rec.company || rec.name || '') +
-            '&item=' + encodeURIComponent(rec.product || 'Solution Package') +
+            '&item=' + encodeURIComponent(itemName) +
+            (itemSku ? '&sku=' + encodeURIComponent(itemSku) : '') +
             '&price=' + encodeURIComponent(rawVal);
     }
 

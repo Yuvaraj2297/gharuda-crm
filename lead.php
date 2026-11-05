@@ -1176,8 +1176,8 @@ window.updateLeadFilterBadge = function() {
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
                                         <select class="form-select nl-select" id="nl_assigned" required>
-                                            <option value="">-None-</option>
-                                            <option selected>yuva raj</option>
+                                            <option value="" selected>-None-</option>
+                                            <option>yuva raj</option>
                                             <option>Harish D.</option>
                                             <option>Priya S.</option>
                                         </select>
@@ -1201,7 +1201,7 @@ window.updateLeadFilterBadge = function() {
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
                                         <select class="form-select input-prefix-select nl-salutation-select" id="nl_salutation" aria-label="Salutation">
-                                            <option value="">-None-</option>
+                                            <option value="" selected>-None-</option>
                                             <option value="Mr.">Mr.</option>
                                             <option value="Mrs.">Mrs.</option>
                                             <option value="Ms.">Ms.</option>
@@ -1277,8 +1277,8 @@ window.updateLeadFilterBadge = function() {
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
                                         <select class="form-select nl-select" id="nl_source">
-                                            <option value="">-None-</option>
-                                            <option selected>Direct</option>
+                                            <option value="" selected>-None-</option>
+                                            <option>Direct</option>
                                             <option>IndiaMart</option>
                                             <option>Website</option>
                                             <option>Facebook Ads</option>
@@ -1300,8 +1300,8 @@ window.updateLeadFilterBadge = function() {
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
                                         <select class="form-select nl-select" id="nl_sourcer">
-                                            <option value="">-None-</option>
-                                            <option selected>GHARUDA SOFTWARE</option>
+                                            <option value="" selected>-None-</option>
+                                            <option>GHARUDA SOFTWARE</option>
                                             <option>yuva raj</option>
                                             <option>Harish D.</option>
                                             <option>Website Form</option>
@@ -1331,8 +1331,8 @@ window.updateLeadFilterBadge = function() {
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
                                         <select class="form-select nl-select" id="nl_status">
-                                            <option value="">-None-</option>
-                                            <option selected>Lead</option>
+                                            <option value="" selected>-None-</option>
+                                            <option>Lead</option>
                                             <option>Quotation</option>
                                             <option>Followup</option>
                                             <option>Qualified</option>
@@ -1362,8 +1362,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_cust_type">
-                                        <option value="">-None-</option>
-                                        <option selected>Direct Customer</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>Direct Customer</option>
                                         <option>Reseller / Partner</option>
                                         <option>System Integrator</option>
                                     </select>
@@ -1377,8 +1377,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_department">
-                                        <option value="">-None-</option>
-                                        <option selected>IT &amp; Software Solutions</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>IT &amp; Software Solutions</option>
                                         <option>Executive Management</option>
                                         <option>Procurement &amp; Purchase</option>
                                         <option>Operations &amp; Plant</option>
@@ -1409,8 +1409,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_industry">
-                                        <option value="">-None-</option>
-                                        <option selected>IT &amp; Software Solutions</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>IT &amp; Software Solutions</option>
                                         <option>Manufacturing &amp; Engineering</option>
                                         <option>Healthcare &amp; Pharmaceuticals</option>
                                         <option>Retail &amp; E-commerce</option>
@@ -1429,8 +1429,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_priority">
-                                        <option value="">-None-</option>
-                                        <option selected>🔥 Hot Lead (High Urgency)</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>🔥 Hot Lead (High Urgency)</option>
                                         <option>⚡ Warm Lead (Medium)</option>
                                         <option>❄️ Cold Lead (Low)</option>
                                     </select>
@@ -1444,8 +1444,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_qualification">
-                                        <option value="">-None-</option>
-                                        <option selected>Sales Qualified Lead (SQL)</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>Sales Qualified Lead (SQL)</option>
                                         <option>Marketing Qualified Lead (MQL)</option>
                                         <option>Unqualified Lead</option>
                                     </select>
@@ -1526,8 +1526,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_product">
-                                        <option value="">-None-</option>
-                                        <option selected>HRMS Subscription &amp; Licenses</option>
+                                        <option value="" selected>-None-</option>
+                                        <option>HRMS Subscription &amp; Licenses</option>
                                         <option>Payroll Module Add-on</option>
                                         <option>Biometric Attendance System</option>
                                         <option>Custom ERP Development</option>
@@ -1557,10 +1557,10 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_probability">
-                                        <option value="">-None-</option>
+                                        <option value="" selected>-None-</option>
                                         <option value="10">10% – Prospecting</option>
                                         <option value="25">25% – Requirements Defined</option>
-                                        <option value="50" selected>50% – Proposal / Quote Sent</option>
+                                        <option value="50">50% – Proposal / Quote Sent</option>
                                         <option value="75">75% – Negotiation / Review</option>
                                         <option value="90">90% – Verbal Agreement</option>
                                         <option value="100">100% – Closed Won</option>
@@ -1574,8 +1574,8 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_sales_term">
-                                        <option value="">-None-</option>
-                                        <option value="Immediate" selected>Immediate (&lt; 15 Days)</option>
+                                        <option value="" selected>-None-</option>
+                                        <option value="Immediate">Immediate (&lt; 15 Days)</option>
                                         <option value="Short Term">Short Term (1 Month)</option>
                                         <option value="Medium Term">Medium Term (2–3 Months)</option>
                                         <option value="Long Term">Long Term (&gt; 3 Months)</option>
@@ -1641,12 +1641,12 @@ window.updateLeadFilterBadge = function() {
                                     <i class="bi bi-box-seam text-primary fs-5"></i>
                                     <span>Enquired Products &amp; Items</span>
                                 </div>
-                                <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
+                                <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1 text-nowrap" id="nlAddItem">
                                     <i class="bi bi-plus-lg"></i><span>Add Item</span>
                                 </button>
                             </div>
                             <div class="table-responsive border rounded-2">
-                                <table class="table table-hover align-middle mb-0 font-13">
+                                <table class="table table-hover align-middle mb-0 font-13" id="nlItemsTable">
                                     <thead class="table-light">
                                         <tr>
                                             <th style="width: 25%;">Item Code</th>
@@ -1656,10 +1656,10 @@ window.updateLeadFilterBadge = function() {
                                         </tr>
                                     </thead>
                                     <tbody id="nlItemBody">
-                                        <tr>
-                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
-                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
-                                            <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
+                                        <tr class="nl-item-row">
+                                            <td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" placeholder="e.g. ITM-001"></td>
+                                            <td><input type="text" list="catalogSkuList" class="form-control form-control-sm rounded-2 nl-item-name" placeholder="Item name or select SKU..."></td>
+                                            <td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
                                             </td>
@@ -1667,6 +1667,18 @@ window.updateLeadFilterBadge = function() {
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Datalist for Quick Catalog Selection -->
+                            <datalist id="catalogSkuList">
+                                <option value="HRMS Subscription &amp; Licenses">SKU-SW-005 · HRMS Subscription (₹1,50,000)</option>
+                                <option value="Cloud CRM Enterprise License">SKU-SW-001 · Software License (₹2,50,000)</option>
+                                <option value="Payroll Module Add-on">SKU-SW-007 · Payroll &amp; Compliance (₹35,000)</option>
+                                <option value="WhatsApp &amp; Omnichannel API Suite">SKU-SW-003 · Messaging Integration (₹45,000)</option>
+                                <option value="Biometric Attendance Terminal Pro">SKU-HW-102 · Hardware Terminal (₹14,500)</option>
+                                <option value="Industrial Barcode &amp; POS Kit">SKU-HW-103 · POS Scanner Kit (₹7,800)</option>
+                                <option value="Smart Access Control 8-Port Kit">SKU-HW-106 · Access Kit (₹28,500)</option>
+                                <option value="Custom ERP Development">SKU-SW-010 · Enterprise Service (₹2,50,000)</option>
+                                <option value="Annual Maintenance Contract (AMC)">SKU-SV-201 · 24x7 SLA Support (₹1,20,000)</option>
+                            </datalist>
                         </div>
                     </div>
 
@@ -1719,11 +1731,11 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_turnover">
-                                        <option value="">-None-</option>
+                                        <option value="" selected>-None-</option>
                                         <option>&lt; ₹50 Lakhs</option>
                                         <option>₹50 Lakhs – ₹1 Cr</option>
                                         <option>₹1 Cr – ₹5 Cr</option>
-                                        <option selected>₹5 Cr – ₹10 Cr</option>
+                                        <option>₹5 Cr – ₹10 Cr</option>
                                         <option>₹10 Cr – ₹50 Cr</option>
                                         <option>&gt; ₹50 Cr</option>
                                     </select>
@@ -1737,10 +1749,10 @@ window.updateLeadFilterBadge = function() {
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <select class="form-select nl-select" id="nl_emp_size">
-                                        <option value="">-None-</option>
+                                        <option value="" selected>-None-</option>
                                         <option>1 – 10 Employees</option>
                                         <option>11 – 50 Employees</option>
-                                        <option selected>51 – 200 Employees</option>
+                                        <option>51 – 200 Employees</option>
                                         <option>201 – 500 Employees</option>
                                         <option>500+ Employees</option>
                                     </select>
@@ -1769,8 +1781,8 @@ window.updateLeadFilterBadge = function() {
                                     <div class="row g-2">
                                         <div class="col-6">
                                             <select class="form-select nl-select" id="nl_country">
-                                                <option value="">-Country-</option>
-                                                <option selected>India</option>
+                                                <option value="" selected>-Country-</option>
+                                                <option>India</option>
                                                 <option>United States</option>
                                                 <option>United Kingdom</option>
                                                 <option>UAE</option>
@@ -1779,8 +1791,8 @@ window.updateLeadFilterBadge = function() {
                                         </div>
                                         <div class="col-6">
                                             <select class="form-select nl-select" id="nl_state">
-                                                <option value="">-State-</option>
-                                                <option selected>Tamil Nadu</option>
+                                                <option value="" selected>-State-</option>
+                                                <option>Tamil Nadu</option>
                                                 <option>Karnataka</option>
                                                 <option>Maharashtra</option>
                                                 <option>Delhi</option>
@@ -1801,8 +1813,8 @@ window.updateLeadFilterBadge = function() {
                                     <div class="row g-2">
                                         <div class="col-6">
                                             <select class="form-select nl-select" id="nl_city">
-                                                <option value="">-City-</option>
-                                                <option selected>Chennai</option>
+                                                <option value="" selected>-City-</option>
+                                                <option>Chennai</option>
                                                 <option>Bangalore</option>
                                                 <option>Mumbai</option>
                                                 <option>Hyderabad</option>
