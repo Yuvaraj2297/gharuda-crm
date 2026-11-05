@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var value = document.getElementById('nl_value').value;
                 var tagsRaw = document.getElementById('nl_tags').value.trim();
                 var assignedEl = document.getElementById('nl_assigned');
-                var assignedText = assignedEl ? assignedEl.selectedOptions[0].text : '—';
+                var assignedText = assignedEl ? (assignedEl.tagName === 'SELECT' ? (assignedEl.selectedOptions[0] ? assignedEl.selectedOptions[0].text : 'yuva raj') : (assignedEl.value || 'yuva raj')) : 'yuva raj';
                 var sourceEl = document.getElementById('nl_source');
                 var sourceText = sourceEl ? sourceEl.selectedOptions[0].text : '—';
                 var statusEl = document.getElementById('nl_status');
@@ -1077,7 +1077,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 if (gstEl) gstEl.classList.remove('is-invalid');
 
-                var initials = assignedText.split(' ').map(function(w) {
+                var initials = assignedText.split(' ').filter(Boolean).map(function(w) {
                     return w.charAt(0);
                 }).join('').toUpperCase().slice(0, 2);
                 var waPhone = phone.replace(/\D/g, '');

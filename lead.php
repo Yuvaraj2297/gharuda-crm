@@ -1166,34 +1166,12 @@ window.updateLeadFilterBadge = function() {
                     </div>
 
                     <div class="row gx-4 gx-xl-5">
-                        <!-- Left Column (9 Balanced Rows) -->
+                        <!-- Left Column (8 Balanced Rows) -->
                         <div class="col-12 col-lg-6">
-                            <!-- Row 1: Lead Owner -->
-                            <div class="row align-items-center crm-field-row">
-                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_assigned">
-                                    Lead Owner<span class="req-star">*</span><span class="crm-colon">:</span>
-                                </label>
-                                <div class="col-sm-8 crm-field-control">
-                                    <div class="input-group">
-                                        <select class="form-select nl-select" id="nl_assigned" required>
-                                            <option value="" selected>-None-</option>
-                                            <option>yuva raj</option>
-                                            <option>Harish D.</option>
-                                            <option>Priya S.</option>
-                                        </select>
-                                        <button type="button" class="btn nl-addon-user" title="Lookup Sales Owner">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                                <circle cx="9" cy="7" r="4"></circle>
-                                                <circle cx="19" cy="11" r="3"></circle>
-                                                <path d="m21 13 2 2"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Hidden Lead Owner automatically populated from login session -->
+                            <input type="hidden" id="nl_assigned" value="<?php echo htmlspecialchars($_SESSION['user_name'] ?? 'yuva raj'); ?>">
 
-                            <!-- Row 2: First Name -->
+                            <!-- Row 1: First Name (Paired with Last Name) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_name">
                                     First Name<span class="crm-colon">:</span>
@@ -1213,7 +1191,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 3: Company -->
+                            <!-- Row 2: Company (Paired with Lead Status) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_company">
                                     Company<span class="req-star">*</span><span class="crm-colon">:</span>
@@ -1223,7 +1201,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 4: Title / Role -->
+                            <!-- Row 3: Title / Role (Paired with Customer Type) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_position">
                                     Title / Role<span class="crm-colon">:</span>
@@ -1233,7 +1211,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 5: Email -->
+                            <!-- Row 4: Email (Paired with Department) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_email">
                                     Email<span class="crm-colon">:</span>
@@ -1243,7 +1221,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 6: Mobile / Phone -->
+                            <!-- Row 5: Mobile / Phone (Paired with Other Phone) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_phone">
                                     Mobile / Phone<span class="crm-colon">:</span>
@@ -1256,7 +1234,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 7: Website -->
+                            <!-- Row 6: Website (Paired with Industry) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_website">
                                     Website<span class="crm-colon">:</span>
@@ -1269,7 +1247,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 8: Lead Source -->
+                            <!-- Row 7: Lead Source (Paired with Lead Rating) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_source">
                                     Lead Source<span class="req-star">*</span><span class="crm-colon">:</span>
@@ -1292,7 +1270,7 @@ window.updateLeadFilterBadge = function() {
                                 </div>
                             </div>
 
-                            <!-- Row 9: Lead Sourcer -->
+                            <!-- Row 8: Lead Sourcer (Paired with Qualification) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_sourcer">
                                     Lead Sourcer<span class="crm-colon">:</span>
@@ -1321,9 +1299,19 @@ window.updateLeadFilterBadge = function() {
                             </div>
                         </div>
 
-                        <!-- Right Column (9 Balanced Rows) -->
+                        <!-- Right Column (Balanced Rows) -->
                         <div class="col-12 col-lg-6">
-                            <!-- Row 1: Lead Status -->
+                            <!-- Row 1: Last Name (Paired horizontally with First Name) -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_last_name">
+                                    Last Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="nl_last_name" placeholder="Last name / Surname">
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Lead Status (Paired horizontally with Company) -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_status">
                                     Lead Status<span class="req-star">*</span><span class="crm-colon">:</span>
@@ -1342,16 +1330,6 @@ window.updateLeadFilterBadge = function() {
                                         </select>
                                         <button type="button" class="btn nl-addon-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
                                     </div>
-                                </div>
-                            </div>
-
-                            <!-- Row 2: Last Name -->
-                            <div class="row align-items-center crm-field-row">
-                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_last_name">
-                                    Last Name<span class="req-star">*</span><span class="crm-colon">:</span>
-                                </label>
-                                <div class="col-sm-8 crm-field-control">
-                                    <input type="text" class="form-control crm-required" id="nl_last_name" placeholder="Last name / Surname">
                                 </div>
                             </div>
 
