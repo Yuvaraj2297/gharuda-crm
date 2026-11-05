@@ -1043,10 +1043,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (newLeadForm) {
             newLeadForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                var rawName = document.getElementById('nl_name').value.trim();
+                var rawName = document.getElementById('nl_name') ? document.getElementById('nl_name').value.trim() : '';
+                var lastName = document.getElementById('nl_last_name') ? document.getElementById('nl_last_name').value.trim() : '';
+                var fullName = (rawName + (lastName ? (' ' + lastName) : '')).trim();
                 var salEl = document.getElementById('nl_salutation');
                 var sal = (salEl && salEl.value) ? (salEl.value + ' ') : '';
-                var name = sal + rawName;
+                var name = sal + fullName;
                 var company = document.getElementById('nl_company').value.trim() || '—';
                 var phone = document.getElementById('nl_phone').value.trim();
                 var countryEl = document.getElementById('nl_country');
@@ -1109,12 +1111,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         source_name: sourceText,
                         last_contact: 'Just now',
                         created: 'Just now',
-                        profession: (function(){ var el = document.getElementById('nl_profession'); return el && el.value ? el.selectedOptions[0].text : null; })(),
-                        lead_score: 0,
+                        profession: (function(){ var el = document.getElementById('nl_profession') || document.getElementById('nl_industry'); return el && el.value ? el.selectedOptions[0].text : null; })(),
+                        department: (function(){ var el = document.getElementById('nl_department'); return el && el.value ? el.selectedOptions[0].text : null; })(),
+                        priority: (function(){ var el = document.getElementById('nl_priority'); return el && el.value ? el.selectedOptions[0].text : null; })(),
+                        lead_score: (function(){ var el = document.getElementById('nl_probability'); return el && el.value ? parseInt(el.value, 10) : 0; })(),
                         gst: gstVal,
-                        turnover: (function(){ var el = document.getElementById('nl_turnover'); return el && el.value.trim() ? el.value.trim() : null; })(),
-                        emp_size: (function(){ var el = document.getElementById('nl_emp_size'); return el && el.value.trim() ? el.value.trim() : null; })(),
-                        customer_type: (function(){ var el = document.getElementById('nl_cust_type'); return el && el.value ? el.selectedOptions[0].text : null; })()
+                        pan: (function(){ var el = document.getElementById('nl_pan'); return el && el.value.trim() ? el.value.trim().toUpperCase() : null; })(),
+                        turnover: (function(){ var el = document.getElementById('nl_turnover'); return el && el.value ? (el.tagName === 'SELECT' ? (el.value ? el.selectedOptions[0].text : null) : el.value.trim()) : null; })(),
+                        emp_size: (function(){ var el = document.getElementById('nl_emp_size'); return el && el.value ? (el.tagName === 'SELECT' ? (el.value ? el.selectedOptions[0].text : null) : el.value.trim()) : null; })(),
+                        customer_type: (function(){ var el = document.getElementById('nl_cust_type'); return el && el.value ? el.selectedOptions[0].text : null; })(),
+                        opt_out: document.getElementById('nl_opt_out') ? document.getElementById('nl_opt_out').checked : false
                     });
                 }
 
@@ -1155,14 +1161,24 @@ document.addEventListener('DOMContentLoaded', function() {
         var nlPocList = document.getElementById('nlPocList');
         if (nlAddPoc && nlPocList) {
             nlAddPoc.addEventListener('click', function() {
-                var row = document.createElement('div');
-                row.className = 'row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0';
-                row.innerHTML =
-                    '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name"></div>' +
-                    '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No."></div>' +
-                    '<div class="col-md-3"><input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address"></div>' +
-                    '<div class="col-md-2"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position"></div>' +
-                    '<div class="col-md-1 text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button></div>';
+                var isTbody = nlPocList.tagName === 'TBODY';
+                var row = document.createElement(isTbody ? 'tr' : 'div');
+                row.className = isTbody ? 'nl-poc-row' : 'row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0';
+                if (isTbody) {
+                    row.innerHTML =
+                        '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Name"></td>' +
+                        '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone"></td>' +
+                        '<td><input type="email" class="form-control form-control-sm rounded-2" placeholder="Email"></td>' +
+                        '<td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Role"></td>' +
+                        '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button></td>';
+                } else {
+                    row.innerHTML =
+                        '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name"></div>' +
+                        '<div class="col-md-3"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No."></div>' +
+                        '<div class="col-md-3"><input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address"></div>' +
+                        '<div class="col-md-2"><input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position"></div>' +
+                        '<div class="col-md-1 text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button></div>';
+                }
                 nlPocList.appendChild(row);
             });
             nlPocList.addEventListener('click', function(e) {

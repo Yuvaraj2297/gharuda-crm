@@ -1,5 +1,5 @@
 <?php include 'header.php'; ?>
-<link rel="stylesheet" href="./assets/css/lead.css">
+<link rel="stylesheet" href="./assets/css/lead.css?v=<?= time(); ?>">
 
 
 
@@ -897,367 +897,821 @@ window.updateLeadFilterBadge = function() {
     });
 </script>
 
+<!-- Inline Styles for Create Lead Modal (Guaranteed Zero-Cache Rendering) -->
+<style id="crmLeadModalInlineStyles">
+    #newLeadModal .nl-crm-sheet {
+        max-width: 1160px;
+        margin: 0 auto;
+        background: #ffffff;
+    }
+    #newLeadModal .crm-field-row {
+        margin-bottom: 12px;
+    }
+    #newLeadModal .crm-field-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #475569;
+        text-align: right;
+        padding-right: 12px;
+        white-space: nowrap;
+        user-select: none;
+    }
+    #newLeadModal .crm-field-label .req-star {
+        color: #ef4444;
+        font-weight: bold;
+        margin-left: 1px;
+        margin-right: 2px;
+    }
+    #newLeadModal .crm-colon {
+        color: #94a3b8;
+        font-weight: 600;
+        margin-left: 2px;
+    }
+    #newLeadModal .form-control,
+    #newLeadModal .form-select {
+        height: 38px;
+        min-height: 38px;
+        font-size: 13px;
+        border: 1px solid #c5c4d3;
+        border-radius: 5px;
+        color: #1e293b;
+        background-color: #ffffff;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    #newLeadModal textarea.form-control {
+        height: auto;
+        min-height: 60px;
+    }
+    #newLeadModal .form-control:focus,
+    #newLeadModal .form-select:focus {
+        border-color: #16a34a !important;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+        outline: none !important;
+    }
+    #newLeadModal .crm-required,
+    #newLeadModal .form-control[required] {
+        border-left: 3.5px solid #ef4444 !important;
+    }
+    #newLeadModal .crm-section-divider {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #16a34a !important;
+        padding: 8px 16px;
+        margin: 20px 0 16px 0;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #newLeadModal .crm-section-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+    #newLeadModal .crm-section-badge {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: #f0fdf4;
+        color: #16a34a;
+        border: 1px solid #bbf7d0;
+    }
+    #newLeadModal .nl-addon-user,
+    #newLeadModal .nl-addon-btn,
+    #newLeadModal .nl-info-addon {
+        background-color: #f0fdf4 !important;
+        border: 1px solid #c5c4d3 !important;
+        color: #16a34a !important;
+        width: 40px;
+        min-width: 40px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #newLeadModal .nl-addon-user svg {
+        width: 16px;
+        height: 16px;
+        stroke: #16a34a;
+    }
+    #newLeadModal .nl-currency-addon,
+    #newLeadModal .nl-addon-text {
+        background-color: #ffffff !important;
+        border: 1px solid #c5c4d3 !important;
+        color: #475569 !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        padding: 0 10px !important;
+    }
+    #newLeadModal .nl-salutation-select {
+        max-width: 105px !important;
+        flex: 0 0 105px !important;
+        border-right: 1px solid #c5c4d3 !important;
+    }
+    #newLeadModal .nl-tags-wrap {
+        min-height: 38px;
+        border: 1px solid #c5c4d3;
+        border-radius: 5px;
+        background: #ffffff;
+        padding: 4px 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #newLeadModal .nl-tags-wrap:focus-within {
+        border-color: #16a34a !important;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+    }
+    #newLeadModal .nl-tags-input {
+        border: none;
+        outline: none;
+        font-size: 13px;
+        color: #0f172a;
+        min-width: 120px;
+        flex-grow: 1;
+    }
+    @media (max-width: 575.98px) {
+        #newLeadModal .crm-field-label {
+            text-align: left !important;
+            padding-right: 0 !important;
+            margin-bottom: 4px !important;
+        }
+    }
+</style>
+
 <!-- ===== New Lead Modal ===== -->
 <div class="modal fade" id="newLeadModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-        <form id="newLeadForm" class="modal-content border-0">
-            <!-- Modal Header -->
-            <div class="modal-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center gap-3">
-                    <span class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
-                        <i class="bi bi-person-plus-fill fs-5"></i>
-                    </span>
-                    <div>
-                        <h5 class="modal-title fw-bold text-dark mb-0 fs-5" id="newLeadModalLabel">Create New Lead</h5>
-                        <div class="small text-muted"><i class="bi bi-lightning-charge text-primary me-1"></i>Capture prospect details, commercial scope, items, and site location</div>
-                    </div>
+        <form id="newLeadForm" class="modal-content border-0 bg-white">
+            <!-- Modal Header (Zoho CRM Clean Style with Top Action Buttons) -->
+            <div class="modal-header bg-white border-bottom py-2.5 px-4 d-flex justify-content-between align-items-center sticky-top shadow-xs">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted font-13">Leads</span>
+                    <span class="text-muted font-13">/</span>
+                    <h5 class="modal-title fw-bold text-dark mb-0 fs-6" id="newLeadModalLabel">Create Lead</h5>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11 ms-2">Standard Layout</span>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" id="nlFormResetBtnTop" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
+                        Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold shadow-sm" style="background-color: var(--primary, #16a34a); border-color: var(--primary, #16a34a);">
+                        Save Lead
+                    </button>
+                    <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
 
-            <!-- Modal Body (2-Section Split: Left & Right) -->
-            <div class="modal-body p-3 p-md-4 bg-light-subtle">
-                <div class="nl-body" style="max-width: 1540px; margin: 0 auto;">
-                    <div class="row g-3 g-xl-4">
+            <!-- Modal Body (Zoho CRM Open Sheet with Native Horizontal label : input) -->
+            <div class="modal-body p-3 p-md-4 p-xl-4 bg-white">
+                <div class="nl-crm-sheet">
 
-                        <!-- ==================== LEFT COLUMN: Lead Profile, Contact & Stakeholders ==================== -->
-                        <div class="col-12 col-xl-6 d-flex flex-column gap-3">
+                    <!-- SECTION 1: Lead Information -->
+                    <div class="crm-section-divider mt-0">
+                        <div class="crm-section-title">
+                            <i class="bi bi-person-badge text-primary fs-5"></i>
+                            <span>Lead Information</span>
+                        </div>
+                        <span class="crm-section-badge">Ownership &amp; Pipeline</span>
+                    </div>
 
-                            <!-- 1. Lead Classification & Ownership -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">1. Classification &amp; Assignment</h6>
-                                    </div>
-                                    <span class="badge bg-primary-subtle text-primary font-11">Pipeline Status</span>
-                                </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="row g-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_status">Status <span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <select class="form-select nl-select" id="nl_status">
-                                                    <option value="">-None-</option>
-                                                    <option selected>Lead</option>
-                                                    <option>Quotation</option>
-                                                    <option>Followup</option>
-                                                    <option>Qualified</option>
-                                                    <option>Negotiation</option>
-                                                    <option>Won</option>
-                                                    <option>Lost</option>
-                                                </select>
-                                                <button type="button" class="btn nl-addon-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_source">Source <span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <select class="form-select nl-select" id="nl_source">
-                                                    <option value="">-None-</option>
-                                                    <option selected>Direct</option>
-                                                    <option>IndiaMart</option>
-                                                    <option>Website</option>
-                                                    <option>Facebook Ads</option>
-                                                    <option>Google Ads</option>
-                                                    <option>Referral</option>
-                                                    <option>Walk-in</option>
-                                                    <option>Cold Call</option>
-                                                </select>
-                                                <button type="button" class="btn nl-addon-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_sourcer">Sourcer / Lead Gen Agent</label>
-                                            <div class="input-group">
-                                                <select class="form-select nl-select" id="nl_sourcer">
-                                                    <option value="">-None-</option>
-                                                    <option>yuva raj</option>
-                                                    <option>Harish D.</option>
-                                                    <option>Website Form</option>
-                                                    <option>Facebook Ads</option>
-                                                    <option>Referral</option>
-                                                </select>
-                                                <button type="button" class="btn nl-addon-user" title="Lookup Sourcer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                                        <circle cx="9" cy="7" r="4"></circle>
-                                                        <circle cx="19" cy="11" r="3"></circle>
-                                                        <path d="m21 13 2 2"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nlTagsInput">Tags / Labels</label>
-                                            <div class="nl-tags-wrap" id="nlTagsWrap">
-                                                <div class="nl-tags-chips" id="nlTagsChips"></div>
-                                                <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Press Enter to add tag...">
-                                            </div>
-                                            <input type="hidden" id="nl_tags" value="">
-                                        </div>
+                    <div class="row gx-4 gx-xl-5">
+                        <!-- Left Column (9 Balanced Rows) -->
+                        <div class="col-12 col-lg-6">
+                            <!-- Row 1: Lead Owner -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_assigned">
+                                    Lead Owner<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <select class="form-select nl-select" id="nl_assigned" required>
+                                            <option value="">-None-</option>
+                                            <option selected>yuva raj</option>
+                                            <option>Harish D.</option>
+                                            <option>Priya S.</option>
+                                        </select>
+                                        <button type="button" class="btn nl-addon-user" title="Lookup Sales Owner">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <circle cx="19" cy="11" r="3"></circle>
+                                                <path d="m21 13 2 2"></path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 2. Primary Contact & Company Details -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-person-lines-fill fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">2. Primary Contact &amp; Company Details</h6>
-                                    </div>
-                                    <span class="badge bg-light text-secondary border font-11">Primary SPOC</span>
-                                </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="row g-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_company">Company / Organization <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="nl_company" required placeholder="Company legal name">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_name">Contact Person Name <span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <select class="form-select input-prefix-select nl-salutation-select" id="nl_salutation" aria-label="Salutation" style="max-width: 110px; flex: 0 0 110px;">
-                                                    <option value="">-None-</option>
-                                                    <option value="Mr.">Mr.</option>
-                                                    <option value="Mrs.">Mrs.</option>
-                                                    <option value="Ms.">Ms.</option>
-                                                    <option value="Dr.">Dr.</option>
-                                                    <option value="Prof.">Prof.</option>
-                                                </select>
-                                                <input type="text" class="form-control" id="nl_name" required placeholder="Primary contact full name">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_position">Position / Designation</label>
-                                            <input type="text" class="form-control" id="nl_position" placeholder="e.g. Managing Director">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_email">Email Address</label>
-                                            <input type="email" class="form-control" id="nl_email" placeholder="contact@company.com">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_phone">Phone / WhatsApp Number</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text nl-addon-text text-muted" style="font-size: 12.5px;">+91</span>
-                                                <input type="text" class="form-control" id="nl_phone" placeholder="10-digit mobile number">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_website">Website URL</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text nl-addon-text text-muted" style="font-size: 12px;">https://</span>
-                                                <input type="url" class="form-control" id="nl_website" placeholder="example.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_date_contacted">Date Contacted</label>
-                                            <input type="date" class="form-control" id="nl_date_contacted">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_cust_type">Customer / Partnership Type</label>
-                                            <select class="form-select nl-select" id="nl_cust_type">
-                                                <option value="">-None-</option>
-                                                <option selected>Direct Customer</option>
-                                                <option>Reseller / Partner</option>
-                                                <option>System Integrator</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label" for="nl_description">Initial Requirement Notes</label>
-                                            <textarea class="form-control" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
-                                        </div>
-                                        
+                            <!-- Row 2: First Name -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_name">
+                                    First Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <select class="form-select input-prefix-select nl-salutation-select" id="nl_salutation" aria-label="Salutation">
+                                            <option value="">-None-</option>
+                                            <option value="Mr.">Mr.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                            <option value="Ms.">Ms.</option>
+                                            <option value="Dr.">Dr.</option>
+                                            <option value="Prof.">Prof.</option>
+                                        </select>
+                                        <input type="text" class="form-control crm-required" id="nl_name" required placeholder="First name">
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 3. Additional Points of Contact (POC) -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-people fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">3. Additional Points of Contact (POC)</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddPoc">
-                                        <i class="bi bi-person-plus"></i><span>Add Contact</span>
-                                    </button>
+                            <!-- Row 3: Company -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_company">
+                                    Company<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="nl_company" required placeholder="Company legal name">
                                 </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div id="nlPocList" class="d-flex flex-column gap-2">
-                                        <div class="row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0">
-                                            <div class="col-sm-6 col-md-3">
-                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name">
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No.">
-                                            </div>
-                                            <div class="col-sm-6 col-md-3">
-                                                <input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address">
-                                            </div>
-                                            <div class="col-sm-4 col-md-2">
-                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position">
-                                            </div>
-                                            <div class="col-sm-2 col-md-1 text-center">
+                            </div>
+
+                            <!-- Row 4: Title / Role -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_position">
+                                    Title / Role<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control" id="nl_position" placeholder="e.g. Managing Director">
+                                </div>
+                            </div>
+
+                            <!-- Row 5: Email -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_email">
+                                    Email<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="email" class="form-control" id="nl_email" placeholder="contact@company.com">
+                                </div>
+                            </div>
+
+                            <!-- Row 6: Mobile / Phone -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_phone">
+                                    Mobile / Phone<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text nl-addon-text">+91</span>
+                                        <input type="text" class="form-control" id="nl_phone" placeholder="10-digit mobile number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 7: Website -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_website">
+                                    Website<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text nl-addon-text" style="font-size: 12px !important;">https://</span>
+                                        <input type="url" class="form-control" id="nl_website" placeholder="example.com">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 8: Lead Source -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_source">
+                                    Lead Source<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <select class="form-select nl-select" id="nl_source">
+                                            <option value="">-None-</option>
+                                            <option selected>Direct</option>
+                                            <option>IndiaMart</option>
+                                            <option>Website</option>
+                                            <option>Facebook Ads</option>
+                                            <option>Google Ads</option>
+                                            <option>Referral</option>
+                                            <option>Walk-in</option>
+                                            <option>Cold Call</option>
+                                        </select>
+                                        <button type="button" class="btn nl-addon-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 9: Lead Sourcer -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_sourcer">
+                                    Lead Sourcer<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <select class="form-select nl-select" id="nl_sourcer">
+                                            <option value="">-None-</option>
+                                            <option selected>GHARUDA SOFTWARE</option>
+                                            <option>yuva raj</option>
+                                            <option>Harish D.</option>
+                                            <option>Website Form</option>
+                                            <option>Facebook Ads</option>
+                                            <option>Referral</option>
+                                        </select>
+                                        <button type="button" class="btn nl-addon-user" title="Lookup Sourcer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <circle cx="19" cy="11" r="3"></circle>
+                                                <path d="m21 13 2 2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column (9 Balanced Rows) -->
+                        <div class="col-12 col-lg-6">
+                            <!-- Row 1: Lead Status -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_status">
+                                    Lead Status<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <select class="form-select nl-select" id="nl_status">
+                                            <option value="">-None-</option>
+                                            <option selected>Lead</option>
+                                            <option>Quotation</option>
+                                            <option>Followup</option>
+                                            <option>Qualified</option>
+                                            <option>Negotiation</option>
+                                            <option>Won</option>
+                                            <option>Lost</option>
+                                        </select>
+                                        <button type="button" class="btn nl-addon-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Last Name -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_last_name">
+                                    Last Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="nl_last_name" placeholder="Last name / Surname">
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Customer Type -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_cust_type">
+                                    Customer Type<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_cust_type">
+                                        <option value="">-None-</option>
+                                        <option selected>Direct Customer</option>
+                                        <option>Reseller / Partner</option>
+                                        <option>System Integrator</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 4: Department -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_department">
+                                    Department<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_department">
+                                        <option value="">-None-</option>
+                                        <option selected>IT &amp; Software Solutions</option>
+                                        <option>Executive Management</option>
+                                        <option>Procurement &amp; Purchase</option>
+                                        <option>Operations &amp; Plant</option>
+                                        <option>Human Resources (HR)</option>
+                                        <option>Finance &amp; Accounts</option>
+                                        <option>Sales &amp; Marketing</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 5: Other Phone -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_alt_phone">
+                                    Other Phone<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text nl-addon-text"><i class="bi bi-telephone"></i></span>
+                                        <input type="text" class="form-control" id="nl_alt_phone" placeholder="Landline or alternate phone">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 6: Industry -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_industry">
+                                    Industry<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_industry">
+                                        <option value="">-None-</option>
+                                        <option selected>IT &amp; Software Solutions</option>
+                                        <option>Manufacturing &amp; Engineering</option>
+                                        <option>Healthcare &amp; Pharmaceuticals</option>
+                                        <option>Retail &amp; E-commerce</option>
+                                        <option>Construction &amp; Real Estate</option>
+                                        <option>Education &amp; Training</option>
+                                        <option>BFSI &amp; Financial Services</option>
+                                        <option>Logistics &amp; Supply Chain</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 7: Priority / Rating -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_priority">
+                                    Lead Rating<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_priority">
+                                        <option value="">-None-</option>
+                                        <option selected>🔥 Hot Lead (High Urgency)</option>
+                                        <option>⚡ Warm Lead (Medium)</option>
+                                        <option>❄️ Cold Lead (Low)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 8: Qualification Stage -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_qualification">
+                                    Qualification<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_qualification">
+                                        <option value="">-None-</option>
+                                        <option selected>Sales Qualified Lead (SQL)</option>
+                                        <option>Marketing Qualified Lead (MQL)</option>
+                                        <option>Unqualified Lead</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 9: Date Contacted -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_date_contacted">
+                                    Date Contacted<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="date" class="form-control" id="nl_date_contacted">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Width Details in Section 1 (Aligned with col-sm-2 : col-sm-10) -->
+                        <div class="col-12 mt-1">
+                            <div class="row align-items-start crm-field-row">
+                                <label class="col-sm-2 col-form-label text-sm-end pt-2 crm-field-label" for="nlTagsInput">
+                                    Tags / Labels<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-10 crm-field-control">
+                                    <div class="nl-tags-wrap" id="nlTagsWrap">
+                                        <div class="nl-tags-chips" id="nlTagsChips"></div>
+                                        <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Press Enter to add tag...">
+                                    </div>
+                                    <input type="hidden" id="nl_tags" value="">
+                                </div>
+                            </div>
+
+                            <div class="row align-items-start crm-field-row">
+                                <label class="col-sm-2 col-form-label text-sm-end pt-2 crm-field-label" for="nl_description">
+                                    Description<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-10 crm-field-control">
+                                    <textarea class="form-control" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center crm-field-row">
+                                <span class="col-sm-2 col-form-label text-sm-end crm-field-label">
+                                    Lead Options<span class="crm-colon">:</span>
+                                </span>
+                                <div class="col-sm-10 crm-field-control">
+                                    <div class="d-flex flex-wrap gap-4 pt-1">
+                                        <div class="form-check form-switch mb-0">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_public">
+                                            <label class="form-check-label text-dark small fw-semibold" for="nl_public">Public Lead (Visible to team)</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-0">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_contacted_today">
+                                            <label class="form-check-label text-dark small fw-semibold" for="nl_contacted_today">Mark as Contacted Today</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-0">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="nl_opt_out">
+                                            <label class="form-check-label text-dark small fw-semibold" for="nl_opt_out">Email Opt Out (GDPR / DND)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SECTION 2: Commercial Estimation & Timeline -->
+                    <div class="crm-section-divider">
+                        <div class="crm-section-title">
+                            <i class="bi bi-currency-rupee text-primary fs-5"></i>
+                            <span>Commercial Scope &amp; Estimation</span>
+                        </div>
+                        <span class="crm-section-badge">Deal &amp; Forecast</span>
+                    </div>
+
+                    <div class="row gx-4 gx-xl-5">
+                        <div class="col-12 col-lg-6">
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_value">
+                                    Expected Value<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text nl-currency-addon">Rs.</span>
+                                        <input type="number" class="form-control" id="nl_value" placeholder="0.00" step="0.01">
+                                        <span class="input-group-text nl-info-addon" title="Estimated deal or quotation value in INR" data-bs-toggle="tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_product">
+                                    Product/Scope<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_product">
+                                        <option value="">-None-</option>
+                                        <option selected>HRMS Subscription &amp; Licenses</option>
+                                        <option>Payroll Module Add-on</option>
+                                        <option>Biometric Attendance System</option>
+                                        <option>Custom ERP Development</option>
+                                        <optgroup label="Hardware &amp; IoT Solutions">
+                                            <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                            <option value="Industrial Barcode &amp; POS Kit">Industrial Barcode &amp; POS Kit</option>
+                                            <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_enquiry_code">
+                                    Enquiry Code<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control bg-light text-muted fw-semibold" id="nl_enquiry_code" value="ENQ-0171" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_probability">
+                                    Deal Probability<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_probability">
+                                        <option value="">-None-</option>
+                                        <option value="10">10% – Prospecting</option>
+                                        <option value="25">25% – Requirements Defined</option>
+                                        <option value="50" selected>50% – Proposal / Quote Sent</option>
+                                        <option value="75">75% – Negotiation / Review</option>
+                                        <option value="90">90% – Verbal Agreement</option>
+                                        <option value="100">100% – Closed Won</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_sales_term">
+                                    Sales Cycle<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_sales_term">
+                                        <option value="">-None-</option>
+                                        <option value="Immediate" selected>Immediate (&lt; 15 Days)</option>
+                                        <option value="Short Term">Short Term (1 Month)</option>
+                                        <option value="Medium Term">Medium Term (2–3 Months)</option>
+                                        <option value="Long Term">Long Term (&gt; 3 Months)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_closure_date">
+                                    Target Closure<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="date" class="form-control" id="nl_closure_date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SECTION 3: Additional Points of Contact & Enquired Items -->
+                    <div class="row gx-4 gx-xl-5 mt-2">
+                        <!-- Points of Contact Table -->
+                        <div class="col-12 col-xl-6 mb-4">
+                            <div class="crm-section-divider">
+                                <div class="crm-section-title">
+                                    <i class="bi bi-people text-primary fs-5"></i>
+                                    <span>Points of Contact (POC)</span>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddPoc">
+                                    <i class="bi bi-person-plus"></i><span>Add Contact</span>
+                                </button>
+                            </div>
+                            <div class="table-responsive border rounded-2">
+                                <table class="table table-hover align-middle mb-0 font-13">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 28%;">Contact Name</th>
+                                            <th style="width: 25%;">Phone No.</th>
+                                            <th style="width: 27%;">Email Address</th>
+                                            <th style="width: 12%;">Role</th>
+                                            <th style="width: 8%;" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="nlPocList">
+                                        <tr class="nl-poc-row">
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Name"></td>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone"></td>
+                                            <td><input type="email" class="form-control form-control-sm rounded-2" placeholder="Email"></td>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Role"></td>
+                                            <td class="text-center">
                                                 <button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button>
-                                            </div>
-                                        </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Enquired Items Table -->
+                        <div class="col-12 col-xl-6 mb-4">
+                            <div class="crm-section-divider">
+                                <div class="crm-section-title">
+                                    <i class="bi bi-box-seam text-primary fs-5"></i>
+                                    <span>Enquired Products &amp; Items</span>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
+                                    <i class="bi bi-plus-lg"></i><span>Add Item</span>
+                                </button>
+                            </div>
+                            <div class="table-responsive border rounded-2">
+                                <table class="table table-hover align-middle mb-0 font-13">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 25%;">Item Code</th>
+                                            <th style="width: 45%;">Item Name / Specification</th>
+                                            <th style="width: 18%;" class="text-center">Qty</th>
+                                            <th style="width: 12%;" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="nlItemBody">
+                                        <tr>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
+                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
+                                            <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SECTION 4: Profile & Compliance & Location -->
+                    <div class="crm-section-divider">
+                        <div class="crm-section-title">
+                            <i class="bi bi-geo-alt text-primary fs-5"></i>
+                            <span>Financial Compliance &amp; Address Information</span>
+                        </div>
+                        <span class="crm-section-badge">Tax &amp; Location</span>
+                    </div>
+
+                    <div class="row gx-4 gx-xl-5">
+                        <!-- Left Column (4 Rows) -->
+                        <div class="col-12 col-lg-6">
+                            <!-- Row 1: GST -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_gst">
+                                    GST Number<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
+                                        <span class="input-group-text nl-info-addon" title="15-character GSTIN format: 22AAAAA0000A1Z5" data-bs-toggle="tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                            </svg>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
 
-                        </div><!-- /col-xl-6 Left -->
-
-                        <!-- ==================== RIGHT COLUMN: Commercial, Items, Location & Compliance ==================== -->
-                        <div class="col-12 col-xl-6 d-flex flex-column gap-3">
-
-                            <!-- 4. Commercial Estimation & Timeline -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-currency-rupee fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">4. Commercial Estimation &amp; Timeline</h6>
-                                    </div>
-                                    <span class="badge bg-primary-subtle text-primary font-11">Commercial Scope</span>
-                                </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="row g-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_value">Expected Lead Value</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text nl-currency-addon">Rs.</span>
-                                                <input type="number" class="form-control" id="nl_value" placeholder="0.00" step="0.01">
-                                                <span class="input-group-text nl-info-addon" title="Estimated deal or quotation value in INR" data-bs-toggle="tooltip">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_product">Primary Product / Solution</label>
-                                            <select class="form-select nl-select" id="nl_product">
-                                                <option value="">-None-</option>
-                                                <option selected>HRMS Subscription &amp; Licenses</option>
-                                                <option>Payroll Module Add-on</option>
-                                                <option>Biometric Attendance System</option>
-                                                <option>Custom ERP Development</option>
-                                                <optgroup label="Hardware &amp; IoT Solutions">
-                                                    <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
-                                                    <option value="Industrial Barcode &amp; POS Kit">Industrial Barcode &amp; POS Kit</option>
-                                                    <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_closure_date">Target Closure Date</label>
-                                            <input type="date" class="form-control" id="nl_closure_date">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_enquiry_code">Enquiry Reference Code</label>
-                                            <input type="text" class="form-control bg-light text-muted fw-semibold" id="nl_enquiry_code" value="ENQ-0171" readonly>
-                                        </div>
-                                    </div>
+                            <!-- Row 2: PAN -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_pan">
+                                    PAN / Tax ID<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <input type="text" class="form-control text-uppercase" id="nl_pan" placeholder="e.g. ABCDE1234F" maxlength="10">
                                 </div>
                             </div>
 
-                            <!-- 5. Enquired Products & Items -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-box-seam fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">5. Enquired Products &amp; Items</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
-                                        <i class="bi bi-plus-lg"></i><span>Add Item</span>
-                                    </button>
-                                </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="table-responsive border rounded-2">
-                                        <table class="table table-hover align-middle mb-0 font-13">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th style="width: 25%;">Item Code</th>
-                                                    <th style="width: 45%;">Item Name / Specification</th>
-                                                    <th style="width: 18%;" class="text-center">Qty</th>
-                                                    <th style="width: 12%;" class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="nlItemBody">
-                                                <tr>
-                                                    <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
-                                                    <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
-                                                    <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
-                                                    <td class="text-center">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <!-- Row 3: Turnover -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_turnover">
+                                    Annual Turnover<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_turnover">
+                                        <option value="">-None-</option>
+                                        <option>&lt; ₹50 Lakhs</option>
+                                        <option>₹50 Lakhs – ₹1 Cr</option>
+                                        <option>₹1 Cr – ₹5 Cr</option>
+                                        <option selected>₹5 Cr – ₹10 Cr</option>
+                                        <option>₹10 Cr – ₹50 Cr</option>
+                                        <option>&gt; ₹50 Cr</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            <!-- 6. Profile & Financial Compliance -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-building-check fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">6. Profile &amp; Financial Compliance</h6>
-                                    </div>
-                                    <span class="badge bg-light text-secondary border font-11">Tax &amp; Scale</span>
+                            <!-- Row 4: Employee Size -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_emp_size">
+                                    Employee Size<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <select class="form-select nl-select" id="nl_emp_size">
+                                        <option value="">-None-</option>
+                                        <option>1 – 10 Employees</option>
+                                        <option>11 – 50 Employees</option>
+                                        <option selected>51 – 200 Employees</option>
+                                        <option>201 – 500 Employees</option>
+                                        <option>500+ Employees</option>
+                                    </select>
                                 </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="row g-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_gst">Company GST Number</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
-                                                <span class="input-group-text nl-info-addon" title="15-character GSTIN format: 22AAAAA0000A1Z5" data-bs-toggle="tooltip">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_turnover">Annual Turnover</label>
-                                            <input type="text" class="form-control" id="nl_turnover" placeholder="e.g. ₹5 Cr – ₹10 Cr">
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label" for="nl_emp_size">Employee Size</label>
-                                            <input type="text" class="form-control" id="nl_emp_size" placeholder="e.g. 51 – 200 Employees">
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column (4 Balanced Rows) -->
+                        <div class="col-12 col-lg-6">
+                            <!-- Row 1: Address -->
+                            <div class="row align-items-start crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end pt-2 crm-field-label" for="nl_address">
+                                    Street Address<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <textarea class="form-control" id="nl_address" rows="2" placeholder="Office / Site address"></textarea>
                                 </div>
                             </div>
 
-                            <!-- 7. Location & Site Address -->
-                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
-                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-geo-alt fs-6"></i></span>
-                                        <h6 class="fw-bold text-dark m-0 font-14">7. Location &amp; Site Address</h6>
-                                    </div>
-                                    <span class="badge bg-light text-secondary border font-11">Geo Location</span>
-                                </div>
-                                <div class="card-body p-3 p-md-4">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label class="form-label" for="nl_address">Full Street Address</label>
-                                            <textarea class="form-control" id="nl_address" rows="1" placeholder="Office / Site address"></textarea>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label class="form-label" for="nl_country">Country</label>
+                            <!-- Row 2: Country & State -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_country">
+                                    Country/State<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="row g-2">
+                                        <div class="col-6">
                                             <select class="form-select nl-select" id="nl_country">
-                                                <option value="">-None-</option>
+                                                <option value="">-Country-</option>
                                                 <option selected>India</option>
                                                 <option>United States</option>
                                                 <option>United Kingdom</option>
@@ -1265,10 +1719,9 @@ window.updateLeadFilterBadge = function() {
                                                 <option>Singapore</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <label class="form-label" for="nl_state">State</label>
+                                        <div class="col-6">
                                             <select class="form-select nl-select" id="nl_state">
-                                                <option value="">-None-</option>
+                                                <option value="">-State-</option>
                                                 <option selected>Tamil Nadu</option>
                                                 <option>Karnataka</option>
                                                 <option>Maharashtra</option>
@@ -1277,10 +1730,20 @@ window.updateLeadFilterBadge = function() {
                                                 <option>Telangana</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <label class="form-label" for="nl_city">City</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: City & Area -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_city">
+                                    City &amp; Area<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="row g-2">
+                                        <div class="col-6">
                                             <select class="form-select nl-select" id="nl_city">
-                                                <option value="">-None-</option>
+                                                <option value="">-City-</option>
                                                 <option selected>Chennai</option>
                                                 <option>Bangalore</option>
                                                 <option>Mumbai</option>
@@ -1288,48 +1751,54 @@ window.updateLeadFilterBadge = function() {
                                                 <option>Coimbatore</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_area">Area / Locality</label>
-                                            <input type="text" class="form-control" id="nl_area" placeholder="e.g. Anna Nagar, Guindy">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_zip">Zip / PIN Code</label>
-                                            <input type="text" class="form-control" id="nl_zip" placeholder="e.g. 600001">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_lat">Latitude (GPS)</label>
-                                            <input type="text" class="form-control" id="nl_lat" placeholder="e.g. 13.0827">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="form-label" for="nl_lng">Longitude (GPS)</label>
-                                            <input type="text" class="form-control" id="nl_lng" placeholder="e.g. 80.2707">
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" id="nl_area" placeholder="Area / Locality">
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        </div><!-- /col-xl-6 Right -->
+                            <!-- Row 4: PIN & GPS -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_zip">
+                                    PIN &amp; GPS<span class="crm-colon">:</span>
+                                </label>
+                                <div class="col-sm-8 crm-field-control">
+                                    <div class="row g-2">
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" id="nl_zip" placeholder="PIN Code">
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" id="nl_lat" placeholder="Latitude">
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" id="nl_lng" placeholder="Longitude">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    </div><!-- /row -->
-                </div><!-- /nl-body -->
+                </div><!-- /nl-crm-sheet -->
             </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer bg-white border-top py-2.5 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <!-- Modal Footer (Sticky Bottom Action Bar) -->
+            <div class="modal-footer bg-white border-top py-2.5 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2 sticky-bottom">
                 <div class="d-flex align-items-center gap-3 text-muted small">
-                    <span><i class="bi bi-shield-check text-success me-1"></i>Fields marked with <span class="text-danger fw-bold">*</span> are required</span>
+                    <span><i class="bi bi-shield-check text-success me-1"></i>Fields marked with <span class="text-danger fw-bold">*</span> (red border) are required</span>
                     <span class="d-none d-md-inline text-muted">&bull;</span>
-                    <span class="d-none d-md-inline"><i class="bi bi-check2-circle text-primary me-1"></i>2-Column Split View</span>
+                    <span class="d-none d-md-inline text-primary fw-medium"><i class="bi bi-check2-circle me-1"></i>Gharuda CRM Enterprise Layout</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-semibold" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg me-1"></i>Cancel
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" data-bs-dismiss="modal">
+                        Cancel
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm px-3 fw-semibold" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
-                        <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
+                        Reset
                     </button>
-                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold shadow-sm">
-                        <i class="bi bi-check-lg me-1"></i>Save Lead
+                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold shadow-sm" style="background-color: var(--primary, #16a34a); border-color: var(--primary, #16a34a);">
+                        Save Lead
                     </button>
                 </div>
             </div>

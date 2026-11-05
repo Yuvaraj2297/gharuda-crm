@@ -1624,3 +1624,118 @@
             border-radius: 12px;
             box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28) !important;
         }
+
+/* ========================================================
+   ZOHO CRM ULTRA-CLEAN HORIZONTAL FORM LAYOUT (WIREFRAME ENGINE)
+   ======================================================== */
+#newLeadModal .nl-crm-sheet {
+    max-width: 1220px !important;
+    margin: 0 auto !important;
+    background-color: #ffffff !important;
+}
+
+#newLeadModal .crm-field-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    margin-bottom: 12px !important;
+    min-height: 38px !important;
+    width: 100% !important;
+}
+
+#newLeadModal .crm-field-row.align-items-start {
+    align-items: flex-start !important;
+}
+
+#newLeadModal .crm-field-label {
+    flex: 0 0 145px !important;
+    width: 145px !important;
+    max-width: 145px !important;
+    min-width: 145px !important;
+    text-align: right !important;
+    margin-bottom: 0 !important;
+    padding-right: 14px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #475569 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    user-select: none !important;
+    display: block !important;
+}
+
+#newLeadModal .crm-field-label .req-star {
+    color: #ef4444 !important;
+    font-weight: 700 !important;
+    margin-left: 2px !important;
+}
+
+#newLeadModal .crm-field-control {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+}
+
+/* Zoho CRM Red indicator bar for required fields */
+#newLeadModal .form-control[required],
+#newLeadModal .crm-required {
+    border-left: 3px solid #ef4444 !important;
+}
+
+/* Zoho CRM Section Dividers */
+#newLeadModal .crm-section-divider {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid var(--primary, #16a34a) !important;
+    padding: 8px 16px !important;
+    margin: 22px 0 16px 0 !important;
+    border-radius: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+#newLeadModal .crm-section-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+}
+
+#newLeadModal .crm-section-badge {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    background: #f0fdf4 !important;
+    color: #16a34a !important;
+    border: 1px solid #bbf7d0 !important;
+    display: inline-block !important;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 767.98px) {
+    #newLeadModal .crm-field-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        margin-bottom: 12px !important;
+    }
+    #newLeadModal .crm-field-label {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        text-align: left !important;
+        padding-right: 0 !important;
+        margin-bottom: 4px !important;
+    }
+    #newLeadModal .crm-field-control {
+        width: 100% !important;
+    }
+}
