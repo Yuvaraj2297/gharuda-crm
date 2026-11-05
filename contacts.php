@@ -4,8 +4,14 @@
 <main class="container-fluid px-0">
     <!-- Page Header (Single-row clean header) -->
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
-        <div>
-            <h1 class="font-display fw-bold mb-0 page-title">Contacts Directory</h1>
+        <div class="d-flex align-items-center gap-2.5">
+            <span class="icon-chip bg-primary-subtle text-primary">
+                <i class="bi bi-people"></i>
+            </span>
+            <div>
+                <h1 class="font-display fw-bold mb-0 page-title">Contacts Directory</h1>
+                <span class="text-muted font-11">Manage customer decision makers, SPOCs, and account contacts</span>
+            </div>
         </div>
         <div class="d-flex align-items-center flex-wrap gap-2">
             <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" data-bs-toggle="offcanvas" data-bs-target="#contactFilterOffcanvas" aria-controls="contactFilterOffcanvas" title="Filter Contacts">
@@ -51,10 +57,10 @@
                     <tr data-company="Power Spares Engineering" data-role="Managing Director" data-status="active">
                         <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">MS</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">MS</span>
                                 <div>
                                     <div class="fw-bold text-dark font-13">MOHAN S</div>
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle font-11">Primary SPOC</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Primary SPOC</span>
                                 </div>
                             </div>
                         </td>
@@ -80,7 +86,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
                                     <li>
                                         <a class="dropdown-item" href="whatsapp-chat.php">
-                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-whatsapp"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
                                                 <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
@@ -89,7 +95,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="mailto:kaviyarasu@ghratechnology.com">
-                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-envelope"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Send Email</div>
                                                 <div class="text-muted" style="font-size: 10px;">Compose message</div>
@@ -98,7 +104,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="quotation-create.php?client=Power+Spares+Engineering">
-                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-file-earmark-text"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Create Quotation</div>
                                                 <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
@@ -122,7 +128,7 @@
                     <tr data-company="Zen Publications" data-role="Project Manager" data-status="active">
                         <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-primary text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">KM</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">KM</span>
                                 <div>
                                     <div class="fw-bold text-dark font-13">Kaviyarasu M</div>
                                     <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Decision Maker</span>
@@ -151,7 +157,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
                                     <li>
                                         <a class="dropdown-item" href="whatsapp-chat.php">
-                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-whatsapp"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
                                                 <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
@@ -160,7 +166,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="mailto:kaviyarasu@gmail.com">
-                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-envelope"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Send Email</div>
                                                 <div class="text-muted" style="font-size: 10px;">Compose message</div>
@@ -169,7 +175,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="quotation-create.php?client=Zen+Publications">
-                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-file-earmark-text"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Create Quotation</div>
                                                 <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
@@ -193,10 +199,10 @@
                     <tr data-company="Hindustan Hydraulics" data-role="Operations Head" data-status="active">
                         <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-info text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">SB</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">SB</span>
                                 <div>
                                     <div class="fw-bold text-dark font-13">Suresh Babu</div>
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle font-11">Operations</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Operations</span>
                                 </div>
                             </div>
                         </td>
@@ -222,7 +228,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
                                     <li>
                                         <a class="dropdown-item" href="whatsapp-chat.php">
-                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-whatsapp"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
                                                 <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
@@ -231,7 +237,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="mailto:suresh@hindustanhydraulics.com">
-                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-envelope"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Send Email</div>
                                                 <div class="text-muted" style="font-size: 10px;">Compose message</div>
@@ -240,7 +246,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="quotation-create.php?client=Hindustan+Hydraulics">
-                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-file-earmark-text"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Create Quotation</div>
                                                 <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
@@ -264,10 +270,10 @@
                     <tr data-company="GG COMPANY" data-role="Finance & Accounts" data-status="active">
                         <td class="ps-4">
                             <div class="d-flex align-items-center gap-2">
-                                <span class="badge rounded-circle bg-warning text-dark p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">PS</span>
+                                <span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">PS</span>
                                 <div>
                                     <div class="fw-bold text-dark font-13">Priya S</div>
-                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle font-11">Finance SPOC</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Finance SPOC</span>
                                 </div>
                             </div>
                         </td>
@@ -293,7 +299,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">
                                     <li>
                                         <a class="dropdown-item" href="whatsapp-chat.php">
-                                            <div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-whatsapp"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">WhatsApp Chat</div>
                                                 <div class="text-muted" style="font-size: 10px;">Direct messaging</div>
@@ -302,7 +308,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="mailto:priya@ggcompany.com">
-                                            <div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-envelope"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Send Email</div>
                                                 <div class="text-muted" style="font-size: 10px;">Compose message</div>
@@ -311,7 +317,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="quotation-create.php?client=GG+COMPANY">
-                                            <div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-file-earmark-text"></i></div>
                                             <div>
                                                 <div class="fw-semibold text-dark font-12">Create Quotation</div>
                                                 <div class="text-muted" style="font-size: 10px;">Generate proposal</div>
@@ -485,8 +491,8 @@ function saveGlobalContact() {
 
     tr.innerHTML =
         '<td class="ps-4"><div class="d-flex align-items-center gap-2">' +
-            '<span class="badge rounded-circle bg-success text-white p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">' + initials + '</span>' +
-            '<div><div class="fw-bold text-dark font-13">' + name + '</div><span class="badge bg-success-subtle text-success border border-success-subtle font-11">Verified SPOC</span></div>' +
+            '<span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">' + initials + '</span>' +
+            '<div><div class="fw-bold text-dark font-13">' + name + '</div><span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Verified SPOC</span></div>' +
         '</div></td>' +
         '<td><a href="customer-view.php?id=1&name=' + encComp + '" class="text-dark fw-semibold text-decoration-none"><i class="bi bi-building me-1 text-muted"></i>' + company + '</a></td>' +
         '<td><a href="mailto:' + email + '" class="text-secondary text-decoration-none">' + email + '</a></td>' +
@@ -500,9 +506,9 @@ function saveGlobalContact() {
                     'Actions' +
                 '</button>' +
                 '<ul class="dropdown-menu dropdown-menu-end shadow border table-action-menu">' +
-                    '<li><a class="dropdown-item" href="whatsapp-chat.php"><div class="action-icon-pill bg-success-subtle text-success"><i class="bi bi-whatsapp"></i></div><div><div class="fw-semibold text-dark font-12">WhatsApp Chat</div><div class="text-muted" style="font-size: 10px;">Direct messaging</div></div></a></li>' +
-                    '<li><a class="dropdown-item" href="mailto:' + email + '"><div class="action-icon-pill bg-secondary-subtle text-secondary"><i class="bi bi-envelope"></i></div><div><div class="fw-semibold text-dark font-12">Send Email</div><div class="text-muted" style="font-size: 10px;">Compose message</div></div></a></li>' +
-                    '<li><a class="dropdown-item" href="quotation-create.php?client=' + encComp + '"><div class="action-icon-pill bg-info-subtle text-info"><i class="bi bi-file-earmark-text"></i></div><div><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Generate proposal</div></div></a></li>' +
+                    '<li><a class="dropdown-item" href="whatsapp-chat.php"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-whatsapp"></i></div><div><div class="fw-semibold text-dark font-12">WhatsApp Chat</div><div class="text-muted" style="font-size: 10px;">Direct messaging</div></div></a></li>' +
+                    '<li><a class="dropdown-item" href="mailto:' + email + '"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-envelope"></i></div><div><div class="fw-semibold text-dark font-12">Send Email</div><div class="text-muted" style="font-size: 10px;">Compose message</div></div></a></li>' +
+                    '<li><a class="dropdown-item" href="quotation-create.php?client=' + encComp + '"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-file-earmark-text"></i></div><div><div class="fw-semibold text-dark font-12">Create Quotation</div><div class="text-muted" style="font-size: 10px;">Generate proposal</div></div></a></li>' +
                     '<li><hr class="dropdown-divider my-1"></li>' +
                     '<li><a class="dropdown-item" href="customer-view.php?id=1&name=' + encComp + '"><div class="action-icon-pill bg-primary-subtle text-primary"><i class="bi bi-person-vcard"></i></div><div><div class="fw-semibold text-dark font-12">Customer 360&deg;</div><div class="text-muted" style="font-size: 10px;">View full client profile</div></div></a></li>' +
                 '</ul>' +

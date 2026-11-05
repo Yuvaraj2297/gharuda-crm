@@ -9,14 +9,14 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
 
 
 <main class="projects-wrapper pb-5">
-    <div class="container-fluid px-3 px-md-4">
+    <div class="container-fluid px-0">
         <!-- Page Header & Action Bar -->
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
             <!-- LEFT: Icon badge + Title + Subtitle -->
             <div class="d-flex align-items-center gap-2.5">
-                <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:36px;height:36px;font-size:18px;">
+                <span class="icon-chip bg-primary-subtle text-primary">
                     <i class="bi bi-briefcase"></i>
-                </div>
+                </span>
                 <div>
                     <h1 class="font-display fw-bold mb-0 page-title">Projects</h1>
                     <span class="text-muted font-11">Manage and track all client &amp; internal projects</span>
@@ -24,55 +24,27 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
             </div>
 
             <!-- CENTER: Tab Switcher (Directory vs Dashboard) -->
-            <div class="btn-group btn-group-sm p-1 bg-light rounded-pill border" role="group" id="projectViewSwitcher">
-                <button type="button" class="btn btn-sm rounded-pill px-3 py-1 fw-semibold <?= $currentView === 'list' ? 'btn-primary' : 'text-secondary' ?>" id="viewTabList" onclick="switchProjectView('list')">
-                    <i class="bi bi-list-task me-1"></i> Projects List
+            <div class="btn-group btn-group-sm" role="group" id="projectViewSwitcher">
+                <button type="button" class="btn btn-outline-primary font-12 fw-semibold px-3 <?= $currentView === 'list' ? 'active' : '' ?>" id="viewTabList" onclick="switchProjectView('list')">
+                    <i class="bi bi-list-task me-1"></i>Projects List
                 </button>
-                <button type="button" class="btn btn-sm rounded-pill px-3 py-1 fw-semibold <?= $currentView === 'dashboard' ? 'btn-primary' : 'text-secondary' ?>" id="viewTabDashboard" onclick="switchProjectView('dashboard')">
-                    <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                <button type="button" class="btn btn-outline-primary font-12 fw-semibold px-3 <?= $currentView === 'dashboard' ? 'active' : '' ?>" id="viewTabDashboard" onclick="switchProjectView('dashboard')">
+                    <i class="bi bi-speedometer2 me-1"></i>Dashboard
                 </button>
             </div>
             
             <!-- RIGHT: Actions -->
             <div class="d-flex align-items-center flex-wrap gap-2">
-                <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#projListFilterOffcanvas" id="btnProjFilters" <?= $currentView === 'dashboard' ? 'style="display:none;"' : '' ?>>
+                <button class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#projListFilterOffcanvas" id="btnProjFilters" <?= $currentView === 'dashboard' ? 'style="display:none;"' : '' ?>>
                     <i class="bi bi-funnel"></i><span>Filters</span>
-                    <span class="badge bg-primary rounded-pill d-none" id="projListFilterCountBadge">0</span>
+                    <span class="badge bg-primary text-white rounded-pill px-1.5 py-0.5 d-none font-11" id="projListFilterCountBadge">0</span>
                 </button>
-                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1" onclick="window.print()">
+                <button type="button" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-2.5" onclick="window.print()">
                     <i class="bi bi-printer"></i><span>Print</span>
                 </button>
-                
-                <!-- Best Create Action: 1-click primary + quick dropdown -->
-                <div class="btn-group">
-                    <a href="project-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
-                        <i class="bi bi-plus-lg"></i><span>New Project</span>
-                    </a>
-                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 font-13">
-                        <li>
-                            <a class="dropdown-item py-2 d-flex align-items-center gap-2" href="project-create.php">
-                                <i class="bi bi-folder-plus text-primary"></i>
-                                <div>
-                                    <div class="fw-semibold">Create Full Project</div>
-                                    <div class="text-muted font-11">Define deliverables, client, milestones & budget</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-1"></li>
-                        <li>
-                            <button type="button" class="dropdown-item py-2 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#newProjectModal">
-                                <i class="bi bi-lightning-charge text-success"></i>
-                                <div>
-                                    <div class="fw-semibold">Quick Add Modal</div>
-                                    <div class="text-muted font-11">Instant project creation with essential fields</div>
-                                </div>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                <a href="project-create.php" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold px-3">
+                    <i class="bi bi-plus-lg"></i><span>New Project</span>
+                </a>
             </div>
         </div>
 
@@ -201,7 +173,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Member 1">M1</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Member 1">M1</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -210,8 +182,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('bel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('bel')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('bel', 'GHARUDA')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('bel')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('bel', 'GHARUDA')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('bel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -220,27 +192,27 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">2</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-circle p-2">S</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">S</span>
                                     <span>Sugar Test</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Asif</td>
-                            <td><span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded-2">Testing</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Testing</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
                             <td class="fw-semibold text-secondary">29-04-2026</td>
                             <td class="fw-semibold text-secondary">29-09-2027</td>
                             <td>
-                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
+                                <span class="remaining-tag badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2 active">
                                     <i class="bi bi-clock-history me-1"></i> 370 days remaining
                                 </span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 1">D1</span>
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 2">D2</span>
-                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 3">D3</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 1">D1</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 2">D2</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Dev 3">D3</span>
                                     <span class="badge bg-light border text-muted rounded-circle p-2" data-bs-toggle="tooltip" title="+10">+10</span>
                                 </div>
                             </td>
@@ -250,8 +222,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Sugar Test')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Sugar Test')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Sugar Test', 'Asif')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Sugar Test')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Sugar Test', 'Asif')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Sugar Test')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -260,14 +232,14 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">3</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">S</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">S</span>
                                     <span>Solar Panel Installation</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Sundar Arumugam</td>
-                            <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle px-2 py-1 rounded-2">Solar</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Solar</span></td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">05-05-2026</td>
                             <td class="fw-semibold text-secondary">05-06-2026</td>
@@ -278,8 +250,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Sundar">SA</span>
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Arun">AR</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Sundar">SA</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Arun">AR</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -288,8 +260,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Solar Panel Installation')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Solar Panel Installation')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Solar Panel Installation', 'Sundar Arumugam')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Solar Panel Installation')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Solar Panel Installation', 'Sundar Arumugam')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Solar Panel Installation')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -298,12 +270,12 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">4</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">C</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">C</span>
                                     <span>Check and Charge</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Hindustan Hydraulics & Pneumatics</td>
-                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Maintenance</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Maintenance</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
@@ -316,7 +288,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Hindustan">HH</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Hindustan">HH</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -325,8 +297,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Check and Charge')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Check and Charge')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Check and Charge', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Check and Charge')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Check and Charge', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Check and Charge')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -335,14 +307,14 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">5</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-circle p-2">C</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">C</span>
                                     <span>Construction project</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">GHARUDA soft</td>
-                            <td><span class="badge bg-primary-subtle text-primary border px-2 py-1 rounded-2">Civil</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">Civil</span></td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">14-02-2026</td>
                             <td class="fw-semibold text-secondary">30-04-2026</td>
@@ -353,7 +325,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-danger-subtle text-danger rounded-circle p-2" data-bs-toggle="tooltip" title="GHARUDA Dev">KS</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="GHARUDA Dev">KS</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -362,8 +334,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Construction project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Construction project')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Construction project', 'GHARUDA soft')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Construction project')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Construction project', 'GHARUDA soft')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Construction project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -372,12 +344,12 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">6</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-circle p-2">R</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">R</span>
                                     <span>RBR Arch</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Hindustan Hydraulics & Pneumatics</td>
-                            <td><span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded-2">Architecture</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Architecture</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
@@ -390,7 +362,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Arch Team">RA</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Arch Team">RA</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -399,8 +371,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('RBR Arch')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('RBR Arch')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('RBR Arch', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('RBR Arch')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('RBR Arch', 'Hindustan Hydraulics & Pneumatics')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('RBR Arch')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -409,12 +381,12 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">7</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle rounded-circle p-2">C</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">C</span>
                                     <span>College Project</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Power Spares Engineering</td>
-                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Education</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Education</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
@@ -427,7 +399,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Power Spares">PS</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Power Spares">PS</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -436,8 +408,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('College Project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('College Project')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('College Project', 'Power Spares Engineering')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('College Project')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('College Project', 'Power Spares Engineering')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('College Project')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -446,12 +418,12 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">8</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-circle p-2">S</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">S</span>
                                     <span>Solar panel</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Prabhu photos</td>
-                            <td><span class="badge bg-warning-subtle text-warning border px-2 py-1 rounded-2">Hardware</span></td>
+                            <td><span class="badge bg-light text-dark border px-2 py-1 rounded-2">Hardware</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">0%</span>
                             </td>
@@ -464,7 +436,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Prabhu Team">PP</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Prabhu Team">PP</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -473,8 +445,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Solar panel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Solar panel')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Solar panel', 'Prabhu photos')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Solar panel')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Solar panel', 'Prabhu photos')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Solar panel')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -488,21 +460,21 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">GHARUDA</td>
-                            <td><span class="badge bg-info-subtle text-info border px-2 py-1 rounded-2">Cloud</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">Cloud</span></td>
                             <td class="text-center">
                                 <span class="badge bg-light border text-secondary fw-semibold">65%</span>
                             </td>
                             <td class="fw-semibold text-secondary">15-05-2026</td>
                             <td class="fw-semibold text-secondary">30-11-2026</td>
                             <td>
-                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
+                                <span class="remaining-tag badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2 active">
                                     <i class="bi bi-clock-history me-1"></i> 120 days remaining
                                 </span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="Cloud Team">CM</span>
-                                    <span class="badge bg-success-subtle text-success rounded-circle p-2" data-bs-toggle="tooltip" title="Dev Lead">AS</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Cloud Team">CM</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Dev Lead">AS</span>
                                 </div>
                             </td>
                             <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">In Progress</span></td>
@@ -511,8 +483,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('Cloud Infrastructure Migration')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('Cloud Infrastructure Migration')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('Cloud Infrastructure Migration', 'GHARUDA')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('Cloud Infrastructure Migration')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('Cloud Infrastructure Migration', 'GHARUDA')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('Cloud Infrastructure Migration')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -521,36 +493,36 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                             <td class="fw-bold text-muted">10</td>
                             <td>
                                 <a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">
-                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">E</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">E</span>
                                     <span>E-Commerce Portal Upgrade</span>
                                 </a>
                             </td>
                             <td class="fw-semibold text-dark">Zen Publications</td>
-                            <td><span class="badge bg-success-subtle text-success border px-2 py-1 rounded-2">E-Commerce</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">E-Commerce</span></td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle text-success border border-success-subtle fw-semibold">100%</span>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold">100%</span>
                             </td>
                             <td class="fw-semibold text-secondary">01-01-2026</td>
                             <td class="fw-semibold text-secondary">15-03-2026</td>
                             <td>
-                                <span class="remaining-tag badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2 active">
-                                    <i class="bi bi-check-circle-fill text-success me-1"></i> Completed
+                                <span class="remaining-tag badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2 active">
+                                    <i class="bi bi-check-circle-fill text-primary me-1"></i> Completed
                                 </span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="badge bg-warning-subtle text-warning rounded-circle p-2" data-bs-toggle="tooltip" title="Zen Lead">ZP</span>
-                                    <span class="badge bg-secondary-subtle text-secondary rounded-circle p-2" data-bs-toggle="tooltip" title="UI Dev">DV</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="Zen Lead">ZP</span>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2" data-bs-toggle="tooltip" title="UI Dev">DV</span>
                                 </div>
                             </td>
-                            <td><span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-2">Finished</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">Finished</span></td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm" role="group">
                                     <a href="project-dashboard.php" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="View Project"><i class="bi bi-eye"></i></a>
                                     <button type="button" onclick="editProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Edit Project"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" onclick="deleteProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-danger" data-bs-toggle="tooltip" title="Delete Project"><i class="bi bi-trash"></i></button>
-                                    <button type="button" onclick="openSendEmailModal('E-Commerce Portal Upgrade', 'Zen Publications')" class="btn btn-light border text-success" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
-                                    <button type="button" onclick="copyProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-info" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
+                                    <button type="button" onclick="openSendEmailModal('E-Commerce Portal Upgrade', 'Zen Publications')" class="btn btn-light border text-primary" data-bs-toggle="tooltip" title="Send Email"><i class="bi bi-envelope"></i></button>
+                                    <button type="button" onclick="copyProject('E-Commerce Portal Upgrade')" class="btn btn-light border text-secondary" data-bs-toggle="tooltip" title="Copy Project"><i class="bi bi-copy"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -1420,19 +1392,19 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
                     tr.innerHTML =
                         '<td class="fw-bold text-primary">NEW</td>' +
                         '<td><a href="project-dashboard.php" class="text-decoration-none fw-bold text-dark d-flex align-items-center gap-2">' +
-                        '<span class="badge bg-success-subtle text-success border border-success-subtle rounded-circle p-2">' + initial + '</span>' +
+                        '<span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">' + initial + '</span>' +
                         '<span>' + (p.name || 'New Project').replace(/</g, '&lt;') + '</span></a></td>' +
                         '<td class="fw-semibold text-dark">' + (p.customer || 'Client').replace(/</g, '&lt;') + '</td>' +
                         '<td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2">' + (p.device || 'Web') + '</span></td>' +
                         '<td class="text-center"><span class="badge bg-light border text-secondary fw-semibold">0%</span></td>' +
                         '<td class="fw-semibold text-secondary">' + (p.startDate || '29-10-2026') + '</td>' +
                         '<td class="fw-semibold text-secondary">' + (p.deadline || '15-11-2026') + '</td>' +
-                        '<td><span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-2"><i class="bi bi-check2-circle me-1"></i>Active Delivery</span></td>' +
-                        '<td><div class="d-flex align-items-center gap-1"><span class="badge bg-primary-subtle text-primary rounded-circle p-2">PM</span></div></td>' +
+                        '<td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-2"><i class="bi bi-check2-circle me-1"></i>Active Delivery</span></td>' +
+                        '<td><div class="d-flex align-items-center gap-1"><span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-circle p-2">PM</span></div></td>' +
                         '<td><span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1.5 rounded-2">' + (p.status || 'In Progress') + '</span></td>' +
                         '<td class="text-center"><div class="btn-group btn-group-sm" role="group">' +
                         '<a href="project-dashboard.php" class="btn btn-light border text-primary" title="View Project"><i class="bi bi-eye"></i></a>' +
-                        '<a href="task-create.php" class="btn btn-light border text-success" title="Assign Tasks"><i class="bi bi-plus-circle"></i></a>' +
+                        '<a href="task-create.php" class="btn btn-light border text-primary" title="Assign Tasks"><i class="bi bi-plus-circle"></i></a>' +
                         '</div></td>';
                     tbody.insertBefore(tr, tbody.firstChild);
                 });
@@ -1446,7 +1418,7 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
             if (btnGroup && !btnGroup.querySelector('.prj-invoice-btn')) {
                 var taskLink = document.createElement('a');
                 taskLink.href = 'task-create.php';
-                taskLink.className = 'btn btn-light border text-success fw-semibold';
+                taskLink.className = 'btn btn-light border text-primary fw-semibold';
                 taskLink.title = 'Add Project Task';
                 taskLink.innerHTML = '<i class="bi bi-check2-square"></i>';
                 btnGroup.appendChild(taskLink);
@@ -1471,8 +1443,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
         if (view === 'dashboard') {
             if (listContainer) listContainer.style.display = 'none';
             if (dashContainer) dashContainer.style.display = 'block';
-            if (tabList) tabList.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold text-secondary';
-            if (tabDash) tabDash.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold btn-primary';
+            if (tabList) tabList.classList.remove('active');
+            if (tabDash) tabDash.classList.add('active');
             if (btnFilters) btnFilters.style.display = 'none';
             if (window.history && window.history.replaceState) {
                 history.replaceState(null, '', 'projects-list.php?view=dashboard');
@@ -1480,8 +1452,8 @@ $clientName = isset($_GET['customer']) ? htmlspecialchars($_GET['customer']) : '
         } else {
             if (listContainer) listContainer.style.display = 'block';
             if (dashContainer) dashContainer.style.display = 'none';
-            if (tabList) tabList.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold btn-primary';
-            if (tabDash) tabDash.className = 'btn btn-sm rounded-pill px-3 py-1 fw-semibold text-secondary';
+            if (tabList) tabList.classList.add('active');
+            if (tabDash) tabDash.classList.remove('active');
             if (btnFilters) btnFilters.style.display = '';
             if (window.history && window.history.replaceState) {
                 history.replaceState(null, '', 'projects-list.php?view=list');

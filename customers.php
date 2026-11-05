@@ -6,13 +6,21 @@
     <!-- Page Header & Action Bar -->
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
         <div class="d-flex align-items-center gap-3 flex-wrap">
-            <h1 class="font-display fw-bold mb-0 page-title">Customers</h1>
+            <div class="d-flex align-items-center gap-2.5">
+                <span class="icon-chip bg-primary-subtle text-primary">
+                    <i class="bi bi-building"></i>
+                </span>
+                <div>
+                    <h1 class="font-display fw-bold mb-0 page-title">Customers</h1>
+                    <span class="text-muted font-11">Manage onboarded customer accounts, 360&deg; ledgers, and B2B profiles</span>
+                </div>
+            </div>
             <div class="btn-group btn-group-sm" role="group" aria-label="Customer View Switcher">
-                <button type="button" class="btn btn-outline-secondary active font-12 fw-semibold px-2.5" id="viewDirectoryBtn" onclick="switchCustomerView('directory')">
+                <button type="button" class="btn btn-outline-primary active font-12 fw-semibold px-2.5" id="viewDirectoryBtn" onclick="switchCustomerView('directory')">
                     <i class="bi bi-list-ul me-1"></i>Directory List
                 </button>
-                <button type="button" class="btn btn-outline-secondary font-12 fw-semibold px-2.5" id="viewAnalyticsBtn" onclick="switchCustomerView('analytics')">
-                    <i class="bi bi-pie-chart me-1"></i>360° Analytics
+                <button type="button" class="btn btn-outline-primary font-12 fw-semibold px-2.5" id="viewAnalyticsBtn" onclick="switchCustomerView('analytics')">
+                    <i class="bi bi-pie-chart me-1"></i>360&deg; Analytics
                 </button>
             </div>
         </div>
