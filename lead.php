@@ -927,98 +927,186 @@ window.updateLeadFilterBadge = function() {
         font-weight: 600;
         margin-left: 2px;
     }
+
+    /* Base Inputs & Selects: Uniform 4px crisp radius */
     #newLeadModal .form-control,
     #newLeadModal .form-select {
-        height: 38px;
-        min-height: 38px;
-        font-size: 13px;
-        border: 1px solid #c5c4d3;
-        border-radius: 5px;
-        color: #1e293b;
-        background-color: #ffffff;
+        height: 38px !important;
+        min-height: 38px !important;
+        font-size: 13px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-radius: 4px !important;
+        color: #1e293b !important;
+        background-color: #ffffff !important;
         transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     #newLeadModal textarea.form-control {
-        height: auto;
-        min-height: 60px;
+        height: auto !important;
+        min-height: 60px !important;
     }
     #newLeadModal .form-control:focus,
     #newLeadModal .form-select:focus {
         border-color: #16a34a !important;
         box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
         outline: none !important;
+        z-index: 3 !important;
     }
+
+    /* Required Red Indicator on Left Edge (Zoho CRM Standard) */
     #newLeadModal .crm-required,
     #newLeadModal .form-control[required] {
         border-left: 3.5px solid #ef4444 !important;
     }
-    #newLeadModal .crm-section-divider {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-left: 4px solid #16a34a !important;
-        padding: 8px 16px;
-        margin: 20px 0 16px 0;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+
+    /* ========================================================
+       PERFECT SEAMLESS INPUT GROUP BORDER-RADIUS & EDGES
+       ======================================================== */
+    #newLeadModal .input-group {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        border-radius: 4px !important;
     }
-    #newLeadModal .crm-section-title {
-        font-size: 13px;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
+
+    /* First item in any input group */
+    #newLeadModal .input-group > :first-child:not(:last-child) {
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-right: none !important;
     }
-    #newLeadModal .crm-section-badge {
-        font-size: 11px;
-        font-weight: 600;
-        padding: 2px 8px;
-        border-radius: 4px;
-        background: #f0fdf4;
-        color: #16a34a;
-        border: 1px solid #bbf7d0;
+
+    /* Middle item in a 3-part input group (e.g. Rs. | 0.00 | ⓘ) */
+    #newLeadModal .input-group > :not(:first-child):not(:last-child) {
+        border-radius: 0 !important;
+        border-left: 1px solid #c5c4d3 !important;
+        border-right: none !important;
+        margin-left: 0 !important;
     }
-    #newLeadModal .nl-addon-user,
-    #newLeadModal .nl-addon-btn,
-    #newLeadModal .nl-info-addon {
+
+    /* Last item in any input group */
+    #newLeadModal .input-group > :last-child:not(:first-child) {
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-left: 1px solid #c5c4d3 !important;
+        margin-left: 0 !important;
+    }
+
+    /* Salutation split dropdown [-None- v] [First name] */
+    #newLeadModal .input-group > select.nl-salutation-select {
+        max-width: 100px !important;
+        flex: 0 0 100px !important;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border: 1px solid #c5c4d3 !important;
+        border-right: 1px solid #c5c4d3 !important;
+    }
+
+    #newLeadModal .input-group > input#nl_name {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-left: none !important;
+        margin-left: 0 !important;
+    }
+
+    /* Right Addon Buttons ([ 👤 ] and [ + ]) */
+    #newLeadModal .input-group > .btn.nl-addon-user,
+    #newLeadModal .input-group > .btn.nl-addon-btn,
+    #newLeadModal .input-group > .nl-info-addon {
         background-color: #f0fdf4 !important;
         border: 1px solid #c5c4d3 !important;
+        border-left: 1px solid #c5c4d3 !important;
         color: #16a34a !important;
-        width: 40px;
-        min-width: 40px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        width: 38px !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        margin-left: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+        transition: all 0.15s ease !important;
     }
-    #newLeadModal .nl-addon-user svg {
-        width: 16px;
-        height: 16px;
-        stroke: #16a34a;
+    #newLeadModal .input-group > .btn.nl-addon-user:hover,
+    #newLeadModal .input-group > .btn.nl-addon-btn:hover {
+        background-color: #dcfce7 !important;
+        color: #15803d !important;
+        border-color: #16a34a !important;
+        z-index: 2 !important;
     }
-    #newLeadModal .nl-currency-addon,
-    #newLeadModal .nl-addon-text {
+    #newLeadModal .input-group > .btn.nl-addon-user svg {
+        width: 16px !important;
+        height: 16px !important;
+        stroke: #16a34a !important;
+        display: block !important;
+    }
+
+    /* Addon Text (e.g. +91, https://, Rs.) */
+    #newLeadModal .input-group > .nl-currency-addon,
+    #newLeadModal .input-group > .nl-addon-text {
         background-color: #ffffff !important;
         border: 1px solid #c5c4d3 !important;
         color: #475569 !important;
         font-size: 13px !important;
         font-weight: 600 !important;
         padding: 0 10px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-left: 0 !important;
     }
-    #newLeadModal .nl-salutation-select {
-        max-width: 105px !important;
-        flex: 0 0 105px !important;
-        border-right: 1px solid #c5c4d3 !important;
+
+    /* Section Dividers & Badges */
+    #newLeadModal .crm-section-divider {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-left: 4px solid #16a34a !important;
+        padding: 8px 16px !important;
+        margin: 20px 0 16px 0 !important;
+        border-radius: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
     }
+    #newLeadModal .crm-section-title {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        letter-spacing: 0.3px !important;
+        text-transform: uppercase !important;
+    }
+    #newLeadModal .crm-section-badge {
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        background: #f0fdf4 !important;
+        color: #16a34a !important;
+        border: 1px solid #bbf7d0 !important;
+    }
+
+    /* Tags input */
     #newLeadModal .nl-tags-wrap {
         min-height: 38px;
         border: 1px solid #c5c4d3;
-        border-radius: 5px;
+        border-radius: 4px;
         background: #ffffff;
         padding: 4px 10px;
         display: flex;
@@ -1116,7 +1204,7 @@ window.updateLeadFilterBadge = function() {
                             <!-- Row 2: First Name -->
                             <div class="row align-items-center crm-field-row">
                                 <label class="col-sm-4 col-form-label text-sm-end crm-field-label" for="nl_name">
-                                    First Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                    First Name<span class="crm-colon">:</span>
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
                                     <div class="input-group">
@@ -1128,7 +1216,7 @@ window.updateLeadFilterBadge = function() {
                                             <option value="Dr.">Dr.</option>
                                             <option value="Prof.">Prof.</option>
                                         </select>
-                                        <input type="text" class="form-control crm-required" id="nl_name" required placeholder="First name">
+                                        <input type="text" class="form-control" id="nl_name" placeholder="First name">
                                     </div>
                                 </div>
                             </div>
