@@ -287,7 +287,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     if (!exists) {
                         var newOpt = new Option(val, val, true, true);
-                        targetSelect.appendChild(newOpt);
+                        var addNewOption = targetSelect.querySelector('option[value="__add_new__"]');
+                        if (addNewOption) {
+                            targetSelect.insertBefore(newOpt, addNewOption);
+                        } else {
+                            targetSelect.appendChild(newOpt);
+                        }
                         targetSelect.value = val;
                     }
 
@@ -309,6 +314,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             addSave.addEventListener('click', saveOption);
+
+            /* Trigger quick add modal when user picks "+ Add New..." option directly from select */
+            document.addEventListener('change', function(e) {
+                var sel = e.target;
+                if (sel && sel.tagName === 'SELECT' && sel.value === '__add_new__') {
+                    sel.value = ''; // Reset select to empty/previous
+                    var targetId = sel.id;
+                    var btn = targetId ? document.querySelector('[data-nl-target="' + targetId + '"]') : null;
+                    if (!btn) {
+                        var group = sel.closest('.input-group');
+                        btn = group ? group.querySelector('.nl-addon-btn, .nl-add-btn') : null;
+                    }
+                    if (btn) {
+                        btn.click();
+                    } else {
+                        /* Fallback: open modal directly */
+                        targetSelect = sel;
+                        targetLabel = fieldLabel(sel);
+                        addTitle.textContent = 'Add New ' + targetLabel;
+                        if (addFieldLabel) addFieldLabel.innerHTML = targetLabel + ' Name <span class="text-danger">*</span>';
+                        addInput.placeholder = 'e.g. Enter new ' + targetLabel.toLowerCase() + '...';
+                        addInput.value = '';
+                        addInput.classList.remove('is-invalid');
+                        if (typeof bootstrap !== 'undefined') {
+                            bootstrap.Modal.getOrCreateInstance(addModal, { backdrop: true, keyboard: true }).show();
+                        }
+                    }
+                }
+            });
+
             if (addCancel) {
                 addCancel.addEventListener('click', function() {
                     if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(addModal).hide();
@@ -1148,10 +1183,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 var itemsList = [];
                 document.querySelectorAll('#nlItemBody tr').forEach(function(row) {
                     var codeEl = row.querySelector('.nl-item-code') || row.querySelectorAll('input')[0];
-                    var nameEl = row.querySelector('.nl-item-name') || row.querySelectorAll('input')[1];
-                    var qtyEl = row.querySelector('.nl-item-qty') || row.querySelectorAll('input')[2];
+                    var selEl = row.querySelector('.nl-item-select');
+                    var customIn = row.querySelector('.nl-item-custom-name');
+                    var name = '';
+                    if (selEl) {
+                        if (selEl.value === 'custom') {
+                            name = customIn ? customIn.value.trim() : 'Custom Item';
+                        } else if (selEl.value) {
+                            var parts = selEl.value.split('|');
+                            name = parts[1] || (selEl.selectedOptions[0] ? selEl.selectedOptions[0].text : '');
+                        }
+                    } else {
+                        var legacyIn = row.querySelector('.nl-item-name');
+                        name = legacyIn ? legacyIn.value.trim() : '';
+                    }
+                    var qtyEl = row.querySelector('.nl-item-qty') || row.querySelector('input[type="number"]');
                     var code = codeEl ? codeEl.value.trim() : '';
-                    var name = nameEl ? nameEl.value.trim() : '';
                     var qty = qtyEl ? (parseInt(qtyEl.value, 10) || 1) : 1;
                     if (code || name) {
                         itemsList.push({ code: code, name: name, qty: qty });
@@ -1244,10 +1291,31 @@ document.addEventListener('DOMContentLoaded', function() {
             'Annual Maintenance Contract (AMC)': { code: 'SKU-SV-201', name: 'Annual Maintenance Contract (AMC)', price: 120000 }
         };
 
+        var ITEM_SELECT_HTML =
+            '<select class="form-select form-select-sm rounded-2 nl-item-select">' +
+                '<option value="" selected>-Select Item / SKU-</option>' +
+                '<optgroup label="Software Licenses &amp; Cloud">' +
+                    '<option value="SKU-SW-001|Cloud CRM Enterprise License|250000">SKU-SW-001 · Cloud CRM Enterprise License (₹2,50,000)</option>' +
+                    '<option value="SKU-SW-005|HRMS Subscription &amp; Licenses|150000">SKU-SW-005 · HRMS Subscription &amp; Licenses (₹1,50,000)</option>' +
+                    '<option value="SKU-SW-007|Payroll Module Add-on|35000">SKU-SW-007 · Payroll Module Add-on (₹35,000)</option>' +
+                    '<option value="SKU-SW-003|WhatsApp &amp; Omnichannel API Suite|45000">SKU-SW-003 · WhatsApp Business API (₹45,000)</option>' +
+                    '<option value="SKU-SW-010|Custom ERP Development|250000">SKU-SW-010 · Custom ERP Development (₹2,50,000)</option>' +
+                '</optgroup>' +
+                '<optgroup label="Hardware &amp; IoT Solutions">' +
+                    '<option value="SKU-HW-102|Biometric Attendance Terminal Pro|14500">SKU-HW-102 · Biometric Attendance Terminal Pro (₹14,500)</option>' +
+                    '<option value="SKU-HW-103|Industrial Barcode &amp; POS Kit|7800">SKU-HW-103 · Industrial Barcode &amp; POS Kit (₹7,800)</option>' +
+                    '<option value="SKU-HW-106|Smart Access Control 8-Port Kit|28500">SKU-HW-106 · Smart Access Control 8-Port Kit (₹28,500)</option>' +
+                '</optgroup>' +
+                '<optgroup label="Support &amp; AMC">' +
+                    '<option value="SKU-SV-201|Annual Maintenance Contract (AMC)|120000">SKU-SV-201 · Annual Maintenance Contract (₹1,20,000)</option>' +
+                '</optgroup>' +
+                '<option value="custom">-- Custom Item / Description --</option>' +
+            '</select>' +
+            '<input type="text" class="form-control form-control-sm rounded-2 nl-item-custom-name d-none mt-1" placeholder="Type custom item description...">';
+
         var nlProductSelect = document.getElementById('nl_product');
         var nlItemBody = document.getElementById('nlItemBody');
         var nlAddItem = document.getElementById('nlAddItem');
-        var nlCatalogQuick = document.getElementById('nlCatalogQuickSelect');
         var nlValueInput = document.getElementById('nl_value');
 
         /* Sync Commercial Scope (Product/Scope) -> Primary Row in Enquired Products */
@@ -1258,7 +1326,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var matched = CRM_PRODUCT_MAP[selectedVal];
             var code = matched ? matched.code : 'SKU-GEN';
-            var name = matched ? matched.name : selectedVal;
             var price = matched ? matched.price : null;
 
             var firstRow = nlItemBody.querySelector('tr');
@@ -1267,16 +1334,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 tr.className = 'nl-item-row';
                 tr.innerHTML =
                     '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" value="' + code + '" placeholder="e.g. ITM-001"></td>' +
-                    '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-name" value="' + name + '" placeholder="Item name or description"></td>' +
+                    '<td>' + ITEM_SELECT_HTML + '</td>' +
                     '<td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>' +
                     '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button></td>';
                 nlItemBody.appendChild(tr);
             } else {
-                var codeIn = firstRow.querySelector('.nl-item-code') || firstRow.querySelectorAll('input')[0];
-                var nameIn = firstRow.querySelector('.nl-item-name') || firstRow.querySelectorAll('input')[1];
-                var qtyIn = firstRow.querySelector('.nl-item-qty') || firstRow.querySelectorAll('input')[2];
+                var codeIn = firstRow.querySelector('.nl-item-code');
+                var selIn = firstRow.querySelector('.nl-item-select');
+                var qtyIn = firstRow.querySelector('.nl-item-qty');
                 if (codeIn) codeIn.value = code;
-                if (nameIn) nameIn.value = name;
+                if (selIn) {
+                    for (var i = 0; i < selIn.options.length; i++) {
+                        if (selIn.options[i].value.indexOf(code) !== -1 || selIn.options[i].text.toLowerCase().indexOf(selectedVal.toLowerCase().slice(0, 8)) !== -1) {
+                            selIn.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
                 if (qtyIn && (!qtyIn.value || qtyIn.value === '0')) qtyIn.value = '1';
             }
 
@@ -1297,35 +1371,53 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        /* Auto-fill Item Code & sync Price when item name picked from Master Catalog */
+        /* Auto-fill Item Code & sync Price when item selected from dropdown in table */
         if (nlItemBody) {
             nlItemBody.addEventListener('change', function(e) {
-                var nameIn = e.target.closest('.nl-item-name');
-                if (nameIn) {
-                    var val = nameIn.value.trim();
-                    var matched = CRM_PRODUCT_MAP[val];
-                    if (matched) {
-                        var row = nameIn.closest('tr');
-                        var codeIn = row ? row.querySelector('.nl-item-code') : null;
-                        var qtyIn = row ? row.querySelector('.nl-item-qty') : null;
+                var sel = e.target.closest('.nl-item-select');
+                if (sel) {
+                    var row = sel.closest('tr');
+                    var codeIn = row ? row.querySelector('.nl-item-code') : null;
+                    var customIn = row ? row.querySelector('.nl-item-custom-name') : null;
+                    var qtyIn = row ? row.querySelector('.nl-item-qty') : null;
+                    var val = sel.value;
+
+                    if (val === 'custom') {
+                        if (customIn) {
+                            customIn.classList.remove('d-none');
+                            customIn.focus();
+                        }
                         if (codeIn && (!codeIn.value || codeIn.value.startsWith('SKU-'))) {
-                            codeIn.value = matched.code;
+                            codeIn.value = 'CUSTOM';
                         }
-                        if (qtyIn && (!qtyIn.value || qtyIn.value === '0')) {
-                            qtyIn.value = '1';
-                        }
-                        if (matched.price && nlValueInput && (!nlValueInput.value || parseFloat(nlValueInput.value) === 0 || nlValueInput.dataset.autoFilled === 'true')) {
-                            nlValueInput.value = matched.price;
-                            nlValueInput.dataset.autoFilled = 'true';
-                        }
+                    } else if (val) {
+                        if (customIn) customIn.classList.add('d-none');
+                        var parts = val.split('|');
+                        var code = parts[0] || '';
+                        var name = parts[1] || '';
+                        var price = parts[2] ? parseFloat(parts[2]) : null;
+
+                        if (codeIn) codeIn.value = code;
+                        if (qtyIn && (!qtyIn.value || qtyIn.value === '0')) qtyIn.value = '1';
+
+                        /* Sync Product/Scope */
                         if (nlProductSelect && (!nlProductSelect.value || nlProductSelect.value === '')) {
                             for (var i = 0; i < nlProductSelect.options.length; i++) {
-                                if (nlProductSelect.options[i].text.toLowerCase() === val.toLowerCase()) {
+                                if (nlProductSelect.options[i].text.toLowerCase().indexOf(name.toLowerCase().slice(0, 8)) !== -1) {
                                     nlProductSelect.selectedIndex = i;
                                     break;
                                 }
                             }
                         }
+
+                        /* Auto-populate Expected Value if empty */
+                        if (price && nlValueInput && (!nlValueInput.value || parseFloat(nlValueInput.value) === 0 || nlValueInput.dataset.autoFilled === 'true')) {
+                            nlValueInput.value = price;
+                            nlValueInput.dataset.autoFilled = 'true';
+                        }
+                    } else {
+                        if (customIn) customIn.classList.add('d-none');
+                        if (codeIn) codeIn.value = '';
                     }
                 }
             });
@@ -1338,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 tr.className = 'nl-item-row';
                 tr.innerHTML =
                     '<td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" placeholder="e.g. ITM-001"></td>' +
-                    '<td><input type="text" list="catalogSkuList" class="form-control form-control-sm rounded-2 nl-item-name" placeholder="Item name or select SKU..."></td>' +
+                    '<td>' + ITEM_SELECT_HTML + '</td>' +
                     '<td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>' +
                     '<td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button></td>';
                 nlItemBody.appendChild(tr);
@@ -1352,6 +1444,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         /* Keep at least 1 clean row */
                         tr.querySelectorAll('input').forEach(function(inp) { inp.value = ''; });
+                        var sel = tr.querySelector('.nl-item-select');
+                        if (sel) sel.selectedIndex = 0;
+                        var customIn = tr.querySelector('.nl-item-custom-name');
+                        if (customIn) customIn.classList.add('d-none');
                     }
                 }
             });

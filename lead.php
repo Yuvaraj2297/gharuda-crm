@@ -899,6 +899,271 @@ window.updateLeadFilterBadge = function() {
 
 <!-- Inline Styles for Create Lead Modal (Guaranteed Zero-Cache Rendering) -->
 <style id="crmLeadModalInlineStyles">
+    /* Refined Salutation prefix select: Sleek, compact & crisp */
+    #newLeadModal .input-group > select.nl-salutation-select {
+        max-width: 84px !important;
+        flex: 0 0 84px !important;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border: 1px solid #c5c4d3 !important;
+        border-right: 1px solid #cbd5e1 !important;
+        background-color: #f8fafc !important;
+        color: #334155 !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+        padding-left: 8px !important;
+        padding-right: 22px !important;
+        background-position: right 0.45rem center !important;
+        background-size: 11px 9px !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+    #newLeadModal .input-group > select.nl-salutation-select:focus {
+        border-color: #16a34a !important;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+        background-color: #ffffff !important;
+        z-index: 3 !important;
+    }
+    #newLeadModal .input-group > input#nl_name {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-left: none !important;
+        margin-left: 0 !important;
+        z-index: 1 !important;
+    }
+    #newLeadModal .input-group > input#nl_name:focus {
+        border-color: #16a34a !important;
+        border-left: 1px solid #16a34a !important;
+        margin-left: -1px !important;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+        z-index: 3 !important;
+    }
+
+    /* Refined Plus (+) Addon Buttons on Select Inputs */
+    #newLeadModal .input-group > select.nl-select {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-right: none !important;
+        background-position: right 0.65rem center !important;
+        background-size: 12px 9px !important;
+        padding-right: 2rem !important;
+    }
+    #newLeadModal .input-group > select.nl-select:focus {
+        border-color: #16a34a !important;
+        border-right: 1px solid #16a34a !important;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+        z-index: 3 !important;
+    }
+    #newLeadModal .input-group > .btn.nl-addon-btn {
+        background-color: #f8fafc !important;
+        border: 1px solid #c5c4d3 !important;
+        border-left: 1px solid #e2e8f0 !important;
+        color: #16a34a !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        margin-left: 0 !important;
+        cursor: pointer !important;
+        transition: all 0.15s ease !important;
+        z-index: 1 !important;
+    }
+    #newLeadModal .input-group > .btn.nl-addon-btn:hover {
+        background-color: #f0fdf4 !important;
+        border-color: #16a34a !important;
+        color: #15803d !important;
+        z-index: 2 !important;
+    }
+    #newLeadModal .input-group > .btn.nl-addon-btn i {
+        font-size: 15px !important;
+        line-height: 1 !important;
+    }
+
+    /* Section Action Buttons (+ Add Contact & + Add Item) */
+    #newLeadModal .crm-section-divider .btn-outline-primary,
+    #newLeadModal #nlAddPoc,
+    #newLeadModal #nlAddItem {
+        border-color: #16a34a !important;
+        color: #16a34a !important;
+        background-color: #ffffff !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+        transition: all 0.15s ease !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+    #newLeadModal .crm-section-divider .btn-outline-primary:hover,
+    #newLeadModal #nlAddPoc:hover,
+    #newLeadModal #nlAddItem:hover {
+        background-color: #f0fdf4 !important;
+        border-color: #15803d !important;
+        color: #15803d !important;
+        box-shadow: 0 2px 4px rgba(22, 163, 74, 0.12) !important;
+    }
+
+    /* Non-plain, Beautiful Enquired Products Table Select */
+    #newLeadModal #nlItemsTable select.nl-item-select {
+        height: 34px !important;
+        min-height: 34px !important;
+        font-size: 12.5px !important;
+        padding: 4px 26px 4px 10px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-radius: 4px !important;
+        background-color: #ffffff !important;
+        background-position: right 0.5rem center !important;
+        background-size: 11px 9px !important;
+        color: #1e293b !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select:hover {
+        border-color: #94a3b8 !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select:focus {
+        border-color: #16a34a !important;
+        box-shadow: 0 0 0 2.5px rgba(22, 163, 74, 0.18) !important;
+        outline: none !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select optgroup {
+        font-weight: 700 !important;
+        color: #334155 !important;
+        background-color: #f1f5f9 !important;
+        padding: 5px 0 !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select option {
+        font-weight: 400 !important;
+        color: #0f172a !important;
+        background-color: #ffffff !important;
+        padding: 6px 10px !important;
+    }
+    #newLeadModal #nlItemsTable .nl-item-custom-name {
+        margin-top: 5px !important;
+        font-size: 12px !important;
+        border-color: #16a34a !important;
+        background-color: #f0fdf4 !important;
+    }
+
+    /* Table Inputs & Dropdowns (Enquired Items & POC Tables) */
+    #newLeadModal #nlItemsTable .form-control,
+    #newLeadModal #nlItemsTable .form-select,
+    #newLeadModal #nlPocList .form-control {
+        height: 33px !important;
+        min-height: 33px !important;
+        font-size: 12.5px !important;
+        padding: 4px 8px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-radius: 4px !important;
+        background-color: #ffffff !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select {
+        height: 33px !important;
+        min-height: 33px !important;
+        font-size: 12px !important;
+        padding: 4px 26px 4px 8px !important;
+        border: 1px solid #c5c4d3 !important;
+        border-radius: 4px !important;
+        background-color: #ffffff !important;
+        background-position: right 0.45rem center !important;
+        background-size: 11px 9px !important;
+        color: #1e293b !important;
+        font-weight: 500 !important;
+    }
+    #newLeadModal #nlItemsTable select.nl-item-select:focus,
+    #newLeadModal #nlItemsTable .form-control:focus,
+    #newLeadModal #nlPocList .form-control:focus {
+        border-color: #16a34a !important;
+        box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15) !important;
+        outline: none !important;
+    }
+
+    /* Leads Table Status & Action Dropdowns (Zero-Cache Enterprise Polish) */
+    .lead-status-dd {
+        display: inline-block !important;
+        position: relative !important;
+    }
+    .lead-status-btn {
+        border: 1px solid #bbf7d0 !important;
+        background: #f0fdf4 !important;
+        color: #15803d !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        padding: 3px 12px !important;
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        transition: all 0.15s ease !important;
+        white-space: nowrap !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+    .lead-status-btn:hover {
+        background: #ffffff !important;
+        border-color: #86efac !important;
+        color: #166534 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+    }
+    .lead-status-menu,
+    .table-action-menu {
+        border-radius: 8px !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.06) !important;
+        padding: 6px !important;
+        font-size: 12.5px !important;
+        min-width: 175px !important;
+        z-index: 1060 !important;
+    }
+    .lead-status-item,
+    .table-action-menu .dropdown-item {
+        border-radius: 4px !important;
+        padding: 6px 12px !important;
+        font-weight: 500 !important;
+        color: #334155 !important;
+        transition: all 0.12s ease !important;
+    }
+    .lead-status-item:hover,
+    .lead-status-item.active {
+        background: #f0fdf4 !important;
+        color: #16a34a !important;
+        font-weight: 600 !important;
+    }
+    .btn-table-action {
+        background-color: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #334155 !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        padding: 4px 10px !important;
+        border-radius: 6px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        transition: all 0.15s ease !important;
+    }
+    .btn-table-action:hover,
+    .btn-table-action[aria-expanded="true"] {
+        background-color: #f8fafc !important;
+        border-color: #cbd5e1 !important;
+        color: #0f172a !important;
+    }
+
     #newLeadModal .nl-crm-sheet {
         max-width: 1160px;
         margin: 0 auto;
@@ -1264,6 +1529,7 @@ window.updateLeadFilterBadge = function() {
                                             <option>Referral</option>
                                             <option>Walk-in</option>
                                             <option>Cold Call</option>
+                                            <option value="__add_new__" class="text-success fw-bold">+ Add New Source...</option>
                                         </select>
                                         <button type="button" class="btn nl-addon-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
                                     </div>
@@ -1276,7 +1542,6 @@ window.updateLeadFilterBadge = function() {
                                     Lead Sourcer<span class="crm-colon">:</span>
                                 </label>
                                 <div class="col-sm-8 crm-field-control">
-                                    <div class="input-group">
                                         <select class="form-select nl-select" id="nl_sourcer">
                                             <option value="" selected>-None-</option>
                                             <option>GHARUDA SOFTWARE</option>
@@ -1286,15 +1551,6 @@ window.updateLeadFilterBadge = function() {
                                             <option>Facebook Ads</option>
                                             <option>Referral</option>
                                         </select>
-                                        <button type="button" class="btn nl-addon-user" title="Lookup Sourcer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                                <circle cx="9" cy="7" r="4"></circle>
-                                                <circle cx="19" cy="11" r="3"></circle>
-                                                <path d="m21 13 2 2"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1327,6 +1583,7 @@ window.updateLeadFilterBadge = function() {
                                             <option>Negotiation</option>
                                             <option>Won</option>
                                             <option>Lost</option>
+                                            <option value="__add_new__" class="text-success fw-bold">+ Add New Status...</option>
                                         </select>
                                         <button type="button" class="btn nl-addon-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
                                     </div>
@@ -1636,7 +1893,28 @@ window.updateLeadFilterBadge = function() {
                                     <tbody id="nlItemBody">
                                         <tr class="nl-item-row">
                                             <td><input type="text" class="form-control form-control-sm rounded-2 nl-item-code" placeholder="e.g. ITM-001"></td>
-                                            <td><input type="text" list="catalogSkuList" class="form-control form-control-sm rounded-2 nl-item-name" placeholder="Item name or select SKU..."></td>
+                                            <td>
+                                                <select class="form-select form-select-sm rounded-2 nl-item-select">
+                                                    <option value="" selected>-Select Item / SKU-</option>
+                                                    <optgroup label="Software Licenses &amp; Cloud">
+                                                        <option value="SKU-SW-001|Cloud CRM Enterprise License|250000">SKU-SW-001 · Cloud CRM Enterprise License (₹2,50,000)</option>
+                                                        <option value="SKU-SW-005|HRMS Subscription &amp; Licenses|150000">SKU-SW-005 · HRMS Subscription &amp; Licenses (₹1,50,000)</option>
+                                                        <option value="SKU-SW-007|Payroll Module Add-on|35000">SKU-SW-007 · Payroll Module Add-on (₹35,000)</option>
+                                                        <option value="SKU-SW-003|WhatsApp &amp; Omnichannel API Suite|45000">SKU-SW-003 · WhatsApp Business API (₹45,000)</option>
+                                                        <option value="SKU-SW-010|Custom ERP Development|250000">SKU-SW-010 · Custom ERP Development (₹2,50,000)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Hardware &amp; IoT Solutions">
+                                                        <option value="SKU-HW-102|Biometric Attendance Terminal Pro|14500">SKU-HW-102 · Biometric Attendance Terminal Pro (₹14,500)</option>
+                                                        <option value="SKU-HW-103|Industrial Barcode &amp; POS Kit|7800">SKU-HW-103 · Industrial Barcode &amp; POS Kit (₹7,800)</option>
+                                                        <option value="SKU-HW-106|Smart Access Control 8-Port Kit|28500">SKU-HW-106 · Smart Access Control 8-Port Kit (₹28,500)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Support &amp; AMC">
+                                                        <option value="SKU-SV-201|Annual Maintenance Contract (AMC)|120000">SKU-SV-201 · Annual Maintenance Contract (₹1,20,000)</option>
+                                                    </optgroup>
+                                                    <option value="custom">-- Custom Item / Description --</option>
+                                                </select>
+                                                <input type="text" class="form-control form-control-sm rounded-2 nl-item-custom-name d-none mt-1" placeholder="Type custom item description...">
+                                            </td>
                                             <td><input type="number" class="form-control form-control-sm rounded-2 text-center nl-item-qty" placeholder="1" min="1" value="1"></td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
@@ -1645,18 +1923,7 @@ window.updateLeadFilterBadge = function() {
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Datalist for Quick Catalog Selection -->
-                            <datalist id="catalogSkuList">
-                                <option value="HRMS Subscription &amp; Licenses">SKU-SW-005 · HRMS Subscription (₹1,50,000)</option>
-                                <option value="Cloud CRM Enterprise License">SKU-SW-001 · Software License (₹2,50,000)</option>
-                                <option value="Payroll Module Add-on">SKU-SW-007 · Payroll &amp; Compliance (₹35,000)</option>
-                                <option value="WhatsApp &amp; Omnichannel API Suite">SKU-SW-003 · Messaging Integration (₹45,000)</option>
-                                <option value="Biometric Attendance Terminal Pro">SKU-HW-102 · Hardware Terminal (₹14,500)</option>
-                                <option value="Industrial Barcode &amp; POS Kit">SKU-HW-103 · POS Scanner Kit (₹7,800)</option>
-                                <option value="Smart Access Control 8-Port Kit">SKU-HW-106 · Access Kit (₹28,500)</option>
-                                <option value="Custom ERP Development">SKU-SW-010 · Enterprise Service (₹2,50,000)</option>
-                                <option value="Annual Maintenance Contract (AMC)">SKU-SV-201 · 24x7 SLA Support (₹1,20,000)</option>
-                            </datalist>
+
                         </div>
                     </div>
 
