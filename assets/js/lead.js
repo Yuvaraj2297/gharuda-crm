@@ -200,58 +200,120 @@ document.addEventListener('DOMContentLoaded', function() {
             var addModal = document.getElementById('nlAddOptionModal');
             var addInput = document.getElementById('nlAddOptionInput');
             var addTitle = document.getElementById('nlAddOptionTitle');
+            var addFieldLabel = document.getElementById('nlAddOptionFieldLabel');
             var addSave = document.getElementById('nlAddOptionSave');
             var addCancel = document.getElementById('nlAddOptionCancel');
-            if (!addModal || !addInput || !addTitle || !addSave || !addCancel) return;
+            if (!addModal || !addInput || !addTitle || !addSave) return;
             var targetSelect = null;
             var targetLabel = '';
 
-
             function fieldLabel(sel) {
-                var col = sel ? sel.closest('.col-lg-3, .col-md-6, .col-md-4, .col-lg-4, .col-12') : null;
-                var lbl = col ? col.querySelector('label.form-label') : null;
-                return lbl ? lbl.textContent.replace('*', '').trim() : 'Option';
+                if (!sel) return 'Option';
+                var row = sel.closest('.crm-field-row, .row, .col-lg-3, .col-md-6, .col-md-4, .col-lg-4, .col-12');
+                var lbl = row ? row.querySelector('.crm-field-label, label.form-label, label') : null;
+                return lbl ? lbl.textContent.replace(/[\*\:]/g, '').trim() : 'Option';
             }
 
-
-            document.querySelectorAll('.nl-add-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            /* Bind all plus buttons with [data-nl-target], .nl-addon-btn, or .nl-add-btn */
+            document.querySelectorAll('[data-nl-target], .nl-addon-btn, .nl-add-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     var targetId = btn.getAttribute('data-nl-target');
+                    if (!targetId) {
+                        var group = btn.closest('.input-group');
+                        var sel = group ? group.querySelector('select') : null;
+                        if (sel && sel.id) targetId = sel.id;
+                    }
                     targetSelect = targetId ? document.getElementById(targetId) : null;
                     if (!targetSelect) return;
+
                     targetLabel = fieldLabel(targetSelect);
                     addTitle.textContent = 'Add New ' + targetLabel;
-                    addInput.placeholder = 'Type new ' + targetLabel.toLowerCase() + '...';
+                    if (addFieldLabel) addFieldLabel.innerHTML = targetLabel + ' Name <span class="text-danger">*</span>';
+                    addInput.placeholder = 'e.g. Enter new ' + targetLabel.toLowerCase() + '...';
                     addInput.value = '';
-                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(addModal).show();
+                    addInput.classList.remove('is-invalid');
+
+                    if (typeof bootstrap !== 'undefined') {
+                        var bsModal = bootstrap.Modal.getOrCreateInstance(addModal, {
+                            backdrop: true,
+                            keyboard: true
+                        });
+                        bsModal.show();
+                    }
                 });
             });
 
+            /* Fix z-index stacking so mini modal smoothly displays on top of #newLeadModal */
+            addModal.addEventListener('shown.bs.modal', function() {
+                var backdrops = document.querySelectorAll('.modal-backdrop');
+                if (backdrops.length > 1) {
+                    var lastBackdrop = backdrops[backdrops.length - 1];
+                    lastBackdrop.style.zIndex = '1070';
+                }
+                addModal.style.zIndex = '1075';
+                addInput.focus();
+                addInput.select();
+            });
+
+            /* Ensure parent #newLeadModal remains scrollable when mini modal closes */
+            addModal.addEventListener('hidden.bs.modal', function() {
+                var parentModal = document.getElementById('newLeadModal');
+                if (parentModal && parentModal.classList.contains('show')) {
+                    document.body.classList.add('modal-open');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
 
             function saveOption() {
                 var val = addInput.value.trim();
                 if (!val) {
+                    addInput.classList.add('is-invalid');
                     addInput.focus();
                     return;
                 }
-                var exists = Array.from(targetSelect.options).some(function(o) {
-                    return o.value.toLowerCase() === val.toLowerCase();
-                });
-                if (!exists) {
-                    targetSelect.appendChild(new Option(val, val, false, false));
+                addInput.classList.remove('is-invalid');
+
+                if (targetSelect) {
+                    var exists = false;
+                    for (var i = 0; i < targetSelect.options.length; i++) {
+                        if (targetSelect.options[i].text.toLowerCase() === val.toLowerCase() || targetSelect.options[i].value.toLowerCase() === val.toLowerCase()) {
+                            targetSelect.selectedIndex = i;
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    if (!exists) {
+                        var newOpt = new Option(val, val, true, true);
+                        targetSelect.appendChild(newOpt);
+                        targetSelect.value = val;
+                    }
+
+                    /* Trigger change event so any listeners react */
+                    targetSelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+                    /* Highlight target select with a green pulse */
+                    targetSelect.style.borderColor = '#16a34a';
+                    targetSelect.style.boxShadow = '0 0 0 3px rgba(22, 163, 74, 0.25)';
+                    setTimeout(function() {
+                        targetSelect.style.borderColor = '';
+                        targetSelect.style.boxShadow = '';
+                    }, 1800);
                 }
-                targetSelect.value = val;
-                if (typeof $ !== 'undefined' && $(targetSelect).data('select2')) {
-                    $(targetSelect).trigger('change');
+
+                if (typeof bootstrap !== 'undefined') {
+                    bootstrap.Modal.getOrCreateInstance(addModal).hide();
                 }
-                if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(addModal).hide();
             }
 
-
             addSave.addEventListener('click', saveOption);
-            addCancel.addEventListener('click', function() {
-                if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(addModal).hide();
-            });
+            if (addCancel) {
+                addCancel.addEventListener('click', function() {
+                    if (typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(addModal).hide();
+                });
+            }
             addInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();

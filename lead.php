@@ -1855,22 +1855,33 @@ window.updateLeadFilterBadge = function() {
 </div>
 
 <!-- ===== New Lead: Add Option mini modal (+ button) ===== -->
-<div class="modal fade" id="nlAddOptionModal" tabindex="-1" aria-hidden="true">
-
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><span id="nlAddOptionTitle">Add New Option</span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<div class="modal fade" id="nlAddOptionModal" tabindex="-1" aria-hidden="true" style="z-index: 1075;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 8px; overflow: hidden;">
+            <div class="modal-header bg-light py-2.5 px-3 border-bottom d-flex align-items-center justify-content-between">
+                <h6 class="modal-title fw-bold text-dark mb-0 d-flex align-items-center gap-2 font-14">
+                    <span class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle" style="width: 26px; height: 26px;">
+                        <i class="bi bi-plus-lg"></i>
+                    </span>
+                    <span id="nlAddOptionTitle">Add New Option</span>
+                </h6>
+                <button type="button" class="btn-close font-12" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <label class="form-label">Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nlAddOptionInput" placeholder="Type new option...">
-                <div class="form-text small text-muted"><i class="bi bi-info-circle me-1"></i>Press Enter to add quickly</div>
+            <div class="modal-body p-3">
+                <label class="form-label font-12 fw-semibold text-secondary mb-1.5" id="nlAddOptionFieldLabel">Option Name <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="nlAddOptionInput" placeholder="Type new option..." style="height: 38px; font-size: 13px; border-radius: 4px;">
+                </div>
+                <div class="form-text small text-muted mt-2 d-flex align-items-center gap-1 font-11">
+                    <i class="bi bi-info-circle text-primary"></i>
+                    <span>Press <kbd class="bg-light text-dark border">Enter ↵</kbd> or click <strong>Save &amp; Select</strong></span>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" id="nlAddOptionCancel">Cancel</button>
-                <button type="button" class="btn btn-primary" id="nlAddOptionSave"><i class="bi bi-check-lg me-1"></i>Add</button>
+            <div class="modal-footer bg-light py-2 px-3 border-top d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary px-3" id="nlAddOptionCancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-sm btn-success px-3 fw-semibold d-inline-flex align-items-center gap-1.5" id="nlAddOptionSave" style="background-color: #16a34a; border-color: #16a34a;">
+                    <i class="bi bi-check-lg"></i><span>Save &amp; Select</span>
+                </button>
             </div>
         </div>
     </div>
