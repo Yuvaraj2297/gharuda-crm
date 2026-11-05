@@ -45,12 +45,12 @@ h1, h2, h3, h4, h5, h6,
     --ui-btn-radius: 6px;
     --ui-dropdown-radius: 6px;
     --ui-control-radius-sm: 4px;
-    --ui-control-bg: var(--input-bg, #f4f7f6);
-    --ui-control-border: #e2e8ec;
-    --ui-control-border-hover: #cfd8de;
+    --ui-control-bg: #ffffff;
+    --ui-control-border: #c5c4d3;
+    --ui-control-border-hover: #94a3b8;
     --ui-focus: var(--primary, #16a34a);
     --ui-focus-ring: 0 0 0 3px rgba(22, 163, 74, .14);
-    --ui-placeholder: #9aa4ae;
+    --ui-placeholder: #838892;
     --ui-disabled-bg: #eef1f3;
 
     --ui-card-radius: 14px;
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6,
 
     --ui-icon-calendar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b7684'%3E%3Cpath d='M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z'/%3E%3Cpath d='M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2'/%3E%3C/svg%3E");
     --ui-icon-clock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b7684'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0'/%3E%3C/svg%3E");
-    --ui-icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236b7684' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+    --ui-icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%23838892' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
 }
 
 
@@ -176,11 +176,11 @@ label .text-danger {
 }
 
 .form-select {
-    padding-right: 2.25rem;
+    padding-right: 2rem;
     background-image: var(--ui-icon-chevron);
     background-repeat: no-repeat;
     background-position: right .85rem center;
-    background-size: 12px 12px;
+    background-size: 10px 6px;
 }
 
 .form-select[multiple],
@@ -253,14 +253,112 @@ textarea.form-control[rows="2"] {
 }
 
 /* Input groups */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-group > .form-control,
+.input-group > .form-select {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    min-height: 38px;
+    height: 38px;
+}
+
 .input-group-text {
-    min-height: var(--ui-control-h);
+    min-height: 38px;
+    height: 38px;
     font-size: var(--ui-font-size);
-    font-weight: 600;
-    color: var(--ink-500);
-    background-color: #eef2f1;
+    font-weight: 500;
+    color: var(--ink-700, #334155);
+    background-color: #f1f5f9;
     border: 1px solid var(--ui-control-border);
-    border-radius: var(--ui-control-radius);
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Prefix Salutation / Country Code Select in input-group */
+.input-group > .form-select.input-prefix-select,
+.input-group > .form-select.nl-salutation-select {
+    flex: 0 0 96px !important;
+    width: 96px !important;
+    max-width: 96px !important;
+    min-width: 96px !important;
+    padding-right: 1.75rem;
+    background-position: right 0.5rem center;
+    border-right: 1px solid var(--ui-control-border, #cbd5e1);
+    font-size: 13px;
+    color: #334155;
+    flex-shrink: 0;
+}
+
+/* User lookup / Addon icon button inside input-group */
+.input-group > .btn.input-addon-user,
+.input-group > .btn.nl-addon-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    height: 38px;
+    width: 42px;
+    padding: 0;
+    flex: 0 0 42px;
+    flex-shrink: 0;
+    background-color: #f0f4f9;
+    color: #2563eb;
+    border: 1px solid var(--ui-control-border, #cbd5e1);
+    z-index: 2;
+    transition: all 0.15s ease;
+}
+.input-group > .btn.input-addon-user:hover,
+.input-group > .btn.nl-addon-user:hover {
+    background-color: #e2eaf4;
+    color: #1d4ed8;
+    border-color: #94a3b8;
+}
+
+/* Action button inside input-group (e.g. + Add button) */
+.input-group > .btn.input-addon-action,
+.input-group > .btn.nl-addon-btn,
+.input-group > .btn.btn-outline-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    height: 38px;
+    padding: 0 12px;
+    flex-shrink: 0;
+    z-index: 2;
+    transition: all 0.15s ease;
+}
+
+/* Suffix Info tooltip addon in input-group */
+.input-group > .input-group-text.input-addon-info,
+.input-group > .input-group-text.nl-info-addon {
+    background-color: #f0f4f9;
+    color: #2563eb;
+    cursor: help;
+    min-width: 38px;
+    padding: 0 10px;
+    justify-content: center;
+}
+
+/* Currency addon */
+.input-group > .input-group-text.input-addon-currency,
+.input-group > .input-group-text.nl-currency-addon {
+    background-color: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+    min-width: 44px;
+    justify-content: center;
 }
 
 .input-group-sm > .input-group-text {

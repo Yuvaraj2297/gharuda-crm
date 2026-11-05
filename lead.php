@@ -904,396 +904,432 @@ window.updateLeadFilterBadge = function() {
             <!-- Modal Header -->
             <div class="modal-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:42px;height:42px;">
+                    <span class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
                         <i class="bi bi-person-plus-fill fs-5"></i>
                     </span>
                     <div>
-                        <h5 class="modal-title fw-bold text-dark mb-0 fs-5">Create New Lead</h5>
-                        <div class="small text-muted"><i class="bi bi-lightning-charge text-warning me-1"></i>Capture prospect details, classification, commercial scope, and key stakeholders</div>
+                        <h5 class="modal-title fw-bold text-dark mb-0 fs-5" id="newLeadModalLabel">Create New Lead</h5>
+                        <div class="small text-muted"><i class="bi bi-lightning-charge text-primary me-1"></i>Capture prospect details, commercial scope, items, and site location</div>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body p-4 bg-light-subtle">
-                <div class="nl-body" style="max-width: 1400px; margin: 0 auto;">
+            <!-- Modal Body (2-Section Split: Left & Right) -->
+            <div class="modal-body p-3 p-md-4 bg-light-subtle">
+                <div class="nl-body" style="max-width: 1540px; margin: 0 auto;">
+                    <div class="row g-3 g-xl-4">
 
-                    <!-- 1. Lead Classification & Ownership -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
-                            <i class="bi bi-funnel text-primary fs-5"></i>
-                            <h6 class="fw-bold text-dark m-0">1. Classification &amp; Assignment</h6>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row g-3">
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Status <span class="text-danger">*</span></label>
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-grow-1">
-                                            <select class="form-select select2 nl-select rounded-2" id="nl_status" data-placeholder="Select status">
-                                                <option value=""></option>
-                                                <option selected>Lead</option>
-                                                <option>Quotation</option>
-                                                <option>Followup</option>
-                                                <option>Qualified</option>
-                                                <option>Negotiation</option>
-                                                <option>Won</option>
-                                                <option>Lost</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-outline-primary nl-add-btn rounded-2" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Source <span class="text-danger">*</span></label>
-                                    <div class="d-flex gap-2">
-                                        <div class="flex-grow-1">
-                                            <select class="form-select select2 nl-select rounded-2" id="nl_source" data-placeholder="Select source">
-                                                <option value=""></option>
-                                                <option selected>Direct</option>
-                                                <option>IndiaMart</option>
-                                                <option>Website</option>
-                                                <option>Facebook Ads</option>
-                                                <option>Google Ads</option>
-                                                <option>Referral</option>
-                                                <option>Walk-in</option>
-                                                <option>Cold Call</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-outline-primary nl-add-btn rounded-2" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Assigned Sales Owner <span class="text-danger">*</span></label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_assigned" data-placeholder="Select person">
-                                        <option value=""></option>
-                                        <option selected>GHARUDA SOFTWARE</option>
-                                        <option>Harish D.</option>
-                                        <option>Divya A.</option>
-                                        <option>Karthik R.</option>
-                                        <option>Priya S.</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Sourcer / Lead Gen Agent</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_sourcer" data-placeholder="Select sourcer">
-                                        <option value=""></option>
-                                        <option selected>GHARUDA SOFTWARE</option>
-                                        <option>Harish D.</option>
-                                        <option>Website Form</option>
-                                        <option>Facebook Ads</option>
-                                        <option>Referral</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Lead Qualification</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_qualification" data-placeholder="Select qualification">
-                                        <option value=""></option>
-                                        <option selected>Sales Qualified Lead (SQL)</option>
-                                        <option>Marketing Qualified Lead (MQL)</option>
-                                        <option>Unqualified Lead</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-8 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1"><i class="bi bi-tag me-1"></i>Tags / Labels</label>
-                                    <div class="nl-tags-wrap rounded-2 bg-light-subtle" id="nlTagsWrap">
-                                        <div class="nl-tags-chips" id="nlTagsChips"></div>
-                                        <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Type and press Enter to add tag...">
-                                    </div>
-                                    <input type="hidden" id="nl_tags" value="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- ==================== LEFT COLUMN: Lead Profile, Contact & Stakeholders ==================== -->
+                        <div class="col-12 col-xl-6 d-flex flex-column gap-3">
 
-                    <!-- 2. Primary Contact & Company Details -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
-                            <i class="bi bi-person-lines-fill text-primary fs-5"></i>
-                            <h6 class="fw-bold text-dark m-0">2. Primary Contact &amp; Company Details</h6>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row g-3">
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Company / Organization <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control rounded-2" id="nl_company" required placeholder="Company legal name">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Contact Person Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control rounded-2" id="nl_name" required placeholder="Primary contact full name">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Position / Designation</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_position" placeholder="e.g. Managing Director">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Email Address</label>
-                                    <input type="email" class="form-control rounded-2" id="nl_email" placeholder="contact@company.com">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Phone / WhatsApp Number</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_phone" placeholder="10-digit mobile number">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Website URL</label>
-                                    <input type="url" class="form-control rounded-2" id="nl_website" placeholder="https://example.com">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Date Contacted</label>
-                                    <input type="date" class="form-control rounded-2" id="nl_date_contacted">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Full Street Address</label>
-                                    <textarea class="form-control rounded-2" id="nl_address" rows="1" placeholder="Office / Site address"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Initial Requirement Notes</label>
-                                    <textarea class="form-control rounded-2" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <div class="d-flex flex-wrap gap-4 pt-1">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="nl_public">
-                                            <label class="form-check-label text-dark small" for="nl_public">Public Lead (Visible to entire sales team)</label>
-                                        </div>
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="nl_contacted_today">
-                                            <label class="form-check-label text-dark small" for="nl_contacted_today">Mark as Contacted Today</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Company Profile & Compliance -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
-                            <i class="bi bi-building-check text-primary fs-5"></i>
-                            <h6 class="fw-bold text-dark m-0">3. Company Profile &amp; Financial Compliance</h6>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row g-3">
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Company GST Number</label>
-                                    <input type="text" class="form-control rounded-2 text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Annual Turnover</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_turnover" placeholder="e.g. ₹5 Cr – ₹10 Cr">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Employee Size</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_emp_size" placeholder="e.g. 51 – 200 Employees">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Customer / Partnership Type</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_cust_type" data-placeholder="Select type">
-                                        <option value=""></option>
-                                        <option selected>Direct Customer</option>
-                                        <option>Reseller / Partner</option>
-                                        <option>System Integrator</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Location & Geography -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
-                            <i class="bi bi-geo-alt text-primary fs-5"></i>
-                            <h6 class="fw-bold text-dark m-0">4. Location &amp; Geography</h6>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row g-3">
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Country</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_country" data-placeholder="Select country">
-                                        <option value=""></option>
-                                        <option selected>India</option>
-                                        <option>United States</option>
-                                        <option>United Kingdom</option>
-                                        <option>UAE</option>
-                                        <option>Singapore</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">State</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_state" data-placeholder="Select state">
-                                        <option value=""></option>
-                                        <option selected>Tamil Nadu</option>
-                                        <option>Karnataka</option>
-                                        <option>Maharashtra</option>
-                                        <option>Delhi</option>
-                                        <option>Kerala</option>
-                                        <option>Telangana</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">City</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_city" data-placeholder="Select city">
-                                        <option value=""></option>
-                                        <option selected>Chennai</option>
-                                        <option>Bangalore</option>
-                                        <option>Mumbai</option>
-                                        <option>Hyderabad</option>
-                                        <option>Coimbatore</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Area / Locality</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_area" placeholder="e.g. Anna Nagar, Guindy">
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Zip Code</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_zip" placeholder="e.g. 600001">
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Latitude (Google Maps)</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_lat" placeholder="e.g. 13.0827">
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Longitude (Google Maps)</label>
-                                    <input type="text" class="form-control rounded-2" id="nl_lng" placeholder="e.g. 80.2707">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. Commercial Value & Estimation -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center gap-2">
-                            <i class="bi bi-currency-rupee text-primary fs-5"></i>
-                            <h6 class="fw-bold text-dark m-0">5. Commercial Estimation &amp; Timeline</h6>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row g-3">
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Expected Lead Value</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light text-muted">₹</span>
-                                        <input type="number" class="form-control rounded-end-2" id="nl_value" placeholder="0.00" step="0.01">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Primary Product / Solution</label>
-                                    <select class="form-select select2 nl-select rounded-2" id="nl_product" data-placeholder="Choose product">
-                                        <option value=""></option>
-                                        <option selected>HRMS Subscription &amp; Licenses</option>
-                                        <option>Payroll Module Add-on</option>
-                                        <option>Biometric Attendance System</option>
-                                        <option>Custom ERP Development</option>
-                                        <optgroup label="Hardware &amp; IoT Solutions">
-                                            <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
-                                            <option value="Industrial Barcode &amp; POS Kit">Industrial Barcode &amp; POS Kit</option>
-                                            <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Target Closure Date</label>
-                                    <input type="date" class="form-control rounded-2" id="nl_closure_date">
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <label class="form-label fw-semibold text-dark small mb-1">Enquiry Reference Code</label>
-                                    <input type="text" class="form-control rounded-2 bg-light text-muted fw-semibold" id="nl_enquiry_code" value="ENQ-0171" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 6. Enquired Items & Key Points of Contact -->
-                    <div class="card border shadow-sm rounded-3 mb-4 bg-white overflow-hidden">
-                        <!-- Items Header -->
-                        <div class="card-header bg-white border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-box-seam text-primary fs-5"></i>
-                                <h6 class="fw-bold text-dark m-0">6. Enquired Products &amp; Items</h6>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
-                                <i class="bi bi-plus-lg"></i><span>Add Item</span>
-                            </button>
-                        </div>
-                        <div class="card-body p-4">
-                            <!-- Items Table -->
-                            <div class="table-responsive border rounded-2 mb-4">
-                                <table class="table table-hover align-middle mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th style="width: 25%;">Item Code</th>
-                                            <th style="width: 50%;">Item Name / Specification</th>
-                                            <th style="width: 15%;" class="text-center">Quantity</th>
-                                            <th style="width: 10%;" class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="nlItemBody">
-                                        <tr>
-                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
-                                            <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
-                                            <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <!-- Points of Contact Subsection -->
-                            <div class="pt-3 border-top">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
+                            <!-- 1. Lead Classification & Ownership -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-2">
-                                        <i class="bi bi-people text-primary fs-5"></i>
-                                        <h6 class="fw-bold text-dark m-0">Additional Points of Contact (POC)</h6>
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-funnel fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">1. Classification &amp; Assignment</h6>
+                                    </div>
+                                    <span class="badge bg-primary-subtle text-primary font-11">Pipeline Status</span>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_status">Status <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <select class="form-select nl-select" id="nl_status">
+                                                    <option value="">-None-</option>
+                                                    <option selected>Lead</option>
+                                                    <option>Quotation</option>
+                                                    <option>Followup</option>
+                                                    <option>Qualified</option>
+                                                    <option>Negotiation</option>
+                                                    <option>Won</option>
+                                                    <option>Lost</option>
+                                                </select>
+                                                <button type="button" class="btn nl-addon-btn" data-nl-target="nl_status" title="Add new status"><i class="bi bi-plus-lg"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_source">Source <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <select class="form-select nl-select" id="nl_source">
+                                                    <option value="">-None-</option>
+                                                    <option selected>Direct</option>
+                                                    <option>IndiaMart</option>
+                                                    <option>Website</option>
+                                                    <option>Facebook Ads</option>
+                                                    <option>Google Ads</option>
+                                                    <option>Referral</option>
+                                                    <option>Walk-in</option>
+                                                    <option>Cold Call</option>
+                                                </select>
+                                                <button type="button" class="btn nl-addon-btn" data-nl-target="nl_source" title="Add new source"><i class="bi bi-plus-lg"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_sourcer">Sourcer / Lead Gen Agent</label>
+                                            <div class="input-group">
+                                                <select class="form-select nl-select" id="nl_sourcer">
+                                                    <option value="">-None-</option>
+                                                    <option>yuva raj</option>
+                                                    <option>Harish D.</option>
+                                                    <option>Website Form</option>
+                                                    <option>Facebook Ads</option>
+                                                    <option>Referral</option>
+                                                </select>
+                                                <button type="button" class="btn nl-addon-user" title="Lookup Sourcer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                        <circle cx="19" cy="11" r="3"></circle>
+                                                        <path d="m21 13 2 2"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nlTagsInput">Tags / Labels</label>
+                                            <div class="nl-tags-wrap" id="nlTagsWrap">
+                                                <div class="nl-tags-chips" id="nlTagsChips"></div>
+                                                <input type="text" class="nl-tags-input" id="nlTagsInput" placeholder="Press Enter to add tag...">
+                                            </div>
+                                            <input type="hidden" id="nl_tags" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. Primary Contact & Company Details -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-person-lines-fill fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">2. Primary Contact &amp; Company Details</h6>
+                                    </div>
+                                    <span class="badge bg-light text-secondary border font-11">Primary SPOC</span>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_company">Company / Organization <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="nl_company" required placeholder="Company legal name">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_name">Contact Person Name <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <select class="form-select input-prefix-select nl-salutation-select" id="nl_salutation" aria-label="Salutation" style="max-width: 110px; flex: 0 0 110px;">
+                                                    <option value="">-None-</option>
+                                                    <option value="Mr.">Mr.</option>
+                                                    <option value="Mrs.">Mrs.</option>
+                                                    <option value="Ms.">Ms.</option>
+                                                    <option value="Dr.">Dr.</option>
+                                                    <option value="Prof.">Prof.</option>
+                                                </select>
+                                                <input type="text" class="form-control" id="nl_name" required placeholder="Primary contact full name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_position">Position / Designation</label>
+                                            <input type="text" class="form-control" id="nl_position" placeholder="e.g. Managing Director">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_email">Email Address</label>
+                                            <input type="email" class="form-control" id="nl_email" placeholder="contact@company.com">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_phone">Phone / WhatsApp Number</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text nl-addon-text text-muted" style="font-size: 12.5px;">+91</span>
+                                                <input type="text" class="form-control" id="nl_phone" placeholder="10-digit mobile number">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_website">Website URL</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text nl-addon-text text-muted" style="font-size: 12px;">https://</span>
+                                                <input type="url" class="form-control" id="nl_website" placeholder="example.com">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_date_contacted">Date Contacted</label>
+                                            <input type="date" class="form-control" id="nl_date_contacted">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_cust_type">Customer / Partnership Type</label>
+                                            <select class="form-select nl-select" id="nl_cust_type">
+                                                <option value="">-None-</option>
+                                                <option selected>Direct Customer</option>
+                                                <option>Reseller / Partner</option>
+                                                <option>System Integrator</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label" for="nl_description">Initial Requirement Notes</label>
+                                            <textarea class="form-control" id="nl_description" rows="2" placeholder="Specific client requirements, hardware/software needs, or enquiry notes..."></textarea>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Additional Points of Contact (POC) -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-people fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">3. Additional Points of Contact (POC)</h6>
                                     </div>
                                     <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddPoc">
                                         <i class="bi bi-person-plus"></i><span>Add Contact</span>
                                     </button>
                                 </div>
-                                <div id="nlPocList" class="d-flex flex-column gap-2">
-                                    <div class="row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0">
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No.">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address">
-                                        </div>
-                                        <div class="col-md-2">
-                                            <input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position">
-                                        </div>
-                                        <div class="col-md-1 text-center">
-                                            <button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button>
+                                <div class="card-body p-3 p-md-4">
+                                    <div id="nlPocList" class="d-flex flex-column gap-2">
+                                        <div class="row g-2 align-items-center nl-poc-row p-2 bg-light-subtle rounded-2 border m-0">
+                                            <div class="col-sm-6 col-md-3">
+                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Contact Name">
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Phone No.">
+                                            </div>
+                                            <div class="col-sm-6 col-md-3">
+                                                <input type="email" class="form-control form-control-sm rounded-2" placeholder="Email Address">
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <input type="text" class="form-control form-control-sm rounded-2" placeholder="Role / Position">
+                                            </div>
+                                            <div class="col-sm-2 col-md-1 text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-danger nl-remove-poc rounded-2" title="Remove Contact"><i class="bi bi-trash"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
+                        </div><!-- /col-xl-6 Left -->
+
+                        <!-- ==================== RIGHT COLUMN: Commercial, Items, Location & Compliance ==================== -->
+                        <div class="col-12 col-xl-6 d-flex flex-column gap-3">
+
+                            <!-- 4. Commercial Estimation & Timeline -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-currency-rupee fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">4. Commercial Estimation &amp; Timeline</h6>
+                                    </div>
+                                    <span class="badge bg-primary-subtle text-primary font-11">Commercial Scope</span>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_value">Expected Lead Value</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text nl-currency-addon">Rs.</span>
+                                                <input type="number" class="form-control" id="nl_value" placeholder="0.00" step="0.01">
+                                                <span class="input-group-text nl-info-addon" title="Estimated deal or quotation value in INR" data-bs-toggle="tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_product">Primary Product / Solution</label>
+                                            <select class="form-select nl-select" id="nl_product">
+                                                <option value="">-None-</option>
+                                                <option selected>HRMS Subscription &amp; Licenses</option>
+                                                <option>Payroll Module Add-on</option>
+                                                <option>Biometric Attendance System</option>
+                                                <option>Custom ERP Development</option>
+                                                <optgroup label="Hardware &amp; IoT Solutions">
+                                                    <option value="Biometric Attendance Terminal Pro">Biometric Attendance Terminal Pro</option>
+                                                    <option value="Industrial Barcode &amp; POS Kit">Industrial Barcode &amp; POS Kit</option>
+                                                    <option value="Smart Access Control 8-Port Kit">Smart Access Control 8-Port Kit</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_closure_date">Target Closure Date</label>
+                                            <input type="date" class="form-control" id="nl_closure_date">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_enquiry_code">Enquiry Reference Code</label>
+                                            <input type="text" class="form-control bg-light text-muted fw-semibold" id="nl_enquiry_code" value="ENQ-0171" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 5. Enquired Products & Items -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-box-seam fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">5. Enquired Products &amp; Items</h6>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-primary fw-semibold d-inline-flex align-items-center gap-1" id="nlAddItem">
+                                        <i class="bi bi-plus-lg"></i><span>Add Item</span>
+                                    </button>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="table-responsive border rounded-2">
+                                        <table class="table table-hover align-middle mb-0 font-13">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th style="width: 25%;">Item Code</th>
+                                                    <th style="width: 45%;">Item Name / Specification</th>
+                                                    <th style="width: 18%;" class="text-center">Qty</th>
+                                                    <th style="width: 12%;" class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="nlItemBody">
+                                                <tr>
+                                                    <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="e.g. ITM-001"></td>
+                                                    <td><input type="text" class="form-control form-control-sm rounded-2" placeholder="Item name or description"></td>
+                                                    <td><input type="number" class="form-control form-control-sm rounded-2 text-center" placeholder="1" min="1" value="1"></td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-sm btn-outline-danger nl-remove-item rounded-2" title="Remove Item"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 6. Profile & Financial Compliance -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-building-check fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">6. Profile &amp; Financial Compliance</h6>
+                                    </div>
+                                    <span class="badge bg-light text-secondary border font-11">Tax &amp; Scale</span>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_gst">Company GST Number</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control text-uppercase" id="nl_gst" placeholder="e.g. 33ABCDE1234F1Z5" maxlength="15">
+                                                <span class="input-group-text nl-info-addon" title="15-character GSTIN format: 22AAAAA0000A1Z5" data-bs-toggle="tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_turnover">Annual Turnover</label>
+                                            <input type="text" class="form-control" id="nl_turnover" placeholder="e.g. ₹5 Cr – ₹10 Cr">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label" for="nl_emp_size">Employee Size</label>
+                                            <input type="text" class="form-control" id="nl_emp_size" placeholder="e.g. 51 – 200 Employees">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 7. Location & Site Address -->
+                            <div class="card border shadow-sm rounded-3 bg-white overflow-hidden">
+                                <div class="card-header bg-white border-bottom py-2.5 px-3 px-md-4 d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="rounded-2 bg-primary-subtle text-primary p-1.5 d-inline-flex"><i class="bi bi-geo-alt fs-6"></i></span>
+                                        <h6 class="fw-bold text-dark m-0 font-14">7. Location &amp; Site Address</h6>
+                                    </div>
+                                    <span class="badge bg-light text-secondary border font-11">Geo Location</span>
+                                </div>
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label" for="nl_address">Full Street Address</label>
+                                            <textarea class="form-control" id="nl_address" rows="1" placeholder="Office / Site address"></textarea>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label" for="nl_country">Country</label>
+                                            <select class="form-select nl-select" id="nl_country">
+                                                <option value="">-None-</option>
+                                                <option selected>India</option>
+                                                <option>United States</option>
+                                                <option>United Kingdom</option>
+                                                <option>UAE</option>
+                                                <option>Singapore</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label" for="nl_state">State</label>
+                                            <select class="form-select nl-select" id="nl_state">
+                                                <option value="">-None-</option>
+                                                <option selected>Tamil Nadu</option>
+                                                <option>Karnataka</option>
+                                                <option>Maharashtra</option>
+                                                <option>Delhi</option>
+                                                <option>Kerala</option>
+                                                <option>Telangana</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-label" for="nl_city">City</label>
+                                            <select class="form-select nl-select" id="nl_city">
+                                                <option value="">-None-</option>
+                                                <option selected>Chennai</option>
+                                                <option>Bangalore</option>
+                                                <option>Mumbai</option>
+                                                <option>Hyderabad</option>
+                                                <option>Coimbatore</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_area">Area / Locality</label>
+                                            <input type="text" class="form-control" id="nl_area" placeholder="e.g. Anna Nagar, Guindy">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_zip">Zip / PIN Code</label>
+                                            <input type="text" class="form-control" id="nl_zip" placeholder="e.g. 600001">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_lat">Latitude (GPS)</label>
+                                            <input type="text" class="form-control" id="nl_lat" placeholder="e.g. 13.0827">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label" for="nl_lng">Longitude (GPS)</label>
+                                            <input type="text" class="form-control" id="nl_lng" placeholder="e.g. 80.2707">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /col-xl-6 Right -->
+
+                    </div><!-- /row -->
                 </div><!-- /nl-body -->
             </div>
 
             <!-- Modal Footer -->
-            <div class="modal-footer bg-white border-top p-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="modal-footer bg-white border-top py-2.5 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-3 text-muted small">
-                    <span><i class="bi bi-shield-check text-success me-1"></i>All fields marked with <span class="text-danger fw-bold">*</span> are required</span>
+                    <span><i class="bi bi-shield-check text-success me-1"></i>Fields marked with <span class="text-danger fw-bold">*</span> are required</span>
                     <span class="d-none d-md-inline text-muted">&bull;</span>
-                    <span class="d-none d-md-inline"><i class="bi bi-lightning-charge text-primary me-1"></i>Enquiry code auto-generated</span>
+                    <span class="d-none d-md-inline"><i class="bi bi-check2-circle text-primary me-1"></i>2-Column Split View</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <button type="button" class="btn btn-outline-secondary px-3" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg me-1"></i>Close
+                    <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-semibold" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1"></i>Cancel
                     </button>
-                    <button type="button" class="btn btn-outline-danger px-3" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
+                    <button type="button" class="btn btn-outline-danger btn-sm px-3 fw-semibold" id="nlFormResetBtn" onclick="document.getElementById('newLeadForm').reset(); if (typeof $ !== 'undefined') $('#newLeadModal .select2').val(null).trigger('change');">
                         <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
                     </button>
-                    <button type="submit" class="btn btn-primary px-4 fw-semibold shadow-sm">
-                        <i class="bi bi-check-lg me-1"></i>Submit Lead
+                    <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i>Save Lead
                     </button>
                 </div>
             </div>

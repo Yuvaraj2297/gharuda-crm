@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         dropdownParent: $(nlModal)
                     });
                 });
+                if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+                    nlModal.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+                        bootstrap.Tooltip.getOrCreateInstance(el);
+                    });
+                }
             });
         }
 
@@ -1038,7 +1043,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (newLeadForm) {
             newLeadForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                var name = document.getElementById('nl_name').value.trim();
+                var rawName = document.getElementById('nl_name').value.trim();
+                var salEl = document.getElementById('nl_salutation');
+                var sal = (salEl && salEl.value) ? (salEl.value + ' ') : '';
+                var name = sal + rawName;
                 var company = document.getElementById('nl_company').value.trim() || '—';
                 var phone = document.getElementById('nl_phone').value.trim();
                 var countryEl = document.getElementById('nl_country');
