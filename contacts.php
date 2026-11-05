@@ -415,56 +415,229 @@
     </div>
 </div>
 
-<!-- Modal: New Contact (Pure Bootstrap 5 Utilities) -->
+<!-- Modal: Add New Client Contact (Zoho CRM Enterprise Layout) -->
 <div class="modal fade" id="newContactModal" tabindex="-1" aria-labelledby="newContactModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow">
-            <div class="modal-header border-bottom p-3 bg-light bg-opacity-50">
+        <div class="modal-content">
+            <div class="modal-header">
                 <div class="d-flex align-items-center gap-2">
-                    <span class="p-2 rounded-2 bg-primary-subtle text-primary"><i class="bi bi-person-plus-fill"></i></span>
-                    <h5 class="modal-title fw-bold text-dark" id="newContactModalLabel">Add New Client Contact</h5>
+                    <span class="p-2 rounded-2 bg-success-subtle text-success"><i class="bi bi-person-plus-fill"></i></span>
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark font-16 mb-0" id="newContactModalLabel">Add New Client Contact</h5>
+                        <span class="text-muted font-11">Enterprise Decision Maker &amp; SPOC Directory</span>
+                    </div>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle font-11 ms-2">Standard Layout</span>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="newContactForm" onsubmit="event.preventDefault(); saveGlobalContact();">
-                <div class="modal-body p-4">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Customer Company <span class="text-danger">*</span></label>
-                            <select class="form-select" id="ncCompany" required>
-                                <option value="">Select Customer Company...</option>
-                                <option value="Power Spares Engineering">Power Spares Engineering</option>
-                                <option value="Zen Publications">Zen Publications</option>
-                                <option value="Hindustan Hydraulics">Hindustan Hydraulics</option>
-                                <option value="Gharuda Software">Gharuda Software</option>
-                                <option value="GG COMPANY">GG COMPANY</option>
-                            </select>
+                <div class="modal-body">
+                    
+                    <!-- SECTION 1: Company & Role Information -->
+                    <div class="crm-section-divider mt-0">
+                        <div class="crm-section-title">
+                            <i class="bi bi-building text-primary fs-6"></i>
+                            <span>Account &amp; Designation Profile</span>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Role / Job Position <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="ncRole" placeholder="e.g. Procurement Lead / General Manager" required>
+                        <span class="crm-section-badge">Corporate SPOC</span>
+                    </div>
+
+                    <div class="row gx-3">
+                        <div class="col-12 col-md-6">
+                            <!-- Customer Company -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncCompany">
+                                    Company<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <select class="form-select crm-required" id="ncCompany" required>
+                                        <option value="">Select Customer Company...</option>
+                                        <option value="Power Spares Engineering">Power Spares Engineering</option>
+                                        <option value="Zen Publications">Zen Publications</option>
+                                        <option value="Hindustan Hydraulics">Hindustan Hydraulics</option>
+                                        <option value="Gharuda Software">Gharuda Software</option>
+                                        <option value="GG COMPANY">GG COMPANY</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="ncFirst" placeholder="First name" required>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Role / Position -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncRole">
+                                    Role / Position<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="ncRole" placeholder="e.g. Procurement Lead / General Manager" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="ncLast" placeholder="Last name" required>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Department -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncDepartment">
+                                    Department<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <select class="form-select" id="ncDepartment">
+                                        <option value="" selected>-Select Department-</option>
+                                        <option value="Executive Management">Executive Management</option>
+                                        <option value="Purchase / Procurement">Purchase / Procurement</option>
+                                        <option value="Finance & Accounts">Finance &amp; Accounts</option>
+                                        <option value="Operations & IT">Operations &amp; IT</option>
+                                        <option value="Technical & Engineering">Technical &amp; Engineering</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="ncEmail" placeholder="contact@company.com" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold">Phone Number</label>
-                            <input type="tel" class="form-control" id="ncPhone" value="+91 ">
+
+                        <div class="col-12 col-md-6">
+                            <!-- Designation / Title -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncDesignation">
+                                    Designation<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <input type="text" class="form-control" id="ncDesignation" placeholder="e.g. Managing Director">
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+                    <!-- SECTION 2: Personal & Contact Channels -->
+                    <div class="crm-section-divider">
+                        <div class="crm-section-title">
+                            <i class="bi bi-person-lines-fill text-primary fs-6"></i>
+                            <span>Personal &amp; Contact Details</span>
+                        </div>
+                        <span class="crm-section-badge">Direct Reach</span>
+                    </div>
+
+                    <div class="row gx-3">
+                        <div class="col-12 col-md-6">
+                            <!-- First Name -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncFirst">
+                                    First Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="ncFirst" placeholder="First name" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Last Name -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncLast">
+                                    Last Name<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <input type="text" class="form-control crm-required" id="ncLast" placeholder="Last name" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Email Address -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncEmail">
+                                    Email Address<span class="req-star">*</span><span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <input type="email" class="form-control crm-required" id="ncEmail" placeholder="contact@company.com" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Mobile / WhatsApp Phone -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncPhone">
+                                    Mobile Phone<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text">+91</span>
+                                        <input type="tel" class="form-control" id="ncPhone" placeholder="10-digit mobile number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <!-- Office / Landline -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncAltPhone">
+                                    Landline / Ext<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                        <input type="tel" class="form-control" id="ncAltPhone" placeholder="044-24567890">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <!-- SPOC Priority & Portal Access -->
+                            <div class="row align-items-center crm-field-row">
+                                <label class="crm-field-label" for="ncPrimaryCheck">
+                                    Account SPOC<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <div class="d-flex align-items-center gap-3 pt-1">
+                                        <div class="form-check form-switch mb-0">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="ncPrimaryCheck" checked>
+                                            <label class="form-check-label font-12 fw-medium text-dark" for="ncPrimaryCheck">Primary SPOC</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SECTION 3: Internal Notes -->
+                    <div class="crm-section-divider">
+                        <div class="crm-section-title">
+                            <i class="bi bi-chat-left-text text-primary fs-6"></i>
+                            <span>Internal Notes &amp; Communication Preference</span>
+                        </div>
+                        <span class="crm-section-badge">Optional</span>
+                    </div>
+
+                    <div class="row gx-3">
+                        <div class="col-12">
+                            <div class="row align-items-start crm-field-row">
+                                <label class="crm-field-label" for="ncNotes">
+                                    Contact Notes<span class="crm-colon">:</span>
+                                </label>
+                                <div class="crm-field-control">
+                                    <textarea class="form-control" id="ncNotes" rows="2" placeholder="Key responsibilities, communication preferences, best time to reach..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="modal-footer border-top p-3 bg-light">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-check2 me-1"></i>Save Contact</button>
+
+                <!-- Modal Footer Action Bar -->
+                <div class="modal-footer d-flex align-items-center justify-content-between">
+                    <div class="font-12 text-muted d-flex align-items-center gap-1.5">
+                        <i class="bi bi-shield-check text-success me-1"></i>Fields marked with <span class="text-danger fw-bold">*</span> (red border) are required
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm px-3 fw-medium" onclick="document.getElementById('newContactForm').reset();">Reset</button>
+                        <button type="submit" class="btn btn-save-contact btn-sm">
+                            <i class="bi bi-check-lg"></i>Save Contact
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -473,15 +646,33 @@
 
 <script>
 function saveGlobalContact() {
-    var company = document.getElementById('ncCompany').value;
+    var compEl = document.getElementById('ncCompany');
+    var roleEl = document.getElementById('ncRole');
+    var firstEl = document.getElementById('ncFirst');
+    var lastEl = document.getElementById('ncLast');
+    var emailEl = document.getElementById('ncEmail');
+    var phoneEl = document.getElementById('ncPhone');
+    var primaryCheck = document.getElementById('ncPrimaryCheck');
+
+    if (!compEl.value.trim() || !roleEl.value.trim() || !firstEl.value.trim() || !lastEl.value.trim() || !emailEl.value.trim()) {
+        document.getElementById('newContactForm').reportValidity();
+        return;
+    }
+
+    var company = compEl.value.trim();
     var encComp = encodeURIComponent(company);
-    var role = document.getElementById('ncRole').value;
-    var first = document.getElementById('ncFirst').value.trim();
-    var last = document.getElementById('ncLast').value.trim();
+    var role = roleEl.value.trim();
+    var first = firstEl.value.trim();
+    var last = lastEl.value.trim();
     var name = first + ' ' + last;
     var initials = ((first.charAt(0) || 'C') + (last.charAt(0) || 'P')).toUpperCase();
-    var email = document.getElementById('ncEmail').value.trim();
-    var phone = document.getElementById('ncPhone').value.trim();
+    var email = emailEl.value.trim();
+    var rawPhone = phoneEl ? phoneEl.value.trim() : '';
+    var phone = rawPhone ? (rawPhone.startsWith('+91') ? rawPhone : '+91 ' + rawPhone) : '+91 98400 00000';
+    var isPrimary = primaryCheck ? primaryCheck.checked : true;
+    var spocBadge = isPrimary 
+        ? '<span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Primary SPOC</span>'
+        : '<span class="badge bg-light text-secondary border font-11">Verified SPOC</span>';
 
     var tbody = document.getElementById('globalContactsBody');
     var tr = document.createElement('tr');
@@ -492,7 +683,7 @@ function saveGlobalContact() {
     tr.innerHTML =
         '<td class="ps-4"><div class="d-flex align-items-center gap-2">' +
             '<span class="badge rounded-circle bg-primary-subtle text-primary border border-primary-subtle fw-bold p-2 d-inline-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">' + initials + '</span>' +
-            '<div><div class="fw-bold text-dark font-13">' + name + '</div><span class="badge bg-primary-subtle text-primary border border-primary-subtle font-11">Verified SPOC</span></div>' +
+            '<div><div class="fw-bold text-dark font-13">' + name + '</div>' + spocBadge + '</div>' +
         '</div></td>' +
         '<td><a href="customer-view.php?id=1&name=' + encComp + '" class="text-dark fw-semibold text-decoration-none"><i class="bi bi-building me-1 text-muted"></i>' + company + '</a></td>' +
         '<td><a href="mailto:' + email + '" class="text-secondary text-decoration-none">' + email + '</a></td>' +
